@@ -1,0 +1,37 @@
+name: ram rust tests
+
+on:
+  push:
+    paths:
+      - "projects/ram/**"
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        name: Install rust
+        with:
+          toolchain: stable
+      - uses: actions-rs/cargo@v1
+        name: Run cargo test
+        with:
+          command: test
+          args: --all-targets --all-features --manifest-path projects/ram/Cargo.toml
+
+  windows:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        name: Install rust
+        with:
+          toolchain: stable
+      - uses: actions-rs/cargo@v1
+        name: Run cargo test
+        with:
+          command: test
+          args: --all-targets --all-features --manifest-path projects/ram/Cargo.toml
