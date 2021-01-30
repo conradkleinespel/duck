@@ -1,0 +1,16 @@
+[package]
+name = "ram"
+version = "7.0.3"
+authors = [ "conradk@conradk.com" ]
+description = "A library that helps to parse source code with finite state machines"
+license = "Apache-2.0"
+homepage = "https://github.com/conradkleinespel/ram"
+repository = "https://github.com/conradkleinespel/ram"
+keywords = ["fsm", "parse", "lex", "token"]
+readme = "README.md"
+
+[lib]
+name = "ram"
+
+[dependencies]
+regex = "1.1"
