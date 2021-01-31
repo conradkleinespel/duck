@@ -18,7 +18,7 @@ rand = "0.7"
 libc = "0.2"
 byteorder = "1.3"
 clipboard = "0.5"
-rpassword =  { path = "../rpassword" }
+rpassword =  { path = "../rpassword", version = "5.0.1" }
 rprompt = "1.0"
 dirs = "3.0"
 openssl = "0.10"
