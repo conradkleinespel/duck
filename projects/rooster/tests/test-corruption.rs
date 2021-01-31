@@ -33,17 +33,17 @@ fn test_corruption() {
         ])
         .unwrap();
 
-    let mut output = sink();
+    let mut output = CursorOutput::new();
     assert_eq!(
         1,
         main_with_args(
             &["rooster", "list"],
-            input!("xxxx\n"),
-            output!(&mut output, &mut sink(), &mut sink()),
+            &mut CursorInput::new("xxxx\n"),
+            &mut output,
             &rooster_file
         )
     );
-    let output_as_vecu8 = output.into_inner();
+    let output_as_vecu8 = output.error_cursor.into_inner();
     let output_as_string = String::from_utf8_lossy(output_as_vecu8.as_slice());
     assert!(output_as_string.contains("Your Rooster file is corrupted"));
 }

@@ -12,21 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use io::{ReaderManager, WriterManager};
+use io::{CliReader, CliWriter};
+use io::{OutputType, Style};
 use list;
 use password;
-use std::io::{BufRead, Write};
 
-pub fn callback_exec<
-    R: BufRead,
-    ErrorWriter: Write + ?Sized,
-    OutputWriter: Write + ?Sized,
-    InstructionWriter: Write + ?Sized,
->(
+pub fn callback_exec(
     matches: &clap::ArgMatches,
     store: &mut password::v2::PasswordStore,
-    reader: &mut ReaderManager<R>,
-    writer: &mut WriterManager<ErrorWriter, OutputWriter, InstructionWriter>,
+    reader: &mut impl CliReader,
+    writer: &mut impl CliWriter,
 ) -> Result<(), i32> {
     let query = matches.value_of("app").unwrap();
 
@@ -42,19 +37,23 @@ pub fn callback_exec<
     .clone();
 
     if let Err(err) = store.delete_password(&password.name) {
-        writer.error().error(
-            format!(
+        writer.writeln(
+            Style::error(format!(
                 "Woops, I couldn't delete this password (reason: {:?}).",
                 err
-            )
-            .as_str(),
+            )),
+            OutputType::Error,
         );
         return Err(1);
     }
 
-    writer
-        .output()
-        .success(format!("Done! I've deleted the password for \"{}\".", password.name).as_str());
+    writer.writeln(
+        Style::success(format!(
+            "Done! I've deleted the password for \"{}\".",
+            password.name
+        )),
+        OutputType::Standard,
+    );
 
     Ok(())
 }

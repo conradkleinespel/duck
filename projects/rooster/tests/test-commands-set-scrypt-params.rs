@@ -11,8 +11,8 @@ fn test_command_set_scrypt_params() {
         0,
         main_with_args(
             &["rooster", "init", "--force-for-tests"],
-            input!("\nxxxx\n"),
-            output!(&mut sink(), &mut sink(), &mut sink()),
+            &mut CursorInput::new("\nxxxx\n"),
+            &mut CursorOutput::new(),
             &rooster_file
         )
     );
@@ -24,31 +24,31 @@ fn test_command_set_scrypt_params() {
         .unwrap();
     assert_eq!(&rooster_file_contents[4..13], &[12, 0, 0, 0, 8, 0, 0, 0, 1]);
 
-    let mut output = sink();
+    let mut output = CursorOutput::new();
     assert_eq!(
         1,
         main_with_args(
             &["rooster", "set-scrypt-params", "15", "4", "0"],
-            input!("xxxx\n"),
-            output!(&mut output, &mut sink(), &mut sink()),
+            &mut CursorInput::new("xxxx\n"),
+            &mut output,
             &rooster_file
         )
     );
-    let output_as_vecu8 = output.into_inner();
+    let output_as_vecu8 = output.error_cursor.into_inner();
     let output_as_string = String::from_utf8_lossy(output_as_vecu8.as_slice());
     assert!(output_as_string.contains("must be > 0"));
 
-    let mut output = sink();
+    let mut output = CursorOutput::new();
     assert_eq!(
         1,
         main_with_args(
             &["rooster", "set-scrypt-params", "21", "4", "1"],
-            input!("xxxx\n"),
-            output!(&mut output, &mut sink(), &mut sink()),
+            &mut CursorInput::new("xxxx\n"),
+            &mut output,
             &rooster_file
         )
     );
-    let output_as_vecu8 = output.into_inner();
+    let output_as_vecu8 = output.error_cursor.into_inner();
     let output_as_string = String::from_utf8_lossy(output_as_vecu8.as_slice());
     assert!(output_as_string.contains("Run with --force to force"));
 
@@ -57,8 +57,8 @@ fn test_command_set_scrypt_params() {
         0,
         main_with_args(
             &["rooster", "set-scrypt-params", "--force", "21", "9", "2"],
-            input!("xxxx\n"),
-            output!(&mut sink(), &mut sink(), &mut sink()),
+            &mut CursorInput::new("xxxx\n"),
+            &mut CursorOutput::new(),
             &rooster_file
         )
     );

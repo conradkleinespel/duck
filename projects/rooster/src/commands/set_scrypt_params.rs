@@ -12,20 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use io::{ReaderManager, WriterManager};
+use io::{CliReader, CliWriter, OutputType, Style};
 use password;
-use std::io::{BufRead, Write};
 
-pub fn callback_exec<
-    R: BufRead,
-    ErrorWriter: Write + ?Sized,
-    OutputWriter: Write + ?Sized,
-    InstructionWriter: Write + ?Sized,
->(
+pub fn callback_exec(
     matches: &clap::ArgMatches,
     store: &mut password::v2::PasswordStore,
-    reader: &mut ReaderManager<R>,
-    writer: &mut WriterManager<ErrorWriter, OutputWriter, InstructionWriter>,
+    _reader: &mut impl CliReader,
+    writer: &mut impl CliWriter,
 ) -> Result<(), i32> {
     let log2_n = matches
         .value_of("log2n")
@@ -47,19 +41,26 @@ pub fn callback_exec<
         .unwrap();
 
     if log2_n <= 0 || r <= 0 || p <= 0 {
-        writer
-            .error()
-            .error(format!("The parameters must be > 0 ({}, {}, {})", log2_n, r, p).as_str());
+        writer.writeln(
+            Style::error(format!(
+                "The parameters must be > 0 ({}, {}, {})",
+                log2_n, r, p
+            )),
+            OutputType::Error,
+        );
         return Err(1);
     }
 
     if !matches.is_present("force") && (log2_n > 20 || r > 8 || p > 1) {
-        writer
-            .error()
-            .error("These parameters seem very high. You might be unable to open your password file ever again. Aborting.");
-        writer
-            .error()
-            .error("Run with --force to force, but make a backup of your password file first.");
+        writer.writeln(
+            Style::error("These parameters seem very high. You might be unable to open your password file ever again. Aborting."),
+            OutputType::Error);
+        writer.writeln(
+            Style::error(
+                "Run with --force to force, but make a backup of your password file first.",
+            ),
+            OutputType::Error,
+        );
         return Err(1);
     }
 

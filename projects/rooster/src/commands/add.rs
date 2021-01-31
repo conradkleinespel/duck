@@ -13,35 +13,32 @@
 // limitations under the License.
 
 use clip::{copy_to_clipboard, paste_keys};
-use io::{ReaderManager, WriterManager};
+use io::{CliReader, CliWriter};
+use io::{OutputType, Style};
 use password;
-use std::io::{BufRead, Write};
 use std::ops::Deref;
 
-pub fn callback_exec<
-    R: BufRead,
-    ErrorWriter: Write + ?Sized,
-    OutputWriter: Write + ?Sized,
-    InstructionWriter: Write + ?Sized,
->(
+pub fn callback_exec(
     matches: &clap::ArgMatches,
     store: &mut password::v2::PasswordStore,
-    reader: &mut ReaderManager<R>,
-    writer: &mut WriterManager<ErrorWriter, OutputWriter, InstructionWriter>,
+    reader: &mut impl CliReader,
+    writer: &mut impl CliWriter,
 ) -> Result<(), i32> {
     let app_name = matches.value_of("app").unwrap();
     let username = matches.value_of("username").unwrap();
 
     if store.has_password(app_name.deref()) {
-        writer
-            .error()
-            .error("Woops, there is already an app with that name.");
+        writer.writeln(
+            Style::error("Woops, there is already an app with that name."),
+            OutputType::Error,
+        );
         return Err(1);
     }
 
-    writer
-        .instruction()
-        .prompt(format!("What password do you want for \"{}\"? ", app_name).as_str());
+    writer.write(
+        format!("What password do you want for \"{}\"? ", app_name),
+        OutputType::Standard,
+    );
     match reader.read_password() {
         Ok(password_as_string) => {
             let password_as_string_clipboard = password_as_string.clone();
@@ -50,40 +47,44 @@ pub fn callback_exec<
             match store.add_password(password) {
                 Ok(_) => {
                     if matches.is_present("show") {
-                        writer.output().success(
-                            format!(
+                        writer.writeln(
+                            Style::success(format!(
                                 "Alright! Here is your password: {}",
                                 password_as_string_clipboard.deref()
-                            )
-                            .as_str(),
+                            )),
+                            OutputType::Standard,
                         );
                         return Ok(());
                     }
 
                     if copy_to_clipboard(&password_as_string_clipboard).is_err() {
-                        writer.output().success(
-                            format!(
+                        writer.writeln(
+                            Style::success(format!(
                                 "Hmm, I tried to copy your new password to your clipboard, \
                                  but something went wrong. Don't worry, it's saved, and you \
                                  can see it with `rooster get {} --show`",
                                 app_name
-                            )
-                            .as_str(),
+                            )),
+                            OutputType::Standard,
                         );
                     } else {
-                        writer.output().success(
-                            format!(
+                        writer.writeln(
+                            Style::success(format!(
                                 "Alright! I've saved your new password. You can paste it \
                                  anywhere with {}.",
                                 paste_keys()
-                            )
-                            .as_str(),
+                            )),
+                            OutputType::Standard,
                         );
                     }
                 }
                 Err(err) => {
-                    writer.error().error(
-                        format!("Woops, I couldn't add the password (reason: {:?}).", err).as_str(),
+                    writer.writeln(
+                        Style::error(format!(
+                            "Woops, I couldn't add the password (reason: {:?}).",
+                            err
+                        )),
+                        OutputType::Error,
                     );
                     return Err(1);
                 }
@@ -91,8 +92,12 @@ pub fn callback_exec<
             Ok(())
         }
         Err(err) => {
-            writer.error().error(
-                format!("\nI couldn't read the app's password (reason: {:?}).", err).as_str(),
+            writer.writeln(
+                Style::error(format!(
+                    "\nI couldn't read the app's password (reason: {:?}).",
+                    err
+                )),
+                OutputType::Error,
             );
             Err(1)
         }
