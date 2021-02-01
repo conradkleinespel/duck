@@ -12,10 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use io::WriterManager;
+use io::{CliWriter, OutputType, Style};
 use password;
 use safe_string::SafeString;
-use std::io::Write;
+
 use std::ops::Deref;
 
 // On Windows and Mac, we'll use the native solutions provided by the OS libraries
@@ -127,48 +127,55 @@ pub fn paste_keys() -> &'static str {
     "Ctrl+V"
 }
 
-pub fn confirm_password_retrieved<
-    ErrorWriter: Write + ?Sized,
-    OutputWriter: Write + ?Sized,
-    InstructionWriter: Write + ?Sized,
->(
+pub fn confirm_password_retrieved(
     show: bool,
     password: &password::v2::Password,
-    writer: &mut WriterManager<ErrorWriter, OutputWriter, InstructionWriter>,
+    writer: &mut impl CliWriter,
 ) {
     if show {
-        writer
-            .output()
-            .success(format!("Alright! Here is your password for {}:", password.name).as_str());
-        writer
-            .output()
-            .success(format!("Username: {}", password.username).as_str());
-        writer
-            .output()
-            .success(format!("Password: {}", password.password.deref()).as_str());
+        writer.writeln(
+            Style::success(format!(
+                "Alright! Here is your password for {}:",
+                password.name
+            )),
+            OutputType::Standard,
+        );
+        writer.writeln(
+            Style::success(format!("Username: {}", password.username)),
+            OutputType::Standard,
+        );
+        writer.writeln(
+            Style::success(format!("Password: {}", password.password.deref())),
+            OutputType::Standard,
+        );
     } else {
         if copy_to_clipboard(&password.password).is_err() {
-            writer.output().success(
-                format!(
+            writer.writeln(
+                Style::success(format!(
                     "Hmm, I tried to copy your new password to your clipboard, but \
                      something went wrong. You can see it with `rooster get '{}' --show`",
                     password.name
-                )
-                .as_str(),
+                )),
+                OutputType::Standard,
             );
         } else {
-            writer
-                .output()
-                .success(format!("Alright! Here is your password for {}:", password.name).as_str());
-            writer
-                .output()
-                .success(format!("Username: {}", password.username).as_str());
-            writer.output().success(
-                format!(
+            writer.writeln(
+                Style::success(format!(
+                    "Alright! Here is your password for {}:",
+                    password.name
+                )),
+                OutputType::Standard,
+            );
+            writer.writeln(
+                Style::success(format!("Username: {}", password.username)),
+                OutputType::Standard,
+            );
+            writer.writeln(
+                Style::success(format!(
                     "Password: ******** (copied to clipboard, paste with {})",
                     paste_keys()
-                )
-                .as_str(),
+                )),
+                OutputType::Standard,
             );
         }
     }

@@ -1,9 +1,8 @@
 extern crate libc;
 extern crate rooster;
 
-use rooster::io::{ReaderManager, WriterManager};
+use rooster::io::{RegularInput, RegularOutput};
 use std::env::VarError;
-use std::io::Write;
 use std::path::PathBuf;
 
 const ROOSTER_FILE_ENV_VAR: &'static str = "ROOSTER_FILE";
@@ -35,30 +34,26 @@ fn main() {
     let args = std::env::args().collect::<Vec<String>>();
     let args_refs = args.iter().map(|s| s.as_str()).collect::<Vec<&str>>();
 
-    let stdin = std::io::stdin();
-    let mut input_reader = Box::new(stdin.lock());
-    let mut error_writer: Box<dyn Write> = Box::new(std::io::stderr());
-    let mut output_writer: Box<dyn Write> = Box::new(std::io::stdout());
-    let mut instruction_writer: Box<dyn Write> = Box::new(
-        std::fs::OpenOptions::new()
-            .write(true)
-            .open("/dev/tty")
-            .unwrap(),
-    );
-
-    let mut writer = WriterManager::new(
-        &mut error_writer,
-        &mut output_writer,
-        &mut instruction_writer,
-    );
-    let mut reader = ReaderManager::new(&mut input_reader, false);
-
     let rooster_file_path = get_password_file_path().unwrap_or_else(|err| std::process::exit(err));
+
+    let stdin = std::io::stdin();
+    let stdout = std::io::stdout();
+    let stderr = std::io::stderr();
+    let tty = std::fs::OpenOptions::new()
+        .write(true)
+        .open("/dev/tty")
+        .unwrap();
 
     std::process::exit(rooster::main_with_args(
         args_refs.as_slice(),
-        &mut reader,
-        &mut writer,
+        &mut RegularInput {
+            stdin_lock: stdin.lock(),
+        },
+        &mut RegularOutput {
+            stdout_lock: stdout.lock(),
+            stderr_lock: stderr.lock(),
+            tty,
+        },
         &rooster_file_path,
     ));
 }

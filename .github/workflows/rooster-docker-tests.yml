@@ -6,6 +6,7 @@ on:
       - master
     paths:
       - "projects/rooster/**"
+      - "projects/rpassword/**"
 
 jobs:
   tests:

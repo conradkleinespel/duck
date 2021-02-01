@@ -13,21 +13,16 @@
 // limitations under the License.
 
 use ffi;
-use io::{ReaderManager, WriterManager};
+use io::{CliReader, CliWriter};
+use io::{OutputType, Style};
 use list;
 use password;
-use std::io::{BufRead, Write};
 
-pub fn callback_exec<
-    R: BufRead,
-    ErrorWriter: Write + ?Sized,
-    OutputWriter: Write + ?Sized,
-    InstructionWriter: Write + ?Sized,
->(
+pub fn callback_exec(
     matches: &clap::ArgMatches,
     store: &mut password::v2::PasswordStore,
-    reader: &mut ReaderManager<R>,
-    writer: &mut WriterManager<ErrorWriter, OutputWriter, InstructionWriter>,
+    reader: &mut impl CliReader,
+    writer: &mut impl CliWriter,
 ) -> Result<(), i32> {
     let query = matches.value_of("app").unwrap();
     let new_name = matches.value_of("new_name").unwrap().to_owned();
@@ -56,18 +51,22 @@ pub fn callback_exec<
 
     match change_result {
         Ok(_) => {
-            writer
-                .output()
-                .success(format!("Done! I've renamed {} to {}", password.name, new_name).as_str());
+            writer.writeln(
+                Style::success(format!(
+                    "Done! I've renamed {} to {}",
+                    password.name, new_name
+                )),
+                OutputType::Standard,
+            );
             Ok(())
         }
         Err(err) => {
-            writer.error().error(
-                format!(
+            writer.writeln(
+                Style::error(format!(
                     "Woops, I couldn't save the new app name (reason: {:?}).",
                     err
-                )
-                .as_str(),
+                )),
+                OutputType::Error,
             );
             Err(1)
         }

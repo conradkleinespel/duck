@@ -14,21 +14,16 @@
 
 use clip;
 use ffi;
-use io::{ReaderManager, WriterManager};
+use io::{CliReader, CliWriter};
+use io::{OutputType, Style};
 use list;
 use password;
-use std::io::{BufRead, Write};
 
-pub fn callback_exec<
-    R: BufRead,
-    ErrorWriter: Write + ?Sized,
-    OutputWriter: Write + ?Sized,
-    InstructionWriter: Write + ?Sized,
->(
+pub fn callback_exec(
     matches: &clap::ArgMatches,
     store: &mut password::v2::PasswordStore,
-    reader: &mut ReaderManager<R>,
-    writer: &mut WriterManager<ErrorWriter, OutputWriter, InstructionWriter>,
+    reader: &mut impl CliReader,
+    writer: &mut impl CliWriter,
 ) -> Result<(), i32> {
     let query = matches.value_of("app").unwrap();
 
@@ -43,13 +38,18 @@ pub fn callback_exec<
     .ok_or(1)?
     .clone();
 
-    writer
-        .instruction()
-        .prompt(format!("What password do you want for \"{}\"? ", password.name).as_str());
+    writer.write(
+        format!("What password do you want for \"{}\"? ", password.name),
+        OutputType::Standard,
+    );
     let password_as_string = reader.read_password().map_err(|err| {
-        writer
-            .error()
-            .error(format!("\nI couldn't read the app's password (reason: {:?}).", err).as_str());
+        writer.writeln(
+            Style::error(format!(
+                "\nI couldn't read the app's password (reason: {:?}).",
+                err
+            )),
+            OutputType::Error,
+        );
         1
     })?;
 
@@ -64,12 +64,12 @@ pub fn callback_exec<
             }
         })
         .map_err(|err| {
-            writer.error().error(
-                format!(
+            writer.writeln(
+                Style::error(format!(
                     "Woops, I couldn't save the new password (reason: {:?}).",
                     err
-                )
-                .as_str(),
+                )),
+                OutputType::Error,
             );
             1
         })?;

@@ -12,9 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use io::{ReaderManager, WriterManager};
+use io::{CliReader, CliWriter, OutputType, Style};
 use password::v2::{Password, PasswordStore};
-use std::io::{BufRead, Write};
 
 /// Used to indicate lists should have a number, ie: 23 Google my.account@gmail.com
 pub const WITH_NUMBERS: bool = true;
@@ -72,46 +71,39 @@ fn get_list_of_passwords(passwords: &Vec<&Password>, with_numbers: bool) -> Vec<
     list
 }
 
-pub fn print_list_of_passwords<
-    ErrorWriter: Write + ?Sized,
-    OutputWriter: Write + ?Sized,
-    InstructionWriter: Write + ?Sized,
->(
+pub fn print_list_of_passwords(
     passwords: &Vec<&Password>,
     with_numbers: bool,
-    writer: &mut WriterManager<ErrorWriter, OutputWriter, InstructionWriter>,
+    writer: &mut impl CliWriter,
 ) {
     let list = get_list_of_passwords(passwords, with_numbers);
 
     for s in list {
-        writer.output().info(s.as_str());
+        writer.writeln(Style::info(s), OutputType::Standard);
     }
 }
 
-fn request_password_index_from_stdin<
-    R: BufRead,
-    ErrorWriter: Write + ?Sized,
-    OutputWriter: Write + ?Sized,
-    InstructionWriter: Write + ?Sized,
->(
+fn request_password_index_from_stdin(
     passwords: &Vec<&Password>,
     prompt: &str,
-    reader: &mut ReaderManager<R>,
-    writer: &mut WriterManager<ErrorWriter, OutputWriter, InstructionWriter>,
+    reader: &mut impl CliReader,
+    writer: &mut impl CliWriter,
 ) -> usize {
     assert!(!passwords.is_empty());
 
     // Read the index from the command line and convert to a number
     loop {
         if passwords.len() > 1 {
-            writer.instruction().info(prompt);
-            writer
-                .instruction()
-                .prompt(format!("Type a number from 1 to {}: ", passwords.len()).as_str());
+            writer.writeln(Style::info(prompt), OutputType::Standard);
+            writer.write(
+                format!("Type a number from 1 to {}: ", passwords.len()),
+                OutputType::Standard,
+            );
         } else if passwords.len() == 1 {
-            writer
-                .instruction()
-                .prompt("If this is the password you mean, type \"1\" and hit ENTER: ");
+            writer.write(
+                "If this is the password you mean, type \"1\" and hit ENTER: ",
+                OutputType::Standard,
+            );
         }
 
         match reader.read_line() {
@@ -119,12 +111,12 @@ fn request_password_index_from_stdin<
                 match line.trim().parse::<usize>() {
                     Ok(index) => {
                         if index == 0 || index > passwords.len() {
-                            writer.instruction().prompt(
+                            writer.write(
                                 format!(
                                     "I need a number between 1 and {}. Let's try again:",
                                     passwords.len()
-                                )
-                                .as_str(),
+                                ),
+                                OutputType::Standard,
                             );
                             continue;
                         }
@@ -132,70 +124,57 @@ fn request_password_index_from_stdin<
                         return index - 1;
                     }
                     Err(err) => {
-                        writer.instruction().prompt(
-                            format!(
-                            "This isn't a valid number (reason: {}). Let's try again (1 to {}): ",
-                            err,
-                            passwords.len()
-                        )
-                            .as_str(),
+                        writer.write(
+                            format!("This isn't a valid number (reason: {}). Let's try again (1 to {}): ", err, passwords.len()),
+                            OutputType::Standard,
                         );
                         continue;
                     }
                 };
             }
             Err(err) => {
-                writer.instruction().prompt(
+                writer.write(
                     format!(
                         "I couldn't read that (reason: {}). Let's try again (1 to {}): ",
                         err,
                         passwords.len()
-                    )
-                    .as_str(),
+                    ),
+                    OutputType::Standard,
                 );
             }
         }
     }
 }
 
-fn choose_password_in_list<
-    R: BufRead,
-    ErrorWriter: Write + ?Sized,
-    OutputWriter: Write + ?Sized,
-    InstructionWriter: Write + ?Sized,
->(
+fn choose_password_in_list(
     passwords: &Vec<&Password>,
     with_numbers: bool,
     prompt: &str,
-    reader: &mut ReaderManager<R>,
-    writer: &mut WriterManager<ErrorWriter, OutputWriter, InstructionWriter>,
+    reader: &mut impl CliReader,
+    writer: &mut impl CliWriter,
 ) -> usize {
     print_list_of_passwords(passwords, with_numbers, writer);
-    writer.output().newline();
+    writer.nl(OutputType::Standard);
     request_password_index_from_stdin(passwords, prompt, reader, writer)
 }
 
-pub fn search_and_choose_password<
-    'a,
-    'b,
-    'c,
-    R: BufRead,
-    ErrorWriter: Write + ?Sized,
-    OutputWriter: Write + ?Sized,
-    InstructionWriter: Write + ?Sized,
->(
-    store: &'c PasswordStore,
+pub fn search_and_choose_password<'a>(
+    store: &'a PasswordStore,
     query: &str,
     with_numbers: bool,
     prompt: &str,
-    reader: &mut ReaderManager<'b, R>,
-    writer: &mut WriterManager<'a, ErrorWriter, OutputWriter, InstructionWriter>,
-) -> Option<&'c Password> {
+    reader: &mut impl CliReader,
+    writer: &mut impl CliWriter,
+) -> Option<&'a Password> {
     let passwords = store.search_passwords(query);
     if passwords.len() == 0 {
-        writer
-            .error()
-            .error(format!("Woops, I can't find any passwords for \"{}\".", query).as_str());
+        writer.writeln(
+            Style::error(format!(
+                "Woops, I can't find any passwords for \"{}\".",
+                query
+            )),
+            OutputType::Error,
+        );
         return None;
     }
 

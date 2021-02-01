@@ -12,10 +12,11 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use io::WriterManager;
+use io::OutputType;
+use io::{CliWriter, Style};
 use rand::{rngs::OsRng, Rng};
 use safe_string::SafeString;
-use std::io::{Result as IoResult, Write};
+use std::io::Result as IoResult;
 
 fn generate_password(alnum: bool, len: usize) -> IoResult<SafeString> {
     let mut password_as_string = String::new();
@@ -72,14 +73,7 @@ impl PasswordSpec {
     }
 }
 
-pub fn check_password_len<
-    ErrorWriter: Write + ?Sized,
-    OutputWriter: Write + ?Sized,
-    InstructionWriter: Write + ?Sized,
->(
-    opt: Option<usize>,
-    writer: &mut WriterManager<ErrorWriter, OutputWriter, InstructionWriter>,
-) -> Option<usize> {
+pub fn check_password_len(opt: Option<usize>, writer: &mut impl CliWriter) -> Option<usize> {
     match opt {
         Some(len) => {
             // We want passwords to contain at least one uppercase letter, one lowercase
@@ -88,21 +82,19 @@ pub fn check_password_len<
             // a password of length < 4 with 4 different kinds of characters (uppercase,
             // lowercase, numeric, punctuation).
             if len < 4 {
-                writer
-                    .error()
-                    .error("Woops! The length of the password must be at least 4. This");
-                writer
-                    .error()
-                    .error("allows us to make sure your password is secure.");
+                writer.writeln(Style::error("Woops! The length of the password must be at least 4. This allows us to make sure your password is secure."), OutputType::Error);
                 None
             } else {
                 Some(len)
             }
         }
         None => {
-            writer
-                .error()
-                .error("Woops! The length option must be a valid number, for instance 8 or 16.");
+            writer.writeln(
+                Style::error(
+                    "Woops! The length option must be a valid number, for instance 8 or 16.",
+                ),
+                OutputType::Error,
+            );
             None
         }
     }

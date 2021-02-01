@@ -13,21 +13,16 @@
 // limitations under the License.
 
 use clip;
-use io::{ReaderManager, WriterManager};
+
+use io::{CliReader, CliWriter};
 use list;
 use password;
-use std::io::{BufRead, Write};
 
-pub fn callback_exec<
-    R: BufRead,
-    ErrorWriter: Write + ?Sized,
-    OutputWriter: Write + ?Sized,
-    InstructionWriter: Write + ?Sized,
->(
+pub fn callback_exec(
     matches: &clap::ArgMatches,
     store: &mut password::v2::PasswordStore,
-    reader: &mut ReaderManager<R>,
-    writer: &mut WriterManager<ErrorWriter, OutputWriter, InstructionWriter>,
+    reader: &mut impl CliReader,
+    writer: &mut impl CliWriter,
 ) -> Result<(), i32> {
     let show = matches.is_present("show");
     let query = matches.value_of("app").unwrap();
