@@ -1,7 +1,7 @@
 use ansi_term::Color::{Green, Red, Yellow};
 pub use ansi_term::Colour;
 use ansi_term::Style as AnsiTermStyle;
-use rpassword::{read_password_from_tty, read_password_with_reader};
+use rpassword::{read_password_from_bufread, read_password_from_tty};
 use safe_string::SafeString;
 use std::fs::File;
 use std::io::{BufRead, Result as IoResult};
@@ -105,7 +105,7 @@ impl<'a> CliReader for RegularInput<'a> {
     }
 
     fn read_password(&mut self) -> IoResult<SafeString> {
-        Ok(SafeString::new(read_password_from_tty(None)?))
+        Ok(SafeString::new(read_password_from_tty()?))
     }
 }
 
@@ -181,9 +181,9 @@ impl CliReader for CursorInput {
     }
 
     fn read_password(&mut self) -> IoResult<SafeString> {
-        Ok(SafeString::new(read_password_with_reader(Some(
+        Ok(SafeString::new(read_password_from_bufread(
             &mut self.cursor,
-        ))?))
+        )?))
     }
 }
 
