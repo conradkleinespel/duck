@@ -24,6 +24,7 @@ extern crate libc;
 extern crate openssl;
 extern crate rand;
 extern crate rpassword;
+extern crate rprompt;
 extern crate serde;
 extern crate serde_json;
 

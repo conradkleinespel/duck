@@ -39,10 +39,6 @@ fn main() {
     let stdin = std::io::stdin();
     let stdout = std::io::stdout();
     let stderr = std::io::stderr();
-    let tty = std::fs::OpenOptions::new()
-        .write(true)
-        .open("/dev/tty")
-        .unwrap();
 
     std::process::exit(rooster::main_with_args(
         args_refs.as_slice(),
@@ -52,7 +48,6 @@ fn main() {
         &mut RegularOutput {
             stdout_lock: stdout.lock(),
             stderr_lock: stderr.lock(),
-            tty,
         },
         &rooster_file_path,
     ));

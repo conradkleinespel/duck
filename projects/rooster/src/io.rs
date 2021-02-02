@@ -1,7 +1,10 @@
 use ansi_term::Color::{Green, Red, Yellow};
 pub use ansi_term::Colour;
 use ansi_term::Style as AnsiTermStyle;
-use rpassword::{read_password_from_bufread, read_password_from_tty};
+use rpassword::{
+    read_password_from_bufread, read_password_from_stdin_lock, read_password_from_tty, stdin_tty,
+};
+use rprompt::{print_tty, read_reply};
 use safe_string::SafeString;
 use std::fs::File;
 use std::io::{BufRead, Result as IoResult};
@@ -22,7 +25,6 @@ pub struct RegularInput<'a> {
 pub struct RegularOutput<'a> {
     pub stdout_lock: StdoutLock<'a>,
     pub stderr_lock: StderrLock<'a>,
-    pub tty: File,
 }
 
 /// Input that reads from a cursor, useful for tests
@@ -99,13 +101,17 @@ impl Style {
 
 impl<'a> CliReader for RegularInput<'a> {
     fn read_line(&mut self) -> IoResult<String> {
-        let mut s = String::new();
-        self.stdin_lock.read_line(&mut s)?;
-        Ok(s)
+        read_reply(&mut self.stdin_lock)
     }
 
     fn read_password(&mut self) -> IoResult<SafeString> {
-        Ok(SafeString::new(read_password_from_tty()?))
+        if stdin_tty() {
+            Ok(SafeString::new(read_password_from_tty()?))
+        } else {
+            Ok(SafeString::new(read_password_from_stdin_lock(
+                &mut self.stdin_lock,
+            )?))
+        }
     }
 }
 
@@ -121,8 +127,7 @@ impl<'a> CliWriter for RegularOutput<'a> {
                 self.stderr_lock.flush().unwrap();
             }
             OutputType::Tty => {
-                self.tty.write_all("\n".as_bytes()).unwrap();
-                self.tty.flush().unwrap();
+                print_tty("\n").unwrap();
             }
         }
     }
@@ -142,8 +147,7 @@ impl<'a> CliWriter for RegularOutput<'a> {
                 self.stderr_lock.flush().unwrap();
             }
             OutputType::Tty => {
-                self.tty.write_all(s.to_string().as_bytes()).unwrap();
-                self.tty.flush().unwrap();
+                print_tty(s.to_string()).unwrap();
             }
         }
     }
@@ -165,9 +169,8 @@ impl<'a> CliWriter for RegularOutput<'a> {
                 self.stderr_lock.flush().unwrap();
             }
             OutputType::Tty => {
-                self.tty.write_all(s.to_string().as_bytes()).unwrap();
-                self.tty.write_all("\n".as_bytes()).unwrap();
-                self.tty.flush().unwrap();
+                print_tty(s.to_string()).unwrap();
+                print_tty("\n").unwrap();
             }
         }
     }
@@ -175,9 +178,7 @@ impl<'a> CliWriter for RegularOutput<'a> {
 
 impl CliReader for CursorInput {
     fn read_line(&mut self) -> IoResult<String> {
-        let mut s = String::new();
-        self.cursor.read_line(&mut s)?;
-        Ok(s)
+        read_reply(&mut self.cursor)
     }
 
     fn read_password(&mut self) -> IoResult<SafeString> {
