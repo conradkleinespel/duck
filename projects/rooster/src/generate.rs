@@ -15,7 +15,7 @@
 use io::OutputType;
 use io::{CliWriter, Style};
 use rand::{rngs::OsRng, Rng};
-use safe_string::SafeString;
+use rutil::safe_string::SafeString;
 use std::io::Result as IoResult;
 
 fn generate_password(alnum: bool, len: usize) -> IoResult<SafeString> {
@@ -36,7 +36,7 @@ fn generate_password(alnum: bool, len: usize) -> IoResult<SafeString> {
             password_as_string.push(rng.gen_range(33, 127) as u8 as char);
         }
     }
-    Ok(SafeString::new(password_as_string))
+    Ok(SafeString::from_string(password_as_string))
 }
 
 /// Returns true if the password contains at least one digit, one uppercase letter and one

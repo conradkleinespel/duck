@@ -25,6 +25,7 @@ extern crate openssl;
 extern crate rand;
 extern crate rpassword;
 extern crate rprompt;
+extern crate rutil;
 extern crate serde;
 extern crate serde_json;
 
@@ -32,8 +33,8 @@ use clap::{App, AppSettings, Arg, ArgMatches};
 use io::{CliReader, CliWriter};
 use io::{OutputType, Style};
 use password::v2::PasswordStore;
-use safe_string::SafeString;
-use safe_vec::SafeVec;
+use rutil::safe_string::SafeString;
+use rutil::safe_vec::SafeVec;
 use std::env;
 use std::fs::File;
 use std::io::Read;
@@ -50,8 +51,6 @@ pub mod io;
 mod list;
 mod password;
 mod quale;
-mod safe_string;
-mod safe_vec;
 
 // We conditionally compile this module to avoid "unused function" warnings.
 #[cfg(all(unix, not(target_os = "macos")))]
