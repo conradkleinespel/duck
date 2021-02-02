@@ -15,8 +15,8 @@
 use super::PasswordError;
 use aes;
 use ffi;
-use safe_string::SafeString;
-use safe_vec::SafeVec;
+use rutil::safe_string::SafeString;
+use rutil::safe_vec::SafeVec;
 use serde::{Deserialize, Serialize};
 use serde_json;
 
@@ -123,8 +123,9 @@ pub fn get_all_passwords(
 
         match decrypted_maybe {
             Ok(decrypted) => {
-                let encoded =
-                    SafeString::new(String::from_utf8_lossy(decrypted.deref()).into_owned());
+                let encoded = SafeString::from_string(
+                    String::from_utf8_lossy(decrypted.deref()).into_owned(),
+                );
 
                 let s: Result<Schema, Error> = serde_json::from_str(encoded.deref());
 

@@ -17,7 +17,7 @@ use io::{CliReader, CliWriter};
 use io::{OutputType, Style};
 use password;
 use password::v2::Password;
-use safe_string::SafeString;
+use rutil::safe_string::SafeString;
 use serde::{Deserialize, Serialize};
 use serde_json;
 use std::io::Cursor;
@@ -60,7 +60,7 @@ fn export_to_csv(
         match csv_writer.write_record(&[
             &password.name,
             &password.username,
-            password.password.inner.as_str(),
+            password.password.deref().as_str(),
         ]) {
             Ok(_) => {}
             Err(_) => return Err(1),
@@ -100,7 +100,7 @@ fn export_to_json(
         }
     };
 
-    let passwords = SafeString::new(passwords_json);
+    let passwords = SafeString::from_string(passwords_json);
     writer.write(format!("{}", passwords.deref()), OutputType::Standard);
     return Ok(());
 }

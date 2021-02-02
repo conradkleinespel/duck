@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - "projects/rprompt/**"
+      - "projects/rutil/**"
 
 jobs:
   linux:

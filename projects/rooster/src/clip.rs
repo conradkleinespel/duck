@@ -14,7 +14,7 @@
 
 use io::{CliWriter, OutputType, Style};
 use password;
-use safe_string::SafeString;
+use rutil::safe_string::SafeString;
 
 use std::ops::Deref;
 
@@ -38,7 +38,7 @@ pub fn copy_to_clipboard(s: &SafeString) -> Result<(), ()> {
     use std::env;
     use std::process::Command;
 
-    let password = SafeString::new(shell_escape::escape(s.deref().into()).into());
+    let password = SafeString::from_string(shell_escape::escape(s.deref().into()).into());
 
     fn wayland_clipboards(password: &SafeString) -> Result<(), ()> {
         match which("wl-copy") {

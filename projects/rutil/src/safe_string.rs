@@ -1,48 +1,45 @@
-// Copyright 2014-2017 The Rooster Developers
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
-use serde::de::{Deserialize, Deserializer, Error, Visitor};
+#[cfg(feature = "serde")]
+use serde::de::{Deserialize, Deserializer, Visitor};
+#[cfg(feature = "serde")]
 use serde::ser::{Serialize, Serializer};
 use std::convert::Into;
+#[cfg(feature = "serde")]
 use std::fmt;
-use std::ops::Deref;
-use std::ops::Drop;
+use std::ops::{Deref, DerefMut, Drop};
 use std::{ptr, sync::atomic};
 
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct SafeString {
-    pub inner: String,
+    inner: String,
 }
 
+#[cfg(feature = "serde")]
 struct StringVisitor;
 
+#[cfg(feature = "serde")]
 impl<'de> Visitor<'de> for StringVisitor {
     fn expecting(&self, formatter: &mut fmt::Formatter) -> fmt::Result {
         formatter.write_str("a string")
     }
-    fn visit_str<E>(self, v: &str) -> Result<Self::Value, E>
-    where
-        E: Error,
-    {
+    fn visit_str<E: serde::de::Error>(self, v: &str) -> Result<Self::Value, E> {
         Ok(String::from(v))
     }
     type Value = String;
 }
 
 impl SafeString {
-    pub fn new(inner: String) -> SafeString {
-        SafeString { inner: inner }
+    pub fn new() -> SafeString {
+        SafeString {
+            inner: String::new(),
+        }
+    }
+
+    pub fn from_string(inner: String) -> SafeString {
+        SafeString { inner }
+    }
+
+    pub fn into_inner(mut self) -> String {
+        std::mem::replace(&mut self.inner, String::new())
     }
 }
 
@@ -60,16 +57,22 @@ impl Drop for SafeString {
 }
 
 impl Deref for SafeString {
-    type Target = str;
+    type Target = String;
 
-    fn deref(&self) -> &str {
-        self.inner.deref()
+    fn deref(&self) -> &String {
+        &self.inner
+    }
+}
+
+impl DerefMut for SafeString {
+    fn deref_mut(&mut self) -> &mut Self::Target {
+        &mut self.inner
     }
 }
 
 impl Into<SafeString> for String {
     fn into(self) -> SafeString {
-        SafeString::new(self)
+        SafeString::from_string(self)
     }
 }
 
@@ -79,6 +82,7 @@ impl<'a> Into<SafeString> for &'a str {
     }
 }
 
+#[cfg(feature = "serde")]
 impl Serialize for SafeString {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
     where
@@ -88,6 +92,7 @@ impl Serialize for SafeString {
     }
 }
 
+#[cfg(feature = "serde")]
 impl<'de> Deserialize<'de> for SafeString {
     fn deserialize<D>(deserializer: D) -> Result<SafeString, D::Error>
     where
@@ -101,12 +106,11 @@ impl<'de> Deserialize<'de> for SafeString {
     }
 }
 
-#[cfg(test)]
+#[cfg(all(test, all(feature = "serde", feature = "serde_json")))]
 mod test {
-    use safe_string::SafeString;
+    use super::SafeString;
     use serde::{Deserialize, Serialize};
     use serde_json;
-    use serde_json::Error;
 
     #[test]
     fn safe_string_serialization() {
@@ -143,7 +147,7 @@ mod test {
     fn safe_string_deserialization() {
         let s = "\"blabla\"";
 
-        let res: Result<SafeString, Error> = serde_json::from_str(s);
+        let res: Result<SafeString, serde_json::Error> = serde_json::from_str(s);
 
         match res {
             Ok(ss) => assert_eq!(
@@ -159,7 +163,7 @@ mod test {
     #[test]
     fn safe_string_within_struct_deserialization() {
         let json = "{\"password\":\"blabla\"}";
-        let res: Result<TestStruct, Error> = serde_json::from_str(json);
+        let res: Result<TestStruct, serde_json::Error> = serde_json::from_str(json);
         match res {
             Ok(ts) => assert_eq!(
                 ts,

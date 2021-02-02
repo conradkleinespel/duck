@@ -5,6 +5,7 @@ on:
     paths:
       - "projects/rooster/**"
       - "projects/rpassword/**"
+      - "projects/rutil/**"
 
 jobs:
   linux:

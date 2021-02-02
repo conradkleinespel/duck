@@ -2,12 +2,11 @@ use ansi_term::Color::{Green, Red, Yellow};
 pub use ansi_term::Colour;
 use ansi_term::Style as AnsiTermStyle;
 use rpassword::{
-    read_password_from_bufread, read_password_from_stdin_lock, read_password_from_tty, stdin_tty,
+    read_password_from_bufread, read_password_from_stdin_lock, read_password_from_tty,
 };
 use rprompt::{print_tty, read_reply};
-use safe_string::SafeString;
-use std::fs::File;
-use std::io::{BufRead, Result as IoResult};
+use rutil::safe_string::SafeString;
+use std::io::Result as IoResult;
 use std::io::{Cursor, StderrLock, StdinLock, StdoutLock, Write};
 
 pub enum OutputType {
@@ -105,10 +104,10 @@ impl<'a> CliReader for RegularInput<'a> {
     }
 
     fn read_password(&mut self) -> IoResult<SafeString> {
-        if stdin_tty() {
-            Ok(SafeString::new(read_password_from_tty()?))
+        if rutil::stdin_is_tty::stdin_is_tty() {
+            Ok(SafeString::from_string(read_password_from_tty()?))
         } else {
-            Ok(SafeString::new(read_password_from_stdin_lock(
+            Ok(SafeString::from_string(read_password_from_stdin_lock(
                 &mut self.stdin_lock,
             )?))
         }
@@ -182,7 +181,7 @@ impl CliReader for CursorInput {
     }
 
     fn read_password(&mut self) -> IoResult<SafeString> {
-        Ok(SafeString::new(read_password_from_bufread(
+        Ok(SafeString::from_string(read_password_from_bufread(
             &mut self.cursor,
         )?))
     }

@@ -194,21 +194,21 @@ mod test {
     use super::get_list_of_passwords;
     use list::{WITHOUT_NUMBERS, WITH_NUMBERS};
     use password::v2::Password;
-    use safe_string::SafeString;
+    use rutil::safe_string::SafeString;
 
     // Creates a list of at least two passwords, and more if specified
     fn get_passwords(mut additional: i32) -> Vec<Password> {
         let google = Password::new(
             format!("google"),
             format!("short un"),
-            SafeString::new(format!("xxxx")),
+            SafeString::from_string(format!("xxxx")),
         );
 
         let mut list = vec![
             Password::new(
                 format!("youtube.com"),
                 format!("that long username"),
-                SafeString::new(format!("xxxx")),
+                SafeString::from_string(format!("xxxx")),
             ),
             google.clone(),
         ];
