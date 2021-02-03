@@ -3,7 +3,7 @@ use io::{CliReader, CliWriter};
 use io::{OutputType, Style};
 use password;
 use password::v2::Password;
-use rutil::safe_string::SafeString;
+use rutil::SafeString;
 use serde::{Deserialize, Serialize};
 use serde_json;
 use std::io::Cursor;

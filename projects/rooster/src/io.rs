@@ -4,8 +4,8 @@ use ansi_term::Style as AnsiTermStyle;
 use rpassword::{
     read_password_from_bufread, read_password_from_stdin_lock, read_password_from_tty,
 };
-use rprompt::{print_tty, read_reply};
-use rutil::safe_string::SafeString;
+use rprompt::{print_tty, read_reply_from_bufread};
+use rutil::SafeString;
 use std::io::Result as IoResult;
 use std::io::{Cursor, StderrLock, StdinLock, StdoutLock, Write};
 

@@ -1,6 +1,6 @@
 use io::{CliWriter, OutputType, Style};
 use password;
-use rutil::safe_string::SafeString;
+use rutil::SafeString;
 
 use std::ops::Deref;
 

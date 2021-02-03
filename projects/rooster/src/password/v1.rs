@@ -1,8 +1,8 @@
 use super::PasswordError;
 use aes;
 use ffi;
-use rutil::safe_string::SafeString;
-use rutil::safe_vec::SafeVec;
+use rutil::SafeString;
+use rutil::SafeVec;
 use serde::{Deserialize, Serialize};
 use serde_json;
 

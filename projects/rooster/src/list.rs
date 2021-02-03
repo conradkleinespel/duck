@@ -180,7 +180,7 @@ mod test {
     use super::get_list_of_passwords;
     use list::{WITHOUT_NUMBERS, WITH_NUMBERS};
     use password::v2::Password;
-    use rutil::safe_string::SafeString;
+    use rutil::SafeString;
 
     // Creates a list of at least two passwords, and more if specified
     fn get_passwords(mut additional: i32) -> Vec<Password> {

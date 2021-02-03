@@ -1,7 +1,7 @@
 use io::OutputType;
 use io::{CliWriter, Style};
 use rand::{rngs::OsRng, Rng};
-use rutil::safe_string::SafeString;
+use rutil::SafeString;
 use std::io::Result as IoResult;
 
 fn generate_password(alnum: bool, len: usize) -> IoResult<SafeString> {
