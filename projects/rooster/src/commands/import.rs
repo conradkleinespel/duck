@@ -1,7 +1,7 @@
-use ffi;
-use io::{CliReader, CliWriter, OutputType, Style};
-use password;
-use password::v2::{Password, PasswordStore};
+use crate::ffi;
+use crate::io::{CliReader, CliWriter, OutputType, Style};
+use crate::password;
+use crate::password::v2::{Password, PasswordStore};
 use serde::{Deserialize, Serialize};
 use serde_json;
 use std::fs::File;

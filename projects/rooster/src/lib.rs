@@ -1,24 +1,12 @@
 // #![allow(useless_format, too_many_arguments)]
 
 extern crate ansi_term;
-extern crate byteorder;
-extern crate clap;
-extern crate clipboard;
-extern crate csv;
-extern crate dirs;
-extern crate libc;
-extern crate openssl;
-extern crate rand;
-extern crate rpassword;
-extern crate rprompt;
-extern crate rutil;
-extern crate serde;
 extern crate serde_json;
 
+use crate::io::{CliReader, CliWriter};
+use crate::io::{OutputType, Style};
+use crate::password::v2::PasswordStore;
 use clap::{App, AppSettings, Arg, ArgMatches};
-use io::{CliReader, CliWriter};
-use io::{OutputType, Style};
-use password::v2::PasswordStore;
 use rutil::SafeString;
 use rutil::SafeVec;
 use std::env;

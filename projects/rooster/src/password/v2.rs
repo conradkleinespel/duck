@@ -1,7 +1,7 @@
-use aes;
+use crate::aes;
 use byteorder::{BigEndian, ReadBytesExt, WriteBytesExt};
-use ffi;
-use password::PasswordError;
+use crate::ffi;
+use crate::password::PasswordError;
 use rand::{rngs::OsRng, RngCore};
 use rutil::SafeString;
 use rutil::SafeVec;
@@ -622,11 +622,11 @@ impl PasswordStore {
 
 #[cfg(test)]
 mod test {
-    use password::v2::{
+    use crate::password::v2::{
         generate_encryption_key, generate_random_iv, generate_random_salt, Password, PasswordStore,
         SCRYPT_PARAM_LOG2_N, SCRYPT_PARAM_P, SCRYPT_PARAM_R,
     };
-    use password::PasswordError;
+    use crate::password::PasswordError;
     use rutil::SafeString;
 
     #[test]

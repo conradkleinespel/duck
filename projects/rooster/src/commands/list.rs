@@ -1,7 +1,7 @@
-use io::{CliReader, CliWriter};
-use io::{OutputType, Style};
-use list;
-use password;
+use crate::io::{CliReader, CliWriter};
+use crate::io::{OutputType, Style};
+use crate::list;
+use crate::password;
 
 pub fn callback_exec(
     _matches: &clap::ArgMatches,

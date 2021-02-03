@@ -1,8 +1,8 @@
 use csv::Writer;
-use io::{CliReader, CliWriter};
-use io::{OutputType, Style};
-use password;
-use password::v2::Password;
+use crate::io::{CliReader, CliWriter};
+use crate::io::{OutputType, Style};
+use crate::password;
+use crate::password::v2::Password;
 use rutil::SafeString;
 use serde::{Deserialize, Serialize};
 use serde_json;

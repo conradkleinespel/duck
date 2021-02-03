@@ -1,5 +1,5 @@
-use io::{CliWriter, OutputType, Style};
-use password;
+use crate::io::{CliWriter, OutputType, Style};
+use crate::password;
 use rutil::SafeString;
 
 use std::ops::Deref;
@@ -19,8 +19,8 @@ pub fn copy_to_clipboard(s: &SafeString) -> Result<(), ()> {
 // and battle tested tools: xsel and xclip.
 #[cfg(all(unix, not(target_os = "macos")))]
 pub fn copy_to_clipboard(s: &SafeString) -> Result<(), ()> {
-    use quale::which;
-    use shell_escape;
+    use crate::quale::which;
+    use crate::shell_escape;
     use std::env;
     use std::process::Command;
 

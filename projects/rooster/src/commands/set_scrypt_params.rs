@@ -1,5 +1,5 @@
-use io::{CliReader, CliWriter, OutputType, Style};
-use password;
+use crate::io::{CliReader, CliWriter, OutputType, Style};
+use crate::password;
 
 pub fn callback_exec(
     matches: &clap::ArgMatches,

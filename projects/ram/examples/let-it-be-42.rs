@@ -1,6 +1,3 @@
-extern crate ram;
-extern crate regex;
-
 use ram::Automaton;
 use regex::Regex;
 

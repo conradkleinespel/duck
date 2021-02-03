@@ -22,7 +22,7 @@ pub fn time() -> time_t {
 
 #[cfg(test)]
 mod test {
-    use ffi::time;
+    use crate::ffi::time;
 
     #[test]
     fn test_time() {

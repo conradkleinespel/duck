@@ -8,6 +8,7 @@ homepage = "https://github.com/conradkleinespel/ram"
 repository = "https://github.com/conradkleinespel/ram"
 keywords = ["fsm", "parse", "lex", "token"]
 readme = "README.md"
+edition = "2018"
 
 [lib]
 name = "ram"

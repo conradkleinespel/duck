@@ -1,5 +1,5 @@
-use io::{CliReader, CliWriter};
-use io::{OutputType, Style};
+use crate::io::{CliReader, CliWriter};
+use crate::io::{OutputType, Style};
 use std::path::PathBuf;
 
 pub fn callback_exec(
@@ -70,7 +70,7 @@ pub fn callback_exec(
         return Err(1);
     }
 
-    let store = match ::password::v2::PasswordStore::new(master_password) {
+    let store = match crate::password::v2::PasswordStore::new(master_password) {
         Ok(store) => store,
         Err(err) => {
             writer.writeln(
@@ -85,7 +85,7 @@ pub fn callback_exec(
         }
     };
 
-    let mut file = match ::create_password_file(filename_as_string.as_str()).map_err(|_| 1) {
+    let mut file = match crate::create_password_file(filename_as_string.as_str()).map_err(|_| 1) {
         Ok(file) => file,
         Err(err) => {
             writer.writeln(

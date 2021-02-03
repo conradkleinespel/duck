@@ -1,5 +1,5 @@
-use io::{CliReader, CliWriter, OutputType, Style};
-use password::v2::{Password, PasswordStore};
+use crate::io::{CliReader, CliWriter, OutputType, Style};
+use crate::password::v2::{Password, PasswordStore};
 
 /// Used to indicate lists should have a number, ie: 23 Google my.account@gmail.com
 pub const WITH_NUMBERS: bool = true;
@@ -178,8 +178,8 @@ pub fn search_and_choose_password<'a>(
 #[cfg(test)]
 mod test {
     use super::get_list_of_passwords;
-    use list::{WITHOUT_NUMBERS, WITH_NUMBERS};
-    use password::v2::Password;
+    use crate::list::{WITHOUT_NUMBERS, WITH_NUMBERS};
+    use crate::password::v2::Password;
     use rutil::SafeString;
 
     // Creates a list of at least two passwords, and more if specified

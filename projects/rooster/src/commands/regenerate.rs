@@ -1,10 +1,10 @@
-use clip;
-use ffi;
-use generate::{check_password_len, PasswordSpec};
-use io::{CliReader, CliWriter};
-use io::{OutputType, Style};
-use list;
-use password;
+use crate::clip;
+use crate::ffi;
+use crate::generate::{check_password_len, PasswordSpec};
+use crate::io::{CliReader, CliWriter};
+use crate::io::{OutputType, Style};
+use crate::list;
+use crate::password;
 
 pub fn callback_exec(
     matches: &clap::ArgMatches,
