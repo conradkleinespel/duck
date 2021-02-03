@@ -8,6 +8,7 @@ use std::fmt;
 use std::ops::{Deref, DerefMut, Drop};
 use std::{ptr, sync::atomic};
 
+/// String that is zeroed when dropped
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct SafeString {
     inner: String,

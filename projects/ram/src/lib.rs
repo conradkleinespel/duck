@@ -1,7 +1,6 @@
-//! # Examples
+//! This library makes it easy to create finite state machines to tokenize strings.
 //!
-//! ## Empty source code matcher
-//!
+//! Here's the simplest automaton you can make with it, it simply finds EOF:
 //! ```
 //! use ram::Automaton;
 //!
@@ -18,41 +17,54 @@
 //! let source_code = format!("");
 //! let runner = am.run(source_code);
 //!
-//! // Print the parsed tokens to the console
-//! println!("{:?}", runner.tokens);
+//! assert_eq!(runner.tokens.len(), 1);
+//! assert!(runner.completed());
+//!
+//! // With a non-empty string, the result is not complete
+//! let source_code = format!("Invalid entry");
+//! let runner = am.run(source_code);
+//!
+//! assert_eq!(runner.tokens.len(), 0);
+//! assert!(!runner.completed());
 //! ```
+//!
+//! Run `cargo run --example let-it-be-42` to see a more complete example.
 
 extern crate regex;
 
 use regex::Regex;
 use std::ops::Deref;
 
+/// Describes a set of valid transitions from one state to the next
 pub struct Automaton {
     pub state_initial: i32,
     pub state_final: i32,
-    finders: Vec<Finder>
+    finders: Vec<Finder>,
 }
 
+/// Contains the token type found during tokenization, along with the corresponding text
 pub struct Token {
     pub type_id: i32,
-    pub text: std::string::String
+    pub text: std::string::String,
 }
 
+/// Reads the source into a list of tokens following the transitions allowed by an automaton
 pub struct Runner<'a> {
     pub source: std::string::String,
     automaton: &'a Automaton,
     pub state: i32,
-    pub tokens: Vec<Token>
+    pub tokens: Vec<Token>,
 }
 
+/// Describes a custom way to tokenize a piece of the source
 pub struct Finder {
     pub state_from: i32,
     pub state_to: i32,
-    callback: fn(runner: &mut Runner, finder: & Finder) -> bool,
+    callback: fn(runner: &mut Runner, finder: &Finder) -> bool,
     regex: Option<Regex>,
     automaton: Option<Automaton>,
     pub token_type: i32,
-    pub join_tokens: bool
+    pub join_tokens: bool,
 }
 
 impl<'a> Automaton {
@@ -60,7 +72,7 @@ impl<'a> Automaton {
         Automaton {
             state_initial: state_initial,
             state_final: state_final,
-            finders: vec![]
+            finders: vec![],
         }
     }
 
@@ -69,7 +81,7 @@ impl<'a> Automaton {
             source: source,
             automaton: self,
             state: self.state_initial,
-            tokens: vec![]
+            tokens: vec![],
         };
 
         runner.run();
@@ -82,7 +94,7 @@ impl<'a> Automaton {
             source: source,
             automaton: self,
             state: self.state_initial,
-            tokens: vec![]
+            tokens: vec![],
         };
 
         runner.run_loop();
@@ -90,7 +102,13 @@ impl<'a> Automaton {
         runner
     }
 
-    pub fn find_custom(&mut self, token_type: i32, state_from: i32, state_to: i32, callback: fn(runner: &mut Runner, finder: & Finder) -> bool) {
+    pub fn find_custom(
+        &mut self,
+        token_type: i32,
+        state_from: i32,
+        state_to: i32,
+        callback: fn(runner: &mut Runner, finder: &Finder) -> bool,
+    ) {
         self.finders.push(Finder {
             state_from: state_from,
             state_to: state_to,
@@ -98,11 +116,11 @@ impl<'a> Automaton {
             regex: None,
             automaton: None,
             token_type: token_type,
-            join_tokens: false
+            join_tokens: false,
         })
     }
 
-    fn finder_whitespace(runner: &mut Runner, finder: & Finder) -> bool {
+    fn finder_whitespace(runner: &mut Runner, finder: &Finder) -> bool {
         let ws = &[' ', '\t'];
         if runner.source.len() > 0 && ws.contains(&(runner.source.as_bytes()[0] as char)) {
             let mut num_spaces = 1;
@@ -123,10 +141,15 @@ impl<'a> Automaton {
     }
 
     pub fn find_whitespace(&mut self, token_type: i32, state_from: i32, state_to: i32) {
-        self.find_custom(token_type, state_from, state_to, Automaton::finder_whitespace);
+        self.find_custom(
+            token_type,
+            state_from,
+            state_to,
+            Automaton::finder_whitespace,
+        );
     }
 
-    fn finder_end(runner: &mut Runner, finder: & Finder) -> bool {
+    fn finder_end(runner: &mut Runner, finder: &Finder) -> bool {
         if runner.source.len() == 0 {
             runner.add_token(Token::new(finder.token_type, "".to_string()));
             true
@@ -139,23 +162,23 @@ impl<'a> Automaton {
         self.find_custom(token_type, state_from, state_to, Automaton::finder_end);
     }
 
-    fn finder_regex(runner: &mut Runner, finder: & Finder) -> bool {
-        match finder.regex.clone().unwrap().find(runner.source.clone().deref()) {
+    fn finder_regex(runner: &mut Runner, finder: &Finder) -> bool {
+        match finder
+            .regex
+            .clone()
+            .unwrap()
+            .find(runner.source.clone().deref())
+        {
             Some(regex_match) => {
                 if regex_match.start() == 0 {
                     let text = runner.source.clone().deref()[..regex_match.end()].to_string();
-                    runner.add_token(Token::new(
-                        finder.token_type,
-                        text
-                    ));
+                    runner.add_token(Token::new(finder.token_type, text));
                     true
                 } else {
                     false
                 }
             }
-            None => {
-                false
-            }
+            None => false,
         }
     }
 
@@ -167,11 +190,11 @@ impl<'a> Automaton {
             regex: Some(re),
             automaton: None,
             token_type: token_type,
-            join_tokens: false
+            join_tokens: false,
         })
     }
 
-    fn automaton_run(runner: &mut Runner, finder: & Finder, am: & Automaton) -> bool {
+    fn automaton_run(runner: &mut Runner, finder: &Finder, am: &Automaton) -> bool {
         let sub_runner = am.run(runner.source.clone());
         if sub_runner.state == am.state_final {
             if finder.join_tokens {
@@ -181,7 +204,7 @@ impl<'a> Automaton {
                 }
                 runner.tokens.push(Token {
                     type_id: finder.token_type,
-                    text: full_text
+                    text: full_text,
                 });
             } else {
                 for t in sub_runner.tokens.deref().iter() {
@@ -195,14 +218,19 @@ impl<'a> Automaton {
         }
     }
 
-    fn finder_automaton(runner: &mut Runner, finder: & Finder) -> bool {
+    fn finder_automaton(runner: &mut Runner, finder: &Finder) -> bool {
         match finder.automaton {
             Some(ref am) => Automaton::automaton_run(runner, finder, am),
-            None => panic!()
+            None => panic!(),
         }
     }
 
-    pub fn find_automaton(&'a mut self, state_from: i32, state_to: i32, am: Automaton) -> &'a mut Finder {
+    pub fn find_automaton(
+        &'a mut self,
+        state_from: i32,
+        state_to: i32,
+        am: Automaton,
+    ) -> &'a mut Finder {
         self.finders.push(Finder {
             state_from: state_from,
             state_to: state_to,
@@ -210,12 +238,12 @@ impl<'a> Automaton {
             regex: None,
             automaton: Some(am),
             token_type: -1,
-            join_tokens: false
+            join_tokens: false,
         });
         self.finders.last_mut().unwrap()
     }
 
-    fn finder_me(runner: &mut Runner, finder: & Finder) -> bool {
+    fn finder_me(runner: &mut Runner, finder: &Finder) -> bool {
         Automaton::automaton_run(runner, finder, runner.automaton)
     }
 
@@ -227,7 +255,7 @@ impl<'a> Automaton {
             regex: None,
             automaton: None,
             token_type: -1,
-            join_tokens: false
+            join_tokens: false,
         });
         self.finders.last_mut().unwrap()
     }
@@ -244,7 +272,7 @@ impl std::clone::Clone for Automaton {
         Automaton {
             state_initial: self.state_initial,
             state_final: self.state_final,
-            finders: self.finders.clone()
+            finders: self.finders.clone(),
         }
     }
 }
@@ -253,7 +281,7 @@ impl Token {
     pub fn new(type_id: i32, text: std::string::String) -> Token {
         Token {
             type_id: type_id,
-            text: text
+            text: text,
         }
     }
 }
@@ -300,19 +328,23 @@ impl<'a> Runner<'a> {
         self.source = self.source.deref()[len..].to_string();
     }
 
-    pub fn completed(& self) -> bool {
+    pub fn completed(&self) -> bool {
         self.state == self.automaton.state_final
     }
 }
 
 impl<'a> std::fmt::Debug for Runner<'a> {
     fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-        write!(f, "(runner [automaton: {:?}, current_state: {}])", self.automaton, self.state)
+        write!(
+            f,
+            "(runner [automaton: {:?}, current_state: {}])",
+            self.automaton, self.state
+        )
     }
 }
 
 impl Finder {
-    pub fn join_tokens(&mut self,  token_type: i32) {
+    pub fn join_tokens(&mut self, token_type: i32) {
         self.join_tokens = true;
         self.token_type = token_type;
     }
@@ -327,7 +359,7 @@ impl std::clone::Clone for Finder {
             regex: self.regex.clone(),
             automaton: self.automaton.clone(),
             token_type: self.token_type,
-            join_tokens: self.join_tokens
+            join_tokens: self.join_tokens,
         }
     }
 }

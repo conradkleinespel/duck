@@ -1,3 +1,4 @@
+/// Normalizes the return of `read_line()` in the context of a CLI application
 pub fn fix_new_line(mut line: String) -> std::io::Result<String> {
     if !line.ends_with('\n') {
         return Err(std::io::Error::new(

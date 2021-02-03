@@ -3,6 +3,7 @@ use std::ops::DerefMut;
 use std::ops::Drop;
 use std::{ptr, sync::atomic};
 
+/// Vec that is zeroed when dropped
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct SafeVec {
     pub inner: Vec<u8>,

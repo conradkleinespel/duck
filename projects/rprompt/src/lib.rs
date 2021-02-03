@@ -1,34 +1,58 @@
-// Copyright 2014-2017 The Rprompt Developers
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
+//! This library makes it easy to prompt for input in a console application on all platforms, Unix
+//! and Windows alike.
+//!
+//! Here's how you can prompt for a reply:
+//! ```no_run
+//! let name = rprompt::prompt_reply("What's your name? ").unwrap();
+//! println!("Your name is {}", name);
+//! ```
+//!
+//! Alternatively, you can print and ask for input separately:
+//! ```no_run
+//! rprompt::print_tty("What's your name? ").unwrap();
+//! let name = rprompt::read_reply().unwrap();
+//! println!("Your name is {}", name);
+//! ```
+//!
+//! If you need more control over the source of the input, which can be useful if you want to unit
+//! test your CLI or handle pipes gracefully, you can use `from_bufread` versions of the functions
+//! and pass any reader you want:
+//! ```no_run
+//! let stdin = std::io::stdin();
+//! let name = rprompt::prompt_reply_from_bufread(&mut stdin.lock(), "What's your name? ").unwrap();
+//! println!("Your name is {}", name);
+//! ```
 
 #[cfg(windows)]
 extern crate winapi;
 
 extern crate rutil;
 
-/// Reads user input
-pub fn read_reply(reader: &mut impl BufRead) -> std::io::Result<String> {
+/// Reads user input from stdin
+pub fn read_reply() -> std::io::Result<String> {
+    read_reply_from_bufread(&mut std::io::stdin().lock())
+}
+
+/// Reads user input from anything that implements BufRead
+pub fn read_reply_from_bufread(reader: &mut impl BufRead) -> std::io::Result<String> {
     let mut reply = String::new();
 
     reader.read_line(&mut reply)?;
 
-    rutil::fix_new_line::fix_new_line(reply)
+    rutil::fix_new_line(reply)
 }
 
-/// Displays a message on the TTY, then reads user input
-pub fn prompt_reply(reader: &mut impl BufRead, prompt: impl ToString) -> std::io::Result<String> {
-    print_tty(prompt.to_string().as_str()).and_then(|_| read_reply(reader))
+/// Displays a message on the TTY, then reads user input from stdin
+pub fn prompt_reply(prompt: impl ToString) -> std::io::Result<String> {
+    prompt_reply_from_bufread(&mut std::io::stdin().lock(), prompt)
+}
+
+/// Displays a message on the TTY, then reads user input from anything that implements BufRead
+pub fn prompt_reply_from_bufread(
+    reader: &mut impl BufRead,
+    prompt: impl ToString,
+) -> std::io::Result<String> {
+    print_tty(prompt.to_string().as_str()).and_then(|_| read_reply_from_bufread(reader))
 }
 
 #[cfg(unix)]

@@ -1,24 +1,10 @@
-// Copyright 2014-2017 The Rooster Developers
-//
-// Licensed under the Apache License, Version 2.0 (the "License");
-// you may not use this file except in compliance with the License.
-// You may obtain a copy of the License at
-//
-//     http://www.apache.org/licenses/LICENSE-2.0
-//
-// Unless required by applicable law or agreed to in writing, software
-// distributed under the License is distributed on an "AS IS" BASIS,
-// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-// See the License for the specific language governing permissions and
-// limitations under the License.
-
 use aes;
 use byteorder::{BigEndian, ReadBytesExt, WriteBytesExt};
 use ffi;
 use password::PasswordError;
 use rand::{rngs::OsRng, RngCore};
-use rutil::safe_string::SafeString;
-use rutil::safe_vec::SafeVec;
+use rutil::SafeString;
+use rutil::SafeVec;
 use serde::{Deserialize, Serialize};
 use serde_json;
 use serde_json::Error;
@@ -641,7 +627,7 @@ mod test {
         SCRYPT_PARAM_LOG2_N, SCRYPT_PARAM_P, SCRYPT_PARAM_R,
     };
     use password::PasswordError;
-    use rutil::safe_string::SafeString;
+    use rutil::SafeString;
 
     #[test]
     fn test_generate_random_iv_has_right_length() {

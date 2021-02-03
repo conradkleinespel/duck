@@ -30,10 +30,13 @@ mod windows {
     }
 }
 
+/// Returns `true` if the program is run via a TTY, `false` otherwise
 #[cfg(unix)]
 pub fn stdin_is_tty() -> bool {
     unix::stdin_is_tty()
 }
+
+/// Returns `true` if the program is run via a TTY, `false` otherwise
 #[cfg(windows)]
 pub fn stdin_is_tty() -> bool {
     windows::stdin_is_tty()
