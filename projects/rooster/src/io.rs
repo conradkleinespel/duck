@@ -104,7 +104,7 @@ impl<'a> CliReader for RegularInput<'a> {
     }
 
     fn read_password(&mut self) -> IoResult<SafeString> {
-        if rutil::stdin_is_tty::stdin_is_tty() {
+        if rutil::stdin_is_tty() {
             Ok(SafeString::from_string(read_password_from_tty()?))
         } else {
             Ok(SafeString::from_string(read_password_from_stdin_lock(

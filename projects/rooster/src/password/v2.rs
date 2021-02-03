@@ -627,7 +627,7 @@ mod test {
         SCRYPT_PARAM_LOG2_N, SCRYPT_PARAM_P, SCRYPT_PARAM_R,
     };
     use password::PasswordError;
-    use rutil::safe_string::SafeString;
+    use rutil::SafeString;
 
     #[test]
     fn test_generate_random_iv_has_right_length() {
