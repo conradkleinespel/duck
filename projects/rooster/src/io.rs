@@ -177,7 +177,7 @@ impl<'a> CliWriter for RegularOutput<'a> {
 
 impl CliReader for CursorInput {
     fn read_line(&mut self) -> IoResult<String> {
-        read_reply(&mut self.cursor)
+        read_reply_from_bufread(&mut self.cursor)
     }
 
     fn read_password(&mut self) -> IoResult<SafeString> {
