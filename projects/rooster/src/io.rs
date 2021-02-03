@@ -1,10 +1,10 @@
+use crate::rutil::{stdin_is_tty, SafeString};
 use ansi_term::Color::{Green, Red, Yellow};
 use ansi_term::Style as AnsiTermStyle;
 use rpassword::{
     read_password_from_bufread, read_password_from_stdin_lock, read_password_from_tty,
 };
 use rprompt::{print_tty, read_reply_from_bufread};
-use rutil::SafeString;
 use std::io::Result as IoResult;
 use std::io::{Cursor, StderrLock, StdinLock, StdoutLock, Write};
 
@@ -103,7 +103,7 @@ impl<'a> CliReader for RegularInput<'a> {
     }
 
     fn read_password(&mut self) -> IoResult<SafeString> {
-        if rutil::stdin_is_tty() {
+        if stdin_is_tty() {
             Ok(SafeString::from_string(read_password_from_tty()?))
         } else {
             Ok(SafeString::from_string(read_password_from_stdin_lock(

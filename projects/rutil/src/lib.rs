@@ -1,5 +1,6 @@
 mod fix_new_line;
 mod safe_string;
+mod safe_string_serde;
 mod safe_vec;
 mod stdin_is_tty;
 

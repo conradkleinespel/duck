@@ -1,10 +1,10 @@
 use crate::aes;
-use byteorder::{BigEndian, ReadBytesExt, WriteBytesExt};
 use crate::ffi;
 use crate::password::PasswordError;
+use crate::rutil::SafeString;
+use crate::rutil::SafeVec;
+use byteorder::{BigEndian, ReadBytesExt, WriteBytesExt};
 use rand::{rngs::OsRng, RngCore};
-use rutil::SafeString;
-use rutil::SafeVec;
 use serde::{Deserialize, Serialize};
 use serde_json;
 use serde_json::Error;
@@ -627,7 +627,7 @@ mod test {
         SCRYPT_PARAM_LOG2_N, SCRYPT_PARAM_P, SCRYPT_PARAM_R,
     };
     use crate::password::PasswordError;
-    use rutil::SafeString;
+    use crate::rutil::SafeString;
 
     #[test]
     fn test_generate_random_iv_has_right_length() {

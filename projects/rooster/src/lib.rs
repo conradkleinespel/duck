@@ -6,9 +6,9 @@ extern crate serde_json;
 use crate::io::{CliReader, CliWriter};
 use crate::io::{OutputType, Style};
 use crate::password::v2::PasswordStore;
+use crate::rutil::SafeString;
+use crate::rutil::SafeVec;
 use clap::{App, AppSettings, Arg, ArgMatches};
-use rutil::SafeString;
-use rutil::SafeVec;
 use std::env;
 use std::fs::File;
 use std::io::Read;
@@ -27,6 +27,7 @@ mod password;
 mod quale;
 
 // We conditionally compile this module to avoid "unused function" warnings.
+mod rutil;
 #[cfg(all(unix, not(target_os = "macos")))]
 mod shell_escape;
 
