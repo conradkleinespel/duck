@@ -1,6 +1,6 @@
 use crate::io::{CliWriter, OutputType, Style};
 use crate::password;
-use rutil::SafeString;
+use crate::rutil::SafeString;
 
 use std::ops::Deref;
 

@@ -1,9 +1,9 @@
-use csv::Writer;
 use crate::io::{CliReader, CliWriter};
 use crate::io::{OutputType, Style};
 use crate::password;
 use crate::password::v2::Password;
-use rutil::SafeString;
+use crate::rutil::SafeString;
+use csv::Writer;
 use serde::{Deserialize, Serialize};
 use serde_json;
 use std::io::Cursor;
