@@ -100,7 +100,7 @@ impl Style {
 
 impl<'a> CliReader for RegularInput<'a> {
     fn read_line(&mut self) -> IoResult<String> {
-        read_reply(&mut self.stdin_lock)
+        read_reply_from_bufread(&mut self.stdin_lock)
     }
 
     fn read_password(&mut self) -> IoResult<SafeString> {
