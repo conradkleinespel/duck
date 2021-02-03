@@ -1,9 +1,9 @@
-use clip;
-use ffi;
-use io::{CliReader, CliWriter};
-use io::{OutputType, Style};
-use list;
-use password;
+use crate::clip;
+use crate::ffi;
+use crate::io::{CliReader, CliWriter};
+use crate::io::{OutputType, Style};
+use crate::list;
+use crate::password;
 
 pub fn callback_exec(
     matches: &clap::ArgMatches,

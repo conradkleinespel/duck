@@ -2,7 +2,7 @@ extern crate serde_json;
 
 mod helpers;
 
-use helpers::prelude::*;
+use crate::helpers::prelude::*;
 use serde_json::Value;
 
 #[test]

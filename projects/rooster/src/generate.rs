@@ -1,5 +1,5 @@
-use io::OutputType;
-use io::{CliWriter, Style};
+use crate::io::OutputType;
+use crate::io::{CliWriter, Style};
 use rand::{rngs::OsRng, Rng};
 use rutil::SafeString;
 use std::io::Result as IoResult;
@@ -88,7 +88,7 @@ pub fn check_password_len(opt: Option<usize>, writer: &mut impl CliWriter) -> Op
 
 #[cfg(test)]
 mod test {
-    use generate::PasswordSpec;
+    use crate::generate::PasswordSpec;
     use std::ops::Deref;
 
     #[test]

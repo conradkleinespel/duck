@@ -1,8 +1,8 @@
-use clip::{copy_to_clipboard, paste_keys};
-use generate::{check_password_len, PasswordSpec};
-use io::{CliReader, CliWriter};
-use io::{OutputType, Style};
-use password;
+use crate::clip::{copy_to_clipboard, paste_keys};
+use crate::generate::{check_password_len, PasswordSpec};
+use crate::io::{CliReader, CliWriter};
+use crate::io::{OutputType, Style};
+use crate::password;
 
 use std::ops::Deref;
 

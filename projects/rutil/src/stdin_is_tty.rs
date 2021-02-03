@@ -1,12 +1,9 @@
-#[cfg(unix)]
-extern crate libc;
-#[cfg(windows)]
-extern crate winapi;
-
 /// Checks if the program is run via a TTY
 #[cfg(unix)]
 mod unix {
+
     use libc::{isatty, STDIN_FILENO};
+
     pub fn stdin_is_tty() -> bool {
         unsafe { isatty(STDIN_FILENO) == 1 }
     }
@@ -15,6 +12,7 @@ mod unix {
 /// Checks if the program is run via a TTY
 #[cfg(windows)]
 mod windows {
+
     use winapi::um::fileapi::GetFileType;
     use winapi::um::handleapi::INVALID_HANDLE_VALUE;
     use winapi::um::processenv::GetStdHandle;

@@ -1,6 +1,3 @@
-extern crate libc;
-extern crate rooster;
-
 use rooster::io::{RegularInput, RegularOutput};
 use std::env::VarError;
 use std::path::PathBuf;

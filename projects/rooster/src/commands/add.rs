@@ -1,7 +1,7 @@
-use clip::{copy_to_clipboard, paste_keys};
-use io::{CliReader, CliWriter};
-use io::{OutputType, Style};
-use password;
+use crate::clip::{copy_to_clipboard, paste_keys};
+use crate::io::{CliReader, CliWriter};
+use crate::io::{OutputType, Style};
+use crate::password;
 use std::ops::Deref;
 
 pub fn callback_exec(

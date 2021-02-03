@@ -1,6 +1,6 @@
 use super::PasswordError;
-use aes;
-use ffi;
+use crate::aes;
+use crate::ffi;
 use rutil::SafeString;
 use rutil::SafeVec;
 use serde::{Deserialize, Serialize};

@@ -30,8 +30,6 @@
 //!
 //! Run `cargo run --example let-it-be-42` to see a more complete example.
 
-extern crate regex;
-
 use regex::Regex;
 use std::ops::Deref;
 

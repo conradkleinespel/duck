@@ -1,6 +1,3 @@
-extern crate ram;
-extern crate regex;
-
 use ram::*;
 use regex::Regex;
 
@@ -11,16 +8,31 @@ enum TokenType {
     StringDoubleQuoteContent,
     StringJoined,
     Whitespace,
-    End
+    End,
 }
 
 #[cfg(test)]
 fn automaton_string_quoted_single() -> Automaton {
     let mut am = Automaton::new(0, 3);
 
-    am.find_regex(TokenType::StringSeparator as i32, 0, 1, Regex::new("'").unwrap());
-    am.find_regex(TokenType::StringSingleQuoteContent as i32, 1, 2, Regex::new("[^']*").unwrap());
-    am.find_regex(TokenType::StringSeparator as i32, 2, 3, Regex::new("'").unwrap());
+    am.find_regex(
+        TokenType::StringSeparator as i32,
+        0,
+        1,
+        Regex::new("'").unwrap(),
+    );
+    am.find_regex(
+        TokenType::StringSingleQuoteContent as i32,
+        1,
+        2,
+        Regex::new("[^']*").unwrap(),
+    );
+    am.find_regex(
+        TokenType::StringSeparator as i32,
+        2,
+        3,
+        Regex::new("'").unwrap(),
+    );
 
     am
 }
@@ -29,9 +41,24 @@ fn automaton_string_quoted_single() -> Automaton {
 fn automaton_string_quoted_double() -> Automaton {
     let mut am = Automaton::new(0, 3);
 
-    am.find_regex(TokenType::StringSeparator as i32, 0, 1, Regex::new("\"").unwrap());
-    am.find_regex(TokenType::StringDoubleQuoteContent as i32, 1, 2, Regex::new("(\\\\\"|[^\"])*").unwrap());
-    am.find_regex(TokenType::StringSeparator as i32, 2, 3, Regex::new("\"").unwrap());
+    am.find_regex(
+        TokenType::StringSeparator as i32,
+        0,
+        1,
+        Regex::new("\"").unwrap(),
+    );
+    am.find_regex(
+        TokenType::StringDoubleQuoteContent as i32,
+        1,
+        2,
+        Regex::new("(\\\\\"|[^\"])*").unwrap(),
+    );
+    am.find_regex(
+        TokenType::StringSeparator as i32,
+        2,
+        3,
+        Regex::new("\"").unwrap(),
+    );
     am
 }
 
@@ -62,7 +89,8 @@ fn automaton_shell_rec() -> Automaton {
 
     am.find_end(TokenType::End as i32, 0, 2);
     am.find_whitespace(TokenType::Whitespace as i32, 0, 1);
-    am.find_automaton(0, 1, automaton_string()).join_tokens(TokenType::StringJoined as i32);
+    am.find_automaton(0, 1, automaton_string())
+        .join_tokens(TokenType::StringJoined as i32);
     am.find_me(1, 2);
 
     am
@@ -74,7 +102,7 @@ fn get_test_source_code() -> String {
 }
 
 #[cfg(test)]
-fn test_finder(_runner: &mut Runner, _finder: & Finder) -> bool {
+fn test_finder(_runner: &mut Runner, _finder: &Finder) -> bool {
     false
 }
 
