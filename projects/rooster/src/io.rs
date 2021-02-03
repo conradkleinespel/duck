@@ -1,5 +1,4 @@
 use ansi_term::Color::{Green, Red, Yellow};
-pub use ansi_term::Colour;
 use ansi_term::Style as AnsiTermStyle;
 use rpassword::{
     read_password_from_bufread, read_password_from_stdin_lock, read_password_from_tty,
