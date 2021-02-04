@@ -6,7 +6,7 @@ on:
       - "projects/rutil/**"
 
 jobs:
-  linux:
+  rust-linux-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -21,7 +21,7 @@ jobs:
           command: test
           args: --all-targets --all-features --manifest-path projects/rutil/Cargo.toml
 
-  windows:
+  rust-windows-tests:
     runs-on: windows-latest
     steps:
       - name: Checkout code
