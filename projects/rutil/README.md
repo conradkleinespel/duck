@@ -1,19 +1,6 @@
 # Rustastic Util
 
-`rutil` contains functions I use in other projects but don't want to make a dedicated crate for.
-
-**No backwards compatibility guarantees on this specific crate. The API can change at any time without warning.**
-
-## Usage
-
-Add `rutil` as a dependency in Cargo.toml:
-
-```toml
-[dependencies]
-rutil = "0.1"
-```
-
-See examples and docs at [https://docs.rs/rutil](https://docs.rs/rutil).
+`rutil` contains functions I use in other projects but don't want to make a dedicated crate for. There are no backwards compatibility guarantees at all and this crate is not published to crates.io.
 
 ## License
 
