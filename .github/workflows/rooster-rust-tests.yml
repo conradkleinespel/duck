@@ -8,7 +8,7 @@ on:
       - "projects/rutil/**"
 
 jobs:
-  linux:
+  rust-linux-tests:
     runs-on: ubuntu-latest
     steps:
       - name: Install dependencies
