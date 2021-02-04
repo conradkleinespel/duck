@@ -8,7 +8,7 @@ use crate::io::{OutputType, Style};
 use crate::password::v2::PasswordStore;
 use crate::rutil::SafeString;
 use crate::rutil::SafeVec;
-use clap::{App, AppSettings, Arg, ArgMatches};
+use clap::{App, AppSettings, Arg};
 use std::env;
 use std::fs::File;
 use std::io::Read;
@@ -263,7 +263,7 @@ pub fn main_with_args(
     writer: &mut impl CliWriter,
     rooster_file_path: &PathBuf,
 ) -> i32 {
-    let matches: ArgMatches = App::new("rooster")
+    let matches = App::new("rooster")
         .global_setting(AppSettings::HelpRequired)
         .global_setting(AppSettings::DisableHelpSubcommand)
         .setting(AppSettings::SubcommandRequiredElseHelp)
