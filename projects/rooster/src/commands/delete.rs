@@ -1,13 +1,12 @@
-use crate::io::{CliReader, CliWriter};
-use crate::io::{OutputType, Style};
+use crate::io::CliInputOutput;
+use crate::io::OutputType;
 use crate::list;
 use crate::password;
 
 pub fn callback_exec(
     matches: &clap::ArgMatches,
     store: &mut password::v2::PasswordStore,
-    reader: &mut impl CliReader,
-    writer: &mut impl CliWriter,
+    io: &mut impl CliInputOutput,
 ) -> Result<(), i32> {
     let query = matches.value_of("app").unwrap();
 
@@ -16,28 +15,24 @@ pub fn callback_exec(
         query,
         list::WITH_NUMBERS,
         "Which password would you like me to delete?",
-        reader,
-        writer,
+        io,
     )
     .ok_or(1)?
     .clone();
 
     if let Err(err) = store.delete_password(&password.name) {
-        writer.writeln(
-            Style::error(format!(
+        io.error(
+            format!(
                 "Woops, I couldn't delete this password (reason: {:?}).",
                 err
-            )),
+            ),
             OutputType::Error,
         );
         return Err(1);
     }
 
-    writer.writeln(
-        Style::success(format!(
-            "Done! I've deleted the password for \"{}\".",
-            password.name
-        )),
+    io.success(
+        format!("Done! I've deleted the password for \"{}\".", password.name),
         OutputType::Standard,
     );
 

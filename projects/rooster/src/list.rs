@@ -1,4 +1,4 @@
-use crate::io::{CliReader, CliWriter, OutputType, Style};
+use crate::io::{CliInputOutput, OutputType};
 use crate::password::v2::{Password, PasswordStore};
 
 /// Used to indicate lists should have a number, ie: 23 Google my.account@gmail.com
@@ -60,44 +60,43 @@ fn get_list_of_passwords(passwords: &Vec<&Password>, with_numbers: bool) -> Vec<
 pub fn print_list_of_passwords(
     passwords: &Vec<&Password>,
     with_numbers: bool,
-    writer: &mut impl CliWriter,
+    io: &mut impl CliInputOutput,
 ) {
     let list = get_list_of_passwords(passwords, with_numbers);
 
     for s in list {
-        writer.writeln(Style::info(s), OutputType::Standard);
+        io.info(s, OutputType::Standard);
     }
 }
 
 fn request_password_index_from_stdin(
     passwords: &Vec<&Password>,
     prompt: &str,
-    reader: &mut impl CliReader,
-    writer: &mut impl CliWriter,
+    io: &mut impl CliInputOutput,
 ) -> usize {
     assert!(!passwords.is_empty());
 
     // Read the index from the command line and convert to a number
     loop {
         if passwords.len() > 1 {
-            writer.writeln(Style::info(prompt), OutputType::Standard);
-            writer.write(
+            io.info(prompt, OutputType::Standard);
+            io.write(
                 format!("Type a number from 1 to {}: ", passwords.len()),
                 OutputType::Standard,
             );
         } else if passwords.len() == 1 {
-            writer.write(
+            io.write(
                 "If this is the password you mean, type \"1\" and hit ENTER: ",
                 OutputType::Standard,
             );
         }
 
-        match reader.read_line() {
+        match io.read_line() {
             Ok(line) => {
                 match line.trim().parse::<usize>() {
                     Ok(index) => {
                         if index == 0 || index > passwords.len() {
-                            writer.write(
+                            io.write(
                                 format!(
                                     "I need a number between 1 and {}. Let's try again:",
                                     passwords.len()
@@ -110,16 +109,15 @@ fn request_password_index_from_stdin(
                         return index - 1;
                     }
                     Err(err) => {
-                        writer.write(
-                            format!("This isn't a valid number (reason: {}). Let's try again (1 to {}): ", err, passwords.len()),
-                            OutputType::Standard,
+                        io.write(
+                            format!("This isn't a valid number (reason: {}). Let's try again (1 to {}): ", err, passwords.len()), OutputType::Standard,
                         );
                         continue;
                     }
                 };
             }
             Err(err) => {
-                writer.write(
+                io.write(
                     format!(
                         "I couldn't read that (reason: {}). Let's try again (1 to {}): ",
                         err,
@@ -136,12 +134,11 @@ fn choose_password_in_list(
     passwords: &Vec<&Password>,
     with_numbers: bool,
     prompt: &str,
-    reader: &mut impl CliReader,
-    writer: &mut impl CliWriter,
+    io: &mut impl CliInputOutput,
 ) -> usize {
-    print_list_of_passwords(passwords, with_numbers, writer);
-    writer.nl(OutputType::Standard);
-    request_password_index_from_stdin(passwords, prompt, reader, writer)
+    print_list_of_passwords(passwords, with_numbers, io);
+    io.nl(OutputType::Standard);
+    request_password_index_from_stdin(passwords, prompt, io)
 }
 
 pub fn search_and_choose_password<'a>(
@@ -149,16 +146,12 @@ pub fn search_and_choose_password<'a>(
     query: &str,
     with_numbers: bool,
     prompt: &str,
-    reader: &mut impl CliReader,
-    writer: &mut impl CliWriter,
+    io: &mut impl CliInputOutput,
 ) -> Option<&'a Password> {
     let passwords = store.search_passwords(query);
     if passwords.len() == 0 {
-        writer.writeln(
-            Style::error(format!(
-                "Woops, I can't find any passwords for \"{}\".",
-                query
-            )),
+        io.error(
+            format!("Woops, I can't find any passwords for \"{}\".", query),
             OutputType::Error,
         );
         return None;
@@ -171,7 +164,7 @@ pub fn search_and_choose_password<'a>(
         return Some(&password);
     }
 
-    let index = choose_password_in_list(&passwords, with_numbers, prompt, reader, writer);
+    let index = choose_password_in_list(&passwords, with_numbers, prompt, io);
     Some(passwords[index])
 }
 

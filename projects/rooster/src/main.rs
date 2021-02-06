@@ -1,4 +1,4 @@
-use rooster::io::{RegularInput, RegularOutput};
+use rooster::io::RegularInputOutput;
 use std::env::VarError;
 use std::path::PathBuf;
 
@@ -39,13 +39,7 @@ fn main() {
 
     std::process::exit(rooster::main_with_args(
         args_refs.as_slice(),
-        &mut RegularInput {
-            stdin_lock: stdin.lock(),
-        },
-        &mut RegularOutput {
-            stdout_lock: stdout.lock(),
-            stderr_lock: stderr.lock(),
-        },
+        &mut RegularInputOutput::new(stdin.lock(), stdout.lock(), stderr.lock()),
         &rooster_file_path,
     ));
 }

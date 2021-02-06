@@ -1,15 +1,14 @@
 use crate::clip;
 use crate::ffi;
-use crate::io::{CliReader, CliWriter};
-use crate::io::{OutputType, Style};
+use crate::io::CliInputOutput;
+use crate::io::OutputType;
 use crate::list;
 use crate::password;
 
 pub fn callback_exec(
     matches: &clap::ArgMatches,
     store: &mut password::v2::PasswordStore,
-    reader: &mut impl CliReader,
-    writer: &mut impl CliWriter,
+    io: &mut impl CliInputOutput,
 ) -> Result<(), i32> {
     let query = matches.value_of("app").unwrap();
 
@@ -18,26 +17,23 @@ pub fn callback_exec(
         query,
         list::WITH_NUMBERS,
         "Which password would like to update?",
-        reader,
-        writer,
+        io,
     )
     .ok_or(1)?
     .clone();
 
-    writer.write(
-        format!("What password do you want for \"{}\"? ", password.name),
-        OutputType::Standard,
-    );
-    let password_as_string = reader.read_password().map_err(|err| {
-        writer.writeln(
-            Style::error(format!(
-                "\nI couldn't read the app's password (reason: {:?}).",
-                err
-            )),
-            OutputType::Error,
-        );
-        1
-    })?;
+    let password_as_string = io
+        .prompt_password(format!(
+            "What password do you want for \"{}\"? ",
+            password.name
+        ))
+        .map_err(|err| {
+            io.error(
+                format!("\nI couldn't read the app's password (reason: {:?}).", err),
+                OutputType::Error,
+            );
+            1
+        })?;
 
     let password = store
         .change_password(&password.name, &|old_password: password::v2::Password| {
@@ -50,17 +46,17 @@ pub fn callback_exec(
             }
         })
         .map_err(|err| {
-            writer.writeln(
-                Style::error(format!(
+            io.error(
+                format!(
                     "Woops, I couldn't save the new password (reason: {:?}).",
                     err
-                )),
+                ),
                 OutputType::Error,
             );
             1
         })?;
 
     let show = matches.is_present("show");
-    clip::confirm_password_retrieved(show, &password, writer);
+    clip::confirm_password_retrieved(show, &password, io);
     Ok(())
 }

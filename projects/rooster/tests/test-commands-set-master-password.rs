@@ -9,8 +9,7 @@ fn test_command_set_master_password() {
         0,
         main_with_args(
             &["rooster", "init", "--force-for-tests"],
-            &mut CursorInput::new("\nxxxx\n"),
-            &mut CursorOutput::new(),
+            &mut CursorInputOutput::new("", "\nxxxx\n"),
             &rooster_file
         )
     );
@@ -19,8 +18,7 @@ fn test_command_set_master_password() {
         0,
         main_with_args(
             &["rooster", "set-master-password"],
-            &mut CursorInput::new("xxxx\nabcd\nabcd\n"),
-            &mut CursorOutput::new(),
+            &mut CursorInputOutput::new("", "xxxx\nabcd\nabcd\n"),
             &rooster_file
         )
     );
@@ -29,8 +27,7 @@ fn test_command_set_master_password() {
         1,
         main_with_args(
             &["rooster", "list"],
-            &mut CursorInput::new("xxxx\n"),
-            &mut CursorOutput::new(),
+            &mut CursorInputOutput::new("", "xxxx\n"),
             &rooster_file
         )
     );
@@ -38,8 +35,7 @@ fn test_command_set_master_password() {
         0,
         main_with_args(
             &["rooster", "list"],
-            &mut CursorInput::new("abcd\n"),
-            &mut CursorOutput::new(),
+            &mut CursorInputOutput::new("", "abcd\n"),
             &rooster_file
         )
     );

@@ -1,16 +1,15 @@
 use crate::clip;
 use crate::ffi;
 use crate::generate::{check_password_len, PasswordSpec};
-use crate::io::{CliReader, CliWriter};
-use crate::io::{OutputType, Style};
+use crate::io::CliInputOutput;
+use crate::io::OutputType;
 use crate::list;
 use crate::password;
 
 pub fn callback_exec(
     matches: &clap::ArgMatches,
     store: &mut password::v2::PasswordStore,
-    reader: &mut impl CliReader,
-    writer: &mut impl CliWriter,
+    io: &mut impl CliInputOutput,
 ) -> Result<(), i32> {
     let query = matches.value_of("app").unwrap();
 
@@ -19,8 +18,7 @@ pub fn callback_exec(
         query,
         list::WITH_NUMBERS,
         "Which password would you like to regenerate?",
-        reader,
-        writer,
+        io,
     )
     .ok_or(1)?
     .clone();
@@ -29,17 +27,17 @@ pub fn callback_exec(
         matches.is_present("alnum"),
         matches
             .value_of("length")
-            .and_then(|len| check_password_len(len.parse::<usize>().ok(), writer)),
+            .and_then(|len| check_password_len(len.parse::<usize>().ok(), io)),
     );
 
     let password_as_string = match pwspec.generate_hard_password() {
         Ok(password_as_string) => password_as_string,
         Err(io_err) => {
-            writer.writeln(
-                Style::error(format!(
+            io.error(
+                format!(
                     "Woops, I could not generate the password (reason: {:?}).",
                     io_err
-                )),
+                ),
                 OutputType::Error,
             );
             return Err(1);
@@ -60,15 +58,15 @@ pub fn callback_exec(
     match change_result {
         Ok(password) => {
             let show = matches.is_present("show");
-            clip::confirm_password_retrieved(show, &password, writer);
+            clip::confirm_password_retrieved(show, &password, io);
             Ok(())
         }
         Err(err) => {
-            writer.writeln(
-                Style::error(format!(
+            io.error(
+                format!(
                     "Woops, I couldn't save the new password (reason: {:?}).",
                     err
-                )),
+                ),
                 OutputType::Error,
             );
             Err(1)

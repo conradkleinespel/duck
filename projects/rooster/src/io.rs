@@ -1,119 +1,138 @@
-use crate::rutil::{stdin_is_tty, SafeString};
+use crate::rutil::{atty, SafeString};
 use ansi_term::Color::{Green, Red, Yellow};
 use ansi_term::Style as AnsiTermStyle;
 use rpassword::{
-    read_password_from_bufread, read_password_from_stdin_lock, read_password_from_tty,
+    prompt_password, prompt_password_from_bufread, read_password, read_password_from_bufread,
 };
-use rprompt::{print_tty, read_reply_from_bufread};
+use rprompt::{prompt_reply, prompt_reply_from_bufread, read_reply, read_reply_from_bufread};
 use std::io::Result as IoResult;
 use std::io::{Cursor, StderrLock, StdinLock, StdoutLock, Write};
 
 pub enum OutputType {
     Standard,
     Error,
-    Tty,
 }
 
-/// Input that reads from stdin, useful for regular CLI use
-pub struct RegularInput<'a> {
-    pub stdin_lock: StdinLock<'a>,
+/// Struct that reads and writes data from the TTY, stdin and stdout
+pub struct RegularInputOutput<'a> {
+    stdin_lock: StdinLock<'a>,
+    stdout_lock: StdoutLock<'a>,
+    stderr_lock: StderrLock<'a>,
 }
 
-/// Output for writing to stdout/stderr, useful for regular CLI use
-pub struct RegularOutput<'a> {
-    pub stdout_lock: StdoutLock<'a>,
-    pub stderr_lock: StderrLock<'a>,
-}
-
-/// Input that reads from a cursor, useful for tests
-#[derive(Default)]
-pub struct CursorInput {
-    cursor: Cursor<Vec<u8>>,
-}
-
-impl CursorInput {
-    pub fn new(input: &str) -> CursorInput {
-        CursorInput {
-            cursor: Cursor::new(input.as_bytes().to_owned()),
+impl<'a> RegularInputOutput<'a> {
+    pub fn new<'b>(
+        stdin_lock: StdinLock<'b>,
+        stdout_lock: StdoutLock<'b>,
+        stderr_lock: StderrLock<'b>,
+    ) -> RegularInputOutput<'b> {
+        RegularInputOutput {
+            stdin_lock,
+            stdout_lock,
+            stderr_lock,
         }
     }
 }
 
-/// Output for writing to cursors, useful for tests
+/// Struct similar to `RegularInputOutput` but that reads and writes from a cursor, useful for tests
 #[derive(Default)]
-pub struct CursorOutput {
-    pub standard_cursor: Cursor<Vec<u8>>,
-    pub error_cursor: Cursor<Vec<u8>>,
-    pub tty_cursor: Cursor<Vec<u8>>,
+pub struct CursorInputOutput {
+    pub stdin_cursor: Cursor<Vec<u8>>,
+    pub ttyin_cursor: Cursor<Vec<u8>>,
+    pub stdout_cursor: Cursor<Vec<u8>>,
+    pub stderr_cursor: Cursor<Vec<u8>>,
+    pub ttyout_cursor: Cursor<Vec<u8>>,
 }
 
-impl CursorOutput {
-    pub fn new() -> CursorOutput {
-        CursorOutput {
-            standard_cursor: Cursor::new(Vec::new()),
-            error_cursor: Cursor::new(Vec::new()),
-            tty_cursor: Cursor::new(Vec::new()),
+impl CursorInputOutput {
+    pub fn new(stdin: &str, ttyin: &str) -> CursorInputOutput {
+        CursorInputOutput {
+            stdin_cursor: Cursor::new(stdin.as_bytes().to_owned()),
+            ttyin_cursor: Cursor::new(ttyin.as_bytes().to_owned()),
+            stdout_cursor: Cursor::new(Vec::new()),
+            stderr_cursor: Cursor::new(Vec::new()),
+            ttyout_cursor: Cursor::new(Vec::new()),
         }
     }
 }
 
-pub trait CliReader {
+pub trait CliInputOutput {
     fn read_line(&mut self) -> IoResult<String>;
+    fn prompt_line(&mut self, prompt: impl ToString) -> IoResult<String>;
     fn read_password(&mut self) -> IoResult<SafeString>;
-}
+    fn prompt_password(&mut self, prompt: impl ToString) -> IoResult<SafeString>;
 
-pub trait CliWriter {
     fn nl(&mut self, output_type: OutputType);
     fn write(&mut self, s: impl ToString, output_type: OutputType);
     fn writeln(&mut self, s: impl ToString, output_type: OutputType);
+
+    fn title(&mut self, s: impl ToString, output_type: OutputType) {
+        self.writeln(
+            AnsiTermStyle::new()
+                .underline()
+                .bold()
+                .paint(s.to_string())
+                .to_string(),
+            output_type,
+        )
+    }
+
+    fn info(&mut self, s: impl ToString, output_type: OutputType) {
+        self.writeln(
+            AnsiTermStyle::new().paint(s.to_string()).to_string(),
+            output_type,
+        )
+    }
+
+    fn warning(&mut self, s: impl ToString, output_type: OutputType) {
+        self.writeln(
+            Yellow.normal().paint(s.to_string()).to_string(),
+            output_type,
+        )
+    }
+
+    fn error(&mut self, s: impl ToString, output_type: OutputType) {
+        self.writeln(Red.normal().paint(s.to_string()).to_string(), output_type)
+    }
+
+    fn success(&mut self, s: impl ToString, output_type: OutputType) {
+        self.writeln(Green.normal().paint(s.to_string()).to_string(), output_type)
+    }
 }
 
-#[derive(Clone)]
-pub struct Style;
-
-impl Style {
-    pub fn title(s: impl ToString) -> String {
-        AnsiTermStyle::new()
-            .underline()
-            .bold()
-            .paint(s.to_string())
-            .to_string()
-    }
-
-    pub fn info(s: impl ToString) -> String {
-        AnsiTermStyle::new().paint(s.to_string()).to_string()
-    }
-
-    pub fn warning(s: impl ToString) -> String {
-        Yellow.normal().paint(s.to_string()).to_string()
-    }
-
-    pub fn error(s: impl ToString) -> String {
-        Red.normal().paint(s.to_string()).to_string()
-    }
-
-    pub fn success(s: impl ToString) -> String {
-        Green.normal().paint(s.to_string()).to_string()
-    }
-}
-
-impl<'a> CliReader for RegularInput<'a> {
+impl<'a> CliInputOutput for RegularInputOutput<'a> {
     fn read_line(&mut self) -> IoResult<String> {
-        read_reply_from_bufread(&mut self.stdin_lock)
+        if !atty::is(atty::Stream::Stdin) {
+            panic!("Need a TTY to read password");
+        }
+
+        read_reply()
+    }
+
+    fn prompt_line(&mut self, prompt: impl ToString) -> IoResult<String> {
+        if !atty::is(atty::Stream::Stdin) || !atty::is(atty::Stream::Stdout) {
+            panic!("Need a TTY to read password");
+        }
+
+        prompt_reply(prompt)
     }
 
     fn read_password(&mut self) -> IoResult<SafeString> {
-        if stdin_is_tty() {
-            Ok(SafeString::from_string(read_password_from_tty()?))
-        } else {
-            Ok(SafeString::from_string(read_password_from_stdin_lock(
-                &mut self.stdin_lock,
-            )?))
+        if !atty::is(atty::Stream::Stdin) {
+            panic!("Need a TTY to read password");
         }
-    }
-}
 
-impl<'a> CliWriter for RegularOutput<'a> {
+        Ok(SafeString::from_string(read_password()?))
+    }
+
+    fn prompt_password(&mut self, prompt: impl ToString) -> IoResult<SafeString> {
+        if !atty::is(atty::Stream::Stdin) || !atty::is(atty::Stream::Stdout) {
+            panic!("Need a TTY to read password");
+        }
+
+        Ok(SafeString::from_string(prompt_password(prompt)?))
+    }
+
     fn nl(&mut self, output_type: OutputType) {
         match output_type {
             OutputType::Standard => {
@@ -123,9 +142,6 @@ impl<'a> CliWriter for RegularOutput<'a> {
             OutputType::Error => {
                 self.stderr_lock.write_all("\n".as_bytes()).unwrap();
                 self.stderr_lock.flush().unwrap();
-            }
-            OutputType::Tty => {
-                print_tty("\n").unwrap();
             }
         }
     }
@@ -143,9 +159,6 @@ impl<'a> CliWriter for RegularOutput<'a> {
                     .write_all(s.to_string().as_bytes())
                     .unwrap();
                 self.stderr_lock.flush().unwrap();
-            }
-            OutputType::Tty => {
-                print_tty(s.to_string()).unwrap();
             }
         }
     }
@@ -166,40 +179,42 @@ impl<'a> CliWriter for RegularOutput<'a> {
                 self.stderr_lock.write_all("\n".as_bytes()).unwrap();
                 self.stderr_lock.flush().unwrap();
             }
-            OutputType::Tty => {
-                print_tty(s.to_string()).unwrap();
-                print_tty("\n").unwrap();
-            }
         }
     }
 }
 
-impl CliReader for CursorInput {
+impl CliInputOutput for CursorInputOutput {
     fn read_line(&mut self) -> IoResult<String> {
-        read_reply_from_bufread(&mut self.cursor)
+        read_reply_from_bufread(&mut self.ttyin_cursor)
+    }
+
+    fn prompt_line(&mut self, prompt: impl ToString) -> IoResult<String> {
+        prompt_reply_from_bufread(&mut self.ttyin_cursor, &mut self.ttyout_cursor, prompt)
     }
 
     fn read_password(&mut self) -> IoResult<SafeString> {
         Ok(SafeString::from_string(read_password_from_bufread(
-            &mut self.cursor,
+            &mut self.ttyin_cursor,
         )?))
     }
-}
 
-impl CliWriter for CursorOutput {
+    fn prompt_password(&mut self, prompt: impl ToString) -> IoResult<SafeString> {
+        Ok(SafeString::from_string(prompt_password_from_bufread(
+            &mut self.ttyin_cursor,
+            &mut self.ttyout_cursor,
+            prompt,
+        )?))
+    }
+
     fn nl(&mut self, output_type: OutputType) {
         match output_type {
             OutputType::Standard => {
-                self.standard_cursor.write_all("\n".as_bytes()).unwrap();
-                self.standard_cursor.flush().unwrap();
+                self.stdout_cursor.write_all("\n".as_bytes()).unwrap();
+                self.stdout_cursor.flush().unwrap();
             }
             OutputType::Error => {
-                self.error_cursor.write_all("\n".as_bytes()).unwrap();
-                self.error_cursor.flush().unwrap();
-            }
-            OutputType::Tty => {
-                self.tty_cursor.write_all("\n".as_bytes()).unwrap();
-                self.tty_cursor.flush().unwrap();
+                self.stderr_cursor.write_all("\n".as_bytes()).unwrap();
+                self.stderr_cursor.flush().unwrap();
             }
         }
     }
@@ -207,20 +222,16 @@ impl CliWriter for CursorOutput {
     fn write(&mut self, s: impl ToString, output_type: OutputType) {
         match output_type {
             OutputType::Standard => {
-                self.standard_cursor
+                self.stdout_cursor
                     .write_all(s.to_string().as_bytes())
                     .unwrap();
-                self.standard_cursor.flush().unwrap();
+                self.stdout_cursor.flush().unwrap();
             }
             OutputType::Error => {
-                self.error_cursor
+                self.stderr_cursor
                     .write_all(s.to_string().as_bytes())
                     .unwrap();
-                self.error_cursor.flush().unwrap();
-            }
-            OutputType::Tty => {
-                self.tty_cursor.write_all(s.to_string().as_bytes()).unwrap();
-                self.tty_cursor.flush().unwrap();
+                self.stderr_cursor.flush().unwrap();
             }
         }
     }
@@ -228,29 +239,22 @@ impl CliWriter for CursorOutput {
     fn writeln(&mut self, s: impl ToString, output_type: OutputType) {
         match output_type {
             OutputType::Standard => {
-                self.standard_cursor
+                self.stdout_cursor
                     .write_all(s.to_string().as_bytes())
                     .unwrap();
-                self.standard_cursor
+                self.stdout_cursor
                     .write_all("\n".to_string().as_bytes())
                     .unwrap();
-                self.standard_cursor.flush().unwrap();
+                self.stdout_cursor.flush().unwrap();
             }
             OutputType::Error => {
-                self.error_cursor
+                self.stderr_cursor
                     .write_all(s.to_string().as_bytes())
                     .unwrap();
-                self.error_cursor
+                self.stderr_cursor
                     .write_all("\n".to_string().as_bytes())
                     .unwrap();
-                self.error_cursor.flush().unwrap();
-            }
-            OutputType::Tty => {
-                self.tty_cursor.write_all(s.to_string().as_bytes()).unwrap();
-                self.tty_cursor
-                    .write_all("\n".to_string().as_bytes())
-                    .unwrap();
-                self.tty_cursor.flush().unwrap();
+                self.stderr_cursor.flush().unwrap();
             }
         }
     }

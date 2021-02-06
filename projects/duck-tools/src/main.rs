@@ -1,7 +1,6 @@
 use clap::{App, AppSettings, Arg};
 use git2::{Cred, RemoteCallbacks, Repository, StatusOptions};
-use rpassword::read_password_from_tty;
-use rprompt::print_tty;
+use rpassword::prompt_password;
 use tempfile::tempdir;
 
 fn main() {
@@ -35,8 +34,7 @@ fn main() {
             let dst_repo_temp_dir = tempdir().unwrap();
             let dst_repo_url = submatches.value_of("dst-repo").unwrap();
 
-            print_tty("SSH passphrase: ").unwrap();
-            let ssh_passphrase = read_password_from_tty().unwrap();
+            let ssh_passphrase = prompt_password("SSH passphrase: ").unwrap();
 
             let mut callbacks = RemoteCallbacks::new();
             callbacks.credentials(|_url, username_from_url, _allowed_types| {

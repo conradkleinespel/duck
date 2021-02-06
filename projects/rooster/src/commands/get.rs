@@ -1,14 +1,13 @@
 use crate::clip;
 
-use crate::io::{CliReader, CliWriter};
+use crate::io::CliInputOutput;
 use crate::list;
 use crate::password;
 
 pub fn callback_exec(
     matches: &clap::ArgMatches,
     store: &mut password::v2::PasswordStore,
-    reader: &mut impl CliReader,
-    writer: &mut impl CliWriter,
+    io: &mut impl CliInputOutput,
 ) -> Result<(), i32> {
     let show = matches.is_present("show");
     let query = matches.value_of("app").unwrap();
@@ -22,10 +21,9 @@ pub fn callback_exec(
         },
     );
     let password =
-        list::search_and_choose_password(store, query, list::WITH_NUMBERS, &prompt, reader, writer)
-            .ok_or(1)?;
+        list::search_and_choose_password(store, query, list::WITH_NUMBERS, &prompt, io).ok_or(1)?;
 
-    clip::confirm_password_retrieved(show, &password, writer);
+    clip::confirm_password_retrieved(show, &password, io);
 
     Ok(())
 }

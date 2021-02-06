@@ -1,6 +1,6 @@
 pub mod prelude {
 
-    pub use rooster::io::{CursorInput, CursorOutput};
+    pub use rooster::io::CursorInputOutput;
     pub use rooster::main_with_args;
     pub fn tempfile() -> PathBuf {
         tempfile::NamedTempFile::new().unwrap().path().to_path_buf()
