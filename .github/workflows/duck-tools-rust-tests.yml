@@ -4,8 +4,8 @@ on:
   push:
     paths:
       - "projects/duck-tools/**"
-      - "projects/rpassword/**"
-      - "projects/rprompt/**"
+      - "projects/rutil/**"
+      - "projects/rclio/**"
 
 jobs:
   rust-linux-tests:

@@ -10,5 +10,13 @@ publish = false
 clap = "3.0.0-beta.2"
 git2 = "0.13"
 tempfile = "3.2"
-rpassword =  { path = "../rpassword", version = "5.0" }
+ansi_term = "0.12"
 rprompt = { path = "../rprompt", version = "1.0" }
+rpassword =  { path = "../rpassword", version = "5.0" }
+
+[target.'cfg(unix)'.dependencies.libc]
+version = "0.2"
+
+[target.'cfg(windows)'.dependencies.winapi]
+version = "0.3"
+features = ["std", "winnt", "fileapi", "processenv", "winbase", "handleapi", "consoleapi", "minwindef", "wincon"]
