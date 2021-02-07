@@ -3,9 +3,9 @@
 extern crate ansi_term;
 extern crate serde_json;
 
-use crate::io::CliInputOutput;
-use crate::io::OutputType;
 use crate::password::v2::PasswordStore;
+use crate::rclio::CliInputOutput;
+use crate::rclio::OutputType;
 use crate::rutil::SafeString;
 use crate::rutil::SafeVec;
 use clap::{App, AppSettings, Arg};
@@ -21,14 +21,11 @@ mod clip;
 mod commands;
 mod ffi;
 mod generate;
-pub mod io;
 mod list;
 mod password;
 mod quale;
-
-// We conditionally compile this module to avoid "unused function" warnings.
+pub mod rclio;
 mod rutil;
-#[cfg(all(unix, not(target_os = "macos")))]
 mod shell_escape;
 
 fn validate_arg_digits(v: &str) -> Result<(), String> {

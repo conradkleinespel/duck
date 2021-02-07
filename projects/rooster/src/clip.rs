@@ -1,5 +1,5 @@
-use crate::io::{CliInputOutput, OutputType};
 use crate::password;
+use crate::rclio::{CliInputOutput, OutputType};
 use crate::rutil::SafeString;
 
 use std::ops::Deref;

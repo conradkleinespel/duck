@@ -1,5 +1,5 @@
-use crate::io::CliInputOutput;
-use crate::io::OutputType;
+use crate::rclio::CliInputOutput;
+use crate::rclio::OutputType;
 use crate::rutil::SafeString;
 use rand::{rngs::OsRng, Rng};
 use std::io::Result as IoResult;

@@ -1,8 +1,8 @@
 use crate::ffi;
-use crate::io::CliInputOutput;
-use crate::io::OutputType;
 use crate::list;
 use crate::password;
+use crate::rclio::CliInputOutput;
+use crate::rclio::OutputType;
 
 pub fn callback_exec(
     matches: &clap::ArgMatches,

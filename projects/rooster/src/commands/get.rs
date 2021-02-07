@@ -1,8 +1,8 @@
 use crate::clip;
 
-use crate::io::CliInputOutput;
 use crate::list;
 use crate::password;
+use crate::rclio::CliInputOutput;
 
 pub fn callback_exec(
     matches: &clap::ArgMatches,
