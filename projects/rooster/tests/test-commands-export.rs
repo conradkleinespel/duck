@@ -12,8 +12,7 @@ fn test_command_export_json() {
         0,
         main_with_args(
             &["rooster", "init", "--force-for-tests"],
-            &mut CursorInput::new("\nxxxx\n"),
-            &mut CursorOutput::new(),
+            &mut CursorInputOutput::new("", "\nxxxx\n"),
             &rooster_file
         )
     );
@@ -22,23 +21,17 @@ fn test_command_export_json() {
         0,
         main_with_args(
             &["rooster", "add", "-s", "Youtube", "yt@example.com"],
-            &mut CursorInput::new("xxxx\nabcd\n"),
-            &mut CursorOutput::new(),
+            &mut CursorInputOutput::new("", "xxxx\nabcd\n"),
             &rooster_file
         )
     );
 
-    let mut output = CursorOutput::new();
+    let mut io = CursorInputOutput::new("", "xxxx\n");
     assert_eq!(
         0,
-        main_with_args(
-            &["rooster", "export", "json"],
-            &mut CursorInput::new("xxxx\n"),
-            &mut output,
-            &rooster_file
-        )
+        main_with_args(&["rooster", "export", "json"], &mut io, &rooster_file)
     );
-    let output_as_vecu8 = output.standard_cursor.into_inner();
+    let output_as_vecu8 = io.stdout_cursor.into_inner();
     let output_as_string = String::from_utf8_lossy(output_as_vecu8.as_slice());
     let output_as_json = serde_json::from_str::<Value>(output_as_string.as_ref()).unwrap();
     let saved_password = output_as_json
@@ -73,8 +66,7 @@ fn test_command_export_csv() {
         0,
         main_with_args(
             &["rooster", "init", "--force-for-tests"],
-            &mut CursorInput::new("\nxxxx\n"),
-            &mut CursorOutput::new(),
+            &mut CursorInputOutput::new("", "\nxxxx\n"),
             &rooster_file
         )
     );
@@ -83,23 +75,17 @@ fn test_command_export_csv() {
         0,
         main_with_args(
             &["rooster", "add", "-s", "Youtube", "yt@example.com"],
-            &mut CursorInput::new("xxxx\nabcd\n"),
-            &mut CursorOutput::new(),
+            &mut CursorInputOutput::new("", "xxxx\nabcd\n"),
             &rooster_file
         )
     );
 
-    let mut output = CursorOutput::new();
+    let mut io = CursorInputOutput::new("", "xxxx\n");
     assert_eq!(
         0,
-        main_with_args(
-            &["rooster", "export", "csv"],
-            &mut CursorInput::new("xxxx\n"),
-            &mut output,
-            &rooster_file
-        )
+        main_with_args(&["rooster", "export", "csv"], &mut io, &rooster_file)
     );
-    let output_as_vecu8 = output.standard_cursor.into_inner();
+    let output_as_vecu8 = io.stdout_cursor.into_inner();
     let output_as_string = String::from_utf8_lossy(output_as_vecu8.as_slice());
     assert_eq!(output_as_string, "Youtube,yt@example.com,abcd\n");
 }
@@ -111,8 +97,7 @@ fn test_command_export_1password() {
         0,
         main_with_args(
             &["rooster", "init", "--force-for-tests"],
-            &mut CursorInput::new("\nxxxx\n"),
-            &mut CursorOutput::new(),
+            &mut CursorInputOutput::new("", "\nxxxx\n"),
             &rooster_file
         )
     );
@@ -121,23 +106,17 @@ fn test_command_export_1password() {
         0,
         main_with_args(
             &["rooster", "add", "-s", "Youtube", "yt@example.com"],
-            &mut CursorInput::new("xxxx\nabcd\n"),
-            &mut CursorOutput::new(),
+            &mut CursorInputOutput::new("", "xxxx\nabcd\n"),
             &rooster_file
         )
     );
 
-    let mut output = CursorOutput::new();
+    let mut io = CursorInputOutput::new("", "xxxx\n");
     assert_eq!(
         0,
-        main_with_args(
-            &["rooster", "export", "1password"],
-            &mut CursorInput::new("xxxx\n"),
-            &mut output,
-            &rooster_file
-        )
+        main_with_args(&["rooster", "export", "1password"], &mut io, &rooster_file)
     );
-    let output_as_vecu8 = output.standard_cursor.into_inner();
+    let output_as_vecu8 = io.stdout_cursor.into_inner();
     let output_as_string = String::from_utf8_lossy(output_as_vecu8.as_slice());
     assert_eq!(output_as_string, "Youtube,yt@example.com,abcd\n");
 }

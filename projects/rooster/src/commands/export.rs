@@ -1,7 +1,7 @@
-use crate::io::{CliReader, CliWriter};
-use crate::io::{OutputType, Style};
 use crate::password;
 use crate::password::v2::Password;
+use crate::rclio::CliInputOutput;
+use crate::rclio::OutputType;
 use crate::rutil::SafeString;
 use csv::Writer;
 use serde::{Deserialize, Serialize};
@@ -17,18 +17,17 @@ pub struct JsonExport {
 pub fn callback_exec(
     matches: &clap::ArgMatches,
     store: &mut password::v2::PasswordStore,
-    _reader: &mut impl CliReader,
-    writer: &mut impl CliWriter,
+    io: &mut impl CliInputOutput,
 ) -> Result<(), i32> {
     let subcommand_name = matches.subcommand_name().unwrap();
     let subcommand_matches = matches.subcommand_matches(subcommand_name).unwrap();
 
     if subcommand_name == "json" {
-        export_to_json(subcommand_matches, store, writer)
+        export_to_json(subcommand_matches, store, io)
     } else if subcommand_name == "csv" {
-        export_to_csv(subcommand_matches, store, writer)
+        export_to_csv(subcommand_matches, store, io)
     } else if subcommand_name == "1password" {
-        export_to_csv(subcommand_matches, store, writer)
+        export_to_csv(subcommand_matches, store, io)
     } else {
         unimplemented!("Invalid export destination")
     }
@@ -37,7 +36,7 @@ pub fn callback_exec(
 fn export_to_csv(
     _matches: &clap::ArgMatches,
     store: &mut password::v2::PasswordStore,
-    writer: &mut impl CliWriter,
+    io: &mut impl CliInputOutput,
 ) -> Result<(), i32> {
     let passwords_ref = store.get_all_passwords();
     let output_cursor: Cursor<Vec<u8>> = Cursor::new(Vec::new());
@@ -52,7 +51,7 @@ fn export_to_csv(
             Err(_) => return Err(1),
         }
     }
-    writer.write(
+    io.write(
         String::from_utf8(csv_writer.into_inner().unwrap().into_inner()).unwrap(),
         OutputType::Standard,
     );
@@ -63,7 +62,7 @@ fn export_to_csv(
 fn export_to_json(
     _matches: &clap::ArgMatches,
     store: &mut password::v2::PasswordStore,
-    writer: &mut impl CliWriter,
+    io: &mut impl CliInputOutput,
 ) -> Result<(), i32> {
     let export = JsonExport {
         passwords: store
@@ -75,11 +74,11 @@ fn export_to_json(
     let passwords_json = match serde_json::to_string(&export) {
         Ok(passwords_json) => passwords_json,
         Err(json_err) => {
-            writer.writeln(
-                Style::error(format!(
+            io.error(
+                format!(
                     "Woops, I could not encode the passwords into JSON (reason: {:?}).",
                     json_err
-                )),
+                ),
                 OutputType::Error,
             );
             return Err(1);
@@ -87,6 +86,6 @@ fn export_to_json(
     };
 
     let passwords = SafeString::from_string(passwords_json);
-    writer.write(format!("{}", passwords.deref()), OutputType::Standard);
+    io.write(format!("{}", passwords.deref()), OutputType::Standard);
     return Ok(());
 }

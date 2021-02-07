@@ -1,5 +1,5 @@
-use crate::io::{CliWriter, OutputType, Style};
 use crate::password;
+use crate::rclio::{CliInputOutput, OutputType};
 use crate::rutil::SafeString;
 
 use std::ops::Deref;
@@ -116,51 +116,45 @@ pub fn paste_keys() -> &'static str {
 pub fn confirm_password_retrieved(
     show: bool,
     password: &password::v2::Password,
-    writer: &mut impl CliWriter,
+    io: &mut impl CliInputOutput,
 ) {
     if show {
-        writer.writeln(
-            Style::success(format!(
-                "Alright! Here is your password for {}:",
-                password.name
-            )),
+        io.success(
+            format!("Alright! Here is your password for {}:", password.name),
             OutputType::Standard,
         );
-        writer.writeln(
-            Style::success(format!("Username: {}", password.username)),
+        io.success(
+            format!("Username: {}", password.username),
             OutputType::Standard,
         );
-        writer.writeln(
-            Style::success(format!("Password: {}", password.password.deref())),
+        io.success(
+            format!("Password: {}", password.password.deref()),
             OutputType::Standard,
         );
     } else {
         if copy_to_clipboard(&password.password).is_err() {
-            writer.writeln(
-                Style::success(format!(
+            io.success(
+                format!(
                     "Hmm, I tried to copy your new password to your clipboard, but \
                      something went wrong. You can see it with `rooster get '{}' --show`",
                     password.name
-                )),
+                ),
                 OutputType::Standard,
             );
         } else {
-            writer.writeln(
-                Style::success(format!(
-                    "Alright! Here is your password for {}:",
-                    password.name
-                )),
+            io.success(
+                format!("Alright! Here is your password for {}:", password.name),
                 OutputType::Standard,
             );
-            writer.writeln(
-                Style::success(format!("Username: {}", password.username)),
+            io.success(
+                format!("Username: {}", password.username),
                 OutputType::Standard,
             );
-            writer.writeln(
-                Style::success(format!(
+            io.success(
+                format!(
                     "Password: ******** (copied to clipboard, paste with {})",
                     paste_keys()
-                )),
+                ),
                 OutputType::Standard,
             );
         }

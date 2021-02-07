@@ -1,14 +1,13 @@
 use crate::ffi;
-use crate::io::{CliReader, CliWriter};
-use crate::io::{OutputType, Style};
 use crate::list;
 use crate::password;
+use crate::rclio::CliInputOutput;
+use crate::rclio::OutputType;
 
 pub fn callback_exec(
     matches: &clap::ArgMatches,
     store: &mut password::v2::PasswordStore,
-    reader: &mut impl CliReader,
-    writer: &mut impl CliWriter,
+    io: &mut impl CliInputOutput,
 ) -> Result<(), i32> {
     let query = matches.value_of("app").unwrap();
     let new_name = matches.value_of("new_name").unwrap().to_owned();
@@ -18,8 +17,7 @@ pub fn callback_exec(
         query,
         list::WITH_NUMBERS,
         "Which password would you like to rename?",
-        reader,
-        writer,
+        io,
     )
     .ok_or(1)?
     .clone();
@@ -37,21 +35,18 @@ pub fn callback_exec(
 
     match change_result {
         Ok(_) => {
-            writer.writeln(
-                Style::success(format!(
-                    "Done! I've renamed {} to {}",
-                    password.name, new_name
-                )),
+            io.success(
+                format!("Done! I've renamed {} to {}", password.name, new_name),
                 OutputType::Standard,
             );
             Ok(())
         }
         Err(err) => {
-            writer.writeln(
-                Style::error(format!(
+            io.error(
+                format!(
                     "Woops, I couldn't save the new app name (reason: {:?}).",
                     err
-                )),
+                ),
                 OutputType::Error,
             );
             Err(1)
