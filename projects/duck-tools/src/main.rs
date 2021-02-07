@@ -1,6 +1,9 @@
+mod rclio;
+mod rutil;
+
+use crate::rclio::{CliInputOutput, RegularInputOutput};
 use clap::{App, AppSettings, Arg};
 use git2::{Cred, RemoteCallbacks, Repository, StatusOptions};
-use rpassword::prompt_password;
 use tempfile::tempdir;
 
 fn main() {
@@ -26,6 +29,11 @@ fn main() {
         )
         .get_matches();
 
+    let stdin = std::io::stdin();
+    let stdout = std::io::stdout();
+    let stderr = std::io::stderr();
+    let mut io = RegularInputOutput::new(stdin.lock(), stdout.lock(), stderr.lock());
+
     match matches.subcommand() {
         Some(("push", submatches)) => {
             println!("{}", submatches.value_of("src-project").unwrap());
@@ -34,7 +42,7 @@ fn main() {
             let dst_repo_temp_dir = tempdir().unwrap();
             let dst_repo_url = submatches.value_of("dst-repo").unwrap();
 
-            let ssh_passphrase = prompt_password("SSH passphrase: ").unwrap();
+            let ssh_passphrase = io.prompt_password("SSH passphrase: ").unwrap();
 
             let mut callbacks = RemoteCallbacks::new();
             callbacks.credentials(|_url, username_from_url, _allowed_types| {
