@@ -1,7 +1,7 @@
 use clap::{App, AppSettings, Arg, ArgMatches};
 use log::LevelFilter;
 use std::ffi::OsStr;
-use std::fs::read_dir;
+use std::fs::{create_dir, read_dir, read_to_string};
 use std::io::Result;
 use std::path::{Path, PathBuf};
 use std::process::{Command, ExitStatus, Stdio};
@@ -39,7 +39,7 @@ fn main() {
                     Arg::new("project-dir")
                         .required(true)
                         .about("Path to one of Duck's Rust projects")
-                        .validator(|project_dir| read_dir(project_dir).map(|_| ())),
+                        .validator(validate_dir),
                 )
                 .arg(
                     Arg::new("windows")
@@ -49,18 +49,33 @@ fn main() {
                 ),
         )
         .subcommand(
-            App::new("copy-to-repo")
+            App::new("repo-rsync")
                 .arg(
                     Arg::new("project-dir")
                         .required(true)
                         .about("Path to one of Duck's Rust projects")
-                        .validator(|project_dir| read_dir(project_dir).map(|_| ())),
+                        .validator(validate_dir),
                 )
                 .arg(
                     Arg::new("repo-dir")
                         .required(true)
                         .about("Path to the repository for that Rust project")
-                        .validator(|project_dir| read_dir(project_dir).map(|_| ())),
+                        .validator(validate_dir),
+                ),
+        )
+        .subcommand(
+            App::new("repo-funding")
+                .arg(
+                    Arg::new("repo-dir")
+                        .required(true)
+                        .about("Path to the repository for that Rust project")
+                        .validator(validate_git_repo),
+                )
+                .arg(
+                    Arg::new("funding-file")
+                        .required(true)
+                        .about("Funding file to copy to the given repository")
+                        .validator(validate_file),
                 ),
         )
         .get_matches();
@@ -79,6 +94,10 @@ fn main() {
     env_logger::builder().filter_level(log_level).init();
 
     log::debug!("{:?}", matches);
+
+    if dry_run {
+        log::info!("dry-run active");
+    }
 
     match matches.subcommand() {
         Some(("cargo-test", subcommand_matches)) => {
@@ -102,7 +121,7 @@ fn main() {
             .unwrap();
             cache_cross_build_objects(log_level, project_dir, project_tmp_dir, dry_run).unwrap();
         }
-        Some(("copy-to-repo", subcommand_matches)) => {
+        Some(("repo-rsync", subcommand_matches)) => {
             let project_dir = arg_to_pathbuf(subcommand_matches, "project-dir").unwrap();
             let repo_dir = arg_to_pathbuf(subcommand_matches, "repo-dir").unwrap();
 
@@ -114,6 +133,44 @@ fn main() {
                 dry_run,
             )
             .unwrap();
+        }
+        Some(("repo-funding", subcommand_matches)) => {
+            let repo_dir = arg_to_pathbuf(subcommand_matches, "repo-dir").unwrap();
+            let funding_file = arg_to_pathbuf(subcommand_matches, "funding-file").unwrap();
+
+            let github_dir = repo_dir.join(".github");
+            log::info!(
+                "checking github configuration directory {}",
+                github_dir.display()
+            );
+            if github_dir.exists() {
+                log::info!("github configuration directory exists");
+                if !github_dir.is_dir() {
+                    log::error!(
+                        "unexpected file {}, expected directory",
+                        github_dir.display()
+                    );
+                    return;
+                }
+            } else {
+                log::info!("github configuration directory missing, creating");
+                if !dry_run {
+                    create_dir(github_dir.as_path()).unwrap();
+                }
+            }
+
+            log::info!(
+                "copy {} to {}",
+                funding_file.display(),
+                github_dir.display()
+            );
+            if !dry_run {
+                std::fs::copy(
+                    funding_file.as_path(),
+                    github_dir.join("FUNDING.yml").as_path(),
+                )
+                .unwrap();
+            }
         }
         _ => unimplemented!(),
     }
@@ -213,7 +270,7 @@ fn arg_to_pathbuf(args: &ArgMatches, arg: &str) -> Result<PathBuf> {
 }
 
 fn remove_dir_contents_except_git(path: &Path, dry_run: bool) -> Result<()> {
-    for entry in std::fs::read_dir(path)? {
+    for entry in read_dir(path)? {
         let path = entry?.path();
         if path.is_dir() {
             if path.components().last().unwrap().as_os_str() == OsStr::new(".git") {
@@ -232,4 +289,25 @@ fn remove_dir_contents_except_git(path: &Path, dry_run: bool) -> Result<()> {
         }
     }
     Ok(())
+}
+
+fn validate_dir(path: &str) -> Result<()> {
+    read_dir(path).map(|_| ())
+}
+
+fn validate_file(path: &str) -> Result<()> {
+    read_to_string(path).map(|_| ())
+}
+
+fn validate_git_repo(path: &str) -> std::result::Result<(), String> {
+    for entry in read_dir(path).map_err(|e| e.to_string())? {
+        let path = entry.map_err(|e| e.to_string())?.path();
+        if path.is_dir() {
+            if path.components().last().unwrap().as_os_str() == OsStr::new(".git") {
+                return Ok(());
+            }
+        }
+    }
+
+    return Err(format!("repo-dir must contain a .git directory"));
 }
