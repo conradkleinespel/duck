@@ -31,10 +31,11 @@ fn main() {
                 .about("Performs a trial run with no changes made")
                 .global(true),
         )
-        .about("Tools to manage the duck repository")
+        .about("Tools to manage the duck git repository")
         .version(env!("CARGO_PKG_VERSION"))
         .subcommand(
             App::new("cargo-test")
+                .about("Run `cross test` for a Rust project")
                 .arg(
                     Arg::new("project-dir")
                         .required(true)
@@ -50,6 +51,7 @@ fn main() {
         )
         .subcommand(
             App::new("repo-rsync")
+                .about("Sync files from a Duck project to its own git repository directory")
                 .arg(
                     Arg::new("project-dir")
                         .required(true)
@@ -59,22 +61,23 @@ fn main() {
                 .arg(
                     Arg::new("repo-dir")
                         .required(true)
-                        .about("Path to the repository for that Rust project")
+                        .about("Path to the git repository for that Rust project")
                         .validator(validate_dir),
                 ),
         )
         .subcommand(
             App::new("repo-funding")
+                .about("Copies a FUNDING.yml file to a git repository directory")
                 .arg(
                     Arg::new("repo-dir")
                         .required(true)
-                        .about("Path to the repository for that Rust project")
+                        .about("Path to the git repository for that Rust project")
                         .validator(validate_git_repo),
                 )
                 .arg(
                     Arg::new("funding-file")
                         .required(true)
-                        .about("Funding file to copy to the given repository")
+                        .about("Funding file to copy to the given git repository")
                         .validator(validate_file),
                 ),
         )
