@@ -1,11 +1,27 @@
-use clap::{App, AppSettings, Arg};
-use log::LevelFilter;
 use std::process::exit;
 
+use clap::{App, AppSettings, Arg};
+use log::LevelFilter;
+
+use command::{cargo_test, repo_funding, repo_history, repo_rsync};
+
 mod command;
+#[allow(unused)]
+mod rclio;
+#[allow(unused)]
+mod rpassword;
+#[allow(unused)]
+mod rprompt;
+#[allow(unused)]
+mod rutil;
 mod validation;
 
 fn main() {
+    let stdin = std::io::stdin();
+    let stdout = std::io::stdout();
+    let stderr = std::io::stderr();
+    let mut io = rclio::RegularInputOutput::new(stdin.lock(), stdout.lock(), stderr.lock());
+
     let matches = App::new("dt")
         .global_setting(AppSettings::HelpRequired)
         .global_setting(AppSettings::DisableHelpSubcommand)
@@ -76,6 +92,25 @@ fn main() {
                         .validator(validation::validate_file),
                 ),
         )
+        .subcommand(
+            App::new("repo-history")
+                .about("Replay history from Duck onto a single project git repository")
+                .arg(
+                    Arg::new("duck-repo")
+                        .required(true)
+                        .about("HTTPS url to Duck's Git repository"),
+                )
+                .arg(
+                    Arg::new("project-name-in-duck")
+                        .required(true)
+                        .about("The name of the project in Duck"),
+                )
+                .arg(
+                    Arg::new("project-repo")
+                        .required(true)
+                        .about("HTTPS url to the single project repository"),
+                ),
+        )
         .get_matches();
 
     let dry_run = matches.is_present("dry-run");
@@ -99,13 +134,16 @@ fn main() {
 
     let result = match matches.subcommand() {
         Some(("cargo-test", subcommand_matches)) => {
-            command::command_cargo_test(dry_run, log_level, subcommand_matches)
+            cargo_test::command_cargo_test(dry_run, log_level, subcommand_matches)
         }
         Some(("repo-rsync", subcommand_matches)) => {
-            command::command_repo_rsync(dry_run, log_level, subcommand_matches)
+            repo_rsync::command_repo_rsync(dry_run, log_level, subcommand_matches)
         }
         Some(("repo-funding", subcommand_matches)) => {
-            command::command_repo_funding(dry_run, subcommand_matches)
+            repo_funding::command_repo_funding(dry_run, subcommand_matches)
+        }
+        Some(("repo-history", subcommand_matches)) => {
+            repo_history::command_repo_history(&mut io, dry_run, log_level, subcommand_matches)
         }
         _ => unimplemented!(),
     };
