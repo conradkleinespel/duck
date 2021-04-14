@@ -22,13 +22,22 @@ To import a crate in another crate:
 
 You can have a look at examples in the `rprompt` or `rpassword` crates.
 
-## How to run tests for a Rust package
+## What the Duck Toolkit is and how to install it
 
-Install the Duck Toolkit:
+The Duck Toolkit (aka `dt`) is a command line tool that makes working with Duck easier.
+
+Currently, it allows to:
+
+- run cross platform tests with `cross` for Rust crates that have [local dependencies](https://github.com/rust-embedded/cross/issues/388);
+- replay Git commit history from Duck, a monorepo, to Duck's projects own repositories.
+
+To install `dt`, run the following commands:
 
 ```shell
-cargo install --path projects/dt/
+cargo install --path projects/dt --debug
 ```
+
+## How to run tests with `cross`
 
 Now you can run test in Linux and Windows easily using [cross](https://github.com/rust-embedded/cross). For instance:
 
@@ -38,4 +47,12 @@ dt cargo-test projects/rpassword/
 
 # Windows
 dt cargo-test projects/rpassword/ -w
+```
+
+## How to replay Duck's commit history to a project's own repository
+
+Now you can replay Duck's commit history onto the project's own Git repository. Here's an example for `rpassword`:
+
+```shell
+dt repo-history https://github.com/conradkleinespel/duck.git rpassword https://github.com/conradkleinespel/rpassword.git -v
 ```

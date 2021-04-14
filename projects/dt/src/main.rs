@@ -61,38 +61,6 @@ fn main() {
                 ),
         )
         .subcommand(
-            App::new("repo-rsync")
-                .about("Sync files from a Duck project to its own git repository directory")
-                .arg(
-                    Arg::new("project-dir")
-                        .required(true)
-                        .about("Path to one of Duck's Rust projects")
-                        .validator(validation::validate_dir),
-                )
-                .arg(
-                    Arg::new("repo-dir")
-                        .required(true)
-                        .about("Path to the git repository for that Rust project")
-                        .validator(validation::validate_dir),
-                ),
-        )
-        .subcommand(
-            App::new("repo-funding")
-                .about("Copies a FUNDING.yml file to a git repository directory")
-                .arg(
-                    Arg::new("repo-dir")
-                        .required(true)
-                        .about("Path to the git repository for that Rust project")
-                        .validator(validation::validate_git_repo),
-                )
-                .arg(
-                    Arg::new("funding-file")
-                        .required(true)
-                        .about("Funding file to copy to the given git repository")
-                        .validator(validation::validate_file),
-                ),
-        )
-        .subcommand(
             App::new("repo-history")
                 .about("Replay history from Duck onto a single project git repository")
                 .arg(
