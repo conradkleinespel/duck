@@ -82,22 +82,7 @@ pub fn command_repo_history(
             .unwrap();
     }
 
-    let pull_request_url = format!(
-        "https://github.com/conradkleinespel/rpassword/compare/origin/{}?expand=1",
-        branch_name
-    );
-
-    match Command::new("xdg-open")
-        .arg(pull_request_url.as_str())
-        .status()
-    {
-        Ok(_) => {
-            log::info!("opening pull request URL in browser {}", pull_request_url);
-        }
-        Err(_) => {
-            log::info!("pull request url {}", pull_request_url);
-        }
-    }
+    log::info!("check state of branch {}", branch_name);
 
     Ok(())
 }
