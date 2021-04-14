@@ -7,7 +7,6 @@ use git2::{
 use log::LevelFilter;
 use std::borrow::Borrow;
 use std::path::{Path, PathBuf};
-use std::process::Command;
 
 pub fn command_repo_history(
     io: &mut RegularInputOutput,
@@ -33,15 +32,22 @@ pub fn command_repo_history(
     let mut project_repo =
         git2::Repository::clone(project_repo_url, project_path.as_path()).unwrap();
 
-    replay_all_commits(
+    match replay_all_commits(
         log_level,
         project_name_in_duck,
         &mut duck_repo,
         duck_path.as_path(),
         &mut project_repo,
         project_path.as_path(),
-    )
-    .unwrap();
+    ) {
+        Err(err) => Result::Err(err).unwrap(),
+        Ok(num_commits_replayed) => {
+            if num_commits_replayed == 0 {
+                log::info!("no commits replayed, skipping git-push");
+                return Ok(());
+            }
+        }
+    }
 
     let branch_name = format!(
         "duck-sync-{}",
@@ -53,7 +59,7 @@ pub fn command_repo_history(
             .id()
             .to_string()
     );
-    let push_refspec = format!("refs/heads/master:refs/heads/origin/{}", branch_name);
+    let push_refspec = format!("refs/heads/master:refs/heads/{}", branch_name);
     log::info!("pusing refspec {}", push_refspec);
     let mut remote_callbacks = RemoteCallbacks::new();
     remote_callbacks.credentials(|_url, _username_from_url, _allowed_types| {
@@ -94,7 +100,9 @@ fn replay_all_commits(
     duck_path: &Path,
     project_repo: &mut Repository,
     project_path: &Path,
-) -> Result<(), Error> {
+) -> Result<u64, Error> {
+    let mut num_commits_replayed = 0;
+
     let mut revwalk = duck_repo.revwalk().unwrap();
     revwalk.set_sorting(Sort::TIME | Sort::REVERSE).unwrap();
     revwalk.push_head().unwrap();
@@ -209,7 +217,9 @@ fn replay_all_commits(
                 &[last_commit.borrow()],
             )
             .map(|_| ())?;
+
+        num_commits_replayed += 1;
     }
 
-    Ok(())
+    Ok(num_commits_replayed)
 }
