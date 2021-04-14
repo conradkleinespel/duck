@@ -3,7 +3,7 @@ use std::process::exit;
 use clap::{App, AppSettings, Arg};
 use log::LevelFilter;
 
-use command::{cargo_test, repo_funding, repo_history, repo_rsync};
+use command::{cargo_test, repo_history};
 
 mod command;
 #[allow(unused)]
@@ -135,12 +135,6 @@ fn main() {
     let result = match matches.subcommand() {
         Some(("cargo-test", subcommand_matches)) => {
             cargo_test::command_cargo_test(dry_run, log_level, subcommand_matches)
-        }
-        Some(("repo-rsync", subcommand_matches)) => {
-            repo_rsync::command_repo_rsync(dry_run, log_level, subcommand_matches)
-        }
-        Some(("repo-funding", subcommand_matches)) => {
-            repo_funding::command_repo_funding(dry_run, subcommand_matches)
         }
         Some(("repo-history", subcommand_matches)) => {
             repo_history::command_repo_history(&mut io, dry_run, log_level, subcommand_matches)

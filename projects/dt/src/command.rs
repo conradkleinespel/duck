@@ -6,9 +6,7 @@ use clap::ArgMatches;
 use log::LevelFilter;
 
 pub mod cargo_test;
-pub mod repo_funding;
 pub mod repo_history;
-pub mod repo_rsync;
 
 fn rsync_files(src: &Path, dest: &Path, log_level: LevelFilter, dry_run: bool) -> io::Result<()> {
     // rsync copies directory contents only if a trailing slash is passed
