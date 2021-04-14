@@ -77,6 +77,11 @@ fn main() {
                     Arg::new("project-repo")
                         .required(true)
                         .about("HTTPS url to the single project repository"),
+                )
+                .arg(
+                    Arg::new("skip-time-filter")
+                        .long("skip-time-filter")
+                        .about("Skips commit time filter, useful to initialize a repository"),
                 ),
         )
         .get_matches();
