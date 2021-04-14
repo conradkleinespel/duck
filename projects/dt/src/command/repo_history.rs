@@ -17,6 +17,7 @@ pub fn command_repo_history(
     let duck_repo_url = subcommand_matches.value_of("duck-repo").unwrap();
     let project_name_in_duck = subcommand_matches.value_of("project-name-in-duck").unwrap();
     let project_repo_url = subcommand_matches.value_of("project-repo").unwrap();
+    let skip_time_filter = subcommand_matches.is_present("skip-time-filter");
 
     let git_tmp_dir = tempfile::tempdir().unwrap();
     let git_tmp_dir_path = git_tmp_dir.path().to_path_buf();
@@ -39,6 +40,7 @@ pub fn command_repo_history(
         duck_path.as_path(),
         &mut project_repo,
         project_path.as_path(),
+        skip_time_filter,
     ) {
         Err(err) => Result::Err(err).unwrap(),
         Ok(num_commits_replayed) => {
@@ -100,6 +102,7 @@ fn replay_all_commits(
     duck_path: &Path,
     project_repo: &mut Repository,
     project_path: &Path,
+    skip_time_filter: bool,
 ) -> Result<u64, Error> {
     let mut num_commits_replayed = 0;
 
@@ -147,7 +150,7 @@ fn replay_all_commits(
             return None;
         }
 
-        if commit.time().seconds() < project_repo_last_commit_time {
+        if !skip_time_filter && commit.time().seconds() < project_repo_last_commit_time {
             log::info!(
                 "skipping commit earlier than HEAD of {} project {} {:?}",
                 project_name_in_duck,
@@ -161,7 +164,6 @@ fn replay_all_commits(
     });
 
     for commit in commits {
-        // TODO: test what happens if project_repo is empty, error BareRepo?
         let last_commit = project_repo.head().unwrap().peel_to_commit().unwrap();
 
         log::info!("checking out commit {} {:?}", commit.id(), commit.message());
