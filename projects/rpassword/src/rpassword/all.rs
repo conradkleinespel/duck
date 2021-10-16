@@ -3,7 +3,30 @@ use crate::rutil::print_tty::{print_tty, print_writer};
 use crate::rutil::safe_string::SafeString;
 use std::io::{BufRead, Write};
 
-#[cfg(unix)]
+#[cfg(target_family = "wasm")]
+mod wasm {
+    use std::io::{self, BufRead};
+
+    /// Reads a password from the TTY
+    pub fn read_password() -> std::io::Result<String> {
+        let tty = std::fs::File::open("/dev/tty")?;
+        let mut reader = io::BufReader::new(tty);
+
+        read_password_from_fd_with_hidden_input(&mut reader)
+    }
+
+    /// Reads a password from a given file descriptor
+    fn read_password_from_fd_with_hidden_input(
+        reader: &mut impl BufRead,
+    ) -> std::io::Result<String> {
+        let mut password = super::SafeString::new();
+
+        reader.read_line(&mut password)?;
+        super::fix_new_line(password.into_inner())
+    }
+}
+
+#[cfg(target_family = "unix")]
 mod unix {
     use libc::{c_int, tcsetattr, termios, ECHO, ECHONL, TCSANOW};
     use std::io::{self, BufRead};
@@ -85,7 +108,7 @@ mod unix {
     }
 }
 
-#[cfg(windows)]
+#[cfg(target_family = "windows")]
 mod windows {
     use std::io::{self, BufReader};
     use std::io::{BufRead, StdinLock};
@@ -176,9 +199,11 @@ mod windows {
     }
 }
 
-#[cfg(unix)]
+#[cfg(target_family = "wasm")]
+pub use wasm::read_password;
+#[cfg(target_family = "unix")]
 pub use unix::read_password;
-#[cfg(windows)]
+#[cfg(target_family = "windows")]
 pub use windows::read_password;
 
 /// Reads a password from anything that implements BufRead
