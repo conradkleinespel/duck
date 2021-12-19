@@ -23,15 +23,14 @@ fn main() {
     let mut io = rclio::RegularInputOutput::new(stdin.lock(), stdout.lock(), stderr.lock());
 
     let matches = App::new("dt")
-        .global_setting(AppSettings::HelpRequired)
+        .global_setting(AppSettings::HelpExpected)
         .global_setting(AppSettings::DisableHelpSubcommand)
         .setting(AppSettings::SubcommandRequiredElseHelp)
-        .global_setting(AppSettings::UnifiedHelpMessage)
         .arg(
             Arg::new("verbose")
                 .long("verbose")
                 .short('v')
-                .about("Prints verbose logs")
+                .help("Prints verbose logs")
                 .global(true)
                 .multiple_occurrences(true),
         )
@@ -39,49 +38,49 @@ fn main() {
             Arg::new("dry-run")
                 .long("dry-run")
                 .short('n')
-                .about("Performs a trial run with no changes made")
+                .help("Performs a trial run with no changes made")
                 .global(true),
         )
-        .about("Tools to manage the duck git repository")
+        .override_help("Tools to manage the duck git repository")
         .version(env!("CARGO_PKG_VERSION"))
         .subcommand(
             App::new("cargo-test")
-                .about("Run `cross test` for a Rust project")
+                .override_help("Run `cross test` for a Rust project")
                 .arg(
                     Arg::new("project-dir")
                         .required(true)
-                        .about("Path to one of Duck's Rust projects")
+                        .help("Path to one of Duck's Rust projects")
                         .validator(validation::validate_dir),
                 )
                 .arg(
                     Arg::new("windows")
                         .long("windows")
                         .short('w')
-                        .about("Build for windows"),
+                        .help("Build for windows"),
                 ),
         )
         .subcommand(
             App::new("repo-history")
-                .about("Replay history from Duck onto a single project git repository")
+                .override_help("Replay history from Duck onto a single project git repository")
                 .arg(
                     Arg::new("duck-repo")
                         .required(true)
-                        .about("HTTPS url to Duck's Git repository"),
+                        .help("HTTPS url to Duck's Git repository"),
                 )
                 .arg(
                     Arg::new("project-name-in-duck")
                         .required(true)
-                        .about("The name of the project in Duck"),
+                        .help("The name of the project in Duck"),
                 )
                 .arg(
                     Arg::new("project-repo")
                         .required(true)
-                        .about("HTTPS url to the single project repository"),
+                        .help("HTTPS url to the single project repository"),
                 )
                 .arg(
                     Arg::new("skip-time-filter")
                         .long("skip-time-filter")
-                        .about("Skips commit time filter, useful to initialize a repository"),
+                        .help("Skips commit time filter, useful to initialize a repository"),
                 ),
         )
         .get_matches();
