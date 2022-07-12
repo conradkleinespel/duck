@@ -1,7 +1,7 @@
 name: dt rust tests
 
 on:
-  push:
+  pull_request:
     paths:
       - "projects/dt/**"
 
