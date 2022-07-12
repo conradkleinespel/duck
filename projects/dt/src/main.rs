@@ -41,11 +41,11 @@ fn main() {
                 .help("Performs a trial run with no changes made")
                 .global(true),
         )
-        .override_help("Tools to manage the duck git repository")
+        .about("Tools to manage the duck git repository")
         .version(env!("CARGO_PKG_VERSION"))
         .subcommand(
             App::new("cargo-test")
-                .override_help("Run `cross test` for a Rust project")
+                .about("Run `cross test` for a Rust project")
                 .arg(
                     Arg::new("project-dir")
                         .required(true)
@@ -61,21 +61,35 @@ fn main() {
         )
         .subcommand(
             App::new("repo-history")
-                .override_help("Replay history from Duck onto a single project git repository")
-                .arg(
-                    Arg::new("duck-repo")
-                        .required(true)
-                        .help("HTTPS url to Duck's Git repository"),
-                )
+                .about("Replay history from Duck onto a single project git repository")
                 .arg(
                     Arg::new("project-name-in-duck")
                         .required(true)
                         .help("The name of the project in Duck"),
                 )
                 .arg(
+                    Arg::new("duck-repo")
+                        .long("duck-repo")
+                        .takes_value(true)
+                        .help("HTTPS url to Duck's Git repository"),
+                )
+                .arg(
+                    Arg::new("duck-branch")
+                        .long("duck-branch")
+                        .takes_value(true)
+                        .help("Name of the branch to checkout for Duck before syncing"),
+                )
+                .arg(
                     Arg::new("project-repo")
-                        .required(true)
+                        .long("project-repo")
+                        .takes_value(true)
                         .help("HTTPS url to the single project repository"),
+                )
+                .arg(
+                    Arg::new("project-branch")
+                        .long("project-branch")
+                        .takes_value(true)
+                        .help("Name of the branch to checkout for the project before syncing"),
                 )
                 .arg(
                     Arg::new("skip-time-filter")

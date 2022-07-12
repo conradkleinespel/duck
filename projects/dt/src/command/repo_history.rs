@@ -1,12 +1,16 @@
 use crate::command::rsync_files;
 use crate::rclio::{CliInputOutput, RegularInputOutput};
+use chrono::NaiveDateTime;
 use clap::ArgMatches;
+use git2::build::CheckoutBuilder;
 use git2::{
-    Cred, Error, IndexAddOption, PushOptions, RemoteCallbacks, Repository, ResetType, Sort,
+    Cred, Error, FetchOptions, IndexAddOption, PushOptions,
+    RemoteCallbacks, Repository, Signature, Sort,
 };
 use log::LevelFilter;
 use std::borrow::Borrow;
 use std::path::{Path, PathBuf};
+use std::time::Duration;
 
 pub fn command_repo_history(
     io: &mut RegularInputOutput,
@@ -14,9 +18,23 @@ pub fn command_repo_history(
     log_level: LevelFilter,
     subcommand_matches: &ArgMatches,
 ) -> std::result::Result<(), String> {
-    let duck_repo_url = subcommand_matches.value_of("duck-repo").unwrap();
+    let duck_repo_url = subcommand_matches
+        .value_of("duck-repo")
+        .unwrap_or("https://github.com/conradkleinespel/duck.git");
+    let duck_branch = subcommand_matches
+        .value_of("duck-branch")
+        .unwrap_or("master");
     let project_name_in_duck = subcommand_matches.value_of("project-name-in-duck").unwrap();
-    let project_repo_url = subcommand_matches.value_of("project-repo").unwrap();
+    let default_project_repo_url = format!(
+        "https://github.com/conradkleinespel/{}.git",
+        project_name_in_duck
+    );
+    let project_repo_url = subcommand_matches
+        .value_of("project-repo")
+        .unwrap_or(default_project_repo_url.as_str());
+    let project_branch = subcommand_matches
+        .value_of("project-branch")
+        .unwrap_or("master");
     let skip_time_filter = subcommand_matches.is_present("skip-time-filter");
 
     let git_tmp_dir = tempfile::tempdir().unwrap();
@@ -27,11 +45,27 @@ pub fn command_repo_history(
     let duck_path = git_tmp_dir_path.join("duck");
     let project_path = git_tmp_dir_path.join("project");
 
+    let (git_username, git_password) = get_username_and_password(io).unwrap();
+
     log::info!("cloning {}", duck_repo_url);
     let mut duck_repo = git2::Repository::clone(duck_repo_url, duck_path.as_path()).unwrap();
+    checkout_branch(
+        &mut duck_repo,
+        duck_branch,
+        git_username.as_str(),
+        git_password.as_str(),
+    )
+    .unwrap();
     log::info!("cloning {}", project_repo_url);
     let mut project_repo =
         git2::Repository::clone(project_repo_url, project_path.as_path()).unwrap();
+    checkout_branch(
+        &mut project_repo,
+        project_branch,
+        git_username.as_str(),
+        git_password.as_str(),
+    )
+    .unwrap();
 
     match replay_all_commits(
         log_level,
@@ -39,6 +73,7 @@ pub fn command_repo_history(
         &mut duck_repo,
         duck_path.as_path(),
         &mut project_repo,
+        project_branch,
         project_path.as_path(),
         skip_time_filter,
     ) {
@@ -66,10 +101,6 @@ pub fn command_repo_history(
     let mut remote_callbacks = RemoteCallbacks::new();
     remote_callbacks.credentials(|_url, _username_from_url, _allowed_types| {
         log::info!("authenticating before git-push");
-
-        let git_username = io.prompt_line("Username: ").unwrap();
-        let git_password = io.prompt_password("Access token: ").unwrap();
-
         Cred::userpass_plaintext(git_username.as_str(), git_password.as_str())
     });
 
@@ -101,6 +132,7 @@ fn replay_all_commits(
     duck_repo: &mut Repository,
     duck_path: &Path,
     project_repo: &mut Repository,
+    project_branch: &str,
     project_path: &Path,
     skip_time_filter: bool,
 ) -> Result<u64, Error> {
@@ -110,13 +142,29 @@ fn replay_all_commits(
     revwalk.set_sorting(Sort::TIME | Sort::REVERSE).unwrap();
     revwalk.push_head().unwrap();
 
+    let remote_project_branch_refspec = format!("refs/remotes/origin/{}", project_branch);
+
+    // We want the "Author Date" and not the "Commit Date" because the "Author Date" is earliest,
+    // this guarantees we don't miss any commits, looking at already synced commits is OK because
+    // commits with empty changelist are skipped
     let project_repo_last_commit_time = project_repo
-        .head()
+        .revparse_single(remote_project_branch_refspec.as_str())
         .unwrap()
-        .peel_to_commit()
+        .as_commit()
         .unwrap()
-        .time()
+        .author()
+        .when()
         .seconds();
+
+    log::info!("project branch {}", remote_project_branch_refspec);
+    log::info!(
+        "last commit time {:?} {:?}",
+        project_repo
+            .revparse_single(remote_project_branch_refspec.as_str())
+            .unwrap()
+            .as_commit(),
+        NaiveDateTime::from_timestamp(project_repo_last_commit_time, 0)
+    );
 
     let commits = revwalk.filter_map(|oid| {
         let commit = duck_repo.find_commit(oid.unwrap()).unwrap();
@@ -152,10 +200,11 @@ fn replay_all_commits(
 
         if !skip_time_filter && commit.time().seconds() < project_repo_last_commit_time {
             log::info!(
-                "skipping commit earlier than HEAD of {} project {} {:?}",
+                "skipping commit earlier than HEAD of {} project {} {:?} {:?}",
                 project_name_in_duck,
                 commit.id(),
-                commit.message()
+                commit.message(),
+                NaiveDateTime::from_timestamp(commit.time().seconds(), 0)
             );
             return None;
         }
@@ -168,8 +217,11 @@ fn replay_all_commits(
 
         log::info!("checking out commit {} {:?}", commit.id(), commit.message());
         duck_repo
-            .reset(commit.as_object(), ResetType::Hard, None)
+            .checkout_tree(commit.as_object(), Some(CheckoutBuilder::new().force()))
             .unwrap();
+
+        // Wait for checkout to complete on local filesystem (no idea why I need this, but it doesn't work otherwise)
+        std::thread::sleep(Duration::from_millis(1000));
 
         log::info!("syncing files from duck to {}", project_name_in_duck);
         rsync_files(
@@ -209,6 +261,12 @@ fn replay_all_commits(
             continue;
         }
 
+        log::info!(
+            "apply commit {:?} with time {:?}",
+            commit,
+            NaiveDateTime::from_timestamp(commit.time().seconds(), 0)
+        );
+
         project_repo
             .commit(
                 Some("HEAD"),
@@ -224,4 +282,47 @@ fn replay_all_commits(
     }
 
     Ok(num_commits_replayed)
+}
+
+fn checkout_branch(
+    repo: &mut Repository,
+    branch: &str,
+    git_username: &str,
+    git_password: &str,
+) -> Result<(), Error> {
+    let mut remote_callbacks = RemoteCallbacks::new();
+    remote_callbacks.credentials(|_url, _username_from_url, _allowed_types| {
+        log::info!("authenticating before git-checkout");
+        Cred::userpass_plaintext(git_username, git_password)
+    });
+
+    let mut fetch_options = FetchOptions::new();
+    fetch_options.remote_callbacks(remote_callbacks);
+
+    let remote_branch_refspec = format!("refs/remotes/origin/{}", branch);
+    repo.find_remote("origin")
+        .unwrap()
+        .download(&[remote_branch_refspec.as_str()], Some(&mut fetch_options))
+        .unwrap();
+
+    let commit_obj = repo
+        .revparse_single(remote_branch_refspec.as_str())
+        .unwrap();
+
+    repo.checkout_tree(&commit_obj, Some(CheckoutBuilder::new().force()))
+        .unwrap();
+
+    return Ok(());
+}
+
+fn get_username_and_password(io: &mut RegularInputOutput) -> Result<(String, String), Error> {
+    let git_username =
+        std::env::var("DUCK_USERNAME").unwrap_or_else(|_| io.prompt_line("Username: ").unwrap());
+    let git_password = std::env::var("DUCK_PASSWORD").unwrap_or_else(|_| {
+        io.prompt_password("Access token: ")
+            .map(|s| s.into_inner())
+            .unwrap()
+    });
+
+    return Ok((git_username, git_password));
 }

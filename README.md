@@ -54,5 +54,5 @@ dt cargo-test projects/rpassword/ -w
 Now you can replay Duck's commit history onto the project's own Git repository. Here's an example for `rpassword`:
 
 ```shell
-dt repo-history https://github.com/conradkleinespel/duck.git rpassword https://github.com/conradkleinespel/rpassword.git -v
+dt repo-history -vvv rpassword
 ```
