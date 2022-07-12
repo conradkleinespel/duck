@@ -1,7 +1,7 @@
 name: rclio rust tests
 
 on:
-  push:
+  pull_request:
     paths:
       - "projects/rclio/**"
       - "projects/rprompt/**"
