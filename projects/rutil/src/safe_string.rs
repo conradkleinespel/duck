@@ -1,10 +1,4 @@
-#[cfg(feature = "serde")]
-use serde::de::{Deserialize, Deserializer, Visitor};
-#[cfg(feature = "serde")]
-use serde::ser::{Serialize, Serializer};
 use std::convert::Into;
-#[cfg(feature = "serde")]
-use std::fmt;
 use std::ops::{Deref, DerefMut, Drop};
 use std::{ptr, sync::atomic};
 

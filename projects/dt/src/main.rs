@@ -3,18 +3,9 @@ use std::process::exit;
 use clap::{App, AppSettings, Arg};
 use log::LevelFilter;
 
-use command::{cargo_test, repo_history};
+use command::repo_history;
 
 mod command;
-#[allow(unused)]
-mod rclio;
-#[allow(unused)]
-mod rpassword;
-#[allow(unused)]
-mod rprompt;
-#[allow(unused)]
-mod rutil;
-mod validation;
 
 fn main() {
     let stdin = std::io::stdin();
@@ -43,22 +34,6 @@ fn main() {
         )
         .about("Tools to manage the duck git repository")
         .version(env!("CARGO_PKG_VERSION"))
-        .subcommand(
-            App::new("cargo-test")
-                .about("Run `cross test` for a Rust project")
-                .arg(
-                    Arg::new("project-dir")
-                        .required(true)
-                        .help("Path to one of Duck's Rust projects")
-                        .validator(validation::validate_dir),
-                )
-                .arg(
-                    Arg::new("windows")
-                        .long("windows")
-                        .short('w')
-                        .help("Build for windows"),
-                ),
-        )
         .subcommand(
             App::new("repo-history")
                 .about("Replay history from Duck onto a single project git repository")
@@ -119,9 +94,6 @@ fn main() {
     }
 
     let result = match matches.subcommand() {
-        Some(("cargo-test", subcommand_matches)) => {
-            cargo_test::command_cargo_test(dry_run, log_level, subcommand_matches)
-        }
         Some(("repo-history", subcommand_matches)) => {
             repo_history::command_repo_history(&mut io, dry_run, log_level, subcommand_matches)
         }

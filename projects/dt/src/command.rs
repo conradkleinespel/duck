@@ -1,11 +1,9 @@
 use std::io;
-use std::path::{Path, PathBuf};
+use std::path::Path;
 use std::process::{Command, Stdio};
 
-use clap::ArgMatches;
 use log::LevelFilter;
 
-pub mod cargo_test;
 pub mod repo_history;
 
 fn rsync_files(src: &Path, dest: &Path, log_level: LevelFilter, dry_run: bool) -> io::Result<()> {
@@ -42,8 +40,4 @@ fn rsync_files(src: &Path, dest: &Path, log_level: LevelFilter, dry_run: bool) -
         .arg(dest_str);
 
     rsync_command.status().map(|_| ())
-}
-
-fn arg_to_pathbuf(args: &ArgMatches, arg: &str) -> io::Result<PathBuf> {
-    std::fs::canonicalize(args.value_of(arg).unwrap())
 }
