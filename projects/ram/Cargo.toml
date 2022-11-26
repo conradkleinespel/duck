@@ -1,6 +1,6 @@
 [package]
 name = "ram"
-version = "7.0.3"
+version = "8.0.0"
 authors = ["Conrad Kleinespel <conradk@conradk.com>"]
 description = "A library that helps to parse source code with finite state machines"
 license = "Apache-2.0"

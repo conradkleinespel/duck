@@ -10,7 +10,7 @@ Add `ram` as a dependency in Cargo.toml:
 
 ```toml
 [dependencies]
-ram = "7.0"
+ram = "8.0"
 ```
 
 See examples and docs at [https://docs.rs/ram](https://docs.rs/ram).
