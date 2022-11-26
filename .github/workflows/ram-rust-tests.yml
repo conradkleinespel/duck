@@ -3,7 +3,8 @@ name: ram rust tests
 on:
   pull_request:
     paths:
-      - "projects/ram/**"
+      - "projects/ram/**.toml"
+      - "projects/ram/**.rs"
 
 jobs:
   rust-linux-tests:

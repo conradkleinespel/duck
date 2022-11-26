@@ -3,7 +3,16 @@ name: dt rust tests
 on:
   pull_request:
     paths:
-      - "projects/dt/**"
+      - "projects/dt/**.toml"
+      - "projects/dt/**.rs"
+      - "projects/rclio/**.toml"
+      - "projects/rclio/**.rs"
+      - "projects/rpassword/**.toml"
+      - "projects/rpassword/**.rs"
+      - "projects/rprompt/**.toml"
+      - "projects/rprompt/**.rs"
+      - "projects/rutil/**.toml"
+      - "projects/rutil/**.rs"
 
 jobs:
   rust-linux-tests:

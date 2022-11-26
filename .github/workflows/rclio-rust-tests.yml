@@ -3,10 +3,14 @@ name: rclio rust tests
 on:
   pull_request:
     paths:
-      - "projects/rclio/**"
-      - "projects/rprompt/**"
-      - "projects/rpassword/**"
-      - "projects/rutil/**"
+      - "projects/rclio/**.toml"
+      - "projects/rclio/**.rs"
+      - "projects/rprompt/**.toml"
+      - "projects/rprompt/**.rs"
+      - "projects/rpassword/**.toml"
+      - "projects/rpassword/**.rs"
+      - "projects/rutil/**.toml"
+      - "projects/rutil/**.rs"
 
 jobs:
   linux:

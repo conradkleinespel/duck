@@ -3,8 +3,10 @@ name: rprompt rust tests
 on:
   pull_request:
     paths:
-      - "projects/rprompt/**"
-      - "projects/rutil/**"
+      - "projects/rprompt/**.toml"
+      - "projects/rprompt/**.rs"
+      - "projects/rutil/**.toml"
+      - "projects/rutil/**.rs"
 
 jobs:
   rust-linux-tests:

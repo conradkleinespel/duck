@@ -3,7 +3,8 @@ name: rutil rust tests
 on:
   pull_request:
     paths:
-      - "projects/rutil/**"
+      - "projects/rutil/**.toml"
+      - "projects/rutil/**.rs"
 
 jobs:
   rust-linux-tests:
