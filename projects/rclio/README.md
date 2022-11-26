@@ -1,6 +1,6 @@
 # Rustastic Cli Input Output
 
-`rclio` makes input and output easy in CLI applications. There are no backwards compatibility guarantees at all and this crate is not published to crates.io.
+`rclio` contains utility functions I use in other projects. There are no backwards compatibility guarantees at all.
 
 ## License
 
