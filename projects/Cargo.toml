@@ -6,5 +6,5 @@ members = [
     "rooster",
     "rpassword",
     "rprompt",
-    "rutil",
+    "rtoolbox",
 ]

@@ -5,8 +5,8 @@ on:
     paths:
       - "projects/rprompt/**.toml"
       - "projects/rprompt/**.rs"
-      - "projects/rutil/**.toml"
-      - "projects/rutil/**.rs"
+      - "projects/rtoolbox/**.toml"
+      - "projects/rtoolbox/**.rs"
 
 jobs:
   rust-linux-tests:

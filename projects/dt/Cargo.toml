@@ -20,6 +20,3 @@ serde_json = "1.0"
 libc = "0.2"
 ansi_term = "0.12"
 rclio = { path = "../rclio" }
-rpassword = { path = "../rpassword" }
-rprompt = { path = "../rprompt" }
-rutil = { path = "../rutil" }

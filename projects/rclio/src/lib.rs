@@ -4,8 +4,8 @@ use rpassword::{
     prompt_password, prompt_password_from_bufread, read_password, read_password_from_bufread,
 };
 use rprompt::{prompt_reply, prompt_reply_from_bufread, read_reply, read_reply_from_bufread};
-use rutil::atty;
-use rutil::safe_string::SafeString;
+use rtoolbox::atty;
+use rtoolbox::safe_string::SafeString;
 use std::io::Result as IoResult;
 use std::io::{Cursor, StderrLock, StdinLock, StdoutLock, Write};
 

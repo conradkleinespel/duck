@@ -9,8 +9,8 @@ on:
       - "projects/rprompt/**.rs"
       - "projects/rpassword/**.toml"
       - "projects/rpassword/**.rs"
-      - "projects/rutil/**.toml"
-      - "projects/rutil/**.rs"
+      - "projects/rtoolbox/**.toml"
+      - "projects/rtoolbox/**.rs"
 
 jobs:
   linux:
