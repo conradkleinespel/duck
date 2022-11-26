@@ -47,25 +47,21 @@ fn main() {
                 .arg(
                     Arg::new("duck-repo")
                         .long("duck-repo")
-                        .takes_value(true)
                         .help("HTTPS url to Duck's Git repository"),
                 )
                 .arg(
                     Arg::new("duck-branch")
                         .long("duck-branch")
-                        .takes_value(true)
                         .help("Name of the branch to checkout for Duck before syncing"),
                 )
                 .arg(
                     Arg::new("project-repo")
                         .long("project-repo")
-                        .takes_value(true)
                         .help("HTTPS url to the single project repository"),
                 )
                 .arg(
                     Arg::new("project-branch")
                         .long("project-branch")
-                        .takes_value(true)
                         .help("Name of the branch to checkout for the project before syncing"),
                 )
                 .arg(

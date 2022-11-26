@@ -9,7 +9,7 @@ homepage = "https://github.com/conradkleinespel/duck"
 description = "Tools to manage the duck repository"
 
 [dependencies]
-clap = "3.2"
+clap = "4.0"
 chrono = "0.4"
 log = "0.4"
 env_logger = "0.9"
