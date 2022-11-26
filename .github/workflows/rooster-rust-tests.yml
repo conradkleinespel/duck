@@ -3,10 +3,16 @@ name: rooster rust tests
 on:
   pull_request:
     paths:
-      - "projects/rooster/**"
-      - "projects/rpassword/**"
-      - "projects/rclio/**"
-      - "projects/rutil/**"
+      - "projects/rooster/**.toml"
+      - "projects/rooster/**.rs"
+      - "projects/rclio/**.toml"
+      - "projects/rclio/**.rs"
+      - "projects/rpassword/**.toml"
+      - "projects/rpassword/**.rs"
+      - "projects/rprompt/**.toml"
+      - "projects/rprompt/**.rs"
+      - "projects/rutil/**.toml"
+      - "projects/rutil/**.rs"
 
 jobs:
   rust-linux-tests:

@@ -5,8 +5,16 @@ on:
     branches:
       - master
     paths:
-      - "projects/rooster/**"
-      - "projects/rpassword/**"
+      - "projects/rooster/**.toml"
+      - "projects/rooster/**.rs"
+      - "projects/rclio/**.toml"
+      - "projects/rclio/**.rs"
+      - "projects/rpassword/**.toml"
+      - "projects/rpassword/**.rs"
+      - "projects/rprompt/**.toml"
+      - "projects/rprompt/**.rs"
+      - "projects/rutil/**.toml"
+      - "projects/rutil/**.rs"
 
 jobs:
   docker-build-tests:
