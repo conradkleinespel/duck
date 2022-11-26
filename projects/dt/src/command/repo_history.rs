@@ -1,13 +1,12 @@
 use crate::command::rsync_files;
-use crate::rclio::{CliInputOutput, RegularInputOutput};
 use chrono::NaiveDateTime;
 use clap::ArgMatches;
 use git2::build::CheckoutBuilder;
 use git2::{
-    Cred, Error, FetchOptions, IndexAddOption, PushOptions,
-    RemoteCallbacks, Repository, Signature, Sort,
+    Cred, Error, FetchOptions, IndexAddOption, PushOptions, RemoteCallbacks, Repository, Sort,
 };
 use log::LevelFilter;
+use rclio::{CliInputOutput, RegularInputOutput};
 use std::borrow::Borrow;
 use std::path::{Path, PathBuf};
 use std::time::Duration;
@@ -163,7 +162,7 @@ fn replay_all_commits(
             .revparse_single(remote_project_branch_refspec.as_str())
             .unwrap()
             .as_commit(),
-        NaiveDateTime::from_timestamp(project_repo_last_commit_time, 0)
+        NaiveDateTime::from_timestamp_opt(project_repo_last_commit_time, 0)
     );
 
     let commits = revwalk.filter_map(|oid| {
@@ -204,7 +203,7 @@ fn replay_all_commits(
                 project_name_in_duck,
                 commit.id(),
                 commit.message(),
-                NaiveDateTime::from_timestamp(commit.time().seconds(), 0)
+                NaiveDateTime::from_timestamp_opt(commit.time().seconds(), 0)
             );
             return None;
         }
@@ -264,7 +263,7 @@ fn replay_all_commits(
         log::info!(
             "apply commit {:?} with time {:?}",
             commit,
-            NaiveDateTime::from_timestamp(commit.time().seconds(), 0)
+            NaiveDateTime::from_timestamp_opt(commit.time().seconds(), 0)
         );
 
         project_repo

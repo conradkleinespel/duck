@@ -11,8 +11,6 @@
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
 
-#![cfg_attr(unix, no_std)]
-
 #[cfg(windows)]
 use winapi::shared::minwindef::DWORD;
 #[cfg(windows)]

@@ -9,6 +9,9 @@ publish = false
 ansi_term = "0.12"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
+rpassword = { path = "../rpassword" }
+rprompt = { path = "../rprompt" }
+rutil = { path = "../rutil" }
 
 [target.'cfg(unix)'.dependencies.libc]
 version = "0.2"

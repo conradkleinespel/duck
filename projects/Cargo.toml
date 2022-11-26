@@ -1,0 +1,10 @@
+[workspace]
+members = [
+    "dt",
+    "ram",
+    "rclio",
+    "rooster",
+    "rpassword",
+    "rprompt",
+    "rutil",
+]

@@ -6,14 +6,6 @@ use log::LevelFilter;
 use command::{cargo_test, repo_history};
 
 mod command;
-#[allow(unused)]
-mod rclio;
-#[allow(unused)]
-mod rpassword;
-#[allow(unused)]
-mod rprompt;
-#[allow(unused)]
-mod rutil;
 mod validation;
 
 fn main() {
