@@ -272,9 +272,6 @@ dependencies = [
  "libc",
  "log",
  "rclio",
- "rpassword",
- "rprompt",
- "rutil",
  "serde",
  "serde_json",
  "tempfile",
@@ -727,7 +724,7 @@ dependencies = [
  "libc",
  "rpassword",
  "rprompt",
- "rutil",
+ "rtoolbox",
  "serde",
  "serde_json",
  "winapi",
@@ -799,9 +796,7 @@ dependencies = [
  "openssl",
  "rand",
  "rclio",
- "rpassword",
- "rprompt",
- "rutil",
+ "rtoolbox",
  "serde",
  "serde_json",
  "tempfile",
@@ -812,7 +807,7 @@ name = "rpassword"
 version = "7.2.0"
 dependencies = [
  "libc",
- "rutil",
+ "rtoolbox",
  "winapi",
 ]
 
@@ -821,15 +816,15 @@ name = "rprompt"
 version = "1.0.5"
 dependencies = [
  "libc",
- "rutil",
+ "rtoolbox",
  "serde",
  "serde_json",
  "winapi",
 ]
 
 [[package]]
-name = "rutil"
-version = "0.1.0"
+name = "rtoolbox"
+version = "0.0.1"
 dependencies = [
  "libc",
  "serde",

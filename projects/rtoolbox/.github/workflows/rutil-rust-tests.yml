@@ -1,4 +1,4 @@
-name: rutil rust tests
+name: rtoolbox rust tests
 
 on: pull_request
 
