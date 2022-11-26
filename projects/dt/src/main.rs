@@ -1,6 +1,6 @@
 use std::process::exit;
 
-use clap::{App, AppSettings, Arg};
+use clap::{Arg, ArgAction, Command};
 use log::LevelFilter;
 
 use command::repo_history;
@@ -13,20 +13,22 @@ fn main() {
     let stderr = std::io::stderr();
     let mut io = rclio::RegularInputOutput::new(stdin.lock(), stdout.lock(), stderr.lock());
 
-    let matches = App::new("dt")
-        .global_setting(AppSettings::HelpExpected)
-        .global_setting(AppSettings::DisableHelpSubcommand)
-        .setting(AppSettings::SubcommandRequiredElseHelp)
+    let matches = Command::new("dt")
+        .help_expected(true)
+        .disable_help_subcommand(true)
+        .subcommand_required(true)
+        .arg_required_else_help(true)
         .arg(
             Arg::new("verbose")
                 .long("verbose")
                 .short('v')
                 .help("Prints verbose logs")
                 .global(true)
-                .multiple_occurrences(true),
+                .action(ArgAction::Count),
         )
         .arg(
             Arg::new("dry-run")
+                .action(ArgAction::SetTrue)
                 .long("dry-run")
                 .short('n')
                 .help("Performs a trial run with no changes made")
@@ -35,7 +37,7 @@ fn main() {
         .about("Tools to manage the duck git repository")
         .version(env!("CARGO_PKG_VERSION"))
         .subcommand(
-            App::new("repo-history")
+            Command::new("repo-history")
                 .about("Replay history from Duck onto a single project git repository")
                 .arg(
                     Arg::new("project-name-in-duck")
@@ -45,37 +47,34 @@ fn main() {
                 .arg(
                     Arg::new("duck-repo")
                         .long("duck-repo")
-                        .takes_value(true)
                         .help("HTTPS url to Duck's Git repository"),
                 )
                 .arg(
                     Arg::new("duck-branch")
                         .long("duck-branch")
-                        .takes_value(true)
                         .help("Name of the branch to checkout for Duck before syncing"),
                 )
                 .arg(
                     Arg::new("project-repo")
                         .long("project-repo")
-                        .takes_value(true)
                         .help("HTTPS url to the single project repository"),
                 )
                 .arg(
                     Arg::new("project-branch")
                         .long("project-branch")
-                        .takes_value(true)
                         .help("Name of the branch to checkout for the project before syncing"),
                 )
                 .arg(
                     Arg::new("skip-time-filter")
+                        .action(ArgAction::SetTrue)
                         .long("skip-time-filter")
                         .help("Skips commit time filter, useful to initialize a repository"),
                 ),
         )
         .get_matches();
 
-    let dry_run = matches.is_present("dry-run");
-    let verbose = matches.occurrences_of("verbose");
+    let dry_run = matches.get_flag("dry-run");
+    let verbose = matches.get_count("verbose");
     let log_level = if verbose >= 3 {
         LevelFilter::Trace
     } else if verbose >= 2 {
