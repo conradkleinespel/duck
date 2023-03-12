@@ -3,7 +3,7 @@ name = "rtoolbox"
 version = "0.0.1"
 description = "Utility functions for other crates, no backwards compatibility guarantees."
 authors = ["Conrad Kleinespel <conradk@conradk.com>"]
-license = "Apache-2.0"
+license = "Apache-2.0 AND MIT"
 edition = "2018"
 
 [features]
