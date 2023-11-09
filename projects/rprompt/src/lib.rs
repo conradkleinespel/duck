@@ -89,4 +89,3 @@ fn get_tty_reader() -> std::io::Result<impl BufRead> {
         std::fs::File::from_raw_handle(handle)
     }))
 }
-

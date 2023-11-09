@@ -18,21 +18,27 @@ pub fn command_repo_history(
     subcommand_matches: &ArgMatches,
 ) -> std::result::Result<(), String> {
     let duck_repo_url = subcommand_matches
-        .get_one::<String>("duck-repo").map(|s| s.to_string())
+        .get_one::<String>("duck-repo")
+        .map(|s| s.to_string())
         .unwrap_or("https://github.com/conradkleinespel/duck.git".to_string());
     let duck_branch = subcommand_matches
-        .get_one::<String>("duck-branch").map(|s| s.to_string())
+        .get_one::<String>("duck-branch")
+        .map(|s| s.to_string())
         .unwrap_or("master".to_string());
-    let project_name_in_duck = subcommand_matches.get_one::<String>("project-name-in-duck").unwrap();
+    let project_name_in_duck = subcommand_matches
+        .get_one::<String>("project-name-in-duck")
+        .unwrap();
     let default_project_repo_url = format!(
         "https://github.com/conradkleinespel/{}.git",
         project_name_in_duck
     );
     let project_repo_url = subcommand_matches
-        .get_one::<String>("project-repo").map(|s| s.to_string())
+        .get_one::<String>("project-repo")
+        .map(|s| s.to_string())
         .unwrap_or(default_project_repo_url.as_str().to_string());
     let project_branch = subcommand_matches
-        .get_one::<String>("project-branch").map(|s| s.to_string())
+        .get_one::<String>("project-branch")
+        .map(|s| s.to_string())
         .unwrap_or("master".to_string());
     let skip_time_filter = subcommand_matches.get_flag("skip-time-filter");
 
@@ -47,7 +53,8 @@ pub fn command_repo_history(
     let (git_username, git_password) = get_username_and_password(io).unwrap();
 
     log::info!("cloning {}", duck_repo_url);
-    let mut duck_repo = git2::Repository::clone(duck_repo_url.as_str(), duck_path.as_path()).unwrap();
+    let mut duck_repo =
+        git2::Repository::clone(duck_repo_url.as_str(), duck_path.as_path()).unwrap();
     checkout_branch(
         &mut duck_repo,
         duck_branch.as_str(),
