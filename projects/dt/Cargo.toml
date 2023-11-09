@@ -14,7 +14,7 @@ chrono = "0.4"
 log = "0.4"
 env_logger = "0.10"
 tempfile = "3.1"
-git2 = "0.15"
+git2 = "0.18"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 libc = "0.2"
