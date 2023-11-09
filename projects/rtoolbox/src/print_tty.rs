@@ -29,11 +29,10 @@ mod windows {
     use std::io::Write;
     use std::os::windows::io::FromRawHandle;
     use windows_sys::core::PCSTR;
-    use windows_sys::Win32::Foundation::INVALID_HANDLE_VALUE;
+    use windows_sys::Win32::Foundation::{GENERIC_READ, GENERIC_WRITE, INVALID_HANDLE_VALUE};
     use windows_sys::Win32::Storage::FileSystem::{
         CreateFileA, FILE_SHARE_READ, FILE_SHARE_WRITE, OPEN_EXISTING,
     };
-    use windows_sys::Win32::System::SystemServices::{GENERIC_READ, GENERIC_WRITE};
 
     /// Displays a message on the TTY
     pub fn print_tty(prompt: impl ToString) -> std::io::Result<()> {
