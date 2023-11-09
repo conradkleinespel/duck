@@ -28,28 +28,31 @@ mod unix {
 mod windows {
     use std::io::Write;
     use std::os::windows::io::FromRawHandle;
-    use winapi::um::fileapi::{CreateFileA, OPEN_EXISTING};
-    use winapi::um::handleapi::INVALID_HANDLE_VALUE;
-    use winapi::um::winnt::{FILE_SHARE_READ, FILE_SHARE_WRITE, GENERIC_READ, GENERIC_WRITE};
+    use windows_sys::core::PCSTR;
+    use windows_sys::Win32::Foundation::INVALID_HANDLE_VALUE;
+    use windows_sys::Win32::Storage::FileSystem::{
+        CreateFileA, FILE_SHARE_READ, FILE_SHARE_WRITE, OPEN_EXISTING,
+    };
+    use windows_sys::Win32::System::SystemServices::{GENERIC_READ, GENERIC_WRITE};
 
     /// Displays a message on the TTY
     pub fn print_tty(prompt: impl ToString) -> std::io::Result<()> {
         let handle = unsafe {
             CreateFileA(
-                b"CONOUT$\x00".as_ptr() as *const i8,
+                b"CONOUT$\x00".as_ptr() as PCSTR,
                 GENERIC_READ | GENERIC_WRITE,
                 FILE_SHARE_READ | FILE_SHARE_WRITE,
-                std::ptr::null_mut(),
+                std::ptr::null(),
                 OPEN_EXISTING,
                 0,
-                std::ptr::null_mut(),
+                INVALID_HANDLE_VALUE,
             )
         };
         if handle == INVALID_HANDLE_VALUE {
             return Err(std::io::Error::last_os_error());
         }
 
-        let mut stream = unsafe { std::fs::File::from_raw_handle(handle) };
+        let mut stream = unsafe { std::fs::File::from_raw_handle(handle as _) };
 
         stream
             .write_all(prompt.to_string().as_str().as_bytes())

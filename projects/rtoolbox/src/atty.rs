@@ -12,9 +12,10 @@
 // included in all copies or substantial portions of the Software.
 
 #[cfg(windows)]
-use winapi::shared::minwindef::DWORD;
+use windows_sys::Win32::System::Console::STD_HANDLE;
+
 #[cfg(windows)]
-use winapi::shared::ntdef::WCHAR;
+type WCHAR = u16;
 
 /// possible stream sources
 #[derive(Clone, Copy, Debug)]
@@ -49,7 +50,7 @@ pub fn is(stream: Stream) -> bool {
 /// returns true if this is a tty
 #[cfg(windows)]
 pub fn is(stream: Stream) -> bool {
-    use winapi::um::winbase::{
+    use windows_sys::Win32::System::Console::{
         STD_ERROR_HANDLE as STD_ERROR, STD_INPUT_HANDLE as STD_INPUT,
         STD_OUTPUT_HANDLE as STD_OUTPUT,
     };
@@ -85,8 +86,8 @@ pub fn isnt(stream: Stream) -> bool {
 
 /// Returns true if any of the given fds are on a console.
 #[cfg(windows)]
-unsafe fn console_on_any(fds: &[DWORD]) -> bool {
-    use winapi::um::{consoleapi::GetConsoleMode, processenv::GetStdHandle};
+unsafe fn console_on_any(fds: &[STD_HANDLE]) -> bool {
+    use windows_sys::Win32::System::Console::{GetConsoleMode, GetStdHandle};
 
     for &fd in fds {
         let mut out = 0;
@@ -100,20 +101,17 @@ unsafe fn console_on_any(fds: &[DWORD]) -> bool {
 
 /// Returns true if there is an MSYS tty on the given handle.
 #[cfg(windows)]
-unsafe fn msys_tty_on(fd: DWORD) -> bool {
+unsafe fn msys_tty_on(fd: STD_HANDLE) -> bool {
+    use std::os::raw::c_void;
     use std::{mem, slice};
 
-    use winapi::{
-        ctypes::c_void,
-        shared::minwindef::MAX_PATH,
-        um::{
-            fileapi::FILE_NAME_INFO, minwinbase::FileNameInfo, processenv::GetStdHandle,
-            winbase::GetFileInformationByHandleEx,
-        },
-    };
+    use windows_sys::Win32::Foundation::MAX_PATH;
+    use windows_sys::Win32::Storage::FileSystem::GetFileInformationByHandleEx;
+    use windows_sys::Win32::Storage::FileSystem::{FileNameInfo, FILE_NAME_INFO};
+    use windows_sys::Win32::System::Console::GetStdHandle;
 
     let size = mem::size_of::<FILE_NAME_INFO>();
-    let mut name_info_bytes = vec![0u8; size + MAX_PATH * mem::size_of::<WCHAR>()];
+    let mut name_info_bytes = vec![0u8; size + MAX_PATH as usize * mem::size_of::<WCHAR>()];
     let res = GetFileInformationByHandleEx(
         GetStdHandle(fd),
         FileNameInfo,
