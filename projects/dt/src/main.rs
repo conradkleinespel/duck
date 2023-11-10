@@ -3,9 +3,7 @@ use std::process::exit;
 use clap::{Arg, ArgAction, Command};
 use log::LevelFilter;
 
-use command::repo_history;
-
-mod command;
+pub mod repo_history;
 
 fn main() {
     let stdin = std::io::stdin();

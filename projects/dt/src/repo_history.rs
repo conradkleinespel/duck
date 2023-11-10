@@ -1,4 +1,3 @@
-use crate::command::rsync_files;
 use chrono::NaiveDateTime;
 use clap::ArgMatches;
 use git2::build::CheckoutBuilder;
@@ -10,6 +9,8 @@ use rclio::{CliInputOutput, RegularInputOutput};
 use std::borrow::Borrow;
 use std::path::{Path, PathBuf};
 use std::time::Duration;
+use std::io;
+use std::process::{Command, Stdio};
 
 pub fn command_repo_history(
     io: &mut RegularInputOutput,
@@ -331,4 +332,40 @@ fn get_username_and_password(io: &mut RegularInputOutput) -> Result<(String, Str
     });
 
     return Ok((git_username, git_password));
+}
+
+fn rsync_files(src: &Path, dest: &Path, log_level: LevelFilter, dry_run: bool) -> io::Result<()> {
+    // rsync copies directory contents only if a trailing slash is passed
+    let src_str = format!("{}/", src.display().to_string());
+    let dest_str = dest.display().to_string();
+
+    log::info!("rsync {} {}", src_str, dest_str);
+
+    let mut rsync_command = Command::new("rsync");
+
+    if dry_run {
+        rsync_command.arg("--dry-run");
+    }
+
+    if log_level >= LevelFilter::Debug {
+        rsync_command.arg("--verbose").stdout(Stdio::inherit());
+    } else {
+        rsync_command.stdout(Stdio::null());
+    }
+
+    rsync_command
+        .arg("--recursive")
+        .arg("--group")
+        .arg("--owner")
+        .arg("--perms")
+        .arg("--delete")
+        .arg("--exclude=.git/")
+        // subcrates need to be hard-copied for cross to pickup on them
+        .arg("--copy-links")
+        // cargo incremental builds work based on file modification time
+        .arg("--times")
+        .arg(src_str)
+        .arg(dest_str);
+
+    rsync_command.status().map(|_| ())
 }
