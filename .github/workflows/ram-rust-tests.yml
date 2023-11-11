@@ -7,7 +7,7 @@ on:
       - "projects/ram/**.rs"
 
 jobs:
-  rust-linux-tests:
+  linux:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -22,7 +22,7 @@ jobs:
           command: test
           args: --all-targets --all-features --manifest-path projects/ram/Cargo.toml
 
-  rust-windows-tests:
+  windows:
     runs-on: windows-latest
     steps:
       - name: Checkout code

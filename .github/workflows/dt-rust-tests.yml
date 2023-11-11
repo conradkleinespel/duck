@@ -15,7 +15,7 @@ on:
       - "projects/rtoolbox/**.rs"
 
 jobs:
-  rust-linux-tests:
+  linux:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
