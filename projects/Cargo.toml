@@ -7,4 +7,5 @@ members = [
     "rpassword",
     "rprompt",
     "rtoolbox",
+    "rsmtp",
 ]
