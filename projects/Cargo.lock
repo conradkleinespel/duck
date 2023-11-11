@@ -681,7 +681,7 @@ dependencies = [
 
 [[package]]
 name = "rclio"
-version = "0.0.2"
+version = "0.0.3"
 dependencies = [
  "ansi_term",
  "rpassword",
@@ -740,7 +740,7 @@ checksum = "c08c74e62047bb2de4ff487b251e4a92e24f48745648451635cec7d591162d9f"
 
 [[package]]
 name = "rooster"
-version = "2.10.0"
+version = "2.11.0"
 dependencies = [
  "ansi_term",
  "byteorder",
@@ -760,7 +760,7 @@ dependencies = [
 
 [[package]]
 name = "rpassword"
-version = "7.2.0"
+version = "7.3.0"
 dependencies = [
  "libc",
  "rtoolbox",
@@ -769,7 +769,7 @@ dependencies = [
 
 [[package]]
 name = "rprompt"
-version = "2.0.2"
+version = "2.1.0"
 dependencies = [
  "rtoolbox",
  "windows-sys",
@@ -777,7 +777,7 @@ dependencies = [
 
 [[package]]
 name = "rtoolbox"
-version = "0.0.1"
+version = "0.0.2"
 dependencies = [
  "libc",
  "serde",

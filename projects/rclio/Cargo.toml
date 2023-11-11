@@ -1,6 +1,6 @@
 [package]
 name = "rclio"
-version = "0.0.2"
+version = "0.0.3"
 description = "Utility functions for other crates, no backwards compatibility guarantees."
 authors = ["Conrad Kleinespel <conradk@conradk.com>"]
 license = "Apache-2.0"
