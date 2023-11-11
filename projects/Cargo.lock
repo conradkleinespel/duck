@@ -760,7 +760,7 @@ dependencies = [
 
 [[package]]
 name = "rpassword"
-version = "7.3.0"
+version = "7.3.1"
 dependencies = [
  "libc",
  "rtoolbox",
@@ -769,7 +769,7 @@ dependencies = [
 
 [[package]]
 name = "rprompt"
-version = "2.1.0"
+version = "2.1.1"
 dependencies = [
  "rtoolbox",
  "windows-sys",
