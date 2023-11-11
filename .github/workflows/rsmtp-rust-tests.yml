@@ -1,0 +1,40 @@
+name: rpassword rust tests
+
+on:
+  pull_request:
+    paths:
+      - "projects/rpassword/**.toml"
+      - "projects/rpassword/**.rs"
+      - "projects/rtoolbox/**.toml"
+      - "projects/rtoolbox/**.rs"
+
+jobs:
+  rust-linux-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        name: Install rust
+        with:
+          toolchain: stable
+      - uses: actions-rs/cargo@v1
+        name: Run cargo test
+        with:
+          command: test
+          args: --all-targets --all-features --manifest-path projects/rpassword/Cargo.toml
+
+  rust-windows-tests:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        name: Install rust
+        with:
+          toolchain: stable
+      - uses: actions-rs/cargo@v1
+        name: Run cargo test
+        with:
+          command: test
+          args: --all-targets --all-features --manifest-path projects/rpassword/Cargo.toml
