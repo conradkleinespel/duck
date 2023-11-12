@@ -1,0 +1,32 @@
+name: sync mono repo to solo repo
+on: push
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    env:
+      DUCK_USERNAME: conradkleinespel
+      DUCK_PASSWORD: "${{ secrets.DUCK_PASSWORD }}"
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - uses: actions-rs/toolchain@v1
+        name: Install rust
+        with:
+          toolchain: stable
+      - uses: actions-rs/cargo@v1
+        name: Sync duck to rpassword
+        with:
+          command: run
+          args: --manifest-path projects/dt/Cargo.toml -- repo-history rpassword -vvv
+      - uses: actions-rs/cargo@v1
+        name: Sync duck to rprompt
+        with:
+          command: run
+          args: --manifest-path projects/dt/Cargo.toml -- repo-history rprompt -vvv
+      - uses: actions-rs/cargo@v1
+        name: Sync duck to rooster
+        with:
+          command: run
+          args: --manifest-path projects/dt/Cargo.toml -- repo-history rooster -vvv
