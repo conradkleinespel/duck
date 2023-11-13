@@ -3,7 +3,7 @@
 pkgname=rooster
 pkgver=2.9.0
 pkgrel=1
-pkgdesc="A simple password manager for geeks"
+pkgdesc="A simple password manager"
 url="https://github.com/conradkleinespel/rooster"
 makedepends=('cargo' 'pkg-config' 'libx11' 'libxmu' 'python3' 'libsodium' 'openssl')
 depends=('libx11' 'libxmu' 'libsodium' 'openssl' 'xsel' 'wl-clipboard')

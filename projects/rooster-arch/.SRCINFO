@@ -1,5 +1,5 @@
 pkgbase = rooster
-	pkgdesc = A simple password manager for geeks
+	pkgdesc = A simple password manager
 	pkgver = 2.9.0
 	pkgrel = 1
 	url = https://github.com/conradkleinespel/rooster
