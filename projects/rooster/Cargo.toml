@@ -25,7 +25,7 @@ clipboard = "0.5"
 dirs = "5.0"
 openssl = "0.10"
 ansi_term = "0.12"
-clap = "4.0"
+clap = "4.4"
 csv = "1.1"
 tempfile = "3.2"
 rclio = { path = "../rclio", version = "0.0" }
