@@ -212,30 +212,18 @@ fn replay_commit(log_level: LevelFilter, duck_project_path: &Path, project_repo:
     )
         .unwrap();
 
+    if project_repo.diff_index_to_workdir(None, None).unwrap().deltas().len() == 0 {
+        log::info!("skipping empty commit");
+        return false;
+    }
+
     log::info!("adding files to index");
     let mut project_index = project_repo.index().unwrap();
     project_index
         .add_all(["*"].iter(), IndexAddOption::DEFAULT, None)
         .unwrap();
     project_index.write().unwrap();
-
-    let tree = project_repo
-        .find_tree(project_index.write_tree().unwrap())
-        .unwrap();
-    if project_repo
-        .diff_tree_to_tree(
-            Some(last_commit.tree().unwrap().borrow()),
-            Some(&tree),
-            None,
-        )
-        .unwrap()
-        .deltas()
-        .len()
-        == 0
-    {
-        log::info!("skipping empty commit");
-        return false;
-    }
+    let tree = project_index.write_tree().unwrap();
 
     log::info!(
         "apply commit {:?} with time {:?}",
@@ -249,7 +237,7 @@ fn replay_commit(log_level: LevelFilter, duck_project_path: &Path, project_repo:
             commit.author().borrow(),
             commit.committer().borrow(),
             String::from_utf8_lossy(commit.message_bytes()).as_ref(),
-            tree.borrow(),
+            project_repo.find_tree(tree).unwrap().borrow(),
             &[last_commit.borrow()],
         )
         .unwrap();
@@ -323,7 +311,7 @@ fn checkout_branch(
 ) -> Result<(), Error> {
     let mut remote_callbacks = RemoteCallbacks::new();
     remote_callbacks.credentials(|_url, _username_from_url, _allowed_types| {
-        log::info!("authenticating before git-checkout");
+        log::info!("authenticating before git checkout {}", branch);
         Cred::userpass_plaintext(git_username, git_password)
     });
 
@@ -342,6 +330,7 @@ fn checkout_branch(
 
     repo.checkout_tree(&commit_obj, Some(CheckoutBuilder::new().force()))
         .unwrap();
+    repo.set_head(remote_branch_refspec.as_str()).unwrap();
 
     return Ok(());
 }
