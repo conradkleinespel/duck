@@ -4,6 +4,7 @@ use git2::build::CheckoutBuilder;
 use git2::{Commit, Cred, Error, FetchOptions, IndexAddOption, PushOptions, RemoteCallbacks, Repository, Sort};
 use rclio::{CliInputOutput, RegularInputOutput};
 use std::borrow::Borrow;
+use std::collections::VecDeque;
 use std::path::{Path, PathBuf};
 use std::io;
 use std::fs;
@@ -336,24 +337,31 @@ fn get_username_and_password(io: &mut RegularInputOutput) -> Result<(String, Str
 }
 
 fn copy_files(src: &Path, dest: &Path) -> io::Result<()> {
-    if src.is_dir() {
-        if !dest.exists() {
-            fs::create_dir_all(dest)?;
+    let mut dirs_to_process = VecDeque::new();
+    dirs_to_process.push_back((src.to_path_buf(), dest.to_path_buf()));
+
+    while let Some((current_src, current_dest)) = dirs_to_process.pop_front() {
+        if !current_dest.exists() {
+            fs::create_dir_all(&current_dest)?;
         }
 
-        for entry in fs::read_dir(src)? {
+        for entry in fs::read_dir(&current_src)? {
             let entry = entry?;
             let path = entry.path();
+            let relative_path = path.strip_prefix(src).unwrap();
+            let dest_path = dest.join(relative_path);
+
             if path.is_dir() {
                 if path.ends_with(".git") {
                     continue;
                 }
-                copy_files(&path, &dest.join(path.file_name().unwrap()))?;
+                dirs_to_process.push_back((path, dest_path));
             } else {
-                fs::copy(&path, dest.join(path.file_name().unwrap()))?;
+                fs::copy(&path, dest_path)?;
             }
         }
     }
+
     Ok(())
 }
 
@@ -370,10 +378,14 @@ fn remove_extra_files(src: &Path, dest: &Path) -> io::Result<()> {
     Ok(())
 }
 
+
 fn get_all_files(dir: &Path) -> io::Result<Vec<PathBuf>> {
     let mut files = Vec::new();
-    if dir.is_dir() {
-        for entry in fs::read_dir(dir)? {
+    let mut dirs_to_process = VecDeque::new();
+    dirs_to_process.push_back(dir.to_path_buf());
+
+    while let Some(current_dir) = dirs_to_process.pop_front() {
+        for entry in fs::read_dir(&current_dir)? {
             let entry = entry?;
             let path = entry.path();
             if path.is_dir() {
@@ -381,12 +393,13 @@ fn get_all_files(dir: &Path) -> io::Result<Vec<PathBuf>> {
                 if path.file_name().unwrap() == ".git" {
                     continue;
                 }
-                files.extend(get_all_files(&path)?);
+                dirs_to_process.push_back(path);
             } else {
                 files.push(path.strip_prefix(dir).unwrap().to_path_buf());
             }
         }
     }
+
     Ok(files)
 }
 
