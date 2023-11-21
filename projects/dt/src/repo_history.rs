@@ -1,23 +1,18 @@
 use chrono::NaiveDateTime;
 use clap::ArgMatches;
 use git2::build::CheckoutBuilder;
-use git2::{
-    Cred, Error, FetchOptions, IndexAddOption, PushOptions, RemoteCallbacks, Repository, Sort,
-};
-use log::LevelFilter;
+use git2::{Commit, Cred, Error, FetchOptions, IndexAddOption, PushOptions, RemoteCallbacks, Repository, Sort};
 use rclio::{CliInputOutput, RegularInputOutput};
 use std::borrow::Borrow;
 use std::path::{Path, PathBuf};
-use std::time::Duration;
 use std::io;
-use std::process::{Command, Stdio};
+use std::fs;
 
 pub fn command_repo_history(
     io: &mut RegularInputOutput,
     dry_run: bool,
-    log_level: LevelFilter,
     subcommand_matches: &ArgMatches,
-) -> std::result::Result<(), String> {
+) -> Result<(), String> {
     let duck_repo_url = subcommand_matches
         .get_one::<String>("duck-repo")
         .map(|s| s.to_string())
@@ -54,31 +49,31 @@ pub fn command_repo_history(
     let (git_username, git_password) = get_username_and_password(io).unwrap();
 
     log::info!("cloning {}", duck_repo_url);
-    let mut duck_repo =
-        git2::Repository::clone(duck_repo_url.as_str(), duck_path.as_path()).unwrap();
+    let mut duck_repo = Repository::clone(
+        duck_repo_url.as_str(), duck_path.as_path(),
+    ).unwrap();
     checkout_branch(
         &mut duck_repo,
         duck_branch.as_str(),
         git_username.as_str(),
         git_password.as_str(),
     )
-    .unwrap();
+        .unwrap();
     log::info!("cloning {}", project_repo_url);
-    let mut project_repo =
-        git2::Repository::clone(project_repo_url.as_str(), project_path.as_path()).unwrap();
+    let mut project_repo = Repository::clone(
+        project_repo_url.as_str(), project_path.as_path(),
+    ).unwrap();
     checkout_branch(
         &mut project_repo,
         project_branch.as_str(),
         git_username.as_str(),
         git_password.as_str(),
     )
-    .unwrap();
+        .unwrap();
 
     match replay_all_commits(
-        log_level,
         project_name_in_duck,
         &mut duck_repo,
-        duck_path.as_path(),
         &mut project_repo,
         project_branch.as_str(),
         project_path.as_path(),
@@ -93,6 +88,12 @@ pub fn command_repo_history(
         }
     }
 
+    push_replayed_repository_branch(&mut project_repo, git_username, git_password, dry_run);
+
+    Ok(())
+}
+
+fn push_replayed_repository_branch(project_repo: &mut Repository, git_username: String, git_password: String, dry_run: bool) {
     let branch_name = format!(
         "duck-sync-{}",
         project_repo
@@ -104,7 +105,7 @@ pub fn command_repo_history(
             .to_string()
     );
     let push_refspec = format!("refs/heads/master:refs/heads/{}", branch_name);
-    log::info!("pusing refspec {}", push_refspec);
+    log::info!("pushing refspec {}", push_refspec);
     let mut remote_callbacks = RemoteCallbacks::new();
     remote_callbacks.credentials(|_url, _username_from_url, _allowed_types| {
         log::info!("authenticating before git-push");
@@ -127,27 +128,17 @@ pub fn command_repo_history(
             .push(&[push_refspec.as_str()], Some(&mut push_options))
             .unwrap();
     }
-
-    log::info!("check state of branch {}", branch_name);
-
-    Ok(())
 }
 
 fn replay_all_commits(
-    log_level: LevelFilter,
     project_name_in_duck: &str,
     duck_repo: &mut Repository,
-    duck_path: &Path,
     project_repo: &mut Repository,
     project_branch: &str,
     project_path: &Path,
     skip_time_filter: bool,
 ) -> Result<u64, Error> {
     let mut num_commits_replayed = 0;
-
-    let mut revwalk = duck_repo.revwalk().unwrap();
-    revwalk.set_sorting(Sort::TIME | Sort::REVERSE).unwrap();
-    revwalk.push_head().unwrap();
 
     let remote_project_branch_refspec = format!("refs/remotes/origin/{}", project_branch);
 
@@ -173,10 +164,84 @@ fn replay_all_commits(
         NaiveDateTime::from_timestamp_opt(project_repo_last_commit_time, 0)
     );
 
-    let commits = revwalk.filter_map(|oid| {
+    let project_directory = PathBuf::new().join("projects").join(project_name_in_duck);
+    let commits = get_commits_to_replay(
+        duck_repo,
+        project_directory.as_path(),
+        skip_time_filter,
+        project_repo_last_commit_time,
+    );
+
+    for commit in commits {
+        log::info!("checking out commit {} {:?}", commit.id(), commit.message());
+        duck_repo.set_head_detached(commit.id()).unwrap();
+        duck_repo.checkout_head(Some(CheckoutBuilder::new().force())).unwrap();
+
+        if replay_commit(
+            duck_repo.path().parent().unwrap().join("projects").join(project_name_in_duck).as_path(),
+            project_repo,
+            project_path,
+            commit,
+        ) {
+            num_commits_replayed += 1;
+        }
+    }
+
+    Ok(num_commits_replayed)
+}
+
+fn replay_commit(duck_project_path: &Path, project_repo: &mut Repository, project_path: &Path, commit: Commit) -> bool {
+    let last_commit = project_repo.head().unwrap().peel_to_commit().unwrap();
+
+    log::info!("syncing files from duck:{:?} to project:{:?}", duck_project_path, project_path);
+    sync_files(
+        duck_project_path,
+        project_path,
+    )
+        .unwrap();
+
+    if project_repo.diff_index_to_workdir(None, None).unwrap().deltas().len() == 0 {
+        log::info!("skipping empty commit");
+        return false;
+    }
+
+    log::info!("adding files to index");
+    let mut project_index = project_repo.index().unwrap();
+    project_index
+        .add_all(["*"].iter(), IndexAddOption::DEFAULT, None)
+        .unwrap();
+    project_index.write().unwrap();
+    let tree = project_index.write_tree().unwrap();
+
+    log::info!(
+        "apply commit {:?} with time {:?}",
+        commit,
+        NaiveDateTime::from_timestamp_opt(commit.time().seconds(), 0)
+    );
+
+    project_repo
+        .commit(
+            Some("HEAD"),
+            commit.author().borrow(),
+            commit.committer().borrow(),
+            String::from_utf8_lossy(commit.message_bytes()).as_ref(),
+            project_repo.find_tree(tree).unwrap().borrow(),
+            &[last_commit.borrow()],
+        )
+        .unwrap();
+
+    return true;
+}
+
+fn get_commits_to_replay<'a>(duck_repo: &'a Repository, project_directory: &Path, skip_time_filter: bool, project_repo_last_commit_time: i64) -> Vec<Commit<'a>> {
+    let mut revwalk = duck_repo.revwalk().unwrap();
+    revwalk.set_sorting(Sort::TIME | Sort::REVERSE).unwrap();
+    revwalk.push_head().unwrap();
+
+    revwalk.filter_map(|oid| {
         let commit = duck_repo.find_commit(oid.unwrap()).unwrap();
 
-        if commit.parent_count() > 1 {
+        if is_merge_commit(&commit) {
             log::info!(
                 "skipping merge commit {} {:?}",
                 commit.id(),
@@ -185,30 +250,20 @@ fn replay_all_commits(
             return None;
         }
 
-        if commit
-            .tree()
-            .unwrap()
-            .get_path(
-                PathBuf::new()
-                    .join("projects")
-                    .join(project_name_in_duck)
-                    .as_path(),
-            )
-            .is_err()
-        {
+        if commit_edits_directory(project_directory, &commit) {
             log::info!(
-                "skipping commit not containing {} project {} {:?}",
-                project_name_in_duck,
+                "skipping commit without changes in {:?}: {} {:?}",
+                project_directory,
                 commit.id(),
                 commit.message()
             );
             return None;
         }
 
-        if !skip_time_filter && commit.time().seconds() < project_repo_last_commit_time {
+        if !skip_time_filter && commit_is_older_than(project_repo_last_commit_time, &commit) {
             log::info!(
-                "skipping commit earlier than HEAD of {} project {} {:?} {:?}",
-                project_name_in_duck,
+                "skipping commit earlier than HEAD in {:?}: {} {:?} {:?}",
+                project_directory,
                 commit.id(),
                 commit.message(),
                 NaiveDateTime::from_timestamp_opt(commit.time().seconds(), 0)
@@ -217,78 +272,23 @@ fn replay_all_commits(
         }
 
         return Some(commit);
-    });
+    }).collect()
+}
 
-    for commit in commits {
-        let last_commit = project_repo.head().unwrap().peel_to_commit().unwrap();
+fn commit_is_older_than(project_repo_last_commit_time: i64, commit: &Commit) -> bool {
+    commit.time().seconds() < project_repo_last_commit_time
+}
 
-        log::info!("checking out commit {} {:?}", commit.id(), commit.message());
-        duck_repo
-            .checkout_tree(commit.as_object(), Some(CheckoutBuilder::new().force()))
-            .unwrap();
+fn commit_edits_directory(directory: &Path, commit: &Commit) -> bool {
+    commit
+        .tree()
+        .unwrap()
+        .get_path(directory)
+        .is_err()
+}
 
-        // Wait for checkout to complete on local filesystem (no idea why I need this, but it doesn't work otherwise)
-        std::thread::sleep(Duration::from_millis(1000));
-
-        log::info!("syncing files from duck to {}", project_name_in_duck);
-        rsync_files(
-            duck_path
-                .to_path_buf()
-                .join("projects")
-                .join(project_name_in_duck)
-                .as_path(),
-            project_path,
-            log_level,
-            false,
-        )
-        .unwrap();
-
-        log::info!("adding files to index");
-        let mut project_index = project_repo.index().unwrap();
-        project_index
-            .add_all(["*"].iter(), IndexAddOption::DEFAULT, None)
-            .unwrap();
-        project_index.write().unwrap();
-
-        let tree = project_repo
-            .find_tree(project_index.write_tree().unwrap())
-            .unwrap();
-        if project_repo
-            .diff_tree_to_tree(
-                Some(last_commit.tree().unwrap().borrow()),
-                Some(&tree),
-                None,
-            )
-            .unwrap()
-            .deltas()
-            .len()
-            == 0
-        {
-            log::info!("skipping empty commit");
-            continue;
-        }
-
-        log::info!(
-            "apply commit {:?} with time {:?}",
-            commit,
-            NaiveDateTime::from_timestamp_opt(commit.time().seconds(), 0)
-        );
-
-        project_repo
-            .commit(
-                Some("HEAD"),
-                commit.author().borrow(),
-                commit.committer().borrow(),
-                String::from_utf8_lossy(commit.message_bytes()).as_ref(),
-                tree.borrow(),
-                &[last_commit.borrow()],
-            )
-            .map(|_| ())?;
-
-        num_commits_replayed += 1;
-    }
-
-    Ok(num_commits_replayed)
+fn is_merge_commit(commit: &Commit) -> bool {
+    commit.parent_count() > 1
 }
 
 fn checkout_branch(
@@ -299,7 +299,7 @@ fn checkout_branch(
 ) -> Result<(), Error> {
     let mut remote_callbacks = RemoteCallbacks::new();
     remote_callbacks.credentials(|_url, _username_from_url, _allowed_types| {
-        log::info!("authenticating before git-checkout");
+        log::info!("authenticating before git checkout {}", branch);
         Cred::userpass_plaintext(git_username, git_password)
     });
 
@@ -318,6 +318,7 @@ fn checkout_branch(
 
     repo.checkout_tree(&commit_obj, Some(CheckoutBuilder::new().force()))
         .unwrap();
+    repo.set_head(remote_branch_refspec.as_str()).unwrap();
 
     return Ok(());
 }
@@ -334,38 +335,62 @@ fn get_username_and_password(io: &mut RegularInputOutput) -> Result<(String, Str
     return Ok((git_username, git_password));
 }
 
-fn rsync_files(src: &Path, dest: &Path, log_level: LevelFilter, dry_run: bool) -> io::Result<()> {
-    // rsync copies directory contents only if a trailing slash is passed
-    let src_str = format!("{}/", src.display().to_string());
-    let dest_str = dest.display().to_string();
+fn copy_files(src: &Path, dest: &Path) -> io::Result<()> {
+    if src.is_dir() {
+        if !dest.exists() {
+            fs::create_dir_all(dest)?;
+        }
 
-    log::info!("rsync {} {}", src_str, dest_str);
+        for entry in fs::read_dir(src)? {
+            let entry = entry?;
+            let path = entry.path();
+            if path.is_dir() {
+                if path.ends_with(".git") {
+                    continue;
+                }
+                copy_files(&path, &dest.join(path.file_name().unwrap()))?;
+            } else {
+                fs::copy(&path, dest.join(path.file_name().unwrap()))?;
+            }
+        }
+    }
+    Ok(())
+}
 
-    let mut rsync_command = Command::new("rsync");
+fn remove_extra_files(src: &Path, dest: &Path) -> io::Result<()> {
+    let src_files = get_all_files(src)?;
+    let dest_files = get_all_files(dest)?;
 
-    if dry_run {
-        rsync_command.arg("--dry-run");
+    for file in dest_files {
+        if !src_files.contains(&file) {
+            fs::remove_file(dest.join(&file))?;
+        }
     }
 
-    if log_level >= LevelFilter::Debug {
-        rsync_command.arg("--verbose").stdout(Stdio::inherit());
-    } else {
-        rsync_command.stdout(Stdio::null());
+    Ok(())
+}
+
+fn get_all_files(dir: &Path) -> io::Result<Vec<PathBuf>> {
+    let mut files = Vec::new();
+    if dir.is_dir() {
+        for entry in fs::read_dir(dir)? {
+            let entry = entry?;
+            let path = entry.path();
+            if path.is_dir() {
+                // Skip the .git directory
+                if path.file_name().unwrap() == ".git" {
+                    continue;
+                }
+                files.extend(get_all_files(&path)?);
+            } else {
+                files.push(path.strip_prefix(dir).unwrap().to_path_buf());
+            }
+        }
     }
+    Ok(files)
+}
 
-    rsync_command
-        .arg("--recursive")
-        .arg("--group")
-        .arg("--owner")
-        .arg("--perms")
-        .arg("--delete")
-        .arg("--exclude=.git/")
-        // subcrates need to be hard-copied for cross to pickup on them
-        .arg("--copy-links")
-        // cargo incremental builds work based on file modification time
-        .arg("--times")
-        .arg(src_str)
-        .arg(dest_str);
-
-    rsync_command.status().map(|_| ())
+fn sync_files(src: &Path, dest: &Path) -> io::Result<()> {
+    copy_files(src, dest)?;
+    remove_extra_files(src, dest)
 }
