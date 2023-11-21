@@ -92,7 +92,7 @@ fn main() {
 
     let result = match matches.subcommand() {
         Some(("repo-history", subcommand_matches)) => {
-            repo_history::command_repo_history(&mut io, dry_run, log_level, subcommand_matches)
+            repo_history::command_repo_history(&mut io, dry_run, subcommand_matches)
         }
         _ => unimplemented!(),
     };

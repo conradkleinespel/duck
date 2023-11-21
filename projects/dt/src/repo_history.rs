@@ -2,18 +2,15 @@ use chrono::NaiveDateTime;
 use clap::ArgMatches;
 use git2::build::CheckoutBuilder;
 use git2::{Commit, Cred, Error, FetchOptions, IndexAddOption, PushOptions, RemoteCallbacks, Repository, Sort};
-use log::LevelFilter;
 use rclio::{CliInputOutput, RegularInputOutput};
 use std::borrow::Borrow;
 use std::path::{Path, PathBuf};
-use std::time::Duration;
 use std::io;
-use std::process::{Command, Stdio};
+use std::fs;
 
 pub fn command_repo_history(
     io: &mut RegularInputOutput,
     dry_run: bool,
-    log_level: LevelFilter,
     subcommand_matches: &ArgMatches,
 ) -> Result<(), String> {
     let duck_repo_url = subcommand_matches
@@ -75,7 +72,6 @@ pub fn command_repo_history(
         .unwrap();
 
     match replay_all_commits(
-        log_level,
         project_name_in_duck,
         &mut duck_repo,
         &mut project_repo,
@@ -109,7 +105,7 @@ fn push_replayed_repository_branch(project_repo: &mut Repository, git_username: 
             .to_string()
     );
     let push_refspec = format!("refs/heads/master:refs/heads/{}", branch_name);
-    log::info!("pusing refspec {}", push_refspec);
+    log::info!("pushing refspec {}", push_refspec);
     let mut remote_callbacks = RemoteCallbacks::new();
     remote_callbacks.credentials(|_url, _username_from_url, _allowed_types| {
         log::info!("authenticating before git-push");
@@ -135,7 +131,6 @@ fn push_replayed_repository_branch(project_repo: &mut Repository, git_username: 
 }
 
 fn replay_all_commits(
-    log_level: LevelFilter,
     project_name_in_duck: &str,
     duck_repo: &mut Repository,
     project_repo: &mut Repository,
@@ -179,15 +174,10 @@ fn replay_all_commits(
 
     for commit in commits {
         log::info!("checking out commit {} {:?}", commit.id(), commit.message());
-        duck_repo
-            .checkout_tree(commit.as_object(), Some(CheckoutBuilder::new().force()))
-            .unwrap();
-
-        // Wait for checkout to complete on local filesystem (no idea why I need this, but it doesn't work otherwise)
-        std::thread::sleep(Duration::from_millis(1000));
+        duck_repo.set_head_detached(commit.id()).unwrap();
+        duck_repo.checkout_head(Some(CheckoutBuilder::new().force())).unwrap();
 
         if replay_commit(
-            log_level,
             duck_repo.path().parent().unwrap().join("projects").join(project_name_in_duck).as_path(),
             project_repo,
             project_path,
@@ -200,15 +190,13 @@ fn replay_all_commits(
     Ok(num_commits_replayed)
 }
 
-fn replay_commit(log_level: LevelFilter, duck_project_path: &Path, project_repo: &mut Repository, project_path: &Path, commit: Commit) -> bool {
+fn replay_commit(duck_project_path: &Path, project_repo: &mut Repository, project_path: &Path, commit: Commit) -> bool {
     let last_commit = project_repo.head().unwrap().peel_to_commit().unwrap();
 
     log::info!("syncing files from duck:{:?} to project:{:?}", duck_project_path, project_path);
-    rsync_files(
+    sync_files(
         duck_project_path,
         project_path,
-        log_level,
-        false,
     )
         .unwrap();
 
@@ -347,38 +335,62 @@ fn get_username_and_password(io: &mut RegularInputOutput) -> Result<(String, Str
     return Ok((git_username, git_password));
 }
 
-fn rsync_files(src: &Path, dest: &Path, log_level: LevelFilter, dry_run: bool) -> io::Result<()> {
-    // rsync copies directory contents only if a trailing slash is passed
-    let src_str = format!("{}/", src.display().to_string());
-    let dest_str = dest.display().to_string();
+fn copy_files(src: &Path, dest: &Path) -> io::Result<()> {
+    if src.is_dir() {
+        if !dest.exists() {
+            fs::create_dir_all(dest)?;
+        }
 
-    log::info!("rsync {} {}", src_str, dest_str);
+        for entry in fs::read_dir(src)? {
+            let entry = entry?;
+            let path = entry.path();
+            if path.is_dir() {
+                if path.ends_with(".git") {
+                    continue;
+                }
+                copy_files(&path, &dest.join(path.file_name().unwrap()))?;
+            } else {
+                fs::copy(&path, dest.join(path.file_name().unwrap()))?;
+            }
+        }
+    }
+    Ok(())
+}
 
-    let mut rsync_command = Command::new("rsync");
+fn remove_extra_files(src: &Path, dest: &Path) -> io::Result<()> {
+    let src_files = get_all_files(src)?;
+    let dest_files = get_all_files(dest)?;
 
-    if dry_run {
-        rsync_command.arg("--dry-run");
+    for file in dest_files {
+        if !src_files.contains(&file) {
+            fs::remove_file(dest.join(&file))?;
+        }
     }
 
-    if log_level >= LevelFilter::Debug {
-        rsync_command.arg("--verbose").stdout(Stdio::inherit());
-    } else {
-        rsync_command.stdout(Stdio::null());
+    Ok(())
+}
+
+fn get_all_files(dir: &Path) -> io::Result<Vec<PathBuf>> {
+    let mut files = Vec::new();
+    if dir.is_dir() {
+        for entry in fs::read_dir(dir)? {
+            let entry = entry?;
+            let path = entry.path();
+            if path.is_dir() {
+                // Skip the .git directory
+                if path.file_name().unwrap() == ".git" {
+                    continue;
+                }
+                files.extend(get_all_files(&path)?);
+            } else {
+                files.push(path.strip_prefix(dir).unwrap().to_path_buf());
+            }
+        }
     }
+    Ok(files)
+}
 
-    rsync_command
-        .arg("--recursive")
-        .arg("--group")
-        .arg("--owner")
-        .arg("--perms")
-        .arg("--delete")
-        .arg("--exclude=.git/")
-        // subcrates need to be hard-copied for cross to pickup on them
-        .arg("--copy-links")
-        // cargo incremental builds work based on file modification time
-        .arg("--times")
-        .arg(src_str)
-        .arg(dest_str);
-
-    rsync_command.status().map(|_| ())
+fn sync_files(src: &Path, dest: &Path) -> io::Result<()> {
+    copy_files(src, dest)?;
+    remove_extra_files(src, dest)
 }
