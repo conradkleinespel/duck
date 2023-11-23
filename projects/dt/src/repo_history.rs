@@ -1,13 +1,14 @@
 use chrono::NaiveDateTime;
 use clap::ArgMatches;
 use git2::build::CheckoutBuilder;
-use git2::{Commit, Cred, Error, FetchOptions, IndexAddOption, PushOptions, RemoteCallbacks, Repository, Sort};
+use git2::{Commit, Cred, Error, FetchOptions, IndexAddOption, Oid, PushOptions, RemoteCallbacks, Repository, Revwalk, Sort};
 use rclio::{CliInputOutput, RegularInputOutput};
 use std::borrow::Borrow;
 use std::collections::VecDeque;
 use std::path::{Path, PathBuf};
 use std::io;
 use std::fs;
+use std::iter::FilterMap;
 
 pub fn command_repo_history(
     io: &mut RegularInputOutput,
@@ -222,52 +223,70 @@ fn replay_commit(duck_project_path: &Path, project_repo: &mut Repository, projec
             &[last_commit.borrow()],
         )
         .unwrap();
-    project_repo.branch("master", &project_repo.find_commit(new_commit_oid).unwrap(), true);
+    project_repo.branch(
+        "master",
+        &project_repo.find_commit(new_commit_oid).unwrap(),
+        true,
+    ).unwrap();
 
     log::info!("new commit is {}", new_commit_oid);
     return true;
 }
 
-fn get_commits_to_replay<'a>(duck_repo: &'a Repository, project_directory: &Path, skip_time_filter: bool, project_repo_last_commit_time: i64) -> Vec<Commit<'a>> {
+fn get_commits_to_replay<'a>(
+    duck_repo: &'a Repository,
+    project_directory: &'a Path,
+    skip_time_filter: bool,
+    project_repo_last_commit_time: i64
+) -> FilterMap<Revwalk<'a>, Box<dyn FnMut(Result<Oid, Error>) -> Option<Commit<'a>> + 'a>> {
     let mut revwalk = duck_repo.revwalk().unwrap();
     revwalk.set_sorting(Sort::TIME | Sort::REVERSE).unwrap();
     revwalk.push_head().unwrap();
 
-    revwalk.filter_map(|oid| {
+    revwalk.filter_map(Box::new(move |oid| {
         let commit = duck_repo.find_commit(oid.unwrap()).unwrap();
 
-        if is_merge_commit(&commit) {
-            log::info!(
+        filter_commit(
+            commit,
+            project_directory,
+            skip_time_filter,
+            project_repo_last_commit_time,
+        )
+    }))
+}
+
+fn filter_commit<'a>(commit: Commit<'a>, project_directory: &Path, skip_time_filter: bool, project_repo_last_commit_time: i64) -> Option<Commit<'a>> {
+    if is_merge_commit(&commit) {
+        log::info!(
                 "skipping merge commit {} {:?}",
                 commit.id(),
                 commit.message()
             );
-            return None;
-        }
+        return None;
+    }
 
-        if commit_edits_directory(project_directory, &commit) {
-            log::info!(
+    if commit_edits_directory(project_directory, &commit) {
+        log::info!(
                 "skipping commit without changes in {:?}: {} {:?}",
                 project_directory,
                 commit.id(),
                 commit.message()
             );
-            return None;
-        }
+        return None;
+    }
 
-        if !skip_time_filter && commit_is_older_than(project_repo_last_commit_time, &commit) {
-            log::info!(
+    if !skip_time_filter && commit_is_older_than(project_repo_last_commit_time, &commit) {
+        log::info!(
                 "skipping commit earlier than HEAD in {:?}: {} {:?} {:?}",
                 project_directory,
                 commit.id(),
                 commit.message(),
                 NaiveDateTime::from_timestamp_opt(commit.time().seconds(), 0)
             );
-            return None;
-        }
+        return None;
+    }
 
-        return Some(commit);
-    }).collect()
+    return Some(commit);
 }
 
 fn commit_is_older_than(project_repo_last_commit_time: i64, commit: &Commit) -> bool {
