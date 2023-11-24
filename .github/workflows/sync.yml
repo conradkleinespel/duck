@@ -30,3 +30,8 @@ jobs:
         with:
           command: run
           args: --manifest-path projects/dt/Cargo.toml -- repo-history rooster -vvv
+      - uses: actions-rs/cargo@v1
+        name: Sync duck to rooster-arch
+        with:
+          command: run
+          args: --manifest-path projects/dt/Cargo.toml -- repo-history rooster-arch -vvv

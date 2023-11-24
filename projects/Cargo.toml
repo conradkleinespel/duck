@@ -9,3 +9,6 @@ members = [
     "rtoolbox",
     "rsmtp",
 ]
+exclude = [
+    "rooster-arch",
+]
