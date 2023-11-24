@@ -80,12 +80,13 @@ pub fn command_repo_history(
         project_path.as_path(),
         skip_time_filter,
     ) {
-        Err(err) => Result::Err(err).unwrap(),
+        Err(err) => Err(err).unwrap(),
         Ok(num_commits_replayed) => {
             if num_commits_replayed == 0 {
                 log::info!("no commits replayed, skipping git-push");
                 return Ok(());
             }
+            log::info!("{} commits replayed", num_commits_replayed);
         }
     }
 
@@ -95,16 +96,13 @@ pub fn command_repo_history(
 }
 
 fn push_replayed_repository_branch(project_repo: &mut Repository, git_username: String, git_password: String, dry_run: bool) {
-    let branch_name = format!(
-        "duck-sync-{}",
-        project_repo
-            .head()
-            .unwrap()
-            .peel_to_commit()
-            .unwrap()
-            .id()
-            .to_string()
-    );
+    let last_commit_id = project_repo
+        .head()
+        .unwrap()
+        .peel_to_commit()
+        .unwrap()
+        .id();
+    let branch_name = format!("duck-sync-{}", last_commit_id);
     let push_refspec = format!("refs/heads/master:refs/heads/{}", branch_name);
     log::info!("pushing refspec {}", push_refspec);
     let mut remote_callbacks = RemoteCallbacks::new();
@@ -116,18 +114,11 @@ fn push_replayed_repository_branch(project_repo: &mut Repository, git_username: 
     let mut push_options = PushOptions::new();
     push_options.remote_callbacks(remote_callbacks);
 
-    log::info!(
-        "pushing to remote remote {:?} {:?}",
-        project_repo.find_remote("origin").unwrap().name(),
-        project_repo.find_remote("origin").unwrap().url()
-    );
+    let mut remote = project_repo.find_remote("origin").unwrap();
+    log::info!("pushing to remote remote {:?} {:?}", remote.name(), remote.url());
 
     if !dry_run {
-        project_repo
-            .find_remote("origin")
-            .unwrap()
-            .push(&[push_refspec.as_str()], Some(&mut push_options))
-            .unwrap();
+        remote.push(&[push_refspec.as_str()], Some(&mut push_options)).unwrap();
     }
 }
 
@@ -201,12 +192,13 @@ fn replay_commit(duck_project_path: &Path, project_repo: &mut Repository, projec
     )
         .unwrap();
 
-    if project_repo.diff_index_to_workdir(None, None).unwrap().deltas().len() == 0 {
+    let num_deltas = project_repo.diff_index_to_workdir(None, None).unwrap().deltas().len();
+    if num_deltas == 0 {
         log::info!("skipping empty commit");
         return false;
     }
 
-    log::info!("adding files to index");
+    log::info!("there are {} deltas, adding files to index", num_deltas);
     let mut project_index = project_repo.index().unwrap();
     project_index
         .add_all(["*"].iter(), IndexAddOption::DEFAULT, None)
@@ -220,7 +212,7 @@ fn replay_commit(duck_project_path: &Path, project_repo: &mut Repository, projec
         NaiveDateTime::from_timestamp_opt(commit.time().seconds(), 0)
     );
 
-    project_repo
+    let new_commit_oid = project_repo
         .commit(
             Some("HEAD"),
             commit.author().borrow(),
@@ -230,7 +222,9 @@ fn replay_commit(duck_project_path: &Path, project_repo: &mut Repository, projec
             &[last_commit.borrow()],
         )
         .unwrap();
+    project_repo.branch("master", &project_repo.find_commit(new_commit_oid).unwrap(), true);
 
+    log::info!("new commit is {}", new_commit_oid);
     return true;
 }
 
