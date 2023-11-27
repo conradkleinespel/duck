@@ -11,7 +11,7 @@ Bug reports should include instructions for how to reproduce step-by-step, inclu
 If you have the necessary skills, you should always attempt to fix the bug yourself. Whenever possible, you should add a unit or integration test so that we don't accidentally reintroduce the bug later.
 
 ## New features
-R
+
 Before working on a new feature, open an issue to discuss your plans. We'll tell you if we think it falls into the scope of this project, so you only spend time implementing changes we're willing to review and merge.
 
 New features should include unit tests and integration tests if applicable, so that future development don't break your code.
