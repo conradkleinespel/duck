@@ -19,6 +19,7 @@ pub struct RegularInputOutput<'a> {
     stdin_lock: StdinLock<'a>,
     stdout_lock: StdoutLock<'a>,
     stderr_lock: StderrLock<'a>,
+    allow_non_tty: bool,
 }
 
 impl<'a> RegularInputOutput<'a> {
@@ -26,11 +27,13 @@ impl<'a> RegularInputOutput<'a> {
         stdin_lock: StdinLock<'b>,
         stdout_lock: StdoutLock<'b>,
         stderr_lock: StderrLock<'b>,
+        allow_non_tty: bool,
     ) -> RegularInputOutput<'b> {
         RegularInputOutput {
             stdin_lock,
             stdout_lock,
             stderr_lock,
+            allow_non_tty,
         }
     }
 }
@@ -104,7 +107,11 @@ pub trait CliInputOutput {
 impl<'a> CliInputOutput for RegularInputOutput<'a> {
     fn read_line(&mut self) -> IoResult<String> {
         if !atty::is(atty::Stream::Stdin) {
-            panic!("Need a TTY to read password");
+            if !self.allow_non_tty {
+                panic!("Need a TTY to read a line");
+            }
+
+            return read_reply_from_bufread(&mut self.stdin_lock);
         }
 
         read_reply()
@@ -112,7 +119,15 @@ impl<'a> CliInputOutput for RegularInputOutput<'a> {
 
     fn prompt_line(&mut self, prompt: impl ToString) -> IoResult<String> {
         if !atty::is(atty::Stream::Stdin) || !atty::is(atty::Stream::Stdout) {
-            panic!("Need a TTY to read password");
+            if !self.allow_non_tty {
+                panic!("Need a TTY to read a line");
+            }
+
+            return prompt_reply_from_bufread(
+                &mut self.stdin_lock,
+                &mut self.stdout_lock,
+                prompt,
+            );
         }
 
         prompt_reply(prompt)
@@ -120,7 +135,12 @@ impl<'a> CliInputOutput for RegularInputOutput<'a> {
 
     fn read_password(&mut self) -> IoResult<SafeString> {
         if !atty::is(atty::Stream::Stdin) {
-            panic!("Need a TTY to read password");
+            if self.allow_non_tty {
+                panic!("Need a TTY to read password");
+            }
+
+            return read_password_from_bufread(&mut self.stdin_lock)
+                .map(|p| SafeString::from_string(p));
         }
 
         Ok(SafeString::from_string(read_password()?))
@@ -128,7 +148,15 @@ impl<'a> CliInputOutput for RegularInputOutput<'a> {
 
     fn prompt_password(&mut self, prompt: impl ToString) -> IoResult<SafeString> {
         if !atty::is(atty::Stream::Stdin) || !atty::is(atty::Stream::Stdout) {
-            panic!("Need a TTY to read password");
+            if self.allow_non_tty {
+                panic!("Need a TTY to read password");
+            }
+
+            return prompt_password_from_bufread(
+                &mut self.stdin_lock,
+                &mut self.stdout_lock,
+                prompt,
+            ).map(|p| SafeString::from_string(p));
         }
 
         Ok(SafeString::from_string(prompt_password(prompt)?))

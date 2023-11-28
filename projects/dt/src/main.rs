@@ -9,7 +9,12 @@ fn main() {
     let stdin = std::io::stdin();
     let stdout = std::io::stdout();
     let stderr = std::io::stderr();
-    let mut io = rclio::RegularInputOutput::new(stdin.lock(), stdout.lock(), stderr.lock());
+    let mut io = rclio::RegularInputOutput::new(
+        stdin.lock(),
+        stdout.lock(),
+        stderr.lock(),
+        false,
+    );
 
     let matches = Command::new("dt")
         .help_expected(true)
