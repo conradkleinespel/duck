@@ -18,6 +18,5 @@
 //! The goal is to eventually comply with the
 //! [SMTP spec from RFC 5321](http://tools.ietf.org/html/rfc5321).
 
-pub mod client;
 pub mod common;
 pub mod server;

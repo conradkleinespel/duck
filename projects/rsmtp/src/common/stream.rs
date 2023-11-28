@@ -17,8 +17,6 @@
 #[cfg(test)]
 use super::MIN_ALLOWED_LINE_SIZE;
 #[cfg(test)]
-use std::error::Error;
-#[cfg(test)]
 use std::fs::File;
 #[cfg(test)]
 use std::fs::OpenOptions;
@@ -124,8 +122,6 @@ impl<S: Read> InputStream<S> {
         // Remove the last line, since we've used it already by now.
         match self.last_crlf {
             Some(p) => {
-                // TODO: This could probably be optimised by shifting bytes instead
-                // of re-allocating.
                 self.buf = self.buf[p + 2..].to_vec();
                 self.buf.reserve(self.max_line_size);
             }

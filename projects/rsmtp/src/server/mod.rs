@@ -171,11 +171,6 @@ impl<CT, ST> Command<CT, ST> {
             }
         }
     }
-
-    fn ready(&self) -> bool {
-        // TODO: complete this
-        true
-    }
 }
 
 /// An SMTP server configuration.
@@ -230,9 +225,6 @@ pub enum ServerError {
 /// Tells whether an error occured during server setup.
 pub type ServerResult<T> = Result<T, ServerError>;
 
-// TODO: logging, via a Trait on the container?
-// TODO: fatal error handling
-
 impl<CT: 'static + Send + Sync + Clone> Server<CT> {
     /// Creates a new SMTP server.
     ///
@@ -254,18 +246,18 @@ impl<CT: 'static + Send + Sync + Clone> Server<CT> {
         }
     }
 
-    fn set_hostname(&mut self, hostname: &str) {
+    pub fn set_hostname(&mut self, hostname: &str) {
         self.config.hostname = hostname.to_owned();
     }
 
-    fn set_max_recipients(&mut self, max: usize) {
+    pub fn set_max_recipients(&mut self, max: usize) {
         if max < 100 {
             panic!("Maximum number of recipients must be >= 100.");
         }
         self.config.max_recipients = max;
     }
 
-    fn set_max_message_size(&mut self, max: usize) {
+    pub fn set_max_message_size(&mut self, max: usize) {
         if max < 65536 {
             panic!("Maximum message size must be >= 65536.");
         }
@@ -277,14 +269,11 @@ impl<CT: 'static + Send + Sync + Clone> Server<CT> {
         self.config.commands.push(command);
     }
 
-    // TODO: allow saying which extensions are supported by this server
-    // for use in EHLO response.
-
-    fn increase_max_command_line_size(&mut self, bytes: usize) {
+    pub fn increase_max_command_line_size(&mut self, bytes: usize) {
         self.config.max_command_line_size += bytes;
     }
 
-    fn increase_max_text_line_size(&mut self, bytes: usize) {
+    pub fn increase_max_text_line_size(&mut self, bytes: usize) {
         self.config.max_text_line_size += bytes;
     }
 
@@ -322,9 +311,6 @@ impl<CT: 'static + Send + Sync + Clone> Server<CT> {
                     // Also, we need to make this an owned string because
                     // the stream uses the same buffer for command lines and
                     // text lines.
-                    //
-                    // TODO: use a different buffer for text lines and command
-                    // lines?
                     String::from_utf8_lossy(buffer).into_owned()
                 }
                 Err(err) => {
@@ -348,7 +334,6 @@ impl<CT: 'static + Send + Sync + Clone> Server<CT> {
                                     next.call(config, container, input, output, &ls[start.len()..]);
                                 }
                                 None => {
-                                    // TODO: improve error message
                                     panic!("Found a command with no middleware");
                                 }
                             }
@@ -356,7 +341,6 @@ impl<CT: 'static + Send + Sync + Clone> Server<CT> {
                         }
                     }
                     None => {
-                        // TODO: improve error message
                         panic!("Found a command with no start string");
                     }
                 }
@@ -402,9 +386,6 @@ impl<CT: 'static + Send + Sync + Clone> Server<CT> {
 
     /// Start the SMTP server on the given address and port.
     pub fn listen(&mut self, ip: IpAddr, port: u16) -> ServerResult<()> {
-        // TODO: check that commands all are valid, meaning they have at least
-        // a key word (ie HELO) and at least 1 middleware.
-
         if self.config.hostname.len() == 0 {
             self.config.hostname = self.get_hostname_from_system()?;
         }
