@@ -3,50 +3,33 @@
 
 //! Date and time formatting routines.
 
-#[cfg(feature = "alloc")]
+#[cfg(all(feature = "alloc", not(feature = "std"), not(test)))]
 use alloc::string::{String, ToString};
-#[cfg(any(feature = "alloc", feature = "std"))]
+#[cfg(feature = "alloc")]
 use core::borrow::Borrow;
-use core::fmt;
-use core::fmt::Write;
+#[cfg(feature = "alloc")]
+use core::fmt::Display;
+use core::fmt::{self, Write};
 
-#[cfg(any(
-    feature = "alloc",
-    feature = "std",
-    feature = "serde",
-    feature = "rustc-serialize"
-))]
-use crate::datetime::SecondsFormat;
-#[cfg(any(feature = "alloc", feature = "std"))]
+#[cfg(feature = "alloc")]
 use crate::offset::Offset;
-#[cfg(any(
-    feature = "alloc",
-    feature = "std",
-    feature = "serde",
-    feature = "rustc-serialize"
-))]
+#[cfg(any(feature = "alloc", feature = "serde", feature = "rustc-serialize"))]
 use crate::{Datelike, FixedOffset, NaiveDateTime, Timelike};
-#[cfg(any(feature = "alloc", feature = "std"))]
+#[cfg(feature = "alloc")]
 use crate::{NaiveDate, NaiveTime, Weekday};
 
-#[cfg(any(feature = "alloc", feature = "std"))]
+#[cfg(feature = "alloc")]
 use super::locales;
-#[cfg(any(
-    feature = "alloc",
-    feature = "std",
-    feature = "serde",
-    feature = "rustc-serialize"
-))]
+#[cfg(any(feature = "alloc", feature = "serde", feature = "rustc-serialize"))]
 use super::{Colons, OffsetFormat, OffsetPrecision, Pad};
-#[cfg(any(feature = "alloc", feature = "std"))]
-use super::{Fixed, InternalFixed, InternalInternal, Item, Locale, Numeric};
-#[cfg(any(feature = "alloc", feature = "std"))]
+#[cfg(feature = "alloc")]
+use super::{Fixed, InternalFixed, InternalInternal, Item, Numeric};
+#[cfg(feature = "alloc")]
 use locales::*;
 
 /// A *temporary* object which can be used as an argument to `format!` or others.
 /// This is normally constructed via `format` methods of each date and time type.
-#[cfg(any(feature = "alloc", feature = "std"))]
-#[cfg_attr(docsrs, doc(cfg(any(feature = "alloc", feature = "std"))))]
+#[cfg(feature = "alloc")]
 #[derive(Debug)]
 pub struct DelayedFormat<I> {
     /// The date view, if any.
@@ -64,7 +47,7 @@ pub struct DelayedFormat<I> {
     locale: Option<Locale>,
 }
 
-#[cfg(any(feature = "alloc", feature = "std"))]
+#[cfg(feature = "alloc")]
 impl<'a, I: Iterator<Item = B> + Clone, B: Borrow<Item<'a>>> DelayedFormat<I> {
     /// Makes a new `DelayedFormat` value out of local date and time.
     #[must_use]
@@ -88,7 +71,7 @@ impl<'a, I: Iterator<Item = B> + Clone, B: Borrow<Item<'a>>> DelayedFormat<I> {
         items: I,
     ) -> DelayedFormat<I>
     where
-        Off: Offset + fmt::Display,
+        Off: Offset + Display,
     {
         let name_and_diff = (offset.to_string(), offset.fix());
         DelayedFormat {
@@ -103,7 +86,6 @@ impl<'a, I: Iterator<Item = B> + Clone, B: Borrow<Item<'a>>> DelayedFormat<I> {
 
     /// Makes a new `DelayedFormat` value out of local date and time and locale.
     #[cfg(feature = "unstable-locales")]
-    #[cfg_attr(docsrs, doc(cfg(feature = "unstable-locales")))]
     #[must_use]
     pub fn new_with_locale(
         date: Option<NaiveDate>,
@@ -116,7 +98,6 @@ impl<'a, I: Iterator<Item = B> + Clone, B: Borrow<Item<'a>>> DelayedFormat<I> {
 
     /// Makes a new `DelayedFormat` value out of local date and time, UTC offset and locale.
     #[cfg(feature = "unstable-locales")]
-    #[cfg_attr(docsrs, doc(cfg(feature = "unstable-locales")))]
     #[must_use]
     pub fn new_with_offset_and_locale<Off>(
         date: Option<NaiveDate>,
@@ -126,38 +107,40 @@ impl<'a, I: Iterator<Item = B> + Clone, B: Borrow<Item<'a>>> DelayedFormat<I> {
         locale: Locale,
     ) -> DelayedFormat<I>
     where
-        Off: Offset + fmt::Display,
+        Off: Offset + Display,
     {
         let name_and_diff = (offset.to_string(), offset.fix());
         DelayedFormat { date, time, off: Some(name_and_diff), items, locale: Some(locale) }
     }
 }
 
-#[cfg(any(feature = "alloc", feature = "std"))]
-impl<'a, I: Iterator<Item = B> + Clone, B: Borrow<Item<'a>>> fmt::Display for DelayedFormat<I> {
+#[cfg(feature = "alloc")]
+impl<'a, I: Iterator<Item = B> + Clone, B: Borrow<Item<'a>>> Display for DelayedFormat<I> {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         #[cfg(feature = "unstable-locales")]
-        {
-            if let Some(locale) = self.locale {
-                return format_localized(
-                    f,
-                    self.date.as_ref(),
-                    self.time.as_ref(),
-                    self.off.as_ref(),
-                    self.items.clone(),
-                    locale,
-                );
-            }
-        }
+        let locale = self.locale;
+        #[cfg(not(feature = "unstable-locales"))]
+        let locale = None;
 
-        format(f, self.date.as_ref(), self.time.as_ref(), self.off.as_ref(), self.items.clone())
+        let mut result = String::new();
+        for item in self.items.clone() {
+            format_inner(
+                &mut result,
+                self.date.as_ref(),
+                self.time.as_ref(),
+                self.off.as_ref(),
+                item.borrow(),
+                locale,
+            )?;
+        }
+        f.pad(&result)
     }
 }
 
 /// Tries to format given arguments with given formatting items.
 /// Internally used by `DelayedFormat`.
-#[cfg(any(feature = "alloc", feature = "std"))]
-#[cfg_attr(docsrs, doc(cfg(any(feature = "alloc", feature = "std"))))]
+#[cfg(feature = "alloc")]
+#[deprecated(since = "0.4.32", note = "Use DelayedFormat::fmt instead")]
 pub fn format<'a, I, B>(
     w: &mut fmt::Formatter,
     date: Option<&NaiveDate>,
@@ -169,15 +152,20 @@ where
     I: Iterator<Item = B> + Clone,
     B: Borrow<Item<'a>>,
 {
-    let mut result = String::new();
-    for item in items {
-        format_inner(&mut result, date, time, off, item.borrow(), None)?;
+    DelayedFormat {
+        date: date.copied(),
+        time: time.copied(),
+        off: off.cloned(),
+        items,
+        #[cfg(feature = "unstable-locales")]
+        locale: None,
     }
-    w.pad(&result)
+    .fmt(w)
 }
+
 /// Formats single formatting item
-#[cfg(any(feature = "alloc", feature = "std"))]
-#[cfg_attr(docsrs, doc(cfg(any(feature = "alloc", feature = "std"))))]
+#[cfg(feature = "alloc")]
+#[deprecated(since = "0.4.32", note = "Use DelayedFormat::fmt instead")]
 pub fn format_item(
     w: &mut fmt::Formatter,
     date: Option<&NaiveDate>,
@@ -185,51 +173,18 @@ pub fn format_item(
     off: Option<&(String, FixedOffset)>,
     item: &Item<'_>,
 ) -> fmt::Result {
-    let mut result = String::new();
-    format_inner(&mut result, date, time, off, item, None)?;
-    w.pad(&result)
-}
-
-/// Tries to format given arguments with given formatting items.
-/// Internally used by `DelayedFormat`.
-#[cfg(feature = "unstable-locales")]
-#[cfg_attr(docsrs, doc(cfg(feature = "unstable-locales")))]
-pub fn format_localized<'a, I, B>(
-    w: &mut fmt::Formatter,
-    date: Option<&NaiveDate>,
-    time: Option<&NaiveTime>,
-    off: Option<&(String, FixedOffset)>,
-    items: I,
-    locale: Locale,
-) -> fmt::Result
-where
-    I: Iterator<Item = B> + Clone,
-    B: Borrow<Item<'a>>,
-{
-    let mut result = String::new();
-    for item in items {
-        format_inner(&mut result, date, time, off, item.borrow(), Some(locale))?;
+    DelayedFormat {
+        date: date.copied(),
+        time: time.copied(),
+        off: off.cloned(),
+        items: [item].into_iter(),
+        #[cfg(feature = "unstable-locales")]
+        locale: None,
     }
-    w.pad(&result)
+    .fmt(w)
 }
 
-/// Formats single formatting item
-#[cfg(feature = "unstable-locales")]
-#[cfg_attr(docsrs, doc(cfg(feature = "unstable-locales")))]
-pub fn format_item_localized(
-    w: &mut fmt::Formatter,
-    date: Option<&NaiveDate>,
-    time: Option<&NaiveTime>,
-    off: Option<&(String, FixedOffset)>,
-    item: &Item<'_>,
-    locale: Locale,
-) -> fmt::Result {
-    let mut result = String::new();
-    format_inner(&mut result, date, time, off, item, Some(locale))?;
-    w.pad(&result)
-}
-
-#[cfg(any(feature = "alloc", feature = "std"))]
+#[cfg(feature = "alloc")]
 fn format_inner(
     w: &mut impl Write,
     date: Option<&NaiveDate>,
@@ -242,7 +197,7 @@ fn format_inner(
 
     match *item {
         Item::Literal(s) | Item::Space(s) => w.write_str(s),
-        #[cfg(any(feature = "alloc", feature = "std"))]
+        #[cfg(feature = "alloc")]
         Item::OwnedLiteral(ref s) | Item::OwnedSpace(ref s) => w.write_str(s),
 
         Item::Numeric(ref spec, ref pad) => {
@@ -274,10 +229,10 @@ fn format_inner(
                 Timestamp => (
                     1,
                     match (date, time, off) {
-                        (Some(d), Some(t), None) => Some(d.and_time(*t).timestamp()),
-                        (Some(d), Some(t), Some(&(_, off))) => {
-                            Some(d.and_time(*t).timestamp() - i64::from(off.local_minus_utc()))
-                        }
+                        (Some(d), Some(t), None) => Some(d.and_time(*t).and_utc().timestamp()),
+                        (Some(d), Some(t), Some(&(_, off))) => Some(
+                            d.and_time(*t).and_utc().timestamp() - i64::from(off.local_minus_utc()),
+                        ),
                         (_, _, _) => None,
                     },
                 ),
@@ -436,7 +391,7 @@ fn format_inner(
                 // same as `%a, %d %b %Y %H:%M:%S %z`
                 {
                     if let (Some(d), Some(t), Some(&(_, off))) = (date, time, off) {
-                        Some(write_rfc2822_inner(w, *d, *t, off, locale))
+                        Some(write_rfc2822(w, crate::NaiveDateTime::new(*d, *t), off))
                     } else {
                         None
                     }
@@ -465,7 +420,7 @@ fn format_inner(
     }
 }
 
-#[cfg(any(feature = "alloc", feature = "std", feature = "serde", feature = "rustc-serialize"))]
+#[cfg(any(feature = "alloc", feature = "serde", feature = "rustc-serialize"))]
 impl OffsetFormat {
     /// Writes an offset from UTC with the format defined by `self`.
     fn format(&self, w: &mut impl Write, off: FixedOffset) -> fmt::Result {
@@ -545,9 +500,37 @@ impl OffsetFormat {
     }
 }
 
+/// Specific formatting options for seconds. This may be extended in the
+/// future, so exhaustive matching in external code is not recommended.
+///
+/// See the `TimeZone::to_rfc3339_opts` function for usage.
+#[derive(Clone, Copy, Debug, Eq, PartialEq, Hash)]
+#[allow(clippy::manual_non_exhaustive)]
+pub enum SecondsFormat {
+    /// Format whole seconds only, with no decimal point nor subseconds.
+    Secs,
+
+    /// Use fixed 3 subsecond digits. This corresponds to [Fixed::Nanosecond3].
+    Millis,
+
+    /// Use fixed 6 subsecond digits. This corresponds to [Fixed::Nanosecond6].
+    Micros,
+
+    /// Use fixed 9 subsecond digits. This corresponds to [Fixed::Nanosecond9].
+    Nanos,
+
+    /// Automatically select one of `Secs`, `Millis`, `Micros`, or `Nanos` to display all available
+    /// non-zero sub-second digits.  This corresponds to [Fixed::Nanosecond].
+    AutoSi,
+
+    // Do not match against this.
+    #[doc(hidden)]
+    __NonExhaustive,
+}
+
 /// Writes the date, time and offset to the string. same as `%Y-%m-%dT%H:%M:%S%.f%:z`
 #[inline]
-#[cfg(any(feature = "alloc", feature = "std", feature = "serde", feature = "rustc-serialize"))]
+#[cfg(any(feature = "alloc", feature = "serde", feature = "rustc-serialize"))]
 pub(crate) fn write_rfc3339(
     w: &mut impl Write,
     dt: NaiveDateTime,
@@ -610,52 +593,42 @@ pub(crate) fn write_rfc3339(
     .format(w, off)
 }
 
-#[cfg(any(feature = "alloc", feature = "std"))]
+#[cfg(feature = "alloc")]
 /// write datetimes like `Tue, 1 Jul 2003 10:52:37 +0200`, same as `%a, %d %b %Y %H:%M:%S %z`
 pub(crate) fn write_rfc2822(
     w: &mut impl Write,
     dt: NaiveDateTime,
     off: FixedOffset,
 ) -> fmt::Result {
-    write_rfc2822_inner(w, dt.date(), dt.time(), off, default_locale())
-}
-
-#[cfg(any(feature = "alloc", feature = "std"))]
-/// write datetimes like `Tue, 1 Jul 2003 10:52:37 +0200`, same as `%a, %d %b %Y %H:%M:%S %z`
-fn write_rfc2822_inner(
-    w: &mut impl Write,
-    d: NaiveDate,
-    t: NaiveTime,
-    off: FixedOffset,
-    locale: Locale,
-) -> fmt::Result {
-    let year = d.year();
+    let year = dt.year();
     // RFC2822 is only defined on years 0 through 9999
     if !(0..=9999).contains(&year) {
         return Err(fmt::Error);
     }
 
-    w.write_str(short_weekdays(locale)[d.weekday().num_days_from_sunday() as usize])?;
+    let english = default_locale();
+
+    w.write_str(short_weekdays(english)[dt.weekday().num_days_from_sunday() as usize])?;
     w.write_str(", ")?;
-    let day = d.day();
+    let day = dt.day();
     if day < 10 {
         w.write_char((b'0' + day as u8) as char)?;
     } else {
         write_hundreds(w, day as u8)?;
     }
     w.write_char(' ')?;
-    w.write_str(short_months(locale)[d.month0() as usize])?;
+    w.write_str(short_months(english)[dt.month0() as usize])?;
     w.write_char(' ')?;
     write_hundreds(w, (year / 100) as u8)?;
     write_hundreds(w, (year % 100) as u8)?;
     w.write_char(' ')?;
 
-    let (hour, min, sec) = t.hms();
+    let (hour, min, sec) = dt.time().hms();
     write_hundreds(w, hour as u8)?;
     w.write_char(':')?;
     write_hundreds(w, min as u8)?;
     w.write_char(':')?;
-    let sec = sec + t.nanosecond() / 1_000_000_000;
+    let sec = sec + dt.nanosecond() / 1_000_000_000;
     write_hundreds(w, sec as u8)?;
     w.write_char(' ')?;
     OffsetFormat {
@@ -680,15 +653,15 @@ pub(crate) fn write_hundreds(w: &mut impl Write, n: u8) -> fmt::Result {
 }
 
 #[cfg(test)]
-#[cfg(any(feature = "alloc", feature = "std"))]
+#[cfg(feature = "alloc")]
 mod tests {
     use super::{Colons, OffsetFormat, OffsetPrecision, Pad};
     use crate::FixedOffset;
-    #[cfg(any(feature = "alloc", feature = "std"))]
+    #[cfg(feature = "alloc")]
     use crate::{NaiveDate, NaiveTime, TimeZone, Timelike, Utc};
 
     #[test]
-    #[cfg(any(feature = "alloc", feature = "std"))]
+    #[cfg(feature = "alloc")]
     fn test_date_format() {
         let d = NaiveDate::from_ymd_opt(2012, 3, 4).unwrap();
         assert_eq!(d.format("%Y,%C,%y,%G,%g").to_string(), "2012,20,12,2012,12");
@@ -733,7 +706,7 @@ mod tests {
     }
 
     #[test]
-    #[cfg(any(feature = "alloc", feature = "std"))]
+    #[cfg(feature = "alloc")]
     fn test_time_format() {
         let t = NaiveTime::from_hms_nano_opt(3, 5, 7, 98765432).unwrap();
         assert_eq!(t.format("%H,%k,%I,%l,%P,%p").to_string(), "03, 3,03, 3,am,AM");
@@ -769,7 +742,7 @@ mod tests {
     }
 
     #[test]
-    #[cfg(any(feature = "alloc", feature = "std"))]
+    #[cfg(feature = "alloc")]
     fn test_datetime_format() {
         let dt =
             NaiveDate::from_ymd_opt(2010, 9, 8).unwrap().and_hms_milli_opt(7, 6, 54, 321).unwrap();
@@ -787,7 +760,7 @@ mod tests {
     }
 
     #[test]
-    #[cfg(any(feature = "alloc", feature = "std"))]
+    #[cfg(feature = "alloc")]
     fn test_datetime_format_alignment() {
         let datetime = Utc
             .with_ymd_and_hms(2007, 1, 2, 12, 34, 56)

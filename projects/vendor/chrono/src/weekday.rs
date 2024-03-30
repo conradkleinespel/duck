@@ -1,6 +1,6 @@
 use core::fmt;
 
-#[cfg(feature = "rkyv")]
+#[cfg(any(feature = "rkyv", feature = "rkyv-16", feature = "rkyv-32", feature = "rkyv-64"))]
 use rkyv::{Archive, Deserialize, Serialize};
 
 use crate::OutOfRange;
@@ -31,8 +31,14 @@ use crate::OutOfRange;
 /// ```
 #[derive(PartialEq, Eq, Copy, Clone, Debug, Hash)]
 #[cfg_attr(feature = "rustc-serialize", derive(RustcEncodable, RustcDecodable))]
-#[cfg_attr(feature = "rkyv", derive(Archive, Deserialize, Serialize))]
-#[cfg_attr(feature = "arbitrary", derive(arbitrary::Arbitrary))]
+#[cfg_attr(
+    any(feature = "rkyv", feature = "rkyv-16", feature = "rkyv-32", feature = "rkyv-64"),
+    derive(Archive, Deserialize, Serialize),
+    archive(compare(PartialEq)),
+    archive_attr(derive(Clone, Copy, PartialEq, Eq, Debug, Hash))
+)]
+#[cfg_attr(feature = "rkyv-validation", archive(check_bytes))]
+#[cfg_attr(all(feature = "arbitrary", feature = "std"), derive(arbitrary::Arbitrary))]
 pub enum Weekday {
     /// Monday.
     Mon = 0,
@@ -117,8 +123,8 @@ impl Weekday {
     ///
     /// # Example
     ///
-    #[cfg_attr(not(feature = "clock"), doc = "```ignore")]
-    #[cfg_attr(feature = "clock", doc = "```rust")]
+    /// ```
+    /// # #[cfg(feature = "clock")] {
     /// # use chrono::{Local, Datelike};
     /// // MTWRFSU is occasionally used as a single-letter abbreviation of the weekdays.
     /// // Use `num_days_from_monday` to index into the array.
@@ -126,6 +132,7 @@ impl Weekday {
     ///
     /// let today = Local::now().weekday();
     /// println!("{}", MTWRFSU[today.num_days_from_monday() as usize]);
+    /// # }
     /// ```
     #[inline]
     pub const fn num_days_from_monday(&self) -> u32 {
@@ -227,7 +234,6 @@ pub struct ParseWeekdayError {
 }
 
 #[cfg(feature = "std")]
-#[cfg_attr(docsrs, doc(cfg(feature = "std")))]
 impl std::error::Error for ParseWeekdayError {}
 
 impl fmt::Display for ParseWeekdayError {
@@ -245,7 +251,6 @@ impl fmt::Debug for ParseWeekdayError {
 // the actual `FromStr` implementation is in the `format` module to leverage the existing code
 
 #[cfg(feature = "serde")]
-#[cfg_attr(docsrs, doc(cfg(feature = "serde")))]
 mod weekday_serde {
     use super::Weekday;
     use core::fmt;
@@ -381,5 +386,14 @@ mod tests {
         for str in errors {
             from_str::<Weekday>(str).unwrap_err();
         }
+    }
+
+    #[test]
+    #[cfg(feature = "rkyv-validation")]
+    fn test_rkyv_validation() {
+        let mon = Weekday::Mon;
+        let bytes = rkyv::to_bytes::<_, 1>(&mon).unwrap();
+
+        assert_eq!(rkyv::from_bytes::<Weekday>(&bytes).unwrap(), mon);
     }
 }

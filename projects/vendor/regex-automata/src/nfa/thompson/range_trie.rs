@@ -141,7 +141,7 @@ construction later by virtue of producing a much much smaller NFA.
 [2] - https://www.mitpressjournals.org/doi/pdfplus/10.1162/089120100561601
 */
 
-use core::{cell::RefCell, convert::TryFrom, fmt, mem, ops::RangeInclusive};
+use core::{cell::RefCell, fmt, mem, ops::RangeInclusive};
 
 use alloc::{format, string::String, vec, vec::Vec};
 
@@ -594,7 +594,7 @@ impl State {
         // Benchmarks suggest that binary search is just a bit faster than
         // straight linear search. Specifically when using the debug tool:
         //
-        //   hyperfine "regex-cli debug thompson -qr --no-captures '\w{90} ecurB'"
+        //   hyperfine "regex-cli debug thompson -qr --captures none '\w{90} ecurB'"
         binary_search(&self.transitions, |t| range.start <= t.range.end)
     }
 
@@ -915,10 +915,6 @@ fn intersects(r1: Utf8Range, r2: Utf8Range) -> bool {
 
 #[cfg(test)]
 mod tests {
-    use core::ops::RangeInclusive;
-
-    use regex_syntax::utf8::Utf8Range;
-
     use super::*;
 
     fn r(range: RangeInclusive<u8>) -> Utf8Range {

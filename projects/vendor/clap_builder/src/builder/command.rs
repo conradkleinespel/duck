@@ -298,6 +298,45 @@ impl Command {
         self
     }
 
+    /// Allows one to mutate an [`ArgGroup`] after it's been added to a [`Command`].
+    ///
+    /// # Panics
+    ///
+    /// If the argument is undefined
+    ///
+    /// # Examples
+    ///
+    /// ```rust
+    /// # use clap_builder as clap;
+    /// # use clap::{Command, arg, ArgGroup};
+    ///
+    /// Command::new("foo")
+    ///     .arg(arg!(--"set-ver" <ver> "set the version manually").required(false))
+    ///     .arg(arg!(--major "auto increase major"))
+    ///     .arg(arg!(--minor "auto increase minor"))
+    ///     .arg(arg!(--patch "auto increase patch"))
+    ///     .group(ArgGroup::new("vers")
+    ///          .args(["set-ver", "major", "minor","patch"])
+    ///          .required(true))
+    ///     .mut_group("vers", |a| a.required(false));
+    /// ```
+    #[must_use]
+    #[cfg_attr(debug_assertions, track_caller)]
+    pub fn mut_group<F>(mut self, arg_id: impl AsRef<str>, f: F) -> Self
+    where
+        F: FnOnce(ArgGroup) -> ArgGroup,
+    {
+        let id = arg_id.as_ref();
+        let index = self
+            .groups
+            .iter()
+            .position(|g| g.get_id() == id)
+            .unwrap_or_else(|| panic!("Group `{id}` is undefined"));
+        let a = self.groups.remove(index);
+
+        self.groups.push(f(a));
+        self
+    }
     /// Allows one to mutate a [`Command`] after it's been added as a subcommand.
     ///
     /// This can be useful for modifying auto-generated arguments of nested subcommands with
@@ -549,7 +588,7 @@ impl Command {
         Error::raw(kind, message).format(self)
     }
 
-    /// Parse [`env::args_os`], exiting on failure.
+    /// Parse [`env::args_os`], [exiting][Error::exit] on failure.
     ///
     /// # Panics
     ///
@@ -571,7 +610,7 @@ impl Command {
         self.get_matches_from(env::args_os())
     }
 
-    /// Parse [`env::args_os`], exiting on failure.
+    /// Parse [`env::args_os`], [exiting][Error::exit] on failure.
     ///
     /// Like [`Command::get_matches`] but doesn't consume the `Command`.
     ///
@@ -631,7 +670,7 @@ impl Command {
         self.try_get_matches_from(env::args_os())
     }
 
-    /// Parse the specified arguments, exiting on failure.
+    /// Parse the specified arguments, [exiting][Error::exit] on failure.
     ///
     /// **NOTE:** The first argument will be parsed as the binary name unless
     /// [`Command::no_binary_name`] is used.
@@ -1087,7 +1126,7 @@ impl Command {
         }
     }
 
-    /// Disables the automatic delimiting of values after `--` or when [`Command::trailing_var_arg`]
+    /// Disables the automatic delimiting of values after `--` or when [`Arg::trailing_var_arg`]
     /// was used.
     ///
     /// **NOTE:** The same thing can be done manually by setting the final positional argument to
@@ -1359,7 +1398,7 @@ impl Command {
     /// assert_eq!(res.unwrap_err().kind(), ErrorKind::UnknownArgument);
     /// ```
     ///
-    /// You can create a custom version flag with [`ArgAction::Help`], [`ArgAction::HelpShort`], or
+    /// You can create a custom help flag with [`ArgAction::Help`], [`ArgAction::HelpShort`], or
     /// [`ArgAction::HelpLong`]
     /// ```rust
     /// # use clap_builder as clap;

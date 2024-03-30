@@ -2205,6 +2205,13 @@ extern "C" {
         id: *const git_oid,
         kind: git_object_t,
     ) -> c_int;
+    pub fn git_object_lookup_prefix(
+        dest: *mut *mut git_object,
+        repo: *mut git_repository,
+        id: *const git_oid,
+        len: size_t,
+        kind: git_object_t,
+    ) -> c_int;
     pub fn git_object_type(obj: *const git_object) -> git_object_t;
     pub fn git_object_peel(
         peeled: *mut *mut git_object,
@@ -2826,6 +2833,12 @@ extern "C" {
         commit: *mut *mut git_commit,
         repo: *mut git_repository,
         id: *const git_oid,
+    ) -> c_int;
+    pub fn git_commit_lookup_prefix(
+        commit: *mut *mut git_commit,
+        repo: *mut git_repository,
+        id: *const git_oid,
+        len: size_t,
     ) -> c_int;
     pub fn git_commit_message(commit: *const git_commit) -> *const c_char;
     pub fn git_commit_message_encoding(commit: *const git_commit) -> *const c_char;

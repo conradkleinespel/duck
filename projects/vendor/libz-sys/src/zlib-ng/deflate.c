@@ -1,5 +1,5 @@
 /* deflate.c -- compress data using the deflation algorithm
- * Copyright (C) 1995-2022 Jean-loup Gailly and Mark Adler
+ * Copyright (C) 1995-2023 Jean-loup Gailly and Mark Adler
  * For conditions of distribution and use, see copyright notice in zlib.h
  */
 
@@ -58,7 +58,7 @@
 # undef deflateInit2
 #endif
 
-const char PREFIX(deflate_copyright)[] = " deflate 1.2.13 Copyright 1995-2022 Jean-loup Gailly and Mark Adler ";
+const char PREFIX(deflate_copyright)[] = " deflate 1.3.0 Copyright 1995-2023 Jean-loup Gailly and Mark Adler ";
 /*
   If you use the zlib library in a product, an acknowledgment is welcome
   in the documentation of your product. If for some reason you cannot
@@ -193,6 +193,9 @@ int32_t ZNG_CONDEXPORT PREFIX(deflateInit2)(PREFIX3(stream) *strm, int32_t level
     uint32_t window_padding = 0;
     deflate_state *s;
     int wrap = 1;
+
+    /* Force initialization functable, because deflate captures function pointers from functable. */
+    functable.force_init();
 
     if (strm == NULL)
         return Z_STREAM_ERROR;
@@ -340,21 +343,12 @@ int32_t Z_EXPORT PREFIX(deflateInit2_)(PREFIX3(stream) *strm, int32_t level, int
 /* =========================================================================
  * Check for a valid deflate stream state. Return 0 if ok, 1 if not.
  */
-static int deflateStateCheck (PREFIX3(stream) *strm) {
+static int deflateStateCheck(PREFIX3(stream) *strm) {
     deflate_state *s;
     if (strm == NULL || strm->zalloc == (alloc_func)0 || strm->zfree == (free_func)0)
         return 1;
     s = strm->state;
-    if (s == NULL || s->strm != strm || (s->status != INIT_STATE &&
-#ifdef GZIP
-                                           s->status != GZIP_STATE &&
-                                           s->status != EXTRA_STATE &&
-                                           s->status != NAME_STATE &&
-                                           s->status != COMMENT_STATE &&
-                                           s->status != HCRC_STATE &&
-#endif
-                                           s->status != BUSY_STATE &&
-                                           s->status != FINISH_STATE))
+    if (s == NULL || s->strm != strm || (s->status < INIT_STATE || s->status > MAX_STATE))
         return 1;
     return 0;
 }

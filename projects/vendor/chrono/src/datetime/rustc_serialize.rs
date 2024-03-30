@@ -1,9 +1,8 @@
-#![cfg_attr(docsrs, doc(cfg(feature = "rustc-serialize")))]
-
-use super::{DateTime, SecondsFormat};
+use super::DateTime;
+use crate::format::SecondsFormat;
 #[cfg(feature = "clock")]
 use crate::offset::Local;
-use crate::offset::{FixedOffset, LocalResult, TimeZone, Utc};
+use crate::offset::{FixedOffset, MappedLocalTime, TimeZone, Utc};
 use core::fmt;
 use core::ops::Deref;
 use rustc_serialize::{Decodable, Decoder, Encodable, Encoder};
@@ -14,16 +13,16 @@ impl<Tz: TimeZone> Encodable for DateTime<Tz> {
     }
 }
 
-// lik? function to convert a LocalResult into a serde-ish Result
-fn from<T, D>(me: LocalResult<T>, d: &mut D) -> Result<T, D::Error>
+// Function to convert a MappedLocalTime into a serde-ish Result
+fn from<T, D>(me: MappedLocalTime<T>, d: &mut D) -> Result<T, D::Error>
 where
     D: Decoder,
     T: fmt::Display,
 {
     match me {
-        LocalResult::None => Err(d.error("value is not a legal timestamp")),
-        LocalResult::Ambiguous(..) => Err(d.error("value is an ambiguous timestamp")),
-        LocalResult::Single(val) => Ok(val),
+        MappedLocalTime::None => Err(d.error("value is not a legal timestamp")),
+        MappedLocalTime::Ambiguous(..) => Err(d.error("value is an ambiguous timestamp")),
+        MappedLocalTime::Single(val) => Ok(val),
     }
 }
 
@@ -82,7 +81,6 @@ impl Decodable for TsSeconds<Utc> {
 }
 
 #[cfg(feature = "clock")]
-#[cfg_attr(docsrs, doc(cfg(feature = "clock")))]
 impl Decodable for DateTime<Local> {
     fn decode<D: Decoder>(d: &mut D) -> Result<DateTime<Local>, D::Error> {
         match d.read_str()?.parse::<DateTime<FixedOffset>>() {
@@ -93,7 +91,6 @@ impl Decodable for DateTime<Local> {
 }
 
 #[cfg(feature = "clock")]
-#[cfg_attr(docsrs, doc(cfg(feature = "clock")))]
 #[allow(deprecated)]
 impl Decodable for TsSeconds<Local> {
     #[allow(deprecated)]

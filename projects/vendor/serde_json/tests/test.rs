@@ -5,6 +5,7 @@
     clippy::derive_partial_eq_without_eq,
     clippy::excessive_precision,
     clippy::float_cmp,
+    clippy::incompatible_msrv, // https://github.com/rust-lang/rust-clippy/issues/12257
     clippy::items_after_statements,
     clippy::let_underscore_untyped,
     clippy::shadow_unrelated,
@@ -14,9 +15,6 @@
     clippy::vec_init_then_push,
     clippy::zero_sized_map_values
 )]
-#![cfg_attr(feature = "trace-macros", feature(trace_macros))]
-#[cfg(feature = "trace-macros")]
-trace_macros!(true);
 
 #[macro_use]
 mod macros;
@@ -33,18 +31,18 @@ use serde_json::{
     from_reader, from_slice, from_str, from_value, json, to_string, to_string_pretty, to_value,
     to_vec, Deserializer, Number, Value,
 };
-use std::collections::hash_map::DefaultHasher;
 use std::collections::BTreeMap;
 #[cfg(feature = "raw_value")]
 use std::collections::HashMap;
 use std::fmt::{self, Debug};
+use std::hash::BuildHasher;
+#[cfg(feature = "raw_value")]
 use std::hash::{Hash, Hasher};
 use std::io;
 use std::iter;
 use std::marker::PhantomData;
 use std::mem;
 use std::str::FromStr;
-use std::string::ToString;
 use std::{f32, f64};
 use std::{i16, i32, i64, i8};
 use std::{u16, u32, u64, u8};
@@ -2337,6 +2335,8 @@ fn test_raw_value_in_map_key() {
     #[repr(transparent)]
     struct RawMapKey(RawValue);
 
+    #[allow(unknown_lints)]
+    #[allow(non_local_definitions)] // false positive: https://github.com/rust-lang/rust/issues/121621
     impl<'de> Deserialize<'de> for &'de RawMapKey {
         fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
         where
@@ -2493,19 +2493,15 @@ fn test_value_into_deserializer() {
 
 #[test]
 fn hash_positive_and_negative_zero() {
-    fn hash(obj: impl Hash) -> u64 {
-        let mut hasher = DefaultHasher::new();
-        obj.hash(&mut hasher);
-        hasher.finish()
-    }
+    let rand = std::hash::RandomState::new();
 
     let k1 = serde_json::from_str::<Number>("0.0").unwrap();
     let k2 = serde_json::from_str::<Number>("-0.0").unwrap();
     if cfg!(feature = "arbitrary_precision") {
         assert_ne!(k1, k2);
-        assert_ne!(hash(k1), hash(k2));
+        assert_ne!(rand.hash_one(k1), rand.hash_one(k2));
     } else {
         assert_eq!(k1, k2);
-        assert_eq!(hash(k1), hash(k2));
+        assert_eq!(rand.hash_one(k1), rand.hash_one(k2));
     }
 }

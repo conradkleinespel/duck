@@ -129,7 +129,7 @@ void gz_compress(FILE *in, gzFile out) {
 #ifdef USE_MMAP /* MMAP version, Miguel Albrecht <malbrech@eso.org> */
 
 /* Try compressing the input file at once using mmap. Return Z_OK if
- * if success, Z_ERRNO otherwise.
+ * success, Z_ERRNO otherwise.
  */
 int gz_compress_mmap(FILE *in, gzFile out) {
     int len;
@@ -265,16 +265,16 @@ void file_uncompress(char *file, int keep) {
 }
 
 void show_help(void) {
-    printf("Usage: minigzip [-c] [-d] [-k] [-f|-h|-R|-F|-T] [-A] [-0 to -9] [files...]\n\n" \
-           "  -c : write to standard output\n" \
-           "  -d : decompress\n" \
-           "  -k : keep input files\n" \
-           "  -f : compress with Z_FILTERED\n" \
-           "  -h : compress with Z_HUFFMAN_ONLY\n" \
-           "  -R : compress with Z_RLE\n" \
-           "  -F : compress with Z_FIXED\n" \
-           "  -T : stored raw\n" \
-           "  -A : auto detect type\n" \
+    printf("Usage: minigzip [-c] [-d] [-k] [-f|-h|-R|-F|-T] [-A] [-0 to -9] [files...]\n\n"
+           "  -c : write to standard output\n"
+           "  -d : decompress\n"
+           "  -k : keep input files\n"
+           "  -f : compress with Z_FILTERED\n"
+           "  -h : compress with Z_HUFFMAN_ONLY\n"
+           "  -R : compress with Z_RLE\n"
+           "  -F : compress with Z_FIXED\n"
+           "  -T : stored raw\n"
+           "  -A : auto detect type\n"
            "  -0 to -9 : compression level\n\n");
 }
 

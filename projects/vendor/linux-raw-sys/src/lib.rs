@@ -202,6 +202,10 @@ pub mod general;
 #[cfg(target_arch = "arm")]
 #[path = "arm/if_ether.rs"]
 pub mod if_ether;
+#[cfg(feature = "if_packet")]
+#[cfg(target_arch = "arm")]
+#[path = "arm/if_packet.rs"]
+pub mod if_packet;
 #[cfg(feature = "io_uring")]
 #[cfg(target_arch = "arm")]
 #[path = "arm/io_uring.rs"]
@@ -210,6 +214,10 @@ pub mod io_uring;
 #[cfg(target_arch = "arm")]
 #[path = "arm/ioctl.rs"]
 pub mod ioctl;
+#[cfg(feature = "mempolicy")]
+#[cfg(target_arch = "arm")]
+#[path = "arm/mempolicy.rs"]
+pub mod mempolicy;
 #[cfg(feature = "net")]
 #[cfg(target_arch = "arm")]
 #[path = "arm/net.rs"]
@@ -226,6 +234,10 @@ pub mod prctl;
 #[cfg(target_arch = "arm")]
 #[path = "arm/system.rs"]
 pub mod system;
+#[cfg(feature = "xdp")]
+#[cfg(target_arch = "arm")]
+#[path = "arm/xdp.rs"]
+pub mod xdp;
 #[cfg(feature = "errno")]
 #[cfg(target_arch = "aarch64")]
 #[path = "aarch64/errno.rs"]
@@ -238,6 +250,10 @@ pub mod general;
 #[cfg(target_arch = "aarch64")]
 #[path = "aarch64/if_ether.rs"]
 pub mod if_ether;
+#[cfg(feature = "if_packet")]
+#[cfg(target_arch = "aarch64")]
+#[path = "aarch64/if_packet.rs"]
+pub mod if_packet;
 #[cfg(feature = "io_uring")]
 #[cfg(target_arch = "aarch64")]
 #[path = "aarch64/io_uring.rs"]
@@ -246,6 +262,10 @@ pub mod io_uring;
 #[cfg(target_arch = "aarch64")]
 #[path = "aarch64/ioctl.rs"]
 pub mod ioctl;
+#[cfg(feature = "mempolicy")]
+#[cfg(target_arch = "aarch64")]
+#[path = "aarch64/mempolicy.rs"]
+pub mod mempolicy;
 #[cfg(feature = "net")]
 #[cfg(target_arch = "aarch64")]
 #[path = "aarch64/net.rs"]
@@ -262,6 +282,10 @@ pub mod prctl;
 #[cfg(target_arch = "aarch64")]
 #[path = "aarch64/system.rs"]
 pub mod system;
+#[cfg(feature = "xdp")]
+#[cfg(target_arch = "aarch64")]
+#[path = "aarch64/xdp.rs"]
+pub mod xdp;
 #[cfg(feature = "errno")]
 #[cfg(target_arch = "csky")]
 #[path = "csky/errno.rs"]
@@ -274,6 +298,10 @@ pub mod general;
 #[cfg(target_arch = "csky")]
 #[path = "csky/if_ether.rs"]
 pub mod if_ether;
+#[cfg(feature = "if_packet")]
+#[cfg(target_arch = "csky")]
+#[path = "csky/if_packet.rs"]
+pub mod if_packet;
 #[cfg(feature = "io_uring")]
 #[cfg(target_arch = "csky")]
 #[path = "csky/io_uring.rs"]
@@ -282,6 +310,10 @@ pub mod io_uring;
 #[cfg(target_arch = "csky")]
 #[path = "csky/ioctl.rs"]
 pub mod ioctl;
+#[cfg(feature = "mempolicy")]
+#[cfg(target_arch = "csky")]
+#[path = "csky/mempolicy.rs"]
+pub mod mempolicy;
 #[cfg(feature = "net")]
 #[cfg(target_arch = "csky")]
 #[path = "csky/net.rs"]
@@ -298,6 +330,10 @@ pub mod prctl;
 #[cfg(target_arch = "csky")]
 #[path = "csky/system.rs"]
 pub mod system;
+#[cfg(feature = "xdp")]
+#[cfg(target_arch = "csky")]
+#[path = "csky/xdp.rs"]
+pub mod xdp;
 #[cfg(feature = "errno")]
 #[cfg(target_arch = "loongarch64")]
 #[path = "loongarch64/errno.rs"]
@@ -310,6 +346,10 @@ pub mod general;
 #[cfg(target_arch = "loongarch64")]
 #[path = "loongarch64/if_ether.rs"]
 pub mod if_ether;
+#[cfg(feature = "if_packet")]
+#[cfg(target_arch = "loongarch64")]
+#[path = "loongarch64/if_packet.rs"]
+pub mod if_packet;
 #[cfg(feature = "io_uring")]
 #[cfg(target_arch = "loongarch64")]
 #[path = "loongarch64/io_uring.rs"]
@@ -318,6 +358,10 @@ pub mod io_uring;
 #[cfg(target_arch = "loongarch64")]
 #[path = "loongarch64/ioctl.rs"]
 pub mod ioctl;
+#[cfg(feature = "mempolicy")]
+#[cfg(target_arch = "loongarch64")]
+#[path = "loongarch64/mempolicy.rs"]
+pub mod mempolicy;
 #[cfg(feature = "net")]
 #[cfg(target_arch = "loongarch64")]
 #[path = "loongarch64/net.rs"]
@@ -334,6 +378,10 @@ pub mod prctl;
 #[cfg(target_arch = "loongarch64")]
 #[path = "loongarch64/system.rs"]
 pub mod system;
+#[cfg(feature = "xdp")]
+#[cfg(target_arch = "loongarch64")]
+#[path = "loongarch64/xdp.rs"]
+pub mod xdp;
 #[cfg(feature = "errno")]
 #[cfg(target_arch = "mips")]
 #[path = "mips/errno.rs"]
@@ -346,6 +394,10 @@ pub mod general;
 #[cfg(target_arch = "mips")]
 #[path = "mips/if_ether.rs"]
 pub mod if_ether;
+#[cfg(feature = "if_packet")]
+#[cfg(target_arch = "mips")]
+#[path = "mips/if_packet.rs"]
+pub mod if_packet;
 #[cfg(feature = "io_uring")]
 #[cfg(target_arch = "mips")]
 #[path = "mips/io_uring.rs"]
@@ -354,6 +406,10 @@ pub mod io_uring;
 #[cfg(target_arch = "mips")]
 #[path = "mips/ioctl.rs"]
 pub mod ioctl;
+#[cfg(feature = "mempolicy")]
+#[cfg(target_arch = "mips")]
+#[path = "mips/mempolicy.rs"]
+pub mod mempolicy;
 #[cfg(feature = "net")]
 #[cfg(target_arch = "mips")]
 #[path = "mips/net.rs"]
@@ -370,6 +426,10 @@ pub mod prctl;
 #[cfg(target_arch = "mips")]
 #[path = "mips/system.rs"]
 pub mod system;
+#[cfg(feature = "xdp")]
+#[cfg(target_arch = "mips")]
+#[path = "mips/xdp.rs"]
+pub mod xdp;
 #[cfg(feature = "errno")]
 #[cfg(target_arch = "mips64")]
 #[path = "mips64/errno.rs"]
@@ -382,6 +442,10 @@ pub mod general;
 #[cfg(target_arch = "mips64")]
 #[path = "mips64/if_ether.rs"]
 pub mod if_ether;
+#[cfg(feature = "if_packet")]
+#[cfg(target_arch = "mips64")]
+#[path = "mips64/if_packet.rs"]
+pub mod if_packet;
 #[cfg(feature = "io_uring")]
 #[cfg(target_arch = "mips64")]
 #[path = "mips64/io_uring.rs"]
@@ -390,6 +454,10 @@ pub mod io_uring;
 #[cfg(target_arch = "mips64")]
 #[path = "mips64/ioctl.rs"]
 pub mod ioctl;
+#[cfg(feature = "mempolicy")]
+#[cfg(target_arch = "mips64")]
+#[path = "mips64/mempolicy.rs"]
+pub mod mempolicy;
 #[cfg(feature = "net")]
 #[cfg(target_arch = "mips64")]
 #[path = "mips64/net.rs"]
@@ -406,6 +474,10 @@ pub mod prctl;
 #[cfg(target_arch = "mips64")]
 #[path = "mips64/system.rs"]
 pub mod system;
+#[cfg(feature = "xdp")]
+#[cfg(target_arch = "mips64")]
+#[path = "mips64/xdp.rs"]
+pub mod xdp;
 #[cfg(feature = "errno")]
 #[cfg(target_arch = "mips32r6")]
 #[path = "mips32r6/errno.rs"]
@@ -418,6 +490,10 @@ pub mod general;
 #[cfg(target_arch = "mips32r6")]
 #[path = "mips32r6/if_ether.rs"]
 pub mod if_ether;
+#[cfg(feature = "if_packet")]
+#[cfg(target_arch = "mips32r6")]
+#[path = "mips32r6/if_packet.rs"]
+pub mod if_packet;
 #[cfg(feature = "io_uring")]
 #[cfg(target_arch = "mips32r6")]
 #[path = "mips32r6/io_uring.rs"]
@@ -426,6 +502,10 @@ pub mod io_uring;
 #[cfg(target_arch = "mips32r6")]
 #[path = "mips32r6/ioctl.rs"]
 pub mod ioctl;
+#[cfg(feature = "mempolicy")]
+#[cfg(target_arch = "mips32r6")]
+#[path = "mips32r6/mempolicy.rs"]
+pub mod mempolicy;
 #[cfg(feature = "net")]
 #[cfg(target_arch = "mips32r6")]
 #[path = "mips32r6/net.rs"]
@@ -442,6 +522,10 @@ pub mod prctl;
 #[cfg(target_arch = "mips32r6")]
 #[path = "mips32r6/system.rs"]
 pub mod system;
+#[cfg(feature = "xdp")]
+#[cfg(target_arch = "mips32r6")]
+#[path = "mips32r6/xdp.rs"]
+pub mod xdp;
 #[cfg(feature = "errno")]
 #[cfg(target_arch = "mips64r6")]
 #[path = "mips64r6/errno.rs"]
@@ -454,6 +538,10 @@ pub mod general;
 #[cfg(target_arch = "mips64r6")]
 #[path = "mips64r6/if_ether.rs"]
 pub mod if_ether;
+#[cfg(feature = "if_packet")]
+#[cfg(target_arch = "mips64r6")]
+#[path = "mips64r6/if_packet.rs"]
+pub mod if_packet;
 #[cfg(feature = "io_uring")]
 #[cfg(target_arch = "mips64r6")]
 #[path = "mips64r6/io_uring.rs"]
@@ -462,6 +550,10 @@ pub mod io_uring;
 #[cfg(target_arch = "mips64r6")]
 #[path = "mips64r6/ioctl.rs"]
 pub mod ioctl;
+#[cfg(feature = "mempolicy")]
+#[cfg(target_arch = "mips64r6")]
+#[path = "mips64r6/mempolicy.rs"]
+pub mod mempolicy;
 #[cfg(feature = "net")]
 #[cfg(target_arch = "mips64r6")]
 #[path = "mips64r6/net.rs"]
@@ -478,6 +570,10 @@ pub mod prctl;
 #[cfg(target_arch = "mips64r6")]
 #[path = "mips64r6/system.rs"]
 pub mod system;
+#[cfg(feature = "xdp")]
+#[cfg(target_arch = "mips64r6")]
+#[path = "mips64r6/xdp.rs"]
+pub mod xdp;
 #[cfg(feature = "errno")]
 #[cfg(target_arch = "powerpc")]
 #[path = "powerpc/errno.rs"]
@@ -490,6 +586,10 @@ pub mod general;
 #[cfg(target_arch = "powerpc")]
 #[path = "powerpc/if_ether.rs"]
 pub mod if_ether;
+#[cfg(feature = "if_packet")]
+#[cfg(target_arch = "powerpc")]
+#[path = "powerpc/if_packet.rs"]
+pub mod if_packet;
 #[cfg(feature = "io_uring")]
 #[cfg(target_arch = "powerpc")]
 #[path = "powerpc/io_uring.rs"]
@@ -498,6 +598,10 @@ pub mod io_uring;
 #[cfg(target_arch = "powerpc")]
 #[path = "powerpc/ioctl.rs"]
 pub mod ioctl;
+#[cfg(feature = "mempolicy")]
+#[cfg(target_arch = "powerpc")]
+#[path = "powerpc/mempolicy.rs"]
+pub mod mempolicy;
 #[cfg(feature = "net")]
 #[cfg(target_arch = "powerpc")]
 #[path = "powerpc/net.rs"]
@@ -514,6 +618,10 @@ pub mod prctl;
 #[cfg(target_arch = "powerpc")]
 #[path = "powerpc/system.rs"]
 pub mod system;
+#[cfg(feature = "xdp")]
+#[cfg(target_arch = "powerpc")]
+#[path = "powerpc/xdp.rs"]
+pub mod xdp;
 #[cfg(feature = "errno")]
 #[cfg(target_arch = "powerpc64")]
 #[path = "powerpc64/errno.rs"]
@@ -526,6 +634,10 @@ pub mod general;
 #[cfg(target_arch = "powerpc64")]
 #[path = "powerpc64/if_ether.rs"]
 pub mod if_ether;
+#[cfg(feature = "if_packet")]
+#[cfg(target_arch = "powerpc64")]
+#[path = "powerpc64/if_packet.rs"]
+pub mod if_packet;
 #[cfg(feature = "io_uring")]
 #[cfg(target_arch = "powerpc64")]
 #[path = "powerpc64/io_uring.rs"]
@@ -534,6 +646,10 @@ pub mod io_uring;
 #[cfg(target_arch = "powerpc64")]
 #[path = "powerpc64/ioctl.rs"]
 pub mod ioctl;
+#[cfg(feature = "mempolicy")]
+#[cfg(target_arch = "powerpc64")]
+#[path = "powerpc64/mempolicy.rs"]
+pub mod mempolicy;
 #[cfg(feature = "net")]
 #[cfg(target_arch = "powerpc64")]
 #[path = "powerpc64/net.rs"]
@@ -550,6 +666,10 @@ pub mod prctl;
 #[cfg(target_arch = "powerpc64")]
 #[path = "powerpc64/system.rs"]
 pub mod system;
+#[cfg(feature = "xdp")]
+#[cfg(target_arch = "powerpc64")]
+#[path = "powerpc64/xdp.rs"]
+pub mod xdp;
 #[cfg(feature = "errno")]
 #[cfg(target_arch = "riscv32")]
 #[path = "riscv32/errno.rs"]
@@ -562,6 +682,10 @@ pub mod general;
 #[cfg(target_arch = "riscv32")]
 #[path = "riscv32/if_ether.rs"]
 pub mod if_ether;
+#[cfg(feature = "if_packet")]
+#[cfg(target_arch = "riscv32")]
+#[path = "riscv32/if_packet.rs"]
+pub mod if_packet;
 #[cfg(feature = "io_uring")]
 #[cfg(target_arch = "riscv32")]
 #[path = "riscv32/io_uring.rs"]
@@ -570,6 +694,10 @@ pub mod io_uring;
 #[cfg(target_arch = "riscv32")]
 #[path = "riscv32/ioctl.rs"]
 pub mod ioctl;
+#[cfg(feature = "mempolicy")]
+#[cfg(target_arch = "riscv32")]
+#[path = "riscv32/mempolicy.rs"]
+pub mod mempolicy;
 #[cfg(feature = "net")]
 #[cfg(target_arch = "riscv32")]
 #[path = "riscv32/net.rs"]
@@ -586,6 +714,10 @@ pub mod prctl;
 #[cfg(target_arch = "riscv32")]
 #[path = "riscv32/system.rs"]
 pub mod system;
+#[cfg(feature = "xdp")]
+#[cfg(target_arch = "riscv32")]
+#[path = "riscv32/xdp.rs"]
+pub mod xdp;
 #[cfg(feature = "errno")]
 #[cfg(target_arch = "riscv64")]
 #[path = "riscv64/errno.rs"]
@@ -598,6 +730,10 @@ pub mod general;
 #[cfg(target_arch = "riscv64")]
 #[path = "riscv64/if_ether.rs"]
 pub mod if_ether;
+#[cfg(feature = "if_packet")]
+#[cfg(target_arch = "riscv64")]
+#[path = "riscv64/if_packet.rs"]
+pub mod if_packet;
 #[cfg(feature = "io_uring")]
 #[cfg(target_arch = "riscv64")]
 #[path = "riscv64/io_uring.rs"]
@@ -606,6 +742,10 @@ pub mod io_uring;
 #[cfg(target_arch = "riscv64")]
 #[path = "riscv64/ioctl.rs"]
 pub mod ioctl;
+#[cfg(feature = "mempolicy")]
+#[cfg(target_arch = "riscv64")]
+#[path = "riscv64/mempolicy.rs"]
+pub mod mempolicy;
 #[cfg(feature = "net")]
 #[cfg(target_arch = "riscv64")]
 #[path = "riscv64/net.rs"]
@@ -622,6 +762,10 @@ pub mod prctl;
 #[cfg(target_arch = "riscv64")]
 #[path = "riscv64/system.rs"]
 pub mod system;
+#[cfg(feature = "xdp")]
+#[cfg(target_arch = "riscv64")]
+#[path = "riscv64/xdp.rs"]
+pub mod xdp;
 #[cfg(feature = "errno")]
 #[cfg(target_arch = "s390x")]
 #[path = "s390x/errno.rs"]
@@ -634,6 +778,10 @@ pub mod general;
 #[cfg(target_arch = "s390x")]
 #[path = "s390x/if_ether.rs"]
 pub mod if_ether;
+#[cfg(feature = "if_packet")]
+#[cfg(target_arch = "s390x")]
+#[path = "s390x/if_packet.rs"]
+pub mod if_packet;
 #[cfg(feature = "io_uring")]
 #[cfg(target_arch = "s390x")]
 #[path = "s390x/io_uring.rs"]
@@ -642,6 +790,10 @@ pub mod io_uring;
 #[cfg(target_arch = "s390x")]
 #[path = "s390x/ioctl.rs"]
 pub mod ioctl;
+#[cfg(feature = "mempolicy")]
+#[cfg(target_arch = "s390x")]
+#[path = "s390x/mempolicy.rs"]
+pub mod mempolicy;
 #[cfg(feature = "net")]
 #[cfg(target_arch = "s390x")]
 #[path = "s390x/net.rs"]
@@ -658,6 +810,10 @@ pub mod prctl;
 #[cfg(target_arch = "s390x")]
 #[path = "s390x/system.rs"]
 pub mod system;
+#[cfg(feature = "xdp")]
+#[cfg(target_arch = "s390x")]
+#[path = "s390x/xdp.rs"]
+pub mod xdp;
 #[cfg(feature = "errno")]
 #[cfg(target_arch = "sparc")]
 #[path = "sparc/errno.rs"]
@@ -670,6 +826,10 @@ pub mod general;
 #[cfg(target_arch = "sparc")]
 #[path = "sparc/if_ether.rs"]
 pub mod if_ether;
+#[cfg(feature = "if_packet")]
+#[cfg(target_arch = "sparc")]
+#[path = "sparc/if_packet.rs"]
+pub mod if_packet;
 #[cfg(feature = "io_uring")]
 #[cfg(target_arch = "sparc")]
 #[path = "sparc/io_uring.rs"]
@@ -678,6 +838,10 @@ pub mod io_uring;
 #[cfg(target_arch = "sparc")]
 #[path = "sparc/ioctl.rs"]
 pub mod ioctl;
+#[cfg(feature = "mempolicy")]
+#[cfg(target_arch = "sparc")]
+#[path = "sparc/mempolicy.rs"]
+pub mod mempolicy;
 #[cfg(feature = "net")]
 #[cfg(target_arch = "sparc")]
 #[path = "sparc/net.rs"]
@@ -694,6 +858,10 @@ pub mod prctl;
 #[cfg(target_arch = "sparc")]
 #[path = "sparc/system.rs"]
 pub mod system;
+#[cfg(feature = "xdp")]
+#[cfg(target_arch = "sparc")]
+#[path = "sparc/xdp.rs"]
+pub mod xdp;
 #[cfg(feature = "errno")]
 #[cfg(target_arch = "sparc64")]
 #[path = "sparc64/errno.rs"]
@@ -706,6 +874,10 @@ pub mod general;
 #[cfg(target_arch = "sparc64")]
 #[path = "sparc64/if_ether.rs"]
 pub mod if_ether;
+#[cfg(feature = "if_packet")]
+#[cfg(target_arch = "sparc64")]
+#[path = "sparc64/if_packet.rs"]
+pub mod if_packet;
 #[cfg(feature = "io_uring")]
 #[cfg(target_arch = "sparc64")]
 #[path = "sparc64/io_uring.rs"]
@@ -714,6 +886,10 @@ pub mod io_uring;
 #[cfg(target_arch = "sparc64")]
 #[path = "sparc64/ioctl.rs"]
 pub mod ioctl;
+#[cfg(feature = "mempolicy")]
+#[cfg(target_arch = "sparc64")]
+#[path = "sparc64/mempolicy.rs"]
+pub mod mempolicy;
 #[cfg(feature = "net")]
 #[cfg(target_arch = "sparc64")]
 #[path = "sparc64/net.rs"]
@@ -730,6 +906,10 @@ pub mod prctl;
 #[cfg(target_arch = "sparc64")]
 #[path = "sparc64/system.rs"]
 pub mod system;
+#[cfg(feature = "xdp")]
+#[cfg(target_arch = "sparc64")]
+#[path = "sparc64/xdp.rs"]
+pub mod xdp;
 #[cfg(feature = "errno")]
 #[cfg(target_arch = "x86")]
 #[path = "x86/errno.rs"]
@@ -742,6 +922,10 @@ pub mod general;
 #[cfg(target_arch = "x86")]
 #[path = "x86/if_ether.rs"]
 pub mod if_ether;
+#[cfg(feature = "if_packet")]
+#[cfg(target_arch = "x86")]
+#[path = "x86/if_packet.rs"]
+pub mod if_packet;
 #[cfg(feature = "io_uring")]
 #[cfg(target_arch = "x86")]
 #[path = "x86/io_uring.rs"]
@@ -750,6 +934,10 @@ pub mod io_uring;
 #[cfg(target_arch = "x86")]
 #[path = "x86/ioctl.rs"]
 pub mod ioctl;
+#[cfg(feature = "mempolicy")]
+#[cfg(target_arch = "x86")]
+#[path = "x86/mempolicy.rs"]
+pub mod mempolicy;
 #[cfg(feature = "net")]
 #[cfg(target_arch = "x86")]
 #[path = "x86/net.rs"]
@@ -766,6 +954,10 @@ pub mod prctl;
 #[cfg(target_arch = "x86")]
 #[path = "x86/system.rs"]
 pub mod system;
+#[cfg(feature = "xdp")]
+#[cfg(target_arch = "x86")]
+#[path = "x86/xdp.rs"]
+pub mod xdp;
 #[cfg(feature = "errno")]
 #[cfg(all(target_arch = "x86_64", target_pointer_width = "64"))]
 #[path = "x86_64/errno.rs"]
@@ -778,6 +970,10 @@ pub mod general;
 #[cfg(all(target_arch = "x86_64", target_pointer_width = "64"))]
 #[path = "x86_64/if_ether.rs"]
 pub mod if_ether;
+#[cfg(feature = "if_packet")]
+#[cfg(all(target_arch = "x86_64", target_pointer_width = "64"))]
+#[path = "x86_64/if_packet.rs"]
+pub mod if_packet;
 #[cfg(feature = "io_uring")]
 #[cfg(all(target_arch = "x86_64", target_pointer_width = "64"))]
 #[path = "x86_64/io_uring.rs"]
@@ -786,6 +982,10 @@ pub mod io_uring;
 #[cfg(all(target_arch = "x86_64", target_pointer_width = "64"))]
 #[path = "x86_64/ioctl.rs"]
 pub mod ioctl;
+#[cfg(feature = "mempolicy")]
+#[cfg(all(target_arch = "x86_64", target_pointer_width = "64"))]
+#[path = "x86_64/mempolicy.rs"]
+pub mod mempolicy;
 #[cfg(feature = "net")]
 #[cfg(all(target_arch = "x86_64", target_pointer_width = "64"))]
 #[path = "x86_64/net.rs"]
@@ -802,6 +1002,10 @@ pub mod prctl;
 #[cfg(all(target_arch = "x86_64", target_pointer_width = "64"))]
 #[path = "x86_64/system.rs"]
 pub mod system;
+#[cfg(feature = "xdp")]
+#[cfg(all(target_arch = "x86_64", target_pointer_width = "64"))]
+#[path = "x86_64/xdp.rs"]
+pub mod xdp;
 #[cfg(feature = "errno")]
 #[cfg(all(target_arch = "x86_64", target_pointer_width = "32"))]
 #[path = "x32/errno.rs"]
@@ -814,6 +1018,10 @@ pub mod general;
 #[cfg(all(target_arch = "x86_64", target_pointer_width = "32"))]
 #[path = "x32/if_ether.rs"]
 pub mod if_ether;
+#[cfg(feature = "if_packet")]
+#[cfg(all(target_arch = "x86_64", target_pointer_width = "32"))]
+#[path = "x32/if_packet.rs"]
+pub mod if_packet;
 #[cfg(feature = "io_uring")]
 #[cfg(all(target_arch = "x86_64", target_pointer_width = "32"))]
 #[path = "x32/io_uring.rs"]
@@ -822,6 +1030,10 @@ pub mod io_uring;
 #[cfg(all(target_arch = "x86_64", target_pointer_width = "32"))]
 #[path = "x32/ioctl.rs"]
 pub mod ioctl;
+#[cfg(feature = "mempolicy")]
+#[cfg(all(target_arch = "x86_64", target_pointer_width = "32"))]
+#[path = "x32/mempolicy.rs"]
+pub mod mempolicy;
 #[cfg(feature = "net")]
 #[cfg(all(target_arch = "x86_64", target_pointer_width = "32"))]
 #[path = "x32/net.rs"]
@@ -838,3 +1050,7 @@ pub mod prctl;
 #[cfg(all(target_arch = "x86_64", target_pointer_width = "32"))]
 #[path = "x32/system.rs"]
 pub mod system;
+#[cfg(feature = "xdp")]
+#[cfg(all(target_arch = "x86_64", target_pointer_width = "32"))]
+#[path = "x32/xdp.rs"]
+pub mod xdp;

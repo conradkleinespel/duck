@@ -69,6 +69,7 @@ cfg_if! {
     if #[cfg(ossl300)] {
         extern "C" {
             pub fn EVP_default_properties_is_fips_enabled(libctx: *mut OSSL_LIB_CTX) -> c_int;
+            pub fn EVP_default_properties_enable_fips(libctx: *mut OSSL_LIB_CTX, enable: c_int) -> c_int;
         }
     }
 }
@@ -537,6 +538,12 @@ extern "C" {
 
     #[cfg(ossl300)]
     pub fn EVP_PKEY_CTX_set_signature_md(ctx: *mut EVP_PKEY_CTX, md: *const EVP_MD) -> c_int;
+
+    #[cfg(ossl300)]
+    pub fn EVP_PKEY_CTX_set_params(ctx: *mut EVP_PKEY_CTX, params: *const OSSL_PARAM) -> c_int;
+
+    #[cfg(ossl300)]
+    pub fn EVP_PKEY_CTX_get_params(ctx: *mut EVP_PKEY_CTX, params: *mut OSSL_PARAM) -> c_int;
 
     pub fn EVP_PKEY_new_mac_key(
         type_: c_int,

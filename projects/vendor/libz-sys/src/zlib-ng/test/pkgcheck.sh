@@ -81,11 +81,6 @@ Darwin)
   sysctl -n machdep.cpu.features
   sysctl -n machdep.cpu.leaf7_features
   sysctl -n machdep.cpu.extfeatures
-  CMAKE_ARGS="-DCMAKE_INSTALL_LIBDIR=lib -DPKGCONFIG_INSTALL_DIR=/lib/pkgconfig -DWITH_RPATH=on ${CMAKE_ARGS}"
-  CONFIGURE_ARGS="--libdir=lib ${CONFIGURE_ARGS}"
-  ;;
-*)
-  CMAKE_ARGS="-DCMAKE_INSTALL_LIBDIR=lib ${CMAKE_ARGS}"
   ;;
 esac
 
@@ -154,6 +149,9 @@ Darwin)
   strip -x -no_uuid "$dylib2"
   ;;
 esac
+
+# Remove cmake target files to avoid mismatch with configure
+find pkgtmp2 -type f -name '*.cmake' -exec rm '{}' \;
 
 # The ar on newer systems defaults to -D (i.e. deterministic),
 # but FreeBSD 12.1, Debian 8, and Ubuntu 14.04 seem to not do that.

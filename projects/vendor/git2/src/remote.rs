@@ -1,4 +1,3 @@
-use libc;
 use raw::git_strarray;
 use std::iter::FusedIterator;
 use std::marker;
@@ -290,7 +289,7 @@ impl<'repo> Remote<'repo> {
     ///
     /// # Examples
     ///
-    /// Example of functionality similar to `git fetch origin/main`:
+    /// Example of functionality similar to `git fetch origin main`:
     ///
     /// ```no_run
     /// fn fetch_origin_main(repo: git2::Repository) -> Result<(), git2::Error> {

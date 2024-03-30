@@ -4,7 +4,7 @@ A library for linking zlib-ng (`libz-ng`) to Rust programs natively, rather
 than in zlib-compat mode.
 
 zlib-ng is a high-performance implementation of zlib. zlib-ng supports building
-in two modes: zlib-compat mode, in whih it provides the same API as zlib and
+in two modes: zlib-compat mode, in which it provides the same API as zlib and
 generally works as a drop-in replacement, and native mode, in which it provides
 its own API. The native API is almost identical to the zlib-compat API, except
 that some types use more correct sizes (rather than the sizes required for zlib
@@ -44,9 +44,9 @@ but we don't guarantee these will continue to work.
 This project is licensed under either of
 
  * Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) or
-   http://www.apache.org/licenses/LICENSE-2.0)
+   https://www.apache.org/licenses/LICENSE-2.0)
  * MIT license ([LICENSE-MIT](LICENSE-MIT) or
-   http://opensource.org/licenses/MIT)
+   https://opensource.org/license/mit/)
 
 at your option.
 

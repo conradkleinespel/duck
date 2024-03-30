@@ -12,7 +12,7 @@
 [package]
 edition = "2018"
 name = "libgit2-sys"
-version = "0.16.1+1.7.1"
+version = "0.16.2+1.7.2"
 authors = [
     "Josh Triplett <josh@joshtriplett.org>",
     "Alex Crichton <alex@alexcrichton.com>",
