@@ -33,9 +33,14 @@ mod windows {
     use windows_sys::Win32::Storage::FileSystem::{
         CreateFileA, FILE_SHARE_READ, FILE_SHARE_WRITE, OPEN_EXISTING,
     };
+    use windows_sys::Win32::System::Console::{GetConsoleOutputCP, SetConsoleOutputCP};
 
     /// Displays a message on the TTY
     pub fn print_tty(prompt: impl ToString) -> std::io::Result<()> {
+        let previous_console_output_cp = unsafe {
+            GetConsoleOutputCP()
+        };
+
         let handle = unsafe {
             CreateFileA(
                 b"CONOUT$\x00".as_ptr() as PCSTR,
@@ -48,14 +53,24 @@ mod windows {
             )
         };
         if handle == INVALID_HANDLE_VALUE {
+            unsafe {
+                SetConsoleOutputCP(previous_console_output_cp);
+            }
             return Err(std::io::Error::last_os_error());
         }
 
         let mut stream = unsafe { std::fs::File::from_raw_handle(handle as _) };
 
-        stream
+        unsafe {
+            SetConsoleOutputCP(65001); // 65001 is UTF-8
+        };
+        let result = stream
             .write_all(prompt.to_string().as_str().as_bytes())
-            .and_then(|_| stream.flush())
+            .and_then(|_| stream.flush());
+        unsafe {
+            SetConsoleOutputCP(previous_console_output_cp);
+        }
+        result
     }
 }
 
