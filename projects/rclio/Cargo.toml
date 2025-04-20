@@ -1,6 +1,6 @@
 [package]
 name = "rclio"
-version = "0.0.3"
+version = "0.0.4"
 description = "Utility functions for other crates, no backwards compatibility guarantees."
 authors = ["Conrad Kleinespel <conradk@conradk.com>"]
 license = "Apache-2.0"
@@ -8,6 +8,6 @@ edition = "2018"
 
 [dependencies]
 ansi_term = "0.12"
-rpassword = { path = "../rpassword", version = "7.3" }
-rprompt = { path = "../rprompt", version = "2.1" }
+rpassword = { path = "../rpassword", version = "7.4" }
+rprompt = { path = "../rprompt", version = "2.2" }
 rtoolbox = { path = "../rtoolbox", version = "0.0" }
