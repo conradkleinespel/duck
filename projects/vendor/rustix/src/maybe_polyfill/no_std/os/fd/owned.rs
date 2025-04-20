@@ -27,9 +27,14 @@ use core::mem::forget;
 /// passed as an argument, it is not captured or consumed, and it never has the
 /// value `-1`.
 ///
-/// This type's `.to_owned()` implementation returns another `BorrowedFd`
-/// rather than an `OwnedFd`. It just makes a trivial copy of the raw file
-/// descriptor, which is then borrowed under the same lifetime.
+/// This type does not have a [`ToOwned`][crate::borrow::ToOwned]
+/// implementation. Calling `.to_owned()` on a variable of this type will call
+/// it on `&BorrowedFd` and use `Clone::clone()` like `ToOwned` does for all
+/// types implementing `Clone`. The result will be descriptor borrowed under
+/// the same lifetime.
+///
+/// To obtain an [`OwnedFd`], you can use [`BorrowedFd::try_clone_to_owned`]
+/// instead, but this is not supported on all platforms.
 #[derive(Copy, Clone)]
 #[repr(transparent)]
 #[cfg_attr(rustc_attrs, rustc_layout_scalar_valid_range_start(0))]
@@ -53,6 +58,8 @@ pub struct BorrowedFd<'fd> {
 /// descriptor, so it can be used in FFI in places where a file descriptor is
 /// passed as a consumed argument or returned as an owned value, and it never
 /// has the value `-1`.
+///
+/// You can use [`AsFd::as_fd`] to obtain a [`BorrowedFd`].
 #[repr(transparent)]
 #[cfg_attr(rustc_attrs, rustc_layout_scalar_valid_range_start(0))]
 // libstd/os/raw/mod.rs assures me that every libstd-supported platform has a
@@ -66,7 +73,7 @@ pub struct OwnedFd {
 }
 
 impl BorrowedFd<'_> {
-    /// Return a `BorrowedFd` holding the given raw file descriptor.
+    /// Returns a `BorrowedFd` holding the given raw file descriptor.
     ///
     /// # Safety
     ///
@@ -107,17 +114,16 @@ impl OwnedFd {
         // no capabilities for multi-process execution. While F_DUPFD is also
         // not supported yet, it might be (currently it returns ENOSYS).
         #[cfg(target_os = "espidf")]
-        let fd = crate::io::fcntl_dupfd(self)?;
+        let fd = crate::io::fcntl_dupfd(self, 0)?;
 
         Ok(fd.into())
     }
 
+    /// Creates a new `OwnedFd` instance that shares the same underlying file handle
+    /// as the existing `OwnedFd` instance.
     #[cfg(target_arch = "wasm32")]
     pub fn try_clone(&self) -> crate::io::Result<Self> {
-        Err(crate::io::const_io_error!(
-            crate::io::ErrorKind::Unsupported,
-            "operation not supported on WASI yet",
-        ))
+        Err(crate::io::Errno::NOSYS)
     }
 }
 
@@ -150,10 +156,7 @@ impl BorrowedFd<'_> {
     #[cfg(any(target_arch = "wasm32", target_os = "hermit"))]
     #[cfg_attr(staged_api, stable(feature = "io_safety", since = "1.63.0"))]
     pub fn try_clone_to_owned(&self) -> crate::io::Result<OwnedFd> {
-        Err(crate::io::const_io_error!(
-            crate::io::ErrorKind::Unsupported,
-            "operation not supported on WASI yet",
-        ))
+        Err(crate::io::Errno::NOSYS)
     }
 }
 

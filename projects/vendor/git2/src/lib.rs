@@ -4,7 +4,7 @@
 //! to manage git repositories. The library itself is a work in progress and is
 //! likely lacking some bindings here and there, so be warned.
 //!
-//! [1]: https://libgit2.github.com/
+//! [1]: https://libgit2.org/
 //!
 //! The git2-rs library strives to be as close to libgit2 as possible, but also
 //! strives to make using libgit2 as safe as possible. All resource management
@@ -65,7 +65,7 @@
 //! source `Repository`, to ensure that they do not outlive the repository
 //! itself.
 
-#![doc(html_root_url = "https://docs.rs/git2/0.18")]
+#![doc(html_root_url = "https://docs.rs/git2/0.20")]
 #![allow(trivial_numeric_casts, trivial_casts)]
 #![deny(missing_docs)]
 #![warn(rust_2018_idioms)]
@@ -101,7 +101,7 @@ pub use crate::index::{
 pub use crate::indexer::{Indexer, IndexerProgress, Progress};
 pub use crate::mailmap::Mailmap;
 pub use crate::mempack::Mempack;
-pub use crate::merge::{AnnotatedCommit, MergeOptions};
+pub use crate::merge::{AnnotatedCommit, MergeFileOptions, MergeFileResult, MergeOptions};
 pub use crate::message::{
     message_prettify, message_trailers_bytes, message_trailers_strs, MessageTrailersBytes,
     MessageTrailersBytesIterator, MessageTrailersStrs, MessageTrailersStrsIterator,
@@ -218,6 +218,8 @@ pub enum ErrorCode {
     ApplyFail,
     /// The object is not owned by the current user
     Owner,
+    /// Timeout
+    Timeout,
 }
 
 /// An enumeration of possible categories of things that can have
@@ -385,6 +387,8 @@ pub enum ConfigLevel {
     Global,
     /// Repository specific config, e.g. $PWD/.git/config
     Local,
+    ///  Worktree specific configuration file, e.g. $GIT_DIR/config.worktree
+    Worktree,
     /// Application specific configuration file
     App,
     /// Highest level available
@@ -415,7 +419,7 @@ pub enum FileFavor {
 
 bitflags! {
     /// Orderings that may be specified for Revwalk iteration.
-    #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+    #[derive(Clone, Copy, Debug, Eq, PartialEq, PartialOrd, Ord, Hash)]
     pub struct Sort: u32 {
         /// Sort the repository contents in no particular ordering.
         ///
@@ -450,7 +454,7 @@ impl Sort {
 
 bitflags! {
     /// Types of credentials that can be requested by a credential callback.
-    #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+    #[derive(Clone, Copy, Debug, Eq, PartialEq, PartialOrd, Ord, Hash)]
     pub struct CredentialType: u32 {
         #[allow(missing_docs)]
         const USER_PASS_PLAINTEXT = raw::GIT_CREDTYPE_USERPASS_PLAINTEXT as u32;
@@ -487,7 +491,7 @@ impl Default for CredentialType {
 
 bitflags! {
     /// Flags for the `flags` field of an IndexEntry.
-    #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+    #[derive(Clone, Copy, Debug, Eq, PartialEq, PartialOrd, Ord, Hash)]
     pub struct IndexEntryFlag: u16 {
         /// Set when the `extended_flags` field is valid.
         const EXTENDED = raw::GIT_INDEX_ENTRY_EXTENDED as u16;
@@ -503,7 +507,7 @@ impl IndexEntryFlag {
 
 bitflags! {
     /// Flags for the `extended_flags` field of an IndexEntry.
-    #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+    #[derive(Clone, Copy, Debug, Eq, PartialEq, PartialOrd, Ord, Hash)]
     pub struct IndexEntryExtendedFlag: u16 {
         /// An "intent to add" entry from "git add -N"
         const INTENT_TO_ADD = raw::GIT_INDEX_ENTRY_INTENT_TO_ADD as u16;
@@ -523,7 +527,7 @@ impl IndexEntryExtendedFlag {
 
 bitflags! {
     /// Flags for APIs that add files matching pathspec
-    #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+    #[derive(Clone, Copy, Debug, Eq, PartialEq, PartialOrd, Ord, Hash)]
     pub struct IndexAddOption: u32 {
         #[allow(missing_docs)]
         const DEFAULT = raw::GIT_INDEX_ADD_DEFAULT as u32;
@@ -555,7 +559,7 @@ impl Default for IndexAddOption {
 
 bitflags! {
     /// Flags for `Repository::open_ext`
-    #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+    #[derive(Clone, Copy, Debug, Eq, PartialEq, PartialOrd, Ord, Hash)]
     pub struct RepositoryOpenFlags: u32 {
         /// Only open the specified path; don't walk upward searching.
         const NO_SEARCH = raw::GIT_REPOSITORY_OPEN_NO_SEARCH as u32;
@@ -580,7 +584,7 @@ impl RepositoryOpenFlags {
 
 bitflags! {
     /// Flags for the return value of `Repository::revparse`
-    #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+    #[derive(Clone, Copy, Debug, Eq, PartialEq, PartialOrd, Ord, Hash)]
     pub struct RevparseMode: u32 {
         /// The spec targeted a single object
         const SINGLE = raw::GIT_REVPARSE_SINGLE as u32;
@@ -599,7 +603,7 @@ impl RevparseMode {
 
 bitflags! {
     /// The results of `merge_analysis` indicating the merge opportunities.
-    #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+    #[derive(Clone, Copy, Debug, Eq, PartialEq, PartialOrd, Ord, Hash)]
     pub struct MergeAnalysis: u32 {
         /// No merge is possible.
         const ANALYSIS_NONE = raw::GIT_MERGE_ANALYSIS_NONE as u32;
@@ -630,7 +634,7 @@ impl MergeAnalysis {
 
 bitflags! {
     /// The user's stated preference for merges.
-    #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+    #[derive(Clone, Copy, Debug, Eq, PartialEq, PartialOrd, Ord, Hash)]
     pub struct MergePreference: u32 {
         /// No configuration was found that suggests a preferred behavior for
         /// merge.
@@ -652,13 +656,24 @@ impl MergePreference {
 
 bitflags! {
     /// Flags controlling the behavior of ODB lookup operations
-    #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+    #[derive(Clone, Copy, Debug, Eq, PartialEq, PartialOrd, Ord, Hash)]
     pub struct OdbLookupFlags: u32 {
         /// Don't call `git_odb_refresh` if the lookup fails. Useful when doing
         /// a batch of lookup operations for objects that may legitimately not
         /// exist. When using this flag, you may wish to manually call
         /// `git_odb_refresh` before processing a batch of objects.
         const NO_REFRESH = raw::GIT_ODB_LOOKUP_NO_REFRESH as u32;
+    }
+}
+
+bitflags! {
+    /// How to handle reference updates.
+    #[derive(Clone, Copy, Debug, Eq, PartialEq, PartialOrd, Ord, Hash)]
+    pub struct RemoteUpdateFlags: u32 {
+       /// Write the fetch results to FETCH_HEAD.
+       const UPDATE_FETCHHEAD = raw::GIT_REMOTE_UPDATE_FETCHHEAD as u32;
+       /// Report unchanged tips in the update_tips callback.
+       const REPORT_UNCHANGED = raw::GIT_REMOTE_UPDATE_REPORT_UNCHANGED as u32;
     }
 }
 
@@ -963,6 +978,7 @@ impl ConfigLevel {
             raw::GIT_CONFIG_LEVEL_XDG => ConfigLevel::XDG,
             raw::GIT_CONFIG_LEVEL_GLOBAL => ConfigLevel::Global,
             raw::GIT_CONFIG_LEVEL_LOCAL => ConfigLevel::Local,
+            raw::GIT_CONFIG_LEVEL_WORKTREE => ConfigLevel::Worktree,
             raw::GIT_CONFIG_LEVEL_APP => ConfigLevel::App,
             raw::GIT_CONFIG_HIGHEST_LEVEL => ConfigLevel::Highest,
             n => panic!("unknown config level: {}", n),
@@ -1007,7 +1023,7 @@ bitflags! {
     /// represents the status of file in the index relative to the HEAD, and the
     /// `STATUS_WT_*` set of flags represent the status of the file in the
     /// working directory relative to the index.
-    #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+    #[derive(Clone, Copy, Debug, Eq, PartialEq, PartialOrd, Ord, Hash)]
     pub struct Status: u32 {
         #[allow(missing_docs)]
         const CURRENT = raw::GIT_STATUS_CURRENT as u32;
@@ -1058,7 +1074,7 @@ impl Status {
 
 bitflags! {
     /// Mode options for RepositoryInitOptions
-    #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+    #[derive(Clone, Copy, Debug, Eq, PartialEq, PartialOrd, Ord, Hash)]
     pub struct RepositoryInitMode: u32 {
         /// Use permissions configured by umask - the default
         const SHARED_UMASK = raw::GIT_REPOSITORY_INIT_SHARED_UMASK as u32;
@@ -1191,7 +1207,7 @@ bitflags! {
     /// Lastly, the following will only be returned for ignore "NONE".
     ///
     /// * WD_UNTRACKED      - workdir contains untracked files
-    #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+    #[derive(Clone, Copy, Debug, Eq, PartialEq, PartialOrd, Ord, Hash)]
     pub struct SubmoduleStatus: u32 {
         #[allow(missing_docs)]
         const IN_HEAD = raw::GIT_SUBMODULE_STATUS_IN_HEAD as u32;
@@ -1288,7 +1304,7 @@ pub enum SubmoduleUpdate {
 
 bitflags! {
     /// ...
-    #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+    #[derive(Clone, Copy, Debug, Eq, PartialEq, PartialOrd, Ord, Hash)]
     pub struct PathspecFlags: u32 {
         /// Use the default pathspec matching configuration.
         const DEFAULT = raw::GIT_PATHSPEC_DEFAULT as u32;
@@ -1334,7 +1350,7 @@ impl Default for PathspecFlags {
 
 bitflags! {
     /// Types of notifications emitted from checkouts.
-    #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+    #[derive(Clone, Copy, Debug, Eq, PartialEq, PartialOrd, Ord, Hash)]
     pub struct CheckoutNotificationType: u32 {
         /// Notification about a conflict.
         const CONFLICT = raw::GIT_CHECKOUT_NOTIFY_CONFLICT as u32;
@@ -1376,7 +1392,7 @@ pub enum DiffFormat {
 
 bitflags! {
     /// Formatting options for diff stats
-    #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+    #[derive(Clone, Copy, Debug, Eq, PartialEq, PartialOrd, Ord, Hash)]
     pub struct DiffStatsFormat: raw::git_diff_stats_format_t {
         /// Don't generate any stats
         const NONE = raw::GIT_DIFF_STATS_NONE;
@@ -1447,7 +1463,7 @@ pub enum StashApplyProgress {
 
 bitflags! {
     #[allow(missing_docs)]
-    #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+    #[derive(Clone, Copy, Debug, Eq, PartialEq, PartialOrd, Ord, Hash)]
     pub struct StashApplyFlags: u32 {
         #[allow(missing_docs)]
         const DEFAULT = raw::GIT_STASH_APPLY_DEFAULT as u32;
@@ -1470,7 +1486,7 @@ impl Default for StashApplyFlags {
 
 bitflags! {
     #[allow(missing_docs)]
-    #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+    #[derive(Clone, Copy, Debug, Eq, PartialEq, PartialOrd, Ord, Hash)]
     pub struct StashFlags: u32 {
         #[allow(missing_docs)]
         const DEFAULT = raw::GIT_STASH_DEFAULT as u32;
@@ -1503,7 +1519,7 @@ impl Default for StashFlags {
 
 bitflags! {
     #[allow(missing_docs)]
-    #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+    #[derive(Clone, Copy, Debug, Eq, PartialEq, PartialOrd, Ord, Hash)]
     pub struct AttrCheckFlags: u32 {
         /// Check the working directory, then the index.
         const FILE_THEN_INDEX = raw::GIT_ATTR_CHECK_FILE_THEN_INDEX as u32;
@@ -1524,7 +1540,7 @@ impl Default for AttrCheckFlags {
 
 bitflags! {
     #[allow(missing_docs)]
-    #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+    #[derive(Clone, Copy, Debug, Eq, PartialEq, PartialOrd, Ord, Hash)]
     pub struct DiffFlags: u32 {
         /// File(s) treated as binary data.
         const BINARY = raw::GIT_DIFF_FLAG_BINARY as u32;
@@ -1546,7 +1562,7 @@ impl DiffFlags {
 
 bitflags! {
     /// Options for [`Reference::normalize_name`].
-    #[derive(Clone, Copy, Debug, Eq, PartialEq)]
+    #[derive(Clone, Copy, Debug, Eq, PartialEq, PartialOrd, Ord, Hash)]
     pub struct ReferenceFormat: u32 {
         /// No particular normalization.
         const NORMAL = raw::GIT_REFERENCE_FORMAT_NORMAL as u32;

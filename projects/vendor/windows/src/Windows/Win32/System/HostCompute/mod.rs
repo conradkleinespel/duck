@@ -1,27 +1,13 @@
 #[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct HCS_CALLBACK(pub isize);
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub struct HCS_CALLBACK(pub *mut core::ffi::c_void);
 impl HCS_CALLBACK {
     pub fn is_invalid(&self) -> bool {
-        self.0 == -1 || self.0 == 0
+        self.0 == -1 as _ || self.0 == 0 as _
     }
 }
-impl ::core::default::Default for HCS_CALLBACK {
+impl Default for HCS_CALLBACK {
     fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
+        unsafe { core::mem::zeroed() }
     }
-}
-impl ::core::clone::Clone for HCS_CALLBACK {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for HCS_CALLBACK {}
-impl ::core::fmt::Debug for HCS_CALLBACK {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("HCS_CALLBACK").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for HCS_CALLBACK {
-    type TypeKind = ::windows_core::CopyType;
 }

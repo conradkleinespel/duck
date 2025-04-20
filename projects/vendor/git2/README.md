@@ -6,7 +6,7 @@ libgit2 bindings for Rust.
 
 ```toml
 [dependencies]
-git2 = "0.18.1"
+git2 = "0.20.1"
 ```
 
 ## Rust version requirements
@@ -16,15 +16,20 @@ stable release as well.
 
 ## Version of libgit2
 
-Currently this library requires libgit2 1.7.1 (or newer patch versions). The
+Currently this library requires libgit2 1.9.0 (or newer patch versions). The
 source for libgit2 is included in the libgit2-sys crate so there's no need to
 pre-install the libgit2 library, the libgit2-sys crate will figure that and/or
-build that for you.
+build that for you. On the other hand, if an appropriate version of `libgit2`
+is present, `git2` will attempt to dynamically link it.
 
-You can enable the Cargo feature `vendored-libgit2` to always compile and
-statically link to a copy of libgit2. Sometimes the libgit2 on the system is
-required to be found and used even when `vendored-libgit2` is activated. In
-this case, you shall set the environment variable `LIBGIT2_NO_VENDOR=1`.
+To be more precise, the vendored `libgit2` is linked statically if two
+conditions both hold:
+
+- The environment variable `LIBGIT2_NO_VENDOR=1` is **not** set
+- **and** either a) The Cargo feature `vendored-libgit2` is set or b) an
+  appropriate version of `libgit2` cannot be found on the system.
+
+In particular, note that the environment variable overrides the Cargo feature.
 
 ## Building git2-rs
 

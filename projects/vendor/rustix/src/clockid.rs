@@ -11,8 +11,11 @@ use crate::fd::BorrowedFd;
 /// [`clock_gettime`]: crate::time::clock_gettime
 #[cfg(not(any(apple, target_os = "wasi")))]
 #[derive(Debug, Copy, Clone, Eq, PartialEq, Hash)]
-#[cfg_attr(not(any(target_os = "aix", target_os = "dragonfly")), repr(i32))]
-#[cfg_attr(target_os = "dragonfly", repr(u64))]
+#[cfg_attr(
+    not(any(target_os = "aix", target_os = "cygwin", target_os = "dragonfly")),
+    repr(i32)
+)]
+#[cfg_attr(any(target_os = "cygwin", target_os = "dragonfly"), repr(u64))]
 #[cfg_attr(target_os = "aix", repr(i64))]
 #[non_exhaustive]
 pub enum ClockId {
@@ -25,6 +28,13 @@ pub enum ClockId {
     Monotonic = bitcast!(c::CLOCK_MONOTONIC),
 
     /// `CLOCK_UPTIME`
+    ///
+    /// On FreeBSD, this is an alias for [`Self::Boottime`].
+    ///
+    /// On OpenBSD, this differs from `Self::Boottime`; it only advances when
+    /// the system is not suspended.
+    ///
+    /// [`Self::Uptime`]: https://docs.rs/rustix/*/x86_64-unknown-freebsd/rustix/time/enum.ClockId.html#variant.Uptime
     #[cfg(any(freebsdlike, target_os = "openbsd"))]
     #[doc(alias = "CLOCK_UPTIME")]
     Uptime = c::CLOCK_UPTIME,
@@ -32,6 +42,7 @@ pub enum ClockId {
     /// `CLOCK_PROCESS_CPUTIME_ID`
     #[cfg(not(any(
         solarish,
+        target_os = "horizon",
         target_os = "netbsd",
         target_os = "redox",
         target_os = "vita"
@@ -42,6 +53,7 @@ pub enum ClockId {
     /// `CLOCK_THREAD_CPUTIME_ID`
     #[cfg(not(any(
         solarish,
+        target_os = "horizon",
         target_os = "netbsd",
         target_os = "redox",
         target_os = "vita"
@@ -69,15 +81,12 @@ pub enum ClockId {
     #[doc(alias = "CLOCK_REALTIME_ALARM")]
     RealtimeAlarm = bitcast!(c::CLOCK_REALTIME_ALARM),
 
-    /// `CLOCK_TAI`, available on Linux >= 3.10
+    /// `CLOCK_TAI`, available on Linux ≥ 3.10
     #[cfg(all(linux_kernel, feature = "linux_4_11"))]
     #[doc(alias = "CLOCK_TAI")]
     Tai = bitcast!(c::CLOCK_TAI),
 
     /// `CLOCK_BOOTTIME`
-    ///
-    /// On FreeBSD, use [`Self::Uptime`], as `CLOCK_BOOTTIME` is an alias for
-    /// `CLOCK_UPTIME`.
     #[cfg(any(linux_kernel, target_os = "fuchsia", target_os = "openbsd"))]
     #[doc(alias = "CLOCK_BOOTTIME")]
     Boottime = bitcast!(c::CLOCK_BOOTTIME),
@@ -140,15 +149,15 @@ pub enum DynamicClockId<'a> {
     #[doc(alias = "CLOCK_REALTIME_ALARM")]
     RealtimeAlarm,
 
-    /// `CLOCK_TAI`, available on Linux >= 3.10
+    /// `CLOCK_TAI`, available on Linux ≥ 3.10
     #[cfg(linux_kernel)]
     #[doc(alias = "CLOCK_TAI")]
     Tai,
 
     /// `CLOCK_BOOTTIME`
     #[cfg(any(
-        freebsdlike,
         linux_kernel,
+        target_os = "freebsd",
         target_os = "fuchsia",
         target_os = "openbsd"
     ))]

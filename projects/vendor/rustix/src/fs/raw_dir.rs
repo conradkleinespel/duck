@@ -1,14 +1,13 @@
 //! `RawDir` and `RawDirEntry`.
 
-use core::fmt;
-use core::mem::{align_of, MaybeUninit};
-use linux_raw_sys::general::linux_dirent64;
-
 use crate::backend::fs::syscalls::getdents_uninit;
 use crate::fd::AsFd;
 use crate::ffi::CStr;
 use crate::fs::FileType;
 use crate::io;
+use core::fmt;
+use core::mem::{align_of, MaybeUninit};
+use linux_raw_sys::general::linux_dirent64;
 
 /// A directory iterator implemented with getdents.
 ///
@@ -89,8 +88,8 @@ impl<'buf, Fd: AsFd> RawDir<'buf, Fd> {
     /// Heap allocated growing buffer for supporting directory entries with
     /// arbitrarily large file names:
     ///
-    /// ```notrust
-    /// # // The `notrust` above can be removed when we can depend on Rust 1.65.
+    /// ```ignore
+    /// # // The `ignore` above can be removed when we can depend on Rust 1.65.
     /// # use std::mem::MaybeUninit;
     /// # use rustix::fs::{CWD, Mode, OFlags, openat, RawDir};
     /// # use rustix::io::Errno;
@@ -213,7 +212,7 @@ impl<'buf, Fd: AsFd> RawDir<'buf, Fd> {
         // - This data is initialized by the check above.
         //   - Assumption: the kernel will not give us partial structs.
         // - Assumption: the kernel uses proper alignment between structs.
-        // - The starting pointer is aligned (performed in RawDir::new)
+        // - The starting pointer is aligned (performed in `RawDir::new`).
         let dirent = unsafe { &*dirent_ptr.cast::<linux_dirent64>() };
 
         self.offset += usize::from(dirent.d_reclen);

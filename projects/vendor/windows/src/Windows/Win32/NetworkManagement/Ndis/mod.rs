@@ -1,208 +1,258 @@
 pub const AUTHENTICATE: OFFLOAD_OPERATION_E = OFFLOAD_OPERATION_E(1i32);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct BSSID_INFO {
+    pub BSSID: [u8; 6],
+    pub PMKID: [u8; 16],
+}
+impl Default for BSSID_INFO {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
 pub const CLOCK_NETWORK_DERIVED: u32 = 2u32;
 pub const CLOCK_PRECISION: u32 = 4u32;
-pub const DD_NDIS_DEVICE_NAME: ::windows_core::PCWSTR = ::windows_core::w!("\\Device\\NDIS");
+pub const DD_NDIS_DEVICE_NAME: windows_core::PCWSTR = windows_core::w!("\\Device\\NDIS");
 pub const DOT11_RSN_KCK_LENGTH: u32 = 16u32;
 pub const DOT11_RSN_KEK_LENGTH: u32 = 16u32;
 pub const DOT11_RSN_MAX_CIPHER_KEY_LENGTH: u32 = 32u32;
 pub const EAPOL_REQUEST_ID_WOL_FLAG_MUST_ENCRYPT: u32 = 1u32;
 pub const ENCRYPT: OFFLOAD_OPERATION_E = OFFLOAD_OPERATION_E(2i32);
 pub const ETHERNET_LENGTH_OF_ADDRESS: u32 = 6u32;
-pub const GUID_DEVINTERFACE_NET: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xcac88484_7515_4c03_82e6_71a87abac361);
-pub const GUID_DEVINTERFACE_NETUIO: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x08336f60_0679_4c6c_85d2_ae7ced65fff7);
-pub const GUID_NDIS_802_11_ADD_KEY: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xab8b5a62_1d51_49d8_ba5c_fa980be03a1d);
-pub const GUID_NDIS_802_11_ADD_WEP: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x4307bff0_2129_11d4_97eb_00c04f79c403);
-pub const GUID_NDIS_802_11_ASSOCIATION_INFORMATION: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xa08d4dd0_960e_40bd_8cf6_c538af98f2e3);
-pub const GUID_NDIS_802_11_AUTHENTICATION_MODE: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x43920a24_2129_11d4_97eb_00c04f79c403);
-pub const GUID_NDIS_802_11_BSSID: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x2504b6c2_1fa5_11d4_97eb_00c04f79c403);
-pub const GUID_NDIS_802_11_BSSID_LIST: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x69526f9a_2062_11d4_97eb_00c04f79c403);
-pub const GUID_NDIS_802_11_BSSID_LIST_SCAN: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x0d9e01e1_ba70_11d4_b675_002048570337);
-pub const GUID_NDIS_802_11_CONFIGURATION: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x4a4df982_2068_11d4_97eb_00c04f79c403);
-pub const GUID_NDIS_802_11_DESIRED_RATES: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x452ee08e_2536_11d4_97eb_00c04f79c403);
-pub const GUID_NDIS_802_11_DISASSOCIATE: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x43671f40_2129_11d4_97eb_00c04f79c403);
-pub const GUID_NDIS_802_11_FRAGMENTATION_THRESHOLD: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x69aaa7c4_2062_11d4_97eb_00c04f79c403);
-pub const GUID_NDIS_802_11_INFRASTRUCTURE_MODE: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x697d5a7e_2062_11d4_97eb_00c04f79c403);
-pub const GUID_NDIS_802_11_MEDIA_STREAM_MODE: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x0a56af66_d84b_49eb_a28d_5282cbb6d0cd);
-pub const GUID_NDIS_802_11_NETWORK_TYPES_SUPPORTED: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x8531d6e6_2041_11d4_97eb_00c04f79c403);
-pub const GUID_NDIS_802_11_NETWORK_TYPE_IN_USE: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x857e2326_2041_11d4_97eb_00c04f79c403);
-pub const GUID_NDIS_802_11_NUMBER_OF_ANTENNAS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x01779336_2064_11d4_97eb_00c04f79c403);
-pub const GUID_NDIS_802_11_POWER_MODE: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x85be837c_2041_11d4_97eb_00c04f79c403);
-pub const GUID_NDIS_802_11_PRIVACY_FILTER: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x6733c4e9_4792_11d4_97f1_00c04f79c403);
-pub const GUID_NDIS_802_11_RELOAD_DEFAULTS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x748b14e8_32ee_4425_b91b_c9848c58b55a);
-pub const GUID_NDIS_802_11_REMOVE_KEY: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x73cb28e9_3188_42d5_b553_b21237e6088c);
-pub const GUID_NDIS_802_11_REMOVE_WEP: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x433c345c_2129_11d4_97eb_00c04f79c403);
-pub const GUID_NDIS_802_11_RSSI: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x1507db16_2053_11d4_97eb_00c04f79c403);
-pub const GUID_NDIS_802_11_RSSI_TRIGGER: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x155689b8_2053_11d4_97eb_00c04f79c403);
-pub const GUID_NDIS_802_11_RTS_THRESHOLD: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x0134d07e_2064_11d4_97eb_00c04f79c403);
-pub const GUID_NDIS_802_11_RX_ANTENNA_SELECTED: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x01ac07a2_2064_11d4_97eb_00c04f79c403);
-pub const GUID_NDIS_802_11_SSID: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x7d2a90ea_2041_11d4_97eb_00c04f79c403);
-pub const GUID_NDIS_802_11_STATISTICS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x42bb73b0_2129_11d4_97eb_00c04f79c403);
-pub const GUID_NDIS_802_11_SUPPORTED_RATES: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x49db8722_2068_11d4_97eb_00c04f79c403);
-pub const GUID_NDIS_802_11_TEST: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x4b9ca16a_6a60_4e9d_920c_6335953fa0b5);
-pub const GUID_NDIS_802_11_TX_ANTENNA_SELECTED: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x01dbb74a_2064_11d4_97eb_00c04f79c403);
-pub const GUID_NDIS_802_11_TX_POWER_LEVEL: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x11e6ba76_2053_11d4_97eb_00c04f79c403);
-pub const GUID_NDIS_802_11_WEP_STATUS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xb027a21f_3cfa_4125_800b_3f7a18fddcdc);
-pub const GUID_NDIS_802_3_CURRENT_ADDRESS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x44795700_a61b_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_802_3_MAC_OPTIONS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x44795703_a61b_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_802_3_MAXIMUM_LIST_SIZE: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x44795702_a61b_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_802_3_MULTICAST_LIST: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x44795701_a61b_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_802_3_PERMANENT_ADDRESS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x447956ff_a61b_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_802_3_RCV_ERROR_ALIGNMENT: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x44795704_a61b_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_802_3_XMIT_MORE_COLLISIONS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x44795706_a61b_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_802_3_XMIT_ONE_COLLISION: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x44795705_a61b_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_802_5_CURRENT_ADDRESS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x44795708_a61b_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_802_5_CURRENT_FUNCTIONAL: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x44795709_a61b_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_802_5_CURRENT_GROUP: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x4479570a_a61b_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_802_5_CURRENT_RING_STATE: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xacf14032_a61c_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_802_5_CURRENT_RING_STATUS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x890a36ec_a61c_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_802_5_LAST_OPEN_STATUS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x4479570b_a61b_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_802_5_LINE_ERRORS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xacf14033_a61c_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_802_5_LOST_FRAMES: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xacf14034_a61c_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_802_5_PERMANENT_ADDRESS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x44795707_a61b_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_ENUMERATE_ADAPTER: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x981f2d7f_b1f3_11d0_8dd7_00c04fc3358c);
-pub const GUID_NDIS_ENUMERATE_ADAPTERS_EX: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x16716917_4306_4be4_9b5a_3809ae44b125);
-pub const GUID_NDIS_ENUMERATE_VC: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x981f2d82_b1f3_11d0_8dd7_00c04fc3358c);
-pub const GUID_NDIS_GEN_CO_DRIVER_VERSION: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x791ad198_e35c_11d0_9692_00c04fc3358c);
-pub const GUID_NDIS_GEN_CO_HARDWARE_STATUS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x791ad192_e35c_11d0_9692_00c04fc3358c);
-pub const GUID_NDIS_GEN_CO_LINK_SPEED: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x791ad195_e35c_11d0_9692_00c04fc3358c);
-pub const GUID_NDIS_GEN_CO_MAC_OPTIONS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x791ad19a_e35c_11d0_9692_00c04fc3358c);
-pub const GUID_NDIS_GEN_CO_MEDIA_CONNECT_STATUS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x791ad19b_e35c_11d0_9692_00c04fc3358c);
-pub const GUID_NDIS_GEN_CO_MEDIA_IN_USE: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x791ad194_e35c_11d0_9692_00c04fc3358c);
-pub const GUID_NDIS_GEN_CO_MEDIA_SUPPORTED: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x791ad193_e35c_11d0_9692_00c04fc3358c);
-pub const GUID_NDIS_GEN_CO_MINIMUM_LINK_SPEED: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x791ad19d_e35c_11d0_9692_00c04fc3358c);
-pub const GUID_NDIS_GEN_CO_RCV_PDUS_ERROR: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x0a214808_e35f_11d0_9692_00c04fc3358c);
-pub const GUID_NDIS_GEN_CO_RCV_PDUS_NO_BUFFER: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x0a214809_e35f_11d0_9692_00c04fc3358c);
-pub const GUID_NDIS_GEN_CO_RCV_PDUS_OK: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x0a214806_e35f_11d0_9692_00c04fc3358c);
-pub const GUID_NDIS_GEN_CO_VENDOR_DESCRIPTION: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x791ad197_e35c_11d0_9692_00c04fc3358c);
-pub const GUID_NDIS_GEN_CO_VENDOR_DRIVER_VERSION: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x791ad19c_e35c_11d0_9692_00c04fc3358c);
-pub const GUID_NDIS_GEN_CO_VENDOR_ID: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x791ad196_e35c_11d0_9692_00c04fc3358c);
-pub const GUID_NDIS_GEN_CO_XMIT_PDUS_ERROR: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x0a214807_e35f_11d0_9692_00c04fc3358c);
-pub const GUID_NDIS_GEN_CO_XMIT_PDUS_OK: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x0a214805_e35f_11d0_9692_00c04fc3358c);
-pub const GUID_NDIS_GEN_CURRENT_LOOKAHEAD: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x5ec10361_a61a_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_GEN_CURRENT_PACKET_FILTER: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x5ec10360_a61a_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_GEN_DRIVER_VERSION: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x5ec10362_a61a_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_GEN_ENUMERATE_PORTS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xf1d6abe8_15e4_4407_81b7_6b830c777cd9);
-pub const GUID_NDIS_GEN_HARDWARE_STATUS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x5ec10354_a61a_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_GEN_INTERRUPT_MODERATION: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xd9c8eea5_f16e_467c_84d5_6345a22ce213);
-pub const GUID_NDIS_GEN_INTERRUPT_MODERATION_PARAMETERS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xd789adfa_9c56_433b_ad01_7574f3cedbe9);
-pub const GUID_NDIS_GEN_LINK_PARAMETERS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x8c7d3579_252b_4614_82c5_a650daa15049);
-pub const GUID_NDIS_GEN_LINK_SPEED: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x5ec10359_a61a_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_GEN_LINK_STATE: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xba1f4c14_a945_4762_b916_0b5515b6f43a);
-pub const GUID_NDIS_GEN_MAC_OPTIONS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x5ec10365_a61a_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_GEN_MAXIMUM_FRAME_SIZE: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x5ec10358_a61a_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_GEN_MAXIMUM_LOOKAHEAD: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x5ec10357_a61a_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_GEN_MAXIMUM_SEND_PACKETS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x5ec10367_a61a_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_GEN_MAXIMUM_TOTAL_SIZE: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x5ec10363_a61a_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_GEN_MEDIA_CONNECT_STATUS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x5ec10366_a61a_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_GEN_MEDIA_IN_USE: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x5ec10356_a61a_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_GEN_MEDIA_SUPPORTED: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x5ec10355_a61a_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_GEN_PCI_DEVICE_CUSTOM_PROPERTIES: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xaa39f5ab_e260_4d01_82b0_b737c880ea05);
-pub const GUID_NDIS_GEN_PHYSICAL_MEDIUM: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x418ca16d_3937_4208_940a_ec6196278085);
-pub const GUID_NDIS_GEN_PHYSICAL_MEDIUM_EX: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x899e7782_035b_43f9_8bb6_2b58971612e5);
-pub const GUID_NDIS_GEN_PORT_AUTHENTICATION_PARAMETERS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xaab6ac31_86fb_48fb_8b48_63db235ace16);
-pub const GUID_NDIS_GEN_PORT_STATE: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x6fbf2a5f_8b8f_4920_8143_e6c460f52524);
-pub const GUID_NDIS_GEN_RCV_ERROR: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x447956fd_a61b_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_GEN_RCV_NO_BUFFER: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x447956fe_a61b_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_GEN_RCV_OK: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x447956fb_a61b_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_GEN_RECEIVE_BLOCK_SIZE: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x5ec1035d_a61a_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_GEN_RECEIVE_BUFFER_SPACE: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x5ec1035b_a61a_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_GEN_STATISTICS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x368c45b5_c129_43c1_939e_7edc2d7fe621);
-pub const GUID_NDIS_GEN_TRANSMIT_BLOCK_SIZE: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x5ec1035c_a61a_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_GEN_TRANSMIT_BUFFER_SPACE: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x5ec1035a_a61a_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_GEN_VENDOR_DESCRIPTION: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x5ec1035f_a61a_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_GEN_VENDOR_DRIVER_VERSION: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x447956f9_a61b_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_GEN_VENDOR_ID: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x5ec1035e_a61a_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_GEN_VLAN_ID: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x765dc702_c5e8_4b67_843b_3f5a4ff2648b);
-pub const GUID_NDIS_GEN_XMIT_ERROR: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x447956fc_a61b_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_GEN_XMIT_OK: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x447956fa_a61b_11d0_8dd4_00c04fc3358c);
-pub const GUID_NDIS_HD_SPLIT_CURRENT_CONFIG: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x81d1303c_ab00_4e49_80b1_5e6e0bf9be53);
-pub const GUID_NDIS_HD_SPLIT_PARAMETERS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x8c048bea_2913_4458_b68e_17f6c1e5c60e);
-pub const GUID_NDIS_LAN_CLASS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xad498944_762f_11d0_8dcb_00c04fc3358c);
-pub const GUID_NDIS_NDK_CAPABILITIES: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x7969ba4d_dd80_4bc7_b3e6_68043997e519);
-pub const GUID_NDIS_NDK_STATE: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x530c69c9_2f51_49de_a1af_088d54ffa474);
-pub const GUID_NDIS_NOTIFY_ADAPTER_ARRIVAL: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x981f2d81_b1f3_11d0_8dd7_00c04fc3358c);
-pub const GUID_NDIS_NOTIFY_ADAPTER_REMOVAL: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x981f2d80_b1f3_11d0_8dd7_00c04fc3358c);
-pub const GUID_NDIS_NOTIFY_BIND: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x5413531c_b1f3_11d0_8dd7_00c04fc3358c);
-pub const GUID_NDIS_NOTIFY_DEVICE_POWER_OFF: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x81bc8189_b026_46ab_b964_f182e342934e);
-pub const GUID_NDIS_NOTIFY_DEVICE_POWER_OFF_EX: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x4159353c_5cd7_42ce_8fe4_a45a2380cc4f);
-pub const GUID_NDIS_NOTIFY_DEVICE_POWER_ON: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x5f81cfd0_f046_4342_af61_895acedaefd9);
-pub const GUID_NDIS_NOTIFY_DEVICE_POWER_ON_EX: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x2b440188_92ac_4f60_9b2d_20a30cbb6bbe);
-pub const GUID_NDIS_NOTIFY_FILTER_ARRIVAL: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x0b6d3c89_5917_43ca_b578_d01a7967c41c);
-pub const GUID_NDIS_NOTIFY_FILTER_REMOVAL: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x1f177cd9_5955_4721_9f6a_78ebdfaef889);
-pub const GUID_NDIS_NOTIFY_UNBIND: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x6e3ce1ec_b1f3_11d0_8dd7_00c04fc3358c);
-pub const GUID_NDIS_NOTIFY_VC_ARRIVAL: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x182f9e0c_b1f3_11d0_8dd7_00c04fc3358c);
-pub const GUID_NDIS_NOTIFY_VC_REMOVAL: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x981f2d79_b1f3_11d0_8dd7_00c04fc3358c);
-pub const GUID_NDIS_PM_ACTIVE_CAPABILITIES: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xb2cf76e3_b3ae_4394_a01f_338c9870e939);
-pub const GUID_NDIS_PM_ADMIN_CONFIG: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x1528d111_708a_4ca4_9215_c05771161cda);
-pub const GUID_NDIS_RECEIVE_FILTER_ENUM_FILTERS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x3f2c141d_83bc_11dd_94b8_001d09162bc3);
-pub const GUID_NDIS_RECEIVE_FILTER_ENUM_QUEUES: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x3f2c141b_83bc_11dd_94b8_001d09162bc3);
-pub const GUID_NDIS_RECEIVE_FILTER_GLOBAL_PARAMETERS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x3f2c141a_83bc_11dd_94b8_001d09162bc3);
-pub const GUID_NDIS_RECEIVE_FILTER_HARDWARE_CAPABILITIES: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x3f2c1419_83bc_11dd_94b8_001d09162bc3);
-pub const GUID_NDIS_RECEIVE_FILTER_PARAMETERS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x3f2c141e_83bc_11dd_94b8_001d09162bc3);
-pub const GUID_NDIS_RECEIVE_FILTER_QUEUE_PARAMETERS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x3f2c141c_83bc_11dd_94b8_001d09162bc3);
-pub const GUID_NDIS_RECEIVE_SCALE_CAPABILITIES: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x26c28774_4252_48fe_a610_a58a398c0eb1);
-pub const GUID_NDIS_RSS_ENABLED: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x9565cd55_3402_4e32_a5b6_2f143f2f2c30);
-pub const GUID_NDIS_STATUS_DOT11_ASSOCIATION_COMPLETION: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x458bbea7_45a4_4ae2_b176_e51f96fc0568);
-pub const GUID_NDIS_STATUS_DOT11_ASSOCIATION_START: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x3927843b_6980_4b48_b15b_4de50977ac40);
-pub const GUID_NDIS_STATUS_DOT11_CONNECTION_COMPLETION: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x96efd9c9_7f1b_4a89_bc04_3e9e271765f1);
-pub const GUID_NDIS_STATUS_DOT11_CONNECTION_START: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x7b74299d_998f_4454_ad08_c5af28576d1b);
-pub const GUID_NDIS_STATUS_DOT11_DISASSOCIATION: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x3fbeb6fc_0fe2_43fd_b2ad_bd99b5f93e13);
-pub const GUID_NDIS_STATUS_DOT11_LINK_QUALITY: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xa3285184_ea99_48ed_825e_a426b11c2754);
-pub const GUID_NDIS_STATUS_DOT11_MPDU_MAX_LENGTH_CHANGED: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x1d6560ec_8e48_4a3e_9fd5_a01b698db6c5);
-pub const GUID_NDIS_STATUS_DOT11_PHY_STATE_CHANGED: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xdeb45316_71b5_4736_bdef_0a9e9f4e62dc);
-pub const GUID_NDIS_STATUS_DOT11_PMKID_CANDIDATE_LIST: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x26d8b8f6_db82_49eb_8bf3_4c130ef06950);
-pub const GUID_NDIS_STATUS_DOT11_ROAMING_COMPLETION: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xdd9d47d1_282b_41e4_b924_66368817fcd3);
-pub const GUID_NDIS_STATUS_DOT11_ROAMING_START: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xb2412d0d_26c8_4f4e_93df_f7b705a0b433);
-pub const GUID_NDIS_STATUS_DOT11_SCAN_CONFIRM: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x8500591e_a0c7_4efb_9342_b674b002cbe6);
-pub const GUID_NDIS_STATUS_DOT11_TKIPMIC_FAILURE: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x442c2ae4_9bc5_4b90_a889_455ef220f4ee);
-pub const GUID_NDIS_STATUS_EXTERNAL_CONNECTIVITY_CHANGE: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xfd306974_c420_4433_b0fe_4cf6a613f59f);
-pub const GUID_NDIS_STATUS_HD_SPLIT_CURRENT_CONFIG: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x6c744b0e_ee9c_4205_90a2_015f6d65f403);
-pub const GUID_NDIS_STATUS_LINK_SPEED_CHANGE: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x981f2d85_b1f3_11d0_8dd7_00c04fc3358c);
-pub const GUID_NDIS_STATUS_LINK_STATE: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x64c6f797_878c_4311_9246_65dba89c3a61);
-pub const GUID_NDIS_STATUS_MEDIA_CONNECT: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x981f2d7d_b1f3_11d0_8dd7_00c04fc3358c);
-pub const GUID_NDIS_STATUS_MEDIA_DISCONNECT: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x981f2d7e_b1f3_11d0_8dd7_00c04fc3358c);
-pub const GUID_NDIS_STATUS_MEDIA_SPECIFIC_INDICATION: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x981f2d84_b1f3_11d0_8dd7_00c04fc3358c);
-pub const GUID_NDIS_STATUS_NETWORK_CHANGE: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xca8a56f9_ce81_40e6_a70f_a067a476e9e9);
-pub const GUID_NDIS_STATUS_OPER_STATUS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xf917b663_845e_4d3d_b6d4_15eb27af81c5);
-pub const GUID_NDIS_STATUS_PACKET_FILTER: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xd47c5407_2e75_46dd_8146_1d7ed2d6ab1d);
-pub const GUID_NDIS_STATUS_PM_OFFLOAD_REJECTED: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xadd1d481_711e_4d1a_92ca_a62db9329712);
-pub const GUID_NDIS_STATUS_PM_WAKE_REASON: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x0933fd58_ca62_438f_83da_dfc1cccb8145);
-pub const GUID_NDIS_STATUS_PM_WOL_PATTERN_REJECTED: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xf72cf68e_18d4_4d63_9a19_e69b13916b1a);
-pub const GUID_NDIS_STATUS_PORT_STATE: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x1dac0dfe_43e5_44b7_b759_7bf46de32e81);
-pub const GUID_NDIS_STATUS_RESET_END: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x981f2d77_b1f3_11d0_8dd7_00c04fc3358c);
-pub const GUID_NDIS_STATUS_RESET_START: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x981f2d76_b1f3_11d0_8dd7_00c04fc3358c);
-pub const GUID_NDIS_STATUS_TASK_OFFLOAD_CURRENT_CONFIG: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x45049fc6_54d8_40c8_9c3d_b011c4e715bc);
-pub const GUID_NDIS_STATUS_TASK_OFFLOAD_HARDWARE_CAPABILITIES: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xb6b8158b_217c_4b2a_be86_6a04beea65b8);
-pub const GUID_NDIS_STATUS_TCP_CONNECTION_OFFLOAD_CURRENT_CONFIG: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xf8edaeff_24e4_4ae6_a413_0b27f76b243d);
-pub const GUID_NDIS_STATUS_TCP_CONNECTION_OFFLOAD_HARDWARE_CAPABILITIES: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x391969b6_402c_43bf_8922_39eae0da1bb5);
-pub const GUID_NDIS_SWITCH_MICROSOFT_VENDOR_ID: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x202547fe_1c9c_40b9_bba1_08ada1f98b3c);
-pub const GUID_NDIS_SWITCH_PORT_PROPERTY_PROFILE_ID_DEFAULT_EXTERNAL_NIC: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x0b347846_0a0c_470a_9b7a_0d965850698f);
-pub const GUID_NDIS_TCP_CONNECTION_OFFLOAD_CURRENT_CONFIG: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x2ee6aef1_0851_458b_bf0d_792343d1cde1);
-pub const GUID_NDIS_TCP_CONNECTION_OFFLOAD_HARDWARE_CAPABILITIES: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x8ce71f2c_d63a_4390_a487_18fa47262ceb);
-pub const GUID_NDIS_TCP_OFFLOAD_CURRENT_CONFIG: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x68542fed_5c74_461e_8934_91c6f9c60960);
-pub const GUID_NDIS_TCP_OFFLOAD_HARDWARE_CAPABILITIES: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xcd5f1102_590f_4ada_ab65_5b31b1dc0172);
-pub const GUID_NDIS_TCP_OFFLOAD_PARAMETERS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x8ead9a22_7f69_4bc6_949a_c8187b074e61);
-pub const GUID_NDIS_TCP_RSC_STATISTICS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x83104445_9b5d_4ee6_a2a5_2bd3fb3c36af);
-pub const GUID_NDIS_WAKE_ON_MAGIC_PACKET_ONLY: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xa14f1c97_8839_4f8a_9996_a28996ebbf1d);
-pub const GUID_NIC_SWITCH_CURRENT_CAPABILITIES: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xe76fdaf3_0be7_4d95_87e9_5aead4b590e9);
-pub const GUID_NIC_SWITCH_HARDWARE_CAPABILITIES: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x37cab40c_d1e8_4301_8c1d_58465e0c4c0f);
-pub const GUID_PM_ADD_PROTOCOL_OFFLOAD: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x0c06c112_0d93_439b_9e6d_26be130c9784);
-pub const GUID_PM_ADD_WOL_PATTERN: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x6fc83ba7_52bc_4faa_ac51_7d2ffe63ba90);
-pub const GUID_PM_CURRENT_CAPABILITIES: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x3abdbd14_d44a_4a3f_9a63_a0a42a51b131);
-pub const GUID_PM_GET_PROTOCOL_OFFLOAD: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xa6435cd9_149f_498e_951b_2d94bea3e3a3);
-pub const GUID_PM_HARDWARE_CAPABILITIES: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xece5360d_3291_4a6e_8044_00511fed27ee);
-pub const GUID_PM_PARAMETERS: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x560245d2_e251_409c_a280_311935be3b28);
-pub const GUID_PM_PROTOCOL_OFFLOAD_LIST: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x736ec5ab_ca8f_4043_bb58_da402a48d9cc);
-pub const GUID_PM_REMOVE_PROTOCOL_OFFLOAD: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xdecd7be2_a6b0_43ca_ae45_d000d20e5265);
-pub const GUID_PM_REMOVE_WOL_PATTERN: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xa037a915_c6ca_4322_b3e3_ef754ec498dc);
-pub const GUID_PM_WOL_PATTERN_LIST: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x4022be37_7ee2_47be_a5a5_050fc79afc75);
-pub const GUID_RECEIVE_FILTER_CURRENT_CAPABILITIES: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x4054e80f_2bc1_4ccc_b033_4abc0c4a1e8c);
-pub const GUID_STATUS_MEDIA_SPECIFIC_INDICATION_EX: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xaaacfca7_954a_4632_a16e_a8a63793a9e5);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct GEN_GET_NETCARD_TIME {
+    pub ReadTime: u64,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct GEN_GET_TIME_CAPS {
+    pub Flags: u32,
+    pub ClockPrecision: u32,
+}
+pub const GUID_DEVINTERFACE_NET: windows_core::GUID = windows_core::GUID::from_u128(0xcac88484_7515_4c03_82e6_71a87abac361);
+pub const GUID_DEVINTERFACE_NETUIO: windows_core::GUID = windows_core::GUID::from_u128(0x08336f60_0679_4c6c_85d2_ae7ced65fff7);
+pub const GUID_NDIS_802_11_ADD_KEY: windows_core::GUID = windows_core::GUID::from_u128(0xab8b5a62_1d51_49d8_ba5c_fa980be03a1d);
+pub const GUID_NDIS_802_11_ADD_WEP: windows_core::GUID = windows_core::GUID::from_u128(0x4307bff0_2129_11d4_97eb_00c04f79c403);
+pub const GUID_NDIS_802_11_ASSOCIATION_INFORMATION: windows_core::GUID = windows_core::GUID::from_u128(0xa08d4dd0_960e_40bd_8cf6_c538af98f2e3);
+pub const GUID_NDIS_802_11_AUTHENTICATION_MODE: windows_core::GUID = windows_core::GUID::from_u128(0x43920a24_2129_11d4_97eb_00c04f79c403);
+pub const GUID_NDIS_802_11_BSSID: windows_core::GUID = windows_core::GUID::from_u128(0x2504b6c2_1fa5_11d4_97eb_00c04f79c403);
+pub const GUID_NDIS_802_11_BSSID_LIST: windows_core::GUID = windows_core::GUID::from_u128(0x69526f9a_2062_11d4_97eb_00c04f79c403);
+pub const GUID_NDIS_802_11_BSSID_LIST_SCAN: windows_core::GUID = windows_core::GUID::from_u128(0x0d9e01e1_ba70_11d4_b675_002048570337);
+pub const GUID_NDIS_802_11_CONFIGURATION: windows_core::GUID = windows_core::GUID::from_u128(0x4a4df982_2068_11d4_97eb_00c04f79c403);
+pub const GUID_NDIS_802_11_DESIRED_RATES: windows_core::GUID = windows_core::GUID::from_u128(0x452ee08e_2536_11d4_97eb_00c04f79c403);
+pub const GUID_NDIS_802_11_DISASSOCIATE: windows_core::GUID = windows_core::GUID::from_u128(0x43671f40_2129_11d4_97eb_00c04f79c403);
+pub const GUID_NDIS_802_11_FRAGMENTATION_THRESHOLD: windows_core::GUID = windows_core::GUID::from_u128(0x69aaa7c4_2062_11d4_97eb_00c04f79c403);
+pub const GUID_NDIS_802_11_INFRASTRUCTURE_MODE: windows_core::GUID = windows_core::GUID::from_u128(0x697d5a7e_2062_11d4_97eb_00c04f79c403);
+pub const GUID_NDIS_802_11_MEDIA_STREAM_MODE: windows_core::GUID = windows_core::GUID::from_u128(0x0a56af66_d84b_49eb_a28d_5282cbb6d0cd);
+pub const GUID_NDIS_802_11_NETWORK_TYPES_SUPPORTED: windows_core::GUID = windows_core::GUID::from_u128(0x8531d6e6_2041_11d4_97eb_00c04f79c403);
+pub const GUID_NDIS_802_11_NETWORK_TYPE_IN_USE: windows_core::GUID = windows_core::GUID::from_u128(0x857e2326_2041_11d4_97eb_00c04f79c403);
+pub const GUID_NDIS_802_11_NUMBER_OF_ANTENNAS: windows_core::GUID = windows_core::GUID::from_u128(0x01779336_2064_11d4_97eb_00c04f79c403);
+pub const GUID_NDIS_802_11_POWER_MODE: windows_core::GUID = windows_core::GUID::from_u128(0x85be837c_2041_11d4_97eb_00c04f79c403);
+pub const GUID_NDIS_802_11_PRIVACY_FILTER: windows_core::GUID = windows_core::GUID::from_u128(0x6733c4e9_4792_11d4_97f1_00c04f79c403);
+pub const GUID_NDIS_802_11_RELOAD_DEFAULTS: windows_core::GUID = windows_core::GUID::from_u128(0x748b14e8_32ee_4425_b91b_c9848c58b55a);
+pub const GUID_NDIS_802_11_REMOVE_KEY: windows_core::GUID = windows_core::GUID::from_u128(0x73cb28e9_3188_42d5_b553_b21237e6088c);
+pub const GUID_NDIS_802_11_REMOVE_WEP: windows_core::GUID = windows_core::GUID::from_u128(0x433c345c_2129_11d4_97eb_00c04f79c403);
+pub const GUID_NDIS_802_11_RSSI: windows_core::GUID = windows_core::GUID::from_u128(0x1507db16_2053_11d4_97eb_00c04f79c403);
+pub const GUID_NDIS_802_11_RSSI_TRIGGER: windows_core::GUID = windows_core::GUID::from_u128(0x155689b8_2053_11d4_97eb_00c04f79c403);
+pub const GUID_NDIS_802_11_RTS_THRESHOLD: windows_core::GUID = windows_core::GUID::from_u128(0x0134d07e_2064_11d4_97eb_00c04f79c403);
+pub const GUID_NDIS_802_11_RX_ANTENNA_SELECTED: windows_core::GUID = windows_core::GUID::from_u128(0x01ac07a2_2064_11d4_97eb_00c04f79c403);
+pub const GUID_NDIS_802_11_SSID: windows_core::GUID = windows_core::GUID::from_u128(0x7d2a90ea_2041_11d4_97eb_00c04f79c403);
+pub const GUID_NDIS_802_11_STATISTICS: windows_core::GUID = windows_core::GUID::from_u128(0x42bb73b0_2129_11d4_97eb_00c04f79c403);
+pub const GUID_NDIS_802_11_SUPPORTED_RATES: windows_core::GUID = windows_core::GUID::from_u128(0x49db8722_2068_11d4_97eb_00c04f79c403);
+pub const GUID_NDIS_802_11_TEST: windows_core::GUID = windows_core::GUID::from_u128(0x4b9ca16a_6a60_4e9d_920c_6335953fa0b5);
+pub const GUID_NDIS_802_11_TX_ANTENNA_SELECTED: windows_core::GUID = windows_core::GUID::from_u128(0x01dbb74a_2064_11d4_97eb_00c04f79c403);
+pub const GUID_NDIS_802_11_TX_POWER_LEVEL: windows_core::GUID = windows_core::GUID::from_u128(0x11e6ba76_2053_11d4_97eb_00c04f79c403);
+pub const GUID_NDIS_802_11_WEP_STATUS: windows_core::GUID = windows_core::GUID::from_u128(0xb027a21f_3cfa_4125_800b_3f7a18fddcdc);
+pub const GUID_NDIS_802_3_CURRENT_ADDRESS: windows_core::GUID = windows_core::GUID::from_u128(0x44795700_a61b_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_802_3_MAC_OPTIONS: windows_core::GUID = windows_core::GUID::from_u128(0x44795703_a61b_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_802_3_MAXIMUM_LIST_SIZE: windows_core::GUID = windows_core::GUID::from_u128(0x44795702_a61b_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_802_3_MULTICAST_LIST: windows_core::GUID = windows_core::GUID::from_u128(0x44795701_a61b_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_802_3_PERMANENT_ADDRESS: windows_core::GUID = windows_core::GUID::from_u128(0x447956ff_a61b_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_802_3_RCV_ERROR_ALIGNMENT: windows_core::GUID = windows_core::GUID::from_u128(0x44795704_a61b_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_802_3_XMIT_MORE_COLLISIONS: windows_core::GUID = windows_core::GUID::from_u128(0x44795706_a61b_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_802_3_XMIT_ONE_COLLISION: windows_core::GUID = windows_core::GUID::from_u128(0x44795705_a61b_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_802_5_CURRENT_ADDRESS: windows_core::GUID = windows_core::GUID::from_u128(0x44795708_a61b_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_802_5_CURRENT_FUNCTIONAL: windows_core::GUID = windows_core::GUID::from_u128(0x44795709_a61b_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_802_5_CURRENT_GROUP: windows_core::GUID = windows_core::GUID::from_u128(0x4479570a_a61b_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_802_5_CURRENT_RING_STATE: windows_core::GUID = windows_core::GUID::from_u128(0xacf14032_a61c_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_802_5_CURRENT_RING_STATUS: windows_core::GUID = windows_core::GUID::from_u128(0x890a36ec_a61c_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_802_5_LAST_OPEN_STATUS: windows_core::GUID = windows_core::GUID::from_u128(0x4479570b_a61b_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_802_5_LINE_ERRORS: windows_core::GUID = windows_core::GUID::from_u128(0xacf14033_a61c_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_802_5_LOST_FRAMES: windows_core::GUID = windows_core::GUID::from_u128(0xacf14034_a61c_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_802_5_PERMANENT_ADDRESS: windows_core::GUID = windows_core::GUID::from_u128(0x44795707_a61b_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_ENUMERATE_ADAPTER: windows_core::GUID = windows_core::GUID::from_u128(0x981f2d7f_b1f3_11d0_8dd7_00c04fc3358c);
+pub const GUID_NDIS_ENUMERATE_ADAPTERS_EX: windows_core::GUID = windows_core::GUID::from_u128(0x16716917_4306_4be4_9b5a_3809ae44b125);
+pub const GUID_NDIS_ENUMERATE_VC: windows_core::GUID = windows_core::GUID::from_u128(0x981f2d82_b1f3_11d0_8dd7_00c04fc3358c);
+pub const GUID_NDIS_GEN_CO_DRIVER_VERSION: windows_core::GUID = windows_core::GUID::from_u128(0x791ad198_e35c_11d0_9692_00c04fc3358c);
+pub const GUID_NDIS_GEN_CO_HARDWARE_STATUS: windows_core::GUID = windows_core::GUID::from_u128(0x791ad192_e35c_11d0_9692_00c04fc3358c);
+pub const GUID_NDIS_GEN_CO_LINK_SPEED: windows_core::GUID = windows_core::GUID::from_u128(0x791ad195_e35c_11d0_9692_00c04fc3358c);
+pub const GUID_NDIS_GEN_CO_MAC_OPTIONS: windows_core::GUID = windows_core::GUID::from_u128(0x791ad19a_e35c_11d0_9692_00c04fc3358c);
+pub const GUID_NDIS_GEN_CO_MEDIA_CONNECT_STATUS: windows_core::GUID = windows_core::GUID::from_u128(0x791ad19b_e35c_11d0_9692_00c04fc3358c);
+pub const GUID_NDIS_GEN_CO_MEDIA_IN_USE: windows_core::GUID = windows_core::GUID::from_u128(0x791ad194_e35c_11d0_9692_00c04fc3358c);
+pub const GUID_NDIS_GEN_CO_MEDIA_SUPPORTED: windows_core::GUID = windows_core::GUID::from_u128(0x791ad193_e35c_11d0_9692_00c04fc3358c);
+pub const GUID_NDIS_GEN_CO_MINIMUM_LINK_SPEED: windows_core::GUID = windows_core::GUID::from_u128(0x791ad19d_e35c_11d0_9692_00c04fc3358c);
+pub const GUID_NDIS_GEN_CO_RCV_PDUS_ERROR: windows_core::GUID = windows_core::GUID::from_u128(0x0a214808_e35f_11d0_9692_00c04fc3358c);
+pub const GUID_NDIS_GEN_CO_RCV_PDUS_NO_BUFFER: windows_core::GUID = windows_core::GUID::from_u128(0x0a214809_e35f_11d0_9692_00c04fc3358c);
+pub const GUID_NDIS_GEN_CO_RCV_PDUS_OK: windows_core::GUID = windows_core::GUID::from_u128(0x0a214806_e35f_11d0_9692_00c04fc3358c);
+pub const GUID_NDIS_GEN_CO_VENDOR_DESCRIPTION: windows_core::GUID = windows_core::GUID::from_u128(0x791ad197_e35c_11d0_9692_00c04fc3358c);
+pub const GUID_NDIS_GEN_CO_VENDOR_DRIVER_VERSION: windows_core::GUID = windows_core::GUID::from_u128(0x791ad19c_e35c_11d0_9692_00c04fc3358c);
+pub const GUID_NDIS_GEN_CO_VENDOR_ID: windows_core::GUID = windows_core::GUID::from_u128(0x791ad196_e35c_11d0_9692_00c04fc3358c);
+pub const GUID_NDIS_GEN_CO_XMIT_PDUS_ERROR: windows_core::GUID = windows_core::GUID::from_u128(0x0a214807_e35f_11d0_9692_00c04fc3358c);
+pub const GUID_NDIS_GEN_CO_XMIT_PDUS_OK: windows_core::GUID = windows_core::GUID::from_u128(0x0a214805_e35f_11d0_9692_00c04fc3358c);
+pub const GUID_NDIS_GEN_CURRENT_LOOKAHEAD: windows_core::GUID = windows_core::GUID::from_u128(0x5ec10361_a61a_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_GEN_CURRENT_PACKET_FILTER: windows_core::GUID = windows_core::GUID::from_u128(0x5ec10360_a61a_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_GEN_DRIVER_VERSION: windows_core::GUID = windows_core::GUID::from_u128(0x5ec10362_a61a_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_GEN_ENUMERATE_PORTS: windows_core::GUID = windows_core::GUID::from_u128(0xf1d6abe8_15e4_4407_81b7_6b830c777cd9);
+pub const GUID_NDIS_GEN_HARDWARE_STATUS: windows_core::GUID = windows_core::GUID::from_u128(0x5ec10354_a61a_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_GEN_INTERRUPT_MODERATION: windows_core::GUID = windows_core::GUID::from_u128(0xd9c8eea5_f16e_467c_84d5_6345a22ce213);
+pub const GUID_NDIS_GEN_INTERRUPT_MODERATION_PARAMETERS: windows_core::GUID = windows_core::GUID::from_u128(0xd789adfa_9c56_433b_ad01_7574f3cedbe9);
+pub const GUID_NDIS_GEN_LINK_PARAMETERS: windows_core::GUID = windows_core::GUID::from_u128(0x8c7d3579_252b_4614_82c5_a650daa15049);
+pub const GUID_NDIS_GEN_LINK_SPEED: windows_core::GUID = windows_core::GUID::from_u128(0x5ec10359_a61a_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_GEN_LINK_STATE: windows_core::GUID = windows_core::GUID::from_u128(0xba1f4c14_a945_4762_b916_0b5515b6f43a);
+pub const GUID_NDIS_GEN_MAC_OPTIONS: windows_core::GUID = windows_core::GUID::from_u128(0x5ec10365_a61a_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_GEN_MAXIMUM_FRAME_SIZE: windows_core::GUID = windows_core::GUID::from_u128(0x5ec10358_a61a_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_GEN_MAXIMUM_LOOKAHEAD: windows_core::GUID = windows_core::GUID::from_u128(0x5ec10357_a61a_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_GEN_MAXIMUM_SEND_PACKETS: windows_core::GUID = windows_core::GUID::from_u128(0x5ec10367_a61a_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_GEN_MAXIMUM_TOTAL_SIZE: windows_core::GUID = windows_core::GUID::from_u128(0x5ec10363_a61a_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_GEN_MEDIA_CONNECT_STATUS: windows_core::GUID = windows_core::GUID::from_u128(0x5ec10366_a61a_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_GEN_MEDIA_IN_USE: windows_core::GUID = windows_core::GUID::from_u128(0x5ec10356_a61a_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_GEN_MEDIA_SUPPORTED: windows_core::GUID = windows_core::GUID::from_u128(0x5ec10355_a61a_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_GEN_PCI_DEVICE_CUSTOM_PROPERTIES: windows_core::GUID = windows_core::GUID::from_u128(0xaa39f5ab_e260_4d01_82b0_b737c880ea05);
+pub const GUID_NDIS_GEN_PHYSICAL_MEDIUM: windows_core::GUID = windows_core::GUID::from_u128(0x418ca16d_3937_4208_940a_ec6196278085);
+pub const GUID_NDIS_GEN_PHYSICAL_MEDIUM_EX: windows_core::GUID = windows_core::GUID::from_u128(0x899e7782_035b_43f9_8bb6_2b58971612e5);
+pub const GUID_NDIS_GEN_PORT_AUTHENTICATION_PARAMETERS: windows_core::GUID = windows_core::GUID::from_u128(0xaab6ac31_86fb_48fb_8b48_63db235ace16);
+pub const GUID_NDIS_GEN_PORT_STATE: windows_core::GUID = windows_core::GUID::from_u128(0x6fbf2a5f_8b8f_4920_8143_e6c460f52524);
+pub const GUID_NDIS_GEN_RCV_ERROR: windows_core::GUID = windows_core::GUID::from_u128(0x447956fd_a61b_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_GEN_RCV_NO_BUFFER: windows_core::GUID = windows_core::GUID::from_u128(0x447956fe_a61b_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_GEN_RCV_OK: windows_core::GUID = windows_core::GUID::from_u128(0x447956fb_a61b_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_GEN_RECEIVE_BLOCK_SIZE: windows_core::GUID = windows_core::GUID::from_u128(0x5ec1035d_a61a_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_GEN_RECEIVE_BUFFER_SPACE: windows_core::GUID = windows_core::GUID::from_u128(0x5ec1035b_a61a_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_GEN_STATISTICS: windows_core::GUID = windows_core::GUID::from_u128(0x368c45b5_c129_43c1_939e_7edc2d7fe621);
+pub const GUID_NDIS_GEN_TRANSMIT_BLOCK_SIZE: windows_core::GUID = windows_core::GUID::from_u128(0x5ec1035c_a61a_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_GEN_TRANSMIT_BUFFER_SPACE: windows_core::GUID = windows_core::GUID::from_u128(0x5ec1035a_a61a_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_GEN_VENDOR_DESCRIPTION: windows_core::GUID = windows_core::GUID::from_u128(0x5ec1035f_a61a_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_GEN_VENDOR_DRIVER_VERSION: windows_core::GUID = windows_core::GUID::from_u128(0x447956f9_a61b_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_GEN_VENDOR_ID: windows_core::GUID = windows_core::GUID::from_u128(0x5ec1035e_a61a_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_GEN_VLAN_ID: windows_core::GUID = windows_core::GUID::from_u128(0x765dc702_c5e8_4b67_843b_3f5a4ff2648b);
+pub const GUID_NDIS_GEN_XMIT_ERROR: windows_core::GUID = windows_core::GUID::from_u128(0x447956fc_a61b_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_GEN_XMIT_OK: windows_core::GUID = windows_core::GUID::from_u128(0x447956fa_a61b_11d0_8dd4_00c04fc3358c);
+pub const GUID_NDIS_HD_SPLIT_CURRENT_CONFIG: windows_core::GUID = windows_core::GUID::from_u128(0x81d1303c_ab00_4e49_80b1_5e6e0bf9be53);
+pub const GUID_NDIS_HD_SPLIT_PARAMETERS: windows_core::GUID = windows_core::GUID::from_u128(0x8c048bea_2913_4458_b68e_17f6c1e5c60e);
+pub const GUID_NDIS_LAN_CLASS: windows_core::GUID = windows_core::GUID::from_u128(0xad498944_762f_11d0_8dcb_00c04fc3358c);
+pub const GUID_NDIS_NDK_CAPABILITIES: windows_core::GUID = windows_core::GUID::from_u128(0x7969ba4d_dd80_4bc7_b3e6_68043997e519);
+pub const GUID_NDIS_NDK_STATE: windows_core::GUID = windows_core::GUID::from_u128(0x530c69c9_2f51_49de_a1af_088d54ffa474);
+pub const GUID_NDIS_NOTIFY_ADAPTER_ARRIVAL: windows_core::GUID = windows_core::GUID::from_u128(0x981f2d81_b1f3_11d0_8dd7_00c04fc3358c);
+pub const GUID_NDIS_NOTIFY_ADAPTER_REMOVAL: windows_core::GUID = windows_core::GUID::from_u128(0x981f2d80_b1f3_11d0_8dd7_00c04fc3358c);
+pub const GUID_NDIS_NOTIFY_BIND: windows_core::GUID = windows_core::GUID::from_u128(0x5413531c_b1f3_11d0_8dd7_00c04fc3358c);
+pub const GUID_NDIS_NOTIFY_DEVICE_POWER_OFF: windows_core::GUID = windows_core::GUID::from_u128(0x81bc8189_b026_46ab_b964_f182e342934e);
+pub const GUID_NDIS_NOTIFY_DEVICE_POWER_OFF_EX: windows_core::GUID = windows_core::GUID::from_u128(0x4159353c_5cd7_42ce_8fe4_a45a2380cc4f);
+pub const GUID_NDIS_NOTIFY_DEVICE_POWER_ON: windows_core::GUID = windows_core::GUID::from_u128(0x5f81cfd0_f046_4342_af61_895acedaefd9);
+pub const GUID_NDIS_NOTIFY_DEVICE_POWER_ON_EX: windows_core::GUID = windows_core::GUID::from_u128(0x2b440188_92ac_4f60_9b2d_20a30cbb6bbe);
+pub const GUID_NDIS_NOTIFY_FILTER_ARRIVAL: windows_core::GUID = windows_core::GUID::from_u128(0x0b6d3c89_5917_43ca_b578_d01a7967c41c);
+pub const GUID_NDIS_NOTIFY_FILTER_REMOVAL: windows_core::GUID = windows_core::GUID::from_u128(0x1f177cd9_5955_4721_9f6a_78ebdfaef889);
+pub const GUID_NDIS_NOTIFY_UNBIND: windows_core::GUID = windows_core::GUID::from_u128(0x6e3ce1ec_b1f3_11d0_8dd7_00c04fc3358c);
+pub const GUID_NDIS_NOTIFY_VC_ARRIVAL: windows_core::GUID = windows_core::GUID::from_u128(0x182f9e0c_b1f3_11d0_8dd7_00c04fc3358c);
+pub const GUID_NDIS_NOTIFY_VC_REMOVAL: windows_core::GUID = windows_core::GUID::from_u128(0x981f2d79_b1f3_11d0_8dd7_00c04fc3358c);
+pub const GUID_NDIS_PM_ACTIVE_CAPABILITIES: windows_core::GUID = windows_core::GUID::from_u128(0xb2cf76e3_b3ae_4394_a01f_338c9870e939);
+pub const GUID_NDIS_PM_ADMIN_CONFIG: windows_core::GUID = windows_core::GUID::from_u128(0x1528d111_708a_4ca4_9215_c05771161cda);
+pub const GUID_NDIS_RECEIVE_FILTER_ENUM_FILTERS: windows_core::GUID = windows_core::GUID::from_u128(0x3f2c141d_83bc_11dd_94b8_001d09162bc3);
+pub const GUID_NDIS_RECEIVE_FILTER_ENUM_QUEUES: windows_core::GUID = windows_core::GUID::from_u128(0x3f2c141b_83bc_11dd_94b8_001d09162bc3);
+pub const GUID_NDIS_RECEIVE_FILTER_GLOBAL_PARAMETERS: windows_core::GUID = windows_core::GUID::from_u128(0x3f2c141a_83bc_11dd_94b8_001d09162bc3);
+pub const GUID_NDIS_RECEIVE_FILTER_HARDWARE_CAPABILITIES: windows_core::GUID = windows_core::GUID::from_u128(0x3f2c1419_83bc_11dd_94b8_001d09162bc3);
+pub const GUID_NDIS_RECEIVE_FILTER_PARAMETERS: windows_core::GUID = windows_core::GUID::from_u128(0x3f2c141e_83bc_11dd_94b8_001d09162bc3);
+pub const GUID_NDIS_RECEIVE_FILTER_QUEUE_PARAMETERS: windows_core::GUID = windows_core::GUID::from_u128(0x3f2c141c_83bc_11dd_94b8_001d09162bc3);
+pub const GUID_NDIS_RECEIVE_SCALE_CAPABILITIES: windows_core::GUID = windows_core::GUID::from_u128(0x26c28774_4252_48fe_a610_a58a398c0eb1);
+pub const GUID_NDIS_RSS_ENABLED: windows_core::GUID = windows_core::GUID::from_u128(0x9565cd55_3402_4e32_a5b6_2f143f2f2c30);
+pub const GUID_NDIS_STATUS_DOT11_ASSOCIATION_COMPLETION: windows_core::GUID = windows_core::GUID::from_u128(0x458bbea7_45a4_4ae2_b176_e51f96fc0568);
+pub const GUID_NDIS_STATUS_DOT11_ASSOCIATION_START: windows_core::GUID = windows_core::GUID::from_u128(0x3927843b_6980_4b48_b15b_4de50977ac40);
+pub const GUID_NDIS_STATUS_DOT11_CONNECTION_COMPLETION: windows_core::GUID = windows_core::GUID::from_u128(0x96efd9c9_7f1b_4a89_bc04_3e9e271765f1);
+pub const GUID_NDIS_STATUS_DOT11_CONNECTION_START: windows_core::GUID = windows_core::GUID::from_u128(0x7b74299d_998f_4454_ad08_c5af28576d1b);
+pub const GUID_NDIS_STATUS_DOT11_DISASSOCIATION: windows_core::GUID = windows_core::GUID::from_u128(0x3fbeb6fc_0fe2_43fd_b2ad_bd99b5f93e13);
+pub const GUID_NDIS_STATUS_DOT11_LINK_QUALITY: windows_core::GUID = windows_core::GUID::from_u128(0xa3285184_ea99_48ed_825e_a426b11c2754);
+pub const GUID_NDIS_STATUS_DOT11_MPDU_MAX_LENGTH_CHANGED: windows_core::GUID = windows_core::GUID::from_u128(0x1d6560ec_8e48_4a3e_9fd5_a01b698db6c5);
+pub const GUID_NDIS_STATUS_DOT11_PHY_STATE_CHANGED: windows_core::GUID = windows_core::GUID::from_u128(0xdeb45316_71b5_4736_bdef_0a9e9f4e62dc);
+pub const GUID_NDIS_STATUS_DOT11_PMKID_CANDIDATE_LIST: windows_core::GUID = windows_core::GUID::from_u128(0x26d8b8f6_db82_49eb_8bf3_4c130ef06950);
+pub const GUID_NDIS_STATUS_DOT11_ROAMING_COMPLETION: windows_core::GUID = windows_core::GUID::from_u128(0xdd9d47d1_282b_41e4_b924_66368817fcd3);
+pub const GUID_NDIS_STATUS_DOT11_ROAMING_START: windows_core::GUID = windows_core::GUID::from_u128(0xb2412d0d_26c8_4f4e_93df_f7b705a0b433);
+pub const GUID_NDIS_STATUS_DOT11_SCAN_CONFIRM: windows_core::GUID = windows_core::GUID::from_u128(0x8500591e_a0c7_4efb_9342_b674b002cbe6);
+pub const GUID_NDIS_STATUS_DOT11_TKIPMIC_FAILURE: windows_core::GUID = windows_core::GUID::from_u128(0x442c2ae4_9bc5_4b90_a889_455ef220f4ee);
+pub const GUID_NDIS_STATUS_EXTERNAL_CONNECTIVITY_CHANGE: windows_core::GUID = windows_core::GUID::from_u128(0xfd306974_c420_4433_b0fe_4cf6a613f59f);
+pub const GUID_NDIS_STATUS_HD_SPLIT_CURRENT_CONFIG: windows_core::GUID = windows_core::GUID::from_u128(0x6c744b0e_ee9c_4205_90a2_015f6d65f403);
+pub const GUID_NDIS_STATUS_LINK_SPEED_CHANGE: windows_core::GUID = windows_core::GUID::from_u128(0x981f2d85_b1f3_11d0_8dd7_00c04fc3358c);
+pub const GUID_NDIS_STATUS_LINK_STATE: windows_core::GUID = windows_core::GUID::from_u128(0x64c6f797_878c_4311_9246_65dba89c3a61);
+pub const GUID_NDIS_STATUS_MEDIA_CONNECT: windows_core::GUID = windows_core::GUID::from_u128(0x981f2d7d_b1f3_11d0_8dd7_00c04fc3358c);
+pub const GUID_NDIS_STATUS_MEDIA_DISCONNECT: windows_core::GUID = windows_core::GUID::from_u128(0x981f2d7e_b1f3_11d0_8dd7_00c04fc3358c);
+pub const GUID_NDIS_STATUS_MEDIA_SPECIFIC_INDICATION: windows_core::GUID = windows_core::GUID::from_u128(0x981f2d84_b1f3_11d0_8dd7_00c04fc3358c);
+pub const GUID_NDIS_STATUS_NETWORK_CHANGE: windows_core::GUID = windows_core::GUID::from_u128(0xca8a56f9_ce81_40e6_a70f_a067a476e9e9);
+pub const GUID_NDIS_STATUS_OPER_STATUS: windows_core::GUID = windows_core::GUID::from_u128(0xf917b663_845e_4d3d_b6d4_15eb27af81c5);
+pub const GUID_NDIS_STATUS_PACKET_FILTER: windows_core::GUID = windows_core::GUID::from_u128(0xd47c5407_2e75_46dd_8146_1d7ed2d6ab1d);
+pub const GUID_NDIS_STATUS_PM_OFFLOAD_REJECTED: windows_core::GUID = windows_core::GUID::from_u128(0xadd1d481_711e_4d1a_92ca_a62db9329712);
+pub const GUID_NDIS_STATUS_PM_WAKE_REASON: windows_core::GUID = windows_core::GUID::from_u128(0x0933fd58_ca62_438f_83da_dfc1cccb8145);
+pub const GUID_NDIS_STATUS_PM_WOL_PATTERN_REJECTED: windows_core::GUID = windows_core::GUID::from_u128(0xf72cf68e_18d4_4d63_9a19_e69b13916b1a);
+pub const GUID_NDIS_STATUS_PORT_STATE: windows_core::GUID = windows_core::GUID::from_u128(0x1dac0dfe_43e5_44b7_b759_7bf46de32e81);
+pub const GUID_NDIS_STATUS_RESET_END: windows_core::GUID = windows_core::GUID::from_u128(0x981f2d77_b1f3_11d0_8dd7_00c04fc3358c);
+pub const GUID_NDIS_STATUS_RESET_START: windows_core::GUID = windows_core::GUID::from_u128(0x981f2d76_b1f3_11d0_8dd7_00c04fc3358c);
+pub const GUID_NDIS_STATUS_TASK_OFFLOAD_CURRENT_CONFIG: windows_core::GUID = windows_core::GUID::from_u128(0x45049fc6_54d8_40c8_9c3d_b011c4e715bc);
+pub const GUID_NDIS_STATUS_TASK_OFFLOAD_HARDWARE_CAPABILITIES: windows_core::GUID = windows_core::GUID::from_u128(0xb6b8158b_217c_4b2a_be86_6a04beea65b8);
+pub const GUID_NDIS_STATUS_TCP_CONNECTION_OFFLOAD_CURRENT_CONFIG: windows_core::GUID = windows_core::GUID::from_u128(0xf8edaeff_24e4_4ae6_a413_0b27f76b243d);
+pub const GUID_NDIS_STATUS_TCP_CONNECTION_OFFLOAD_HARDWARE_CAPABILITIES: windows_core::GUID = windows_core::GUID::from_u128(0x391969b6_402c_43bf_8922_39eae0da1bb5);
+pub const GUID_NDIS_SWITCH_MICROSOFT_VENDOR_ID: windows_core::GUID = windows_core::GUID::from_u128(0x202547fe_1c9c_40b9_bba1_08ada1f98b3c);
+pub const GUID_NDIS_SWITCH_PORT_PROPERTY_PROFILE_ID_DEFAULT_EXTERNAL_NIC: windows_core::GUID = windows_core::GUID::from_u128(0x0b347846_0a0c_470a_9b7a_0d965850698f);
+pub const GUID_NDIS_TCP_CONNECTION_OFFLOAD_CURRENT_CONFIG: windows_core::GUID = windows_core::GUID::from_u128(0x2ee6aef1_0851_458b_bf0d_792343d1cde1);
+pub const GUID_NDIS_TCP_CONNECTION_OFFLOAD_HARDWARE_CAPABILITIES: windows_core::GUID = windows_core::GUID::from_u128(0x8ce71f2c_d63a_4390_a487_18fa47262ceb);
+pub const GUID_NDIS_TCP_OFFLOAD_CURRENT_CONFIG: windows_core::GUID = windows_core::GUID::from_u128(0x68542fed_5c74_461e_8934_91c6f9c60960);
+pub const GUID_NDIS_TCP_OFFLOAD_HARDWARE_CAPABILITIES: windows_core::GUID = windows_core::GUID::from_u128(0xcd5f1102_590f_4ada_ab65_5b31b1dc0172);
+pub const GUID_NDIS_TCP_OFFLOAD_PARAMETERS: windows_core::GUID = windows_core::GUID::from_u128(0x8ead9a22_7f69_4bc6_949a_c8187b074e61);
+pub const GUID_NDIS_TCP_RSC_STATISTICS: windows_core::GUID = windows_core::GUID::from_u128(0x83104445_9b5d_4ee6_a2a5_2bd3fb3c36af);
+pub const GUID_NDIS_WAKE_ON_MAGIC_PACKET_ONLY: windows_core::GUID = windows_core::GUID::from_u128(0xa14f1c97_8839_4f8a_9996_a28996ebbf1d);
+pub const GUID_NIC_SWITCH_CURRENT_CAPABILITIES: windows_core::GUID = windows_core::GUID::from_u128(0xe76fdaf3_0be7_4d95_87e9_5aead4b590e9);
+pub const GUID_NIC_SWITCH_HARDWARE_CAPABILITIES: windows_core::GUID = windows_core::GUID::from_u128(0x37cab40c_d1e8_4301_8c1d_58465e0c4c0f);
+pub const GUID_PM_ADD_PROTOCOL_OFFLOAD: windows_core::GUID = windows_core::GUID::from_u128(0x0c06c112_0d93_439b_9e6d_26be130c9784);
+pub const GUID_PM_ADD_WOL_PATTERN: windows_core::GUID = windows_core::GUID::from_u128(0x6fc83ba7_52bc_4faa_ac51_7d2ffe63ba90);
+pub const GUID_PM_CURRENT_CAPABILITIES: windows_core::GUID = windows_core::GUID::from_u128(0x3abdbd14_d44a_4a3f_9a63_a0a42a51b131);
+pub const GUID_PM_GET_PROTOCOL_OFFLOAD: windows_core::GUID = windows_core::GUID::from_u128(0xa6435cd9_149f_498e_951b_2d94bea3e3a3);
+pub const GUID_PM_HARDWARE_CAPABILITIES: windows_core::GUID = windows_core::GUID::from_u128(0xece5360d_3291_4a6e_8044_00511fed27ee);
+pub const GUID_PM_PARAMETERS: windows_core::GUID = windows_core::GUID::from_u128(0x560245d2_e251_409c_a280_311935be3b28);
+pub const GUID_PM_PROTOCOL_OFFLOAD_LIST: windows_core::GUID = windows_core::GUID::from_u128(0x736ec5ab_ca8f_4043_bb58_da402a48d9cc);
+pub const GUID_PM_REMOVE_PROTOCOL_OFFLOAD: windows_core::GUID = windows_core::GUID::from_u128(0xdecd7be2_a6b0_43ca_ae45_d000d20e5265);
+pub const GUID_PM_REMOVE_WOL_PATTERN: windows_core::GUID = windows_core::GUID::from_u128(0xa037a915_c6ca_4322_b3e3_ef754ec498dc);
+pub const GUID_PM_WOL_PATTERN_LIST: windows_core::GUID = windows_core::GUID::from_u128(0x4022be37_7ee2_47be_a5a5_050fc79afc75);
+pub const GUID_RECEIVE_FILTER_CURRENT_CAPABILITIES: windows_core::GUID = windows_core::GUID::from_u128(0x4054e80f_2bc1_4ccc_b033_4abc0c4a1e8c);
+pub const GUID_STATUS_MEDIA_SPECIFIC_INDICATION_EX: windows_core::GUID = windows_core::GUID::from_u128(0xaaacfca7_954a_4632_a16e_a8a63793a9e5);
 pub const IF_ADMINISTRATIVE_DEMANDDIAL: IF_ADMINISTRATIVE_STATE = IF_ADMINISTRATIVE_STATE(2i32);
 pub const IF_ADMINISTRATIVE_DISABLED: IF_ADMINISTRATIVE_STATE = IF_ADMINISTRATIVE_STATE(0i32);
 pub const IF_ADMINISTRATIVE_ENABLED: IF_ADMINISTRATIVE_STATE = IF_ADMINISTRATIVE_STATE(1i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct IF_ADMINISTRATIVE_STATE(pub i32);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct IF_COUNTED_STRING_LH {
+    pub Length: u16,
+    pub String: [u16; 257],
+}
+impl Default for IF_COUNTED_STRING_LH {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
 pub const IF_MAX_PHYS_ADDRESS_LENGTH: u32 = 32u32;
 pub const IF_MAX_STRING_SIZE: u32 = 256u32;
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct IF_OPER_STATUS(pub i32);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct IF_PHYSICAL_ADDRESS_LH {
+    pub Length: u16,
+    pub Address: [u8; 32],
+}
+impl Default for IF_PHYSICAL_ADDRESS_LH {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
 pub const IOCTL_NDIS_RESERVED5: u32 = 1507380u32;
 pub const IOCTL_NDIS_RESERVED6: u32 = 1540152u32;
 pub const IPSEC_OFFLOAD_V2_AND_TCP_CHECKSUM_COEXISTENCE: u32 = 2u32;
@@ -236,28 +286,394 @@ pub const MediaConnectStateUnknown: NET_IF_MEDIA_CONNECT_STATE = NET_IF_MEDIA_CO
 pub const MediaDuplexStateFull: NET_IF_MEDIA_DUPLEX_STATE = NET_IF_MEDIA_DUPLEX_STATE(2i32);
 pub const MediaDuplexStateHalf: NET_IF_MEDIA_DUPLEX_STATE = NET_IF_MEDIA_DUPLEX_STATE(1i32);
 pub const MediaDuplexStateUnknown: NET_IF_MEDIA_DUPLEX_STATE = NET_IF_MEDIA_DUPLEX_STATE(0i32);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct NDIS_802_11_AI_REQFI {
+    pub Capabilities: u16,
+    pub ListenInterval: u16,
+    pub CurrentAPAddress: [u8; 6],
+}
+impl Default for NDIS_802_11_AI_REQFI {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
 pub const NDIS_802_11_AI_REQFI_CAPABILITIES: u32 = 1u32;
 pub const NDIS_802_11_AI_REQFI_CURRENTAPADDRESS: u32 = 4u32;
 pub const NDIS_802_11_AI_REQFI_LISTENINTERVAL: u32 = 2u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_802_11_AI_RESFI {
+    pub Capabilities: u16,
+    pub StatusCode: u16,
+    pub AssociationId: u16,
+}
 pub const NDIS_802_11_AI_RESFI_ASSOCIATIONID: u32 = 4u32;
 pub const NDIS_802_11_AI_RESFI_CAPABILITIES: u32 = 1u32;
 pub const NDIS_802_11_AI_RESFI_STATUSCODE: u32 = 2u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_802_11_ASSOCIATION_INFORMATION {
+    pub Length: u32,
+    pub AvailableRequestFixedIEs: u16,
+    pub RequestFixedIEs: NDIS_802_11_AI_REQFI,
+    pub RequestIELength: u32,
+    pub OffsetRequestIEs: u32,
+    pub AvailableResponseFixedIEs: u16,
+    pub ResponseFixedIEs: NDIS_802_11_AI_RESFI,
+    pub ResponseIELength: u32,
+    pub OffsetResponseIEs: u32,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_802_11_AUTHENTICATION_ENCRYPTION {
+    pub AuthModeSupported: NDIS_802_11_AUTHENTICATION_MODE,
+    pub EncryptStatusSupported: NDIS_802_11_WEP_STATUS,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct NDIS_802_11_AUTHENTICATION_EVENT {
+    pub Status: NDIS_802_11_STATUS_INDICATION,
+    pub Request: [NDIS_802_11_AUTHENTICATION_REQUEST; 1],
+}
+impl Default for NDIS_802_11_AUTHENTICATION_EVENT {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NDIS_802_11_AUTHENTICATION_MODE(pub i32);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct NDIS_802_11_AUTHENTICATION_REQUEST {
+    pub Length: u32,
+    pub Bssid: [u8; 6],
+    pub Flags: u32,
+}
+impl Default for NDIS_802_11_AUTHENTICATION_REQUEST {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
 pub const NDIS_802_11_AUTH_REQUEST_AUTH_FIELDS: u32 = 15u32;
 pub const NDIS_802_11_AUTH_REQUEST_GROUP_ERROR: u32 = 14u32;
 pub const NDIS_802_11_AUTH_REQUEST_KEYUPDATE: u32 = 2u32;
 pub const NDIS_802_11_AUTH_REQUEST_PAIRWISE_ERROR: u32 = 6u32;
 pub const NDIS_802_11_AUTH_REQUEST_REAUTH: u32 = 1u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct NDIS_802_11_BSSID_LIST {
+    pub NumberOfItems: u32,
+    pub Bssid: [NDIS_WLAN_BSSID; 1],
+}
+impl Default for NDIS_802_11_BSSID_LIST {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct NDIS_802_11_BSSID_LIST_EX {
+    pub NumberOfItems: u32,
+    pub Bssid: [NDIS_WLAN_BSSID_EX; 1],
+}
+impl Default for NDIS_802_11_BSSID_LIST_EX {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct NDIS_802_11_CAPABILITY {
+    pub Length: u32,
+    pub Version: u32,
+    pub NoOfPMKIDs: u32,
+    pub NoOfAuthEncryptPairsSupported: u32,
+    pub AuthenticationEncryptionSupported: [NDIS_802_11_AUTHENTICATION_ENCRYPTION; 1],
+}
+impl Default for NDIS_802_11_CAPABILITY {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_802_11_CONFIGURATION {
+    pub Length: u32,
+    pub BeaconPeriod: u32,
+    pub ATIMWindow: u32,
+    pub DSConfig: u32,
+    pub FHConfig: NDIS_802_11_CONFIGURATION_FH,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_802_11_CONFIGURATION_FH {
+    pub Length: u32,
+    pub HopPattern: u32,
+    pub HopSet: u32,
+    pub DwellTime: u32,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct NDIS_802_11_FIXED_IEs {
+    pub Timestamp: [u8; 8],
+    pub BeaconInterval: u16,
+    pub Capabilities: u16,
+}
+impl Default for NDIS_802_11_FIXED_IEs {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct NDIS_802_11_KEY {
+    pub Length: u32,
+    pub KeyIndex: u32,
+    pub KeyLength: u32,
+    pub BSSID: [u8; 6],
+    pub KeyRSC: u64,
+    pub KeyMaterial: [u8; 1],
+}
+impl Default for NDIS_802_11_KEY {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
 pub const NDIS_802_11_LENGTH_RATES: u32 = 8u32;
 pub const NDIS_802_11_LENGTH_RATES_EX: u32 = 16u32;
 pub const NDIS_802_11_LENGTH_SSID: u32 = 32u32;
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NDIS_802_11_MEDIA_STREAM_MODE(pub i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NDIS_802_11_NETWORK_INFRASTRUCTURE(pub i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NDIS_802_11_NETWORK_TYPE(pub i32);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct NDIS_802_11_NETWORK_TYPE_LIST {
+    pub NumberOfItems: u32,
+    pub NetworkType: [NDIS_802_11_NETWORK_TYPE; 1],
+}
+impl Default for NDIS_802_11_NETWORK_TYPE_LIST {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct NDIS_802_11_NON_BCAST_SSID_LIST {
+    pub NumberOfItems: u32,
+    pub Non_Bcast_Ssid: [NDIS_802_11_SSID; 1],
+}
+impl Default for NDIS_802_11_NON_BCAST_SSID_LIST {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct NDIS_802_11_PMKID {
+    pub Length: u32,
+    pub BSSIDInfoCount: u32,
+    pub BSSIDInfo: [BSSID_INFO; 1],
+}
+impl Default for NDIS_802_11_PMKID {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct NDIS_802_11_PMKID_CANDIDATE_LIST {
+    pub Version: u32,
+    pub NumCandidates: u32,
+    pub CandidateList: [PMKID_CANDIDATE; 1],
+}
+impl Default for NDIS_802_11_PMKID_CANDIDATE_LIST {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
 pub const NDIS_802_11_PMKID_CANDIDATE_PREAUTH_ENABLED: u32 = 1u32;
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NDIS_802_11_POWER_MODE(pub i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NDIS_802_11_PRIVACY_FILTER(pub i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NDIS_802_11_RADIO_STATUS(pub i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NDIS_802_11_RELOAD_DEFAULTS(pub i32);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct NDIS_802_11_REMOVE_KEY {
+    pub Length: u32,
+    pub KeyIndex: u32,
+    pub BSSID: [u8; 6],
+}
+impl Default for NDIS_802_11_REMOVE_KEY {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct NDIS_802_11_SSID {
+    pub SsidLength: u32,
+    pub Ssid: [u8; 32],
+}
+impl Default for NDIS_802_11_SSID {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_802_11_STATISTICS {
+    pub Length: u32,
+    pub TransmittedFragmentCount: i64,
+    pub MulticastTransmittedFrameCount: i64,
+    pub FailedCount: i64,
+    pub RetryCount: i64,
+    pub MultipleRetryCount: i64,
+    pub RTSSuccessCount: i64,
+    pub RTSFailureCount: i64,
+    pub ACKFailureCount: i64,
+    pub FrameDuplicateCount: i64,
+    pub ReceivedFragmentCount: i64,
+    pub MulticastReceivedFrameCount: i64,
+    pub FCSErrorCount: i64,
+    pub TKIPLocalMICFailures: i64,
+    pub TKIPICVErrorCount: i64,
+    pub TKIPCounterMeasuresInvoked: i64,
+    pub TKIPReplays: i64,
+    pub CCMPFormatErrors: i64,
+    pub CCMPReplays: i64,
+    pub CCMPDecryptErrors: i64,
+    pub FourWayHandshakeFailures: i64,
+    pub WEPUndecryptableCount: i64,
+    pub WEPICVErrorCount: i64,
+    pub DecryptSuccessCount: i64,
+    pub DecryptFailureCount: i64,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_802_11_STATUS_INDICATION {
+    pub StatusType: NDIS_802_11_STATUS_TYPE,
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NDIS_802_11_STATUS_TYPE(pub i32);
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub struct NDIS_802_11_TEST {
+    pub Length: u32,
+    pub Type: u32,
+    pub Anonymous: NDIS_802_11_TEST_0,
+}
+impl Default for NDIS_802_11_TEST {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub union NDIS_802_11_TEST_0 {
+    pub AuthenticationEvent: NDIS_802_11_AUTHENTICATION_EVENT,
+    pub RssiTrigger: i32,
+}
+impl Default for NDIS_802_11_TEST_0 {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct NDIS_802_11_VARIABLE_IEs {
+    pub ElementID: u8,
+    pub Length: u8,
+    pub data: [u8; 1],
+}
+impl Default for NDIS_802_11_VARIABLE_IEs {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct NDIS_802_11_WEP {
+    pub Length: u32,
+    pub KeyIndex: u32,
+    pub KeyLength: u32,
+    pub KeyMaterial: [u8; 1],
+}
+impl Default for NDIS_802_11_WEP {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NDIS_802_11_WEP_STATUS(pub i32);
 pub const NDIS_802_3_MAC_OPTION_PRIORITY: u32 = 1u32;
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NDIS_802_5_RING_STATE(pub i32);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_CO_DEVICE_PROFILE {
+    pub DeviceDescription: NDIS_VAR_DATA_DESC,
+    pub DevSpecificInfo: NDIS_VAR_DATA_DESC,
+    pub ulTAPISupplementaryPassThru: u32,
+    pub ulAddressModes: u32,
+    pub ulNumAddresses: u32,
+    pub ulBearerModes: u32,
+    pub ulMaxTxRate: u32,
+    pub ulMinTxRate: u32,
+    pub ulMaxRxRate: u32,
+    pub ulMinRxRate: u32,
+    pub ulMediaModes: u32,
+    pub ulGenerateToneModes: u32,
+    pub ulGenerateToneMaxNumFreq: u32,
+    pub ulGenerateDigitModes: u32,
+    pub ulMonitorToneMaxNumFreq: u32,
+    pub ulMonitorToneMaxNumEntries: u32,
+    pub ulMonitorDigitModes: u32,
+    pub ulGatherDigitsMinTimeout: u32,
+    pub ulGatherDigitsMaxTimeout: u32,
+    pub ulDevCapFlags: u32,
+    pub ulMaxNumActiveCalls: u32,
+    pub ulAnswerMode: u32,
+    pub ulUUIAcceptSize: u32,
+    pub ulUUIAnswerSize: u32,
+    pub ulUUIMakeCallSize: u32,
+    pub ulUUIDropSize: u32,
+    pub ulUUISendUserUserInfoSize: u32,
+    pub ulUUICallInfoSize: u32,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_CO_LINK_SPEED {
+    pub Outbound: u32,
+    pub Inbound: u32,
+}
 pub const NDIS_CO_MAC_OPTION_DYNAMIC_LINK_SPEED: u32 = 1u32;
 pub const NDIS_DEFAULT_RECEIVE_FILTER_ID: u32 = 0u32;
 pub const NDIS_DEFAULT_RECEIVE_QUEUE_GROUP_ID: u32 = 0u32;
 pub const NDIS_DEFAULT_RECEIVE_QUEUE_ID: u32 = 0u32;
 pub const NDIS_DEFAULT_SWITCH_ID: u32 = 0u32;
 pub const NDIS_DEFAULT_VPORT_ID: u32 = 0u32;
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NDIS_DEVICE_POWER_STATE(pub i32);
 pub const NDIS_DEVICE_TYPE_ENDPOINT: u32 = 1u32;
 pub const NDIS_DEVICE_WAKE_ON_MAGIC_PACKET_ENABLE: u32 = 4u32;
 pub const NDIS_DEVICE_WAKE_ON_PATTERN_MATCH_ENABLE: u32 = 2u32;
@@ -281,6 +697,15 @@ pub const NDIS_ETH_TYPE_ARP: u32 = 2054u32;
 pub const NDIS_ETH_TYPE_IPV4: u32 = 2048u32;
 pub const NDIS_ETH_TYPE_IPV6: u32 = 34525u32;
 pub const NDIS_ETH_TYPE_SLOW_PROTOCOL: u32 = 34825u32;
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NDIS_FDDI_ATTACHMENT_TYPE(pub i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NDIS_FDDI_LCONNECTION_STATE(pub i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NDIS_FDDI_RING_MGT_STATE(pub i32);
 pub const NDIS_GFP_ENCAPSULATION_TYPE_IP_IN_GRE: u32 = 4u32;
 pub const NDIS_GFP_ENCAPSULATION_TYPE_IP_IN_IP: u32 = 2u32;
 pub const NDIS_GFP_ENCAPSULATION_TYPE_NOT_ENCAPSULATED: u32 = 1u32;
@@ -455,7 +880,43 @@ pub const NDIS_GFT_WCFE_REDIRECT_TO_EGRESS_QUEUE_OF_VPORT_IF_TTL_IS_ONE: u32 = 1
 pub const NDIS_GFT_WCFE_REDIRECT_TO_INGRESS_QUEUE_OF_VPORT: u32 = 2u32;
 pub const NDIS_GFT_WCFE_REDIRECT_TO_INGRESS_QUEUE_OF_VPORT_IF_TTL_IS_ONE: u32 = 8u32;
 pub const NDIS_GFT_WILDCARD_MATCH_FLOW_ENTRY_REVISION_1: u32 = 1u32;
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub struct NDIS_GUID {
+    pub Guid: windows_core::GUID,
+    pub Anonymous: NDIS_GUID_0,
+    pub Size: u32,
+    pub Flags: u32,
+}
+impl Default for NDIS_GUID {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub union NDIS_GUID_0 {
+    pub Oid: u32,
+    pub Status: i32,
+}
+impl Default for NDIS_GUID_0 {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_HARDWARE_CROSSTIMESTAMP {
+    pub Header: NDIS_OBJECT_HEADER,
+    pub Flags: u32,
+    pub SystemTimestamp1: u64,
+    pub HardwareClockTimestamp: u64,
+    pub SystemTimestamp2: u64,
+}
 pub const NDIS_HARDWARE_CROSSTIMESTAMP_REVISION_1: u32 = 1u32;
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NDIS_HARDWARE_STATUS(pub i32);
 pub const NDIS_HASH_FUNCTION_MASK: u32 = 255u32;
 pub const NDIS_HASH_IPV4: u32 = 256u32;
 pub const NDIS_HASH_IPV6: u32 = 1024u32;
@@ -477,14 +938,146 @@ pub const NDIS_HD_SPLIT_ENABLE_HEADER_DATA_SPLIT: u32 = 1u32;
 pub const NDIS_HD_SPLIT_PARAMETERS_REVISION_1: u32 = 1u32;
 pub const NDIS_HYPERVISOR_INFO_FLAG_HYPERVISOR_PRESENT: u32 = 1u32;
 pub const NDIS_HYPERVISOR_INFO_REVISION_1: u32 = 1u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_INTERFACE_INFORMATION {
+    pub ifOperStatus: NET_IF_OPER_STATUS,
+    pub ifOperStatusFlags: u32,
+    pub MediaConnectState: NET_IF_MEDIA_CONNECT_STATE,
+    pub MediaDuplexState: NET_IF_MEDIA_DUPLEX_STATE,
+    pub ifMtu: u32,
+    pub ifPromiscuousMode: bool,
+    pub ifDeviceWakeUpEnable: bool,
+    pub XmitLinkSpeed: u64,
+    pub RcvLinkSpeed: u64,
+    pub ifLastChange: u64,
+    pub ifCounterDiscontinuityTime: u64,
+    pub ifInUnknownProtos: u64,
+    pub ifInDiscards: u64,
+    pub ifInErrors: u64,
+    pub ifHCInOctets: u64,
+    pub ifHCInUcastPkts: u64,
+    pub ifHCInMulticastPkts: u64,
+    pub ifHCInBroadcastPkts: u64,
+    pub ifHCOutOctets: u64,
+    pub ifHCOutUcastPkts: u64,
+    pub ifHCOutMulticastPkts: u64,
+    pub ifHCOutBroadcastPkts: u64,
+    pub ifOutErrors: u64,
+    pub ifOutDiscards: u64,
+    pub ifHCInUcastOctets: u64,
+    pub ifHCInMulticastOctets: u64,
+    pub ifHCInBroadcastOctets: u64,
+    pub ifHCOutUcastOctets: u64,
+    pub ifHCOutMulticastOctets: u64,
+    pub ifHCOutBroadcastOctets: u64,
+    pub CompartmentId: NET_IF_COMPARTMENT_ID,
+    pub SupportedStatistics: u32,
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NDIS_INTERRUPT_MODERATION(pub i32);
 pub const NDIS_INTERRUPT_MODERATION_CHANGE_NEEDS_REINITIALIZE: u32 = 2u32;
 pub const NDIS_INTERRUPT_MODERATION_CHANGE_NEEDS_RESET: u32 = 1u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_INTERRUPT_MODERATION_PARAMETERS {
+    pub Header: NDIS_OBJECT_HEADER,
+    pub Flags: u32,
+    pub InterruptModeration: NDIS_INTERRUPT_MODERATION,
+}
 pub const NDIS_INTERRUPT_MODERATION_PARAMETERS_REVISION_1: u32 = 1u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_IPSEC_OFFLOAD_V1 {
+    pub Supported: NDIS_IPSEC_OFFLOAD_V1_0,
+    pub IPv4AH: NDIS_IPSEC_OFFLOAD_V1_1,
+    pub IPv4ESP: NDIS_IPSEC_OFFLOAD_V1_2,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_IPSEC_OFFLOAD_V1_1 {
+    pub _bitfield: u32,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_IPSEC_OFFLOAD_V1_2 {
+    pub _bitfield: u32,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_IPSEC_OFFLOAD_V1_0 {
+    pub Encapsulation: u32,
+    pub AhEspCombined: u32,
+    pub TransportTunnelCombined: u32,
+    pub IPv4Options: u32,
+    pub Flags: u32,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_IP_OPER_STATE {
+    pub Header: NDIS_OBJECT_HEADER,
+    pub Flags: u32,
+    pub IpOperationalStatus: NDIS_IP_OPER_STATUS,
+}
 pub const NDIS_IP_OPER_STATE_REVISION_1: u32 = 1u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_IP_OPER_STATUS {
+    pub AddressFamily: u32,
+    pub OperationalStatus: NET_IF_OPER_STATUS,
+    pub OperationalStatusFlags: u32,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct NDIS_IP_OPER_STATUS_INFO {
+    pub Header: NDIS_OBJECT_HEADER,
+    pub Flags: u32,
+    pub NumberofAddressFamiliesReturned: u32,
+    pub IpOperationalStatus: [NDIS_IP_OPER_STATUS; 32],
+}
+impl Default for NDIS_IP_OPER_STATUS_INFO {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
 pub const NDIS_IP_OPER_STATUS_INFO_REVISION_1: u32 = 1u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_IRDA_PACKET_INFO {
+    pub ExtraBOFs: u32,
+    pub MinTurnAroundTime: u32,
+}
 pub const NDIS_ISOLATION_NAME_MAX_STRING_SIZE: u32 = 127u32;
 pub const NDIS_ISOLATION_PARAMETERS_REVISION_1: u32 = 1u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_LINK_PARAMETERS {
+    pub Header: NDIS_OBJECT_HEADER,
+    pub MediaDuplexState: NET_IF_MEDIA_DUPLEX_STATE,
+    pub XmitLinkSpeed: u64,
+    pub RcvLinkSpeed: u64,
+    pub PauseFunctions: NDIS_SUPPORTED_PAUSE_FUNCTIONS,
+    pub AutoNegotiationFlags: u32,
+}
 pub const NDIS_LINK_PARAMETERS_REVISION_1: u32 = 1u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_LINK_SPEED {
+    pub XmitLinkSpeed: u64,
+    pub RcvLinkSpeed: u64,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_LINK_STATE {
+    pub Header: NDIS_OBJECT_HEADER,
+    pub MediaConnectState: NET_IF_MEDIA_CONNECT_STATE,
+    pub MediaDuplexState: NET_IF_MEDIA_DUPLEX_STATE,
+    pub XmitLinkSpeed: u64,
+    pub RcvLinkSpeed: u64,
+    pub PauseFunctions: NDIS_SUPPORTED_PAUSE_FUNCTIONS,
+    pub AutoNegotiationFlags: u32,
+}
 pub const NDIS_LINK_STATE_DUPLEX_AUTO_NEGOTIATED: u32 = 4u32;
 pub const NDIS_LINK_STATE_PAUSE_FUNCTIONS_AUTO_NEGOTIATED: u32 = 8u32;
 pub const NDIS_LINK_STATE_RCV_LINK_SPEED_AUTO_NEGOTIATED: u32 = 2u32;
@@ -504,10 +1097,19 @@ pub const NDIS_MAC_OPTION_TRANSFERS_NOT_PEND: u32 = 4u32;
 pub const NDIS_MAXIMUM_PORTS: u32 = 16777216u32;
 pub const NDIS_MEDIA_CAP_RECEIVE: u32 = 2u32;
 pub const NDIS_MEDIA_CAP_TRANSMIT: u32 = 1u32;
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NDIS_MEDIA_STATE(pub i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NDIS_MEDIUM(pub i32);
 pub const NDIS_NDK_CAPABILITIES_REVISION_1: u32 = 1u32;
 pub const NDIS_NDK_CONNECTIONS_REVISION_1: u32 = 1u32;
 pub const NDIS_NDK_LOCAL_ENDPOINTS_REVISION_1: u32 = 1u32;
 pub const NDIS_NDK_STATISTICS_INFO_REVISION_1: u32 = 1u32;
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NDIS_NETWORK_CHANGE_TYPE(pub i32);
 pub const NDIS_NIC_SWITCH_CAPABILITIES_REVISION_1: u32 = 1u32;
 pub const NDIS_NIC_SWITCH_CAPABILITIES_REVISION_2: u32 = 2u32;
 pub const NDIS_NIC_SWITCH_CAPABILITIES_REVISION_3: u32 = 3u32;
@@ -559,6 +1161,13 @@ pub const NDIS_NIC_SWITCH_VPORT_PARAMS_PACKET_DIRECT_RX_ONLY: u32 = 2u32;
 pub const NDIS_NIC_SWITCH_VPORT_PARAMS_PROCESSOR_AFFINITY_CHANGED: u32 = 1048576u32;
 pub const NDIS_NIC_SWITCH_VPORT_PARAMS_QOS_SQ_ID_CHANGED: u32 = 4194304u32;
 pub const NDIS_NIC_SWITCH_VPORT_PARAMS_STATE_CHANGED: u32 = 524288u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_OBJECT_HEADER {
+    pub Type: u8,
+    pub Revision: u8,
+    pub Size: u16,
+}
 pub const NDIS_OBJECT_REVISION_1: u32 = 1u32;
 pub const NDIS_OBJECT_TYPE_BIND_PARAMETERS: u32 = 134u32;
 pub const NDIS_OBJECT_TYPE_CLIENT_CHIMNEY_OFFLOAD_CHARACTERISTICS: u32 = 147u32;
@@ -625,8 +1234,35 @@ pub const NDIS_OBJECT_TYPE_SHARED_MEMORY_PROVIDER_CHARACTERISTICS: u32 = 176u32;
 pub const NDIS_OBJECT_TYPE_STATUS_INDICATION: u32 = 152u32;
 pub const NDIS_OBJECT_TYPE_SWITCH_OPTIONAL_HANDLERS: u32 = 184u32;
 pub const NDIS_OBJECT_TYPE_TIMER_CHARACTERISTICS: u32 = 151u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_OFFLOAD {
+    pub Header: NDIS_OBJECT_HEADER,
+    pub Checksum: NDIS_TCP_IP_CHECKSUM_OFFLOAD,
+    pub LsoV1: NDIS_TCP_LARGE_SEND_OFFLOAD_V1,
+    pub IPsecV1: NDIS_IPSEC_OFFLOAD_V1,
+    pub LsoV2: NDIS_TCP_LARGE_SEND_OFFLOAD_V2,
+    pub Flags: u32,
+}
 pub const NDIS_OFFLOAD_FLAGS_GROUP_CHECKSUM_CAPABILITIES: u32 = 1u32;
 pub const NDIS_OFFLOAD_NOT_SUPPORTED: u32 = 0u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_OFFLOAD_PARAMETERS {
+    pub Header: NDIS_OBJECT_HEADER,
+    pub IPv4Checksum: u8,
+    pub TCPIPv4Checksum: u8,
+    pub UDPIPv4Checksum: u8,
+    pub TCPIPv6Checksum: u8,
+    pub UDPIPv6Checksum: u8,
+    pub LsoV1: u8,
+    pub IPsecV1: u8,
+    pub LsoV2IPv4: u8,
+    pub LsoV2IPv6: u8,
+    pub TcpConnectionIPv4: u8,
+    pub TcpConnectionIPv6: u8,
+    pub Flags: u32,
+}
 pub const NDIS_OFFLOAD_PARAMETERS_CONNECTION_OFFLOAD_DISABLED: u32 = 1u32;
 pub const NDIS_OFFLOAD_PARAMETERS_CONNECTION_OFFLOAD_ENABLED: u32 = 2u32;
 pub const NDIS_OFFLOAD_PARAMETERS_IPSECV1_AH_AND_ESP_ENABLED: u32 = 4u32;
@@ -667,6 +1303,13 @@ pub const NDIS_OFFLOAD_SET_NO_CHANGE: u32 = 0u32;
 pub const NDIS_OFFLOAD_SET_OFF: u32 = 2u32;
 pub const NDIS_OFFLOAD_SET_ON: u32 = 1u32;
 pub const NDIS_OFFLOAD_SUPPORTED: u32 = 1u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_OPER_STATE {
+    pub Header: NDIS_OBJECT_HEADER,
+    pub OperationalStatus: NET_IF_OPER_STATUS,
+    pub OperationalStatusFlags: u32,
+}
 pub const NDIS_OPER_STATE_REVISION_1: u32 = 1u32;
 pub const NDIS_PACKET_TYPE_ALL_FUNCTIONAL: u32 = 8192u32;
 pub const NDIS_PACKET_TYPE_ALL_LOCAL: u32 = 128u32;
@@ -681,16 +1324,46 @@ pub const NDIS_PACKET_TYPE_NO_LOCAL: u32 = 65536u32;
 pub const NDIS_PACKET_TYPE_PROMISCUOUS: u32 = 32u32;
 pub const NDIS_PACKET_TYPE_SMT: u32 = 64u32;
 pub const NDIS_PACKET_TYPE_SOURCE_ROUTING: u32 = 16u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_PCI_DEVICE_CUSTOM_PROPERTIES {
+    pub Header: NDIS_OBJECT_HEADER,
+    pub DeviceType: u32,
+    pub CurrentSpeedAndMode: u32,
+    pub CurrentPayloadSize: u32,
+    pub MaxPayloadSize: u32,
+    pub MaxReadRequestSize: u32,
+    pub CurrentLinkSpeed: u32,
+    pub CurrentLinkWidth: u32,
+    pub MaxLinkSpeed: u32,
+    pub MaxLinkWidth: u32,
+    pub PciExpressVersion: u32,
+    pub InterruptType: u32,
+    pub MaxInterruptMessages: u32,
+}
 pub const NDIS_PD_CAPABILITIES_REVISION_1: u32 = 1u32;
 pub const NDIS_PD_CAPS_DRAIN_NOTIFICATIONS_SUPPORTED: u32 = 2u32;
 pub const NDIS_PD_CAPS_NOTIFICATION_MODERATION_COUNT_SUPPORTED: u32 = 8u32;
 pub const NDIS_PD_CAPS_NOTIFICATION_MODERATION_INTERVAL_SUPPORTED: u32 = 4u32;
 pub const NDIS_PD_CAPS_RECEIVE_FILTER_COUNTERS_SUPPORTED: u32 = 1u32;
 pub const NDIS_PD_CONFIG_REVISION_1: u32 = 1u32;
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NDIS_PHYSICAL_MEDIUM(pub i32);
 pub const NDIS_PM_CAPABILITIES_REVISION_1: u32 = 1u32;
 pub const NDIS_PM_CAPABILITIES_REVISION_2: u32 = 2u32;
 pub const NDIS_PM_MAX_PATTERN_ID: u32 = 65535u32;
 pub const NDIS_PM_MAX_STRING_SIZE: u32 = 64u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_PM_PACKET_PATTERN {
+    pub Priority: u32,
+    pub Reserved: u32,
+    pub MaskSize: u32,
+    pub PatternOffset: u32,
+    pub PatternSize: u32,
+    pub PatternFlags: u32,
+}
 pub const NDIS_PM_PARAMETERS_REVISION_1: u32 = 1u32;
 pub const NDIS_PM_PARAMETERS_REVISION_2: u32 = 2u32;
 pub const NDIS_PM_PRIVATE_PATTERN_ID: u32 = 1u32;
@@ -714,6 +1387,13 @@ pub const NDIS_PM_WAKE_ON_MEDIA_DISCONNECT_SUPPORTED: u32 = 2u32;
 pub const NDIS_PM_WAKE_PACKET_INDICATION_SUPPORTED: u32 = 1u32;
 pub const NDIS_PM_WAKE_PACKET_REVISION_1: u32 = 1u32;
 pub const NDIS_PM_WAKE_REASON_REVISION_1: u32 = 1u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_PM_WAKE_UP_CAPABILITIES {
+    pub MinMagicPacketWakeUp: NDIS_DEVICE_POWER_STATE,
+    pub MinPatternWakeUp: NDIS_DEVICE_POWER_STATE,
+    pub MinLinkChangeWakeUp: NDIS_DEVICE_POWER_STATE,
+}
 pub const NDIS_PM_WOL_BITMAP_PATTERN_ENABLED: u32 = 1u32;
 pub const NDIS_PM_WOL_BITMAP_PATTERN_SUPPORTED: u32 = 1u32;
 pub const NDIS_PM_WOL_EAPOL_REQUEST_ID_MESSAGE_ENABLED: u32 = 65536u32;
@@ -733,14 +1413,99 @@ pub const NDIS_PM_WOL_PATTERN_REVISION_2: u32 = 2u32;
 pub const NDIS_PM_WOL_PRIORITY_HIGHEST: u32 = 1u32;
 pub const NDIS_PM_WOL_PRIORITY_LOWEST: u32 = 4294967295u32;
 pub const NDIS_PM_WOL_PRIORITY_NORMAL: u32 = 268435456u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_PNP_CAPABILITIES {
+    pub Flags: u32,
+    pub WakeUpCapabilities: NDIS_PM_WAKE_UP_CAPABILITIES,
+}
 pub const NDIS_PNP_WAKE_UP_LINK_CHANGE: u32 = 4u32;
 pub const NDIS_PNP_WAKE_UP_MAGIC_PACKET: u32 = 1u32;
 pub const NDIS_PNP_WAKE_UP_PATTERN_MATCH: u32 = 2u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct NDIS_PORT {
+    pub Next: *mut NDIS_PORT,
+    pub NdisReserved: *mut core::ffi::c_void,
+    pub MiniportReserved: *mut core::ffi::c_void,
+    pub ProtocolReserved: *mut core::ffi::c_void,
+    pub PortCharacteristics: NDIS_PORT_CHARACTERISTICS,
+}
+impl Default for NDIS_PORT {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct NDIS_PORT_ARRAY {
+    pub Header: NDIS_OBJECT_HEADER,
+    pub NumberOfPorts: u32,
+    pub OffsetFirstPort: u32,
+    pub ElementSize: u32,
+    pub Ports: [NDIS_PORT_CHARACTERISTICS; 1],
+}
+impl Default for NDIS_PORT_ARRAY {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
 pub const NDIS_PORT_ARRAY_REVISION_1: u32 = 1u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_PORT_AUTHENTICATION_PARAMETERS {
+    pub Header: NDIS_OBJECT_HEADER,
+    pub SendControlState: NDIS_PORT_CONTROL_STATE,
+    pub RcvControlState: NDIS_PORT_CONTROL_STATE,
+    pub SendAuthorizationState: NDIS_PORT_AUTHORIZATION_STATE,
+    pub RcvAuthorizationState: NDIS_PORT_AUTHORIZATION_STATE,
+}
 pub const NDIS_PORT_AUTHENTICATION_PARAMETERS_REVISION_1: u32 = 1u32;
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NDIS_PORT_AUTHORIZATION_STATE(pub i32);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_PORT_CHARACTERISTICS {
+    pub Header: NDIS_OBJECT_HEADER,
+    pub PortNumber: u32,
+    pub Flags: u32,
+    pub Type: NDIS_PORT_TYPE,
+    pub MediaConnectState: NET_IF_MEDIA_CONNECT_STATE,
+    pub XmitLinkSpeed: u64,
+    pub RcvLinkSpeed: u64,
+    pub Direction: NET_IF_DIRECTION_TYPE,
+    pub SendControlState: NDIS_PORT_CONTROL_STATE,
+    pub RcvControlState: NDIS_PORT_CONTROL_STATE,
+    pub SendAuthorizationState: NDIS_PORT_AUTHORIZATION_STATE,
+    pub RcvAuthorizationState: NDIS_PORT_AUTHORIZATION_STATE,
+}
 pub const NDIS_PORT_CHARACTERISTICS_REVISION_1: u32 = 1u32;
 pub const NDIS_PORT_CHAR_USE_DEFAULT_AUTH_SETTINGS: u32 = 1u32;
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NDIS_PORT_CONTROL_STATE(pub i32);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_PORT_STATE {
+    pub Header: NDIS_OBJECT_HEADER,
+    pub MediaConnectState: NET_IF_MEDIA_CONNECT_STATE,
+    pub XmitLinkSpeed: u64,
+    pub RcvLinkSpeed: u64,
+    pub Direction: NET_IF_DIRECTION_TYPE,
+    pub SendControlState: NDIS_PORT_CONTROL_STATE,
+    pub RcvControlState: NDIS_PORT_CONTROL_STATE,
+    pub SendAuthorizationState: NDIS_PORT_AUTHORIZATION_STATE,
+    pub RcvAuthorizationState: NDIS_PORT_AUTHORIZATION_STATE,
+    pub Flags: u32,
+}
 pub const NDIS_PORT_STATE_REVISION_1: u32 = 1u32;
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NDIS_PORT_TYPE(pub i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NDIS_PROCESSOR_VENDOR(pub i32);
 pub const NDIS_PROTOCOL_ID_DEFAULT: u32 = 0u32;
 pub const NDIS_PROTOCOL_ID_IP6: u32 = 3u32;
 pub const NDIS_PROTOCOL_ID_IPX: u32 = 6u32;
@@ -851,6 +1616,15 @@ pub const NDIS_RECEIVE_FILTER_VM_QUEUE_SUPPORTED: u32 = 2u32;
 pub const NDIS_RECEIVE_HASH_FLAG_ENABLE_HASH: u32 = 1u32;
 pub const NDIS_RECEIVE_HASH_FLAG_HASH_INFO_UNCHANGED: u32 = 2u32;
 pub const NDIS_RECEIVE_HASH_FLAG_HASH_KEY_UNCHANGED: u32 = 4u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_RECEIVE_HASH_PARAMETERS {
+    pub Header: NDIS_OBJECT_HEADER,
+    pub Flags: u32,
+    pub HashInformation: u32,
+    pub HashSecretKeySize: u16,
+    pub HashSecretKeyOffset: u32,
+}
 pub const NDIS_RECEIVE_HASH_PARAMETERS_REVISION_1: u32 = 1u32;
 pub const NDIS_RECEIVE_QUEUE_ALLOCATION_COMPLETE_ARRAY_REVISION_1: u32 = 1u32;
 pub const NDIS_RECEIVE_QUEUE_ALLOCATION_COMPLETE_PARAMETERS_REVISION_1: u32 = 1u32;
@@ -870,9 +1644,29 @@ pub const NDIS_RECEIVE_QUEUE_PARAMETERS_REVISION_1: u32 = 1u32;
 pub const NDIS_RECEIVE_QUEUE_PARAMETERS_REVISION_2: u32 = 2u32;
 pub const NDIS_RECEIVE_QUEUE_PARAMETERS_REVISION_3: u32 = 3u32;
 pub const NDIS_RECEIVE_QUEUE_PARAMETERS_SUGGESTED_RECV_BUFFER_NUMBERS_CHANGED: u32 = 262144u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_RECEIVE_SCALE_CAPABILITIES {
+    pub Header: NDIS_OBJECT_HEADER,
+    pub CapabilitiesFlags: u32,
+    pub NumberOfInterruptMessages: u32,
+    pub NumberOfReceiveQueues: u32,
+}
 pub const NDIS_RECEIVE_SCALE_CAPABILITIES_REVISION_1: u32 = 1u32;
 pub const NDIS_RECEIVE_SCALE_CAPABILITIES_REVISION_2: u32 = 2u32;
 pub const NDIS_RECEIVE_SCALE_CAPABILITIES_REVISION_3: u32 = 3u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_RECEIVE_SCALE_PARAMETERS {
+    pub Header: NDIS_OBJECT_HEADER,
+    pub Flags: u16,
+    pub BaseCpuNumber: u16,
+    pub HashInformation: u32,
+    pub IndirectionTableSize: u16,
+    pub IndirectionTableOffset: u32,
+    pub HashSecretKeySize: u16,
+    pub HashSecretKeyOffset: u32,
+}
 pub const NDIS_RECEIVE_SCALE_PARAMETERS_REVISION_1: u32 = 1u32;
 pub const NDIS_RECEIVE_SCALE_PARAMETERS_REVISION_2: u32 = 2u32;
 pub const NDIS_RECEIVE_SCALE_PARAMETERS_REVISION_3: u32 = 3u32;
@@ -882,6 +1676,9 @@ pub const NDIS_RECEIVE_SCALE_PARAM_HASH_INFO_CHANGED: u32 = 2u32;
 pub const NDIS_RECEIVE_SCALE_PARAM_HASH_KEY_CHANGED: u32 = 4u32;
 pub const NDIS_RECEIVE_SCALE_PARAM_NUMBER_OF_ENTRIES_CHANGED: u32 = 16u32;
 pub const NDIS_RECEIVE_SCALE_PARAM_NUMBER_OF_QUEUES_CHANGED: u32 = 8u32;
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NDIS_REQUEST_TYPE(pub i32);
 pub const NDIS_RING_AUTO_REMOVAL_ERROR: u32 = 1024u32;
 pub const NDIS_RING_COUNTER_OVERFLOW: u32 = 256u32;
 pub const NDIS_RING_HARD_ERROR: u32 = 16384u32;
@@ -962,7 +1759,59 @@ pub const NDIS_STATISTICS_FLAGS_VALID_RCV_DISCARDS: u32 = 16u32;
 pub const NDIS_STATISTICS_FLAGS_VALID_RCV_ERROR: u32 = 32u32;
 pub const NDIS_STATISTICS_FLAGS_VALID_XMIT_DISCARDS: u32 = 32768u32;
 pub const NDIS_STATISTICS_FLAGS_VALID_XMIT_ERROR: u32 = 1024u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_STATISTICS_INFO {
+    pub Header: NDIS_OBJECT_HEADER,
+    pub SupportedStatistics: u32,
+    pub ifInDiscards: u64,
+    pub ifInErrors: u64,
+    pub ifHCInOctets: u64,
+    pub ifHCInUcastPkts: u64,
+    pub ifHCInMulticastPkts: u64,
+    pub ifHCInBroadcastPkts: u64,
+    pub ifHCOutOctets: u64,
+    pub ifHCOutUcastPkts: u64,
+    pub ifHCOutMulticastPkts: u64,
+    pub ifHCOutBroadcastPkts: u64,
+    pub ifOutErrors: u64,
+    pub ifOutDiscards: u64,
+    pub ifHCInUcastOctets: u64,
+    pub ifHCInMulticastOctets: u64,
+    pub ifHCInBroadcastOctets: u64,
+    pub ifHCOutUcastOctets: u64,
+    pub ifHCOutMulticastOctets: u64,
+    pub ifHCOutBroadcastOctets: u64,
+}
 pub const NDIS_STATISTICS_INFO_REVISION_1: u32 = 1u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct NDIS_STATISTICS_VALUE {
+    pub Oid: u32,
+    pub DataLength: u32,
+    pub Data: [u8; 1],
+}
+impl Default for NDIS_STATISTICS_VALUE {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct NDIS_STATISTICS_VALUE_EX {
+    pub Oid: u32,
+    pub DataLength: u32,
+    pub Length: u32,
+    pub Data: [u8; 1],
+}
+impl Default for NDIS_STATISTICS_VALUE_EX {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NDIS_SUPPORTED_PAUSE_FUNCTIONS(pub i32);
 pub const NDIS_SUPPORT_NDIS6: u32 = 1u32;
 pub const NDIS_SUPPORT_NDIS61: u32 = 1u32;
 pub const NDIS_SUPPORT_NDIS620: u32 = 1u32;
@@ -1017,11 +1866,189 @@ pub const NDIS_SWITCH_PROPERTY_ENUM_INFO_REVISION_1: u32 = 1u32;
 pub const NDIS_SWITCH_PROPERTY_ENUM_PARAMETERS_REVISION_1: u32 = 1u32;
 pub const NDIS_SWITCH_PROPERTY_PARAMETERS_REVISION_1: u32 = 1u32;
 pub const NDIS_SYSTEM_PROCESSOR_INFO_EX_REVISION_1: u32 = 1u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_TCP_CONNECTION_OFFLOAD {
+    pub Header: NDIS_OBJECT_HEADER,
+    pub Encapsulation: u32,
+    pub _bitfield: u32,
+    pub TcpConnectionOffloadCapacity: u32,
+    pub Flags: u32,
+}
 pub const NDIS_TCP_CONNECTION_OFFLOAD_REVISION_1: u32 = 1u32;
 pub const NDIS_TCP_CONNECTION_OFFLOAD_REVISION_2: u32 = 2u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_TCP_IP_CHECKSUM_OFFLOAD {
+    pub IPv4Transmit: NDIS_TCP_IP_CHECKSUM_OFFLOAD_0,
+    pub IPv4Receive: NDIS_TCP_IP_CHECKSUM_OFFLOAD_1,
+    pub IPv6Transmit: NDIS_TCP_IP_CHECKSUM_OFFLOAD_2,
+    pub IPv6Receive: NDIS_TCP_IP_CHECKSUM_OFFLOAD_3,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_TCP_IP_CHECKSUM_OFFLOAD_1 {
+    pub Encapsulation: u32,
+    pub _bitfield: u32,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_TCP_IP_CHECKSUM_OFFLOAD_0 {
+    pub Encapsulation: u32,
+    pub _bitfield: u32,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_TCP_IP_CHECKSUM_OFFLOAD_3 {
+    pub Encapsulation: u32,
+    pub _bitfield: u32,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_TCP_IP_CHECKSUM_OFFLOAD_2 {
+    pub Encapsulation: u32,
+    pub _bitfield: u32,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_TCP_LARGE_SEND_OFFLOAD_V1 {
+    pub IPv4: NDIS_TCP_LARGE_SEND_OFFLOAD_V1_0,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_TCP_LARGE_SEND_OFFLOAD_V1_0 {
+    pub Encapsulation: u32,
+    pub MaxOffLoadSize: u32,
+    pub MinSegmentCount: u32,
+    pub _bitfield: u32,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_TCP_LARGE_SEND_OFFLOAD_V2 {
+    pub IPv4: NDIS_TCP_LARGE_SEND_OFFLOAD_V2_0,
+    pub IPv6: NDIS_TCP_LARGE_SEND_OFFLOAD_V2_1,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_TCP_LARGE_SEND_OFFLOAD_V2_0 {
+    pub Encapsulation: u32,
+    pub MaxOffLoadSize: u32,
+    pub MinSegmentCount: u32,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_TCP_LARGE_SEND_OFFLOAD_V2_1 {
+    pub Encapsulation: u32,
+    pub MaxOffLoadSize: u32,
+    pub MinSegmentCount: u32,
+    pub _bitfield: u32,
+}
 pub const NDIS_TCP_RECV_SEG_COALESC_OFFLOAD_REVISION_1: u32 = 1u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct NDIS_TIMEOUT_DPC_REQUEST_CAPABILITIES {
+    pub Header: NDIS_OBJECT_HEADER,
+    pub Flags: u32,
+    pub TimeoutArrayLength: u32,
+    pub TimeoutArray: [u32; 1],
+}
+impl Default for NDIS_TIMEOUT_DPC_REQUEST_CAPABILITIES {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
 pub const NDIS_TIMEOUT_DPC_REQUEST_CAPABILITIES_REVISION_1: u32 = 1u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_TIMESTAMP_CAPABILITIES {
+    pub Header: NDIS_OBJECT_HEADER,
+    pub HardwareClockFrequencyHz: u64,
+    pub CrossTimestamp: bool,
+    pub Reserved1: u64,
+    pub Reserved2: u64,
+    pub TimestampFlags: NDIS_TIMESTAMP_CAPABILITY_FLAGS,
+}
 pub const NDIS_TIMESTAMP_CAPABILITIES_REVISION_1: u32 = 1u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_TIMESTAMP_CAPABILITY_FLAGS {
+    pub PtpV2OverUdpIPv4EventMsgReceiveHw: bool,
+    pub PtpV2OverUdpIPv4AllMsgReceiveHw: bool,
+    pub PtpV2OverUdpIPv4EventMsgTransmitHw: bool,
+    pub PtpV2OverUdpIPv4AllMsgTransmitHw: bool,
+    pub PtpV2OverUdpIPv6EventMsgReceiveHw: bool,
+    pub PtpV2OverUdpIPv6AllMsgReceiveHw: bool,
+    pub PtpV2OverUdpIPv6EventMsgTransmitHw: bool,
+    pub PtpV2OverUdpIPv6AllMsgTransmitHw: bool,
+    pub AllReceiveHw: bool,
+    pub AllTransmitHw: bool,
+    pub TaggedTransmitHw: bool,
+    pub AllReceiveSw: bool,
+    pub AllTransmitSw: bool,
+    pub TaggedTransmitSw: bool,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_VAR_DATA_DESC {
+    pub Length: u16,
+    pub MaximumLength: u16,
+    pub Offset: usize,
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NDIS_WAN_HEADER_FORMAT(pub i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NDIS_WAN_MEDIUM_SUBTYPE(pub i32);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_WAN_PROTOCOL_CAPS {
+    pub Flags: u32,
+    pub Reserved: u32,
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NDIS_WAN_QUALITY(pub i32);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct NDIS_WLAN_BSSID {
+    pub Length: u32,
+    pub MacAddress: [u8; 6],
+    pub Reserved: [u8; 2],
+    pub Ssid: NDIS_802_11_SSID,
+    pub Privacy: u32,
+    pub Rssi: i32,
+    pub NetworkTypeInUse: NDIS_802_11_NETWORK_TYPE,
+    pub Configuration: NDIS_802_11_CONFIGURATION,
+    pub InfrastructureMode: NDIS_802_11_NETWORK_INFRASTRUCTURE,
+    pub SupportedRates: [u8; 8],
+}
+impl Default for NDIS_WLAN_BSSID {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct NDIS_WLAN_BSSID_EX {
+    pub Length: u32,
+    pub MacAddress: [u8; 6],
+    pub Reserved: [u8; 2],
+    pub Ssid: NDIS_802_11_SSID,
+    pub Privacy: u32,
+    pub Rssi: i32,
+    pub NetworkTypeInUse: NDIS_802_11_NETWORK_TYPE,
+    pub Configuration: NDIS_802_11_CONFIGURATION,
+    pub InfrastructureMode: NDIS_802_11_NETWORK_INFRASTRUCTURE,
+    pub SupportedRates: [u8; 16],
+    pub IELength: u32,
+    pub IEs: [u8; 1],
+}
+impl Default for NDIS_WLAN_BSSID_EX {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
 pub const NDIS_WLAN_WAKE_ON_4WAY_HANDSHAKE_REQUEST_ENABLED: u32 = 8u32;
 pub const NDIS_WLAN_WAKE_ON_4WAY_HANDSHAKE_REQUEST_SUPPORTED: u32 = 8u32;
 pub const NDIS_WLAN_WAKE_ON_AP_ASSOCIATION_LOST_ENABLED: u32 = 2u32;
@@ -1031,19 +2058,230 @@ pub const NDIS_WLAN_WAKE_ON_GTK_HANDSHAKE_ERROR_SUPPORTED: u32 = 4u32;
 pub const NDIS_WLAN_WAKE_ON_NLO_DISCOVERY_ENABLED: u32 = 1u32;
 pub const NDIS_WLAN_WAKE_ON_NLO_DISCOVERY_SUPPORTED: u32 = 1u32;
 pub const NDIS_WMI_DEFAULT_METHOD_ID: u32 = 1u32;
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub struct NDIS_WMI_ENUM_ADAPTER {
+    pub Header: NDIS_OBJECT_HEADER,
+    pub IfIndex: u32,
+    pub NetLuid: NET_LUID_LH,
+    pub DeviceNameLength: u16,
+    pub DeviceName: [i8; 1],
+}
+impl Default for NDIS_WMI_ENUM_ADAPTER {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
 pub const NDIS_WMI_ENUM_ADAPTER_REVISION_1: u32 = 1u32;
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub struct NDIS_WMI_EVENT_HEADER {
+    pub Header: NDIS_OBJECT_HEADER,
+    pub IfIndex: u32,
+    pub NetLuid: NET_LUID_LH,
+    pub RequestId: u64,
+    pub PortNumber: u32,
+    pub DeviceNameLength: u32,
+    pub DeviceNameOffset: u32,
+    pub Padding: [u8; 4],
+}
+impl Default for NDIS_WMI_EVENT_HEADER {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
 pub const NDIS_WMI_EVENT_HEADER_REVISION_1: u32 = 1u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_WMI_IPSEC_OFFLOAD_V1 {
+    pub Supported: NDIS_WMI_IPSEC_OFFLOAD_V1_0,
+    pub IPv4AH: NDIS_WMI_IPSEC_OFFLOAD_V1_1,
+    pub IPv4ESP: NDIS_WMI_IPSEC_OFFLOAD_V1_2,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_WMI_IPSEC_OFFLOAD_V1_1 {
+    pub Md5: u32,
+    pub Sha_1: u32,
+    pub Transport: u32,
+    pub Tunnel: u32,
+    pub Send: u32,
+    pub Receive: u32,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_WMI_IPSEC_OFFLOAD_V1_2 {
+    pub Des: u32,
+    pub Reserved: u32,
+    pub TripleDes: u32,
+    pub NullEsp: u32,
+    pub Transport: u32,
+    pub Tunnel: u32,
+    pub Send: u32,
+    pub Receive: u32,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_WMI_IPSEC_OFFLOAD_V1_0 {
+    pub Encapsulation: u32,
+    pub AhEspCombined: u32,
+    pub TransportTunnelCombined: u32,
+    pub IPv4Options: u32,
+    pub Flags: u32,
+}
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub struct NDIS_WMI_METHOD_HEADER {
+    pub Header: NDIS_OBJECT_HEADER,
+    pub PortNumber: u32,
+    pub NetLuid: NET_LUID_LH,
+    pub RequestId: u64,
+    pub Timeout: u32,
+    pub Padding: [u8; 4],
+}
+impl Default for NDIS_WMI_METHOD_HEADER {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
 pub const NDIS_WMI_METHOD_HEADER_REVISION_1: u32 = 1u32;
 pub const NDIS_WMI_OBJECT_TYPE_ENUM_ADAPTER: u32 = 4u32;
 pub const NDIS_WMI_OBJECT_TYPE_EVENT: u32 = 3u32;
 pub const NDIS_WMI_OBJECT_TYPE_METHOD: u32 = 2u32;
 pub const NDIS_WMI_OBJECT_TYPE_OUTPUT_INFO: u32 = 5u32;
 pub const NDIS_WMI_OBJECT_TYPE_SET: u32 = 1u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_WMI_OFFLOAD {
+    pub Header: NDIS_OBJECT_HEADER,
+    pub Checksum: NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD,
+    pub LsoV1: NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1,
+    pub IPsecV1: NDIS_WMI_IPSEC_OFFLOAD_V1,
+    pub LsoV2: NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2,
+    pub Flags: u32,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_WMI_OUTPUT_INFO {
+    pub Header: NDIS_OBJECT_HEADER,
+    pub Flags: u32,
+    pub SupportedRevision: u8,
+    pub DataOffset: u32,
+}
 pub const NDIS_WMI_PM_ACTIVE_CAPABILITIES_REVISION_1: u32 = 1u32;
 pub const NDIS_WMI_PM_ADMIN_CONFIG_REVISION_1: u32 = 1u32;
 pub const NDIS_WMI_RECEIVE_QUEUE_INFO_REVISION_1: u32 = 1u32;
 pub const NDIS_WMI_RECEIVE_QUEUE_PARAMETERS_REVISION_1: u32 = 1u32;
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub struct NDIS_WMI_SET_HEADER {
+    pub Header: NDIS_OBJECT_HEADER,
+    pub PortNumber: u32,
+    pub NetLuid: NET_LUID_LH,
+    pub RequestId: u64,
+    pub Timeout: u32,
+    pub Padding: [u8; 4],
+}
+impl Default for NDIS_WMI_SET_HEADER {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
 pub const NDIS_WMI_SET_HEADER_REVISION_1: u32 = 1u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_WMI_TCP_CONNECTION_OFFLOAD {
+    pub Header: NDIS_OBJECT_HEADER,
+    pub Encapsulation: u32,
+    pub SupportIPv4: u32,
+    pub SupportIPv6: u32,
+    pub SupportIPv6ExtensionHeaders: u32,
+    pub SupportSack: u32,
+    pub TcpConnectionOffloadCapacity: u32,
+    pub Flags: u32,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD {
+    pub IPv4Transmit: NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_0,
+    pub IPv4Receive: NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_1,
+    pub IPv6Transmit: NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_2,
+    pub IPv6Receive: NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_3,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_1 {
+    pub Encapsulation: u32,
+    pub IpOptionsSupported: u32,
+    pub TcpOptionsSupported: u32,
+    pub TcpChecksum: u32,
+    pub UdpChecksum: u32,
+    pub IpChecksum: u32,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_0 {
+    pub Encapsulation: u32,
+    pub IpOptionsSupported: u32,
+    pub TcpOptionsSupported: u32,
+    pub TcpChecksum: u32,
+    pub UdpChecksum: u32,
+    pub IpChecksum: u32,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_3 {
+    pub Encapsulation: u32,
+    pub IpExtensionHeadersSupported: u32,
+    pub TcpOptionsSupported: u32,
+    pub TcpChecksum: u32,
+    pub UdpChecksum: u32,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_2 {
+    pub Encapsulation: u32,
+    pub IpExtensionHeadersSupported: u32,
+    pub TcpOptionsSupported: u32,
+    pub TcpChecksum: u32,
+    pub UdpChecksum: u32,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1 {
+    pub IPv4: NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1_0,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1_0 {
+    pub Encapsulation: u32,
+    pub MaxOffLoadSize: u32,
+    pub MinSegmentCount: u32,
+    pub TcpOptions: u32,
+    pub IpOptions: u32,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2 {
+    pub IPv4: NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2_0,
+    pub IPv6: NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2_1,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2_0 {
+    pub Encapsulation: u32,
+    pub MaxOffLoadSize: u32,
+    pub MinSegmentCount: u32,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2_1 {
+    pub Encapsulation: u32,
+    pub MaxOffLoadSize: u32,
+    pub MinSegmentCount: u32,
+    pub IpExtensionHeadersSupported: u32,
+    pub TcpOptionsSupported: u32,
+}
 pub const NDIS_WWAN_WAKE_ON_PACKET_STATE_ENABLED: u32 = 8u32;
 pub const NDIS_WWAN_WAKE_ON_PACKET_STATE_SUPPORTED: u32 = 8u32;
 pub const NDIS_WWAN_WAKE_ON_REGISTER_STATE_ENABLED: u32 = 1u32;
@@ -1061,27 +2299,155 @@ pub const NDK_ADAPTER_FLAG_LOOPBACK_CONNECTIONS_SUPPORTED: u32 = 65536u32;
 pub const NDK_ADAPTER_FLAG_MULTI_ENGINE_SUPPORTED: u32 = 8u32;
 pub const NDK_ADAPTER_FLAG_RDMA_READ_LOCAL_INVALIDATE_SUPPORTED: u32 = 16u32;
 pub const NDK_ADAPTER_FLAG_RDMA_READ_SINK_NOT_REQUIRED: u32 = 2u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDK_ADAPTER_INFO {
+    pub Version: NDK_VERSION,
+    pub VendorId: u32,
+    pub DeviceId: u32,
+    pub MaxRegistrationSize: usize,
+    pub MaxWindowSize: usize,
+    pub FRMRPageCount: u32,
+    pub MaxInitiatorRequestSge: u32,
+    pub MaxReceiveRequestSge: u32,
+    pub MaxReadRequestSge: u32,
+    pub MaxTransferLength: u32,
+    pub MaxInlineDataSize: u32,
+    pub MaxInboundReadLimit: u32,
+    pub MaxOutboundReadLimit: u32,
+    pub MaxReceiveQueueDepth: u32,
+    pub MaxInitiatorQueueDepth: u32,
+    pub MaxSrqDepth: u32,
+    pub MaxCqDepth: u32,
+    pub LargeRequestThreshold: u32,
+    pub MaxCallerData: u32,
+    pub MaxCalleeData: u32,
+    pub AdapterFlags: u32,
+    pub RdmaTechnology: NDK_RDMA_TECHNOLOGY,
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NDK_RDMA_TECHNOLOGY(pub i32);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NDK_VERSION {
+    pub Major: u16,
+    pub Minor: u16,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct NETWORK_ADDRESS {
+    pub AddressLength: u16,
+    pub AddressType: u16,
+    pub Address: [u8; 1],
+}
+impl Default for NETWORK_ADDRESS {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct NETWORK_ADDRESS_IP {
+    pub sin_port: u16,
+    pub IN_ADDR: u32,
+    pub sin_zero: [u8; 8],
+}
+impl Default for NETWORK_ADDRESS_IP {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct NETWORK_ADDRESS_IP6 {
+    pub sin6_port: u16,
+    pub sin6_flowinfo: u32,
+    pub sin6_addr: [u16; 8],
+    pub sin6_scope_id: u32,
+}
+impl Default for NETWORK_ADDRESS_IP6 {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct NETWORK_ADDRESS_IPX {
+    pub NetworkAddress: u32,
+    pub NodeAddress: [u8; 6],
+    pub Socket: u16,
+}
+impl Default for NETWORK_ADDRESS_IPX {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct NETWORK_ADDRESS_LIST {
+    pub AddressCount: i32,
+    pub AddressType: u16,
+    pub Address: [NETWORK_ADDRESS; 1],
+}
+impl Default for NETWORK_ADDRESS_LIST {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
 pub const NET_IFLUID_UNSPECIFIED: u32 = 0u32;
 pub const NET_IF_ACCESS_BROADCAST: NET_IF_ACCESS_TYPE = NET_IF_ACCESS_TYPE(2i32);
 pub const NET_IF_ACCESS_LOOPBACK: NET_IF_ACCESS_TYPE = NET_IF_ACCESS_TYPE(1i32);
 pub const NET_IF_ACCESS_MAXIMUM: NET_IF_ACCESS_TYPE = NET_IF_ACCESS_TYPE(5i32);
 pub const NET_IF_ACCESS_POINT_TO_MULTI_POINT: NET_IF_ACCESS_TYPE = NET_IF_ACCESS_TYPE(4i32);
 pub const NET_IF_ACCESS_POINT_TO_POINT: NET_IF_ACCESS_TYPE = NET_IF_ACCESS_TYPE(3i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NET_IF_ACCESS_TYPE(pub i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NET_IF_ADMIN_STATUS(pub i32);
 pub const NET_IF_ADMIN_STATUS_DOWN: NET_IF_ADMIN_STATUS = NET_IF_ADMIN_STATUS(2i32);
 pub const NET_IF_ADMIN_STATUS_TESTING: NET_IF_ADMIN_STATUS = NET_IF_ADMIN_STATUS(3i32);
 pub const NET_IF_ADMIN_STATUS_UP: NET_IF_ADMIN_STATUS = NET_IF_ADMIN_STATUS(1i32);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NET_IF_ALIAS_LH {
+    pub ifAliasLength: u16,
+    pub ifAliasOffset: u16,
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
+pub struct NET_IF_COMPARTMENT_ID(pub u32);
+pub const NET_IF_COMPARTMENT_ID_PRIMARY: u32 = 1u32;
+pub const NET_IF_COMPARTMENT_ID_UNSPECIFIED: u32 = 0u32;
 pub const NET_IF_CONNECTION_DEDICATED: NET_IF_CONNECTION_TYPE = NET_IF_CONNECTION_TYPE(1i32);
 pub const NET_IF_CONNECTION_DEMAND: NET_IF_CONNECTION_TYPE = NET_IF_CONNECTION_TYPE(3i32);
 pub const NET_IF_CONNECTION_MAXIMUM: NET_IF_CONNECTION_TYPE = NET_IF_CONNECTION_TYPE(4i32);
 pub const NET_IF_CONNECTION_PASSIVE: NET_IF_CONNECTION_TYPE = NET_IF_CONNECTION_TYPE(2i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NET_IF_CONNECTION_TYPE(pub i32);
 pub const NET_IF_DIRECTION_MAXIMUM: NET_IF_DIRECTION_TYPE = NET_IF_DIRECTION_TYPE(3i32);
 pub const NET_IF_DIRECTION_RECEIVEONLY: NET_IF_DIRECTION_TYPE = NET_IF_DIRECTION_TYPE(2i32);
 pub const NET_IF_DIRECTION_SENDONLY: NET_IF_DIRECTION_TYPE = NET_IF_DIRECTION_TYPE(1i32);
 pub const NET_IF_DIRECTION_SENDRECEIVE: NET_IF_DIRECTION_TYPE = NET_IF_DIRECTION_TYPE(0i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NET_IF_DIRECTION_TYPE(pub i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NET_IF_MEDIA_CONNECT_STATE(pub i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NET_IF_MEDIA_DUPLEX_STATE(pub i32);
 pub const NET_IF_OID_COMPARTMENT_ID: u32 = 2u32;
 pub const NET_IF_OID_IF_ALIAS: u32 = 1u32;
 pub const NET_IF_OID_IF_ENTRY: u32 = 4u32;
 pub const NET_IF_OID_NETWORK_GUID: u32 = 3u32;
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NET_IF_OPER_STATUS(pub i32);
 pub const NET_IF_OPER_STATUS_DORMANT: NET_IF_OPER_STATUS = NET_IF_OPER_STATUS(5i32);
 pub const NET_IF_OPER_STATUS_DORMANT_LOW_POWER: u32 = 8u32;
 pub const NET_IF_OPER_STATUS_DORMANT_PAUSED: u32 = 4u32;
@@ -1093,9 +2459,42 @@ pub const NET_IF_OPER_STATUS_NOT_PRESENT: NET_IF_OPER_STATUS = NET_IF_OPER_STATU
 pub const NET_IF_OPER_STATUS_TESTING: NET_IF_OPER_STATUS = NET_IF_OPER_STATUS(3i32);
 pub const NET_IF_OPER_STATUS_UNKNOWN: NET_IF_OPER_STATUS = NET_IF_OPER_STATUS(4i32);
 pub const NET_IF_OPER_STATUS_UP: NET_IF_OPER_STATUS = NET_IF_OPER_STATUS(1i32);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NET_IF_RCV_ADDRESS_LH {
+    pub ifRcvAddressType: NET_IF_RCV_ADDRESS_TYPE,
+    pub ifRcvAddressLength: u16,
+    pub ifRcvAddressOffset: u16,
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct NET_IF_RCV_ADDRESS_TYPE(pub i32);
 pub const NET_IF_RCV_ADDRESS_TYPE_NON_VOLATILE: NET_IF_RCV_ADDRESS_TYPE = NET_IF_RCV_ADDRESS_TYPE(3i32);
 pub const NET_IF_RCV_ADDRESS_TYPE_OTHER: NET_IF_RCV_ADDRESS_TYPE = NET_IF_RCV_ADDRESS_TYPE(1i32);
 pub const NET_IF_RCV_ADDRESS_TYPE_VOLATILE: NET_IF_RCV_ADDRESS_TYPE = NET_IF_RCV_ADDRESS_TYPE(2i32);
+#[repr(C)]
+#[derive(Clone, Copy)]
+pub union NET_LUID_LH {
+    pub Value: u64,
+    pub Info: NET_LUID_LH_0,
+}
+impl Default for NET_LUID_LH {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NET_LUID_LH_0 {
+    pub _bitfield: u64,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct NET_PHYSICAL_LOCATION_LH {
+    pub BusNumber: u32,
+    pub SlotNumber: u32,
+    pub FunctionNumber: u32,
+}
 pub const NET_SITEID_MAXSYSTEM: u32 = 268435455u32;
 pub const NET_SITEID_MAXUSER: u32 = 134217727u32;
 pub const NET_SITEID_UNSPECIFIED: u32 = 0u32;
@@ -1327,20 +2726,112 @@ pub const NdkRoCE: NDK_RDMA_TECHNOLOGY = NDK_RDMA_TECHNOLOGY(3i32);
 pub const NdkRoCEv2: NDK_RDMA_TECHNOLOGY = NDK_RDMA_TECHNOLOGY(4i32);
 pub const NdkUndefined: NDK_RDMA_TECHNOLOGY = NDK_RDMA_TECHNOLOGY(0i32);
 pub const NdkiWarp: NDK_RDMA_TECHNOLOGY = NDK_RDMA_TECHNOLOGY(1i32);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct OFFLOAD_ALGO_INFO {
+    pub algoIdentifier: u32,
+    pub algoKeylen: u32,
+    pub algoRounds: u32,
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct OFFLOAD_CONF_ALGO(pub i32);
 pub const OFFLOAD_INBOUND_SA: u32 = 1u32;
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct OFFLOAD_INTEGRITY_ALGO(pub i32);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct OFFLOAD_IPSEC_ADD_SA {
+    pub SrcAddr: u32,
+    pub SrcMask: u32,
+    pub DestAddr: u32,
+    pub DestMask: u32,
+    pub Protocol: u32,
+    pub SrcPort: u16,
+    pub DestPort: u16,
+    pub SrcTunnelAddr: u32,
+    pub DestTunnelAddr: u32,
+    pub Flags: u16,
+    pub NumSAs: i16,
+    pub SecAssoc: [OFFLOAD_SECURITY_ASSOCIATION; 3],
+    pub OffloadHandle: super::super::Foundation::HANDLE,
+    pub KeyLen: u32,
+    pub KeyMat: [u8; 1],
+}
+impl Default for OFFLOAD_IPSEC_ADD_SA {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct OFFLOAD_IPSEC_ADD_UDPESP_SA {
+    pub SrcAddr: u32,
+    pub SrcMask: u32,
+    pub DstAddr: u32,
+    pub DstMask: u32,
+    pub Protocol: u32,
+    pub SrcPort: u16,
+    pub DstPort: u16,
+    pub SrcTunnelAddr: u32,
+    pub DstTunnelAddr: u32,
+    pub Flags: u16,
+    pub NumSAs: i16,
+    pub SecAssoc: [OFFLOAD_SECURITY_ASSOCIATION; 3],
+    pub OffloadHandle: super::super::Foundation::HANDLE,
+    pub EncapTypeEntry: OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_ENTRY,
+    pub EncapTypeEntryOffldHandle: super::super::Foundation::HANDLE,
+    pub KeyLen: u32,
+    pub KeyMat: [u8; 1],
+}
+impl Default for OFFLOAD_IPSEC_ADD_UDPESP_SA {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
 pub const OFFLOAD_IPSEC_CONF_3_DES: OFFLOAD_CONF_ALGO = OFFLOAD_CONF_ALGO(3i32);
 pub const OFFLOAD_IPSEC_CONF_DES: OFFLOAD_CONF_ALGO = OFFLOAD_CONF_ALGO(1i32);
 pub const OFFLOAD_IPSEC_CONF_MAX: OFFLOAD_CONF_ALGO = OFFLOAD_CONF_ALGO(4i32);
 pub const OFFLOAD_IPSEC_CONF_NONE: OFFLOAD_CONF_ALGO = OFFLOAD_CONF_ALGO(0i32);
 pub const OFFLOAD_IPSEC_CONF_RESERVED: OFFLOAD_CONF_ALGO = OFFLOAD_CONF_ALGO(2i32);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct OFFLOAD_IPSEC_DELETE_SA {
+    pub OffloadHandle: super::super::Foundation::HANDLE,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct OFFLOAD_IPSEC_DELETE_UDPESP_SA {
+    pub OffloadHandle: super::super::Foundation::HANDLE,
+    pub EncapTypeEntryOffldHandle: super::super::Foundation::HANDLE,
+}
 pub const OFFLOAD_IPSEC_INTEGRITY_MAX: OFFLOAD_INTEGRITY_ALGO = OFFLOAD_INTEGRITY_ALGO(3i32);
 pub const OFFLOAD_IPSEC_INTEGRITY_MD5: OFFLOAD_INTEGRITY_ALGO = OFFLOAD_INTEGRITY_ALGO(1i32);
 pub const OFFLOAD_IPSEC_INTEGRITY_NONE: OFFLOAD_INTEGRITY_ALGO = OFFLOAD_INTEGRITY_ALGO(0i32);
 pub const OFFLOAD_IPSEC_INTEGRITY_SHA: OFFLOAD_INTEGRITY_ALGO = OFFLOAD_INTEGRITY_ALGO(2i32);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_ENTRY {
+    pub UdpEncapType: UDP_ENCAP_TYPE,
+    pub DstEncapPort: u16,
+}
 pub const OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_IKE: UDP_ENCAP_TYPE = UDP_ENCAP_TYPE(0i32);
 pub const OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_OTHER: UDP_ENCAP_TYPE = UDP_ENCAP_TYPE(1i32);
 pub const OFFLOAD_MAX_SAS: u32 = 3u32;
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct OFFLOAD_OPERATION_E(pub i32);
 pub const OFFLOAD_OUTBOUND_SA: u32 = 2u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct OFFLOAD_SECURITY_ASSOCIATION {
+    pub Operation: OFFLOAD_OPERATION_E,
+    pub SPI: u32,
+    pub IntegrityAlgo: OFFLOAD_ALGO_INFO,
+    pub ConfAlgo: OFFLOAD_ALGO_INFO,
+    pub Reserved: OFFLOAD_ALGO_INFO,
+}
 pub const OID_1394_LOCAL_NODE_INFO: u32 = 201392385u32;
 pub const OID_1394_VC_INFO: u32 = 201392386u32;
 pub const OID_802_11_ADD_KEY: u32 = 218169629u32;
@@ -2112,10 +3603,30 @@ pub const OID_WWAN_USSD: u32 = 234946841u32;
 pub const OID_WWAN_VENDOR_SPECIFIC: u32 = 234946836u32;
 pub const OID_WWAN_VISIBLE_PROVIDERS: u32 = 234946824u32;
 pub const OID_XBOX_ACC_RESERVED0: u32 = 4194304000u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct PMKID_CANDIDATE {
+    pub BSSID: [u8; 6],
+    pub Flags: u32,
+}
+impl Default for PMKID_CANDIDATE {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
 pub const READABLE_LOCAL_CLOCK: u32 = 1u32;
 pub const RECEIVE_TIME_INDICATION_CAPABLE: u32 = 8u32;
 pub const TIMED_SEND_CAPABLE: u32 = 16u32;
 pub const TIME_STAMP_CAPABLE: u32 = 32u32;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct TRANSPORT_HEADER_OFFSET {
+    pub ProtocolType: u16,
+    pub HeaderOffset: u16,
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct TUNNEL_TYPE(pub i32);
 pub const TUNNEL_TYPE_6TO4: TUNNEL_TYPE = TUNNEL_TYPE(11i32);
 pub const TUNNEL_TYPE_DIRECT: TUNNEL_TYPE = TUNNEL_TYPE(2i32);
 pub const TUNNEL_TYPE_IPHTTPS: TUNNEL_TYPE = TUNNEL_TYPE(15i32);
@@ -2123,7 +3634,10 @@ pub const TUNNEL_TYPE_ISATAP: TUNNEL_TYPE = TUNNEL_TYPE(13i32);
 pub const TUNNEL_TYPE_NONE: TUNNEL_TYPE = TUNNEL_TYPE(0i32);
 pub const TUNNEL_TYPE_OTHER: TUNNEL_TYPE = TUNNEL_TYPE(1i32);
 pub const TUNNEL_TYPE_TEREDO: TUNNEL_TYPE = TUNNEL_TYPE(14i32);
-pub const UNSPECIFIED_NETWORK_GUID: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x12ba5bde_143e_4c0d_b66d_2379bb141913);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct UDP_ENCAP_TYPE(pub i32);
+pub const UNSPECIFIED_NETWORK_GUID: windows_core::GUID = windows_core::GUID::from_u128(0x12ba5bde_143e_4c0d_b66d_2379bb141913);
 pub const WAN_PROTOCOL_KEEPS_STATS: u32 = 1u32;
 pub const fNDIS_GUID_ALLOW_READ: u32 = 32u32;
 pub const fNDIS_GUID_ALLOW_WRITE: u32 = 64u32;
@@ -2135,5569 +3649,3 @@ pub const fNDIS_GUID_SUPPORT_COMMON_HEADER: u32 = 512u32;
 pub const fNDIS_GUID_TO_OID: u32 = 1u32;
 pub const fNDIS_GUID_TO_STATUS: u32 = 2u32;
 pub const fNDIS_GUID_UNICODE_STRING: u32 = 8u32;
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct IF_ADMINISTRATIVE_STATE(pub i32);
-impl ::core::marker::Copy for IF_ADMINISTRATIVE_STATE {}
-impl ::core::clone::Clone for IF_ADMINISTRATIVE_STATE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for IF_ADMINISTRATIVE_STATE {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for IF_ADMINISTRATIVE_STATE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for IF_ADMINISTRATIVE_STATE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("IF_ADMINISTRATIVE_STATE").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct IF_OPER_STATUS(pub i32);
-impl ::core::marker::Copy for IF_OPER_STATUS {}
-impl ::core::clone::Clone for IF_OPER_STATUS {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for IF_OPER_STATUS {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for IF_OPER_STATUS {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for IF_OPER_STATUS {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("IF_OPER_STATUS").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NDIS_802_11_AUTHENTICATION_MODE(pub i32);
-impl ::core::marker::Copy for NDIS_802_11_AUTHENTICATION_MODE {}
-impl ::core::clone::Clone for NDIS_802_11_AUTHENTICATION_MODE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NDIS_802_11_AUTHENTICATION_MODE {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_AUTHENTICATION_MODE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NDIS_802_11_AUTHENTICATION_MODE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NDIS_802_11_AUTHENTICATION_MODE").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NDIS_802_11_MEDIA_STREAM_MODE(pub i32);
-impl ::core::marker::Copy for NDIS_802_11_MEDIA_STREAM_MODE {}
-impl ::core::clone::Clone for NDIS_802_11_MEDIA_STREAM_MODE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NDIS_802_11_MEDIA_STREAM_MODE {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_MEDIA_STREAM_MODE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NDIS_802_11_MEDIA_STREAM_MODE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NDIS_802_11_MEDIA_STREAM_MODE").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NDIS_802_11_NETWORK_INFRASTRUCTURE(pub i32);
-impl ::core::marker::Copy for NDIS_802_11_NETWORK_INFRASTRUCTURE {}
-impl ::core::clone::Clone for NDIS_802_11_NETWORK_INFRASTRUCTURE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NDIS_802_11_NETWORK_INFRASTRUCTURE {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_NETWORK_INFRASTRUCTURE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NDIS_802_11_NETWORK_INFRASTRUCTURE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NDIS_802_11_NETWORK_INFRASTRUCTURE").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NDIS_802_11_NETWORK_TYPE(pub i32);
-impl ::core::marker::Copy for NDIS_802_11_NETWORK_TYPE {}
-impl ::core::clone::Clone for NDIS_802_11_NETWORK_TYPE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NDIS_802_11_NETWORK_TYPE {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_NETWORK_TYPE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NDIS_802_11_NETWORK_TYPE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NDIS_802_11_NETWORK_TYPE").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NDIS_802_11_POWER_MODE(pub i32);
-impl ::core::marker::Copy for NDIS_802_11_POWER_MODE {}
-impl ::core::clone::Clone for NDIS_802_11_POWER_MODE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NDIS_802_11_POWER_MODE {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_POWER_MODE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NDIS_802_11_POWER_MODE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NDIS_802_11_POWER_MODE").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NDIS_802_11_PRIVACY_FILTER(pub i32);
-impl ::core::marker::Copy for NDIS_802_11_PRIVACY_FILTER {}
-impl ::core::clone::Clone for NDIS_802_11_PRIVACY_FILTER {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NDIS_802_11_PRIVACY_FILTER {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_PRIVACY_FILTER {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NDIS_802_11_PRIVACY_FILTER {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NDIS_802_11_PRIVACY_FILTER").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NDIS_802_11_RADIO_STATUS(pub i32);
-impl ::core::marker::Copy for NDIS_802_11_RADIO_STATUS {}
-impl ::core::clone::Clone for NDIS_802_11_RADIO_STATUS {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NDIS_802_11_RADIO_STATUS {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_RADIO_STATUS {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NDIS_802_11_RADIO_STATUS {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NDIS_802_11_RADIO_STATUS").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NDIS_802_11_RELOAD_DEFAULTS(pub i32);
-impl ::core::marker::Copy for NDIS_802_11_RELOAD_DEFAULTS {}
-impl ::core::clone::Clone for NDIS_802_11_RELOAD_DEFAULTS {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NDIS_802_11_RELOAD_DEFAULTS {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_RELOAD_DEFAULTS {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NDIS_802_11_RELOAD_DEFAULTS {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NDIS_802_11_RELOAD_DEFAULTS").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NDIS_802_11_STATUS_TYPE(pub i32);
-impl ::core::marker::Copy for NDIS_802_11_STATUS_TYPE {}
-impl ::core::clone::Clone for NDIS_802_11_STATUS_TYPE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NDIS_802_11_STATUS_TYPE {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_STATUS_TYPE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NDIS_802_11_STATUS_TYPE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NDIS_802_11_STATUS_TYPE").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NDIS_802_11_WEP_STATUS(pub i32);
-impl ::core::marker::Copy for NDIS_802_11_WEP_STATUS {}
-impl ::core::clone::Clone for NDIS_802_11_WEP_STATUS {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NDIS_802_11_WEP_STATUS {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_WEP_STATUS {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NDIS_802_11_WEP_STATUS {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NDIS_802_11_WEP_STATUS").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NDIS_802_5_RING_STATE(pub i32);
-impl ::core::marker::Copy for NDIS_802_5_RING_STATE {}
-impl ::core::clone::Clone for NDIS_802_5_RING_STATE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NDIS_802_5_RING_STATE {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_5_RING_STATE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NDIS_802_5_RING_STATE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NDIS_802_5_RING_STATE").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NDIS_DEVICE_POWER_STATE(pub i32);
-impl ::core::marker::Copy for NDIS_DEVICE_POWER_STATE {}
-impl ::core::clone::Clone for NDIS_DEVICE_POWER_STATE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NDIS_DEVICE_POWER_STATE {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NDIS_DEVICE_POWER_STATE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NDIS_DEVICE_POWER_STATE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NDIS_DEVICE_POWER_STATE").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NDIS_FDDI_ATTACHMENT_TYPE(pub i32);
-impl ::core::marker::Copy for NDIS_FDDI_ATTACHMENT_TYPE {}
-impl ::core::clone::Clone for NDIS_FDDI_ATTACHMENT_TYPE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NDIS_FDDI_ATTACHMENT_TYPE {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NDIS_FDDI_ATTACHMENT_TYPE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NDIS_FDDI_ATTACHMENT_TYPE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NDIS_FDDI_ATTACHMENT_TYPE").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NDIS_FDDI_LCONNECTION_STATE(pub i32);
-impl ::core::marker::Copy for NDIS_FDDI_LCONNECTION_STATE {}
-impl ::core::clone::Clone for NDIS_FDDI_LCONNECTION_STATE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NDIS_FDDI_LCONNECTION_STATE {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NDIS_FDDI_LCONNECTION_STATE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NDIS_FDDI_LCONNECTION_STATE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NDIS_FDDI_LCONNECTION_STATE").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NDIS_FDDI_RING_MGT_STATE(pub i32);
-impl ::core::marker::Copy for NDIS_FDDI_RING_MGT_STATE {}
-impl ::core::clone::Clone for NDIS_FDDI_RING_MGT_STATE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NDIS_FDDI_RING_MGT_STATE {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NDIS_FDDI_RING_MGT_STATE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NDIS_FDDI_RING_MGT_STATE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NDIS_FDDI_RING_MGT_STATE").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NDIS_HARDWARE_STATUS(pub i32);
-impl ::core::marker::Copy for NDIS_HARDWARE_STATUS {}
-impl ::core::clone::Clone for NDIS_HARDWARE_STATUS {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NDIS_HARDWARE_STATUS {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NDIS_HARDWARE_STATUS {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NDIS_HARDWARE_STATUS {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NDIS_HARDWARE_STATUS").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NDIS_INTERRUPT_MODERATION(pub i32);
-impl ::core::marker::Copy for NDIS_INTERRUPT_MODERATION {}
-impl ::core::clone::Clone for NDIS_INTERRUPT_MODERATION {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NDIS_INTERRUPT_MODERATION {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NDIS_INTERRUPT_MODERATION {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NDIS_INTERRUPT_MODERATION {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NDIS_INTERRUPT_MODERATION").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NDIS_MEDIA_STATE(pub i32);
-impl ::core::marker::Copy for NDIS_MEDIA_STATE {}
-impl ::core::clone::Clone for NDIS_MEDIA_STATE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NDIS_MEDIA_STATE {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NDIS_MEDIA_STATE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NDIS_MEDIA_STATE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NDIS_MEDIA_STATE").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NDIS_MEDIUM(pub i32);
-impl ::core::marker::Copy for NDIS_MEDIUM {}
-impl ::core::clone::Clone for NDIS_MEDIUM {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NDIS_MEDIUM {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NDIS_MEDIUM {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NDIS_MEDIUM {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NDIS_MEDIUM").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NDIS_NETWORK_CHANGE_TYPE(pub i32);
-impl ::core::marker::Copy for NDIS_NETWORK_CHANGE_TYPE {}
-impl ::core::clone::Clone for NDIS_NETWORK_CHANGE_TYPE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NDIS_NETWORK_CHANGE_TYPE {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NDIS_NETWORK_CHANGE_TYPE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NDIS_NETWORK_CHANGE_TYPE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NDIS_NETWORK_CHANGE_TYPE").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NDIS_PHYSICAL_MEDIUM(pub i32);
-impl ::core::marker::Copy for NDIS_PHYSICAL_MEDIUM {}
-impl ::core::clone::Clone for NDIS_PHYSICAL_MEDIUM {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NDIS_PHYSICAL_MEDIUM {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NDIS_PHYSICAL_MEDIUM {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NDIS_PHYSICAL_MEDIUM {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NDIS_PHYSICAL_MEDIUM").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NDIS_PORT_AUTHORIZATION_STATE(pub i32);
-impl ::core::marker::Copy for NDIS_PORT_AUTHORIZATION_STATE {}
-impl ::core::clone::Clone for NDIS_PORT_AUTHORIZATION_STATE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NDIS_PORT_AUTHORIZATION_STATE {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NDIS_PORT_AUTHORIZATION_STATE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NDIS_PORT_AUTHORIZATION_STATE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NDIS_PORT_AUTHORIZATION_STATE").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NDIS_PORT_CONTROL_STATE(pub i32);
-impl ::core::marker::Copy for NDIS_PORT_CONTROL_STATE {}
-impl ::core::clone::Clone for NDIS_PORT_CONTROL_STATE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NDIS_PORT_CONTROL_STATE {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NDIS_PORT_CONTROL_STATE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NDIS_PORT_CONTROL_STATE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NDIS_PORT_CONTROL_STATE").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NDIS_PORT_TYPE(pub i32);
-impl ::core::marker::Copy for NDIS_PORT_TYPE {}
-impl ::core::clone::Clone for NDIS_PORT_TYPE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NDIS_PORT_TYPE {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NDIS_PORT_TYPE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NDIS_PORT_TYPE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NDIS_PORT_TYPE").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NDIS_PROCESSOR_VENDOR(pub i32);
-impl ::core::marker::Copy for NDIS_PROCESSOR_VENDOR {}
-impl ::core::clone::Clone for NDIS_PROCESSOR_VENDOR {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NDIS_PROCESSOR_VENDOR {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NDIS_PROCESSOR_VENDOR {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NDIS_PROCESSOR_VENDOR {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NDIS_PROCESSOR_VENDOR").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NDIS_REQUEST_TYPE(pub i32);
-impl ::core::marker::Copy for NDIS_REQUEST_TYPE {}
-impl ::core::clone::Clone for NDIS_REQUEST_TYPE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NDIS_REQUEST_TYPE {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NDIS_REQUEST_TYPE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NDIS_REQUEST_TYPE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NDIS_REQUEST_TYPE").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NDIS_SUPPORTED_PAUSE_FUNCTIONS(pub i32);
-impl ::core::marker::Copy for NDIS_SUPPORTED_PAUSE_FUNCTIONS {}
-impl ::core::clone::Clone for NDIS_SUPPORTED_PAUSE_FUNCTIONS {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NDIS_SUPPORTED_PAUSE_FUNCTIONS {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NDIS_SUPPORTED_PAUSE_FUNCTIONS {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NDIS_SUPPORTED_PAUSE_FUNCTIONS {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NDIS_SUPPORTED_PAUSE_FUNCTIONS").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NDIS_WAN_HEADER_FORMAT(pub i32);
-impl ::core::marker::Copy for NDIS_WAN_HEADER_FORMAT {}
-impl ::core::clone::Clone for NDIS_WAN_HEADER_FORMAT {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NDIS_WAN_HEADER_FORMAT {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NDIS_WAN_HEADER_FORMAT {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NDIS_WAN_HEADER_FORMAT {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NDIS_WAN_HEADER_FORMAT").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NDIS_WAN_MEDIUM_SUBTYPE(pub i32);
-impl ::core::marker::Copy for NDIS_WAN_MEDIUM_SUBTYPE {}
-impl ::core::clone::Clone for NDIS_WAN_MEDIUM_SUBTYPE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NDIS_WAN_MEDIUM_SUBTYPE {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NDIS_WAN_MEDIUM_SUBTYPE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NDIS_WAN_MEDIUM_SUBTYPE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NDIS_WAN_MEDIUM_SUBTYPE").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NDIS_WAN_QUALITY(pub i32);
-impl ::core::marker::Copy for NDIS_WAN_QUALITY {}
-impl ::core::clone::Clone for NDIS_WAN_QUALITY {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NDIS_WAN_QUALITY {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NDIS_WAN_QUALITY {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NDIS_WAN_QUALITY {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NDIS_WAN_QUALITY").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NDK_RDMA_TECHNOLOGY(pub i32);
-impl ::core::marker::Copy for NDK_RDMA_TECHNOLOGY {}
-impl ::core::clone::Clone for NDK_RDMA_TECHNOLOGY {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NDK_RDMA_TECHNOLOGY {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NDK_RDMA_TECHNOLOGY {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NDK_RDMA_TECHNOLOGY {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NDK_RDMA_TECHNOLOGY").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NET_IF_ACCESS_TYPE(pub i32);
-impl ::core::marker::Copy for NET_IF_ACCESS_TYPE {}
-impl ::core::clone::Clone for NET_IF_ACCESS_TYPE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NET_IF_ACCESS_TYPE {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NET_IF_ACCESS_TYPE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NET_IF_ACCESS_TYPE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NET_IF_ACCESS_TYPE").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NET_IF_ADMIN_STATUS(pub i32);
-impl ::core::marker::Copy for NET_IF_ADMIN_STATUS {}
-impl ::core::clone::Clone for NET_IF_ADMIN_STATUS {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NET_IF_ADMIN_STATUS {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NET_IF_ADMIN_STATUS {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NET_IF_ADMIN_STATUS {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NET_IF_ADMIN_STATUS").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NET_IF_CONNECTION_TYPE(pub i32);
-impl ::core::marker::Copy for NET_IF_CONNECTION_TYPE {}
-impl ::core::clone::Clone for NET_IF_CONNECTION_TYPE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NET_IF_CONNECTION_TYPE {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NET_IF_CONNECTION_TYPE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NET_IF_CONNECTION_TYPE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NET_IF_CONNECTION_TYPE").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NET_IF_DIRECTION_TYPE(pub i32);
-impl ::core::marker::Copy for NET_IF_DIRECTION_TYPE {}
-impl ::core::clone::Clone for NET_IF_DIRECTION_TYPE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NET_IF_DIRECTION_TYPE {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NET_IF_DIRECTION_TYPE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NET_IF_DIRECTION_TYPE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NET_IF_DIRECTION_TYPE").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NET_IF_MEDIA_CONNECT_STATE(pub i32);
-impl ::core::marker::Copy for NET_IF_MEDIA_CONNECT_STATE {}
-impl ::core::clone::Clone for NET_IF_MEDIA_CONNECT_STATE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NET_IF_MEDIA_CONNECT_STATE {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NET_IF_MEDIA_CONNECT_STATE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NET_IF_MEDIA_CONNECT_STATE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NET_IF_MEDIA_CONNECT_STATE").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NET_IF_MEDIA_DUPLEX_STATE(pub i32);
-impl ::core::marker::Copy for NET_IF_MEDIA_DUPLEX_STATE {}
-impl ::core::clone::Clone for NET_IF_MEDIA_DUPLEX_STATE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NET_IF_MEDIA_DUPLEX_STATE {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NET_IF_MEDIA_DUPLEX_STATE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NET_IF_MEDIA_DUPLEX_STATE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NET_IF_MEDIA_DUPLEX_STATE").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NET_IF_OPER_STATUS(pub i32);
-impl ::core::marker::Copy for NET_IF_OPER_STATUS {}
-impl ::core::clone::Clone for NET_IF_OPER_STATUS {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NET_IF_OPER_STATUS {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NET_IF_OPER_STATUS {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NET_IF_OPER_STATUS {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NET_IF_OPER_STATUS").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct NET_IF_RCV_ADDRESS_TYPE(pub i32);
-impl ::core::marker::Copy for NET_IF_RCV_ADDRESS_TYPE {}
-impl ::core::clone::Clone for NET_IF_RCV_ADDRESS_TYPE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for NET_IF_RCV_ADDRESS_TYPE {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for NET_IF_RCV_ADDRESS_TYPE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for NET_IF_RCV_ADDRESS_TYPE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("NET_IF_RCV_ADDRESS_TYPE").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct OFFLOAD_CONF_ALGO(pub i32);
-impl ::core::marker::Copy for OFFLOAD_CONF_ALGO {}
-impl ::core::clone::Clone for OFFLOAD_CONF_ALGO {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for OFFLOAD_CONF_ALGO {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for OFFLOAD_CONF_ALGO {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for OFFLOAD_CONF_ALGO {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("OFFLOAD_CONF_ALGO").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct OFFLOAD_INTEGRITY_ALGO(pub i32);
-impl ::core::marker::Copy for OFFLOAD_INTEGRITY_ALGO {}
-impl ::core::clone::Clone for OFFLOAD_INTEGRITY_ALGO {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for OFFLOAD_INTEGRITY_ALGO {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for OFFLOAD_INTEGRITY_ALGO {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for OFFLOAD_INTEGRITY_ALGO {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("OFFLOAD_INTEGRITY_ALGO").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct OFFLOAD_OPERATION_E(pub i32);
-impl ::core::marker::Copy for OFFLOAD_OPERATION_E {}
-impl ::core::clone::Clone for OFFLOAD_OPERATION_E {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for OFFLOAD_OPERATION_E {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for OFFLOAD_OPERATION_E {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for OFFLOAD_OPERATION_E {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("OFFLOAD_OPERATION_E").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct TUNNEL_TYPE(pub i32);
-impl ::core::marker::Copy for TUNNEL_TYPE {}
-impl ::core::clone::Clone for TUNNEL_TYPE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for TUNNEL_TYPE {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for TUNNEL_TYPE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for TUNNEL_TYPE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("TUNNEL_TYPE").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct UDP_ENCAP_TYPE(pub i32);
-impl ::core::marker::Copy for UDP_ENCAP_TYPE {}
-impl ::core::clone::Clone for UDP_ENCAP_TYPE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for UDP_ENCAP_TYPE {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for UDP_ENCAP_TYPE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for UDP_ENCAP_TYPE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("UDP_ENCAP_TYPE").field(&self.0).finish()
-    }
-}
-#[repr(C)]
-pub struct BSSID_INFO {
-    pub BSSID: [u8; 6],
-    pub PMKID: [u8; 16],
-}
-impl ::core::marker::Copy for BSSID_INFO {}
-impl ::core::clone::Clone for BSSID_INFO {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for BSSID_INFO {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("BSSID_INFO").field("BSSID", &self.BSSID).field("PMKID", &self.PMKID).finish()
-    }
-}
-impl ::windows_core::TypeKind for BSSID_INFO {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for BSSID_INFO {
-    fn eq(&self, other: &Self) -> bool {
-        self.BSSID == other.BSSID && self.PMKID == other.PMKID
-    }
-}
-impl ::core::cmp::Eq for BSSID_INFO {}
-impl ::core::default::Default for BSSID_INFO {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct GEN_GET_NETCARD_TIME {
-    pub ReadTime: u64,
-}
-impl ::core::marker::Copy for GEN_GET_NETCARD_TIME {}
-impl ::core::clone::Clone for GEN_GET_NETCARD_TIME {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for GEN_GET_NETCARD_TIME {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("GEN_GET_NETCARD_TIME").field("ReadTime", &self.ReadTime).finish()
-    }
-}
-impl ::windows_core::TypeKind for GEN_GET_NETCARD_TIME {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for GEN_GET_NETCARD_TIME {
-    fn eq(&self, other: &Self) -> bool {
-        self.ReadTime == other.ReadTime
-    }
-}
-impl ::core::cmp::Eq for GEN_GET_NETCARD_TIME {}
-impl ::core::default::Default for GEN_GET_NETCARD_TIME {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct GEN_GET_TIME_CAPS {
-    pub Flags: u32,
-    pub ClockPrecision: u32,
-}
-impl ::core::marker::Copy for GEN_GET_TIME_CAPS {}
-impl ::core::clone::Clone for GEN_GET_TIME_CAPS {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for GEN_GET_TIME_CAPS {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("GEN_GET_TIME_CAPS").field("Flags", &self.Flags).field("ClockPrecision", &self.ClockPrecision).finish()
-    }
-}
-impl ::windows_core::TypeKind for GEN_GET_TIME_CAPS {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for GEN_GET_TIME_CAPS {
-    fn eq(&self, other: &Self) -> bool {
-        self.Flags == other.Flags && self.ClockPrecision == other.ClockPrecision
-    }
-}
-impl ::core::cmp::Eq for GEN_GET_TIME_CAPS {}
-impl ::core::default::Default for GEN_GET_TIME_CAPS {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct IF_COUNTED_STRING_LH {
-    pub Length: u16,
-    pub String: [u16; 257],
-}
-impl ::core::marker::Copy for IF_COUNTED_STRING_LH {}
-impl ::core::clone::Clone for IF_COUNTED_STRING_LH {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for IF_COUNTED_STRING_LH {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("IF_COUNTED_STRING_LH").field("Length", &self.Length).field("String", &self.String).finish()
-    }
-}
-impl ::windows_core::TypeKind for IF_COUNTED_STRING_LH {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for IF_COUNTED_STRING_LH {
-    fn eq(&self, other: &Self) -> bool {
-        self.Length == other.Length && self.String == other.String
-    }
-}
-impl ::core::cmp::Eq for IF_COUNTED_STRING_LH {}
-impl ::core::default::Default for IF_COUNTED_STRING_LH {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct IF_PHYSICAL_ADDRESS_LH {
-    pub Length: u16,
-    pub Address: [u8; 32],
-}
-impl ::core::marker::Copy for IF_PHYSICAL_ADDRESS_LH {}
-impl ::core::clone::Clone for IF_PHYSICAL_ADDRESS_LH {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for IF_PHYSICAL_ADDRESS_LH {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("IF_PHYSICAL_ADDRESS_LH").field("Length", &self.Length).field("Address", &self.Address).finish()
-    }
-}
-impl ::windows_core::TypeKind for IF_PHYSICAL_ADDRESS_LH {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for IF_PHYSICAL_ADDRESS_LH {
-    fn eq(&self, other: &Self) -> bool {
-        self.Length == other.Length && self.Address == other.Address
-    }
-}
-impl ::core::cmp::Eq for IF_PHYSICAL_ADDRESS_LH {}
-impl ::core::default::Default for IF_PHYSICAL_ADDRESS_LH {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_802_11_AI_REQFI {
-    pub Capabilities: u16,
-    pub ListenInterval: u16,
-    pub CurrentAPAddress: [u8; 6],
-}
-impl ::core::marker::Copy for NDIS_802_11_AI_REQFI {}
-impl ::core::clone::Clone for NDIS_802_11_AI_REQFI {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_802_11_AI_REQFI {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_802_11_AI_REQFI").field("Capabilities", &self.Capabilities).field("ListenInterval", &self.ListenInterval).field("CurrentAPAddress", &self.CurrentAPAddress).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_AI_REQFI {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_802_11_AI_REQFI {
-    fn eq(&self, other: &Self) -> bool {
-        self.Capabilities == other.Capabilities && self.ListenInterval == other.ListenInterval && self.CurrentAPAddress == other.CurrentAPAddress
-    }
-}
-impl ::core::cmp::Eq for NDIS_802_11_AI_REQFI {}
-impl ::core::default::Default for NDIS_802_11_AI_REQFI {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_802_11_AI_RESFI {
-    pub Capabilities: u16,
-    pub StatusCode: u16,
-    pub AssociationId: u16,
-}
-impl ::core::marker::Copy for NDIS_802_11_AI_RESFI {}
-impl ::core::clone::Clone for NDIS_802_11_AI_RESFI {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_802_11_AI_RESFI {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_802_11_AI_RESFI").field("Capabilities", &self.Capabilities).field("StatusCode", &self.StatusCode).field("AssociationId", &self.AssociationId).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_AI_RESFI {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_802_11_AI_RESFI {
-    fn eq(&self, other: &Self) -> bool {
-        self.Capabilities == other.Capabilities && self.StatusCode == other.StatusCode && self.AssociationId == other.AssociationId
-    }
-}
-impl ::core::cmp::Eq for NDIS_802_11_AI_RESFI {}
-impl ::core::default::Default for NDIS_802_11_AI_RESFI {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_802_11_ASSOCIATION_INFORMATION {
-    pub Length: u32,
-    pub AvailableRequestFixedIEs: u16,
-    pub RequestFixedIEs: NDIS_802_11_AI_REQFI,
-    pub RequestIELength: u32,
-    pub OffsetRequestIEs: u32,
-    pub AvailableResponseFixedIEs: u16,
-    pub ResponseFixedIEs: NDIS_802_11_AI_RESFI,
-    pub ResponseIELength: u32,
-    pub OffsetResponseIEs: u32,
-}
-impl ::core::marker::Copy for NDIS_802_11_ASSOCIATION_INFORMATION {}
-impl ::core::clone::Clone for NDIS_802_11_ASSOCIATION_INFORMATION {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_802_11_ASSOCIATION_INFORMATION {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_802_11_ASSOCIATION_INFORMATION")
-            .field("Length", &self.Length)
-            .field("AvailableRequestFixedIEs", &self.AvailableRequestFixedIEs)
-            .field("RequestFixedIEs", &self.RequestFixedIEs)
-            .field("RequestIELength", &self.RequestIELength)
-            .field("OffsetRequestIEs", &self.OffsetRequestIEs)
-            .field("AvailableResponseFixedIEs", &self.AvailableResponseFixedIEs)
-            .field("ResponseFixedIEs", &self.ResponseFixedIEs)
-            .field("ResponseIELength", &self.ResponseIELength)
-            .field("OffsetResponseIEs", &self.OffsetResponseIEs)
-            .finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_ASSOCIATION_INFORMATION {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_802_11_ASSOCIATION_INFORMATION {
-    fn eq(&self, other: &Self) -> bool {
-        self.Length == other.Length && self.AvailableRequestFixedIEs == other.AvailableRequestFixedIEs && self.RequestFixedIEs == other.RequestFixedIEs && self.RequestIELength == other.RequestIELength && self.OffsetRequestIEs == other.OffsetRequestIEs && self.AvailableResponseFixedIEs == other.AvailableResponseFixedIEs && self.ResponseFixedIEs == other.ResponseFixedIEs && self.ResponseIELength == other.ResponseIELength && self.OffsetResponseIEs == other.OffsetResponseIEs
-    }
-}
-impl ::core::cmp::Eq for NDIS_802_11_ASSOCIATION_INFORMATION {}
-impl ::core::default::Default for NDIS_802_11_ASSOCIATION_INFORMATION {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_802_11_AUTHENTICATION_ENCRYPTION {
-    pub AuthModeSupported: NDIS_802_11_AUTHENTICATION_MODE,
-    pub EncryptStatusSupported: NDIS_802_11_WEP_STATUS,
-}
-impl ::core::marker::Copy for NDIS_802_11_AUTHENTICATION_ENCRYPTION {}
-impl ::core::clone::Clone for NDIS_802_11_AUTHENTICATION_ENCRYPTION {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_802_11_AUTHENTICATION_ENCRYPTION {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_802_11_AUTHENTICATION_ENCRYPTION").field("AuthModeSupported", &self.AuthModeSupported).field("EncryptStatusSupported", &self.EncryptStatusSupported).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_AUTHENTICATION_ENCRYPTION {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_802_11_AUTHENTICATION_ENCRYPTION {
-    fn eq(&self, other: &Self) -> bool {
-        self.AuthModeSupported == other.AuthModeSupported && self.EncryptStatusSupported == other.EncryptStatusSupported
-    }
-}
-impl ::core::cmp::Eq for NDIS_802_11_AUTHENTICATION_ENCRYPTION {}
-impl ::core::default::Default for NDIS_802_11_AUTHENTICATION_ENCRYPTION {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_802_11_AUTHENTICATION_EVENT {
-    pub Status: NDIS_802_11_STATUS_INDICATION,
-    pub Request: [NDIS_802_11_AUTHENTICATION_REQUEST; 1],
-}
-impl ::core::marker::Copy for NDIS_802_11_AUTHENTICATION_EVENT {}
-impl ::core::clone::Clone for NDIS_802_11_AUTHENTICATION_EVENT {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_802_11_AUTHENTICATION_EVENT {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_802_11_AUTHENTICATION_EVENT").field("Status", &self.Status).field("Request", &self.Request).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_AUTHENTICATION_EVENT {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_802_11_AUTHENTICATION_EVENT {
-    fn eq(&self, other: &Self) -> bool {
-        self.Status == other.Status && self.Request == other.Request
-    }
-}
-impl ::core::cmp::Eq for NDIS_802_11_AUTHENTICATION_EVENT {}
-impl ::core::default::Default for NDIS_802_11_AUTHENTICATION_EVENT {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_802_11_AUTHENTICATION_REQUEST {
-    pub Length: u32,
-    pub Bssid: [u8; 6],
-    pub Flags: u32,
-}
-impl ::core::marker::Copy for NDIS_802_11_AUTHENTICATION_REQUEST {}
-impl ::core::clone::Clone for NDIS_802_11_AUTHENTICATION_REQUEST {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_802_11_AUTHENTICATION_REQUEST {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_802_11_AUTHENTICATION_REQUEST").field("Length", &self.Length).field("Bssid", &self.Bssid).field("Flags", &self.Flags).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_AUTHENTICATION_REQUEST {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_802_11_AUTHENTICATION_REQUEST {
-    fn eq(&self, other: &Self) -> bool {
-        self.Length == other.Length && self.Bssid == other.Bssid && self.Flags == other.Flags
-    }
-}
-impl ::core::cmp::Eq for NDIS_802_11_AUTHENTICATION_REQUEST {}
-impl ::core::default::Default for NDIS_802_11_AUTHENTICATION_REQUEST {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_802_11_BSSID_LIST {
-    pub NumberOfItems: u32,
-    pub Bssid: [NDIS_WLAN_BSSID; 1],
-}
-impl ::core::marker::Copy for NDIS_802_11_BSSID_LIST {}
-impl ::core::clone::Clone for NDIS_802_11_BSSID_LIST {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_802_11_BSSID_LIST {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_802_11_BSSID_LIST").field("NumberOfItems", &self.NumberOfItems).field("Bssid", &self.Bssid).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_BSSID_LIST {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_802_11_BSSID_LIST {
-    fn eq(&self, other: &Self) -> bool {
-        self.NumberOfItems == other.NumberOfItems && self.Bssid == other.Bssid
-    }
-}
-impl ::core::cmp::Eq for NDIS_802_11_BSSID_LIST {}
-impl ::core::default::Default for NDIS_802_11_BSSID_LIST {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_802_11_BSSID_LIST_EX {
-    pub NumberOfItems: u32,
-    pub Bssid: [NDIS_WLAN_BSSID_EX; 1],
-}
-impl ::core::marker::Copy for NDIS_802_11_BSSID_LIST_EX {}
-impl ::core::clone::Clone for NDIS_802_11_BSSID_LIST_EX {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_802_11_BSSID_LIST_EX {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_802_11_BSSID_LIST_EX").field("NumberOfItems", &self.NumberOfItems).field("Bssid", &self.Bssid).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_BSSID_LIST_EX {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_802_11_BSSID_LIST_EX {
-    fn eq(&self, other: &Self) -> bool {
-        self.NumberOfItems == other.NumberOfItems && self.Bssid == other.Bssid
-    }
-}
-impl ::core::cmp::Eq for NDIS_802_11_BSSID_LIST_EX {}
-impl ::core::default::Default for NDIS_802_11_BSSID_LIST_EX {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_802_11_CAPABILITY {
-    pub Length: u32,
-    pub Version: u32,
-    pub NoOfPMKIDs: u32,
-    pub NoOfAuthEncryptPairsSupported: u32,
-    pub AuthenticationEncryptionSupported: [NDIS_802_11_AUTHENTICATION_ENCRYPTION; 1],
-}
-impl ::core::marker::Copy for NDIS_802_11_CAPABILITY {}
-impl ::core::clone::Clone for NDIS_802_11_CAPABILITY {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_802_11_CAPABILITY {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_802_11_CAPABILITY").field("Length", &self.Length).field("Version", &self.Version).field("NoOfPMKIDs", &self.NoOfPMKIDs).field("NoOfAuthEncryptPairsSupported", &self.NoOfAuthEncryptPairsSupported).field("AuthenticationEncryptionSupported", &self.AuthenticationEncryptionSupported).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_CAPABILITY {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_802_11_CAPABILITY {
-    fn eq(&self, other: &Self) -> bool {
-        self.Length == other.Length && self.Version == other.Version && self.NoOfPMKIDs == other.NoOfPMKIDs && self.NoOfAuthEncryptPairsSupported == other.NoOfAuthEncryptPairsSupported && self.AuthenticationEncryptionSupported == other.AuthenticationEncryptionSupported
-    }
-}
-impl ::core::cmp::Eq for NDIS_802_11_CAPABILITY {}
-impl ::core::default::Default for NDIS_802_11_CAPABILITY {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_802_11_CONFIGURATION {
-    pub Length: u32,
-    pub BeaconPeriod: u32,
-    pub ATIMWindow: u32,
-    pub DSConfig: u32,
-    pub FHConfig: NDIS_802_11_CONFIGURATION_FH,
-}
-impl ::core::marker::Copy for NDIS_802_11_CONFIGURATION {}
-impl ::core::clone::Clone for NDIS_802_11_CONFIGURATION {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_802_11_CONFIGURATION {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_802_11_CONFIGURATION").field("Length", &self.Length).field("BeaconPeriod", &self.BeaconPeriod).field("ATIMWindow", &self.ATIMWindow).field("DSConfig", &self.DSConfig).field("FHConfig", &self.FHConfig).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_CONFIGURATION {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_802_11_CONFIGURATION {
-    fn eq(&self, other: &Self) -> bool {
-        self.Length == other.Length && self.BeaconPeriod == other.BeaconPeriod && self.ATIMWindow == other.ATIMWindow && self.DSConfig == other.DSConfig && self.FHConfig == other.FHConfig
-    }
-}
-impl ::core::cmp::Eq for NDIS_802_11_CONFIGURATION {}
-impl ::core::default::Default for NDIS_802_11_CONFIGURATION {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_802_11_CONFIGURATION_FH {
-    pub Length: u32,
-    pub HopPattern: u32,
-    pub HopSet: u32,
-    pub DwellTime: u32,
-}
-impl ::core::marker::Copy for NDIS_802_11_CONFIGURATION_FH {}
-impl ::core::clone::Clone for NDIS_802_11_CONFIGURATION_FH {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_802_11_CONFIGURATION_FH {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_802_11_CONFIGURATION_FH").field("Length", &self.Length).field("HopPattern", &self.HopPattern).field("HopSet", &self.HopSet).field("DwellTime", &self.DwellTime).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_CONFIGURATION_FH {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_802_11_CONFIGURATION_FH {
-    fn eq(&self, other: &Self) -> bool {
-        self.Length == other.Length && self.HopPattern == other.HopPattern && self.HopSet == other.HopSet && self.DwellTime == other.DwellTime
-    }
-}
-impl ::core::cmp::Eq for NDIS_802_11_CONFIGURATION_FH {}
-impl ::core::default::Default for NDIS_802_11_CONFIGURATION_FH {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_802_11_FIXED_IEs {
-    pub Timestamp: [u8; 8],
-    pub BeaconInterval: u16,
-    pub Capabilities: u16,
-}
-impl ::core::marker::Copy for NDIS_802_11_FIXED_IEs {}
-impl ::core::clone::Clone for NDIS_802_11_FIXED_IEs {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_802_11_FIXED_IEs {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_802_11_FIXED_IEs").field("Timestamp", &self.Timestamp).field("BeaconInterval", &self.BeaconInterval).field("Capabilities", &self.Capabilities).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_FIXED_IEs {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_802_11_FIXED_IEs {
-    fn eq(&self, other: &Self) -> bool {
-        self.Timestamp == other.Timestamp && self.BeaconInterval == other.BeaconInterval && self.Capabilities == other.Capabilities
-    }
-}
-impl ::core::cmp::Eq for NDIS_802_11_FIXED_IEs {}
-impl ::core::default::Default for NDIS_802_11_FIXED_IEs {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_802_11_KEY {
-    pub Length: u32,
-    pub KeyIndex: u32,
-    pub KeyLength: u32,
-    pub BSSID: [u8; 6],
-    pub KeyRSC: u64,
-    pub KeyMaterial: [u8; 1],
-}
-impl ::core::marker::Copy for NDIS_802_11_KEY {}
-impl ::core::clone::Clone for NDIS_802_11_KEY {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_802_11_KEY {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_802_11_KEY").field("Length", &self.Length).field("KeyIndex", &self.KeyIndex).field("KeyLength", &self.KeyLength).field("BSSID", &self.BSSID).field("KeyRSC", &self.KeyRSC).field("KeyMaterial", &self.KeyMaterial).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_KEY {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_802_11_KEY {
-    fn eq(&self, other: &Self) -> bool {
-        self.Length == other.Length && self.KeyIndex == other.KeyIndex && self.KeyLength == other.KeyLength && self.BSSID == other.BSSID && self.KeyRSC == other.KeyRSC && self.KeyMaterial == other.KeyMaterial
-    }
-}
-impl ::core::cmp::Eq for NDIS_802_11_KEY {}
-impl ::core::default::Default for NDIS_802_11_KEY {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_802_11_NETWORK_TYPE_LIST {
-    pub NumberOfItems: u32,
-    pub NetworkType: [NDIS_802_11_NETWORK_TYPE; 1],
-}
-impl ::core::marker::Copy for NDIS_802_11_NETWORK_TYPE_LIST {}
-impl ::core::clone::Clone for NDIS_802_11_NETWORK_TYPE_LIST {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_802_11_NETWORK_TYPE_LIST {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_802_11_NETWORK_TYPE_LIST").field("NumberOfItems", &self.NumberOfItems).field("NetworkType", &self.NetworkType).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_NETWORK_TYPE_LIST {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_802_11_NETWORK_TYPE_LIST {
-    fn eq(&self, other: &Self) -> bool {
-        self.NumberOfItems == other.NumberOfItems && self.NetworkType == other.NetworkType
-    }
-}
-impl ::core::cmp::Eq for NDIS_802_11_NETWORK_TYPE_LIST {}
-impl ::core::default::Default for NDIS_802_11_NETWORK_TYPE_LIST {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_802_11_NON_BCAST_SSID_LIST {
-    pub NumberOfItems: u32,
-    pub Non_Bcast_Ssid: [NDIS_802_11_SSID; 1],
-}
-impl ::core::marker::Copy for NDIS_802_11_NON_BCAST_SSID_LIST {}
-impl ::core::clone::Clone for NDIS_802_11_NON_BCAST_SSID_LIST {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_802_11_NON_BCAST_SSID_LIST {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_802_11_NON_BCAST_SSID_LIST").field("NumberOfItems", &self.NumberOfItems).field("Non_Bcast_Ssid", &self.Non_Bcast_Ssid).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_NON_BCAST_SSID_LIST {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_802_11_NON_BCAST_SSID_LIST {
-    fn eq(&self, other: &Self) -> bool {
-        self.NumberOfItems == other.NumberOfItems && self.Non_Bcast_Ssid == other.Non_Bcast_Ssid
-    }
-}
-impl ::core::cmp::Eq for NDIS_802_11_NON_BCAST_SSID_LIST {}
-impl ::core::default::Default for NDIS_802_11_NON_BCAST_SSID_LIST {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_802_11_PMKID {
-    pub Length: u32,
-    pub BSSIDInfoCount: u32,
-    pub BSSIDInfo: [BSSID_INFO; 1],
-}
-impl ::core::marker::Copy for NDIS_802_11_PMKID {}
-impl ::core::clone::Clone for NDIS_802_11_PMKID {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_802_11_PMKID {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_802_11_PMKID").field("Length", &self.Length).field("BSSIDInfoCount", &self.BSSIDInfoCount).field("BSSIDInfo", &self.BSSIDInfo).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_PMKID {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_802_11_PMKID {
-    fn eq(&self, other: &Self) -> bool {
-        self.Length == other.Length && self.BSSIDInfoCount == other.BSSIDInfoCount && self.BSSIDInfo == other.BSSIDInfo
-    }
-}
-impl ::core::cmp::Eq for NDIS_802_11_PMKID {}
-impl ::core::default::Default for NDIS_802_11_PMKID {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_802_11_PMKID_CANDIDATE_LIST {
-    pub Version: u32,
-    pub NumCandidates: u32,
-    pub CandidateList: [PMKID_CANDIDATE; 1],
-}
-impl ::core::marker::Copy for NDIS_802_11_PMKID_CANDIDATE_LIST {}
-impl ::core::clone::Clone for NDIS_802_11_PMKID_CANDIDATE_LIST {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_802_11_PMKID_CANDIDATE_LIST {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_802_11_PMKID_CANDIDATE_LIST").field("Version", &self.Version).field("NumCandidates", &self.NumCandidates).field("CandidateList", &self.CandidateList).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_PMKID_CANDIDATE_LIST {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_802_11_PMKID_CANDIDATE_LIST {
-    fn eq(&self, other: &Self) -> bool {
-        self.Version == other.Version && self.NumCandidates == other.NumCandidates && self.CandidateList == other.CandidateList
-    }
-}
-impl ::core::cmp::Eq for NDIS_802_11_PMKID_CANDIDATE_LIST {}
-impl ::core::default::Default for NDIS_802_11_PMKID_CANDIDATE_LIST {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_802_11_REMOVE_KEY {
-    pub Length: u32,
-    pub KeyIndex: u32,
-    pub BSSID: [u8; 6],
-}
-impl ::core::marker::Copy for NDIS_802_11_REMOVE_KEY {}
-impl ::core::clone::Clone for NDIS_802_11_REMOVE_KEY {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_802_11_REMOVE_KEY {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_802_11_REMOVE_KEY").field("Length", &self.Length).field("KeyIndex", &self.KeyIndex).field("BSSID", &self.BSSID).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_REMOVE_KEY {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_802_11_REMOVE_KEY {
-    fn eq(&self, other: &Self) -> bool {
-        self.Length == other.Length && self.KeyIndex == other.KeyIndex && self.BSSID == other.BSSID
-    }
-}
-impl ::core::cmp::Eq for NDIS_802_11_REMOVE_KEY {}
-impl ::core::default::Default for NDIS_802_11_REMOVE_KEY {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_802_11_SSID {
-    pub SsidLength: u32,
-    pub Ssid: [u8; 32],
-}
-impl ::core::marker::Copy for NDIS_802_11_SSID {}
-impl ::core::clone::Clone for NDIS_802_11_SSID {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_802_11_SSID {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_802_11_SSID").field("SsidLength", &self.SsidLength).field("Ssid", &self.Ssid).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_SSID {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_802_11_SSID {
-    fn eq(&self, other: &Self) -> bool {
-        self.SsidLength == other.SsidLength && self.Ssid == other.Ssid
-    }
-}
-impl ::core::cmp::Eq for NDIS_802_11_SSID {}
-impl ::core::default::Default for NDIS_802_11_SSID {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_802_11_STATISTICS {
-    pub Length: u32,
-    pub TransmittedFragmentCount: i64,
-    pub MulticastTransmittedFrameCount: i64,
-    pub FailedCount: i64,
-    pub RetryCount: i64,
-    pub MultipleRetryCount: i64,
-    pub RTSSuccessCount: i64,
-    pub RTSFailureCount: i64,
-    pub ACKFailureCount: i64,
-    pub FrameDuplicateCount: i64,
-    pub ReceivedFragmentCount: i64,
-    pub MulticastReceivedFrameCount: i64,
-    pub FCSErrorCount: i64,
-    pub TKIPLocalMICFailures: i64,
-    pub TKIPICVErrorCount: i64,
-    pub TKIPCounterMeasuresInvoked: i64,
-    pub TKIPReplays: i64,
-    pub CCMPFormatErrors: i64,
-    pub CCMPReplays: i64,
-    pub CCMPDecryptErrors: i64,
-    pub FourWayHandshakeFailures: i64,
-    pub WEPUndecryptableCount: i64,
-    pub WEPICVErrorCount: i64,
-    pub DecryptSuccessCount: i64,
-    pub DecryptFailureCount: i64,
-}
-impl ::core::marker::Copy for NDIS_802_11_STATISTICS {}
-impl ::core::clone::Clone for NDIS_802_11_STATISTICS {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_802_11_STATISTICS {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_802_11_STATISTICS")
-            .field("Length", &self.Length)
-            .field("TransmittedFragmentCount", &self.TransmittedFragmentCount)
-            .field("MulticastTransmittedFrameCount", &self.MulticastTransmittedFrameCount)
-            .field("FailedCount", &self.FailedCount)
-            .field("RetryCount", &self.RetryCount)
-            .field("MultipleRetryCount", &self.MultipleRetryCount)
-            .field("RTSSuccessCount", &self.RTSSuccessCount)
-            .field("RTSFailureCount", &self.RTSFailureCount)
-            .field("ACKFailureCount", &self.ACKFailureCount)
-            .field("FrameDuplicateCount", &self.FrameDuplicateCount)
-            .field("ReceivedFragmentCount", &self.ReceivedFragmentCount)
-            .field("MulticastReceivedFrameCount", &self.MulticastReceivedFrameCount)
-            .field("FCSErrorCount", &self.FCSErrorCount)
-            .field("TKIPLocalMICFailures", &self.TKIPLocalMICFailures)
-            .field("TKIPICVErrorCount", &self.TKIPICVErrorCount)
-            .field("TKIPCounterMeasuresInvoked", &self.TKIPCounterMeasuresInvoked)
-            .field("TKIPReplays", &self.TKIPReplays)
-            .field("CCMPFormatErrors", &self.CCMPFormatErrors)
-            .field("CCMPReplays", &self.CCMPReplays)
-            .field("CCMPDecryptErrors", &self.CCMPDecryptErrors)
-            .field("FourWayHandshakeFailures", &self.FourWayHandshakeFailures)
-            .field("WEPUndecryptableCount", &self.WEPUndecryptableCount)
-            .field("WEPICVErrorCount", &self.WEPICVErrorCount)
-            .field("DecryptSuccessCount", &self.DecryptSuccessCount)
-            .field("DecryptFailureCount", &self.DecryptFailureCount)
-            .finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_STATISTICS {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_802_11_STATISTICS {
-    fn eq(&self, other: &Self) -> bool {
-        self.Length == other.Length
-            && self.TransmittedFragmentCount == other.TransmittedFragmentCount
-            && self.MulticastTransmittedFrameCount == other.MulticastTransmittedFrameCount
-            && self.FailedCount == other.FailedCount
-            && self.RetryCount == other.RetryCount
-            && self.MultipleRetryCount == other.MultipleRetryCount
-            && self.RTSSuccessCount == other.RTSSuccessCount
-            && self.RTSFailureCount == other.RTSFailureCount
-            && self.ACKFailureCount == other.ACKFailureCount
-            && self.FrameDuplicateCount == other.FrameDuplicateCount
-            && self.ReceivedFragmentCount == other.ReceivedFragmentCount
-            && self.MulticastReceivedFrameCount == other.MulticastReceivedFrameCount
-            && self.FCSErrorCount == other.FCSErrorCount
-            && self.TKIPLocalMICFailures == other.TKIPLocalMICFailures
-            && self.TKIPICVErrorCount == other.TKIPICVErrorCount
-            && self.TKIPCounterMeasuresInvoked == other.TKIPCounterMeasuresInvoked
-            && self.TKIPReplays == other.TKIPReplays
-            && self.CCMPFormatErrors == other.CCMPFormatErrors
-            && self.CCMPReplays == other.CCMPReplays
-            && self.CCMPDecryptErrors == other.CCMPDecryptErrors
-            && self.FourWayHandshakeFailures == other.FourWayHandshakeFailures
-            && self.WEPUndecryptableCount == other.WEPUndecryptableCount
-            && self.WEPICVErrorCount == other.WEPICVErrorCount
-            && self.DecryptSuccessCount == other.DecryptSuccessCount
-            && self.DecryptFailureCount == other.DecryptFailureCount
-    }
-}
-impl ::core::cmp::Eq for NDIS_802_11_STATISTICS {}
-impl ::core::default::Default for NDIS_802_11_STATISTICS {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_802_11_STATUS_INDICATION {
-    pub StatusType: NDIS_802_11_STATUS_TYPE,
-}
-impl ::core::marker::Copy for NDIS_802_11_STATUS_INDICATION {}
-impl ::core::clone::Clone for NDIS_802_11_STATUS_INDICATION {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_802_11_STATUS_INDICATION {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_802_11_STATUS_INDICATION").field("StatusType", &self.StatusType).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_STATUS_INDICATION {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_802_11_STATUS_INDICATION {
-    fn eq(&self, other: &Self) -> bool {
-        self.StatusType == other.StatusType
-    }
-}
-impl ::core::cmp::Eq for NDIS_802_11_STATUS_INDICATION {}
-impl ::core::default::Default for NDIS_802_11_STATUS_INDICATION {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_802_11_TEST {
-    pub Length: u32,
-    pub Type: u32,
-    pub Anonymous: NDIS_802_11_TEST_0,
-}
-impl ::core::marker::Copy for NDIS_802_11_TEST {}
-impl ::core::clone::Clone for NDIS_802_11_TEST {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_TEST {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::default::Default for NDIS_802_11_TEST {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub union NDIS_802_11_TEST_0 {
-    pub AuthenticationEvent: NDIS_802_11_AUTHENTICATION_EVENT,
-    pub RssiTrigger: i32,
-}
-impl ::core::marker::Copy for NDIS_802_11_TEST_0 {}
-impl ::core::clone::Clone for NDIS_802_11_TEST_0 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_TEST_0 {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::default::Default for NDIS_802_11_TEST_0 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_802_11_VARIABLE_IEs {
-    pub ElementID: u8,
-    pub Length: u8,
-    pub data: [u8; 1],
-}
-impl ::core::marker::Copy for NDIS_802_11_VARIABLE_IEs {}
-impl ::core::clone::Clone for NDIS_802_11_VARIABLE_IEs {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_802_11_VARIABLE_IEs {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_802_11_VARIABLE_IEs").field("ElementID", &self.ElementID).field("Length", &self.Length).field("data", &self.data).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_VARIABLE_IEs {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_802_11_VARIABLE_IEs {
-    fn eq(&self, other: &Self) -> bool {
-        self.ElementID == other.ElementID && self.Length == other.Length && self.data == other.data
-    }
-}
-impl ::core::cmp::Eq for NDIS_802_11_VARIABLE_IEs {}
-impl ::core::default::Default for NDIS_802_11_VARIABLE_IEs {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_802_11_WEP {
-    pub Length: u32,
-    pub KeyIndex: u32,
-    pub KeyLength: u32,
-    pub KeyMaterial: [u8; 1],
-}
-impl ::core::marker::Copy for NDIS_802_11_WEP {}
-impl ::core::clone::Clone for NDIS_802_11_WEP {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_802_11_WEP {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_802_11_WEP").field("Length", &self.Length).field("KeyIndex", &self.KeyIndex).field("KeyLength", &self.KeyLength).field("KeyMaterial", &self.KeyMaterial).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_802_11_WEP {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_802_11_WEP {
-    fn eq(&self, other: &Self) -> bool {
-        self.Length == other.Length && self.KeyIndex == other.KeyIndex && self.KeyLength == other.KeyLength && self.KeyMaterial == other.KeyMaterial
-    }
-}
-impl ::core::cmp::Eq for NDIS_802_11_WEP {}
-impl ::core::default::Default for NDIS_802_11_WEP {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_CO_DEVICE_PROFILE {
-    pub DeviceDescription: NDIS_VAR_DATA_DESC,
-    pub DevSpecificInfo: NDIS_VAR_DATA_DESC,
-    pub ulTAPISupplementaryPassThru: u32,
-    pub ulAddressModes: u32,
-    pub ulNumAddresses: u32,
-    pub ulBearerModes: u32,
-    pub ulMaxTxRate: u32,
-    pub ulMinTxRate: u32,
-    pub ulMaxRxRate: u32,
-    pub ulMinRxRate: u32,
-    pub ulMediaModes: u32,
-    pub ulGenerateToneModes: u32,
-    pub ulGenerateToneMaxNumFreq: u32,
-    pub ulGenerateDigitModes: u32,
-    pub ulMonitorToneMaxNumFreq: u32,
-    pub ulMonitorToneMaxNumEntries: u32,
-    pub ulMonitorDigitModes: u32,
-    pub ulGatherDigitsMinTimeout: u32,
-    pub ulGatherDigitsMaxTimeout: u32,
-    pub ulDevCapFlags: u32,
-    pub ulMaxNumActiveCalls: u32,
-    pub ulAnswerMode: u32,
-    pub ulUUIAcceptSize: u32,
-    pub ulUUIAnswerSize: u32,
-    pub ulUUIMakeCallSize: u32,
-    pub ulUUIDropSize: u32,
-    pub ulUUISendUserUserInfoSize: u32,
-    pub ulUUICallInfoSize: u32,
-}
-impl ::core::marker::Copy for NDIS_CO_DEVICE_PROFILE {}
-impl ::core::clone::Clone for NDIS_CO_DEVICE_PROFILE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_CO_DEVICE_PROFILE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_CO_DEVICE_PROFILE")
-            .field("DeviceDescription", &self.DeviceDescription)
-            .field("DevSpecificInfo", &self.DevSpecificInfo)
-            .field("ulTAPISupplementaryPassThru", &self.ulTAPISupplementaryPassThru)
-            .field("ulAddressModes", &self.ulAddressModes)
-            .field("ulNumAddresses", &self.ulNumAddresses)
-            .field("ulBearerModes", &self.ulBearerModes)
-            .field("ulMaxTxRate", &self.ulMaxTxRate)
-            .field("ulMinTxRate", &self.ulMinTxRate)
-            .field("ulMaxRxRate", &self.ulMaxRxRate)
-            .field("ulMinRxRate", &self.ulMinRxRate)
-            .field("ulMediaModes", &self.ulMediaModes)
-            .field("ulGenerateToneModes", &self.ulGenerateToneModes)
-            .field("ulGenerateToneMaxNumFreq", &self.ulGenerateToneMaxNumFreq)
-            .field("ulGenerateDigitModes", &self.ulGenerateDigitModes)
-            .field("ulMonitorToneMaxNumFreq", &self.ulMonitorToneMaxNumFreq)
-            .field("ulMonitorToneMaxNumEntries", &self.ulMonitorToneMaxNumEntries)
-            .field("ulMonitorDigitModes", &self.ulMonitorDigitModes)
-            .field("ulGatherDigitsMinTimeout", &self.ulGatherDigitsMinTimeout)
-            .field("ulGatherDigitsMaxTimeout", &self.ulGatherDigitsMaxTimeout)
-            .field("ulDevCapFlags", &self.ulDevCapFlags)
-            .field("ulMaxNumActiveCalls", &self.ulMaxNumActiveCalls)
-            .field("ulAnswerMode", &self.ulAnswerMode)
-            .field("ulUUIAcceptSize", &self.ulUUIAcceptSize)
-            .field("ulUUIAnswerSize", &self.ulUUIAnswerSize)
-            .field("ulUUIMakeCallSize", &self.ulUUIMakeCallSize)
-            .field("ulUUIDropSize", &self.ulUUIDropSize)
-            .field("ulUUISendUserUserInfoSize", &self.ulUUISendUserUserInfoSize)
-            .field("ulUUICallInfoSize", &self.ulUUICallInfoSize)
-            .finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_CO_DEVICE_PROFILE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_CO_DEVICE_PROFILE {
-    fn eq(&self, other: &Self) -> bool {
-        self.DeviceDescription == other.DeviceDescription
-            && self.DevSpecificInfo == other.DevSpecificInfo
-            && self.ulTAPISupplementaryPassThru == other.ulTAPISupplementaryPassThru
-            && self.ulAddressModes == other.ulAddressModes
-            && self.ulNumAddresses == other.ulNumAddresses
-            && self.ulBearerModes == other.ulBearerModes
-            && self.ulMaxTxRate == other.ulMaxTxRate
-            && self.ulMinTxRate == other.ulMinTxRate
-            && self.ulMaxRxRate == other.ulMaxRxRate
-            && self.ulMinRxRate == other.ulMinRxRate
-            && self.ulMediaModes == other.ulMediaModes
-            && self.ulGenerateToneModes == other.ulGenerateToneModes
-            && self.ulGenerateToneMaxNumFreq == other.ulGenerateToneMaxNumFreq
-            && self.ulGenerateDigitModes == other.ulGenerateDigitModes
-            && self.ulMonitorToneMaxNumFreq == other.ulMonitorToneMaxNumFreq
-            && self.ulMonitorToneMaxNumEntries == other.ulMonitorToneMaxNumEntries
-            && self.ulMonitorDigitModes == other.ulMonitorDigitModes
-            && self.ulGatherDigitsMinTimeout == other.ulGatherDigitsMinTimeout
-            && self.ulGatherDigitsMaxTimeout == other.ulGatherDigitsMaxTimeout
-            && self.ulDevCapFlags == other.ulDevCapFlags
-            && self.ulMaxNumActiveCalls == other.ulMaxNumActiveCalls
-            && self.ulAnswerMode == other.ulAnswerMode
-            && self.ulUUIAcceptSize == other.ulUUIAcceptSize
-            && self.ulUUIAnswerSize == other.ulUUIAnswerSize
-            && self.ulUUIMakeCallSize == other.ulUUIMakeCallSize
-            && self.ulUUIDropSize == other.ulUUIDropSize
-            && self.ulUUISendUserUserInfoSize == other.ulUUISendUserUserInfoSize
-            && self.ulUUICallInfoSize == other.ulUUICallInfoSize
-    }
-}
-impl ::core::cmp::Eq for NDIS_CO_DEVICE_PROFILE {}
-impl ::core::default::Default for NDIS_CO_DEVICE_PROFILE {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_CO_LINK_SPEED {
-    pub Outbound: u32,
-    pub Inbound: u32,
-}
-impl ::core::marker::Copy for NDIS_CO_LINK_SPEED {}
-impl ::core::clone::Clone for NDIS_CO_LINK_SPEED {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_CO_LINK_SPEED {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_CO_LINK_SPEED").field("Outbound", &self.Outbound).field("Inbound", &self.Inbound).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_CO_LINK_SPEED {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_CO_LINK_SPEED {
-    fn eq(&self, other: &Self) -> bool {
-        self.Outbound == other.Outbound && self.Inbound == other.Inbound
-    }
-}
-impl ::core::cmp::Eq for NDIS_CO_LINK_SPEED {}
-impl ::core::default::Default for NDIS_CO_LINK_SPEED {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_GUID {
-    pub Guid: ::windows_core::GUID,
-    pub Anonymous: NDIS_GUID_0,
-    pub Size: u32,
-    pub Flags: u32,
-}
-impl ::core::marker::Copy for NDIS_GUID {}
-impl ::core::clone::Clone for NDIS_GUID {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::windows_core::TypeKind for NDIS_GUID {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::default::Default for NDIS_GUID {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub union NDIS_GUID_0 {
-    pub Oid: u32,
-    pub Status: i32,
-}
-impl ::core::marker::Copy for NDIS_GUID_0 {}
-impl ::core::clone::Clone for NDIS_GUID_0 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::windows_core::TypeKind for NDIS_GUID_0 {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::default::Default for NDIS_GUID_0 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_HARDWARE_CROSSTIMESTAMP {
-    pub Header: NDIS_OBJECT_HEADER,
-    pub Flags: u32,
-    pub SystemTimestamp1: u64,
-    pub HardwareClockTimestamp: u64,
-    pub SystemTimestamp2: u64,
-}
-impl ::core::marker::Copy for NDIS_HARDWARE_CROSSTIMESTAMP {}
-impl ::core::clone::Clone for NDIS_HARDWARE_CROSSTIMESTAMP {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_HARDWARE_CROSSTIMESTAMP {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_HARDWARE_CROSSTIMESTAMP").field("Header", &self.Header).field("Flags", &self.Flags).field("SystemTimestamp1", &self.SystemTimestamp1).field("HardwareClockTimestamp", &self.HardwareClockTimestamp).field("SystemTimestamp2", &self.SystemTimestamp2).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_HARDWARE_CROSSTIMESTAMP {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_HARDWARE_CROSSTIMESTAMP {
-    fn eq(&self, other: &Self) -> bool {
-        self.Header == other.Header && self.Flags == other.Flags && self.SystemTimestamp1 == other.SystemTimestamp1 && self.HardwareClockTimestamp == other.HardwareClockTimestamp && self.SystemTimestamp2 == other.SystemTimestamp2
-    }
-}
-impl ::core::cmp::Eq for NDIS_HARDWARE_CROSSTIMESTAMP {}
-impl ::core::default::Default for NDIS_HARDWARE_CROSSTIMESTAMP {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
-pub struct NDIS_INTERFACE_INFORMATION {
-    pub ifOperStatus: NET_IF_OPER_STATUS,
-    pub ifOperStatusFlags: u32,
-    pub MediaConnectState: NET_IF_MEDIA_CONNECT_STATE,
-    pub MediaDuplexState: NET_IF_MEDIA_DUPLEX_STATE,
-    pub ifMtu: u32,
-    pub ifPromiscuousMode: super::super::Foundation::BOOLEAN,
-    pub ifDeviceWakeUpEnable: super::super::Foundation::BOOLEAN,
-    pub XmitLinkSpeed: u64,
-    pub RcvLinkSpeed: u64,
-    pub ifLastChange: u64,
-    pub ifCounterDiscontinuityTime: u64,
-    pub ifInUnknownProtos: u64,
-    pub ifInDiscards: u64,
-    pub ifInErrors: u64,
-    pub ifHCInOctets: u64,
-    pub ifHCInUcastPkts: u64,
-    pub ifHCInMulticastPkts: u64,
-    pub ifHCInBroadcastPkts: u64,
-    pub ifHCOutOctets: u64,
-    pub ifHCOutUcastPkts: u64,
-    pub ifHCOutMulticastPkts: u64,
-    pub ifHCOutBroadcastPkts: u64,
-    pub ifOutErrors: u64,
-    pub ifOutDiscards: u64,
-    pub ifHCInUcastOctets: u64,
-    pub ifHCInMulticastOctets: u64,
-    pub ifHCInBroadcastOctets: u64,
-    pub ifHCOutUcastOctets: u64,
-    pub ifHCOutMulticastOctets: u64,
-    pub ifHCOutBroadcastOctets: u64,
-    pub CompartmentId: u32,
-    pub SupportedStatistics: u32,
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::marker::Copy for NDIS_INTERFACE_INFORMATION {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::clone::Clone for NDIS_INTERFACE_INFORMATION {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::fmt::Debug for NDIS_INTERFACE_INFORMATION {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_INTERFACE_INFORMATION")
-            .field("ifOperStatus", &self.ifOperStatus)
-            .field("ifOperStatusFlags", &self.ifOperStatusFlags)
-            .field("MediaConnectState", &self.MediaConnectState)
-            .field("MediaDuplexState", &self.MediaDuplexState)
-            .field("ifMtu", &self.ifMtu)
-            .field("ifPromiscuousMode", &self.ifPromiscuousMode)
-            .field("ifDeviceWakeUpEnable", &self.ifDeviceWakeUpEnable)
-            .field("XmitLinkSpeed", &self.XmitLinkSpeed)
-            .field("RcvLinkSpeed", &self.RcvLinkSpeed)
-            .field("ifLastChange", &self.ifLastChange)
-            .field("ifCounterDiscontinuityTime", &self.ifCounterDiscontinuityTime)
-            .field("ifInUnknownProtos", &self.ifInUnknownProtos)
-            .field("ifInDiscards", &self.ifInDiscards)
-            .field("ifInErrors", &self.ifInErrors)
-            .field("ifHCInOctets", &self.ifHCInOctets)
-            .field("ifHCInUcastPkts", &self.ifHCInUcastPkts)
-            .field("ifHCInMulticastPkts", &self.ifHCInMulticastPkts)
-            .field("ifHCInBroadcastPkts", &self.ifHCInBroadcastPkts)
-            .field("ifHCOutOctets", &self.ifHCOutOctets)
-            .field("ifHCOutUcastPkts", &self.ifHCOutUcastPkts)
-            .field("ifHCOutMulticastPkts", &self.ifHCOutMulticastPkts)
-            .field("ifHCOutBroadcastPkts", &self.ifHCOutBroadcastPkts)
-            .field("ifOutErrors", &self.ifOutErrors)
-            .field("ifOutDiscards", &self.ifOutDiscards)
-            .field("ifHCInUcastOctets", &self.ifHCInUcastOctets)
-            .field("ifHCInMulticastOctets", &self.ifHCInMulticastOctets)
-            .field("ifHCInBroadcastOctets", &self.ifHCInBroadcastOctets)
-            .field("ifHCOutUcastOctets", &self.ifHCOutUcastOctets)
-            .field("ifHCOutMulticastOctets", &self.ifHCOutMulticastOctets)
-            .field("ifHCOutBroadcastOctets", &self.ifHCOutBroadcastOctets)
-            .field("CompartmentId", &self.CompartmentId)
-            .field("SupportedStatistics", &self.SupportedStatistics)
-            .finish()
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::windows_core::TypeKind for NDIS_INTERFACE_INFORMATION {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::PartialEq for NDIS_INTERFACE_INFORMATION {
-    fn eq(&self, other: &Self) -> bool {
-        self.ifOperStatus == other.ifOperStatus
-            && self.ifOperStatusFlags == other.ifOperStatusFlags
-            && self.MediaConnectState == other.MediaConnectState
-            && self.MediaDuplexState == other.MediaDuplexState
-            && self.ifMtu == other.ifMtu
-            && self.ifPromiscuousMode == other.ifPromiscuousMode
-            && self.ifDeviceWakeUpEnable == other.ifDeviceWakeUpEnable
-            && self.XmitLinkSpeed == other.XmitLinkSpeed
-            && self.RcvLinkSpeed == other.RcvLinkSpeed
-            && self.ifLastChange == other.ifLastChange
-            && self.ifCounterDiscontinuityTime == other.ifCounterDiscontinuityTime
-            && self.ifInUnknownProtos == other.ifInUnknownProtos
-            && self.ifInDiscards == other.ifInDiscards
-            && self.ifInErrors == other.ifInErrors
-            && self.ifHCInOctets == other.ifHCInOctets
-            && self.ifHCInUcastPkts == other.ifHCInUcastPkts
-            && self.ifHCInMulticastPkts == other.ifHCInMulticastPkts
-            && self.ifHCInBroadcastPkts == other.ifHCInBroadcastPkts
-            && self.ifHCOutOctets == other.ifHCOutOctets
-            && self.ifHCOutUcastPkts == other.ifHCOutUcastPkts
-            && self.ifHCOutMulticastPkts == other.ifHCOutMulticastPkts
-            && self.ifHCOutBroadcastPkts == other.ifHCOutBroadcastPkts
-            && self.ifOutErrors == other.ifOutErrors
-            && self.ifOutDiscards == other.ifOutDiscards
-            && self.ifHCInUcastOctets == other.ifHCInUcastOctets
-            && self.ifHCInMulticastOctets == other.ifHCInMulticastOctets
-            && self.ifHCInBroadcastOctets == other.ifHCInBroadcastOctets
-            && self.ifHCOutUcastOctets == other.ifHCOutUcastOctets
-            && self.ifHCOutMulticastOctets == other.ifHCOutMulticastOctets
-            && self.ifHCOutBroadcastOctets == other.ifHCOutBroadcastOctets
-            && self.CompartmentId == other.CompartmentId
-            && self.SupportedStatistics == other.SupportedStatistics
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::Eq for NDIS_INTERFACE_INFORMATION {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::default::Default for NDIS_INTERFACE_INFORMATION {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_INTERRUPT_MODERATION_PARAMETERS {
-    pub Header: NDIS_OBJECT_HEADER,
-    pub Flags: u32,
-    pub InterruptModeration: NDIS_INTERRUPT_MODERATION,
-}
-impl ::core::marker::Copy for NDIS_INTERRUPT_MODERATION_PARAMETERS {}
-impl ::core::clone::Clone for NDIS_INTERRUPT_MODERATION_PARAMETERS {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_INTERRUPT_MODERATION_PARAMETERS {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_INTERRUPT_MODERATION_PARAMETERS").field("Header", &self.Header).field("Flags", &self.Flags).field("InterruptModeration", &self.InterruptModeration).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_INTERRUPT_MODERATION_PARAMETERS {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_INTERRUPT_MODERATION_PARAMETERS {
-    fn eq(&self, other: &Self) -> bool {
-        self.Header == other.Header && self.Flags == other.Flags && self.InterruptModeration == other.InterruptModeration
-    }
-}
-impl ::core::cmp::Eq for NDIS_INTERRUPT_MODERATION_PARAMETERS {}
-impl ::core::default::Default for NDIS_INTERRUPT_MODERATION_PARAMETERS {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_IPSEC_OFFLOAD_V1 {
-    pub Supported: NDIS_IPSEC_OFFLOAD_V1_2,
-    pub IPv4AH: NDIS_IPSEC_OFFLOAD_V1_0,
-    pub IPv4ESP: NDIS_IPSEC_OFFLOAD_V1_1,
-}
-impl ::core::marker::Copy for NDIS_IPSEC_OFFLOAD_V1 {}
-impl ::core::clone::Clone for NDIS_IPSEC_OFFLOAD_V1 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_IPSEC_OFFLOAD_V1 {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_IPSEC_OFFLOAD_V1").field("Supported", &self.Supported).field("IPv4AH", &self.IPv4AH).field("IPv4ESP", &self.IPv4ESP).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_IPSEC_OFFLOAD_V1 {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_IPSEC_OFFLOAD_V1 {
-    fn eq(&self, other: &Self) -> bool {
-        self.Supported == other.Supported && self.IPv4AH == other.IPv4AH && self.IPv4ESP == other.IPv4ESP
-    }
-}
-impl ::core::cmp::Eq for NDIS_IPSEC_OFFLOAD_V1 {}
-impl ::core::default::Default for NDIS_IPSEC_OFFLOAD_V1 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_IPSEC_OFFLOAD_V1_0 {
-    pub _bitfield: u32,
-}
-impl ::core::marker::Copy for NDIS_IPSEC_OFFLOAD_V1_0 {}
-impl ::core::clone::Clone for NDIS_IPSEC_OFFLOAD_V1_0 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_IPSEC_OFFLOAD_V1_0 {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_IPSEC_OFFLOAD_V1_0").field("_bitfield", &self._bitfield).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_IPSEC_OFFLOAD_V1_0 {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_IPSEC_OFFLOAD_V1_0 {
-    fn eq(&self, other: &Self) -> bool {
-        self._bitfield == other._bitfield
-    }
-}
-impl ::core::cmp::Eq for NDIS_IPSEC_OFFLOAD_V1_0 {}
-impl ::core::default::Default for NDIS_IPSEC_OFFLOAD_V1_0 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_IPSEC_OFFLOAD_V1_1 {
-    pub _bitfield: u32,
-}
-impl ::core::marker::Copy for NDIS_IPSEC_OFFLOAD_V1_1 {}
-impl ::core::clone::Clone for NDIS_IPSEC_OFFLOAD_V1_1 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_IPSEC_OFFLOAD_V1_1 {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_IPSEC_OFFLOAD_V1_1").field("_bitfield", &self._bitfield).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_IPSEC_OFFLOAD_V1_1 {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_IPSEC_OFFLOAD_V1_1 {
-    fn eq(&self, other: &Self) -> bool {
-        self._bitfield == other._bitfield
-    }
-}
-impl ::core::cmp::Eq for NDIS_IPSEC_OFFLOAD_V1_1 {}
-impl ::core::default::Default for NDIS_IPSEC_OFFLOAD_V1_1 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_IPSEC_OFFLOAD_V1_2 {
-    pub Encapsulation: u32,
-    pub AhEspCombined: u32,
-    pub TransportTunnelCombined: u32,
-    pub IPv4Options: u32,
-    pub Flags: u32,
-}
-impl ::core::marker::Copy for NDIS_IPSEC_OFFLOAD_V1_2 {}
-impl ::core::clone::Clone for NDIS_IPSEC_OFFLOAD_V1_2 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_IPSEC_OFFLOAD_V1_2 {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_IPSEC_OFFLOAD_V1_2").field("Encapsulation", &self.Encapsulation).field("AhEspCombined", &self.AhEspCombined).field("TransportTunnelCombined", &self.TransportTunnelCombined).field("IPv4Options", &self.IPv4Options).field("Flags", &self.Flags).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_IPSEC_OFFLOAD_V1_2 {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_IPSEC_OFFLOAD_V1_2 {
-    fn eq(&self, other: &Self) -> bool {
-        self.Encapsulation == other.Encapsulation && self.AhEspCombined == other.AhEspCombined && self.TransportTunnelCombined == other.TransportTunnelCombined && self.IPv4Options == other.IPv4Options && self.Flags == other.Flags
-    }
-}
-impl ::core::cmp::Eq for NDIS_IPSEC_OFFLOAD_V1_2 {}
-impl ::core::default::Default for NDIS_IPSEC_OFFLOAD_V1_2 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_IP_OPER_STATE {
-    pub Header: NDIS_OBJECT_HEADER,
-    pub Flags: u32,
-    pub IpOperationalStatus: NDIS_IP_OPER_STATUS,
-}
-impl ::core::marker::Copy for NDIS_IP_OPER_STATE {}
-impl ::core::clone::Clone for NDIS_IP_OPER_STATE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_IP_OPER_STATE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_IP_OPER_STATE").field("Header", &self.Header).field("Flags", &self.Flags).field("IpOperationalStatus", &self.IpOperationalStatus).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_IP_OPER_STATE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_IP_OPER_STATE {
-    fn eq(&self, other: &Self) -> bool {
-        self.Header == other.Header && self.Flags == other.Flags && self.IpOperationalStatus == other.IpOperationalStatus
-    }
-}
-impl ::core::cmp::Eq for NDIS_IP_OPER_STATE {}
-impl ::core::default::Default for NDIS_IP_OPER_STATE {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_IP_OPER_STATUS {
-    pub AddressFamily: u32,
-    pub OperationalStatus: NET_IF_OPER_STATUS,
-    pub OperationalStatusFlags: u32,
-}
-impl ::core::marker::Copy for NDIS_IP_OPER_STATUS {}
-impl ::core::clone::Clone for NDIS_IP_OPER_STATUS {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_IP_OPER_STATUS {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_IP_OPER_STATUS").field("AddressFamily", &self.AddressFamily).field("OperationalStatus", &self.OperationalStatus).field("OperationalStatusFlags", &self.OperationalStatusFlags).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_IP_OPER_STATUS {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_IP_OPER_STATUS {
-    fn eq(&self, other: &Self) -> bool {
-        self.AddressFamily == other.AddressFamily && self.OperationalStatus == other.OperationalStatus && self.OperationalStatusFlags == other.OperationalStatusFlags
-    }
-}
-impl ::core::cmp::Eq for NDIS_IP_OPER_STATUS {}
-impl ::core::default::Default for NDIS_IP_OPER_STATUS {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_IP_OPER_STATUS_INFO {
-    pub Header: NDIS_OBJECT_HEADER,
-    pub Flags: u32,
-    pub NumberofAddressFamiliesReturned: u32,
-    pub IpOperationalStatus: [NDIS_IP_OPER_STATUS; 32],
-}
-impl ::core::marker::Copy for NDIS_IP_OPER_STATUS_INFO {}
-impl ::core::clone::Clone for NDIS_IP_OPER_STATUS_INFO {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_IP_OPER_STATUS_INFO {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_IP_OPER_STATUS_INFO").field("Header", &self.Header).field("Flags", &self.Flags).field("NumberofAddressFamiliesReturned", &self.NumberofAddressFamiliesReturned).field("IpOperationalStatus", &self.IpOperationalStatus).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_IP_OPER_STATUS_INFO {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_IP_OPER_STATUS_INFO {
-    fn eq(&self, other: &Self) -> bool {
-        self.Header == other.Header && self.Flags == other.Flags && self.NumberofAddressFamiliesReturned == other.NumberofAddressFamiliesReturned && self.IpOperationalStatus == other.IpOperationalStatus
-    }
-}
-impl ::core::cmp::Eq for NDIS_IP_OPER_STATUS_INFO {}
-impl ::core::default::Default for NDIS_IP_OPER_STATUS_INFO {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_IRDA_PACKET_INFO {
-    pub ExtraBOFs: u32,
-    pub MinTurnAroundTime: u32,
-}
-impl ::core::marker::Copy for NDIS_IRDA_PACKET_INFO {}
-impl ::core::clone::Clone for NDIS_IRDA_PACKET_INFO {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_IRDA_PACKET_INFO {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_IRDA_PACKET_INFO").field("ExtraBOFs", &self.ExtraBOFs).field("MinTurnAroundTime", &self.MinTurnAroundTime).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_IRDA_PACKET_INFO {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_IRDA_PACKET_INFO {
-    fn eq(&self, other: &Self) -> bool {
-        self.ExtraBOFs == other.ExtraBOFs && self.MinTurnAroundTime == other.MinTurnAroundTime
-    }
-}
-impl ::core::cmp::Eq for NDIS_IRDA_PACKET_INFO {}
-impl ::core::default::Default for NDIS_IRDA_PACKET_INFO {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_LINK_PARAMETERS {
-    pub Header: NDIS_OBJECT_HEADER,
-    pub MediaDuplexState: NET_IF_MEDIA_DUPLEX_STATE,
-    pub XmitLinkSpeed: u64,
-    pub RcvLinkSpeed: u64,
-    pub PauseFunctions: NDIS_SUPPORTED_PAUSE_FUNCTIONS,
-    pub AutoNegotiationFlags: u32,
-}
-impl ::core::marker::Copy for NDIS_LINK_PARAMETERS {}
-impl ::core::clone::Clone for NDIS_LINK_PARAMETERS {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_LINK_PARAMETERS {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_LINK_PARAMETERS").field("Header", &self.Header).field("MediaDuplexState", &self.MediaDuplexState).field("XmitLinkSpeed", &self.XmitLinkSpeed).field("RcvLinkSpeed", &self.RcvLinkSpeed).field("PauseFunctions", &self.PauseFunctions).field("AutoNegotiationFlags", &self.AutoNegotiationFlags).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_LINK_PARAMETERS {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_LINK_PARAMETERS {
-    fn eq(&self, other: &Self) -> bool {
-        self.Header == other.Header && self.MediaDuplexState == other.MediaDuplexState && self.XmitLinkSpeed == other.XmitLinkSpeed && self.RcvLinkSpeed == other.RcvLinkSpeed && self.PauseFunctions == other.PauseFunctions && self.AutoNegotiationFlags == other.AutoNegotiationFlags
-    }
-}
-impl ::core::cmp::Eq for NDIS_LINK_PARAMETERS {}
-impl ::core::default::Default for NDIS_LINK_PARAMETERS {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_LINK_SPEED {
-    pub XmitLinkSpeed: u64,
-    pub RcvLinkSpeed: u64,
-}
-impl ::core::marker::Copy for NDIS_LINK_SPEED {}
-impl ::core::clone::Clone for NDIS_LINK_SPEED {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_LINK_SPEED {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_LINK_SPEED").field("XmitLinkSpeed", &self.XmitLinkSpeed).field("RcvLinkSpeed", &self.RcvLinkSpeed).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_LINK_SPEED {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_LINK_SPEED {
-    fn eq(&self, other: &Self) -> bool {
-        self.XmitLinkSpeed == other.XmitLinkSpeed && self.RcvLinkSpeed == other.RcvLinkSpeed
-    }
-}
-impl ::core::cmp::Eq for NDIS_LINK_SPEED {}
-impl ::core::default::Default for NDIS_LINK_SPEED {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_LINK_STATE {
-    pub Header: NDIS_OBJECT_HEADER,
-    pub MediaConnectState: NET_IF_MEDIA_CONNECT_STATE,
-    pub MediaDuplexState: NET_IF_MEDIA_DUPLEX_STATE,
-    pub XmitLinkSpeed: u64,
-    pub RcvLinkSpeed: u64,
-    pub PauseFunctions: NDIS_SUPPORTED_PAUSE_FUNCTIONS,
-    pub AutoNegotiationFlags: u32,
-}
-impl ::core::marker::Copy for NDIS_LINK_STATE {}
-impl ::core::clone::Clone for NDIS_LINK_STATE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_LINK_STATE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_LINK_STATE").field("Header", &self.Header).field("MediaConnectState", &self.MediaConnectState).field("MediaDuplexState", &self.MediaDuplexState).field("XmitLinkSpeed", &self.XmitLinkSpeed).field("RcvLinkSpeed", &self.RcvLinkSpeed).field("PauseFunctions", &self.PauseFunctions).field("AutoNegotiationFlags", &self.AutoNegotiationFlags).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_LINK_STATE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_LINK_STATE {
-    fn eq(&self, other: &Self) -> bool {
-        self.Header == other.Header && self.MediaConnectState == other.MediaConnectState && self.MediaDuplexState == other.MediaDuplexState && self.XmitLinkSpeed == other.XmitLinkSpeed && self.RcvLinkSpeed == other.RcvLinkSpeed && self.PauseFunctions == other.PauseFunctions && self.AutoNegotiationFlags == other.AutoNegotiationFlags
-    }
-}
-impl ::core::cmp::Eq for NDIS_LINK_STATE {}
-impl ::core::default::Default for NDIS_LINK_STATE {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_OBJECT_HEADER {
-    pub Type: u8,
-    pub Revision: u8,
-    pub Size: u16,
-}
-impl ::core::marker::Copy for NDIS_OBJECT_HEADER {}
-impl ::core::clone::Clone for NDIS_OBJECT_HEADER {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_OBJECT_HEADER {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_OBJECT_HEADER").field("Type", &self.Type).field("Revision", &self.Revision).field("Size", &self.Size).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_OBJECT_HEADER {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_OBJECT_HEADER {
-    fn eq(&self, other: &Self) -> bool {
-        self.Type == other.Type && self.Revision == other.Revision && self.Size == other.Size
-    }
-}
-impl ::core::cmp::Eq for NDIS_OBJECT_HEADER {}
-impl ::core::default::Default for NDIS_OBJECT_HEADER {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_OFFLOAD {
-    pub Header: NDIS_OBJECT_HEADER,
-    pub Checksum: NDIS_TCP_IP_CHECKSUM_OFFLOAD,
-    pub LsoV1: NDIS_TCP_LARGE_SEND_OFFLOAD_V1,
-    pub IPsecV1: NDIS_IPSEC_OFFLOAD_V1,
-    pub LsoV2: NDIS_TCP_LARGE_SEND_OFFLOAD_V2,
-    pub Flags: u32,
-}
-impl ::core::marker::Copy for NDIS_OFFLOAD {}
-impl ::core::clone::Clone for NDIS_OFFLOAD {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_OFFLOAD {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_OFFLOAD").field("Header", &self.Header).field("Checksum", &self.Checksum).field("LsoV1", &self.LsoV1).field("IPsecV1", &self.IPsecV1).field("LsoV2", &self.LsoV2).field("Flags", &self.Flags).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_OFFLOAD {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_OFFLOAD {
-    fn eq(&self, other: &Self) -> bool {
-        self.Header == other.Header && self.Checksum == other.Checksum && self.LsoV1 == other.LsoV1 && self.IPsecV1 == other.IPsecV1 && self.LsoV2 == other.LsoV2 && self.Flags == other.Flags
-    }
-}
-impl ::core::cmp::Eq for NDIS_OFFLOAD {}
-impl ::core::default::Default for NDIS_OFFLOAD {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_OFFLOAD_PARAMETERS {
-    pub Header: NDIS_OBJECT_HEADER,
-    pub IPv4Checksum: u8,
-    pub TCPIPv4Checksum: u8,
-    pub UDPIPv4Checksum: u8,
-    pub TCPIPv6Checksum: u8,
-    pub UDPIPv6Checksum: u8,
-    pub LsoV1: u8,
-    pub IPsecV1: u8,
-    pub LsoV2IPv4: u8,
-    pub LsoV2IPv6: u8,
-    pub TcpConnectionIPv4: u8,
-    pub TcpConnectionIPv6: u8,
-    pub Flags: u32,
-}
-impl ::core::marker::Copy for NDIS_OFFLOAD_PARAMETERS {}
-impl ::core::clone::Clone for NDIS_OFFLOAD_PARAMETERS {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_OFFLOAD_PARAMETERS {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_OFFLOAD_PARAMETERS")
-            .field("Header", &self.Header)
-            .field("IPv4Checksum", &self.IPv4Checksum)
-            .field("TCPIPv4Checksum", &self.TCPIPv4Checksum)
-            .field("UDPIPv4Checksum", &self.UDPIPv4Checksum)
-            .field("TCPIPv6Checksum", &self.TCPIPv6Checksum)
-            .field("UDPIPv6Checksum", &self.UDPIPv6Checksum)
-            .field("LsoV1", &self.LsoV1)
-            .field("IPsecV1", &self.IPsecV1)
-            .field("LsoV2IPv4", &self.LsoV2IPv4)
-            .field("LsoV2IPv6", &self.LsoV2IPv6)
-            .field("TcpConnectionIPv4", &self.TcpConnectionIPv4)
-            .field("TcpConnectionIPv6", &self.TcpConnectionIPv6)
-            .field("Flags", &self.Flags)
-            .finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_OFFLOAD_PARAMETERS {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_OFFLOAD_PARAMETERS {
-    fn eq(&self, other: &Self) -> bool {
-        self.Header == other.Header && self.IPv4Checksum == other.IPv4Checksum && self.TCPIPv4Checksum == other.TCPIPv4Checksum && self.UDPIPv4Checksum == other.UDPIPv4Checksum && self.TCPIPv6Checksum == other.TCPIPv6Checksum && self.UDPIPv6Checksum == other.UDPIPv6Checksum && self.LsoV1 == other.LsoV1 && self.IPsecV1 == other.IPsecV1 && self.LsoV2IPv4 == other.LsoV2IPv4 && self.LsoV2IPv6 == other.LsoV2IPv6 && self.TcpConnectionIPv4 == other.TcpConnectionIPv4 && self.TcpConnectionIPv6 == other.TcpConnectionIPv6 && self.Flags == other.Flags
-    }
-}
-impl ::core::cmp::Eq for NDIS_OFFLOAD_PARAMETERS {}
-impl ::core::default::Default for NDIS_OFFLOAD_PARAMETERS {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_OPER_STATE {
-    pub Header: NDIS_OBJECT_HEADER,
-    pub OperationalStatus: NET_IF_OPER_STATUS,
-    pub OperationalStatusFlags: u32,
-}
-impl ::core::marker::Copy for NDIS_OPER_STATE {}
-impl ::core::clone::Clone for NDIS_OPER_STATE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_OPER_STATE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_OPER_STATE").field("Header", &self.Header).field("OperationalStatus", &self.OperationalStatus).field("OperationalStatusFlags", &self.OperationalStatusFlags).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_OPER_STATE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_OPER_STATE {
-    fn eq(&self, other: &Self) -> bool {
-        self.Header == other.Header && self.OperationalStatus == other.OperationalStatus && self.OperationalStatusFlags == other.OperationalStatusFlags
-    }
-}
-impl ::core::cmp::Eq for NDIS_OPER_STATE {}
-impl ::core::default::Default for NDIS_OPER_STATE {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_PCI_DEVICE_CUSTOM_PROPERTIES {
-    pub Header: NDIS_OBJECT_HEADER,
-    pub DeviceType: u32,
-    pub CurrentSpeedAndMode: u32,
-    pub CurrentPayloadSize: u32,
-    pub MaxPayloadSize: u32,
-    pub MaxReadRequestSize: u32,
-    pub CurrentLinkSpeed: u32,
-    pub CurrentLinkWidth: u32,
-    pub MaxLinkSpeed: u32,
-    pub MaxLinkWidth: u32,
-    pub PciExpressVersion: u32,
-    pub InterruptType: u32,
-    pub MaxInterruptMessages: u32,
-}
-impl ::core::marker::Copy for NDIS_PCI_DEVICE_CUSTOM_PROPERTIES {}
-impl ::core::clone::Clone for NDIS_PCI_DEVICE_CUSTOM_PROPERTIES {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_PCI_DEVICE_CUSTOM_PROPERTIES {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_PCI_DEVICE_CUSTOM_PROPERTIES")
-            .field("Header", &self.Header)
-            .field("DeviceType", &self.DeviceType)
-            .field("CurrentSpeedAndMode", &self.CurrentSpeedAndMode)
-            .field("CurrentPayloadSize", &self.CurrentPayloadSize)
-            .field("MaxPayloadSize", &self.MaxPayloadSize)
-            .field("MaxReadRequestSize", &self.MaxReadRequestSize)
-            .field("CurrentLinkSpeed", &self.CurrentLinkSpeed)
-            .field("CurrentLinkWidth", &self.CurrentLinkWidth)
-            .field("MaxLinkSpeed", &self.MaxLinkSpeed)
-            .field("MaxLinkWidth", &self.MaxLinkWidth)
-            .field("PciExpressVersion", &self.PciExpressVersion)
-            .field("InterruptType", &self.InterruptType)
-            .field("MaxInterruptMessages", &self.MaxInterruptMessages)
-            .finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_PCI_DEVICE_CUSTOM_PROPERTIES {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_PCI_DEVICE_CUSTOM_PROPERTIES {
-    fn eq(&self, other: &Self) -> bool {
-        self.Header == other.Header && self.DeviceType == other.DeviceType && self.CurrentSpeedAndMode == other.CurrentSpeedAndMode && self.CurrentPayloadSize == other.CurrentPayloadSize && self.MaxPayloadSize == other.MaxPayloadSize && self.MaxReadRequestSize == other.MaxReadRequestSize && self.CurrentLinkSpeed == other.CurrentLinkSpeed && self.CurrentLinkWidth == other.CurrentLinkWidth && self.MaxLinkSpeed == other.MaxLinkSpeed && self.MaxLinkWidth == other.MaxLinkWidth && self.PciExpressVersion == other.PciExpressVersion && self.InterruptType == other.InterruptType && self.MaxInterruptMessages == other.MaxInterruptMessages
-    }
-}
-impl ::core::cmp::Eq for NDIS_PCI_DEVICE_CUSTOM_PROPERTIES {}
-impl ::core::default::Default for NDIS_PCI_DEVICE_CUSTOM_PROPERTIES {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_PM_PACKET_PATTERN {
-    pub Priority: u32,
-    pub Reserved: u32,
-    pub MaskSize: u32,
-    pub PatternOffset: u32,
-    pub PatternSize: u32,
-    pub PatternFlags: u32,
-}
-impl ::core::marker::Copy for NDIS_PM_PACKET_PATTERN {}
-impl ::core::clone::Clone for NDIS_PM_PACKET_PATTERN {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_PM_PACKET_PATTERN {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_PM_PACKET_PATTERN").field("Priority", &self.Priority).field("Reserved", &self.Reserved).field("MaskSize", &self.MaskSize).field("PatternOffset", &self.PatternOffset).field("PatternSize", &self.PatternSize).field("PatternFlags", &self.PatternFlags).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_PM_PACKET_PATTERN {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_PM_PACKET_PATTERN {
-    fn eq(&self, other: &Self) -> bool {
-        self.Priority == other.Priority && self.Reserved == other.Reserved && self.MaskSize == other.MaskSize && self.PatternOffset == other.PatternOffset && self.PatternSize == other.PatternSize && self.PatternFlags == other.PatternFlags
-    }
-}
-impl ::core::cmp::Eq for NDIS_PM_PACKET_PATTERN {}
-impl ::core::default::Default for NDIS_PM_PACKET_PATTERN {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_PM_WAKE_UP_CAPABILITIES {
-    pub MinMagicPacketWakeUp: NDIS_DEVICE_POWER_STATE,
-    pub MinPatternWakeUp: NDIS_DEVICE_POWER_STATE,
-    pub MinLinkChangeWakeUp: NDIS_DEVICE_POWER_STATE,
-}
-impl ::core::marker::Copy for NDIS_PM_WAKE_UP_CAPABILITIES {}
-impl ::core::clone::Clone for NDIS_PM_WAKE_UP_CAPABILITIES {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_PM_WAKE_UP_CAPABILITIES {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_PM_WAKE_UP_CAPABILITIES").field("MinMagicPacketWakeUp", &self.MinMagicPacketWakeUp).field("MinPatternWakeUp", &self.MinPatternWakeUp).field("MinLinkChangeWakeUp", &self.MinLinkChangeWakeUp).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_PM_WAKE_UP_CAPABILITIES {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_PM_WAKE_UP_CAPABILITIES {
-    fn eq(&self, other: &Self) -> bool {
-        self.MinMagicPacketWakeUp == other.MinMagicPacketWakeUp && self.MinPatternWakeUp == other.MinPatternWakeUp && self.MinLinkChangeWakeUp == other.MinLinkChangeWakeUp
-    }
-}
-impl ::core::cmp::Eq for NDIS_PM_WAKE_UP_CAPABILITIES {}
-impl ::core::default::Default for NDIS_PM_WAKE_UP_CAPABILITIES {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_PNP_CAPABILITIES {
-    pub Flags: u32,
-    pub WakeUpCapabilities: NDIS_PM_WAKE_UP_CAPABILITIES,
-}
-impl ::core::marker::Copy for NDIS_PNP_CAPABILITIES {}
-impl ::core::clone::Clone for NDIS_PNP_CAPABILITIES {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_PNP_CAPABILITIES {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_PNP_CAPABILITIES").field("Flags", &self.Flags).field("WakeUpCapabilities", &self.WakeUpCapabilities).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_PNP_CAPABILITIES {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_PNP_CAPABILITIES {
-    fn eq(&self, other: &Self) -> bool {
-        self.Flags == other.Flags && self.WakeUpCapabilities == other.WakeUpCapabilities
-    }
-}
-impl ::core::cmp::Eq for NDIS_PNP_CAPABILITIES {}
-impl ::core::default::Default for NDIS_PNP_CAPABILITIES {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_PORT {
-    pub Next: *mut NDIS_PORT,
-    pub NdisReserved: *mut ::core::ffi::c_void,
-    pub MiniportReserved: *mut ::core::ffi::c_void,
-    pub ProtocolReserved: *mut ::core::ffi::c_void,
-    pub PortCharacteristics: NDIS_PORT_CHARACTERISTICS,
-}
-impl ::core::marker::Copy for NDIS_PORT {}
-impl ::core::clone::Clone for NDIS_PORT {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_PORT {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_PORT").field("Next", &self.Next).field("NdisReserved", &self.NdisReserved).field("MiniportReserved", &self.MiniportReserved).field("ProtocolReserved", &self.ProtocolReserved).field("PortCharacteristics", &self.PortCharacteristics).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_PORT {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_PORT {
-    fn eq(&self, other: &Self) -> bool {
-        self.Next == other.Next && self.NdisReserved == other.NdisReserved && self.MiniportReserved == other.MiniportReserved && self.ProtocolReserved == other.ProtocolReserved && self.PortCharacteristics == other.PortCharacteristics
-    }
-}
-impl ::core::cmp::Eq for NDIS_PORT {}
-impl ::core::default::Default for NDIS_PORT {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_PORT_ARRAY {
-    pub Header: NDIS_OBJECT_HEADER,
-    pub NumberOfPorts: u32,
-    pub OffsetFirstPort: u32,
-    pub ElementSize: u32,
-    pub Ports: [NDIS_PORT_CHARACTERISTICS; 1],
-}
-impl ::core::marker::Copy for NDIS_PORT_ARRAY {}
-impl ::core::clone::Clone for NDIS_PORT_ARRAY {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_PORT_ARRAY {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_PORT_ARRAY").field("Header", &self.Header).field("NumberOfPorts", &self.NumberOfPorts).field("OffsetFirstPort", &self.OffsetFirstPort).field("ElementSize", &self.ElementSize).field("Ports", &self.Ports).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_PORT_ARRAY {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_PORT_ARRAY {
-    fn eq(&self, other: &Self) -> bool {
-        self.Header == other.Header && self.NumberOfPorts == other.NumberOfPorts && self.OffsetFirstPort == other.OffsetFirstPort && self.ElementSize == other.ElementSize && self.Ports == other.Ports
-    }
-}
-impl ::core::cmp::Eq for NDIS_PORT_ARRAY {}
-impl ::core::default::Default for NDIS_PORT_ARRAY {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_PORT_AUTHENTICATION_PARAMETERS {
-    pub Header: NDIS_OBJECT_HEADER,
-    pub SendControlState: NDIS_PORT_CONTROL_STATE,
-    pub RcvControlState: NDIS_PORT_CONTROL_STATE,
-    pub SendAuthorizationState: NDIS_PORT_AUTHORIZATION_STATE,
-    pub RcvAuthorizationState: NDIS_PORT_AUTHORIZATION_STATE,
-}
-impl ::core::marker::Copy for NDIS_PORT_AUTHENTICATION_PARAMETERS {}
-impl ::core::clone::Clone for NDIS_PORT_AUTHENTICATION_PARAMETERS {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_PORT_AUTHENTICATION_PARAMETERS {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_PORT_AUTHENTICATION_PARAMETERS").field("Header", &self.Header).field("SendControlState", &self.SendControlState).field("RcvControlState", &self.RcvControlState).field("SendAuthorizationState", &self.SendAuthorizationState).field("RcvAuthorizationState", &self.RcvAuthorizationState).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_PORT_AUTHENTICATION_PARAMETERS {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_PORT_AUTHENTICATION_PARAMETERS {
-    fn eq(&self, other: &Self) -> bool {
-        self.Header == other.Header && self.SendControlState == other.SendControlState && self.RcvControlState == other.RcvControlState && self.SendAuthorizationState == other.SendAuthorizationState && self.RcvAuthorizationState == other.RcvAuthorizationState
-    }
-}
-impl ::core::cmp::Eq for NDIS_PORT_AUTHENTICATION_PARAMETERS {}
-impl ::core::default::Default for NDIS_PORT_AUTHENTICATION_PARAMETERS {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_PORT_CHARACTERISTICS {
-    pub Header: NDIS_OBJECT_HEADER,
-    pub PortNumber: u32,
-    pub Flags: u32,
-    pub Type: NDIS_PORT_TYPE,
-    pub MediaConnectState: NET_IF_MEDIA_CONNECT_STATE,
-    pub XmitLinkSpeed: u64,
-    pub RcvLinkSpeed: u64,
-    pub Direction: NET_IF_DIRECTION_TYPE,
-    pub SendControlState: NDIS_PORT_CONTROL_STATE,
-    pub RcvControlState: NDIS_PORT_CONTROL_STATE,
-    pub SendAuthorizationState: NDIS_PORT_AUTHORIZATION_STATE,
-    pub RcvAuthorizationState: NDIS_PORT_AUTHORIZATION_STATE,
-}
-impl ::core::marker::Copy for NDIS_PORT_CHARACTERISTICS {}
-impl ::core::clone::Clone for NDIS_PORT_CHARACTERISTICS {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_PORT_CHARACTERISTICS {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_PORT_CHARACTERISTICS")
-            .field("Header", &self.Header)
-            .field("PortNumber", &self.PortNumber)
-            .field("Flags", &self.Flags)
-            .field("Type", &self.Type)
-            .field("MediaConnectState", &self.MediaConnectState)
-            .field("XmitLinkSpeed", &self.XmitLinkSpeed)
-            .field("RcvLinkSpeed", &self.RcvLinkSpeed)
-            .field("Direction", &self.Direction)
-            .field("SendControlState", &self.SendControlState)
-            .field("RcvControlState", &self.RcvControlState)
-            .field("SendAuthorizationState", &self.SendAuthorizationState)
-            .field("RcvAuthorizationState", &self.RcvAuthorizationState)
-            .finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_PORT_CHARACTERISTICS {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_PORT_CHARACTERISTICS {
-    fn eq(&self, other: &Self) -> bool {
-        self.Header == other.Header && self.PortNumber == other.PortNumber && self.Flags == other.Flags && self.Type == other.Type && self.MediaConnectState == other.MediaConnectState && self.XmitLinkSpeed == other.XmitLinkSpeed && self.RcvLinkSpeed == other.RcvLinkSpeed && self.Direction == other.Direction && self.SendControlState == other.SendControlState && self.RcvControlState == other.RcvControlState && self.SendAuthorizationState == other.SendAuthorizationState && self.RcvAuthorizationState == other.RcvAuthorizationState
-    }
-}
-impl ::core::cmp::Eq for NDIS_PORT_CHARACTERISTICS {}
-impl ::core::default::Default for NDIS_PORT_CHARACTERISTICS {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_PORT_STATE {
-    pub Header: NDIS_OBJECT_HEADER,
-    pub MediaConnectState: NET_IF_MEDIA_CONNECT_STATE,
-    pub XmitLinkSpeed: u64,
-    pub RcvLinkSpeed: u64,
-    pub Direction: NET_IF_DIRECTION_TYPE,
-    pub SendControlState: NDIS_PORT_CONTROL_STATE,
-    pub RcvControlState: NDIS_PORT_CONTROL_STATE,
-    pub SendAuthorizationState: NDIS_PORT_AUTHORIZATION_STATE,
-    pub RcvAuthorizationState: NDIS_PORT_AUTHORIZATION_STATE,
-    pub Flags: u32,
-}
-impl ::core::marker::Copy for NDIS_PORT_STATE {}
-impl ::core::clone::Clone for NDIS_PORT_STATE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_PORT_STATE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_PORT_STATE")
-            .field("Header", &self.Header)
-            .field("MediaConnectState", &self.MediaConnectState)
-            .field("XmitLinkSpeed", &self.XmitLinkSpeed)
-            .field("RcvLinkSpeed", &self.RcvLinkSpeed)
-            .field("Direction", &self.Direction)
-            .field("SendControlState", &self.SendControlState)
-            .field("RcvControlState", &self.RcvControlState)
-            .field("SendAuthorizationState", &self.SendAuthorizationState)
-            .field("RcvAuthorizationState", &self.RcvAuthorizationState)
-            .field("Flags", &self.Flags)
-            .finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_PORT_STATE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_PORT_STATE {
-    fn eq(&self, other: &Self) -> bool {
-        self.Header == other.Header && self.MediaConnectState == other.MediaConnectState && self.XmitLinkSpeed == other.XmitLinkSpeed && self.RcvLinkSpeed == other.RcvLinkSpeed && self.Direction == other.Direction && self.SendControlState == other.SendControlState && self.RcvControlState == other.RcvControlState && self.SendAuthorizationState == other.SendAuthorizationState && self.RcvAuthorizationState == other.RcvAuthorizationState && self.Flags == other.Flags
-    }
-}
-impl ::core::cmp::Eq for NDIS_PORT_STATE {}
-impl ::core::default::Default for NDIS_PORT_STATE {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_RECEIVE_HASH_PARAMETERS {
-    pub Header: NDIS_OBJECT_HEADER,
-    pub Flags: u32,
-    pub HashInformation: u32,
-    pub HashSecretKeySize: u16,
-    pub HashSecretKeyOffset: u32,
-}
-impl ::core::marker::Copy for NDIS_RECEIVE_HASH_PARAMETERS {}
-impl ::core::clone::Clone for NDIS_RECEIVE_HASH_PARAMETERS {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_RECEIVE_HASH_PARAMETERS {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_RECEIVE_HASH_PARAMETERS").field("Header", &self.Header).field("Flags", &self.Flags).field("HashInformation", &self.HashInformation).field("HashSecretKeySize", &self.HashSecretKeySize).field("HashSecretKeyOffset", &self.HashSecretKeyOffset).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_RECEIVE_HASH_PARAMETERS {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_RECEIVE_HASH_PARAMETERS {
-    fn eq(&self, other: &Self) -> bool {
-        self.Header == other.Header && self.Flags == other.Flags && self.HashInformation == other.HashInformation && self.HashSecretKeySize == other.HashSecretKeySize && self.HashSecretKeyOffset == other.HashSecretKeyOffset
-    }
-}
-impl ::core::cmp::Eq for NDIS_RECEIVE_HASH_PARAMETERS {}
-impl ::core::default::Default for NDIS_RECEIVE_HASH_PARAMETERS {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_RECEIVE_SCALE_CAPABILITIES {
-    pub Header: NDIS_OBJECT_HEADER,
-    pub CapabilitiesFlags: u32,
-    pub NumberOfInterruptMessages: u32,
-    pub NumberOfReceiveQueues: u32,
-}
-impl ::core::marker::Copy for NDIS_RECEIVE_SCALE_CAPABILITIES {}
-impl ::core::clone::Clone for NDIS_RECEIVE_SCALE_CAPABILITIES {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_RECEIVE_SCALE_CAPABILITIES {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_RECEIVE_SCALE_CAPABILITIES").field("Header", &self.Header).field("CapabilitiesFlags", &self.CapabilitiesFlags).field("NumberOfInterruptMessages", &self.NumberOfInterruptMessages).field("NumberOfReceiveQueues", &self.NumberOfReceiveQueues).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_RECEIVE_SCALE_CAPABILITIES {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_RECEIVE_SCALE_CAPABILITIES {
-    fn eq(&self, other: &Self) -> bool {
-        self.Header == other.Header && self.CapabilitiesFlags == other.CapabilitiesFlags && self.NumberOfInterruptMessages == other.NumberOfInterruptMessages && self.NumberOfReceiveQueues == other.NumberOfReceiveQueues
-    }
-}
-impl ::core::cmp::Eq for NDIS_RECEIVE_SCALE_CAPABILITIES {}
-impl ::core::default::Default for NDIS_RECEIVE_SCALE_CAPABILITIES {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_RECEIVE_SCALE_PARAMETERS {
-    pub Header: NDIS_OBJECT_HEADER,
-    pub Flags: u16,
-    pub BaseCpuNumber: u16,
-    pub HashInformation: u32,
-    pub IndirectionTableSize: u16,
-    pub IndirectionTableOffset: u32,
-    pub HashSecretKeySize: u16,
-    pub HashSecretKeyOffset: u32,
-}
-impl ::core::marker::Copy for NDIS_RECEIVE_SCALE_PARAMETERS {}
-impl ::core::clone::Clone for NDIS_RECEIVE_SCALE_PARAMETERS {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_RECEIVE_SCALE_PARAMETERS {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_RECEIVE_SCALE_PARAMETERS").field("Header", &self.Header).field("Flags", &self.Flags).field("BaseCpuNumber", &self.BaseCpuNumber).field("HashInformation", &self.HashInformation).field("IndirectionTableSize", &self.IndirectionTableSize).field("IndirectionTableOffset", &self.IndirectionTableOffset).field("HashSecretKeySize", &self.HashSecretKeySize).field("HashSecretKeyOffset", &self.HashSecretKeyOffset).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_RECEIVE_SCALE_PARAMETERS {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_RECEIVE_SCALE_PARAMETERS {
-    fn eq(&self, other: &Self) -> bool {
-        self.Header == other.Header && self.Flags == other.Flags && self.BaseCpuNumber == other.BaseCpuNumber && self.HashInformation == other.HashInformation && self.IndirectionTableSize == other.IndirectionTableSize && self.IndirectionTableOffset == other.IndirectionTableOffset && self.HashSecretKeySize == other.HashSecretKeySize && self.HashSecretKeyOffset == other.HashSecretKeyOffset
-    }
-}
-impl ::core::cmp::Eq for NDIS_RECEIVE_SCALE_PARAMETERS {}
-impl ::core::default::Default for NDIS_RECEIVE_SCALE_PARAMETERS {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_STATISTICS_INFO {
-    pub Header: NDIS_OBJECT_HEADER,
-    pub SupportedStatistics: u32,
-    pub ifInDiscards: u64,
-    pub ifInErrors: u64,
-    pub ifHCInOctets: u64,
-    pub ifHCInUcastPkts: u64,
-    pub ifHCInMulticastPkts: u64,
-    pub ifHCInBroadcastPkts: u64,
-    pub ifHCOutOctets: u64,
-    pub ifHCOutUcastPkts: u64,
-    pub ifHCOutMulticastPkts: u64,
-    pub ifHCOutBroadcastPkts: u64,
-    pub ifOutErrors: u64,
-    pub ifOutDiscards: u64,
-    pub ifHCInUcastOctets: u64,
-    pub ifHCInMulticastOctets: u64,
-    pub ifHCInBroadcastOctets: u64,
-    pub ifHCOutUcastOctets: u64,
-    pub ifHCOutMulticastOctets: u64,
-    pub ifHCOutBroadcastOctets: u64,
-}
-impl ::core::marker::Copy for NDIS_STATISTICS_INFO {}
-impl ::core::clone::Clone for NDIS_STATISTICS_INFO {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_STATISTICS_INFO {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_STATISTICS_INFO")
-            .field("Header", &self.Header)
-            .field("SupportedStatistics", &self.SupportedStatistics)
-            .field("ifInDiscards", &self.ifInDiscards)
-            .field("ifInErrors", &self.ifInErrors)
-            .field("ifHCInOctets", &self.ifHCInOctets)
-            .field("ifHCInUcastPkts", &self.ifHCInUcastPkts)
-            .field("ifHCInMulticastPkts", &self.ifHCInMulticastPkts)
-            .field("ifHCInBroadcastPkts", &self.ifHCInBroadcastPkts)
-            .field("ifHCOutOctets", &self.ifHCOutOctets)
-            .field("ifHCOutUcastPkts", &self.ifHCOutUcastPkts)
-            .field("ifHCOutMulticastPkts", &self.ifHCOutMulticastPkts)
-            .field("ifHCOutBroadcastPkts", &self.ifHCOutBroadcastPkts)
-            .field("ifOutErrors", &self.ifOutErrors)
-            .field("ifOutDiscards", &self.ifOutDiscards)
-            .field("ifHCInUcastOctets", &self.ifHCInUcastOctets)
-            .field("ifHCInMulticastOctets", &self.ifHCInMulticastOctets)
-            .field("ifHCInBroadcastOctets", &self.ifHCInBroadcastOctets)
-            .field("ifHCOutUcastOctets", &self.ifHCOutUcastOctets)
-            .field("ifHCOutMulticastOctets", &self.ifHCOutMulticastOctets)
-            .field("ifHCOutBroadcastOctets", &self.ifHCOutBroadcastOctets)
-            .finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_STATISTICS_INFO {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_STATISTICS_INFO {
-    fn eq(&self, other: &Self) -> bool {
-        self.Header == other.Header
-            && self.SupportedStatistics == other.SupportedStatistics
-            && self.ifInDiscards == other.ifInDiscards
-            && self.ifInErrors == other.ifInErrors
-            && self.ifHCInOctets == other.ifHCInOctets
-            && self.ifHCInUcastPkts == other.ifHCInUcastPkts
-            && self.ifHCInMulticastPkts == other.ifHCInMulticastPkts
-            && self.ifHCInBroadcastPkts == other.ifHCInBroadcastPkts
-            && self.ifHCOutOctets == other.ifHCOutOctets
-            && self.ifHCOutUcastPkts == other.ifHCOutUcastPkts
-            && self.ifHCOutMulticastPkts == other.ifHCOutMulticastPkts
-            && self.ifHCOutBroadcastPkts == other.ifHCOutBroadcastPkts
-            && self.ifOutErrors == other.ifOutErrors
-            && self.ifOutDiscards == other.ifOutDiscards
-            && self.ifHCInUcastOctets == other.ifHCInUcastOctets
-            && self.ifHCInMulticastOctets == other.ifHCInMulticastOctets
-            && self.ifHCInBroadcastOctets == other.ifHCInBroadcastOctets
-            && self.ifHCOutUcastOctets == other.ifHCOutUcastOctets
-            && self.ifHCOutMulticastOctets == other.ifHCOutMulticastOctets
-            && self.ifHCOutBroadcastOctets == other.ifHCOutBroadcastOctets
-    }
-}
-impl ::core::cmp::Eq for NDIS_STATISTICS_INFO {}
-impl ::core::default::Default for NDIS_STATISTICS_INFO {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_STATISTICS_VALUE {
-    pub Oid: u32,
-    pub DataLength: u32,
-    pub Data: [u8; 1],
-}
-impl ::core::marker::Copy for NDIS_STATISTICS_VALUE {}
-impl ::core::clone::Clone for NDIS_STATISTICS_VALUE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_STATISTICS_VALUE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_STATISTICS_VALUE").field("Oid", &self.Oid).field("DataLength", &self.DataLength).field("Data", &self.Data).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_STATISTICS_VALUE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_STATISTICS_VALUE {
-    fn eq(&self, other: &Self) -> bool {
-        self.Oid == other.Oid && self.DataLength == other.DataLength && self.Data == other.Data
-    }
-}
-impl ::core::cmp::Eq for NDIS_STATISTICS_VALUE {}
-impl ::core::default::Default for NDIS_STATISTICS_VALUE {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_STATISTICS_VALUE_EX {
-    pub Oid: u32,
-    pub DataLength: u32,
-    pub Length: u32,
-    pub Data: [u8; 1],
-}
-impl ::core::marker::Copy for NDIS_STATISTICS_VALUE_EX {}
-impl ::core::clone::Clone for NDIS_STATISTICS_VALUE_EX {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_STATISTICS_VALUE_EX {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_STATISTICS_VALUE_EX").field("Oid", &self.Oid).field("DataLength", &self.DataLength).field("Length", &self.Length).field("Data", &self.Data).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_STATISTICS_VALUE_EX {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_STATISTICS_VALUE_EX {
-    fn eq(&self, other: &Self) -> bool {
-        self.Oid == other.Oid && self.DataLength == other.DataLength && self.Length == other.Length && self.Data == other.Data
-    }
-}
-impl ::core::cmp::Eq for NDIS_STATISTICS_VALUE_EX {}
-impl ::core::default::Default for NDIS_STATISTICS_VALUE_EX {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_TCP_CONNECTION_OFFLOAD {
-    pub Header: NDIS_OBJECT_HEADER,
-    pub Encapsulation: u32,
-    pub _bitfield: u32,
-    pub TcpConnectionOffloadCapacity: u32,
-    pub Flags: u32,
-}
-impl ::core::marker::Copy for NDIS_TCP_CONNECTION_OFFLOAD {}
-impl ::core::clone::Clone for NDIS_TCP_CONNECTION_OFFLOAD {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_TCP_CONNECTION_OFFLOAD {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_TCP_CONNECTION_OFFLOAD").field("Header", &self.Header).field("Encapsulation", &self.Encapsulation).field("_bitfield", &self._bitfield).field("TcpConnectionOffloadCapacity", &self.TcpConnectionOffloadCapacity).field("Flags", &self.Flags).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_TCP_CONNECTION_OFFLOAD {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_TCP_CONNECTION_OFFLOAD {
-    fn eq(&self, other: &Self) -> bool {
-        self.Header == other.Header && self.Encapsulation == other.Encapsulation && self._bitfield == other._bitfield && self.TcpConnectionOffloadCapacity == other.TcpConnectionOffloadCapacity && self.Flags == other.Flags
-    }
-}
-impl ::core::cmp::Eq for NDIS_TCP_CONNECTION_OFFLOAD {}
-impl ::core::default::Default for NDIS_TCP_CONNECTION_OFFLOAD {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_TCP_IP_CHECKSUM_OFFLOAD {
-    pub IPv4Transmit: NDIS_TCP_IP_CHECKSUM_OFFLOAD_1,
-    pub IPv4Receive: NDIS_TCP_IP_CHECKSUM_OFFLOAD_0,
-    pub IPv6Transmit: NDIS_TCP_IP_CHECKSUM_OFFLOAD_3,
-    pub IPv6Receive: NDIS_TCP_IP_CHECKSUM_OFFLOAD_2,
-}
-impl ::core::marker::Copy for NDIS_TCP_IP_CHECKSUM_OFFLOAD {}
-impl ::core::clone::Clone for NDIS_TCP_IP_CHECKSUM_OFFLOAD {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_TCP_IP_CHECKSUM_OFFLOAD {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_TCP_IP_CHECKSUM_OFFLOAD").field("IPv4Transmit", &self.IPv4Transmit).field("IPv4Receive", &self.IPv4Receive).field("IPv6Transmit", &self.IPv6Transmit).field("IPv6Receive", &self.IPv6Receive).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_TCP_IP_CHECKSUM_OFFLOAD {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_TCP_IP_CHECKSUM_OFFLOAD {
-    fn eq(&self, other: &Self) -> bool {
-        self.IPv4Transmit == other.IPv4Transmit && self.IPv4Receive == other.IPv4Receive && self.IPv6Transmit == other.IPv6Transmit && self.IPv6Receive == other.IPv6Receive
-    }
-}
-impl ::core::cmp::Eq for NDIS_TCP_IP_CHECKSUM_OFFLOAD {}
-impl ::core::default::Default for NDIS_TCP_IP_CHECKSUM_OFFLOAD {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_TCP_IP_CHECKSUM_OFFLOAD_0 {
-    pub Encapsulation: u32,
-    pub _bitfield: u32,
-}
-impl ::core::marker::Copy for NDIS_TCP_IP_CHECKSUM_OFFLOAD_0 {}
-impl ::core::clone::Clone for NDIS_TCP_IP_CHECKSUM_OFFLOAD_0 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_TCP_IP_CHECKSUM_OFFLOAD_0 {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_TCP_IP_CHECKSUM_OFFLOAD_0").field("Encapsulation", &self.Encapsulation).field("_bitfield", &self._bitfield).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_TCP_IP_CHECKSUM_OFFLOAD_0 {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_TCP_IP_CHECKSUM_OFFLOAD_0 {
-    fn eq(&self, other: &Self) -> bool {
-        self.Encapsulation == other.Encapsulation && self._bitfield == other._bitfield
-    }
-}
-impl ::core::cmp::Eq for NDIS_TCP_IP_CHECKSUM_OFFLOAD_0 {}
-impl ::core::default::Default for NDIS_TCP_IP_CHECKSUM_OFFLOAD_0 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_TCP_IP_CHECKSUM_OFFLOAD_1 {
-    pub Encapsulation: u32,
-    pub _bitfield: u32,
-}
-impl ::core::marker::Copy for NDIS_TCP_IP_CHECKSUM_OFFLOAD_1 {}
-impl ::core::clone::Clone for NDIS_TCP_IP_CHECKSUM_OFFLOAD_1 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_TCP_IP_CHECKSUM_OFFLOAD_1 {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_TCP_IP_CHECKSUM_OFFLOAD_1").field("Encapsulation", &self.Encapsulation).field("_bitfield", &self._bitfield).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_TCP_IP_CHECKSUM_OFFLOAD_1 {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_TCP_IP_CHECKSUM_OFFLOAD_1 {
-    fn eq(&self, other: &Self) -> bool {
-        self.Encapsulation == other.Encapsulation && self._bitfield == other._bitfield
-    }
-}
-impl ::core::cmp::Eq for NDIS_TCP_IP_CHECKSUM_OFFLOAD_1 {}
-impl ::core::default::Default for NDIS_TCP_IP_CHECKSUM_OFFLOAD_1 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_TCP_IP_CHECKSUM_OFFLOAD_2 {
-    pub Encapsulation: u32,
-    pub _bitfield: u32,
-}
-impl ::core::marker::Copy for NDIS_TCP_IP_CHECKSUM_OFFLOAD_2 {}
-impl ::core::clone::Clone for NDIS_TCP_IP_CHECKSUM_OFFLOAD_2 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_TCP_IP_CHECKSUM_OFFLOAD_2 {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_TCP_IP_CHECKSUM_OFFLOAD_2").field("Encapsulation", &self.Encapsulation).field("_bitfield", &self._bitfield).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_TCP_IP_CHECKSUM_OFFLOAD_2 {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_TCP_IP_CHECKSUM_OFFLOAD_2 {
-    fn eq(&self, other: &Self) -> bool {
-        self.Encapsulation == other.Encapsulation && self._bitfield == other._bitfield
-    }
-}
-impl ::core::cmp::Eq for NDIS_TCP_IP_CHECKSUM_OFFLOAD_2 {}
-impl ::core::default::Default for NDIS_TCP_IP_CHECKSUM_OFFLOAD_2 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_TCP_IP_CHECKSUM_OFFLOAD_3 {
-    pub Encapsulation: u32,
-    pub _bitfield: u32,
-}
-impl ::core::marker::Copy for NDIS_TCP_IP_CHECKSUM_OFFLOAD_3 {}
-impl ::core::clone::Clone for NDIS_TCP_IP_CHECKSUM_OFFLOAD_3 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_TCP_IP_CHECKSUM_OFFLOAD_3 {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_TCP_IP_CHECKSUM_OFFLOAD_3").field("Encapsulation", &self.Encapsulation).field("_bitfield", &self._bitfield).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_TCP_IP_CHECKSUM_OFFLOAD_3 {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_TCP_IP_CHECKSUM_OFFLOAD_3 {
-    fn eq(&self, other: &Self) -> bool {
-        self.Encapsulation == other.Encapsulation && self._bitfield == other._bitfield
-    }
-}
-impl ::core::cmp::Eq for NDIS_TCP_IP_CHECKSUM_OFFLOAD_3 {}
-impl ::core::default::Default for NDIS_TCP_IP_CHECKSUM_OFFLOAD_3 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_TCP_LARGE_SEND_OFFLOAD_V1 {
-    pub IPv4: NDIS_TCP_LARGE_SEND_OFFLOAD_V1_0,
-}
-impl ::core::marker::Copy for NDIS_TCP_LARGE_SEND_OFFLOAD_V1 {}
-impl ::core::clone::Clone for NDIS_TCP_LARGE_SEND_OFFLOAD_V1 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_TCP_LARGE_SEND_OFFLOAD_V1 {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_TCP_LARGE_SEND_OFFLOAD_V1").field("IPv4", &self.IPv4).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_TCP_LARGE_SEND_OFFLOAD_V1 {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_TCP_LARGE_SEND_OFFLOAD_V1 {
-    fn eq(&self, other: &Self) -> bool {
-        self.IPv4 == other.IPv4
-    }
-}
-impl ::core::cmp::Eq for NDIS_TCP_LARGE_SEND_OFFLOAD_V1 {}
-impl ::core::default::Default for NDIS_TCP_LARGE_SEND_OFFLOAD_V1 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_TCP_LARGE_SEND_OFFLOAD_V1_0 {
-    pub Encapsulation: u32,
-    pub MaxOffLoadSize: u32,
-    pub MinSegmentCount: u32,
-    pub _bitfield: u32,
-}
-impl ::core::marker::Copy for NDIS_TCP_LARGE_SEND_OFFLOAD_V1_0 {}
-impl ::core::clone::Clone for NDIS_TCP_LARGE_SEND_OFFLOAD_V1_0 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_TCP_LARGE_SEND_OFFLOAD_V1_0 {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_TCP_LARGE_SEND_OFFLOAD_V1_0").field("Encapsulation", &self.Encapsulation).field("MaxOffLoadSize", &self.MaxOffLoadSize).field("MinSegmentCount", &self.MinSegmentCount).field("_bitfield", &self._bitfield).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_TCP_LARGE_SEND_OFFLOAD_V1_0 {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_TCP_LARGE_SEND_OFFLOAD_V1_0 {
-    fn eq(&self, other: &Self) -> bool {
-        self.Encapsulation == other.Encapsulation && self.MaxOffLoadSize == other.MaxOffLoadSize && self.MinSegmentCount == other.MinSegmentCount && self._bitfield == other._bitfield
-    }
-}
-impl ::core::cmp::Eq for NDIS_TCP_LARGE_SEND_OFFLOAD_V1_0 {}
-impl ::core::default::Default for NDIS_TCP_LARGE_SEND_OFFLOAD_V1_0 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_TCP_LARGE_SEND_OFFLOAD_V2 {
-    pub IPv4: NDIS_TCP_LARGE_SEND_OFFLOAD_V2_0,
-    pub IPv6: NDIS_TCP_LARGE_SEND_OFFLOAD_V2_1,
-}
-impl ::core::marker::Copy for NDIS_TCP_LARGE_SEND_OFFLOAD_V2 {}
-impl ::core::clone::Clone for NDIS_TCP_LARGE_SEND_OFFLOAD_V2 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_TCP_LARGE_SEND_OFFLOAD_V2 {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_TCP_LARGE_SEND_OFFLOAD_V2").field("IPv4", &self.IPv4).field("IPv6", &self.IPv6).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_TCP_LARGE_SEND_OFFLOAD_V2 {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_TCP_LARGE_SEND_OFFLOAD_V2 {
-    fn eq(&self, other: &Self) -> bool {
-        self.IPv4 == other.IPv4 && self.IPv6 == other.IPv6
-    }
-}
-impl ::core::cmp::Eq for NDIS_TCP_LARGE_SEND_OFFLOAD_V2 {}
-impl ::core::default::Default for NDIS_TCP_LARGE_SEND_OFFLOAD_V2 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_TCP_LARGE_SEND_OFFLOAD_V2_0 {
-    pub Encapsulation: u32,
-    pub MaxOffLoadSize: u32,
-    pub MinSegmentCount: u32,
-}
-impl ::core::marker::Copy for NDIS_TCP_LARGE_SEND_OFFLOAD_V2_0 {}
-impl ::core::clone::Clone for NDIS_TCP_LARGE_SEND_OFFLOAD_V2_0 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_TCP_LARGE_SEND_OFFLOAD_V2_0 {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_TCP_LARGE_SEND_OFFLOAD_V2_0").field("Encapsulation", &self.Encapsulation).field("MaxOffLoadSize", &self.MaxOffLoadSize).field("MinSegmentCount", &self.MinSegmentCount).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_TCP_LARGE_SEND_OFFLOAD_V2_0 {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_TCP_LARGE_SEND_OFFLOAD_V2_0 {
-    fn eq(&self, other: &Self) -> bool {
-        self.Encapsulation == other.Encapsulation && self.MaxOffLoadSize == other.MaxOffLoadSize && self.MinSegmentCount == other.MinSegmentCount
-    }
-}
-impl ::core::cmp::Eq for NDIS_TCP_LARGE_SEND_OFFLOAD_V2_0 {}
-impl ::core::default::Default for NDIS_TCP_LARGE_SEND_OFFLOAD_V2_0 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_TCP_LARGE_SEND_OFFLOAD_V2_1 {
-    pub Encapsulation: u32,
-    pub MaxOffLoadSize: u32,
-    pub MinSegmentCount: u32,
-    pub _bitfield: u32,
-}
-impl ::core::marker::Copy for NDIS_TCP_LARGE_SEND_OFFLOAD_V2_1 {}
-impl ::core::clone::Clone for NDIS_TCP_LARGE_SEND_OFFLOAD_V2_1 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_TCP_LARGE_SEND_OFFLOAD_V2_1 {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_TCP_LARGE_SEND_OFFLOAD_V2_1").field("Encapsulation", &self.Encapsulation).field("MaxOffLoadSize", &self.MaxOffLoadSize).field("MinSegmentCount", &self.MinSegmentCount).field("_bitfield", &self._bitfield).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_TCP_LARGE_SEND_OFFLOAD_V2_1 {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_TCP_LARGE_SEND_OFFLOAD_V2_1 {
-    fn eq(&self, other: &Self) -> bool {
-        self.Encapsulation == other.Encapsulation && self.MaxOffLoadSize == other.MaxOffLoadSize && self.MinSegmentCount == other.MinSegmentCount && self._bitfield == other._bitfield
-    }
-}
-impl ::core::cmp::Eq for NDIS_TCP_LARGE_SEND_OFFLOAD_V2_1 {}
-impl ::core::default::Default for NDIS_TCP_LARGE_SEND_OFFLOAD_V2_1 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_TIMEOUT_DPC_REQUEST_CAPABILITIES {
-    pub Header: NDIS_OBJECT_HEADER,
-    pub Flags: u32,
-    pub TimeoutArrayLength: u32,
-    pub TimeoutArray: [u32; 1],
-}
-impl ::core::marker::Copy for NDIS_TIMEOUT_DPC_REQUEST_CAPABILITIES {}
-impl ::core::clone::Clone for NDIS_TIMEOUT_DPC_REQUEST_CAPABILITIES {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_TIMEOUT_DPC_REQUEST_CAPABILITIES {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_TIMEOUT_DPC_REQUEST_CAPABILITIES").field("Header", &self.Header).field("Flags", &self.Flags).field("TimeoutArrayLength", &self.TimeoutArrayLength).field("TimeoutArray", &self.TimeoutArray).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_TIMEOUT_DPC_REQUEST_CAPABILITIES {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_TIMEOUT_DPC_REQUEST_CAPABILITIES {
-    fn eq(&self, other: &Self) -> bool {
-        self.Header == other.Header && self.Flags == other.Flags && self.TimeoutArrayLength == other.TimeoutArrayLength && self.TimeoutArray == other.TimeoutArray
-    }
-}
-impl ::core::cmp::Eq for NDIS_TIMEOUT_DPC_REQUEST_CAPABILITIES {}
-impl ::core::default::Default for NDIS_TIMEOUT_DPC_REQUEST_CAPABILITIES {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
-pub struct NDIS_TIMESTAMP_CAPABILITIES {
-    pub Header: NDIS_OBJECT_HEADER,
-    pub HardwareClockFrequencyHz: u64,
-    pub CrossTimestamp: super::super::Foundation::BOOLEAN,
-    pub Reserved1: u64,
-    pub Reserved2: u64,
-    pub TimestampFlags: NDIS_TIMESTAMP_CAPABILITY_FLAGS,
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::marker::Copy for NDIS_TIMESTAMP_CAPABILITIES {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::clone::Clone for NDIS_TIMESTAMP_CAPABILITIES {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::fmt::Debug for NDIS_TIMESTAMP_CAPABILITIES {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_TIMESTAMP_CAPABILITIES").field("Header", &self.Header).field("HardwareClockFrequencyHz", &self.HardwareClockFrequencyHz).field("CrossTimestamp", &self.CrossTimestamp).field("Reserved1", &self.Reserved1).field("Reserved2", &self.Reserved2).field("TimestampFlags", &self.TimestampFlags).finish()
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::windows_core::TypeKind for NDIS_TIMESTAMP_CAPABILITIES {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::PartialEq for NDIS_TIMESTAMP_CAPABILITIES {
-    fn eq(&self, other: &Self) -> bool {
-        self.Header == other.Header && self.HardwareClockFrequencyHz == other.HardwareClockFrequencyHz && self.CrossTimestamp == other.CrossTimestamp && self.Reserved1 == other.Reserved1 && self.Reserved2 == other.Reserved2 && self.TimestampFlags == other.TimestampFlags
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::Eq for NDIS_TIMESTAMP_CAPABILITIES {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::default::Default for NDIS_TIMESTAMP_CAPABILITIES {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
-pub struct NDIS_TIMESTAMP_CAPABILITY_FLAGS {
-    pub PtpV2OverUdpIPv4EventMsgReceiveHw: super::super::Foundation::BOOLEAN,
-    pub PtpV2OverUdpIPv4AllMsgReceiveHw: super::super::Foundation::BOOLEAN,
-    pub PtpV2OverUdpIPv4EventMsgTransmitHw: super::super::Foundation::BOOLEAN,
-    pub PtpV2OverUdpIPv4AllMsgTransmitHw: super::super::Foundation::BOOLEAN,
-    pub PtpV2OverUdpIPv6EventMsgReceiveHw: super::super::Foundation::BOOLEAN,
-    pub PtpV2OverUdpIPv6AllMsgReceiveHw: super::super::Foundation::BOOLEAN,
-    pub PtpV2OverUdpIPv6EventMsgTransmitHw: super::super::Foundation::BOOLEAN,
-    pub PtpV2OverUdpIPv6AllMsgTransmitHw: super::super::Foundation::BOOLEAN,
-    pub AllReceiveHw: super::super::Foundation::BOOLEAN,
-    pub AllTransmitHw: super::super::Foundation::BOOLEAN,
-    pub TaggedTransmitHw: super::super::Foundation::BOOLEAN,
-    pub AllReceiveSw: super::super::Foundation::BOOLEAN,
-    pub AllTransmitSw: super::super::Foundation::BOOLEAN,
-    pub TaggedTransmitSw: super::super::Foundation::BOOLEAN,
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::marker::Copy for NDIS_TIMESTAMP_CAPABILITY_FLAGS {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::clone::Clone for NDIS_TIMESTAMP_CAPABILITY_FLAGS {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::fmt::Debug for NDIS_TIMESTAMP_CAPABILITY_FLAGS {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_TIMESTAMP_CAPABILITY_FLAGS")
-            .field("PtpV2OverUdpIPv4EventMsgReceiveHw", &self.PtpV2OverUdpIPv4EventMsgReceiveHw)
-            .field("PtpV2OverUdpIPv4AllMsgReceiveHw", &self.PtpV2OverUdpIPv4AllMsgReceiveHw)
-            .field("PtpV2OverUdpIPv4EventMsgTransmitHw", &self.PtpV2OverUdpIPv4EventMsgTransmitHw)
-            .field("PtpV2OverUdpIPv4AllMsgTransmitHw", &self.PtpV2OverUdpIPv4AllMsgTransmitHw)
-            .field("PtpV2OverUdpIPv6EventMsgReceiveHw", &self.PtpV2OverUdpIPv6EventMsgReceiveHw)
-            .field("PtpV2OverUdpIPv6AllMsgReceiveHw", &self.PtpV2OverUdpIPv6AllMsgReceiveHw)
-            .field("PtpV2OverUdpIPv6EventMsgTransmitHw", &self.PtpV2OverUdpIPv6EventMsgTransmitHw)
-            .field("PtpV2OverUdpIPv6AllMsgTransmitHw", &self.PtpV2OverUdpIPv6AllMsgTransmitHw)
-            .field("AllReceiveHw", &self.AllReceiveHw)
-            .field("AllTransmitHw", &self.AllTransmitHw)
-            .field("TaggedTransmitHw", &self.TaggedTransmitHw)
-            .field("AllReceiveSw", &self.AllReceiveSw)
-            .field("AllTransmitSw", &self.AllTransmitSw)
-            .field("TaggedTransmitSw", &self.TaggedTransmitSw)
-            .finish()
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::windows_core::TypeKind for NDIS_TIMESTAMP_CAPABILITY_FLAGS {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::PartialEq for NDIS_TIMESTAMP_CAPABILITY_FLAGS {
-    fn eq(&self, other: &Self) -> bool {
-        self.PtpV2OverUdpIPv4EventMsgReceiveHw == other.PtpV2OverUdpIPv4EventMsgReceiveHw
-            && self.PtpV2OverUdpIPv4AllMsgReceiveHw == other.PtpV2OverUdpIPv4AllMsgReceiveHw
-            && self.PtpV2OverUdpIPv4EventMsgTransmitHw == other.PtpV2OverUdpIPv4EventMsgTransmitHw
-            && self.PtpV2OverUdpIPv4AllMsgTransmitHw == other.PtpV2OverUdpIPv4AllMsgTransmitHw
-            && self.PtpV2OverUdpIPv6EventMsgReceiveHw == other.PtpV2OverUdpIPv6EventMsgReceiveHw
-            && self.PtpV2OverUdpIPv6AllMsgReceiveHw == other.PtpV2OverUdpIPv6AllMsgReceiveHw
-            && self.PtpV2OverUdpIPv6EventMsgTransmitHw == other.PtpV2OverUdpIPv6EventMsgTransmitHw
-            && self.PtpV2OverUdpIPv6AllMsgTransmitHw == other.PtpV2OverUdpIPv6AllMsgTransmitHw
-            && self.AllReceiveHw == other.AllReceiveHw
-            && self.AllTransmitHw == other.AllTransmitHw
-            && self.TaggedTransmitHw == other.TaggedTransmitHw
-            && self.AllReceiveSw == other.AllReceiveSw
-            && self.AllTransmitSw == other.AllTransmitSw
-            && self.TaggedTransmitSw == other.TaggedTransmitSw
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::Eq for NDIS_TIMESTAMP_CAPABILITY_FLAGS {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::default::Default for NDIS_TIMESTAMP_CAPABILITY_FLAGS {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_VAR_DATA_DESC {
-    pub Length: u16,
-    pub MaximumLength: u16,
-    pub Offset: usize,
-}
-impl ::core::marker::Copy for NDIS_VAR_DATA_DESC {}
-impl ::core::clone::Clone for NDIS_VAR_DATA_DESC {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_VAR_DATA_DESC {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_VAR_DATA_DESC").field("Length", &self.Length).field("MaximumLength", &self.MaximumLength).field("Offset", &self.Offset).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_VAR_DATA_DESC {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_VAR_DATA_DESC {
-    fn eq(&self, other: &Self) -> bool {
-        self.Length == other.Length && self.MaximumLength == other.MaximumLength && self.Offset == other.Offset
-    }
-}
-impl ::core::cmp::Eq for NDIS_VAR_DATA_DESC {}
-impl ::core::default::Default for NDIS_VAR_DATA_DESC {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_WAN_PROTOCOL_CAPS {
-    pub Flags: u32,
-    pub Reserved: u32,
-}
-impl ::core::marker::Copy for NDIS_WAN_PROTOCOL_CAPS {}
-impl ::core::clone::Clone for NDIS_WAN_PROTOCOL_CAPS {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_WAN_PROTOCOL_CAPS {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_WAN_PROTOCOL_CAPS").field("Flags", &self.Flags).field("Reserved", &self.Reserved).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_WAN_PROTOCOL_CAPS {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_WAN_PROTOCOL_CAPS {
-    fn eq(&self, other: &Self) -> bool {
-        self.Flags == other.Flags && self.Reserved == other.Reserved
-    }
-}
-impl ::core::cmp::Eq for NDIS_WAN_PROTOCOL_CAPS {}
-impl ::core::default::Default for NDIS_WAN_PROTOCOL_CAPS {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_WLAN_BSSID {
-    pub Length: u32,
-    pub MacAddress: [u8; 6],
-    pub Reserved: [u8; 2],
-    pub Ssid: NDIS_802_11_SSID,
-    pub Privacy: u32,
-    pub Rssi: i32,
-    pub NetworkTypeInUse: NDIS_802_11_NETWORK_TYPE,
-    pub Configuration: NDIS_802_11_CONFIGURATION,
-    pub InfrastructureMode: NDIS_802_11_NETWORK_INFRASTRUCTURE,
-    pub SupportedRates: [u8; 8],
-}
-impl ::core::marker::Copy for NDIS_WLAN_BSSID {}
-impl ::core::clone::Clone for NDIS_WLAN_BSSID {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_WLAN_BSSID {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_WLAN_BSSID").field("Length", &self.Length).field("MacAddress", &self.MacAddress).field("Reserved", &self.Reserved).field("Ssid", &self.Ssid).field("Privacy", &self.Privacy).field("Rssi", &self.Rssi).field("NetworkTypeInUse", &self.NetworkTypeInUse).field("Configuration", &self.Configuration).field("InfrastructureMode", &self.InfrastructureMode).field("SupportedRates", &self.SupportedRates).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_WLAN_BSSID {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_WLAN_BSSID {
-    fn eq(&self, other: &Self) -> bool {
-        self.Length == other.Length && self.MacAddress == other.MacAddress && self.Reserved == other.Reserved && self.Ssid == other.Ssid && self.Privacy == other.Privacy && self.Rssi == other.Rssi && self.NetworkTypeInUse == other.NetworkTypeInUse && self.Configuration == other.Configuration && self.InfrastructureMode == other.InfrastructureMode && self.SupportedRates == other.SupportedRates
-    }
-}
-impl ::core::cmp::Eq for NDIS_WLAN_BSSID {}
-impl ::core::default::Default for NDIS_WLAN_BSSID {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_WLAN_BSSID_EX {
-    pub Length: u32,
-    pub MacAddress: [u8; 6],
-    pub Reserved: [u8; 2],
-    pub Ssid: NDIS_802_11_SSID,
-    pub Privacy: u32,
-    pub Rssi: i32,
-    pub NetworkTypeInUse: NDIS_802_11_NETWORK_TYPE,
-    pub Configuration: NDIS_802_11_CONFIGURATION,
-    pub InfrastructureMode: NDIS_802_11_NETWORK_INFRASTRUCTURE,
-    pub SupportedRates: [u8; 16],
-    pub IELength: u32,
-    pub IEs: [u8; 1],
-}
-impl ::core::marker::Copy for NDIS_WLAN_BSSID_EX {}
-impl ::core::clone::Clone for NDIS_WLAN_BSSID_EX {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_WLAN_BSSID_EX {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_WLAN_BSSID_EX")
-            .field("Length", &self.Length)
-            .field("MacAddress", &self.MacAddress)
-            .field("Reserved", &self.Reserved)
-            .field("Ssid", &self.Ssid)
-            .field("Privacy", &self.Privacy)
-            .field("Rssi", &self.Rssi)
-            .field("NetworkTypeInUse", &self.NetworkTypeInUse)
-            .field("Configuration", &self.Configuration)
-            .field("InfrastructureMode", &self.InfrastructureMode)
-            .field("SupportedRates", &self.SupportedRates)
-            .field("IELength", &self.IELength)
-            .field("IEs", &self.IEs)
-            .finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_WLAN_BSSID_EX {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_WLAN_BSSID_EX {
-    fn eq(&self, other: &Self) -> bool {
-        self.Length == other.Length && self.MacAddress == other.MacAddress && self.Reserved == other.Reserved && self.Ssid == other.Ssid && self.Privacy == other.Privacy && self.Rssi == other.Rssi && self.NetworkTypeInUse == other.NetworkTypeInUse && self.Configuration == other.Configuration && self.InfrastructureMode == other.InfrastructureMode && self.SupportedRates == other.SupportedRates && self.IELength == other.IELength && self.IEs == other.IEs
-    }
-}
-impl ::core::cmp::Eq for NDIS_WLAN_BSSID_EX {}
-impl ::core::default::Default for NDIS_WLAN_BSSID_EX {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_WMI_ENUM_ADAPTER {
-    pub Header: NDIS_OBJECT_HEADER,
-    pub IfIndex: u32,
-    pub NetLuid: NET_LUID_LH,
-    pub DeviceNameLength: u16,
-    pub DeviceName: [u8; 1],
-}
-impl ::core::marker::Copy for NDIS_WMI_ENUM_ADAPTER {}
-impl ::core::clone::Clone for NDIS_WMI_ENUM_ADAPTER {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::windows_core::TypeKind for NDIS_WMI_ENUM_ADAPTER {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::default::Default for NDIS_WMI_ENUM_ADAPTER {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_WMI_EVENT_HEADER {
-    pub Header: NDIS_OBJECT_HEADER,
-    pub IfIndex: u32,
-    pub NetLuid: NET_LUID_LH,
-    pub RequestId: u64,
-    pub PortNumber: u32,
-    pub DeviceNameLength: u32,
-    pub DeviceNameOffset: u32,
-    pub Padding: [u8; 4],
-}
-impl ::core::marker::Copy for NDIS_WMI_EVENT_HEADER {}
-impl ::core::clone::Clone for NDIS_WMI_EVENT_HEADER {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::windows_core::TypeKind for NDIS_WMI_EVENT_HEADER {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::default::Default for NDIS_WMI_EVENT_HEADER {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_WMI_IPSEC_OFFLOAD_V1 {
-    pub Supported: NDIS_WMI_IPSEC_OFFLOAD_V1_2,
-    pub IPv4AH: NDIS_WMI_IPSEC_OFFLOAD_V1_0,
-    pub IPv4ESP: NDIS_WMI_IPSEC_OFFLOAD_V1_1,
-}
-impl ::core::marker::Copy for NDIS_WMI_IPSEC_OFFLOAD_V1 {}
-impl ::core::clone::Clone for NDIS_WMI_IPSEC_OFFLOAD_V1 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_WMI_IPSEC_OFFLOAD_V1 {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_WMI_IPSEC_OFFLOAD_V1").field("Supported", &self.Supported).field("IPv4AH", &self.IPv4AH).field("IPv4ESP", &self.IPv4ESP).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_WMI_IPSEC_OFFLOAD_V1 {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_WMI_IPSEC_OFFLOAD_V1 {
-    fn eq(&self, other: &Self) -> bool {
-        self.Supported == other.Supported && self.IPv4AH == other.IPv4AH && self.IPv4ESP == other.IPv4ESP
-    }
-}
-impl ::core::cmp::Eq for NDIS_WMI_IPSEC_OFFLOAD_V1 {}
-impl ::core::default::Default for NDIS_WMI_IPSEC_OFFLOAD_V1 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_WMI_IPSEC_OFFLOAD_V1_0 {
-    pub Md5: u32,
-    pub Sha_1: u32,
-    pub Transport: u32,
-    pub Tunnel: u32,
-    pub Send: u32,
-    pub Receive: u32,
-}
-impl ::core::marker::Copy for NDIS_WMI_IPSEC_OFFLOAD_V1_0 {}
-impl ::core::clone::Clone for NDIS_WMI_IPSEC_OFFLOAD_V1_0 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_WMI_IPSEC_OFFLOAD_V1_0 {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_WMI_IPSEC_OFFLOAD_V1_0").field("Md5", &self.Md5).field("Sha_1", &self.Sha_1).field("Transport", &self.Transport).field("Tunnel", &self.Tunnel).field("Send", &self.Send).field("Receive", &self.Receive).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_WMI_IPSEC_OFFLOAD_V1_0 {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_WMI_IPSEC_OFFLOAD_V1_0 {
-    fn eq(&self, other: &Self) -> bool {
-        self.Md5 == other.Md5 && self.Sha_1 == other.Sha_1 && self.Transport == other.Transport && self.Tunnel == other.Tunnel && self.Send == other.Send && self.Receive == other.Receive
-    }
-}
-impl ::core::cmp::Eq for NDIS_WMI_IPSEC_OFFLOAD_V1_0 {}
-impl ::core::default::Default for NDIS_WMI_IPSEC_OFFLOAD_V1_0 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_WMI_IPSEC_OFFLOAD_V1_1 {
-    pub Des: u32,
-    pub Reserved: u32,
-    pub TripleDes: u32,
-    pub NullEsp: u32,
-    pub Transport: u32,
-    pub Tunnel: u32,
-    pub Send: u32,
-    pub Receive: u32,
-}
-impl ::core::marker::Copy for NDIS_WMI_IPSEC_OFFLOAD_V1_1 {}
-impl ::core::clone::Clone for NDIS_WMI_IPSEC_OFFLOAD_V1_1 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_WMI_IPSEC_OFFLOAD_V1_1 {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_WMI_IPSEC_OFFLOAD_V1_1").field("Des", &self.Des).field("Reserved", &self.Reserved).field("TripleDes", &self.TripleDes).field("NullEsp", &self.NullEsp).field("Transport", &self.Transport).field("Tunnel", &self.Tunnel).field("Send", &self.Send).field("Receive", &self.Receive).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_WMI_IPSEC_OFFLOAD_V1_1 {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_WMI_IPSEC_OFFLOAD_V1_1 {
-    fn eq(&self, other: &Self) -> bool {
-        self.Des == other.Des && self.Reserved == other.Reserved && self.TripleDes == other.TripleDes && self.NullEsp == other.NullEsp && self.Transport == other.Transport && self.Tunnel == other.Tunnel && self.Send == other.Send && self.Receive == other.Receive
-    }
-}
-impl ::core::cmp::Eq for NDIS_WMI_IPSEC_OFFLOAD_V1_1 {}
-impl ::core::default::Default for NDIS_WMI_IPSEC_OFFLOAD_V1_1 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_WMI_IPSEC_OFFLOAD_V1_2 {
-    pub Encapsulation: u32,
-    pub AhEspCombined: u32,
-    pub TransportTunnelCombined: u32,
-    pub IPv4Options: u32,
-    pub Flags: u32,
-}
-impl ::core::marker::Copy for NDIS_WMI_IPSEC_OFFLOAD_V1_2 {}
-impl ::core::clone::Clone for NDIS_WMI_IPSEC_OFFLOAD_V1_2 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_WMI_IPSEC_OFFLOAD_V1_2 {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_WMI_IPSEC_OFFLOAD_V1_2").field("Encapsulation", &self.Encapsulation).field("AhEspCombined", &self.AhEspCombined).field("TransportTunnelCombined", &self.TransportTunnelCombined).field("IPv4Options", &self.IPv4Options).field("Flags", &self.Flags).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_WMI_IPSEC_OFFLOAD_V1_2 {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_WMI_IPSEC_OFFLOAD_V1_2 {
-    fn eq(&self, other: &Self) -> bool {
-        self.Encapsulation == other.Encapsulation && self.AhEspCombined == other.AhEspCombined && self.TransportTunnelCombined == other.TransportTunnelCombined && self.IPv4Options == other.IPv4Options && self.Flags == other.Flags
-    }
-}
-impl ::core::cmp::Eq for NDIS_WMI_IPSEC_OFFLOAD_V1_2 {}
-impl ::core::default::Default for NDIS_WMI_IPSEC_OFFLOAD_V1_2 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_WMI_METHOD_HEADER {
-    pub Header: NDIS_OBJECT_HEADER,
-    pub PortNumber: u32,
-    pub NetLuid: NET_LUID_LH,
-    pub RequestId: u64,
-    pub Timeout: u32,
-    pub Padding: [u8; 4],
-}
-impl ::core::marker::Copy for NDIS_WMI_METHOD_HEADER {}
-impl ::core::clone::Clone for NDIS_WMI_METHOD_HEADER {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::windows_core::TypeKind for NDIS_WMI_METHOD_HEADER {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::default::Default for NDIS_WMI_METHOD_HEADER {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_WMI_OFFLOAD {
-    pub Header: NDIS_OBJECT_HEADER,
-    pub Checksum: NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD,
-    pub LsoV1: NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1,
-    pub IPsecV1: NDIS_WMI_IPSEC_OFFLOAD_V1,
-    pub LsoV2: NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2,
-    pub Flags: u32,
-}
-impl ::core::marker::Copy for NDIS_WMI_OFFLOAD {}
-impl ::core::clone::Clone for NDIS_WMI_OFFLOAD {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_WMI_OFFLOAD {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_WMI_OFFLOAD").field("Header", &self.Header).field("Checksum", &self.Checksum).field("LsoV1", &self.LsoV1).field("IPsecV1", &self.IPsecV1).field("LsoV2", &self.LsoV2).field("Flags", &self.Flags).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_WMI_OFFLOAD {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_WMI_OFFLOAD {
-    fn eq(&self, other: &Self) -> bool {
-        self.Header == other.Header && self.Checksum == other.Checksum && self.LsoV1 == other.LsoV1 && self.IPsecV1 == other.IPsecV1 && self.LsoV2 == other.LsoV2 && self.Flags == other.Flags
-    }
-}
-impl ::core::cmp::Eq for NDIS_WMI_OFFLOAD {}
-impl ::core::default::Default for NDIS_WMI_OFFLOAD {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_WMI_OUTPUT_INFO {
-    pub Header: NDIS_OBJECT_HEADER,
-    pub Flags: u32,
-    pub SupportedRevision: u8,
-    pub DataOffset: u32,
-}
-impl ::core::marker::Copy for NDIS_WMI_OUTPUT_INFO {}
-impl ::core::clone::Clone for NDIS_WMI_OUTPUT_INFO {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_WMI_OUTPUT_INFO {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_WMI_OUTPUT_INFO").field("Header", &self.Header).field("Flags", &self.Flags).field("SupportedRevision", &self.SupportedRevision).field("DataOffset", &self.DataOffset).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_WMI_OUTPUT_INFO {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_WMI_OUTPUT_INFO {
-    fn eq(&self, other: &Self) -> bool {
-        self.Header == other.Header && self.Flags == other.Flags && self.SupportedRevision == other.SupportedRevision && self.DataOffset == other.DataOffset
-    }
-}
-impl ::core::cmp::Eq for NDIS_WMI_OUTPUT_INFO {}
-impl ::core::default::Default for NDIS_WMI_OUTPUT_INFO {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_WMI_SET_HEADER {
-    pub Header: NDIS_OBJECT_HEADER,
-    pub PortNumber: u32,
-    pub NetLuid: NET_LUID_LH,
-    pub RequestId: u64,
-    pub Timeout: u32,
-    pub Padding: [u8; 4],
-}
-impl ::core::marker::Copy for NDIS_WMI_SET_HEADER {}
-impl ::core::clone::Clone for NDIS_WMI_SET_HEADER {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::windows_core::TypeKind for NDIS_WMI_SET_HEADER {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::default::Default for NDIS_WMI_SET_HEADER {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_WMI_TCP_CONNECTION_OFFLOAD {
-    pub Header: NDIS_OBJECT_HEADER,
-    pub Encapsulation: u32,
-    pub SupportIPv4: u32,
-    pub SupportIPv6: u32,
-    pub SupportIPv6ExtensionHeaders: u32,
-    pub SupportSack: u32,
-    pub TcpConnectionOffloadCapacity: u32,
-    pub Flags: u32,
-}
-impl ::core::marker::Copy for NDIS_WMI_TCP_CONNECTION_OFFLOAD {}
-impl ::core::clone::Clone for NDIS_WMI_TCP_CONNECTION_OFFLOAD {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_WMI_TCP_CONNECTION_OFFLOAD {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_WMI_TCP_CONNECTION_OFFLOAD").field("Header", &self.Header).field("Encapsulation", &self.Encapsulation).field("SupportIPv4", &self.SupportIPv4).field("SupportIPv6", &self.SupportIPv6).field("SupportIPv6ExtensionHeaders", &self.SupportIPv6ExtensionHeaders).field("SupportSack", &self.SupportSack).field("TcpConnectionOffloadCapacity", &self.TcpConnectionOffloadCapacity).field("Flags", &self.Flags).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_WMI_TCP_CONNECTION_OFFLOAD {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_WMI_TCP_CONNECTION_OFFLOAD {
-    fn eq(&self, other: &Self) -> bool {
-        self.Header == other.Header && self.Encapsulation == other.Encapsulation && self.SupportIPv4 == other.SupportIPv4 && self.SupportIPv6 == other.SupportIPv6 && self.SupportIPv6ExtensionHeaders == other.SupportIPv6ExtensionHeaders && self.SupportSack == other.SupportSack && self.TcpConnectionOffloadCapacity == other.TcpConnectionOffloadCapacity && self.Flags == other.Flags
-    }
-}
-impl ::core::cmp::Eq for NDIS_WMI_TCP_CONNECTION_OFFLOAD {}
-impl ::core::default::Default for NDIS_WMI_TCP_CONNECTION_OFFLOAD {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD {
-    pub IPv4Transmit: NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_1,
-    pub IPv4Receive: NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_0,
-    pub IPv6Transmit: NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_3,
-    pub IPv6Receive: NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_2,
-}
-impl ::core::marker::Copy for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD {}
-impl ::core::clone::Clone for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD").field("IPv4Transmit", &self.IPv4Transmit).field("IPv4Receive", &self.IPv4Receive).field("IPv6Transmit", &self.IPv6Transmit).field("IPv6Receive", &self.IPv6Receive).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD {
-    fn eq(&self, other: &Self) -> bool {
-        self.IPv4Transmit == other.IPv4Transmit && self.IPv4Receive == other.IPv4Receive && self.IPv6Transmit == other.IPv6Transmit && self.IPv6Receive == other.IPv6Receive
-    }
-}
-impl ::core::cmp::Eq for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD {}
-impl ::core::default::Default for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_0 {
-    pub Encapsulation: u32,
-    pub IpOptionsSupported: u32,
-    pub TcpOptionsSupported: u32,
-    pub TcpChecksum: u32,
-    pub UdpChecksum: u32,
-    pub IpChecksum: u32,
-}
-impl ::core::marker::Copy for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_0 {}
-impl ::core::clone::Clone for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_0 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_0 {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_0").field("Encapsulation", &self.Encapsulation).field("IpOptionsSupported", &self.IpOptionsSupported).field("TcpOptionsSupported", &self.TcpOptionsSupported).field("TcpChecksum", &self.TcpChecksum).field("UdpChecksum", &self.UdpChecksum).field("IpChecksum", &self.IpChecksum).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_0 {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_0 {
-    fn eq(&self, other: &Self) -> bool {
-        self.Encapsulation == other.Encapsulation && self.IpOptionsSupported == other.IpOptionsSupported && self.TcpOptionsSupported == other.TcpOptionsSupported && self.TcpChecksum == other.TcpChecksum && self.UdpChecksum == other.UdpChecksum && self.IpChecksum == other.IpChecksum
-    }
-}
-impl ::core::cmp::Eq for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_0 {}
-impl ::core::default::Default for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_0 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_1 {
-    pub Encapsulation: u32,
-    pub IpOptionsSupported: u32,
-    pub TcpOptionsSupported: u32,
-    pub TcpChecksum: u32,
-    pub UdpChecksum: u32,
-    pub IpChecksum: u32,
-}
-impl ::core::marker::Copy for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_1 {}
-impl ::core::clone::Clone for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_1 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_1 {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_1").field("Encapsulation", &self.Encapsulation).field("IpOptionsSupported", &self.IpOptionsSupported).field("TcpOptionsSupported", &self.TcpOptionsSupported).field("TcpChecksum", &self.TcpChecksum).field("UdpChecksum", &self.UdpChecksum).field("IpChecksum", &self.IpChecksum).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_1 {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_1 {
-    fn eq(&self, other: &Self) -> bool {
-        self.Encapsulation == other.Encapsulation && self.IpOptionsSupported == other.IpOptionsSupported && self.TcpOptionsSupported == other.TcpOptionsSupported && self.TcpChecksum == other.TcpChecksum && self.UdpChecksum == other.UdpChecksum && self.IpChecksum == other.IpChecksum
-    }
-}
-impl ::core::cmp::Eq for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_1 {}
-impl ::core::default::Default for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_1 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_2 {
-    pub Encapsulation: u32,
-    pub IpExtensionHeadersSupported: u32,
-    pub TcpOptionsSupported: u32,
-    pub TcpChecksum: u32,
-    pub UdpChecksum: u32,
-}
-impl ::core::marker::Copy for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_2 {}
-impl ::core::clone::Clone for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_2 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_2 {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_2").field("Encapsulation", &self.Encapsulation).field("IpExtensionHeadersSupported", &self.IpExtensionHeadersSupported).field("TcpOptionsSupported", &self.TcpOptionsSupported).field("TcpChecksum", &self.TcpChecksum).field("UdpChecksum", &self.UdpChecksum).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_2 {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_2 {
-    fn eq(&self, other: &Self) -> bool {
-        self.Encapsulation == other.Encapsulation && self.IpExtensionHeadersSupported == other.IpExtensionHeadersSupported && self.TcpOptionsSupported == other.TcpOptionsSupported && self.TcpChecksum == other.TcpChecksum && self.UdpChecksum == other.UdpChecksum
-    }
-}
-impl ::core::cmp::Eq for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_2 {}
-impl ::core::default::Default for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_2 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_3 {
-    pub Encapsulation: u32,
-    pub IpExtensionHeadersSupported: u32,
-    pub TcpOptionsSupported: u32,
-    pub TcpChecksum: u32,
-    pub UdpChecksum: u32,
-}
-impl ::core::marker::Copy for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_3 {}
-impl ::core::clone::Clone for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_3 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_3 {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_3").field("Encapsulation", &self.Encapsulation).field("IpExtensionHeadersSupported", &self.IpExtensionHeadersSupported).field("TcpOptionsSupported", &self.TcpOptionsSupported).field("TcpChecksum", &self.TcpChecksum).field("UdpChecksum", &self.UdpChecksum).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_3 {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_3 {
-    fn eq(&self, other: &Self) -> bool {
-        self.Encapsulation == other.Encapsulation && self.IpExtensionHeadersSupported == other.IpExtensionHeadersSupported && self.TcpOptionsSupported == other.TcpOptionsSupported && self.TcpChecksum == other.TcpChecksum && self.UdpChecksum == other.UdpChecksum
-    }
-}
-impl ::core::cmp::Eq for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_3 {}
-impl ::core::default::Default for NDIS_WMI_TCP_IP_CHECKSUM_OFFLOAD_3 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1 {
-    pub IPv4: NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1_0,
-}
-impl ::core::marker::Copy for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1 {}
-impl ::core::clone::Clone for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1 {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1").field("IPv4", &self.IPv4).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1 {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1 {
-    fn eq(&self, other: &Self) -> bool {
-        self.IPv4 == other.IPv4
-    }
-}
-impl ::core::cmp::Eq for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1 {}
-impl ::core::default::Default for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1_0 {
-    pub Encapsulation: u32,
-    pub MaxOffLoadSize: u32,
-    pub MinSegmentCount: u32,
-    pub TcpOptions: u32,
-    pub IpOptions: u32,
-}
-impl ::core::marker::Copy for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1_0 {}
-impl ::core::clone::Clone for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1_0 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1_0 {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1_0").field("Encapsulation", &self.Encapsulation).field("MaxOffLoadSize", &self.MaxOffLoadSize).field("MinSegmentCount", &self.MinSegmentCount).field("TcpOptions", &self.TcpOptions).field("IpOptions", &self.IpOptions).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1_0 {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1_0 {
-    fn eq(&self, other: &Self) -> bool {
-        self.Encapsulation == other.Encapsulation && self.MaxOffLoadSize == other.MaxOffLoadSize && self.MinSegmentCount == other.MinSegmentCount && self.TcpOptions == other.TcpOptions && self.IpOptions == other.IpOptions
-    }
-}
-impl ::core::cmp::Eq for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1_0 {}
-impl ::core::default::Default for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V1_0 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2 {
-    pub IPv4: NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2_0,
-    pub IPv6: NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2_1,
-}
-impl ::core::marker::Copy for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2 {}
-impl ::core::clone::Clone for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2 {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2").field("IPv4", &self.IPv4).field("IPv6", &self.IPv6).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2 {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2 {
-    fn eq(&self, other: &Self) -> bool {
-        self.IPv4 == other.IPv4 && self.IPv6 == other.IPv6
-    }
-}
-impl ::core::cmp::Eq for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2 {}
-impl ::core::default::Default for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2_0 {
-    pub Encapsulation: u32,
-    pub MaxOffLoadSize: u32,
-    pub MinSegmentCount: u32,
-}
-impl ::core::marker::Copy for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2_0 {}
-impl ::core::clone::Clone for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2_0 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2_0 {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2_0").field("Encapsulation", &self.Encapsulation).field("MaxOffLoadSize", &self.MaxOffLoadSize).field("MinSegmentCount", &self.MinSegmentCount).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2_0 {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2_0 {
-    fn eq(&self, other: &Self) -> bool {
-        self.Encapsulation == other.Encapsulation && self.MaxOffLoadSize == other.MaxOffLoadSize && self.MinSegmentCount == other.MinSegmentCount
-    }
-}
-impl ::core::cmp::Eq for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2_0 {}
-impl ::core::default::Default for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2_0 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2_1 {
-    pub Encapsulation: u32,
-    pub MaxOffLoadSize: u32,
-    pub MinSegmentCount: u32,
-    pub IpExtensionHeadersSupported: u32,
-    pub TcpOptionsSupported: u32,
-}
-impl ::core::marker::Copy for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2_1 {}
-impl ::core::clone::Clone for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2_1 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2_1 {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2_1").field("Encapsulation", &self.Encapsulation).field("MaxOffLoadSize", &self.MaxOffLoadSize).field("MinSegmentCount", &self.MinSegmentCount).field("IpExtensionHeadersSupported", &self.IpExtensionHeadersSupported).field("TcpOptionsSupported", &self.TcpOptionsSupported).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2_1 {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2_1 {
-    fn eq(&self, other: &Self) -> bool {
-        self.Encapsulation == other.Encapsulation && self.MaxOffLoadSize == other.MaxOffLoadSize && self.MinSegmentCount == other.MinSegmentCount && self.IpExtensionHeadersSupported == other.IpExtensionHeadersSupported && self.TcpOptionsSupported == other.TcpOptionsSupported
-    }
-}
-impl ::core::cmp::Eq for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2_1 {}
-impl ::core::default::Default for NDIS_WMI_TCP_LARGE_SEND_OFFLOAD_V2_1 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDK_ADAPTER_INFO {
-    pub Version: NDK_VERSION,
-    pub VendorId: u32,
-    pub DeviceId: u32,
-    pub MaxRegistrationSize: usize,
-    pub MaxWindowSize: usize,
-    pub FRMRPageCount: u32,
-    pub MaxInitiatorRequestSge: u32,
-    pub MaxReceiveRequestSge: u32,
-    pub MaxReadRequestSge: u32,
-    pub MaxTransferLength: u32,
-    pub MaxInlineDataSize: u32,
-    pub MaxInboundReadLimit: u32,
-    pub MaxOutboundReadLimit: u32,
-    pub MaxReceiveQueueDepth: u32,
-    pub MaxInitiatorQueueDepth: u32,
-    pub MaxSrqDepth: u32,
-    pub MaxCqDepth: u32,
-    pub LargeRequestThreshold: u32,
-    pub MaxCallerData: u32,
-    pub MaxCalleeData: u32,
-    pub AdapterFlags: u32,
-    pub RdmaTechnology: NDK_RDMA_TECHNOLOGY,
-}
-impl ::core::marker::Copy for NDK_ADAPTER_INFO {}
-impl ::core::clone::Clone for NDK_ADAPTER_INFO {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDK_ADAPTER_INFO {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDK_ADAPTER_INFO")
-            .field("Version", &self.Version)
-            .field("VendorId", &self.VendorId)
-            .field("DeviceId", &self.DeviceId)
-            .field("MaxRegistrationSize", &self.MaxRegistrationSize)
-            .field("MaxWindowSize", &self.MaxWindowSize)
-            .field("FRMRPageCount", &self.FRMRPageCount)
-            .field("MaxInitiatorRequestSge", &self.MaxInitiatorRequestSge)
-            .field("MaxReceiveRequestSge", &self.MaxReceiveRequestSge)
-            .field("MaxReadRequestSge", &self.MaxReadRequestSge)
-            .field("MaxTransferLength", &self.MaxTransferLength)
-            .field("MaxInlineDataSize", &self.MaxInlineDataSize)
-            .field("MaxInboundReadLimit", &self.MaxInboundReadLimit)
-            .field("MaxOutboundReadLimit", &self.MaxOutboundReadLimit)
-            .field("MaxReceiveQueueDepth", &self.MaxReceiveQueueDepth)
-            .field("MaxInitiatorQueueDepth", &self.MaxInitiatorQueueDepth)
-            .field("MaxSrqDepth", &self.MaxSrqDepth)
-            .field("MaxCqDepth", &self.MaxCqDepth)
-            .field("LargeRequestThreshold", &self.LargeRequestThreshold)
-            .field("MaxCallerData", &self.MaxCallerData)
-            .field("MaxCalleeData", &self.MaxCalleeData)
-            .field("AdapterFlags", &self.AdapterFlags)
-            .field("RdmaTechnology", &self.RdmaTechnology)
-            .finish()
-    }
-}
-impl ::windows_core::TypeKind for NDK_ADAPTER_INFO {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDK_ADAPTER_INFO {
-    fn eq(&self, other: &Self) -> bool {
-        self.Version == other.Version
-            && self.VendorId == other.VendorId
-            && self.DeviceId == other.DeviceId
-            && self.MaxRegistrationSize == other.MaxRegistrationSize
-            && self.MaxWindowSize == other.MaxWindowSize
-            && self.FRMRPageCount == other.FRMRPageCount
-            && self.MaxInitiatorRequestSge == other.MaxInitiatorRequestSge
-            && self.MaxReceiveRequestSge == other.MaxReceiveRequestSge
-            && self.MaxReadRequestSge == other.MaxReadRequestSge
-            && self.MaxTransferLength == other.MaxTransferLength
-            && self.MaxInlineDataSize == other.MaxInlineDataSize
-            && self.MaxInboundReadLimit == other.MaxInboundReadLimit
-            && self.MaxOutboundReadLimit == other.MaxOutboundReadLimit
-            && self.MaxReceiveQueueDepth == other.MaxReceiveQueueDepth
-            && self.MaxInitiatorQueueDepth == other.MaxInitiatorQueueDepth
-            && self.MaxSrqDepth == other.MaxSrqDepth
-            && self.MaxCqDepth == other.MaxCqDepth
-            && self.LargeRequestThreshold == other.LargeRequestThreshold
-            && self.MaxCallerData == other.MaxCallerData
-            && self.MaxCalleeData == other.MaxCalleeData
-            && self.AdapterFlags == other.AdapterFlags
-            && self.RdmaTechnology == other.RdmaTechnology
-    }
-}
-impl ::core::cmp::Eq for NDK_ADAPTER_INFO {}
-impl ::core::default::Default for NDK_ADAPTER_INFO {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NDK_VERSION {
-    pub Major: u16,
-    pub Minor: u16,
-}
-impl ::core::marker::Copy for NDK_VERSION {}
-impl ::core::clone::Clone for NDK_VERSION {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NDK_VERSION {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NDK_VERSION").field("Major", &self.Major).field("Minor", &self.Minor).finish()
-    }
-}
-impl ::windows_core::TypeKind for NDK_VERSION {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NDK_VERSION {
-    fn eq(&self, other: &Self) -> bool {
-        self.Major == other.Major && self.Minor == other.Minor
-    }
-}
-impl ::core::cmp::Eq for NDK_VERSION {}
-impl ::core::default::Default for NDK_VERSION {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NETWORK_ADDRESS {
-    pub AddressLength: u16,
-    pub AddressType: u16,
-    pub Address: [u8; 1],
-}
-impl ::core::marker::Copy for NETWORK_ADDRESS {}
-impl ::core::clone::Clone for NETWORK_ADDRESS {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NETWORK_ADDRESS {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NETWORK_ADDRESS").field("AddressLength", &self.AddressLength).field("AddressType", &self.AddressType).field("Address", &self.Address).finish()
-    }
-}
-impl ::windows_core::TypeKind for NETWORK_ADDRESS {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NETWORK_ADDRESS {
-    fn eq(&self, other: &Self) -> bool {
-        self.AddressLength == other.AddressLength && self.AddressType == other.AddressType && self.Address == other.Address
-    }
-}
-impl ::core::cmp::Eq for NETWORK_ADDRESS {}
-impl ::core::default::Default for NETWORK_ADDRESS {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NETWORK_ADDRESS_IP {
-    pub sin_port: u16,
-    pub IN_ADDR: u32,
-    pub sin_zero: [u8; 8],
-}
-impl ::core::marker::Copy for NETWORK_ADDRESS_IP {}
-impl ::core::clone::Clone for NETWORK_ADDRESS_IP {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NETWORK_ADDRESS_IP {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NETWORK_ADDRESS_IP").field("sin_port", &self.sin_port).field("IN_ADDR", &self.IN_ADDR).field("sin_zero", &self.sin_zero).finish()
-    }
-}
-impl ::windows_core::TypeKind for NETWORK_ADDRESS_IP {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NETWORK_ADDRESS_IP {
-    fn eq(&self, other: &Self) -> bool {
-        self.sin_port == other.sin_port && self.IN_ADDR == other.IN_ADDR && self.sin_zero == other.sin_zero
-    }
-}
-impl ::core::cmp::Eq for NETWORK_ADDRESS_IP {}
-impl ::core::default::Default for NETWORK_ADDRESS_IP {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NETWORK_ADDRESS_IP6 {
-    pub sin6_port: u16,
-    pub sin6_flowinfo: u32,
-    pub sin6_addr: [u16; 8],
-    pub sin6_scope_id: u32,
-}
-impl ::core::marker::Copy for NETWORK_ADDRESS_IP6 {}
-impl ::core::clone::Clone for NETWORK_ADDRESS_IP6 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NETWORK_ADDRESS_IP6 {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NETWORK_ADDRESS_IP6").field("sin6_port", &self.sin6_port).field("sin6_flowinfo", &self.sin6_flowinfo).field("sin6_addr", &self.sin6_addr).field("sin6_scope_id", &self.sin6_scope_id).finish()
-    }
-}
-impl ::windows_core::TypeKind for NETWORK_ADDRESS_IP6 {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NETWORK_ADDRESS_IP6 {
-    fn eq(&self, other: &Self) -> bool {
-        self.sin6_port == other.sin6_port && self.sin6_flowinfo == other.sin6_flowinfo && self.sin6_addr == other.sin6_addr && self.sin6_scope_id == other.sin6_scope_id
-    }
-}
-impl ::core::cmp::Eq for NETWORK_ADDRESS_IP6 {}
-impl ::core::default::Default for NETWORK_ADDRESS_IP6 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NETWORK_ADDRESS_IPX {
-    pub NetworkAddress: u32,
-    pub NodeAddress: [u8; 6],
-    pub Socket: u16,
-}
-impl ::core::marker::Copy for NETWORK_ADDRESS_IPX {}
-impl ::core::clone::Clone for NETWORK_ADDRESS_IPX {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NETWORK_ADDRESS_IPX {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NETWORK_ADDRESS_IPX").field("NetworkAddress", &self.NetworkAddress).field("NodeAddress", &self.NodeAddress).field("Socket", &self.Socket).finish()
-    }
-}
-impl ::windows_core::TypeKind for NETWORK_ADDRESS_IPX {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NETWORK_ADDRESS_IPX {
-    fn eq(&self, other: &Self) -> bool {
-        self.NetworkAddress == other.NetworkAddress && self.NodeAddress == other.NodeAddress && self.Socket == other.Socket
-    }
-}
-impl ::core::cmp::Eq for NETWORK_ADDRESS_IPX {}
-impl ::core::default::Default for NETWORK_ADDRESS_IPX {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NETWORK_ADDRESS_LIST {
-    pub AddressCount: i32,
-    pub AddressType: u16,
-    pub Address: [NETWORK_ADDRESS; 1],
-}
-impl ::core::marker::Copy for NETWORK_ADDRESS_LIST {}
-impl ::core::clone::Clone for NETWORK_ADDRESS_LIST {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NETWORK_ADDRESS_LIST {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NETWORK_ADDRESS_LIST").field("AddressCount", &self.AddressCount).field("AddressType", &self.AddressType).field("Address", &self.Address).finish()
-    }
-}
-impl ::windows_core::TypeKind for NETWORK_ADDRESS_LIST {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NETWORK_ADDRESS_LIST {
-    fn eq(&self, other: &Self) -> bool {
-        self.AddressCount == other.AddressCount && self.AddressType == other.AddressType && self.Address == other.Address
-    }
-}
-impl ::core::cmp::Eq for NETWORK_ADDRESS_LIST {}
-impl ::core::default::Default for NETWORK_ADDRESS_LIST {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NET_IF_ALIAS_LH {
-    pub ifAliasLength: u16,
-    pub ifAliasOffset: u16,
-}
-impl ::core::marker::Copy for NET_IF_ALIAS_LH {}
-impl ::core::clone::Clone for NET_IF_ALIAS_LH {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NET_IF_ALIAS_LH {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NET_IF_ALIAS_LH").field("ifAliasLength", &self.ifAliasLength).field("ifAliasOffset", &self.ifAliasOffset).finish()
-    }
-}
-impl ::windows_core::TypeKind for NET_IF_ALIAS_LH {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NET_IF_ALIAS_LH {
-    fn eq(&self, other: &Self) -> bool {
-        self.ifAliasLength == other.ifAliasLength && self.ifAliasOffset == other.ifAliasOffset
-    }
-}
-impl ::core::cmp::Eq for NET_IF_ALIAS_LH {}
-impl ::core::default::Default for NET_IF_ALIAS_LH {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NET_IF_RCV_ADDRESS_LH {
-    pub ifRcvAddressType: NET_IF_RCV_ADDRESS_TYPE,
-    pub ifRcvAddressLength: u16,
-    pub ifRcvAddressOffset: u16,
-}
-impl ::core::marker::Copy for NET_IF_RCV_ADDRESS_LH {}
-impl ::core::clone::Clone for NET_IF_RCV_ADDRESS_LH {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NET_IF_RCV_ADDRESS_LH {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NET_IF_RCV_ADDRESS_LH").field("ifRcvAddressType", &self.ifRcvAddressType).field("ifRcvAddressLength", &self.ifRcvAddressLength).field("ifRcvAddressOffset", &self.ifRcvAddressOffset).finish()
-    }
-}
-impl ::windows_core::TypeKind for NET_IF_RCV_ADDRESS_LH {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NET_IF_RCV_ADDRESS_LH {
-    fn eq(&self, other: &Self) -> bool {
-        self.ifRcvAddressType == other.ifRcvAddressType && self.ifRcvAddressLength == other.ifRcvAddressLength && self.ifRcvAddressOffset == other.ifRcvAddressOffset
-    }
-}
-impl ::core::cmp::Eq for NET_IF_RCV_ADDRESS_LH {}
-impl ::core::default::Default for NET_IF_RCV_ADDRESS_LH {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub union NET_LUID_LH {
-    pub Value: u64,
-    pub Info: NET_LUID_LH_0,
-}
-impl ::core::marker::Copy for NET_LUID_LH {}
-impl ::core::clone::Clone for NET_LUID_LH {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::windows_core::TypeKind for NET_LUID_LH {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::default::Default for NET_LUID_LH {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NET_LUID_LH_0 {
-    pub _bitfield: u64,
-}
-impl ::core::marker::Copy for NET_LUID_LH_0 {}
-impl ::core::clone::Clone for NET_LUID_LH_0 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NET_LUID_LH_0 {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NET_LUID_LH_0").field("_bitfield", &self._bitfield).finish()
-    }
-}
-impl ::windows_core::TypeKind for NET_LUID_LH_0 {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NET_LUID_LH_0 {
-    fn eq(&self, other: &Self) -> bool {
-        self._bitfield == other._bitfield
-    }
-}
-impl ::core::cmp::Eq for NET_LUID_LH_0 {}
-impl ::core::default::Default for NET_LUID_LH_0 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct NET_PHYSICAL_LOCATION_LH {
-    pub BusNumber: u32,
-    pub SlotNumber: u32,
-    pub FunctionNumber: u32,
-}
-impl ::core::marker::Copy for NET_PHYSICAL_LOCATION_LH {}
-impl ::core::clone::Clone for NET_PHYSICAL_LOCATION_LH {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for NET_PHYSICAL_LOCATION_LH {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("NET_PHYSICAL_LOCATION_LH").field("BusNumber", &self.BusNumber).field("SlotNumber", &self.SlotNumber).field("FunctionNumber", &self.FunctionNumber).finish()
-    }
-}
-impl ::windows_core::TypeKind for NET_PHYSICAL_LOCATION_LH {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for NET_PHYSICAL_LOCATION_LH {
-    fn eq(&self, other: &Self) -> bool {
-        self.BusNumber == other.BusNumber && self.SlotNumber == other.SlotNumber && self.FunctionNumber == other.FunctionNumber
-    }
-}
-impl ::core::cmp::Eq for NET_PHYSICAL_LOCATION_LH {}
-impl ::core::default::Default for NET_PHYSICAL_LOCATION_LH {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct OFFLOAD_ALGO_INFO {
-    pub algoIdentifier: u32,
-    pub algoKeylen: u32,
-    pub algoRounds: u32,
-}
-impl ::core::marker::Copy for OFFLOAD_ALGO_INFO {}
-impl ::core::clone::Clone for OFFLOAD_ALGO_INFO {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for OFFLOAD_ALGO_INFO {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("OFFLOAD_ALGO_INFO").field("algoIdentifier", &self.algoIdentifier).field("algoKeylen", &self.algoKeylen).field("algoRounds", &self.algoRounds).finish()
-    }
-}
-impl ::windows_core::TypeKind for OFFLOAD_ALGO_INFO {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for OFFLOAD_ALGO_INFO {
-    fn eq(&self, other: &Self) -> bool {
-        self.algoIdentifier == other.algoIdentifier && self.algoKeylen == other.algoKeylen && self.algoRounds == other.algoRounds
-    }
-}
-impl ::core::cmp::Eq for OFFLOAD_ALGO_INFO {}
-impl ::core::default::Default for OFFLOAD_ALGO_INFO {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
-pub struct OFFLOAD_IPSEC_ADD_SA {
-    pub SrcAddr: u32,
-    pub SrcMask: u32,
-    pub DestAddr: u32,
-    pub DestMask: u32,
-    pub Protocol: u32,
-    pub SrcPort: u16,
-    pub DestPort: u16,
-    pub SrcTunnelAddr: u32,
-    pub DestTunnelAddr: u32,
-    pub Flags: u16,
-    pub NumSAs: i16,
-    pub SecAssoc: [OFFLOAD_SECURITY_ASSOCIATION; 3],
-    pub OffloadHandle: super::super::Foundation::HANDLE,
-    pub KeyLen: u32,
-    pub KeyMat: [u8; 1],
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::marker::Copy for OFFLOAD_IPSEC_ADD_SA {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::clone::Clone for OFFLOAD_IPSEC_ADD_SA {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::fmt::Debug for OFFLOAD_IPSEC_ADD_SA {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("OFFLOAD_IPSEC_ADD_SA")
-            .field("SrcAddr", &self.SrcAddr)
-            .field("SrcMask", &self.SrcMask)
-            .field("DestAddr", &self.DestAddr)
-            .field("DestMask", &self.DestMask)
-            .field("Protocol", &self.Protocol)
-            .field("SrcPort", &self.SrcPort)
-            .field("DestPort", &self.DestPort)
-            .field("SrcTunnelAddr", &self.SrcTunnelAddr)
-            .field("DestTunnelAddr", &self.DestTunnelAddr)
-            .field("Flags", &self.Flags)
-            .field("NumSAs", &self.NumSAs)
-            .field("SecAssoc", &self.SecAssoc)
-            .field("OffloadHandle", &self.OffloadHandle)
-            .field("KeyLen", &self.KeyLen)
-            .field("KeyMat", &self.KeyMat)
-            .finish()
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::windows_core::TypeKind for OFFLOAD_IPSEC_ADD_SA {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::PartialEq for OFFLOAD_IPSEC_ADD_SA {
-    fn eq(&self, other: &Self) -> bool {
-        self.SrcAddr == other.SrcAddr && self.SrcMask == other.SrcMask && self.DestAddr == other.DestAddr && self.DestMask == other.DestMask && self.Protocol == other.Protocol && self.SrcPort == other.SrcPort && self.DestPort == other.DestPort && self.SrcTunnelAddr == other.SrcTunnelAddr && self.DestTunnelAddr == other.DestTunnelAddr && self.Flags == other.Flags && self.NumSAs == other.NumSAs && self.SecAssoc == other.SecAssoc && self.OffloadHandle == other.OffloadHandle && self.KeyLen == other.KeyLen && self.KeyMat == other.KeyMat
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::Eq for OFFLOAD_IPSEC_ADD_SA {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::default::Default for OFFLOAD_IPSEC_ADD_SA {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
-pub struct OFFLOAD_IPSEC_ADD_UDPESP_SA {
-    pub SrcAddr: u32,
-    pub SrcMask: u32,
-    pub DstAddr: u32,
-    pub DstMask: u32,
-    pub Protocol: u32,
-    pub SrcPort: u16,
-    pub DstPort: u16,
-    pub SrcTunnelAddr: u32,
-    pub DstTunnelAddr: u32,
-    pub Flags: u16,
-    pub NumSAs: i16,
-    pub SecAssoc: [OFFLOAD_SECURITY_ASSOCIATION; 3],
-    pub OffloadHandle: super::super::Foundation::HANDLE,
-    pub EncapTypeEntry: OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_ENTRY,
-    pub EncapTypeEntryOffldHandle: super::super::Foundation::HANDLE,
-    pub KeyLen: u32,
-    pub KeyMat: [u8; 1],
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::marker::Copy for OFFLOAD_IPSEC_ADD_UDPESP_SA {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::clone::Clone for OFFLOAD_IPSEC_ADD_UDPESP_SA {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::fmt::Debug for OFFLOAD_IPSEC_ADD_UDPESP_SA {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("OFFLOAD_IPSEC_ADD_UDPESP_SA")
-            .field("SrcAddr", &self.SrcAddr)
-            .field("SrcMask", &self.SrcMask)
-            .field("DstAddr", &self.DstAddr)
-            .field("DstMask", &self.DstMask)
-            .field("Protocol", &self.Protocol)
-            .field("SrcPort", &self.SrcPort)
-            .field("DstPort", &self.DstPort)
-            .field("SrcTunnelAddr", &self.SrcTunnelAddr)
-            .field("DstTunnelAddr", &self.DstTunnelAddr)
-            .field("Flags", &self.Flags)
-            .field("NumSAs", &self.NumSAs)
-            .field("SecAssoc", &self.SecAssoc)
-            .field("OffloadHandle", &self.OffloadHandle)
-            .field("EncapTypeEntry", &self.EncapTypeEntry)
-            .field("EncapTypeEntryOffldHandle", &self.EncapTypeEntryOffldHandle)
-            .field("KeyLen", &self.KeyLen)
-            .field("KeyMat", &self.KeyMat)
-            .finish()
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::windows_core::TypeKind for OFFLOAD_IPSEC_ADD_UDPESP_SA {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::PartialEq for OFFLOAD_IPSEC_ADD_UDPESP_SA {
-    fn eq(&self, other: &Self) -> bool {
-        self.SrcAddr == other.SrcAddr && self.SrcMask == other.SrcMask && self.DstAddr == other.DstAddr && self.DstMask == other.DstMask && self.Protocol == other.Protocol && self.SrcPort == other.SrcPort && self.DstPort == other.DstPort && self.SrcTunnelAddr == other.SrcTunnelAddr && self.DstTunnelAddr == other.DstTunnelAddr && self.Flags == other.Flags && self.NumSAs == other.NumSAs && self.SecAssoc == other.SecAssoc && self.OffloadHandle == other.OffloadHandle && self.EncapTypeEntry == other.EncapTypeEntry && self.EncapTypeEntryOffldHandle == other.EncapTypeEntryOffldHandle && self.KeyLen == other.KeyLen && self.KeyMat == other.KeyMat
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::Eq for OFFLOAD_IPSEC_ADD_UDPESP_SA {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::default::Default for OFFLOAD_IPSEC_ADD_UDPESP_SA {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
-pub struct OFFLOAD_IPSEC_DELETE_SA {
-    pub OffloadHandle: super::super::Foundation::HANDLE,
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::marker::Copy for OFFLOAD_IPSEC_DELETE_SA {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::clone::Clone for OFFLOAD_IPSEC_DELETE_SA {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::fmt::Debug for OFFLOAD_IPSEC_DELETE_SA {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("OFFLOAD_IPSEC_DELETE_SA").field("OffloadHandle", &self.OffloadHandle).finish()
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::windows_core::TypeKind for OFFLOAD_IPSEC_DELETE_SA {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::PartialEq for OFFLOAD_IPSEC_DELETE_SA {
-    fn eq(&self, other: &Self) -> bool {
-        self.OffloadHandle == other.OffloadHandle
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::Eq for OFFLOAD_IPSEC_DELETE_SA {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::default::Default for OFFLOAD_IPSEC_DELETE_SA {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
-pub struct OFFLOAD_IPSEC_DELETE_UDPESP_SA {
-    pub OffloadHandle: super::super::Foundation::HANDLE,
-    pub EncapTypeEntryOffldHandle: super::super::Foundation::HANDLE,
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::marker::Copy for OFFLOAD_IPSEC_DELETE_UDPESP_SA {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::clone::Clone for OFFLOAD_IPSEC_DELETE_UDPESP_SA {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::fmt::Debug for OFFLOAD_IPSEC_DELETE_UDPESP_SA {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("OFFLOAD_IPSEC_DELETE_UDPESP_SA").field("OffloadHandle", &self.OffloadHandle).field("EncapTypeEntryOffldHandle", &self.EncapTypeEntryOffldHandle).finish()
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::windows_core::TypeKind for OFFLOAD_IPSEC_DELETE_UDPESP_SA {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::PartialEq for OFFLOAD_IPSEC_DELETE_UDPESP_SA {
-    fn eq(&self, other: &Self) -> bool {
-        self.OffloadHandle == other.OffloadHandle && self.EncapTypeEntryOffldHandle == other.EncapTypeEntryOffldHandle
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::Eq for OFFLOAD_IPSEC_DELETE_UDPESP_SA {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::default::Default for OFFLOAD_IPSEC_DELETE_UDPESP_SA {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_ENTRY {
-    pub UdpEncapType: UDP_ENCAP_TYPE,
-    pub DstEncapPort: u16,
-}
-impl ::core::marker::Copy for OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_ENTRY {}
-impl ::core::clone::Clone for OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_ENTRY {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_ENTRY {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_ENTRY").field("UdpEncapType", &self.UdpEncapType).field("DstEncapPort", &self.DstEncapPort).finish()
-    }
-}
-impl ::windows_core::TypeKind for OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_ENTRY {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_ENTRY {
-    fn eq(&self, other: &Self) -> bool {
-        self.UdpEncapType == other.UdpEncapType && self.DstEncapPort == other.DstEncapPort
-    }
-}
-impl ::core::cmp::Eq for OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_ENTRY {}
-impl ::core::default::Default for OFFLOAD_IPSEC_UDPESP_ENCAPTYPE_ENTRY {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct OFFLOAD_SECURITY_ASSOCIATION {
-    pub Operation: OFFLOAD_OPERATION_E,
-    pub SPI: u32,
-    pub IntegrityAlgo: OFFLOAD_ALGO_INFO,
-    pub ConfAlgo: OFFLOAD_ALGO_INFO,
-    pub Reserved: OFFLOAD_ALGO_INFO,
-}
-impl ::core::marker::Copy for OFFLOAD_SECURITY_ASSOCIATION {}
-impl ::core::clone::Clone for OFFLOAD_SECURITY_ASSOCIATION {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for OFFLOAD_SECURITY_ASSOCIATION {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("OFFLOAD_SECURITY_ASSOCIATION").field("Operation", &self.Operation).field("SPI", &self.SPI).field("IntegrityAlgo", &self.IntegrityAlgo).field("ConfAlgo", &self.ConfAlgo).field("Reserved", &self.Reserved).finish()
-    }
-}
-impl ::windows_core::TypeKind for OFFLOAD_SECURITY_ASSOCIATION {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for OFFLOAD_SECURITY_ASSOCIATION {
-    fn eq(&self, other: &Self) -> bool {
-        self.Operation == other.Operation && self.SPI == other.SPI && self.IntegrityAlgo == other.IntegrityAlgo && self.ConfAlgo == other.ConfAlgo && self.Reserved == other.Reserved
-    }
-}
-impl ::core::cmp::Eq for OFFLOAD_SECURITY_ASSOCIATION {}
-impl ::core::default::Default for OFFLOAD_SECURITY_ASSOCIATION {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct PMKID_CANDIDATE {
-    pub BSSID: [u8; 6],
-    pub Flags: u32,
-}
-impl ::core::marker::Copy for PMKID_CANDIDATE {}
-impl ::core::clone::Clone for PMKID_CANDIDATE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for PMKID_CANDIDATE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("PMKID_CANDIDATE").field("BSSID", &self.BSSID).field("Flags", &self.Flags).finish()
-    }
-}
-impl ::windows_core::TypeKind for PMKID_CANDIDATE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for PMKID_CANDIDATE {
-    fn eq(&self, other: &Self) -> bool {
-        self.BSSID == other.BSSID && self.Flags == other.Flags
-    }
-}
-impl ::core::cmp::Eq for PMKID_CANDIDATE {}
-impl ::core::default::Default for PMKID_CANDIDATE {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct TRANSPORT_HEADER_OFFSET {
-    pub ProtocolType: u16,
-    pub HeaderOffset: u16,
-}
-impl ::core::marker::Copy for TRANSPORT_HEADER_OFFSET {}
-impl ::core::clone::Clone for TRANSPORT_HEADER_OFFSET {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for TRANSPORT_HEADER_OFFSET {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("TRANSPORT_HEADER_OFFSET").field("ProtocolType", &self.ProtocolType).field("HeaderOffset", &self.HeaderOffset).finish()
-    }
-}
-impl ::windows_core::TypeKind for TRANSPORT_HEADER_OFFSET {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for TRANSPORT_HEADER_OFFSET {
-    fn eq(&self, other: &Self) -> bool {
-        self.ProtocolType == other.ProtocolType && self.HeaderOffset == other.HeaderOffset
-    }
-}
-impl ::core::cmp::Eq for TRANSPORT_HEADER_OFFSET {}
-impl ::core::default::Default for TRANSPORT_HEADER_OFFSET {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}

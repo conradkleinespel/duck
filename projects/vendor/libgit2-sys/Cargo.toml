@@ -12,7 +12,7 @@
 [package]
 edition = "2018"
 name = "libgit2-sys"
-version = "0.16.1+1.7.1"
+version = "0.18.1+1.9.0"
 authors = [
     "Josh Triplett <josh@joshtriplett.org>",
     "Alex Crichton <alex@alexcrichton.com>",
@@ -26,9 +26,25 @@ exclude = [
     "libgit2/fuzzers/*",
     "libgit2/tests/*",
 ]
+autolib = false
+autobins = false
+autoexamples = false
+autotests = false
+autobenches = false
 description = "Native bindings to the libgit2 library"
+readme = false
 license = "MIT OR Apache-2.0"
 repository = "https://github.com/rust-lang/git2-rs"
+
+[features]
+https = ["openssl-sys"]
+ssh = ["libssh2-sys"]
+vendored = []
+vendored-openssl = ["openssl-sys/vendored"]
+zlib-ng-compat = [
+    "libz-sys/zlib-ng",
+    "libssh2-sys?/zlib-ng-compat",
+]
 
 [lib]
 name = "libgit2_sys"
@@ -52,17 +68,6 @@ features = ["parallel"]
 
 [build-dependencies.pkg-config]
 version = "0.3.15"
-
-[features]
-https = ["openssl-sys"]
-ssh = ["libssh2-sys"]
-ssh_key_from_memory = []
-vendored = []
-vendored-openssl = ["openssl-sys/vendored"]
-zlib-ng-compat = [
-    "libz-sys/zlib-ng",
-    "libssh2-sys?/zlib-ng-compat",
-]
 
 [target."cfg(unix)".dependencies.openssl-sys]
 version = "0.9.45"

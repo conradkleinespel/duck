@@ -1,5 +1,61 @@
 # Changelog
 
+## 0.18.1+1.9.0 - 2025-03-17
+[0.18.0...0.18.1](https://github.com/rust-lang/git2-rs/compare/libgit2-sys-0.18.0+1.9.0...libgit2-sys-0.18.1+1.9.0)
+
+### Added
+
+- Added binding for `git_branch_upstream_merge`
+  [#1131](https://github.com/rust-lang/git2-rs/pull/1131)
+- Added bindings for `git_merge_file_options` and `git_merge_file_result`, `git_merge_file_options_init`, `git_merge_file_from_index`, `git_merge_file_result_free`, and updated `git_merge_file_flag_t`.
+  [#1062](https://github.com/rust-lang/git2-rs/pull/1062)
+
+### Fixed
+
+- Fixed linking to advapi32 on Windows for recent nightly versions of Rust.
+  [#1143](https://github.com/rust-lang/git2-rs/pull/1143)
+
+## 0.18.0+1.9.0 - 2025-01-04
+[0.16.2...0.17.0](https://github.com/rust-lang/git2-rs/compare/libgit2-sys-0.17.0+1.8.1...libgit2-sys-0.18.0+1.9.0)
+
+### Added
+
+- Added bindings for `git_repository_commondir`
+  [#1079](https://github.com/rust-lang/git2-rs/pull/1079)
+- Added bindings for `git_merge_base_octopus`
+  [#1088](https://github.com/rust-lang/git2-rs/pull/1088)
+
+### Changed
+
+- ❗ Updated to libgit2 [1.9.0](https://github.com/libgit2/libgit2/releases/tag/v1.9.0)
+  [#1111](https://github.com/rust-lang/git2-rs/pull/1111)
+- ❗ Removed the `ssh_key_from_memory` Cargo feature, it was unused.
+  [#1087](https://github.com/rust-lang/git2-rs/pull/1087)
+
+## 0.17.0+1.8.1 - 2024-06-13
+[0.16.2...0.17.0](https://github.com/rust-lang/git2-rs/compare/libgit2-sys-0.16.2+1.7.2...libgit2-sys-0.17.0+1.8.1)
+
+### Changed
+
+- ❗ Updated to libgit2 [1.8.1](https://github.com/libgit2/libgit2/releases/tag/v1.8.1)
+  [#1032](https://github.com/rust-lang/git2-rs/pull/1032)
+
+## 0.16.2+1.7.2 - 2024-02-06
+[0.16.1...0.16.2](https://github.com/rust-lang/git2-rs/compare/libgit2-sys-0.16.1+1.7.1...libgit2-sys-0.16.2+1.7.2)
+
+### Added
+
+- Added binding for `git_commit_lookup_prefix`.
+  [#1011](https://github.com/rust-lang/git2-rs/pull/1011)
+- Added binding for `git_object_lookup_prefix`.
+  [#1014](https://github.com/rust-lang/git2-rs/pull/1014)
+
+### Changed
+
+- ❗ Updated to libgit2 [1.7.2](https://github.com/libgit2/libgit2/releases/tag/v1.7.2).
+  This fixes [CVE-2024-24575](https://github.com/libgit2/libgit2/security/advisories/GHSA-54mf-x2rh-hq9v) and [CVE-2024-24577](https://github.com/libgit2/libgit2/security/advisories/GHSA-j2v7-4f6v-gpg8).
+  [#1017](https://github.com/rust-lang/git2-rs/pull/1017)
+
 ## 0.16.1+1.7.1 - 2023-08-28
 [0.16.0...0.16.1](https://github.com/rust-lang/git2-rs/compare/libgit2-sys-0.16.0+1.7.1...libgit2-sys-0.16.1+1.7.1)
 

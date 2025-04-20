@@ -32,7 +32,7 @@
 //! Sample values from an array with `O(n)` complexity (`n` is the length of array):
 //!
 //! ```
-//! fastrand::choose_multiple(vec![1, 4, 5].iter(), 2);
+//! fastrand::choose_multiple([1, 4, 5], 2);
 //! fastrand::choose_multiple(0..20, 12);
 //! ```
 //!
@@ -98,7 +98,7 @@
 //! [`fastrand-contrib`]: https://crates.io/crates/fastrand-contrib
 //! [`getrandom`]: https://crates.io/crates/getrandom
 
-#![cfg_attr(not(feature = "std"), no_std)]
+#![no_std]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 #![forbid(unsafe_code)]
 #![warn(missing_docs, missing_debug_implementations, rust_2018_idioms)]
@@ -111,6 +111,8 @@
 
 #[cfg(feature = "alloc")]
 extern crate alloc;
+#[cfg(feature = "std")]
+extern crate std;
 
 use core::convert::{TryFrom, TryInto};
 use core::ops::{Bound, RangeBounds};
@@ -146,9 +148,14 @@ impl Rng {
     /// Generates a random `u64`.
     #[inline]
     fn gen_u64(&mut self) -> u64 {
-        let s = self.0.wrapping_add(0xA0761D6478BD642F);
+        // Constants for WyRand taken from: https://github.com/wangyi-fudan/wyhash/blob/master/wyhash.h#L151
+        // Updated for the final v4.2 implementation with improved constants for better entropy output.
+        const WY_CONST_0: u64 = 0x2d35_8dcc_aa6c_78a5;
+        const WY_CONST_1: u64 = 0x8bb8_4b93_962e_acc9;
+
+        let s = self.0.wrapping_add(WY_CONST_0);
         self.0 = s;
-        let t = u128::from(s) * u128::from(s ^ 0xE7037ED1A0B428DB);
+        let t = u128::from(s) * u128::from(s ^ WY_CONST_1);
         (t as u64) ^ (t >> 64) as u64
     }
 
@@ -284,10 +291,7 @@ impl Rng {
     #[inline]
     #[must_use = "this creates a new instance of `Rng`; if you want to initialize the thread-local generator, use `fastrand::seed()` instead"]
     pub fn with_seed(seed: u64) -> Self {
-        let mut rng = Rng(0);
-
-        rng.seed(seed);
-        rng
+        Rng(seed)
     }
 
     /// Clones the generator by deterministically deriving a new generator based on the initial
@@ -374,27 +378,28 @@ impl Rng {
         f64::from_bits((1 << (b - 2)) - (1 << f) + (self.u64(..) >> (b - f))) - 1.0
     }
 
-    /// Collects `amount` values at random from the iterator into a vector.
+    /// Collects `amount` values at random from the iterable into a vector.
     ///
-    /// The length of the returned vector equals `amount` unless the iterator
+    /// The length of the returned vector equals `amount` unless the iterable
     /// contains insufficient elements, in which case it equals the number of
     /// elements available.
     ///
-    /// Complexity is `O(n)` where `n` is the length of the iterator.
+    /// Complexity is `O(n)` where `n` is the length of the iterable.
     #[cfg(feature = "alloc")]
     #[cfg_attr(docsrs, doc(cfg(feature = "alloc")))]
-    pub fn choose_multiple<T: Iterator>(&mut self, mut source: T, amount: usize) -> Vec<T::Item> {
+    pub fn choose_multiple<I: IntoIterator>(&mut self, source: I, amount: usize) -> Vec<I::Item> {
         // Adapted from: https://docs.rs/rand/latest/rand/seq/trait.IteratorRandom.html#method.choose_multiple
         let mut reservoir = Vec::with_capacity(amount);
+        let mut iter = source.into_iter();
 
-        reservoir.extend(source.by_ref().take(amount));
+        reservoir.extend(iter.by_ref().take(amount));
 
         // Continue unless the iterator was exhausted
         //
         // note: this prevents iterators that "restart" from causing problems.
         // If the iterator stops once, then so do we.
         if reservoir.len() == amount {
-            for (i, elem) in source.enumerate() {
+            for (i, elem) in iter.enumerate() {
                 let end = i + 1 + amount;
                 let k = self.usize(0..end);
                 if let Some(slot) = reservoir.get_mut(k) {
@@ -613,14 +618,6 @@ impl Rng {
         usize,
         gen_u64,
         gen_mod_u64,
-        "Generates a random `usize` in the given range."
-    );
-    #[cfg(target_pointer_width = "128")]
-    rng_integer!(
-        usize,
-        usize,
-        gen_u128,
-        gen_mod_u128,
         "Generates a random `usize` in the given range."
     );
 

@@ -1,3617 +1,3306 @@
 #[inline]
 pub unsafe fn GdipAddPathArc(path: *mut GpPath, x: f32, y: f32, width: f32, height: f32, startangle: f32, sweepangle: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathArc(path : *mut GpPath, x : f32, y : f32, width : f32, height : f32, startangle : f32, sweepangle : f32) -> Status);
-    GdipAddPathArc(path, x, y, width, height, startangle, sweepangle)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathArc(path : *mut GpPath, x : f32, y : f32, width : f32, height : f32, startangle : f32, sweepangle : f32) -> Status);
+    unsafe { GdipAddPathArc(path as _, x, y, width, height, startangle, sweepangle) }
 }
 #[inline]
 pub unsafe fn GdipAddPathArcI(path: *mut GpPath, x: i32, y: i32, width: i32, height: i32, startangle: f32, sweepangle: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathArcI(path : *mut GpPath, x : i32, y : i32, width : i32, height : i32, startangle : f32, sweepangle : f32) -> Status);
-    GdipAddPathArcI(path, x, y, width, height, startangle, sweepangle)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathArcI(path : *mut GpPath, x : i32, y : i32, width : i32, height : i32, startangle : f32, sweepangle : f32) -> Status);
+    unsafe { GdipAddPathArcI(path as _, x, y, width, height, startangle, sweepangle) }
 }
 #[inline]
 pub unsafe fn GdipAddPathBezier(path: *mut GpPath, x1: f32, y1: f32, x2: f32, y2: f32, x3: f32, y3: f32, x4: f32, y4: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathBezier(path : *mut GpPath, x1 : f32, y1 : f32, x2 : f32, y2 : f32, x3 : f32, y3 : f32, x4 : f32, y4 : f32) -> Status);
-    GdipAddPathBezier(path, x1, y1, x2, y2, x3, y3, x4, y4)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathBezier(path : *mut GpPath, x1 : f32, y1 : f32, x2 : f32, y2 : f32, x3 : f32, y3 : f32, x4 : f32, y4 : f32) -> Status);
+    unsafe { GdipAddPathBezier(path as _, x1, y1, x2, y2, x3, y3, x4, y4) }
 }
 #[inline]
 pub unsafe fn GdipAddPathBezierI(path: *mut GpPath, x1: i32, y1: i32, x2: i32, y2: i32, x3: i32, y3: i32, x4: i32, y4: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathBezierI(path : *mut GpPath, x1 : i32, y1 : i32, x2 : i32, y2 : i32, x3 : i32, y3 : i32, x4 : i32, y4 : i32) -> Status);
-    GdipAddPathBezierI(path, x1, y1, x2, y2, x3, y3, x4, y4)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathBezierI(path : *mut GpPath, x1 : i32, y1 : i32, x2 : i32, y2 : i32, x3 : i32, y3 : i32, x4 : i32, y4 : i32) -> Status);
+    unsafe { GdipAddPathBezierI(path as _, x1, y1, x2, y2, x3, y3, x4, y4) }
 }
 #[inline]
 pub unsafe fn GdipAddPathBeziers(path: *mut GpPath, points: *const PointF, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathBeziers(path : *mut GpPath, points : *const PointF, count : i32) -> Status);
-    GdipAddPathBeziers(path, points, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathBeziers(path : *mut GpPath, points : *const PointF, count : i32) -> Status);
+    unsafe { GdipAddPathBeziers(path as _, points, count) }
 }
 #[inline]
 pub unsafe fn GdipAddPathBeziersI(path: *mut GpPath, points: *const Point, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathBeziersI(path : *mut GpPath, points : *const Point, count : i32) -> Status);
-    GdipAddPathBeziersI(path, points, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathBeziersI(path : *mut GpPath, points : *const Point, count : i32) -> Status);
+    unsafe { GdipAddPathBeziersI(path as _, points, count) }
 }
 #[inline]
 pub unsafe fn GdipAddPathClosedCurve(path: *mut GpPath, points: *const PointF, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathClosedCurve(path : *mut GpPath, points : *const PointF, count : i32) -> Status);
-    GdipAddPathClosedCurve(path, points, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathClosedCurve(path : *mut GpPath, points : *const PointF, count : i32) -> Status);
+    unsafe { GdipAddPathClosedCurve(path as _, points, count) }
 }
 #[inline]
 pub unsafe fn GdipAddPathClosedCurve2(path: *mut GpPath, points: *const PointF, count: i32, tension: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathClosedCurve2(path : *mut GpPath, points : *const PointF, count : i32, tension : f32) -> Status);
-    GdipAddPathClosedCurve2(path, points, count, tension)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathClosedCurve2(path : *mut GpPath, points : *const PointF, count : i32, tension : f32) -> Status);
+    unsafe { GdipAddPathClosedCurve2(path as _, points, count, tension) }
 }
 #[inline]
 pub unsafe fn GdipAddPathClosedCurve2I(path: *mut GpPath, points: *const Point, count: i32, tension: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathClosedCurve2I(path : *mut GpPath, points : *const Point, count : i32, tension : f32) -> Status);
-    GdipAddPathClosedCurve2I(path, points, count, tension)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathClosedCurve2I(path : *mut GpPath, points : *const Point, count : i32, tension : f32) -> Status);
+    unsafe { GdipAddPathClosedCurve2I(path as _, points, count, tension) }
 }
 #[inline]
 pub unsafe fn GdipAddPathClosedCurveI(path: *mut GpPath, points: *const Point, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathClosedCurveI(path : *mut GpPath, points : *const Point, count : i32) -> Status);
-    GdipAddPathClosedCurveI(path, points, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathClosedCurveI(path : *mut GpPath, points : *const Point, count : i32) -> Status);
+    unsafe { GdipAddPathClosedCurveI(path as _, points, count) }
 }
 #[inline]
 pub unsafe fn GdipAddPathCurve(path: *mut GpPath, points: *const PointF, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathCurve(path : *mut GpPath, points : *const PointF, count : i32) -> Status);
-    GdipAddPathCurve(path, points, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathCurve(path : *mut GpPath, points : *const PointF, count : i32) -> Status);
+    unsafe { GdipAddPathCurve(path as _, points, count) }
 }
 #[inline]
 pub unsafe fn GdipAddPathCurve2(path: *mut GpPath, points: *const PointF, count: i32, tension: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathCurve2(path : *mut GpPath, points : *const PointF, count : i32, tension : f32) -> Status);
-    GdipAddPathCurve2(path, points, count, tension)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathCurve2(path : *mut GpPath, points : *const PointF, count : i32, tension : f32) -> Status);
+    unsafe { GdipAddPathCurve2(path as _, points, count, tension) }
 }
 #[inline]
 pub unsafe fn GdipAddPathCurve2I(path: *mut GpPath, points: *const Point, count: i32, tension: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathCurve2I(path : *mut GpPath, points : *const Point, count : i32, tension : f32) -> Status);
-    GdipAddPathCurve2I(path, points, count, tension)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathCurve2I(path : *mut GpPath, points : *const Point, count : i32, tension : f32) -> Status);
+    unsafe { GdipAddPathCurve2I(path as _, points, count, tension) }
 }
 #[inline]
 pub unsafe fn GdipAddPathCurve3(path: *mut GpPath, points: *const PointF, count: i32, offset: i32, numberofsegments: i32, tension: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathCurve3(path : *mut GpPath, points : *const PointF, count : i32, offset : i32, numberofsegments : i32, tension : f32) -> Status);
-    GdipAddPathCurve3(path, points, count, offset, numberofsegments, tension)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathCurve3(path : *mut GpPath, points : *const PointF, count : i32, offset : i32, numberofsegments : i32, tension : f32) -> Status);
+    unsafe { GdipAddPathCurve3(path as _, points, count, offset, numberofsegments, tension) }
 }
 #[inline]
 pub unsafe fn GdipAddPathCurve3I(path: *mut GpPath, points: *const Point, count: i32, offset: i32, numberofsegments: i32, tension: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathCurve3I(path : *mut GpPath, points : *const Point, count : i32, offset : i32, numberofsegments : i32, tension : f32) -> Status);
-    GdipAddPathCurve3I(path, points, count, offset, numberofsegments, tension)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathCurve3I(path : *mut GpPath, points : *const Point, count : i32, offset : i32, numberofsegments : i32, tension : f32) -> Status);
+    unsafe { GdipAddPathCurve3I(path as _, points, count, offset, numberofsegments, tension) }
 }
 #[inline]
 pub unsafe fn GdipAddPathCurveI(path: *mut GpPath, points: *const Point, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathCurveI(path : *mut GpPath, points : *const Point, count : i32) -> Status);
-    GdipAddPathCurveI(path, points, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathCurveI(path : *mut GpPath, points : *const Point, count : i32) -> Status);
+    unsafe { GdipAddPathCurveI(path as _, points, count) }
 }
 #[inline]
 pub unsafe fn GdipAddPathEllipse(path: *mut GpPath, x: f32, y: f32, width: f32, height: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathEllipse(path : *mut GpPath, x : f32, y : f32, width : f32, height : f32) -> Status);
-    GdipAddPathEllipse(path, x, y, width, height)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathEllipse(path : *mut GpPath, x : f32, y : f32, width : f32, height : f32) -> Status);
+    unsafe { GdipAddPathEllipse(path as _, x, y, width, height) }
 }
 #[inline]
 pub unsafe fn GdipAddPathEllipseI(path: *mut GpPath, x: i32, y: i32, width: i32, height: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathEllipseI(path : *mut GpPath, x : i32, y : i32, width : i32, height : i32) -> Status);
-    GdipAddPathEllipseI(path, x, y, width, height)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathEllipseI(path : *mut GpPath, x : i32, y : i32, width : i32, height : i32) -> Status);
+    unsafe { GdipAddPathEllipseI(path as _, x, y, width, height) }
 }
 #[inline]
 pub unsafe fn GdipAddPathLine(path: *mut GpPath, x1: f32, y1: f32, x2: f32, y2: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathLine(path : *mut GpPath, x1 : f32, y1 : f32, x2 : f32, y2 : f32) -> Status);
-    GdipAddPathLine(path, x1, y1, x2, y2)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathLine(path : *mut GpPath, x1 : f32, y1 : f32, x2 : f32, y2 : f32) -> Status);
+    unsafe { GdipAddPathLine(path as _, x1, y1, x2, y2) }
 }
 #[inline]
 pub unsafe fn GdipAddPathLine2(path: *mut GpPath, points: *const PointF, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathLine2(path : *mut GpPath, points : *const PointF, count : i32) -> Status);
-    GdipAddPathLine2(path, points, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathLine2(path : *mut GpPath, points : *const PointF, count : i32) -> Status);
+    unsafe { GdipAddPathLine2(path as _, points, count) }
 }
 #[inline]
 pub unsafe fn GdipAddPathLine2I(path: *mut GpPath, points: *const Point, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathLine2I(path : *mut GpPath, points : *const Point, count : i32) -> Status);
-    GdipAddPathLine2I(path, points, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathLine2I(path : *mut GpPath, points : *const Point, count : i32) -> Status);
+    unsafe { GdipAddPathLine2I(path as _, points, count) }
 }
 #[inline]
 pub unsafe fn GdipAddPathLineI(path: *mut GpPath, x1: i32, y1: i32, x2: i32, y2: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathLineI(path : *mut GpPath, x1 : i32, y1 : i32, x2 : i32, y2 : i32) -> Status);
-    GdipAddPathLineI(path, x1, y1, x2, y2)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathLineI(path : *mut GpPath, x1 : i32, y1 : i32, x2 : i32, y2 : i32) -> Status);
+    unsafe { GdipAddPathLineI(path as _, x1, y1, x2, y2) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipAddPathPath<P0>(path: *mut GpPath, addingpath: *const GpPath, connect: P0) -> Status
-where
-    P0: ::windows_core::IntoParam<super::super::Foundation::BOOL>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathPath(path : *mut GpPath, addingpath : *const GpPath, connect : super::super::Foundation:: BOOL) -> Status);
-    GdipAddPathPath(path, addingpath, connect.into_param().abi())
+pub unsafe fn GdipAddPathPath(path: *mut GpPath, addingpath: *const GpPath, connect: bool) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathPath(path : *mut GpPath, addingpath : *const GpPath, connect : windows_core::BOOL) -> Status);
+    unsafe { GdipAddPathPath(path as _, addingpath, connect.into()) }
 }
 #[inline]
 pub unsafe fn GdipAddPathPie(path: *mut GpPath, x: f32, y: f32, width: f32, height: f32, startangle: f32, sweepangle: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathPie(path : *mut GpPath, x : f32, y : f32, width : f32, height : f32, startangle : f32, sweepangle : f32) -> Status);
-    GdipAddPathPie(path, x, y, width, height, startangle, sweepangle)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathPie(path : *mut GpPath, x : f32, y : f32, width : f32, height : f32, startangle : f32, sweepangle : f32) -> Status);
+    unsafe { GdipAddPathPie(path as _, x, y, width, height, startangle, sweepangle) }
 }
 #[inline]
 pub unsafe fn GdipAddPathPieI(path: *mut GpPath, x: i32, y: i32, width: i32, height: i32, startangle: f32, sweepangle: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathPieI(path : *mut GpPath, x : i32, y : i32, width : i32, height : i32, startangle : f32, sweepangle : f32) -> Status);
-    GdipAddPathPieI(path, x, y, width, height, startangle, sweepangle)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathPieI(path : *mut GpPath, x : i32, y : i32, width : i32, height : i32, startangle : f32, sweepangle : f32) -> Status);
+    unsafe { GdipAddPathPieI(path as _, x, y, width, height, startangle, sweepangle) }
 }
 #[inline]
 pub unsafe fn GdipAddPathPolygon(path: *mut GpPath, points: *const PointF, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathPolygon(path : *mut GpPath, points : *const PointF, count : i32) -> Status);
-    GdipAddPathPolygon(path, points, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathPolygon(path : *mut GpPath, points : *const PointF, count : i32) -> Status);
+    unsafe { GdipAddPathPolygon(path as _, points, count) }
 }
 #[inline]
 pub unsafe fn GdipAddPathPolygonI(path: *mut GpPath, points: *const Point, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathPolygonI(path : *mut GpPath, points : *const Point, count : i32) -> Status);
-    GdipAddPathPolygonI(path, points, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathPolygonI(path : *mut GpPath, points : *const Point, count : i32) -> Status);
+    unsafe { GdipAddPathPolygonI(path as _, points, count) }
 }
 #[inline]
 pub unsafe fn GdipAddPathRectangle(path: *mut GpPath, x: f32, y: f32, width: f32, height: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathRectangle(path : *mut GpPath, x : f32, y : f32, width : f32, height : f32) -> Status);
-    GdipAddPathRectangle(path, x, y, width, height)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathRectangle(path : *mut GpPath, x : f32, y : f32, width : f32, height : f32) -> Status);
+    unsafe { GdipAddPathRectangle(path as _, x, y, width, height) }
 }
 #[inline]
 pub unsafe fn GdipAddPathRectangleI(path: *mut GpPath, x: i32, y: i32, width: i32, height: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathRectangleI(path : *mut GpPath, x : i32, y : i32, width : i32, height : i32) -> Status);
-    GdipAddPathRectangleI(path, x, y, width, height)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathRectangleI(path : *mut GpPath, x : i32, y : i32, width : i32, height : i32) -> Status);
+    unsafe { GdipAddPathRectangleI(path as _, x, y, width, height) }
 }
 #[inline]
 pub unsafe fn GdipAddPathRectangles(path: *mut GpPath, rects: *const RectF, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathRectangles(path : *mut GpPath, rects : *const RectF, count : i32) -> Status);
-    GdipAddPathRectangles(path, rects, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathRectangles(path : *mut GpPath, rects : *const RectF, count : i32) -> Status);
+    unsafe { GdipAddPathRectangles(path as _, rects, count) }
 }
 #[inline]
 pub unsafe fn GdipAddPathRectanglesI(path: *mut GpPath, rects: *const Rect, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathRectanglesI(path : *mut GpPath, rects : *const Rect, count : i32) -> Status);
-    GdipAddPathRectanglesI(path, rects, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathRectanglesI(path : *mut GpPath, rects : *const Rect, count : i32) -> Status);
+    unsafe { GdipAddPathRectanglesI(path as _, rects, count) }
 }
 #[inline]
-pub unsafe fn GdipAddPathString<P0>(path: *mut GpPath, string: P0, length: i32, family: *const GpFontFamily, style: i32, emsize: f32, layoutrect: *const RectF, format: *const GpStringFormat) -> Status
+pub unsafe fn GdipAddPathString<P1>(path: *mut GpPath, string: P1, length: i32, family: *const GpFontFamily, style: i32, emsize: f32, layoutrect: *const RectF, format: *const GpStringFormat) -> Status
 where
-    P0: ::windows_core::IntoParam<::windows_core::PCWSTR>,
+    P1: windows_core::Param<windows_core::PCWSTR>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathString(path : *mut GpPath, string : ::windows_core::PCWSTR, length : i32, family : *const GpFontFamily, style : i32, emsize : f32, layoutrect : *const RectF, format : *const GpStringFormat) -> Status);
-    GdipAddPathString(path, string.into_param().abi(), length, family, style, emsize, layoutrect, format)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathString(path : *mut GpPath, string : windows_core::PCWSTR, length : i32, family : *const GpFontFamily, style : i32, emsize : f32, layoutrect : *const RectF, format : *const GpStringFormat) -> Status);
+    unsafe { GdipAddPathString(path as _, string.param().abi(), length, family, style, emsize, layoutrect, format) }
 }
 #[inline]
-pub unsafe fn GdipAddPathStringI<P0>(path: *mut GpPath, string: P0, length: i32, family: *const GpFontFamily, style: i32, emsize: f32, layoutrect: *const Rect, format: *const GpStringFormat) -> Status
+pub unsafe fn GdipAddPathStringI<P1>(path: *mut GpPath, string: P1, length: i32, family: *const GpFontFamily, style: i32, emsize: f32, layoutrect: *const Rect, format: *const GpStringFormat) -> Status
 where
-    P0: ::windows_core::IntoParam<::windows_core::PCWSTR>,
+    P1: windows_core::Param<windows_core::PCWSTR>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAddPathStringI(path : *mut GpPath, string : ::windows_core::PCWSTR, length : i32, family : *const GpFontFamily, style : i32, emsize : f32, layoutrect : *const Rect, format : *const GpStringFormat) -> Status);
-    GdipAddPathStringI(path, string.into_param().abi(), length, family, style, emsize, layoutrect, format)
+    windows_link::link!("gdiplus.dll" "system" fn GdipAddPathStringI(path : *mut GpPath, string : windows_core::PCWSTR, length : i32, family : *const GpFontFamily, style : i32, emsize : f32, layoutrect : *const Rect, format : *const GpStringFormat) -> Status);
+    unsafe { GdipAddPathStringI(path as _, string.param().abi(), length, family, style, emsize, layoutrect, format) }
 }
 #[inline]
-pub unsafe fn GdipAlloc(size: usize) -> *mut ::core::ffi::c_void {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipAlloc(size : usize) -> *mut ::core::ffi::c_void);
-    GdipAlloc(size)
+pub unsafe fn GdipAlloc(size: usize) -> *mut core::ffi::c_void {
+    windows_link::link!("gdiplus.dll" "system" fn GdipAlloc(size : usize) -> *mut core::ffi::c_void);
+    unsafe { GdipAlloc(size) }
 }
 #[inline]
 pub unsafe fn GdipBeginContainer(graphics: *mut GpGraphics, dstrect: *const RectF, srcrect: *const RectF, unit: Unit, state: *mut u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipBeginContainer(graphics : *mut GpGraphics, dstrect : *const RectF, srcrect : *const RectF, unit : Unit, state : *mut u32) -> Status);
-    GdipBeginContainer(graphics, dstrect, srcrect, unit, state)
+    windows_link::link!("gdiplus.dll" "system" fn GdipBeginContainer(graphics : *mut GpGraphics, dstrect : *const RectF, srcrect : *const RectF, unit : Unit, state : *mut u32) -> Status);
+    unsafe { GdipBeginContainer(graphics as _, dstrect, srcrect, unit, state as _) }
 }
 #[inline]
 pub unsafe fn GdipBeginContainer2(graphics: *mut GpGraphics, state: *mut u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipBeginContainer2(graphics : *mut GpGraphics, state : *mut u32) -> Status);
-    GdipBeginContainer2(graphics, state)
+    windows_link::link!("gdiplus.dll" "system" fn GdipBeginContainer2(graphics : *mut GpGraphics, state : *mut u32) -> Status);
+    unsafe { GdipBeginContainer2(graphics as _, state as _) }
 }
 #[inline]
 pub unsafe fn GdipBeginContainerI(graphics: *mut GpGraphics, dstrect: *const Rect, srcrect: *const Rect, unit: Unit, state: *mut u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipBeginContainerI(graphics : *mut GpGraphics, dstrect : *const Rect, srcrect : *const Rect, unit : Unit, state : *mut u32) -> Status);
-    GdipBeginContainerI(graphics, dstrect, srcrect, unit, state)
+    windows_link::link!("gdiplus.dll" "system" fn GdipBeginContainerI(graphics : *mut GpGraphics, dstrect : *const Rect, srcrect : *const Rect, unit : Unit, state : *mut u32) -> Status);
+    unsafe { GdipBeginContainerI(graphics as _, dstrect, srcrect, unit, state as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipBitmapApplyEffect<P0>(bitmap: *mut GpBitmap, effect: *mut CGpEffect, roi: *mut super::super::Foundation::RECT, useauxdata: P0, auxdata: *mut *mut ::core::ffi::c_void, auxdatasize: *mut i32) -> Status
-where
-    P0: ::windows_core::IntoParam<super::super::Foundation::BOOL>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipBitmapApplyEffect(bitmap : *mut GpBitmap, effect : *mut CGpEffect, roi : *mut super::super::Foundation:: RECT, useauxdata : super::super::Foundation:: BOOL, auxdata : *mut *mut ::core::ffi::c_void, auxdatasize : *mut i32) -> Status);
-    GdipBitmapApplyEffect(bitmap, effect, roi, useauxdata.into_param().abi(), auxdata, auxdatasize)
+pub unsafe fn GdipBitmapApplyEffect(bitmap: *mut GpBitmap, effect: *mut CGpEffect, roi: *mut super::super::Foundation::RECT, useauxdata: bool, auxdata: *mut *mut core::ffi::c_void, auxdatasize: *mut i32) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipBitmapApplyEffect(bitmap : *mut GpBitmap, effect : *mut CGpEffect, roi : *mut super::super::Foundation:: RECT, useauxdata : windows_core::BOOL, auxdata : *mut *mut core::ffi::c_void, auxdatasize : *mut i32) -> Status);
+    unsafe { GdipBitmapApplyEffect(bitmap as _, effect as _, roi as _, useauxdata.into(), auxdata as _, auxdatasize as _) }
 }
 #[inline]
 pub unsafe fn GdipBitmapConvertFormat(pinputbitmap: *mut GpBitmap, format: i32, dithertype: DitherType, palettetype: PaletteType, palette: *mut ColorPalette, alphathresholdpercent: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipBitmapConvertFormat(pinputbitmap : *mut GpBitmap, format : i32, dithertype : DitherType, palettetype : PaletteType, palette : *mut ColorPalette, alphathresholdpercent : f32) -> Status);
-    GdipBitmapConvertFormat(pinputbitmap, format, dithertype, palettetype, palette, alphathresholdpercent)
+    windows_link::link!("gdiplus.dll" "system" fn GdipBitmapConvertFormat(pinputbitmap : *mut GpBitmap, format : i32, dithertype : DitherType, palettetype : PaletteType, palette : *mut ColorPalette, alphathresholdpercent : f32) -> Status);
+    unsafe { GdipBitmapConvertFormat(pinputbitmap as _, format, dithertype, palettetype, palette as _, alphathresholdpercent) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipBitmapCreateApplyEffect<P0>(inputbitmaps: *mut *mut GpBitmap, numinputs: i32, effect: *mut CGpEffect, roi: *mut super::super::Foundation::RECT, outputrect: *mut super::super::Foundation::RECT, outputbitmap: *mut *mut GpBitmap, useauxdata: P0, auxdata: *mut *mut ::core::ffi::c_void, auxdatasize: *mut i32) -> Status
-where
-    P0: ::windows_core::IntoParam<super::super::Foundation::BOOL>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipBitmapCreateApplyEffect(inputbitmaps : *mut *mut GpBitmap, numinputs : i32, effect : *mut CGpEffect, roi : *mut super::super::Foundation:: RECT, outputrect : *mut super::super::Foundation:: RECT, outputbitmap : *mut *mut GpBitmap, useauxdata : super::super::Foundation:: BOOL, auxdata : *mut *mut ::core::ffi::c_void, auxdatasize : *mut i32) -> Status);
-    GdipBitmapCreateApplyEffect(inputbitmaps, numinputs, effect, roi, outputrect, outputbitmap, useauxdata.into_param().abi(), auxdata, auxdatasize)
+pub unsafe fn GdipBitmapCreateApplyEffect(inputbitmaps: *mut *mut GpBitmap, numinputs: i32, effect: *mut CGpEffect, roi: *mut super::super::Foundation::RECT, outputrect: *mut super::super::Foundation::RECT, outputbitmap: *mut *mut GpBitmap, useauxdata: bool, auxdata: *mut *mut core::ffi::c_void, auxdatasize: *mut i32) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipBitmapCreateApplyEffect(inputbitmaps : *mut *mut GpBitmap, numinputs : i32, effect : *mut CGpEffect, roi : *mut super::super::Foundation:: RECT, outputrect : *mut super::super::Foundation:: RECT, outputbitmap : *mut *mut GpBitmap, useauxdata : windows_core::BOOL, auxdata : *mut *mut core::ffi::c_void, auxdatasize : *mut i32) -> Status);
+    unsafe { GdipBitmapCreateApplyEffect(inputbitmaps as _, numinputs, effect as _, roi as _, outputrect as _, outputbitmap as _, useauxdata.into(), auxdata as _, auxdatasize as _) }
 }
 #[inline]
 pub unsafe fn GdipBitmapGetHistogram(bitmap: *mut GpBitmap, format: HistogramFormat, numberofentries: u32, channel0: *mut u32, channel1: *mut u32, channel2: *mut u32, channel3: *mut u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipBitmapGetHistogram(bitmap : *mut GpBitmap, format : HistogramFormat, numberofentries : u32, channel0 : *mut u32, channel1 : *mut u32, channel2 : *mut u32, channel3 : *mut u32) -> Status);
-    GdipBitmapGetHistogram(bitmap, format, numberofentries, channel0, channel1, channel2, channel3)
+    windows_link::link!("gdiplus.dll" "system" fn GdipBitmapGetHistogram(bitmap : *mut GpBitmap, format : HistogramFormat, numberofentries : u32, channel0 : *mut u32, channel1 : *mut u32, channel2 : *mut u32, channel3 : *mut u32) -> Status);
+    unsafe { GdipBitmapGetHistogram(bitmap as _, format, numberofentries, channel0 as _, channel1 as _, channel2 as _, channel3 as _) }
 }
 #[inline]
 pub unsafe fn GdipBitmapGetHistogramSize(format: HistogramFormat, numberofentries: *mut u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipBitmapGetHistogramSize(format : HistogramFormat, numberofentries : *mut u32) -> Status);
-    GdipBitmapGetHistogramSize(format, numberofentries)
+    windows_link::link!("gdiplus.dll" "system" fn GdipBitmapGetHistogramSize(format : HistogramFormat, numberofentries : *mut u32) -> Status);
+    unsafe { GdipBitmapGetHistogramSize(format, numberofentries as _) }
 }
 #[inline]
 pub unsafe fn GdipBitmapGetPixel(bitmap: *mut GpBitmap, x: i32, y: i32, color: *mut u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipBitmapGetPixel(bitmap : *mut GpBitmap, x : i32, y : i32, color : *mut u32) -> Status);
-    GdipBitmapGetPixel(bitmap, x, y, color)
+    windows_link::link!("gdiplus.dll" "system" fn GdipBitmapGetPixel(bitmap : *mut GpBitmap, x : i32, y : i32, color : *mut u32) -> Status);
+    unsafe { GdipBitmapGetPixel(bitmap as _, x, y, color as _) }
 }
 #[inline]
 pub unsafe fn GdipBitmapLockBits(bitmap: *mut GpBitmap, rect: *const Rect, flags: u32, format: i32, lockedbitmapdata: *mut BitmapData) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipBitmapLockBits(bitmap : *mut GpBitmap, rect : *const Rect, flags : u32, format : i32, lockedbitmapdata : *mut BitmapData) -> Status);
-    GdipBitmapLockBits(bitmap, rect, flags, format, lockedbitmapdata)
+    windows_link::link!("gdiplus.dll" "system" fn GdipBitmapLockBits(bitmap : *mut GpBitmap, rect : *const Rect, flags : u32, format : i32, lockedbitmapdata : *mut BitmapData) -> Status);
+    unsafe { GdipBitmapLockBits(bitmap as _, rect, flags, format, lockedbitmapdata as _) }
 }
 #[inline]
 pub unsafe fn GdipBitmapSetPixel(bitmap: *mut GpBitmap, x: i32, y: i32, color: u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipBitmapSetPixel(bitmap : *mut GpBitmap, x : i32, y : i32, color : u32) -> Status);
-    GdipBitmapSetPixel(bitmap, x, y, color)
+    windows_link::link!("gdiplus.dll" "system" fn GdipBitmapSetPixel(bitmap : *mut GpBitmap, x : i32, y : i32, color : u32) -> Status);
+    unsafe { GdipBitmapSetPixel(bitmap as _, x, y, color) }
 }
 #[inline]
 pub unsafe fn GdipBitmapSetResolution(bitmap: *mut GpBitmap, xdpi: f32, ydpi: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipBitmapSetResolution(bitmap : *mut GpBitmap, xdpi : f32, ydpi : f32) -> Status);
-    GdipBitmapSetResolution(bitmap, xdpi, ydpi)
+    windows_link::link!("gdiplus.dll" "system" fn GdipBitmapSetResolution(bitmap : *mut GpBitmap, xdpi : f32, ydpi : f32) -> Status);
+    unsafe { GdipBitmapSetResolution(bitmap as _, xdpi, ydpi) }
 }
 #[inline]
 pub unsafe fn GdipBitmapUnlockBits(bitmap: *mut GpBitmap, lockedbitmapdata: *mut BitmapData) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipBitmapUnlockBits(bitmap : *mut GpBitmap, lockedbitmapdata : *mut BitmapData) -> Status);
-    GdipBitmapUnlockBits(bitmap, lockedbitmapdata)
+    windows_link::link!("gdiplus.dll" "system" fn GdipBitmapUnlockBits(bitmap : *mut GpBitmap, lockedbitmapdata : *mut BitmapData) -> Status);
+    unsafe { GdipBitmapUnlockBits(bitmap as _, lockedbitmapdata as _) }
 }
 #[inline]
 pub unsafe fn GdipClearPathMarkers(path: *mut GpPath) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipClearPathMarkers(path : *mut GpPath) -> Status);
-    GdipClearPathMarkers(path)
+    windows_link::link!("gdiplus.dll" "system" fn GdipClearPathMarkers(path : *mut GpPath) -> Status);
+    unsafe { GdipClearPathMarkers(path as _) }
 }
 #[inline]
 pub unsafe fn GdipCloneBitmapArea(x: f32, y: f32, width: f32, height: f32, format: i32, srcbitmap: *mut GpBitmap, dstbitmap: *mut *mut GpBitmap) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCloneBitmapArea(x : f32, y : f32, width : f32, height : f32, format : i32, srcbitmap : *mut GpBitmap, dstbitmap : *mut *mut GpBitmap) -> Status);
-    GdipCloneBitmapArea(x, y, width, height, format, srcbitmap, dstbitmap)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCloneBitmapArea(x : f32, y : f32, width : f32, height : f32, format : i32, srcbitmap : *mut GpBitmap, dstbitmap : *mut *mut GpBitmap) -> Status);
+    unsafe { GdipCloneBitmapArea(x, y, width, height, format, srcbitmap as _, dstbitmap as _) }
 }
 #[inline]
 pub unsafe fn GdipCloneBitmapAreaI(x: i32, y: i32, width: i32, height: i32, format: i32, srcbitmap: *mut GpBitmap, dstbitmap: *mut *mut GpBitmap) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCloneBitmapAreaI(x : i32, y : i32, width : i32, height : i32, format : i32, srcbitmap : *mut GpBitmap, dstbitmap : *mut *mut GpBitmap) -> Status);
-    GdipCloneBitmapAreaI(x, y, width, height, format, srcbitmap, dstbitmap)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCloneBitmapAreaI(x : i32, y : i32, width : i32, height : i32, format : i32, srcbitmap : *mut GpBitmap, dstbitmap : *mut *mut GpBitmap) -> Status);
+    unsafe { GdipCloneBitmapAreaI(x, y, width, height, format, srcbitmap as _, dstbitmap as _) }
 }
 #[inline]
 pub unsafe fn GdipCloneBrush(brush: *mut GpBrush, clonebrush: *mut *mut GpBrush) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCloneBrush(brush : *mut GpBrush, clonebrush : *mut *mut GpBrush) -> Status);
-    GdipCloneBrush(brush, clonebrush)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCloneBrush(brush : *mut GpBrush, clonebrush : *mut *mut GpBrush) -> Status);
+    unsafe { GdipCloneBrush(brush as _, clonebrush as _) }
 }
 #[inline]
 pub unsafe fn GdipCloneCustomLineCap(customcap: *mut GpCustomLineCap, clonedcap: *mut *mut GpCustomLineCap) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCloneCustomLineCap(customcap : *mut GpCustomLineCap, clonedcap : *mut *mut GpCustomLineCap) -> Status);
-    GdipCloneCustomLineCap(customcap, clonedcap)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCloneCustomLineCap(customcap : *mut GpCustomLineCap, clonedcap : *mut *mut GpCustomLineCap) -> Status);
+    unsafe { GdipCloneCustomLineCap(customcap as _, clonedcap as _) }
 }
 #[inline]
 pub unsafe fn GdipCloneFont(font: *mut GpFont, clonefont: *mut *mut GpFont) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCloneFont(font : *mut GpFont, clonefont : *mut *mut GpFont) -> Status);
-    GdipCloneFont(font, clonefont)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCloneFont(font : *mut GpFont, clonefont : *mut *mut GpFont) -> Status);
+    unsafe { GdipCloneFont(font as _, clonefont as _) }
 }
 #[inline]
 pub unsafe fn GdipCloneFontFamily(fontfamily: *mut GpFontFamily, clonedfontfamily: *mut *mut GpFontFamily) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCloneFontFamily(fontfamily : *mut GpFontFamily, clonedfontfamily : *mut *mut GpFontFamily) -> Status);
-    GdipCloneFontFamily(fontfamily, clonedfontfamily)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCloneFontFamily(fontfamily : *mut GpFontFamily, clonedfontfamily : *mut *mut GpFontFamily) -> Status);
+    unsafe { GdipCloneFontFamily(fontfamily as _, clonedfontfamily as _) }
 }
 #[inline]
 pub unsafe fn GdipCloneImage(image: *mut GpImage, cloneimage: *mut *mut GpImage) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCloneImage(image : *mut GpImage, cloneimage : *mut *mut GpImage) -> Status);
-    GdipCloneImage(image, cloneimage)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCloneImage(image : *mut GpImage, cloneimage : *mut *mut GpImage) -> Status);
+    unsafe { GdipCloneImage(image as _, cloneimage as _) }
 }
 #[inline]
 pub unsafe fn GdipCloneImageAttributes(imageattr: *const GpImageAttributes, cloneimageattr: *mut *mut GpImageAttributes) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCloneImageAttributes(imageattr : *const GpImageAttributes, cloneimageattr : *mut *mut GpImageAttributes) -> Status);
-    GdipCloneImageAttributes(imageattr, cloneimageattr)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCloneImageAttributes(imageattr : *const GpImageAttributes, cloneimageattr : *mut *mut GpImageAttributes) -> Status);
+    unsafe { GdipCloneImageAttributes(imageattr, cloneimageattr as _) }
 }
 #[inline]
 pub unsafe fn GdipCloneMatrix(matrix: *mut Matrix, clonematrix: *mut *mut Matrix) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCloneMatrix(matrix : *mut Matrix, clonematrix : *mut *mut Matrix) -> Status);
-    GdipCloneMatrix(matrix, clonematrix)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCloneMatrix(matrix : *mut Matrix, clonematrix : *mut *mut Matrix) -> Status);
+    unsafe { GdipCloneMatrix(matrix as _, clonematrix as _) }
 }
 #[inline]
 pub unsafe fn GdipClonePath(path: *mut GpPath, clonepath: *mut *mut GpPath) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipClonePath(path : *mut GpPath, clonepath : *mut *mut GpPath) -> Status);
-    GdipClonePath(path, clonepath)
+    windows_link::link!("gdiplus.dll" "system" fn GdipClonePath(path : *mut GpPath, clonepath : *mut *mut GpPath) -> Status);
+    unsafe { GdipClonePath(path as _, clonepath as _) }
 }
 #[inline]
 pub unsafe fn GdipClonePen(pen: *mut GpPen, clonepen: *mut *mut GpPen) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipClonePen(pen : *mut GpPen, clonepen : *mut *mut GpPen) -> Status);
-    GdipClonePen(pen, clonepen)
+    windows_link::link!("gdiplus.dll" "system" fn GdipClonePen(pen : *mut GpPen, clonepen : *mut *mut GpPen) -> Status);
+    unsafe { GdipClonePen(pen as _, clonepen as _) }
 }
 #[inline]
 pub unsafe fn GdipCloneRegion(region: *mut GpRegion, cloneregion: *mut *mut GpRegion) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCloneRegion(region : *mut GpRegion, cloneregion : *mut *mut GpRegion) -> Status);
-    GdipCloneRegion(region, cloneregion)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCloneRegion(region : *mut GpRegion, cloneregion : *mut *mut GpRegion) -> Status);
+    unsafe { GdipCloneRegion(region as _, cloneregion as _) }
 }
 #[inline]
 pub unsafe fn GdipCloneStringFormat(format: *const GpStringFormat, newformat: *mut *mut GpStringFormat) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCloneStringFormat(format : *const GpStringFormat, newformat : *mut *mut GpStringFormat) -> Status);
-    GdipCloneStringFormat(format, newformat)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCloneStringFormat(format : *const GpStringFormat, newformat : *mut *mut GpStringFormat) -> Status);
+    unsafe { GdipCloneStringFormat(format, newformat as _) }
 }
 #[inline]
 pub unsafe fn GdipClosePathFigure(path: *mut GpPath) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipClosePathFigure(path : *mut GpPath) -> Status);
-    GdipClosePathFigure(path)
+    windows_link::link!("gdiplus.dll" "system" fn GdipClosePathFigure(path : *mut GpPath) -> Status);
+    unsafe { GdipClosePathFigure(path as _) }
 }
 #[inline]
 pub unsafe fn GdipClosePathFigures(path: *mut GpPath) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipClosePathFigures(path : *mut GpPath) -> Status);
-    GdipClosePathFigures(path)
+    windows_link::link!("gdiplus.dll" "system" fn GdipClosePathFigures(path : *mut GpPath) -> Status);
+    unsafe { GdipClosePathFigures(path as _) }
 }
 #[inline]
 pub unsafe fn GdipCombineRegionPath(region: *mut GpRegion, path: *mut GpPath, combinemode: CombineMode) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCombineRegionPath(region : *mut GpRegion, path : *mut GpPath, combinemode : CombineMode) -> Status);
-    GdipCombineRegionPath(region, path, combinemode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCombineRegionPath(region : *mut GpRegion, path : *mut GpPath, combinemode : CombineMode) -> Status);
+    unsafe { GdipCombineRegionPath(region as _, path as _, combinemode) }
 }
 #[inline]
 pub unsafe fn GdipCombineRegionRect(region: *mut GpRegion, rect: *const RectF, combinemode: CombineMode) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCombineRegionRect(region : *mut GpRegion, rect : *const RectF, combinemode : CombineMode) -> Status);
-    GdipCombineRegionRect(region, rect, combinemode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCombineRegionRect(region : *mut GpRegion, rect : *const RectF, combinemode : CombineMode) -> Status);
+    unsafe { GdipCombineRegionRect(region as _, rect, combinemode) }
 }
 #[inline]
 pub unsafe fn GdipCombineRegionRectI(region: *mut GpRegion, rect: *const Rect, combinemode: CombineMode) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCombineRegionRectI(region : *mut GpRegion, rect : *const Rect, combinemode : CombineMode) -> Status);
-    GdipCombineRegionRectI(region, rect, combinemode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCombineRegionRectI(region : *mut GpRegion, rect : *const Rect, combinemode : CombineMode) -> Status);
+    unsafe { GdipCombineRegionRectI(region as _, rect, combinemode) }
 }
 #[inline]
 pub unsafe fn GdipCombineRegionRegion(region: *mut GpRegion, region2: *mut GpRegion, combinemode: CombineMode) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCombineRegionRegion(region : *mut GpRegion, region2 : *mut GpRegion, combinemode : CombineMode) -> Status);
-    GdipCombineRegionRegion(region, region2, combinemode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCombineRegionRegion(region : *mut GpRegion, region2 : *mut GpRegion, combinemode : CombineMode) -> Status);
+    unsafe { GdipCombineRegionRegion(region as _, region2 as _, combinemode) }
 }
 #[inline]
 pub unsafe fn GdipComment(graphics: *mut GpGraphics, sizedata: u32, data: *const u8) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipComment(graphics : *mut GpGraphics, sizedata : u32, data : *const u8) -> Status);
-    GdipComment(graphics, sizedata, data)
+    windows_link::link!("gdiplus.dll" "system" fn GdipComment(graphics : *mut GpGraphics, sizedata : u32, data : *const u8) -> Status);
+    unsafe { GdipComment(graphics as _, sizedata, data) }
 }
 #[inline]
-pub unsafe fn GdipConvertToEmfPlus<P0>(refgraphics: *const GpGraphics, metafile: *mut GpMetafile, conversionfailureflag: *mut i32, emftype: EmfType, description: P0, out_metafile: *mut *mut GpMetafile) -> Status
+pub unsafe fn GdipConvertToEmfPlus<P4>(refgraphics: *const GpGraphics, metafile: *mut GpMetafile, conversionfailureflag: *mut i32, emftype: EmfType, description: P4, out_metafile: *mut *mut GpMetafile) -> Status
 where
-    P0: ::windows_core::IntoParam<::windows_core::PCWSTR>,
+    P4: windows_core::Param<windows_core::PCWSTR>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipConvertToEmfPlus(refgraphics : *const GpGraphics, metafile : *mut GpMetafile, conversionfailureflag : *mut i32, emftype : EmfType, description : ::windows_core::PCWSTR, out_metafile : *mut *mut GpMetafile) -> Status);
-    GdipConvertToEmfPlus(refgraphics, metafile, conversionfailureflag, emftype, description.into_param().abi(), out_metafile)
+    windows_link::link!("gdiplus.dll" "system" fn GdipConvertToEmfPlus(refgraphics : *const GpGraphics, metafile : *mut GpMetafile, conversionfailureflag : *mut i32, emftype : EmfType, description : windows_core::PCWSTR, out_metafile : *mut *mut GpMetafile) -> Status);
+    unsafe { GdipConvertToEmfPlus(refgraphics, metafile as _, conversionfailureflag as _, emftype, description.param().abi(), out_metafile as _) }
 }
 #[inline]
-pub unsafe fn GdipConvertToEmfPlusToFile<P0, P1>(refgraphics: *const GpGraphics, metafile: *mut GpMetafile, conversionfailureflag: *mut i32, filename: P0, emftype: EmfType, description: P1, out_metafile: *mut *mut GpMetafile) -> Status
+pub unsafe fn GdipConvertToEmfPlusToFile<P3, P5>(refgraphics: *const GpGraphics, metafile: *mut GpMetafile, conversionfailureflag: *mut i32, filename: P3, emftype: EmfType, description: P5, out_metafile: *mut *mut GpMetafile) -> Status
 where
-    P0: ::windows_core::IntoParam<::windows_core::PCWSTR>,
-    P1: ::windows_core::IntoParam<::windows_core::PCWSTR>,
+    P3: windows_core::Param<windows_core::PCWSTR>,
+    P5: windows_core::Param<windows_core::PCWSTR>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipConvertToEmfPlusToFile(refgraphics : *const GpGraphics, metafile : *mut GpMetafile, conversionfailureflag : *mut i32, filename : ::windows_core::PCWSTR, emftype : EmfType, description : ::windows_core::PCWSTR, out_metafile : *mut *mut GpMetafile) -> Status);
-    GdipConvertToEmfPlusToFile(refgraphics, metafile, conversionfailureflag, filename.into_param().abi(), emftype, description.into_param().abi(), out_metafile)
+    windows_link::link!("gdiplus.dll" "system" fn GdipConvertToEmfPlusToFile(refgraphics : *const GpGraphics, metafile : *mut GpMetafile, conversionfailureflag : *mut i32, filename : windows_core::PCWSTR, emftype : EmfType, description : windows_core::PCWSTR, out_metafile : *mut *mut GpMetafile) -> Status);
+    unsafe { GdipConvertToEmfPlusToFile(refgraphics, metafile as _, conversionfailureflag as _, filename.param().abi(), emftype, description.param().abi(), out_metafile as _) }
 }
-#[doc = "Required features: `\"Win32_System_Com\"`"]
 #[cfg(feature = "Win32_System_Com")]
 #[inline]
-pub unsafe fn GdipConvertToEmfPlusToStream<P0, P1>(refgraphics: *const GpGraphics, metafile: *mut GpMetafile, conversionfailureflag: *mut i32, stream: P0, emftype: EmfType, description: P1, out_metafile: *mut *mut GpMetafile) -> Status
+pub unsafe fn GdipConvertToEmfPlusToStream<P3, P5>(refgraphics: *const GpGraphics, metafile: *mut GpMetafile, conversionfailureflag: *mut i32, stream: P3, emftype: EmfType, description: P5, out_metafile: *mut *mut GpMetafile) -> Status
 where
-    P0: ::windows_core::IntoParam<super::super::System::Com::IStream>,
-    P1: ::windows_core::IntoParam<::windows_core::PCWSTR>,
+    P3: windows_core::Param<super::super::System::Com::IStream>,
+    P5: windows_core::Param<windows_core::PCWSTR>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipConvertToEmfPlusToStream(refgraphics : *const GpGraphics, metafile : *mut GpMetafile, conversionfailureflag : *mut i32, stream : * mut::core::ffi::c_void, emftype : EmfType, description : ::windows_core::PCWSTR, out_metafile : *mut *mut GpMetafile) -> Status);
-    GdipConvertToEmfPlusToStream(refgraphics, metafile, conversionfailureflag, stream.into_param().abi(), emftype, description.into_param().abi(), out_metafile)
+    windows_link::link!("gdiplus.dll" "system" fn GdipConvertToEmfPlusToStream(refgraphics : *const GpGraphics, metafile : *mut GpMetafile, conversionfailureflag : *mut i32, stream : * mut core::ffi::c_void, emftype : EmfType, description : windows_core::PCWSTR, out_metafile : *mut *mut GpMetafile) -> Status);
+    unsafe { GdipConvertToEmfPlusToStream(refgraphics, metafile as _, conversionfailureflag as _, stream.param().abi(), emftype, description.param().abi(), out_metafile as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipCreateAdjustableArrowCap<P0>(height: f32, width: f32, isfilled: P0, cap: *mut *mut GpAdjustableArrowCap) -> Status
-where
-    P0: ::windows_core::IntoParam<super::super::Foundation::BOOL>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateAdjustableArrowCap(height : f32, width : f32, isfilled : super::super::Foundation:: BOOL, cap : *mut *mut GpAdjustableArrowCap) -> Status);
-    GdipCreateAdjustableArrowCap(height, width, isfilled.into_param().abi(), cap)
+pub unsafe fn GdipCreateAdjustableArrowCap(height: f32, width: f32, isfilled: bool, cap: *mut *mut GpAdjustableArrowCap) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateAdjustableArrowCap(height : f32, width : f32, isfilled : windows_core::BOOL, cap : *mut *mut GpAdjustableArrowCap) -> Status);
+    unsafe { GdipCreateAdjustableArrowCap(height, width, isfilled.into(), cap as _) }
 }
-#[doc = "Required features: `\"Win32_Graphics_DirectDraw\"`"]
 #[cfg(feature = "Win32_Graphics_DirectDraw")]
 #[inline]
 pub unsafe fn GdipCreateBitmapFromDirectDrawSurface<P0>(surface: P0, bitmap: *mut *mut GpBitmap) -> Status
 where
-    P0: ::windows_core::IntoParam<super::DirectDraw::IDirectDrawSurface7>,
+    P0: windows_core::Param<super::DirectDraw::IDirectDrawSurface7>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateBitmapFromDirectDrawSurface(surface : * mut::core::ffi::c_void, bitmap : *mut *mut GpBitmap) -> Status);
-    GdipCreateBitmapFromDirectDrawSurface(surface.into_param().abi(), bitmap)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateBitmapFromDirectDrawSurface(surface : * mut core::ffi::c_void, bitmap : *mut *mut GpBitmap) -> Status);
+    unsafe { GdipCreateBitmapFromDirectDrawSurface(surface.param().abi(), bitmap as _) }
 }
 #[inline]
 pub unsafe fn GdipCreateBitmapFromFile<P0>(filename: P0, bitmap: *mut *mut GpBitmap) -> Status
 where
-    P0: ::windows_core::IntoParam<::windows_core::PCWSTR>,
+    P0: windows_core::Param<windows_core::PCWSTR>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateBitmapFromFile(filename : ::windows_core::PCWSTR, bitmap : *mut *mut GpBitmap) -> Status);
-    GdipCreateBitmapFromFile(filename.into_param().abi(), bitmap)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateBitmapFromFile(filename : windows_core::PCWSTR, bitmap : *mut *mut GpBitmap) -> Status);
+    unsafe { GdipCreateBitmapFromFile(filename.param().abi(), bitmap as _) }
 }
 #[inline]
 pub unsafe fn GdipCreateBitmapFromFileICM<P0>(filename: P0, bitmap: *mut *mut GpBitmap) -> Status
 where
-    P0: ::windows_core::IntoParam<::windows_core::PCWSTR>,
+    P0: windows_core::Param<windows_core::PCWSTR>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateBitmapFromFileICM(filename : ::windows_core::PCWSTR, bitmap : *mut *mut GpBitmap) -> Status);
-    GdipCreateBitmapFromFileICM(filename.into_param().abi(), bitmap)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateBitmapFromFileICM(filename : windows_core::PCWSTR, bitmap : *mut *mut GpBitmap) -> Status);
+    unsafe { GdipCreateBitmapFromFileICM(filename.param().abi(), bitmap as _) }
 }
-#[doc = "Required features: `\"Win32_Graphics_Gdi\"`"]
 #[cfg(feature = "Win32_Graphics_Gdi")]
 #[inline]
-pub unsafe fn GdipCreateBitmapFromGdiDib(gdibitmapinfo: *const super::Gdi::BITMAPINFO, gdibitmapdata: *mut ::core::ffi::c_void, bitmap: *mut *mut GpBitmap) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateBitmapFromGdiDib(gdibitmapinfo : *const super::Gdi:: BITMAPINFO, gdibitmapdata : *mut ::core::ffi::c_void, bitmap : *mut *mut GpBitmap) -> Status);
-    GdipCreateBitmapFromGdiDib(gdibitmapinfo, gdibitmapdata, bitmap)
+pub unsafe fn GdipCreateBitmapFromGdiDib(gdibitmapinfo: *const super::Gdi::BITMAPINFO, gdibitmapdata: *mut core::ffi::c_void, bitmap: *mut *mut GpBitmap) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateBitmapFromGdiDib(gdibitmapinfo : *const super::Gdi:: BITMAPINFO, gdibitmapdata : *mut core::ffi::c_void, bitmap : *mut *mut GpBitmap) -> Status);
+    unsafe { GdipCreateBitmapFromGdiDib(gdibitmapinfo, gdibitmapdata as _, bitmap as _) }
 }
 #[inline]
 pub unsafe fn GdipCreateBitmapFromGraphics(width: i32, height: i32, target: *mut GpGraphics, bitmap: *mut *mut GpBitmap) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateBitmapFromGraphics(width : i32, height : i32, target : *mut GpGraphics, bitmap : *mut *mut GpBitmap) -> Status);
-    GdipCreateBitmapFromGraphics(width, height, target, bitmap)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateBitmapFromGraphics(width : i32, height : i32, target : *mut GpGraphics, bitmap : *mut *mut GpBitmap) -> Status);
+    unsafe { GdipCreateBitmapFromGraphics(width, height, target as _, bitmap as _) }
 }
-#[doc = "Required features: `\"Win32_Graphics_Gdi\"`"]
 #[cfg(feature = "Win32_Graphics_Gdi")]
 #[inline]
-pub unsafe fn GdipCreateBitmapFromHBITMAP<P0, P1>(hbm: P0, hpal: P1, bitmap: *mut *mut GpBitmap) -> Status
-where
-    P0: ::windows_core::IntoParam<super::Gdi::HBITMAP>,
-    P1: ::windows_core::IntoParam<super::Gdi::HPALETTE>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateBitmapFromHBITMAP(hbm : super::Gdi:: HBITMAP, hpal : super::Gdi:: HPALETTE, bitmap : *mut *mut GpBitmap) -> Status);
-    GdipCreateBitmapFromHBITMAP(hbm.into_param().abi(), hpal.into_param().abi(), bitmap)
+pub unsafe fn GdipCreateBitmapFromHBITMAP(hbm: super::Gdi::HBITMAP, hpal: super::Gdi::HPALETTE, bitmap: *mut *mut GpBitmap) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateBitmapFromHBITMAP(hbm : super::Gdi:: HBITMAP, hpal : super::Gdi:: HPALETTE, bitmap : *mut *mut GpBitmap) -> Status);
+    unsafe { GdipCreateBitmapFromHBITMAP(hbm, hpal, bitmap as _) }
 }
-#[doc = "Required features: `\"Win32_UI_WindowsAndMessaging\"`"]
 #[cfg(feature = "Win32_UI_WindowsAndMessaging")]
 #[inline]
-pub unsafe fn GdipCreateBitmapFromHICON<P0>(hicon: P0, bitmap: *mut *mut GpBitmap) -> Status
-where
-    P0: ::windows_core::IntoParam<super::super::UI::WindowsAndMessaging::HICON>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateBitmapFromHICON(hicon : super::super::UI::WindowsAndMessaging:: HICON, bitmap : *mut *mut GpBitmap) -> Status);
-    GdipCreateBitmapFromHICON(hicon.into_param().abi(), bitmap)
-}
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
-#[inline]
-pub unsafe fn GdipCreateBitmapFromResource<P0, P1>(hinstance: P0, lpbitmapname: P1, bitmap: *mut *mut GpBitmap) -> Status
-where
-    P0: ::windows_core::IntoParam<super::super::Foundation::HINSTANCE>,
-    P1: ::windows_core::IntoParam<::windows_core::PCWSTR>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateBitmapFromResource(hinstance : super::super::Foundation:: HINSTANCE, lpbitmapname : ::windows_core::PCWSTR, bitmap : *mut *mut GpBitmap) -> Status);
-    GdipCreateBitmapFromResource(hinstance.into_param().abi(), lpbitmapname.into_param().abi(), bitmap)
+pub unsafe fn GdipCreateBitmapFromHICON(hicon: super::super::UI::WindowsAndMessaging::HICON, bitmap: *mut *mut GpBitmap) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateBitmapFromHICON(hicon : super::super::UI::WindowsAndMessaging:: HICON, bitmap : *mut *mut GpBitmap) -> Status);
+    unsafe { GdipCreateBitmapFromHICON(hicon, bitmap as _) }
 }
 #[inline]
-pub unsafe fn GdipCreateBitmapFromScan0(width: i32, height: i32, stride: i32, format: i32, scan0: ::core::option::Option<*const u8>, bitmap: *mut *mut GpBitmap) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateBitmapFromScan0(width : i32, height : i32, stride : i32, format : i32, scan0 : *const u8, bitmap : *mut *mut GpBitmap) -> Status);
-    GdipCreateBitmapFromScan0(width, height, stride, format, ::core::mem::transmute(scan0.unwrap_or(::std::ptr::null())), bitmap)
+pub unsafe fn GdipCreateBitmapFromResource<P1>(hinstance: super::super::Foundation::HINSTANCE, lpbitmapname: P1, bitmap: *mut *mut GpBitmap) -> Status
+where
+    P1: windows_core::Param<windows_core::PCWSTR>,
+{
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateBitmapFromResource(hinstance : super::super::Foundation:: HINSTANCE, lpbitmapname : windows_core::PCWSTR, bitmap : *mut *mut GpBitmap) -> Status);
+    unsafe { GdipCreateBitmapFromResource(hinstance, lpbitmapname.param().abi(), bitmap as _) }
 }
-#[doc = "Required features: `\"Win32_System_Com\"`"]
+#[inline]
+pub unsafe fn GdipCreateBitmapFromScan0(width: i32, height: i32, stride: i32, format: i32, scan0: Option<*const u8>, bitmap: *mut *mut GpBitmap) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateBitmapFromScan0(width : i32, height : i32, stride : i32, format : i32, scan0 : *const u8, bitmap : *mut *mut GpBitmap) -> Status);
+    unsafe { GdipCreateBitmapFromScan0(width, height, stride, format, scan0.unwrap_or(core::mem::zeroed()) as _, bitmap as _) }
+}
 #[cfg(feature = "Win32_System_Com")]
 #[inline]
 pub unsafe fn GdipCreateBitmapFromStream<P0>(stream: P0, bitmap: *mut *mut GpBitmap) -> Status
 where
-    P0: ::windows_core::IntoParam<super::super::System::Com::IStream>,
+    P0: windows_core::Param<super::super::System::Com::IStream>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateBitmapFromStream(stream : * mut::core::ffi::c_void, bitmap : *mut *mut GpBitmap) -> Status);
-    GdipCreateBitmapFromStream(stream.into_param().abi(), bitmap)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateBitmapFromStream(stream : * mut core::ffi::c_void, bitmap : *mut *mut GpBitmap) -> Status);
+    unsafe { GdipCreateBitmapFromStream(stream.param().abi(), bitmap as _) }
 }
-#[doc = "Required features: `\"Win32_System_Com\"`"]
 #[cfg(feature = "Win32_System_Com")]
 #[inline]
 pub unsafe fn GdipCreateBitmapFromStreamICM<P0>(stream: P0, bitmap: *mut *mut GpBitmap) -> Status
 where
-    P0: ::windows_core::IntoParam<super::super::System::Com::IStream>,
+    P0: windows_core::Param<super::super::System::Com::IStream>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateBitmapFromStreamICM(stream : * mut::core::ffi::c_void, bitmap : *mut *mut GpBitmap) -> Status);
-    GdipCreateBitmapFromStreamICM(stream.into_param().abi(), bitmap)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateBitmapFromStreamICM(stream : * mut core::ffi::c_void, bitmap : *mut *mut GpBitmap) -> Status);
+    unsafe { GdipCreateBitmapFromStreamICM(stream.param().abi(), bitmap as _) }
 }
 #[inline]
 pub unsafe fn GdipCreateCachedBitmap(bitmap: *mut GpBitmap, graphics: *mut GpGraphics, cachedbitmap: *mut *mut GpCachedBitmap) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateCachedBitmap(bitmap : *mut GpBitmap, graphics : *mut GpGraphics, cachedbitmap : *mut *mut GpCachedBitmap) -> Status);
-    GdipCreateCachedBitmap(bitmap, graphics, cachedbitmap)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateCachedBitmap(bitmap : *mut GpBitmap, graphics : *mut GpGraphics, cachedbitmap : *mut *mut GpCachedBitmap) -> Status);
+    unsafe { GdipCreateCachedBitmap(bitmap as _, graphics as _, cachedbitmap as _) }
 }
 #[inline]
 pub unsafe fn GdipCreateCustomLineCap(fillpath: *mut GpPath, strokepath: *mut GpPath, basecap: LineCap, baseinset: f32, customcap: *mut *mut GpCustomLineCap) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateCustomLineCap(fillpath : *mut GpPath, strokepath : *mut GpPath, basecap : LineCap, baseinset : f32, customcap : *mut *mut GpCustomLineCap) -> Status);
-    GdipCreateCustomLineCap(fillpath, strokepath, basecap, baseinset, customcap)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateCustomLineCap(fillpath : *mut GpPath, strokepath : *mut GpPath, basecap : LineCap, baseinset : f32, customcap : *mut *mut GpCustomLineCap) -> Status);
+    unsafe { GdipCreateCustomLineCap(fillpath as _, strokepath as _, basecap, baseinset, customcap as _) }
 }
 #[inline]
-pub unsafe fn GdipCreateEffect(guid: ::windows_core::GUID, effect: *mut *mut CGpEffect) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateEffect(guid : ::windows_core::GUID, effect : *mut *mut CGpEffect) -> Status);
-    GdipCreateEffect(::core::mem::transmute(guid), effect)
+pub unsafe fn GdipCreateEffect(guid: windows_core::GUID, effect: *mut *mut CGpEffect) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateEffect(guid : windows_core::GUID, effect : *mut *mut CGpEffect) -> Status);
+    unsafe { GdipCreateEffect(core::mem::transmute(guid), effect as _) }
 }
 #[inline]
 pub unsafe fn GdipCreateFont(fontfamily: *const GpFontFamily, emsize: f32, style: i32, unit: Unit, font: *mut *mut GpFont) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateFont(fontfamily : *const GpFontFamily, emsize : f32, style : i32, unit : Unit, font : *mut *mut GpFont) -> Status);
-    GdipCreateFont(fontfamily, emsize, style, unit, font)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateFont(fontfamily : *const GpFontFamily, emsize : f32, style : i32, unit : Unit, font : *mut *mut GpFont) -> Status);
+    unsafe { GdipCreateFont(fontfamily, emsize, style, unit, font as _) }
 }
 #[inline]
 pub unsafe fn GdipCreateFontFamilyFromName<P0>(name: P0, fontcollection: *mut GpFontCollection, fontfamily: *mut *mut GpFontFamily) -> Status
 where
-    P0: ::windows_core::IntoParam<::windows_core::PCWSTR>,
+    P0: windows_core::Param<windows_core::PCWSTR>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateFontFamilyFromName(name : ::windows_core::PCWSTR, fontcollection : *mut GpFontCollection, fontfamily : *mut *mut GpFontFamily) -> Status);
-    GdipCreateFontFamilyFromName(name.into_param().abi(), fontcollection, fontfamily)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateFontFamilyFromName(name : windows_core::PCWSTR, fontcollection : *mut GpFontCollection, fontfamily : *mut *mut GpFontFamily) -> Status);
+    unsafe { GdipCreateFontFamilyFromName(name.param().abi(), fontcollection as _, fontfamily as _) }
 }
-#[doc = "Required features: `\"Win32_Graphics_Gdi\"`"]
 #[cfg(feature = "Win32_Graphics_Gdi")]
 #[inline]
-pub unsafe fn GdipCreateFontFromDC<P0>(hdc: P0, font: *mut *mut GpFont) -> Status
-where
-    P0: ::windows_core::IntoParam<super::Gdi::HDC>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateFontFromDC(hdc : super::Gdi:: HDC, font : *mut *mut GpFont) -> Status);
-    GdipCreateFontFromDC(hdc.into_param().abi(), font)
+pub unsafe fn GdipCreateFontFromDC(hdc: super::Gdi::HDC, font: *mut *mut GpFont) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateFontFromDC(hdc : super::Gdi:: HDC, font : *mut *mut GpFont) -> Status);
+    unsafe { GdipCreateFontFromDC(hdc, font as _) }
 }
-#[doc = "Required features: `\"Win32_Graphics_Gdi\"`"]
 #[cfg(feature = "Win32_Graphics_Gdi")]
 #[inline]
-pub unsafe fn GdipCreateFontFromLogfontA<P0>(hdc: P0, logfont: *const super::Gdi::LOGFONTA, font: *mut *mut GpFont) -> Status
-where
-    P0: ::windows_core::IntoParam<super::Gdi::HDC>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateFontFromLogfontA(hdc : super::Gdi:: HDC, logfont : *const super::Gdi:: LOGFONTA, font : *mut *mut GpFont) -> Status);
-    GdipCreateFontFromLogfontA(hdc.into_param().abi(), logfont, font)
+pub unsafe fn GdipCreateFontFromLogfontA(hdc: super::Gdi::HDC, logfont: *const super::Gdi::LOGFONTA, font: *mut *mut GpFont) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateFontFromLogfontA(hdc : super::Gdi:: HDC, logfont : *const super::Gdi:: LOGFONTA, font : *mut *mut GpFont) -> Status);
+    unsafe { GdipCreateFontFromLogfontA(hdc, logfont, font as _) }
 }
-#[doc = "Required features: `\"Win32_Graphics_Gdi\"`"]
 #[cfg(feature = "Win32_Graphics_Gdi")]
 #[inline]
-pub unsafe fn GdipCreateFontFromLogfontW<P0>(hdc: P0, logfont: *const super::Gdi::LOGFONTW, font: *mut *mut GpFont) -> Status
-where
-    P0: ::windows_core::IntoParam<super::Gdi::HDC>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateFontFromLogfontW(hdc : super::Gdi:: HDC, logfont : *const super::Gdi:: LOGFONTW, font : *mut *mut GpFont) -> Status);
-    GdipCreateFontFromLogfontW(hdc.into_param().abi(), logfont, font)
+pub unsafe fn GdipCreateFontFromLogfontW(hdc: super::Gdi::HDC, logfont: *const super::Gdi::LOGFONTW, font: *mut *mut GpFont) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateFontFromLogfontW(hdc : super::Gdi:: HDC, logfont : *const super::Gdi:: LOGFONTW, font : *mut *mut GpFont) -> Status);
+    unsafe { GdipCreateFontFromLogfontW(hdc, logfont, font as _) }
 }
-#[doc = "Required features: `\"Win32_Graphics_Gdi\"`"]
 #[cfg(feature = "Win32_Graphics_Gdi")]
 #[inline]
-pub unsafe fn GdipCreateFromHDC<P0>(hdc: P0, graphics: *mut *mut GpGraphics) -> Status
-where
-    P0: ::windows_core::IntoParam<super::Gdi::HDC>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateFromHDC(hdc : super::Gdi:: HDC, graphics : *mut *mut GpGraphics) -> Status);
-    GdipCreateFromHDC(hdc.into_param().abi(), graphics)
+pub unsafe fn GdipCreateFromHDC(hdc: super::Gdi::HDC, graphics: *mut *mut GpGraphics) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateFromHDC(hdc : super::Gdi:: HDC, graphics : *mut *mut GpGraphics) -> Status);
+    unsafe { GdipCreateFromHDC(hdc, graphics as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`, `\"Win32_Graphics_Gdi\"`"]
-#[cfg(all(feature = "Win32_Foundation", feature = "Win32_Graphics_Gdi"))]
+#[cfg(feature = "Win32_Graphics_Gdi")]
 #[inline]
-pub unsafe fn GdipCreateFromHDC2<P0, P1>(hdc: P0, hdevice: P1, graphics: *mut *mut GpGraphics) -> Status
-where
-    P0: ::windows_core::IntoParam<super::Gdi::HDC>,
-    P1: ::windows_core::IntoParam<super::super::Foundation::HANDLE>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateFromHDC2(hdc : super::Gdi:: HDC, hdevice : super::super::Foundation:: HANDLE, graphics : *mut *mut GpGraphics) -> Status);
-    GdipCreateFromHDC2(hdc.into_param().abi(), hdevice.into_param().abi(), graphics)
+pub unsafe fn GdipCreateFromHDC2(hdc: super::Gdi::HDC, hdevice: super::super::Foundation::HANDLE, graphics: *mut *mut GpGraphics) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateFromHDC2(hdc : super::Gdi:: HDC, hdevice : super::super::Foundation:: HANDLE, graphics : *mut *mut GpGraphics) -> Status);
+    unsafe { GdipCreateFromHDC2(hdc, hdevice, graphics as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipCreateFromHWND<P0>(hwnd: P0, graphics: *mut *mut GpGraphics) -> Status
-where
-    P0: ::windows_core::IntoParam<super::super::Foundation::HWND>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateFromHWND(hwnd : super::super::Foundation:: HWND, graphics : *mut *mut GpGraphics) -> Status);
-    GdipCreateFromHWND(hwnd.into_param().abi(), graphics)
+pub unsafe fn GdipCreateFromHWND(hwnd: super::super::Foundation::HWND, graphics: *mut *mut GpGraphics) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateFromHWND(hwnd : super::super::Foundation:: HWND, graphics : *mut *mut GpGraphics) -> Status);
+    unsafe { GdipCreateFromHWND(hwnd, graphics as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipCreateFromHWNDICM<P0>(hwnd: P0, graphics: *mut *mut GpGraphics) -> Status
-where
-    P0: ::windows_core::IntoParam<super::super::Foundation::HWND>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateFromHWNDICM(hwnd : super::super::Foundation:: HWND, graphics : *mut *mut GpGraphics) -> Status);
-    GdipCreateFromHWNDICM(hwnd.into_param().abi(), graphics)
+pub unsafe fn GdipCreateFromHWNDICM(hwnd: super::super::Foundation::HWND, graphics: *mut *mut GpGraphics) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateFromHWNDICM(hwnd : super::super::Foundation:: HWND, graphics : *mut *mut GpGraphics) -> Status);
+    unsafe { GdipCreateFromHWNDICM(hwnd, graphics as _) }
 }
-#[doc = "Required features: `\"Win32_Graphics_Gdi\"`"]
 #[cfg(feature = "Win32_Graphics_Gdi")]
 #[inline]
 pub unsafe fn GdipCreateHBITMAPFromBitmap(bitmap: *mut GpBitmap, hbmreturn: *mut super::Gdi::HBITMAP, background: u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateHBITMAPFromBitmap(bitmap : *mut GpBitmap, hbmreturn : *mut super::Gdi:: HBITMAP, background : u32) -> Status);
-    GdipCreateHBITMAPFromBitmap(bitmap, hbmreturn, background)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateHBITMAPFromBitmap(bitmap : *mut GpBitmap, hbmreturn : *mut super::Gdi:: HBITMAP, background : u32) -> Status);
+    unsafe { GdipCreateHBITMAPFromBitmap(bitmap as _, hbmreturn as _, background) }
 }
-#[doc = "Required features: `\"Win32_UI_WindowsAndMessaging\"`"]
 #[cfg(feature = "Win32_UI_WindowsAndMessaging")]
 #[inline]
 pub unsafe fn GdipCreateHICONFromBitmap(bitmap: *mut GpBitmap, hbmreturn: *mut super::super::UI::WindowsAndMessaging::HICON) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateHICONFromBitmap(bitmap : *mut GpBitmap, hbmreturn : *mut super::super::UI::WindowsAndMessaging:: HICON) -> Status);
-    GdipCreateHICONFromBitmap(bitmap, hbmreturn)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateHICONFromBitmap(bitmap : *mut GpBitmap, hbmreturn : *mut super::super::UI::WindowsAndMessaging:: HICON) -> Status);
+    unsafe { GdipCreateHICONFromBitmap(bitmap as _, hbmreturn as _) }
 }
-#[doc = "Required features: `\"Win32_Graphics_Gdi\"`"]
 #[cfg(feature = "Win32_Graphics_Gdi")]
 #[inline]
 pub unsafe fn GdipCreateHalftonePalette() -> super::Gdi::HPALETTE {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateHalftonePalette() -> super::Gdi:: HPALETTE);
-    GdipCreateHalftonePalette()
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateHalftonePalette() -> super::Gdi:: HPALETTE);
+    unsafe { GdipCreateHalftonePalette() }
 }
 #[inline]
 pub unsafe fn GdipCreateHatchBrush(hatchstyle: HatchStyle, forecol: u32, backcol: u32, brush: *mut *mut GpHatch) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateHatchBrush(hatchstyle : HatchStyle, forecol : u32, backcol : u32, brush : *mut *mut GpHatch) -> Status);
-    GdipCreateHatchBrush(hatchstyle, forecol, backcol, brush)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateHatchBrush(hatchstyle : HatchStyle, forecol : u32, backcol : u32, brush : *mut *mut GpHatch) -> Status);
+    unsafe { GdipCreateHatchBrush(hatchstyle, forecol, backcol, brush as _) }
 }
 #[inline]
 pub unsafe fn GdipCreateImageAttributes(imageattr: *mut *mut GpImageAttributes) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateImageAttributes(imageattr : *mut *mut GpImageAttributes) -> Status);
-    GdipCreateImageAttributes(imageattr)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateImageAttributes(imageattr : *mut *mut GpImageAttributes) -> Status);
+    unsafe { GdipCreateImageAttributes(imageattr as _) }
 }
 #[inline]
 pub unsafe fn GdipCreateLineBrush(point1: *const PointF, point2: *const PointF, color1: u32, color2: u32, wrapmode: WrapMode, linegradient: *mut *mut GpLineGradient) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateLineBrush(point1 : *const PointF, point2 : *const PointF, color1 : u32, color2 : u32, wrapmode : WrapMode, linegradient : *mut *mut GpLineGradient) -> Status);
-    GdipCreateLineBrush(point1, point2, color1, color2, wrapmode, linegradient)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateLineBrush(point1 : *const PointF, point2 : *const PointF, color1 : u32, color2 : u32, wrapmode : WrapMode, linegradient : *mut *mut GpLineGradient) -> Status);
+    unsafe { GdipCreateLineBrush(point1, point2, color1, color2, wrapmode, linegradient as _) }
 }
 #[inline]
 pub unsafe fn GdipCreateLineBrushFromRect(rect: *const RectF, color1: u32, color2: u32, mode: LinearGradientMode, wrapmode: WrapMode, linegradient: *mut *mut GpLineGradient) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateLineBrushFromRect(rect : *const RectF, color1 : u32, color2 : u32, mode : LinearGradientMode, wrapmode : WrapMode, linegradient : *mut *mut GpLineGradient) -> Status);
-    GdipCreateLineBrushFromRect(rect, color1, color2, mode, wrapmode, linegradient)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateLineBrushFromRect(rect : *const RectF, color1 : u32, color2 : u32, mode : LinearGradientMode, wrapmode : WrapMode, linegradient : *mut *mut GpLineGradient) -> Status);
+    unsafe { GdipCreateLineBrushFromRect(rect, color1, color2, mode, wrapmode, linegradient as _) }
 }
 #[inline]
 pub unsafe fn GdipCreateLineBrushFromRectI(rect: *const Rect, color1: u32, color2: u32, mode: LinearGradientMode, wrapmode: WrapMode, linegradient: *mut *mut GpLineGradient) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateLineBrushFromRectI(rect : *const Rect, color1 : u32, color2 : u32, mode : LinearGradientMode, wrapmode : WrapMode, linegradient : *mut *mut GpLineGradient) -> Status);
-    GdipCreateLineBrushFromRectI(rect, color1, color2, mode, wrapmode, linegradient)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateLineBrushFromRectI(rect : *const Rect, color1 : u32, color2 : u32, mode : LinearGradientMode, wrapmode : WrapMode, linegradient : *mut *mut GpLineGradient) -> Status);
+    unsafe { GdipCreateLineBrushFromRectI(rect, color1, color2, mode, wrapmode, linegradient as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipCreateLineBrushFromRectWithAngle<P0>(rect: *const RectF, color1: u32, color2: u32, angle: f32, isanglescalable: P0, wrapmode: WrapMode, linegradient: *mut *mut GpLineGradient) -> Status
-where
-    P0: ::windows_core::IntoParam<super::super::Foundation::BOOL>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateLineBrushFromRectWithAngle(rect : *const RectF, color1 : u32, color2 : u32, angle : f32, isanglescalable : super::super::Foundation:: BOOL, wrapmode : WrapMode, linegradient : *mut *mut GpLineGradient) -> Status);
-    GdipCreateLineBrushFromRectWithAngle(rect, color1, color2, angle, isanglescalable.into_param().abi(), wrapmode, linegradient)
+pub unsafe fn GdipCreateLineBrushFromRectWithAngle(rect: *const RectF, color1: u32, color2: u32, angle: f32, isanglescalable: bool, wrapmode: WrapMode, linegradient: *mut *mut GpLineGradient) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateLineBrushFromRectWithAngle(rect : *const RectF, color1 : u32, color2 : u32, angle : f32, isanglescalable : windows_core::BOOL, wrapmode : WrapMode, linegradient : *mut *mut GpLineGradient) -> Status);
+    unsafe { GdipCreateLineBrushFromRectWithAngle(rect, color1, color2, angle, isanglescalable.into(), wrapmode, linegradient as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipCreateLineBrushFromRectWithAngleI<P0>(rect: *const Rect, color1: u32, color2: u32, angle: f32, isanglescalable: P0, wrapmode: WrapMode, linegradient: *mut *mut GpLineGradient) -> Status
-where
-    P0: ::windows_core::IntoParam<super::super::Foundation::BOOL>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateLineBrushFromRectWithAngleI(rect : *const Rect, color1 : u32, color2 : u32, angle : f32, isanglescalable : super::super::Foundation:: BOOL, wrapmode : WrapMode, linegradient : *mut *mut GpLineGradient) -> Status);
-    GdipCreateLineBrushFromRectWithAngleI(rect, color1, color2, angle, isanglescalable.into_param().abi(), wrapmode, linegradient)
+pub unsafe fn GdipCreateLineBrushFromRectWithAngleI(rect: *const Rect, color1: u32, color2: u32, angle: f32, isanglescalable: bool, wrapmode: WrapMode, linegradient: *mut *mut GpLineGradient) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateLineBrushFromRectWithAngleI(rect : *const Rect, color1 : u32, color2 : u32, angle : f32, isanglescalable : windows_core::BOOL, wrapmode : WrapMode, linegradient : *mut *mut GpLineGradient) -> Status);
+    unsafe { GdipCreateLineBrushFromRectWithAngleI(rect, color1, color2, angle, isanglescalable.into(), wrapmode, linegradient as _) }
 }
 #[inline]
 pub unsafe fn GdipCreateLineBrushI(point1: *const Point, point2: *const Point, color1: u32, color2: u32, wrapmode: WrapMode, linegradient: *mut *mut GpLineGradient) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateLineBrushI(point1 : *const Point, point2 : *const Point, color1 : u32, color2 : u32, wrapmode : WrapMode, linegradient : *mut *mut GpLineGradient) -> Status);
-    GdipCreateLineBrushI(point1, point2, color1, color2, wrapmode, linegradient)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateLineBrushI(point1 : *const Point, point2 : *const Point, color1 : u32, color2 : u32, wrapmode : WrapMode, linegradient : *mut *mut GpLineGradient) -> Status);
+    unsafe { GdipCreateLineBrushI(point1, point2, color1, color2, wrapmode, linegradient as _) }
 }
 #[inline]
 pub unsafe fn GdipCreateMatrix(matrix: *mut *mut Matrix) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateMatrix(matrix : *mut *mut Matrix) -> Status);
-    GdipCreateMatrix(matrix)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateMatrix(matrix : *mut *mut Matrix) -> Status);
+    unsafe { GdipCreateMatrix(matrix as _) }
 }
 #[inline]
 pub unsafe fn GdipCreateMatrix2(m11: f32, m12: f32, m21: f32, m22: f32, dx: f32, dy: f32, matrix: *mut *mut Matrix) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateMatrix2(m11 : f32, m12 : f32, m21 : f32, m22 : f32, dx : f32, dy : f32, matrix : *mut *mut Matrix) -> Status);
-    GdipCreateMatrix2(m11, m12, m21, m22, dx, dy, matrix)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateMatrix2(m11 : f32, m12 : f32, m21 : f32, m22 : f32, dx : f32, dy : f32, matrix : *mut *mut Matrix) -> Status);
+    unsafe { GdipCreateMatrix2(m11, m12, m21, m22, dx, dy, matrix as _) }
 }
 #[inline]
 pub unsafe fn GdipCreateMatrix3(rect: *const RectF, dstplg: *const PointF, matrix: *mut *mut Matrix) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateMatrix3(rect : *const RectF, dstplg : *const PointF, matrix : *mut *mut Matrix) -> Status);
-    GdipCreateMatrix3(rect, dstplg, matrix)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateMatrix3(rect : *const RectF, dstplg : *const PointF, matrix : *mut *mut Matrix) -> Status);
+    unsafe { GdipCreateMatrix3(rect, dstplg, matrix as _) }
 }
 #[inline]
 pub unsafe fn GdipCreateMatrix3I(rect: *const Rect, dstplg: *const Point, matrix: *mut *mut Matrix) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateMatrix3I(rect : *const Rect, dstplg : *const Point, matrix : *mut *mut Matrix) -> Status);
-    GdipCreateMatrix3I(rect, dstplg, matrix)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateMatrix3I(rect : *const Rect, dstplg : *const Point, matrix : *mut *mut Matrix) -> Status);
+    unsafe { GdipCreateMatrix3I(rect, dstplg, matrix as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`, `\"Win32_Graphics_Gdi\"`"]
-#[cfg(all(feature = "Win32_Foundation", feature = "Win32_Graphics_Gdi"))]
+#[cfg(feature = "Win32_Graphics_Gdi")]
 #[inline]
-pub unsafe fn GdipCreateMetafileFromEmf<P0, P1>(hemf: P0, deleteemf: P1, metafile: *mut *mut GpMetafile) -> Status
-where
-    P0: ::windows_core::IntoParam<super::Gdi::HENHMETAFILE>,
-    P1: ::windows_core::IntoParam<super::super::Foundation::BOOL>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateMetafileFromEmf(hemf : super::Gdi:: HENHMETAFILE, deleteemf : super::super::Foundation:: BOOL, metafile : *mut *mut GpMetafile) -> Status);
-    GdipCreateMetafileFromEmf(hemf.into_param().abi(), deleteemf.into_param().abi(), metafile)
+pub unsafe fn GdipCreateMetafileFromEmf(hemf: super::Gdi::HENHMETAFILE, deleteemf: bool, metafile: *mut *mut GpMetafile) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateMetafileFromEmf(hemf : super::Gdi:: HENHMETAFILE, deleteemf : windows_core::BOOL, metafile : *mut *mut GpMetafile) -> Status);
+    unsafe { GdipCreateMetafileFromEmf(hemf, deleteemf.into(), metafile as _) }
 }
 #[inline]
 pub unsafe fn GdipCreateMetafileFromFile<P0>(file: P0, metafile: *mut *mut GpMetafile) -> Status
 where
-    P0: ::windows_core::IntoParam<::windows_core::PCWSTR>,
+    P0: windows_core::Param<windows_core::PCWSTR>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateMetafileFromFile(file : ::windows_core::PCWSTR, metafile : *mut *mut GpMetafile) -> Status);
-    GdipCreateMetafileFromFile(file.into_param().abi(), metafile)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateMetafileFromFile(file : windows_core::PCWSTR, metafile : *mut *mut GpMetafile) -> Status);
+    unsafe { GdipCreateMetafileFromFile(file.param().abi(), metafile as _) }
 }
-#[doc = "Required features: `\"Win32_System_Com\"`"]
 #[cfg(feature = "Win32_System_Com")]
 #[inline]
 pub unsafe fn GdipCreateMetafileFromStream<P0>(stream: P0, metafile: *mut *mut GpMetafile) -> Status
 where
-    P0: ::windows_core::IntoParam<super::super::System::Com::IStream>,
+    P0: windows_core::Param<super::super::System::Com::IStream>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateMetafileFromStream(stream : * mut::core::ffi::c_void, metafile : *mut *mut GpMetafile) -> Status);
-    GdipCreateMetafileFromStream(stream.into_param().abi(), metafile)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateMetafileFromStream(stream : * mut core::ffi::c_void, metafile : *mut *mut GpMetafile) -> Status);
+    unsafe { GdipCreateMetafileFromStream(stream.param().abi(), metafile as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`, `\"Win32_Graphics_Gdi\"`"]
-#[cfg(all(feature = "Win32_Foundation", feature = "Win32_Graphics_Gdi"))]
+#[cfg(feature = "Win32_Graphics_Gdi")]
 #[inline]
-pub unsafe fn GdipCreateMetafileFromWmf<P0, P1>(hwmf: P0, deletewmf: P1, wmfplaceablefileheader: *const WmfPlaceableFileHeader, metafile: *mut *mut GpMetafile) -> Status
-where
-    P0: ::windows_core::IntoParam<super::Gdi::HMETAFILE>,
-    P1: ::windows_core::IntoParam<super::super::Foundation::BOOL>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateMetafileFromWmf(hwmf : super::Gdi:: HMETAFILE, deletewmf : super::super::Foundation:: BOOL, wmfplaceablefileheader : *const WmfPlaceableFileHeader, metafile : *mut *mut GpMetafile) -> Status);
-    GdipCreateMetafileFromWmf(hwmf.into_param().abi(), deletewmf.into_param().abi(), wmfplaceablefileheader, metafile)
+pub unsafe fn GdipCreateMetafileFromWmf(hwmf: super::Gdi::HMETAFILE, deletewmf: bool, wmfplaceablefileheader: *const WmfPlaceableFileHeader, metafile: *mut *mut GpMetafile) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateMetafileFromWmf(hwmf : super::Gdi:: HMETAFILE, deletewmf : windows_core::BOOL, wmfplaceablefileheader : *const WmfPlaceableFileHeader, metafile : *mut *mut GpMetafile) -> Status);
+    unsafe { GdipCreateMetafileFromWmf(hwmf, deletewmf.into(), wmfplaceablefileheader, metafile as _) }
 }
 #[inline]
 pub unsafe fn GdipCreateMetafileFromWmfFile<P0>(file: P0, wmfplaceablefileheader: *const WmfPlaceableFileHeader, metafile: *mut *mut GpMetafile) -> Status
 where
-    P0: ::windows_core::IntoParam<::windows_core::PCWSTR>,
+    P0: windows_core::Param<windows_core::PCWSTR>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateMetafileFromWmfFile(file : ::windows_core::PCWSTR, wmfplaceablefileheader : *const WmfPlaceableFileHeader, metafile : *mut *mut GpMetafile) -> Status);
-    GdipCreateMetafileFromWmfFile(file.into_param().abi(), wmfplaceablefileheader, metafile)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateMetafileFromWmfFile(file : windows_core::PCWSTR, wmfplaceablefileheader : *const WmfPlaceableFileHeader, metafile : *mut *mut GpMetafile) -> Status);
+    unsafe { GdipCreateMetafileFromWmfFile(file.param().abi(), wmfplaceablefileheader, metafile as _) }
 }
 #[inline]
 pub unsafe fn GdipCreatePath(brushmode: FillMode, path: *mut *mut GpPath) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreatePath(brushmode : FillMode, path : *mut *mut GpPath) -> Status);
-    GdipCreatePath(brushmode, path)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreatePath(brushmode : FillMode, path : *mut *mut GpPath) -> Status);
+    unsafe { GdipCreatePath(brushmode, path as _) }
 }
 #[inline]
 pub unsafe fn GdipCreatePath2(param0: *const PointF, param1: *const u8, param2: i32, param3: FillMode, path: *mut *mut GpPath) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreatePath2(param0 : *const PointF, param1 : *const u8, param2 : i32, param3 : FillMode, path : *mut *mut GpPath) -> Status);
-    GdipCreatePath2(param0, param1, param2, param3, path)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreatePath2(param0 : *const PointF, param1 : *const u8, param2 : i32, param3 : FillMode, path : *mut *mut GpPath) -> Status);
+    unsafe { GdipCreatePath2(param0, param1, param2, param3, path as _) }
 }
 #[inline]
 pub unsafe fn GdipCreatePath2I(param0: *const Point, param1: *const u8, param2: i32, param3: FillMode, path: *mut *mut GpPath) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreatePath2I(param0 : *const Point, param1 : *const u8, param2 : i32, param3 : FillMode, path : *mut *mut GpPath) -> Status);
-    GdipCreatePath2I(param0, param1, param2, param3, path)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreatePath2I(param0 : *const Point, param1 : *const u8, param2 : i32, param3 : FillMode, path : *mut *mut GpPath) -> Status);
+    unsafe { GdipCreatePath2I(param0, param1, param2, param3, path as _) }
 }
 #[inline]
 pub unsafe fn GdipCreatePathGradient(points: *const PointF, count: i32, wrapmode: WrapMode, polygradient: *mut *mut GpPathGradient) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreatePathGradient(points : *const PointF, count : i32, wrapmode : WrapMode, polygradient : *mut *mut GpPathGradient) -> Status);
-    GdipCreatePathGradient(points, count, wrapmode, polygradient)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreatePathGradient(points : *const PointF, count : i32, wrapmode : WrapMode, polygradient : *mut *mut GpPathGradient) -> Status);
+    unsafe { GdipCreatePathGradient(points, count, wrapmode, polygradient as _) }
 }
 #[inline]
 pub unsafe fn GdipCreatePathGradientFromPath(path: *const GpPath, polygradient: *mut *mut GpPathGradient) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreatePathGradientFromPath(path : *const GpPath, polygradient : *mut *mut GpPathGradient) -> Status);
-    GdipCreatePathGradientFromPath(path, polygradient)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreatePathGradientFromPath(path : *const GpPath, polygradient : *mut *mut GpPathGradient) -> Status);
+    unsafe { GdipCreatePathGradientFromPath(path, polygradient as _) }
 }
 #[inline]
 pub unsafe fn GdipCreatePathGradientI(points: *const Point, count: i32, wrapmode: WrapMode, polygradient: *mut *mut GpPathGradient) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreatePathGradientI(points : *const Point, count : i32, wrapmode : WrapMode, polygradient : *mut *mut GpPathGradient) -> Status);
-    GdipCreatePathGradientI(points, count, wrapmode, polygradient)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreatePathGradientI(points : *const Point, count : i32, wrapmode : WrapMode, polygradient : *mut *mut GpPathGradient) -> Status);
+    unsafe { GdipCreatePathGradientI(points, count, wrapmode, polygradient as _) }
 }
 #[inline]
 pub unsafe fn GdipCreatePathIter(iterator: *mut *mut GpPathIterator, path: *mut GpPath) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreatePathIter(iterator : *mut *mut GpPathIterator, path : *mut GpPath) -> Status);
-    GdipCreatePathIter(iterator, path)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreatePathIter(iterator : *mut *mut GpPathIterator, path : *mut GpPath) -> Status);
+    unsafe { GdipCreatePathIter(iterator as _, path as _) }
 }
 #[inline]
 pub unsafe fn GdipCreatePen1(color: u32, width: f32, unit: Unit, pen: *mut *mut GpPen) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreatePen1(color : u32, width : f32, unit : Unit, pen : *mut *mut GpPen) -> Status);
-    GdipCreatePen1(color, width, unit, pen)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreatePen1(color : u32, width : f32, unit : Unit, pen : *mut *mut GpPen) -> Status);
+    unsafe { GdipCreatePen1(color, width, unit, pen as _) }
 }
 #[inline]
 pub unsafe fn GdipCreatePen2(brush: *mut GpBrush, width: f32, unit: Unit, pen: *mut *mut GpPen) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreatePen2(brush : *mut GpBrush, width : f32, unit : Unit, pen : *mut *mut GpPen) -> Status);
-    GdipCreatePen2(brush, width, unit, pen)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreatePen2(brush : *mut GpBrush, width : f32, unit : Unit, pen : *mut *mut GpPen) -> Status);
+    unsafe { GdipCreatePen2(brush as _, width, unit, pen as _) }
 }
 #[inline]
 pub unsafe fn GdipCreateRegion(region: *mut *mut GpRegion) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateRegion(region : *mut *mut GpRegion) -> Status);
-    GdipCreateRegion(region)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateRegion(region : *mut *mut GpRegion) -> Status);
+    unsafe { GdipCreateRegion(region as _) }
 }
-#[doc = "Required features: `\"Win32_Graphics_Gdi\"`"]
 #[cfg(feature = "Win32_Graphics_Gdi")]
 #[inline]
-pub unsafe fn GdipCreateRegionHrgn<P0>(hrgn: P0, region: *mut *mut GpRegion) -> Status
-where
-    P0: ::windows_core::IntoParam<super::Gdi::HRGN>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateRegionHrgn(hrgn : super::Gdi:: HRGN, region : *mut *mut GpRegion) -> Status);
-    GdipCreateRegionHrgn(hrgn.into_param().abi(), region)
+pub unsafe fn GdipCreateRegionHrgn(hrgn: super::Gdi::HRGN, region: *mut *mut GpRegion) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateRegionHrgn(hrgn : super::Gdi:: HRGN, region : *mut *mut GpRegion) -> Status);
+    unsafe { GdipCreateRegionHrgn(hrgn, region as _) }
 }
 #[inline]
 pub unsafe fn GdipCreateRegionPath(path: *mut GpPath, region: *mut *mut GpRegion) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateRegionPath(path : *mut GpPath, region : *mut *mut GpRegion) -> Status);
-    GdipCreateRegionPath(path, region)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateRegionPath(path : *mut GpPath, region : *mut *mut GpRegion) -> Status);
+    unsafe { GdipCreateRegionPath(path as _, region as _) }
 }
 #[inline]
 pub unsafe fn GdipCreateRegionRect(rect: *const RectF, region: *mut *mut GpRegion) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateRegionRect(rect : *const RectF, region : *mut *mut GpRegion) -> Status);
-    GdipCreateRegionRect(rect, region)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateRegionRect(rect : *const RectF, region : *mut *mut GpRegion) -> Status);
+    unsafe { GdipCreateRegionRect(rect, region as _) }
 }
 #[inline]
 pub unsafe fn GdipCreateRegionRectI(rect: *const Rect, region: *mut *mut GpRegion) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateRegionRectI(rect : *const Rect, region : *mut *mut GpRegion) -> Status);
-    GdipCreateRegionRectI(rect, region)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateRegionRectI(rect : *const Rect, region : *mut *mut GpRegion) -> Status);
+    unsafe { GdipCreateRegionRectI(rect, region as _) }
 }
 #[inline]
 pub unsafe fn GdipCreateRegionRgnData(regiondata: *const u8, size: i32, region: *mut *mut GpRegion) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateRegionRgnData(regiondata : *const u8, size : i32, region : *mut *mut GpRegion) -> Status);
-    GdipCreateRegionRgnData(regiondata, size, region)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateRegionRgnData(regiondata : *const u8, size : i32, region : *mut *mut GpRegion) -> Status);
+    unsafe { GdipCreateRegionRgnData(regiondata, size, region as _) }
 }
 #[inline]
 pub unsafe fn GdipCreateSolidFill(color: u32, brush: *mut *mut GpSolidFill) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateSolidFill(color : u32, brush : *mut *mut GpSolidFill) -> Status);
-    GdipCreateSolidFill(color, brush)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateSolidFill(color : u32, brush : *mut *mut GpSolidFill) -> Status);
+    unsafe { GdipCreateSolidFill(color, brush as _) }
 }
-#[doc = "Required features: `\"Win32_System_Com\"`"]
 #[cfg(feature = "Win32_System_Com")]
 #[inline]
-pub unsafe fn GdipCreateStreamOnFile<P0>(filename: P0, access: u32, stream: *mut ::core::option::Option<super::super::System::Com::IStream>) -> Status
+pub unsafe fn GdipCreateStreamOnFile<P0>(filename: P0, access: u32, stream: *mut Option<super::super::System::Com::IStream>) -> Status
 where
-    P0: ::windows_core::IntoParam<::windows_core::PCWSTR>,
+    P0: windows_core::Param<windows_core::PCWSTR>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateStreamOnFile(filename : ::windows_core::PCWSTR, access : u32, stream : *mut * mut::core::ffi::c_void) -> Status);
-    GdipCreateStreamOnFile(filename.into_param().abi(), access, ::core::mem::transmute(stream))
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateStreamOnFile(filename : windows_core::PCWSTR, access : u32, stream : *mut * mut core::ffi::c_void) -> Status);
+    unsafe { GdipCreateStreamOnFile(filename.param().abi(), access, core::mem::transmute(stream)) }
 }
 #[inline]
 pub unsafe fn GdipCreateStringFormat(formatattributes: i32, language: u16, format: *mut *mut GpStringFormat) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateStringFormat(formatattributes : i32, language : u16, format : *mut *mut GpStringFormat) -> Status);
-    GdipCreateStringFormat(formatattributes, language, format)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateStringFormat(formatattributes : i32, language : u16, format : *mut *mut GpStringFormat) -> Status);
+    unsafe { GdipCreateStringFormat(formatattributes, language, format as _) }
 }
 #[inline]
 pub unsafe fn GdipCreateTexture(image: *mut GpImage, wrapmode: WrapMode, texture: *mut *mut GpTexture) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateTexture(image : *mut GpImage, wrapmode : WrapMode, texture : *mut *mut GpTexture) -> Status);
-    GdipCreateTexture(image, wrapmode, texture)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateTexture(image : *mut GpImage, wrapmode : WrapMode, texture : *mut *mut GpTexture) -> Status);
+    unsafe { GdipCreateTexture(image as _, wrapmode, texture as _) }
 }
 #[inline]
 pub unsafe fn GdipCreateTexture2(image: *mut GpImage, wrapmode: WrapMode, x: f32, y: f32, width: f32, height: f32, texture: *mut *mut GpTexture) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateTexture2(image : *mut GpImage, wrapmode : WrapMode, x : f32, y : f32, width : f32, height : f32, texture : *mut *mut GpTexture) -> Status);
-    GdipCreateTexture2(image, wrapmode, x, y, width, height, texture)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateTexture2(image : *mut GpImage, wrapmode : WrapMode, x : f32, y : f32, width : f32, height : f32, texture : *mut *mut GpTexture) -> Status);
+    unsafe { GdipCreateTexture2(image as _, wrapmode, x, y, width, height, texture as _) }
 }
 #[inline]
 pub unsafe fn GdipCreateTexture2I(image: *mut GpImage, wrapmode: WrapMode, x: i32, y: i32, width: i32, height: i32, texture: *mut *mut GpTexture) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateTexture2I(image : *mut GpImage, wrapmode : WrapMode, x : i32, y : i32, width : i32, height : i32, texture : *mut *mut GpTexture) -> Status);
-    GdipCreateTexture2I(image, wrapmode, x, y, width, height, texture)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateTexture2I(image : *mut GpImage, wrapmode : WrapMode, x : i32, y : i32, width : i32, height : i32, texture : *mut *mut GpTexture) -> Status);
+    unsafe { GdipCreateTexture2I(image as _, wrapmode, x, y, width, height, texture as _) }
 }
 #[inline]
 pub unsafe fn GdipCreateTextureIA(image: *mut GpImage, imageattributes: *const GpImageAttributes, x: f32, y: f32, width: f32, height: f32, texture: *mut *mut GpTexture) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateTextureIA(image : *mut GpImage, imageattributes : *const GpImageAttributes, x : f32, y : f32, width : f32, height : f32, texture : *mut *mut GpTexture) -> Status);
-    GdipCreateTextureIA(image, imageattributes, x, y, width, height, texture)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateTextureIA(image : *mut GpImage, imageattributes : *const GpImageAttributes, x : f32, y : f32, width : f32, height : f32, texture : *mut *mut GpTexture) -> Status);
+    unsafe { GdipCreateTextureIA(image as _, imageattributes, x, y, width, height, texture as _) }
 }
 #[inline]
 pub unsafe fn GdipCreateTextureIAI(image: *mut GpImage, imageattributes: *const GpImageAttributes, x: i32, y: i32, width: i32, height: i32, texture: *mut *mut GpTexture) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipCreateTextureIAI(image : *mut GpImage, imageattributes : *const GpImageAttributes, x : i32, y : i32, width : i32, height : i32, texture : *mut *mut GpTexture) -> Status);
-    GdipCreateTextureIAI(image, imageattributes, x, y, width, height, texture)
+    windows_link::link!("gdiplus.dll" "system" fn GdipCreateTextureIAI(image : *mut GpImage, imageattributes : *const GpImageAttributes, x : i32, y : i32, width : i32, height : i32, texture : *mut *mut GpTexture) -> Status);
+    unsafe { GdipCreateTextureIAI(image as _, imageattributes, x, y, width, height, texture as _) }
 }
 #[inline]
 pub unsafe fn GdipDeleteBrush(brush: *mut GpBrush) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDeleteBrush(brush : *mut GpBrush) -> Status);
-    GdipDeleteBrush(brush)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDeleteBrush(brush : *mut GpBrush) -> Status);
+    unsafe { GdipDeleteBrush(brush as _) }
 }
 #[inline]
 pub unsafe fn GdipDeleteCachedBitmap(cachedbitmap: *mut GpCachedBitmap) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDeleteCachedBitmap(cachedbitmap : *mut GpCachedBitmap) -> Status);
-    GdipDeleteCachedBitmap(cachedbitmap)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDeleteCachedBitmap(cachedbitmap : *mut GpCachedBitmap) -> Status);
+    unsafe { GdipDeleteCachedBitmap(cachedbitmap as _) }
 }
 #[inline]
 pub unsafe fn GdipDeleteCustomLineCap(customcap: *mut GpCustomLineCap) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDeleteCustomLineCap(customcap : *mut GpCustomLineCap) -> Status);
-    GdipDeleteCustomLineCap(customcap)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDeleteCustomLineCap(customcap : *mut GpCustomLineCap) -> Status);
+    unsafe { GdipDeleteCustomLineCap(customcap as _) }
 }
 #[inline]
 pub unsafe fn GdipDeleteEffect(effect: *mut CGpEffect) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDeleteEffect(effect : *mut CGpEffect) -> Status);
-    GdipDeleteEffect(effect)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDeleteEffect(effect : *mut CGpEffect) -> Status);
+    unsafe { GdipDeleteEffect(effect as _) }
 }
 #[inline]
 pub unsafe fn GdipDeleteFont(font: *mut GpFont) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDeleteFont(font : *mut GpFont) -> Status);
-    GdipDeleteFont(font)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDeleteFont(font : *mut GpFont) -> Status);
+    unsafe { GdipDeleteFont(font as _) }
 }
 #[inline]
 pub unsafe fn GdipDeleteFontFamily(fontfamily: *mut GpFontFamily) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDeleteFontFamily(fontfamily : *mut GpFontFamily) -> Status);
-    GdipDeleteFontFamily(fontfamily)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDeleteFontFamily(fontfamily : *mut GpFontFamily) -> Status);
+    unsafe { GdipDeleteFontFamily(fontfamily as _) }
 }
 #[inline]
 pub unsafe fn GdipDeleteGraphics(graphics: *mut GpGraphics) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDeleteGraphics(graphics : *mut GpGraphics) -> Status);
-    GdipDeleteGraphics(graphics)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDeleteGraphics(graphics : *mut GpGraphics) -> Status);
+    unsafe { GdipDeleteGraphics(graphics as _) }
 }
 #[inline]
 pub unsafe fn GdipDeleteMatrix(matrix: *mut Matrix) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDeleteMatrix(matrix : *mut Matrix) -> Status);
-    GdipDeleteMatrix(matrix)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDeleteMatrix(matrix : *mut Matrix) -> Status);
+    unsafe { GdipDeleteMatrix(matrix as _) }
 }
 #[inline]
 pub unsafe fn GdipDeletePath(path: *mut GpPath) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDeletePath(path : *mut GpPath) -> Status);
-    GdipDeletePath(path)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDeletePath(path : *mut GpPath) -> Status);
+    unsafe { GdipDeletePath(path as _) }
 }
 #[inline]
 pub unsafe fn GdipDeletePathIter(iterator: *mut GpPathIterator) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDeletePathIter(iterator : *mut GpPathIterator) -> Status);
-    GdipDeletePathIter(iterator)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDeletePathIter(iterator : *mut GpPathIterator) -> Status);
+    unsafe { GdipDeletePathIter(iterator as _) }
 }
 #[inline]
 pub unsafe fn GdipDeletePen(pen: *mut GpPen) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDeletePen(pen : *mut GpPen) -> Status);
-    GdipDeletePen(pen)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDeletePen(pen : *mut GpPen) -> Status);
+    unsafe { GdipDeletePen(pen as _) }
 }
 #[inline]
 pub unsafe fn GdipDeletePrivateFontCollection(fontcollection: *mut *mut GpFontCollection) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDeletePrivateFontCollection(fontcollection : *mut *mut GpFontCollection) -> Status);
-    GdipDeletePrivateFontCollection(fontcollection)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDeletePrivateFontCollection(fontcollection : *mut *mut GpFontCollection) -> Status);
+    unsafe { GdipDeletePrivateFontCollection(fontcollection as _) }
 }
 #[inline]
 pub unsafe fn GdipDeleteRegion(region: *mut GpRegion) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDeleteRegion(region : *mut GpRegion) -> Status);
-    GdipDeleteRegion(region)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDeleteRegion(region : *mut GpRegion) -> Status);
+    unsafe { GdipDeleteRegion(region as _) }
 }
 #[inline]
 pub unsafe fn GdipDeleteStringFormat(format: *mut GpStringFormat) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDeleteStringFormat(format : *mut GpStringFormat) -> Status);
-    GdipDeleteStringFormat(format)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDeleteStringFormat(format : *mut GpStringFormat) -> Status);
+    unsafe { GdipDeleteStringFormat(format as _) }
 }
 #[inline]
 pub unsafe fn GdipDisposeImage(image: *mut GpImage) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDisposeImage(image : *mut GpImage) -> Status);
-    GdipDisposeImage(image)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDisposeImage(image : *mut GpImage) -> Status);
+    unsafe { GdipDisposeImage(image as _) }
 }
 #[inline]
 pub unsafe fn GdipDisposeImageAttributes(imageattr: *mut GpImageAttributes) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDisposeImageAttributes(imageattr : *mut GpImageAttributes) -> Status);
-    GdipDisposeImageAttributes(imageattr)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDisposeImageAttributes(imageattr : *mut GpImageAttributes) -> Status);
+    unsafe { GdipDisposeImageAttributes(imageattr as _) }
 }
 #[inline]
 pub unsafe fn GdipDrawArc(graphics: *mut GpGraphics, pen: *mut GpPen, x: f32, y: f32, width: f32, height: f32, startangle: f32, sweepangle: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawArc(graphics : *mut GpGraphics, pen : *mut GpPen, x : f32, y : f32, width : f32, height : f32, startangle : f32, sweepangle : f32) -> Status);
-    GdipDrawArc(graphics, pen, x, y, width, height, startangle, sweepangle)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawArc(graphics : *mut GpGraphics, pen : *mut GpPen, x : f32, y : f32, width : f32, height : f32, startangle : f32, sweepangle : f32) -> Status);
+    unsafe { GdipDrawArc(graphics as _, pen as _, x, y, width, height, startangle, sweepangle) }
 }
 #[inline]
 pub unsafe fn GdipDrawArcI(graphics: *mut GpGraphics, pen: *mut GpPen, x: i32, y: i32, width: i32, height: i32, startangle: f32, sweepangle: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawArcI(graphics : *mut GpGraphics, pen : *mut GpPen, x : i32, y : i32, width : i32, height : i32, startangle : f32, sweepangle : f32) -> Status);
-    GdipDrawArcI(graphics, pen, x, y, width, height, startangle, sweepangle)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawArcI(graphics : *mut GpGraphics, pen : *mut GpPen, x : i32, y : i32, width : i32, height : i32, startangle : f32, sweepangle : f32) -> Status);
+    unsafe { GdipDrawArcI(graphics as _, pen as _, x, y, width, height, startangle, sweepangle) }
 }
 #[inline]
 pub unsafe fn GdipDrawBezier(graphics: *mut GpGraphics, pen: *mut GpPen, x1: f32, y1: f32, x2: f32, y2: f32, x3: f32, y3: f32, x4: f32, y4: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawBezier(graphics : *mut GpGraphics, pen : *mut GpPen, x1 : f32, y1 : f32, x2 : f32, y2 : f32, x3 : f32, y3 : f32, x4 : f32, y4 : f32) -> Status);
-    GdipDrawBezier(graphics, pen, x1, y1, x2, y2, x3, y3, x4, y4)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawBezier(graphics : *mut GpGraphics, pen : *mut GpPen, x1 : f32, y1 : f32, x2 : f32, y2 : f32, x3 : f32, y3 : f32, x4 : f32, y4 : f32) -> Status);
+    unsafe { GdipDrawBezier(graphics as _, pen as _, x1, y1, x2, y2, x3, y3, x4, y4) }
 }
 #[inline]
 pub unsafe fn GdipDrawBezierI(graphics: *mut GpGraphics, pen: *mut GpPen, x1: i32, y1: i32, x2: i32, y2: i32, x3: i32, y3: i32, x4: i32, y4: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawBezierI(graphics : *mut GpGraphics, pen : *mut GpPen, x1 : i32, y1 : i32, x2 : i32, y2 : i32, x3 : i32, y3 : i32, x4 : i32, y4 : i32) -> Status);
-    GdipDrawBezierI(graphics, pen, x1, y1, x2, y2, x3, y3, x4, y4)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawBezierI(graphics : *mut GpGraphics, pen : *mut GpPen, x1 : i32, y1 : i32, x2 : i32, y2 : i32, x3 : i32, y3 : i32, x4 : i32, y4 : i32) -> Status);
+    unsafe { GdipDrawBezierI(graphics as _, pen as _, x1, y1, x2, y2, x3, y3, x4, y4) }
 }
 #[inline]
 pub unsafe fn GdipDrawBeziers(graphics: *mut GpGraphics, pen: *mut GpPen, points: *const PointF, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawBeziers(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const PointF, count : i32) -> Status);
-    GdipDrawBeziers(graphics, pen, points, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawBeziers(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const PointF, count : i32) -> Status);
+    unsafe { GdipDrawBeziers(graphics as _, pen as _, points, count) }
 }
 #[inline]
 pub unsafe fn GdipDrawBeziersI(graphics: *mut GpGraphics, pen: *mut GpPen, points: *const Point, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawBeziersI(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const Point, count : i32) -> Status);
-    GdipDrawBeziersI(graphics, pen, points, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawBeziersI(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const Point, count : i32) -> Status);
+    unsafe { GdipDrawBeziersI(graphics as _, pen as _, points, count) }
 }
 #[inline]
 pub unsafe fn GdipDrawCachedBitmap(graphics: *mut GpGraphics, cachedbitmap: *mut GpCachedBitmap, x: i32, y: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawCachedBitmap(graphics : *mut GpGraphics, cachedbitmap : *mut GpCachedBitmap, x : i32, y : i32) -> Status);
-    GdipDrawCachedBitmap(graphics, cachedbitmap, x, y)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawCachedBitmap(graphics : *mut GpGraphics, cachedbitmap : *mut GpCachedBitmap, x : i32, y : i32) -> Status);
+    unsafe { GdipDrawCachedBitmap(graphics as _, cachedbitmap as _, x, y) }
 }
 #[inline]
 pub unsafe fn GdipDrawClosedCurve(graphics: *mut GpGraphics, pen: *mut GpPen, points: *const PointF, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawClosedCurve(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const PointF, count : i32) -> Status);
-    GdipDrawClosedCurve(graphics, pen, points, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawClosedCurve(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const PointF, count : i32) -> Status);
+    unsafe { GdipDrawClosedCurve(graphics as _, pen as _, points, count) }
 }
 #[inline]
 pub unsafe fn GdipDrawClosedCurve2(graphics: *mut GpGraphics, pen: *mut GpPen, points: *const PointF, count: i32, tension: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawClosedCurve2(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const PointF, count : i32, tension : f32) -> Status);
-    GdipDrawClosedCurve2(graphics, pen, points, count, tension)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawClosedCurve2(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const PointF, count : i32, tension : f32) -> Status);
+    unsafe { GdipDrawClosedCurve2(graphics as _, pen as _, points, count, tension) }
 }
 #[inline]
 pub unsafe fn GdipDrawClosedCurve2I(graphics: *mut GpGraphics, pen: *mut GpPen, points: *const Point, count: i32, tension: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawClosedCurve2I(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const Point, count : i32, tension : f32) -> Status);
-    GdipDrawClosedCurve2I(graphics, pen, points, count, tension)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawClosedCurve2I(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const Point, count : i32, tension : f32) -> Status);
+    unsafe { GdipDrawClosedCurve2I(graphics as _, pen as _, points, count, tension) }
 }
 #[inline]
 pub unsafe fn GdipDrawClosedCurveI(graphics: *mut GpGraphics, pen: *mut GpPen, points: *const Point, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawClosedCurveI(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const Point, count : i32) -> Status);
-    GdipDrawClosedCurveI(graphics, pen, points, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawClosedCurveI(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const Point, count : i32) -> Status);
+    unsafe { GdipDrawClosedCurveI(graphics as _, pen as _, points, count) }
 }
 #[inline]
 pub unsafe fn GdipDrawCurve(graphics: *mut GpGraphics, pen: *mut GpPen, points: *const PointF, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawCurve(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const PointF, count : i32) -> Status);
-    GdipDrawCurve(graphics, pen, points, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawCurve(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const PointF, count : i32) -> Status);
+    unsafe { GdipDrawCurve(graphics as _, pen as _, points, count) }
 }
 #[inline]
 pub unsafe fn GdipDrawCurve2(graphics: *mut GpGraphics, pen: *mut GpPen, points: *const PointF, count: i32, tension: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawCurve2(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const PointF, count : i32, tension : f32) -> Status);
-    GdipDrawCurve2(graphics, pen, points, count, tension)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawCurve2(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const PointF, count : i32, tension : f32) -> Status);
+    unsafe { GdipDrawCurve2(graphics as _, pen as _, points, count, tension) }
 }
 #[inline]
 pub unsafe fn GdipDrawCurve2I(graphics: *mut GpGraphics, pen: *mut GpPen, points: *const Point, count: i32, tension: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawCurve2I(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const Point, count : i32, tension : f32) -> Status);
-    GdipDrawCurve2I(graphics, pen, points, count, tension)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawCurve2I(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const Point, count : i32, tension : f32) -> Status);
+    unsafe { GdipDrawCurve2I(graphics as _, pen as _, points, count, tension) }
 }
 #[inline]
 pub unsafe fn GdipDrawCurve3(graphics: *mut GpGraphics, pen: *mut GpPen, points: *const PointF, count: i32, offset: i32, numberofsegments: i32, tension: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawCurve3(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const PointF, count : i32, offset : i32, numberofsegments : i32, tension : f32) -> Status);
-    GdipDrawCurve3(graphics, pen, points, count, offset, numberofsegments, tension)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawCurve3(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const PointF, count : i32, offset : i32, numberofsegments : i32, tension : f32) -> Status);
+    unsafe { GdipDrawCurve3(graphics as _, pen as _, points, count, offset, numberofsegments, tension) }
 }
 #[inline]
 pub unsafe fn GdipDrawCurve3I(graphics: *mut GpGraphics, pen: *mut GpPen, points: *const Point, count: i32, offset: i32, numberofsegments: i32, tension: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawCurve3I(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const Point, count : i32, offset : i32, numberofsegments : i32, tension : f32) -> Status);
-    GdipDrawCurve3I(graphics, pen, points, count, offset, numberofsegments, tension)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawCurve3I(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const Point, count : i32, offset : i32, numberofsegments : i32, tension : f32) -> Status);
+    unsafe { GdipDrawCurve3I(graphics as _, pen as _, points, count, offset, numberofsegments, tension) }
 }
 #[inline]
 pub unsafe fn GdipDrawCurveI(graphics: *mut GpGraphics, pen: *mut GpPen, points: *const Point, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawCurveI(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const Point, count : i32) -> Status);
-    GdipDrawCurveI(graphics, pen, points, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawCurveI(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const Point, count : i32) -> Status);
+    unsafe { GdipDrawCurveI(graphics as _, pen as _, points, count) }
 }
 #[inline]
 pub unsafe fn GdipDrawDriverString(graphics: *mut GpGraphics, text: *const u16, length: i32, font: *const GpFont, brush: *const GpBrush, positions: *const PointF, flags: i32, matrix: *const Matrix) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawDriverString(graphics : *mut GpGraphics, text : *const u16, length : i32, font : *const GpFont, brush : *const GpBrush, positions : *const PointF, flags : i32, matrix : *const Matrix) -> Status);
-    GdipDrawDriverString(graphics, text, length, font, brush, positions, flags, matrix)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawDriverString(graphics : *mut GpGraphics, text : *const u16, length : i32, font : *const GpFont, brush : *const GpBrush, positions : *const PointF, flags : i32, matrix : *const Matrix) -> Status);
+    unsafe { GdipDrawDriverString(graphics as _, text, length, font, brush, positions, flags, matrix) }
 }
 #[inline]
 pub unsafe fn GdipDrawEllipse(graphics: *mut GpGraphics, pen: *mut GpPen, x: f32, y: f32, width: f32, height: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawEllipse(graphics : *mut GpGraphics, pen : *mut GpPen, x : f32, y : f32, width : f32, height : f32) -> Status);
-    GdipDrawEllipse(graphics, pen, x, y, width, height)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawEllipse(graphics : *mut GpGraphics, pen : *mut GpPen, x : f32, y : f32, width : f32, height : f32) -> Status);
+    unsafe { GdipDrawEllipse(graphics as _, pen as _, x, y, width, height) }
 }
 #[inline]
 pub unsafe fn GdipDrawEllipseI(graphics: *mut GpGraphics, pen: *mut GpPen, x: i32, y: i32, width: i32, height: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawEllipseI(graphics : *mut GpGraphics, pen : *mut GpPen, x : i32, y : i32, width : i32, height : i32) -> Status);
-    GdipDrawEllipseI(graphics, pen, x, y, width, height)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawEllipseI(graphics : *mut GpGraphics, pen : *mut GpPen, x : i32, y : i32, width : i32, height : i32) -> Status);
+    unsafe { GdipDrawEllipseI(graphics as _, pen as _, x, y, width, height) }
 }
 #[inline]
 pub unsafe fn GdipDrawImage(graphics: *mut GpGraphics, image: *mut GpImage, x: f32, y: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawImage(graphics : *mut GpGraphics, image : *mut GpImage, x : f32, y : f32) -> Status);
-    GdipDrawImage(graphics, image, x, y)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawImage(graphics : *mut GpGraphics, image : *mut GpImage, x : f32, y : f32) -> Status);
+    unsafe { GdipDrawImage(graphics as _, image as _, x, y) }
 }
 #[inline]
 pub unsafe fn GdipDrawImageFX(graphics: *mut GpGraphics, image: *mut GpImage, source: *mut RectF, xform: *mut Matrix, effect: *mut CGpEffect, imageattributes: *mut GpImageAttributes, srcunit: Unit) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawImageFX(graphics : *mut GpGraphics, image : *mut GpImage, source : *mut RectF, xform : *mut Matrix, effect : *mut CGpEffect, imageattributes : *mut GpImageAttributes, srcunit : Unit) -> Status);
-    GdipDrawImageFX(graphics, image, source, xform, effect, imageattributes, srcunit)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawImageFX(graphics : *mut GpGraphics, image : *mut GpImage, source : *mut RectF, xform : *mut Matrix, effect : *mut CGpEffect, imageattributes : *mut GpImageAttributes, srcunit : Unit) -> Status);
+    unsafe { GdipDrawImageFX(graphics as _, image as _, source as _, xform as _, effect as _, imageattributes as _, srcunit) }
 }
 #[inline]
 pub unsafe fn GdipDrawImageI(graphics: *mut GpGraphics, image: *mut GpImage, x: i32, y: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawImageI(graphics : *mut GpGraphics, image : *mut GpImage, x : i32, y : i32) -> Status);
-    GdipDrawImageI(graphics, image, x, y)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawImageI(graphics : *mut GpGraphics, image : *mut GpImage, x : i32, y : i32) -> Status);
+    unsafe { GdipDrawImageI(graphics as _, image as _, x, y) }
 }
 #[inline]
 pub unsafe fn GdipDrawImagePointRect(graphics: *mut GpGraphics, image: *mut GpImage, x: f32, y: f32, srcx: f32, srcy: f32, srcwidth: f32, srcheight: f32, srcunit: Unit) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawImagePointRect(graphics : *mut GpGraphics, image : *mut GpImage, x : f32, y : f32, srcx : f32, srcy : f32, srcwidth : f32, srcheight : f32, srcunit : Unit) -> Status);
-    GdipDrawImagePointRect(graphics, image, x, y, srcx, srcy, srcwidth, srcheight, srcunit)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawImagePointRect(graphics : *mut GpGraphics, image : *mut GpImage, x : f32, y : f32, srcx : f32, srcy : f32, srcwidth : f32, srcheight : f32, srcunit : Unit) -> Status);
+    unsafe { GdipDrawImagePointRect(graphics as _, image as _, x, y, srcx, srcy, srcwidth, srcheight, srcunit) }
 }
 #[inline]
 pub unsafe fn GdipDrawImagePointRectI(graphics: *mut GpGraphics, image: *mut GpImage, x: i32, y: i32, srcx: i32, srcy: i32, srcwidth: i32, srcheight: i32, srcunit: Unit) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawImagePointRectI(graphics : *mut GpGraphics, image : *mut GpImage, x : i32, y : i32, srcx : i32, srcy : i32, srcwidth : i32, srcheight : i32, srcunit : Unit) -> Status);
-    GdipDrawImagePointRectI(graphics, image, x, y, srcx, srcy, srcwidth, srcheight, srcunit)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawImagePointRectI(graphics : *mut GpGraphics, image : *mut GpImage, x : i32, y : i32, srcx : i32, srcy : i32, srcwidth : i32, srcheight : i32, srcunit : Unit) -> Status);
+    unsafe { GdipDrawImagePointRectI(graphics as _, image as _, x, y, srcx, srcy, srcwidth, srcheight, srcunit) }
 }
 #[inline]
 pub unsafe fn GdipDrawImagePoints(graphics: *mut GpGraphics, image: *mut GpImage, dstpoints: *const PointF, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawImagePoints(graphics : *mut GpGraphics, image : *mut GpImage, dstpoints : *const PointF, count : i32) -> Status);
-    GdipDrawImagePoints(graphics, image, dstpoints, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawImagePoints(graphics : *mut GpGraphics, image : *mut GpImage, dstpoints : *const PointF, count : i32) -> Status);
+    unsafe { GdipDrawImagePoints(graphics as _, image as _, dstpoints, count) }
 }
 #[inline]
 pub unsafe fn GdipDrawImagePointsI(graphics: *mut GpGraphics, image: *mut GpImage, dstpoints: *const Point, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawImagePointsI(graphics : *mut GpGraphics, image : *mut GpImage, dstpoints : *const Point, count : i32) -> Status);
-    GdipDrawImagePointsI(graphics, image, dstpoints, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawImagePointsI(graphics : *mut GpGraphics, image : *mut GpImage, dstpoints : *const Point, count : i32) -> Status);
+    unsafe { GdipDrawImagePointsI(graphics as _, image as _, dstpoints, count) }
 }
 #[inline]
-pub unsafe fn GdipDrawImagePointsRect(graphics: *mut GpGraphics, image: *mut GpImage, points: *const PointF, count: i32, srcx: f32, srcy: f32, srcwidth: f32, srcheight: f32, srcunit: Unit, imageattributes: *const GpImageAttributes, callback: isize, callbackdata: *mut ::core::ffi::c_void) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawImagePointsRect(graphics : *mut GpGraphics, image : *mut GpImage, points : *const PointF, count : i32, srcx : f32, srcy : f32, srcwidth : f32, srcheight : f32, srcunit : Unit, imageattributes : *const GpImageAttributes, callback : isize, callbackdata : *mut ::core::ffi::c_void) -> Status);
-    GdipDrawImagePointsRect(graphics, image, points, count, srcx, srcy, srcwidth, srcheight, srcunit, imageattributes, callback, callbackdata)
+pub unsafe fn GdipDrawImagePointsRect(graphics: *mut GpGraphics, image: *mut GpImage, points: *const PointF, count: i32, srcx: f32, srcy: f32, srcwidth: f32, srcheight: f32, srcunit: Unit, imageattributes: *const GpImageAttributes, callback: isize, callbackdata: *mut core::ffi::c_void) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawImagePointsRect(graphics : *mut GpGraphics, image : *mut GpImage, points : *const PointF, count : i32, srcx : f32, srcy : f32, srcwidth : f32, srcheight : f32, srcunit : Unit, imageattributes : *const GpImageAttributes, callback : isize, callbackdata : *mut core::ffi::c_void) -> Status);
+    unsafe { GdipDrawImagePointsRect(graphics as _, image as _, points, count, srcx, srcy, srcwidth, srcheight, srcunit, imageattributes, callback, callbackdata as _) }
 }
 #[inline]
-pub unsafe fn GdipDrawImagePointsRectI(graphics: *mut GpGraphics, image: *mut GpImage, points: *const Point, count: i32, srcx: i32, srcy: i32, srcwidth: i32, srcheight: i32, srcunit: Unit, imageattributes: *const GpImageAttributes, callback: isize, callbackdata: *mut ::core::ffi::c_void) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawImagePointsRectI(graphics : *mut GpGraphics, image : *mut GpImage, points : *const Point, count : i32, srcx : i32, srcy : i32, srcwidth : i32, srcheight : i32, srcunit : Unit, imageattributes : *const GpImageAttributes, callback : isize, callbackdata : *mut ::core::ffi::c_void) -> Status);
-    GdipDrawImagePointsRectI(graphics, image, points, count, srcx, srcy, srcwidth, srcheight, srcunit, imageattributes, callback, callbackdata)
+pub unsafe fn GdipDrawImagePointsRectI(graphics: *mut GpGraphics, image: *mut GpImage, points: *const Point, count: i32, srcx: i32, srcy: i32, srcwidth: i32, srcheight: i32, srcunit: Unit, imageattributes: *const GpImageAttributes, callback: isize, callbackdata: *mut core::ffi::c_void) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawImagePointsRectI(graphics : *mut GpGraphics, image : *mut GpImage, points : *const Point, count : i32, srcx : i32, srcy : i32, srcwidth : i32, srcheight : i32, srcunit : Unit, imageattributes : *const GpImageAttributes, callback : isize, callbackdata : *mut core::ffi::c_void) -> Status);
+    unsafe { GdipDrawImagePointsRectI(graphics as _, image as _, points, count, srcx, srcy, srcwidth, srcheight, srcunit, imageattributes, callback, callbackdata as _) }
 }
 #[inline]
 pub unsafe fn GdipDrawImageRect(graphics: *mut GpGraphics, image: *mut GpImage, x: f32, y: f32, width: f32, height: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawImageRect(graphics : *mut GpGraphics, image : *mut GpImage, x : f32, y : f32, width : f32, height : f32) -> Status);
-    GdipDrawImageRect(graphics, image, x, y, width, height)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawImageRect(graphics : *mut GpGraphics, image : *mut GpImage, x : f32, y : f32, width : f32, height : f32) -> Status);
+    unsafe { GdipDrawImageRect(graphics as _, image as _, x, y, width, height) }
 }
 #[inline]
 pub unsafe fn GdipDrawImageRectI(graphics: *mut GpGraphics, image: *mut GpImage, x: i32, y: i32, width: i32, height: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawImageRectI(graphics : *mut GpGraphics, image : *mut GpImage, x : i32, y : i32, width : i32, height : i32) -> Status);
-    GdipDrawImageRectI(graphics, image, x, y, width, height)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawImageRectI(graphics : *mut GpGraphics, image : *mut GpImage, x : i32, y : i32, width : i32, height : i32) -> Status);
+    unsafe { GdipDrawImageRectI(graphics as _, image as _, x, y, width, height) }
 }
 #[inline]
-pub unsafe fn GdipDrawImageRectRect(graphics: *mut GpGraphics, image: *mut GpImage, dstx: f32, dsty: f32, dstwidth: f32, dstheight: f32, srcx: f32, srcy: f32, srcwidth: f32, srcheight: f32, srcunit: Unit, imageattributes: *const GpImageAttributes, callback: isize, callbackdata: *mut ::core::ffi::c_void) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawImageRectRect(graphics : *mut GpGraphics, image : *mut GpImage, dstx : f32, dsty : f32, dstwidth : f32, dstheight : f32, srcx : f32, srcy : f32, srcwidth : f32, srcheight : f32, srcunit : Unit, imageattributes : *const GpImageAttributes, callback : isize, callbackdata : *mut ::core::ffi::c_void) -> Status);
-    GdipDrawImageRectRect(graphics, image, dstx, dsty, dstwidth, dstheight, srcx, srcy, srcwidth, srcheight, srcunit, imageattributes, callback, callbackdata)
+pub unsafe fn GdipDrawImageRectRect(graphics: *mut GpGraphics, image: *mut GpImage, dstx: f32, dsty: f32, dstwidth: f32, dstheight: f32, srcx: f32, srcy: f32, srcwidth: f32, srcheight: f32, srcunit: Unit, imageattributes: *const GpImageAttributes, callback: isize, callbackdata: *mut core::ffi::c_void) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawImageRectRect(graphics : *mut GpGraphics, image : *mut GpImage, dstx : f32, dsty : f32, dstwidth : f32, dstheight : f32, srcx : f32, srcy : f32, srcwidth : f32, srcheight : f32, srcunit : Unit, imageattributes : *const GpImageAttributes, callback : isize, callbackdata : *mut core::ffi::c_void) -> Status);
+    unsafe { GdipDrawImageRectRect(graphics as _, image as _, dstx, dsty, dstwidth, dstheight, srcx, srcy, srcwidth, srcheight, srcunit, imageattributes, callback, callbackdata as _) }
 }
 #[inline]
-pub unsafe fn GdipDrawImageRectRectI(graphics: *mut GpGraphics, image: *mut GpImage, dstx: i32, dsty: i32, dstwidth: i32, dstheight: i32, srcx: i32, srcy: i32, srcwidth: i32, srcheight: i32, srcunit: Unit, imageattributes: *const GpImageAttributes, callback: isize, callbackdata: *mut ::core::ffi::c_void) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawImageRectRectI(graphics : *mut GpGraphics, image : *mut GpImage, dstx : i32, dsty : i32, dstwidth : i32, dstheight : i32, srcx : i32, srcy : i32, srcwidth : i32, srcheight : i32, srcunit : Unit, imageattributes : *const GpImageAttributes, callback : isize, callbackdata : *mut ::core::ffi::c_void) -> Status);
-    GdipDrawImageRectRectI(graphics, image, dstx, dsty, dstwidth, dstheight, srcx, srcy, srcwidth, srcheight, srcunit, imageattributes, callback, callbackdata)
+pub unsafe fn GdipDrawImageRectRectI(graphics: *mut GpGraphics, image: *mut GpImage, dstx: i32, dsty: i32, dstwidth: i32, dstheight: i32, srcx: i32, srcy: i32, srcwidth: i32, srcheight: i32, srcunit: Unit, imageattributes: *const GpImageAttributes, callback: isize, callbackdata: *mut core::ffi::c_void) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawImageRectRectI(graphics : *mut GpGraphics, image : *mut GpImage, dstx : i32, dsty : i32, dstwidth : i32, dstheight : i32, srcx : i32, srcy : i32, srcwidth : i32, srcheight : i32, srcunit : Unit, imageattributes : *const GpImageAttributes, callback : isize, callbackdata : *mut core::ffi::c_void) -> Status);
+    unsafe { GdipDrawImageRectRectI(graphics as _, image as _, dstx, dsty, dstwidth, dstheight, srcx, srcy, srcwidth, srcheight, srcunit, imageattributes, callback, callbackdata as _) }
 }
 #[inline]
 pub unsafe fn GdipDrawLine(graphics: *mut GpGraphics, pen: *mut GpPen, x1: f32, y1: f32, x2: f32, y2: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawLine(graphics : *mut GpGraphics, pen : *mut GpPen, x1 : f32, y1 : f32, x2 : f32, y2 : f32) -> Status);
-    GdipDrawLine(graphics, pen, x1, y1, x2, y2)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawLine(graphics : *mut GpGraphics, pen : *mut GpPen, x1 : f32, y1 : f32, x2 : f32, y2 : f32) -> Status);
+    unsafe { GdipDrawLine(graphics as _, pen as _, x1, y1, x2, y2) }
 }
 #[inline]
 pub unsafe fn GdipDrawLineI(graphics: *mut GpGraphics, pen: *mut GpPen, x1: i32, y1: i32, x2: i32, y2: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawLineI(graphics : *mut GpGraphics, pen : *mut GpPen, x1 : i32, y1 : i32, x2 : i32, y2 : i32) -> Status);
-    GdipDrawLineI(graphics, pen, x1, y1, x2, y2)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawLineI(graphics : *mut GpGraphics, pen : *mut GpPen, x1 : i32, y1 : i32, x2 : i32, y2 : i32) -> Status);
+    unsafe { GdipDrawLineI(graphics as _, pen as _, x1, y1, x2, y2) }
 }
 #[inline]
 pub unsafe fn GdipDrawLines(graphics: *mut GpGraphics, pen: *mut GpPen, points: *const PointF, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawLines(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const PointF, count : i32) -> Status);
-    GdipDrawLines(graphics, pen, points, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawLines(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const PointF, count : i32) -> Status);
+    unsafe { GdipDrawLines(graphics as _, pen as _, points, count) }
 }
 #[inline]
 pub unsafe fn GdipDrawLinesI(graphics: *mut GpGraphics, pen: *mut GpPen, points: *const Point, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawLinesI(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const Point, count : i32) -> Status);
-    GdipDrawLinesI(graphics, pen, points, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawLinesI(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const Point, count : i32) -> Status);
+    unsafe { GdipDrawLinesI(graphics as _, pen as _, points, count) }
 }
 #[inline]
 pub unsafe fn GdipDrawPath(graphics: *mut GpGraphics, pen: *mut GpPen, path: *mut GpPath) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawPath(graphics : *mut GpGraphics, pen : *mut GpPen, path : *mut GpPath) -> Status);
-    GdipDrawPath(graphics, pen, path)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawPath(graphics : *mut GpGraphics, pen : *mut GpPen, path : *mut GpPath) -> Status);
+    unsafe { GdipDrawPath(graphics as _, pen as _, path as _) }
 }
 #[inline]
 pub unsafe fn GdipDrawPie(graphics: *mut GpGraphics, pen: *mut GpPen, x: f32, y: f32, width: f32, height: f32, startangle: f32, sweepangle: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawPie(graphics : *mut GpGraphics, pen : *mut GpPen, x : f32, y : f32, width : f32, height : f32, startangle : f32, sweepangle : f32) -> Status);
-    GdipDrawPie(graphics, pen, x, y, width, height, startangle, sweepangle)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawPie(graphics : *mut GpGraphics, pen : *mut GpPen, x : f32, y : f32, width : f32, height : f32, startangle : f32, sweepangle : f32) -> Status);
+    unsafe { GdipDrawPie(graphics as _, pen as _, x, y, width, height, startangle, sweepangle) }
 }
 #[inline]
 pub unsafe fn GdipDrawPieI(graphics: *mut GpGraphics, pen: *mut GpPen, x: i32, y: i32, width: i32, height: i32, startangle: f32, sweepangle: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawPieI(graphics : *mut GpGraphics, pen : *mut GpPen, x : i32, y : i32, width : i32, height : i32, startangle : f32, sweepangle : f32) -> Status);
-    GdipDrawPieI(graphics, pen, x, y, width, height, startangle, sweepangle)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawPieI(graphics : *mut GpGraphics, pen : *mut GpPen, x : i32, y : i32, width : i32, height : i32, startangle : f32, sweepangle : f32) -> Status);
+    unsafe { GdipDrawPieI(graphics as _, pen as _, x, y, width, height, startangle, sweepangle) }
 }
 #[inline]
 pub unsafe fn GdipDrawPolygon(graphics: *mut GpGraphics, pen: *mut GpPen, points: *const PointF, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawPolygon(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const PointF, count : i32) -> Status);
-    GdipDrawPolygon(graphics, pen, points, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawPolygon(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const PointF, count : i32) -> Status);
+    unsafe { GdipDrawPolygon(graphics as _, pen as _, points, count) }
 }
 #[inline]
 pub unsafe fn GdipDrawPolygonI(graphics: *mut GpGraphics, pen: *mut GpPen, points: *const Point, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawPolygonI(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const Point, count : i32) -> Status);
-    GdipDrawPolygonI(graphics, pen, points, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawPolygonI(graphics : *mut GpGraphics, pen : *mut GpPen, points : *const Point, count : i32) -> Status);
+    unsafe { GdipDrawPolygonI(graphics as _, pen as _, points, count) }
 }
 #[inline]
 pub unsafe fn GdipDrawRectangle(graphics: *mut GpGraphics, pen: *mut GpPen, x: f32, y: f32, width: f32, height: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawRectangle(graphics : *mut GpGraphics, pen : *mut GpPen, x : f32, y : f32, width : f32, height : f32) -> Status);
-    GdipDrawRectangle(graphics, pen, x, y, width, height)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawRectangle(graphics : *mut GpGraphics, pen : *mut GpPen, x : f32, y : f32, width : f32, height : f32) -> Status);
+    unsafe { GdipDrawRectangle(graphics as _, pen as _, x, y, width, height) }
 }
 #[inline]
 pub unsafe fn GdipDrawRectangleI(graphics: *mut GpGraphics, pen: *mut GpPen, x: i32, y: i32, width: i32, height: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawRectangleI(graphics : *mut GpGraphics, pen : *mut GpPen, x : i32, y : i32, width : i32, height : i32) -> Status);
-    GdipDrawRectangleI(graphics, pen, x, y, width, height)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawRectangleI(graphics : *mut GpGraphics, pen : *mut GpPen, x : i32, y : i32, width : i32, height : i32) -> Status);
+    unsafe { GdipDrawRectangleI(graphics as _, pen as _, x, y, width, height) }
 }
 #[inline]
 pub unsafe fn GdipDrawRectangles(graphics: *mut GpGraphics, pen: *mut GpPen, rects: *const RectF, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawRectangles(graphics : *mut GpGraphics, pen : *mut GpPen, rects : *const RectF, count : i32) -> Status);
-    GdipDrawRectangles(graphics, pen, rects, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawRectangles(graphics : *mut GpGraphics, pen : *mut GpPen, rects : *const RectF, count : i32) -> Status);
+    unsafe { GdipDrawRectangles(graphics as _, pen as _, rects, count) }
 }
 #[inline]
 pub unsafe fn GdipDrawRectanglesI(graphics: *mut GpGraphics, pen: *mut GpPen, rects: *const Rect, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawRectanglesI(graphics : *mut GpGraphics, pen : *mut GpPen, rects : *const Rect, count : i32) -> Status);
-    GdipDrawRectanglesI(graphics, pen, rects, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawRectanglesI(graphics : *mut GpGraphics, pen : *mut GpPen, rects : *const Rect, count : i32) -> Status);
+    unsafe { GdipDrawRectanglesI(graphics as _, pen as _, rects, count) }
 }
 #[inline]
-pub unsafe fn GdipDrawString<P0>(graphics: *mut GpGraphics, string: P0, length: i32, font: *const GpFont, layoutrect: *const RectF, stringformat: *const GpStringFormat, brush: *const GpBrush) -> Status
+pub unsafe fn GdipDrawString<P1>(graphics: *mut GpGraphics, string: P1, length: i32, font: *const GpFont, layoutrect: *const RectF, stringformat: *const GpStringFormat, brush: *const GpBrush) -> Status
 where
-    P0: ::windows_core::IntoParam<::windows_core::PCWSTR>,
+    P1: windows_core::Param<windows_core::PCWSTR>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipDrawString(graphics : *mut GpGraphics, string : ::windows_core::PCWSTR, length : i32, font : *const GpFont, layoutrect : *const RectF, stringformat : *const GpStringFormat, brush : *const GpBrush) -> Status);
-    GdipDrawString(graphics, string.into_param().abi(), length, font, layoutrect, stringformat, brush)
+    windows_link::link!("gdiplus.dll" "system" fn GdipDrawString(graphics : *mut GpGraphics, string : windows_core::PCWSTR, length : i32, font : *const GpFont, layoutrect : *const RectF, stringformat : *const GpStringFormat, brush : *const GpBrush) -> Status);
+    unsafe { GdipDrawString(graphics as _, string.param().abi(), length, font, layoutrect, stringformat, brush) }
 }
-#[doc = "Required features: `\"Win32_Graphics_Gdi\"`"]
 #[cfg(feature = "Win32_Graphics_Gdi")]
 #[inline]
-pub unsafe fn GdipEmfToWmfBits<P0>(hemf: P0, pdata16: ::core::option::Option<&mut [u8]>, imapmode: i32, eflags: i32) -> u32
-where
-    P0: ::windows_core::IntoParam<super::Gdi::HENHMETAFILE>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipEmfToWmfBits(hemf : super::Gdi:: HENHMETAFILE, cbdata16 : u32, pdata16 : *mut u8, imapmode : i32, eflags : i32) -> u32);
-    GdipEmfToWmfBits(hemf.into_param().abi(), pdata16.as_deref().map_or(0, |slice| slice.len().try_into().unwrap()), ::core::mem::transmute(pdata16.as_deref().map_or(::core::ptr::null(), |slice| slice.as_ptr())), imapmode, eflags)
+pub unsafe fn GdipEmfToWmfBits(hemf: super::Gdi::HENHMETAFILE, pdata16: Option<&mut [u8]>, imapmode: i32, eflags: i32) -> u32 {
+    windows_link::link!("gdiplus.dll" "system" fn GdipEmfToWmfBits(hemf : super::Gdi:: HENHMETAFILE, cbdata16 : u32, pdata16 : *mut u8, imapmode : i32, eflags : i32) -> u32);
+    unsafe { GdipEmfToWmfBits(hemf, pdata16.as_deref().map_or(0, |slice| slice.len().try_into().unwrap()), core::mem::transmute(pdata16.as_deref().map_or(core::ptr::null(), |slice| slice.as_ptr())), imapmode, eflags) }
 }
 #[inline]
 pub unsafe fn GdipEndContainer(graphics: *mut GpGraphics, state: u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipEndContainer(graphics : *mut GpGraphics, state : u32) -> Status);
-    GdipEndContainer(graphics, state)
+    windows_link::link!("gdiplus.dll" "system" fn GdipEndContainer(graphics : *mut GpGraphics, state : u32) -> Status);
+    unsafe { GdipEndContainer(graphics as _, state) }
 }
 #[inline]
-pub unsafe fn GdipEnumerateMetafileDestPoint(graphics: *mut GpGraphics, metafile: *const GpMetafile, destpoint: *const PointF, callback: isize, callbackdata: *mut ::core::ffi::c_void, imageattributes: *const GpImageAttributes) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipEnumerateMetafileDestPoint(graphics : *mut GpGraphics, metafile : *const GpMetafile, destpoint : *const PointF, callback : isize, callbackdata : *mut ::core::ffi::c_void, imageattributes : *const GpImageAttributes) -> Status);
-    GdipEnumerateMetafileDestPoint(graphics, metafile, destpoint, callback, callbackdata, imageattributes)
+pub unsafe fn GdipEnumerateMetafileDestPoint(graphics: *mut GpGraphics, metafile: *const GpMetafile, destpoint: *const PointF, callback: isize, callbackdata: *mut core::ffi::c_void, imageattributes: *const GpImageAttributes) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipEnumerateMetafileDestPoint(graphics : *mut GpGraphics, metafile : *const GpMetafile, destpoint : *const PointF, callback : isize, callbackdata : *mut core::ffi::c_void, imageattributes : *const GpImageAttributes) -> Status);
+    unsafe { GdipEnumerateMetafileDestPoint(graphics as _, metafile, destpoint, callback, callbackdata as _, imageattributes) }
 }
 #[inline]
-pub unsafe fn GdipEnumerateMetafileDestPointI(graphics: *mut GpGraphics, metafile: *const GpMetafile, destpoint: *const Point, callback: isize, callbackdata: *mut ::core::ffi::c_void, imageattributes: *const GpImageAttributes) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipEnumerateMetafileDestPointI(graphics : *mut GpGraphics, metafile : *const GpMetafile, destpoint : *const Point, callback : isize, callbackdata : *mut ::core::ffi::c_void, imageattributes : *const GpImageAttributes) -> Status);
-    GdipEnumerateMetafileDestPointI(graphics, metafile, destpoint, callback, callbackdata, imageattributes)
+pub unsafe fn GdipEnumerateMetafileDestPointI(graphics: *mut GpGraphics, metafile: *const GpMetafile, destpoint: *const Point, callback: isize, callbackdata: *mut core::ffi::c_void, imageattributes: *const GpImageAttributes) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipEnumerateMetafileDestPointI(graphics : *mut GpGraphics, metafile : *const GpMetafile, destpoint : *const Point, callback : isize, callbackdata : *mut core::ffi::c_void, imageattributes : *const GpImageAttributes) -> Status);
+    unsafe { GdipEnumerateMetafileDestPointI(graphics as _, metafile, destpoint, callback, callbackdata as _, imageattributes) }
 }
 #[inline]
-pub unsafe fn GdipEnumerateMetafileDestPoints(graphics: *mut GpGraphics, metafile: *const GpMetafile, destpoints: *const PointF, count: i32, callback: isize, callbackdata: *mut ::core::ffi::c_void, imageattributes: *const GpImageAttributes) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipEnumerateMetafileDestPoints(graphics : *mut GpGraphics, metafile : *const GpMetafile, destpoints : *const PointF, count : i32, callback : isize, callbackdata : *mut ::core::ffi::c_void, imageattributes : *const GpImageAttributes) -> Status);
-    GdipEnumerateMetafileDestPoints(graphics, metafile, destpoints, count, callback, callbackdata, imageattributes)
+pub unsafe fn GdipEnumerateMetafileDestPoints(graphics: *mut GpGraphics, metafile: *const GpMetafile, destpoints: *const PointF, count: i32, callback: isize, callbackdata: *mut core::ffi::c_void, imageattributes: *const GpImageAttributes) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipEnumerateMetafileDestPoints(graphics : *mut GpGraphics, metafile : *const GpMetafile, destpoints : *const PointF, count : i32, callback : isize, callbackdata : *mut core::ffi::c_void, imageattributes : *const GpImageAttributes) -> Status);
+    unsafe { GdipEnumerateMetafileDestPoints(graphics as _, metafile, destpoints, count, callback, callbackdata as _, imageattributes) }
 }
 #[inline]
-pub unsafe fn GdipEnumerateMetafileDestPointsI(graphics: *mut GpGraphics, metafile: *const GpMetafile, destpoints: *const Point, count: i32, callback: isize, callbackdata: *mut ::core::ffi::c_void, imageattributes: *const GpImageAttributes) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipEnumerateMetafileDestPointsI(graphics : *mut GpGraphics, metafile : *const GpMetafile, destpoints : *const Point, count : i32, callback : isize, callbackdata : *mut ::core::ffi::c_void, imageattributes : *const GpImageAttributes) -> Status);
-    GdipEnumerateMetafileDestPointsI(graphics, metafile, destpoints, count, callback, callbackdata, imageattributes)
+pub unsafe fn GdipEnumerateMetafileDestPointsI(graphics: *mut GpGraphics, metafile: *const GpMetafile, destpoints: *const Point, count: i32, callback: isize, callbackdata: *mut core::ffi::c_void, imageattributes: *const GpImageAttributes) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipEnumerateMetafileDestPointsI(graphics : *mut GpGraphics, metafile : *const GpMetafile, destpoints : *const Point, count : i32, callback : isize, callbackdata : *mut core::ffi::c_void, imageattributes : *const GpImageAttributes) -> Status);
+    unsafe { GdipEnumerateMetafileDestPointsI(graphics as _, metafile, destpoints, count, callback, callbackdata as _, imageattributes) }
 }
 #[inline]
-pub unsafe fn GdipEnumerateMetafileDestRect(graphics: *mut GpGraphics, metafile: *const GpMetafile, destrect: *const RectF, callback: isize, callbackdata: *mut ::core::ffi::c_void, imageattributes: *const GpImageAttributes) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipEnumerateMetafileDestRect(graphics : *mut GpGraphics, metafile : *const GpMetafile, destrect : *const RectF, callback : isize, callbackdata : *mut ::core::ffi::c_void, imageattributes : *const GpImageAttributes) -> Status);
-    GdipEnumerateMetafileDestRect(graphics, metafile, destrect, callback, callbackdata, imageattributes)
+pub unsafe fn GdipEnumerateMetafileDestRect(graphics: *mut GpGraphics, metafile: *const GpMetafile, destrect: *const RectF, callback: isize, callbackdata: *mut core::ffi::c_void, imageattributes: *const GpImageAttributes) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipEnumerateMetafileDestRect(graphics : *mut GpGraphics, metafile : *const GpMetafile, destrect : *const RectF, callback : isize, callbackdata : *mut core::ffi::c_void, imageattributes : *const GpImageAttributes) -> Status);
+    unsafe { GdipEnumerateMetafileDestRect(graphics as _, metafile, destrect, callback, callbackdata as _, imageattributes) }
 }
 #[inline]
-pub unsafe fn GdipEnumerateMetafileDestRectI(graphics: *mut GpGraphics, metafile: *const GpMetafile, destrect: *const Rect, callback: isize, callbackdata: *mut ::core::ffi::c_void, imageattributes: *const GpImageAttributes) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipEnumerateMetafileDestRectI(graphics : *mut GpGraphics, metafile : *const GpMetafile, destrect : *const Rect, callback : isize, callbackdata : *mut ::core::ffi::c_void, imageattributes : *const GpImageAttributes) -> Status);
-    GdipEnumerateMetafileDestRectI(graphics, metafile, destrect, callback, callbackdata, imageattributes)
+pub unsafe fn GdipEnumerateMetafileDestRectI(graphics: *mut GpGraphics, metafile: *const GpMetafile, destrect: *const Rect, callback: isize, callbackdata: *mut core::ffi::c_void, imageattributes: *const GpImageAttributes) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipEnumerateMetafileDestRectI(graphics : *mut GpGraphics, metafile : *const GpMetafile, destrect : *const Rect, callback : isize, callbackdata : *mut core::ffi::c_void, imageattributes : *const GpImageAttributes) -> Status);
+    unsafe { GdipEnumerateMetafileDestRectI(graphics as _, metafile, destrect, callback, callbackdata as _, imageattributes) }
 }
 #[inline]
-pub unsafe fn GdipEnumerateMetafileSrcRectDestPoint(graphics: *mut GpGraphics, metafile: *const GpMetafile, destpoint: *const PointF, srcrect: *const RectF, srcunit: Unit, callback: isize, callbackdata: *mut ::core::ffi::c_void, imageattributes: *const GpImageAttributes) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipEnumerateMetafileSrcRectDestPoint(graphics : *mut GpGraphics, metafile : *const GpMetafile, destpoint : *const PointF, srcrect : *const RectF, srcunit : Unit, callback : isize, callbackdata : *mut ::core::ffi::c_void, imageattributes : *const GpImageAttributes) -> Status);
-    GdipEnumerateMetafileSrcRectDestPoint(graphics, metafile, destpoint, srcrect, srcunit, callback, callbackdata, imageattributes)
+pub unsafe fn GdipEnumerateMetafileSrcRectDestPoint(graphics: *mut GpGraphics, metafile: *const GpMetafile, destpoint: *const PointF, srcrect: *const RectF, srcunit: Unit, callback: isize, callbackdata: *mut core::ffi::c_void, imageattributes: *const GpImageAttributes) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipEnumerateMetafileSrcRectDestPoint(graphics : *mut GpGraphics, metafile : *const GpMetafile, destpoint : *const PointF, srcrect : *const RectF, srcunit : Unit, callback : isize, callbackdata : *mut core::ffi::c_void, imageattributes : *const GpImageAttributes) -> Status);
+    unsafe { GdipEnumerateMetafileSrcRectDestPoint(graphics as _, metafile, destpoint, srcrect, srcunit, callback, callbackdata as _, imageattributes) }
 }
 #[inline]
-pub unsafe fn GdipEnumerateMetafileSrcRectDestPointI(graphics: *mut GpGraphics, metafile: *const GpMetafile, destpoint: *const Point, srcrect: *const Rect, srcunit: Unit, callback: isize, callbackdata: *mut ::core::ffi::c_void, imageattributes: *const GpImageAttributes) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipEnumerateMetafileSrcRectDestPointI(graphics : *mut GpGraphics, metafile : *const GpMetafile, destpoint : *const Point, srcrect : *const Rect, srcunit : Unit, callback : isize, callbackdata : *mut ::core::ffi::c_void, imageattributes : *const GpImageAttributes) -> Status);
-    GdipEnumerateMetafileSrcRectDestPointI(graphics, metafile, destpoint, srcrect, srcunit, callback, callbackdata, imageattributes)
+pub unsafe fn GdipEnumerateMetafileSrcRectDestPointI(graphics: *mut GpGraphics, metafile: *const GpMetafile, destpoint: *const Point, srcrect: *const Rect, srcunit: Unit, callback: isize, callbackdata: *mut core::ffi::c_void, imageattributes: *const GpImageAttributes) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipEnumerateMetafileSrcRectDestPointI(graphics : *mut GpGraphics, metafile : *const GpMetafile, destpoint : *const Point, srcrect : *const Rect, srcunit : Unit, callback : isize, callbackdata : *mut core::ffi::c_void, imageattributes : *const GpImageAttributes) -> Status);
+    unsafe { GdipEnumerateMetafileSrcRectDestPointI(graphics as _, metafile, destpoint, srcrect, srcunit, callback, callbackdata as _, imageattributes) }
 }
 #[inline]
-pub unsafe fn GdipEnumerateMetafileSrcRectDestPoints(graphics: *mut GpGraphics, metafile: *const GpMetafile, destpoints: *const PointF, count: i32, srcrect: *const RectF, srcunit: Unit, callback: isize, callbackdata: *mut ::core::ffi::c_void, imageattributes: *const GpImageAttributes) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipEnumerateMetafileSrcRectDestPoints(graphics : *mut GpGraphics, metafile : *const GpMetafile, destpoints : *const PointF, count : i32, srcrect : *const RectF, srcunit : Unit, callback : isize, callbackdata : *mut ::core::ffi::c_void, imageattributes : *const GpImageAttributes) -> Status);
-    GdipEnumerateMetafileSrcRectDestPoints(graphics, metafile, destpoints, count, srcrect, srcunit, callback, callbackdata, imageattributes)
+pub unsafe fn GdipEnumerateMetafileSrcRectDestPoints(graphics: *mut GpGraphics, metafile: *const GpMetafile, destpoints: *const PointF, count: i32, srcrect: *const RectF, srcunit: Unit, callback: isize, callbackdata: *mut core::ffi::c_void, imageattributes: *const GpImageAttributes) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipEnumerateMetafileSrcRectDestPoints(graphics : *mut GpGraphics, metafile : *const GpMetafile, destpoints : *const PointF, count : i32, srcrect : *const RectF, srcunit : Unit, callback : isize, callbackdata : *mut core::ffi::c_void, imageattributes : *const GpImageAttributes) -> Status);
+    unsafe { GdipEnumerateMetafileSrcRectDestPoints(graphics as _, metafile, destpoints, count, srcrect, srcunit, callback, callbackdata as _, imageattributes) }
 }
 #[inline]
-pub unsafe fn GdipEnumerateMetafileSrcRectDestPointsI(graphics: *mut GpGraphics, metafile: *const GpMetafile, destpoints: *const Point, count: i32, srcrect: *const Rect, srcunit: Unit, callback: isize, callbackdata: *mut ::core::ffi::c_void, imageattributes: *const GpImageAttributes) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipEnumerateMetafileSrcRectDestPointsI(graphics : *mut GpGraphics, metafile : *const GpMetafile, destpoints : *const Point, count : i32, srcrect : *const Rect, srcunit : Unit, callback : isize, callbackdata : *mut ::core::ffi::c_void, imageattributes : *const GpImageAttributes) -> Status);
-    GdipEnumerateMetafileSrcRectDestPointsI(graphics, metafile, destpoints, count, srcrect, srcunit, callback, callbackdata, imageattributes)
+pub unsafe fn GdipEnumerateMetafileSrcRectDestPointsI(graphics: *mut GpGraphics, metafile: *const GpMetafile, destpoints: *const Point, count: i32, srcrect: *const Rect, srcunit: Unit, callback: isize, callbackdata: *mut core::ffi::c_void, imageattributes: *const GpImageAttributes) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipEnumerateMetafileSrcRectDestPointsI(graphics : *mut GpGraphics, metafile : *const GpMetafile, destpoints : *const Point, count : i32, srcrect : *const Rect, srcunit : Unit, callback : isize, callbackdata : *mut core::ffi::c_void, imageattributes : *const GpImageAttributes) -> Status);
+    unsafe { GdipEnumerateMetafileSrcRectDestPointsI(graphics as _, metafile, destpoints, count, srcrect, srcunit, callback, callbackdata as _, imageattributes) }
 }
 #[inline]
-pub unsafe fn GdipEnumerateMetafileSrcRectDestRect(graphics: *mut GpGraphics, metafile: *const GpMetafile, destrect: *const RectF, srcrect: *const RectF, srcunit: Unit, callback: isize, callbackdata: *mut ::core::ffi::c_void, imageattributes: *const GpImageAttributes) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipEnumerateMetafileSrcRectDestRect(graphics : *mut GpGraphics, metafile : *const GpMetafile, destrect : *const RectF, srcrect : *const RectF, srcunit : Unit, callback : isize, callbackdata : *mut ::core::ffi::c_void, imageattributes : *const GpImageAttributes) -> Status);
-    GdipEnumerateMetafileSrcRectDestRect(graphics, metafile, destrect, srcrect, srcunit, callback, callbackdata, imageattributes)
+pub unsafe fn GdipEnumerateMetafileSrcRectDestRect(graphics: *mut GpGraphics, metafile: *const GpMetafile, destrect: *const RectF, srcrect: *const RectF, srcunit: Unit, callback: isize, callbackdata: *mut core::ffi::c_void, imageattributes: *const GpImageAttributes) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipEnumerateMetafileSrcRectDestRect(graphics : *mut GpGraphics, metafile : *const GpMetafile, destrect : *const RectF, srcrect : *const RectF, srcunit : Unit, callback : isize, callbackdata : *mut core::ffi::c_void, imageattributes : *const GpImageAttributes) -> Status);
+    unsafe { GdipEnumerateMetafileSrcRectDestRect(graphics as _, metafile, destrect, srcrect, srcunit, callback, callbackdata as _, imageattributes) }
 }
 #[inline]
-pub unsafe fn GdipEnumerateMetafileSrcRectDestRectI(graphics: *mut GpGraphics, metafile: *const GpMetafile, destrect: *const Rect, srcrect: *const Rect, srcunit: Unit, callback: isize, callbackdata: *mut ::core::ffi::c_void, imageattributes: *const GpImageAttributes) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipEnumerateMetafileSrcRectDestRectI(graphics : *mut GpGraphics, metafile : *const GpMetafile, destrect : *const Rect, srcrect : *const Rect, srcunit : Unit, callback : isize, callbackdata : *mut ::core::ffi::c_void, imageattributes : *const GpImageAttributes) -> Status);
-    GdipEnumerateMetafileSrcRectDestRectI(graphics, metafile, destrect, srcrect, srcunit, callback, callbackdata, imageattributes)
+pub unsafe fn GdipEnumerateMetafileSrcRectDestRectI(graphics: *mut GpGraphics, metafile: *const GpMetafile, destrect: *const Rect, srcrect: *const Rect, srcunit: Unit, callback: isize, callbackdata: *mut core::ffi::c_void, imageattributes: *const GpImageAttributes) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipEnumerateMetafileSrcRectDestRectI(graphics : *mut GpGraphics, metafile : *const GpMetafile, destrect : *const Rect, srcrect : *const Rect, srcunit : Unit, callback : isize, callbackdata : *mut core::ffi::c_void, imageattributes : *const GpImageAttributes) -> Status);
+    unsafe { GdipEnumerateMetafileSrcRectDestRectI(graphics as _, metafile, destrect, srcrect, srcunit, callback, callbackdata as _, imageattributes) }
 }
 #[inline]
 pub unsafe fn GdipFillClosedCurve(graphics: *mut GpGraphics, brush: *mut GpBrush, points: *const PointF, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipFillClosedCurve(graphics : *mut GpGraphics, brush : *mut GpBrush, points : *const PointF, count : i32) -> Status);
-    GdipFillClosedCurve(graphics, brush, points, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipFillClosedCurve(graphics : *mut GpGraphics, brush : *mut GpBrush, points : *const PointF, count : i32) -> Status);
+    unsafe { GdipFillClosedCurve(graphics as _, brush as _, points, count) }
 }
 #[inline]
 pub unsafe fn GdipFillClosedCurve2(graphics: *mut GpGraphics, brush: *mut GpBrush, points: *const PointF, count: i32, tension: f32, fillmode: FillMode) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipFillClosedCurve2(graphics : *mut GpGraphics, brush : *mut GpBrush, points : *const PointF, count : i32, tension : f32, fillmode : FillMode) -> Status);
-    GdipFillClosedCurve2(graphics, brush, points, count, tension, fillmode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipFillClosedCurve2(graphics : *mut GpGraphics, brush : *mut GpBrush, points : *const PointF, count : i32, tension : f32, fillmode : FillMode) -> Status);
+    unsafe { GdipFillClosedCurve2(graphics as _, brush as _, points, count, tension, fillmode) }
 }
 #[inline]
 pub unsafe fn GdipFillClosedCurve2I(graphics: *mut GpGraphics, brush: *mut GpBrush, points: *const Point, count: i32, tension: f32, fillmode: FillMode) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipFillClosedCurve2I(graphics : *mut GpGraphics, brush : *mut GpBrush, points : *const Point, count : i32, tension : f32, fillmode : FillMode) -> Status);
-    GdipFillClosedCurve2I(graphics, brush, points, count, tension, fillmode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipFillClosedCurve2I(graphics : *mut GpGraphics, brush : *mut GpBrush, points : *const Point, count : i32, tension : f32, fillmode : FillMode) -> Status);
+    unsafe { GdipFillClosedCurve2I(graphics as _, brush as _, points, count, tension, fillmode) }
 }
 #[inline]
 pub unsafe fn GdipFillClosedCurveI(graphics: *mut GpGraphics, brush: *mut GpBrush, points: *const Point, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipFillClosedCurveI(graphics : *mut GpGraphics, brush : *mut GpBrush, points : *const Point, count : i32) -> Status);
-    GdipFillClosedCurveI(graphics, brush, points, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipFillClosedCurveI(graphics : *mut GpGraphics, brush : *mut GpBrush, points : *const Point, count : i32) -> Status);
+    unsafe { GdipFillClosedCurveI(graphics as _, brush as _, points, count) }
 }
 #[inline]
 pub unsafe fn GdipFillEllipse(graphics: *mut GpGraphics, brush: *mut GpBrush, x: f32, y: f32, width: f32, height: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipFillEllipse(graphics : *mut GpGraphics, brush : *mut GpBrush, x : f32, y : f32, width : f32, height : f32) -> Status);
-    GdipFillEllipse(graphics, brush, x, y, width, height)
+    windows_link::link!("gdiplus.dll" "system" fn GdipFillEllipse(graphics : *mut GpGraphics, brush : *mut GpBrush, x : f32, y : f32, width : f32, height : f32) -> Status);
+    unsafe { GdipFillEllipse(graphics as _, brush as _, x, y, width, height) }
 }
 #[inline]
 pub unsafe fn GdipFillEllipseI(graphics: *mut GpGraphics, brush: *mut GpBrush, x: i32, y: i32, width: i32, height: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipFillEllipseI(graphics : *mut GpGraphics, brush : *mut GpBrush, x : i32, y : i32, width : i32, height : i32) -> Status);
-    GdipFillEllipseI(graphics, brush, x, y, width, height)
+    windows_link::link!("gdiplus.dll" "system" fn GdipFillEllipseI(graphics : *mut GpGraphics, brush : *mut GpBrush, x : i32, y : i32, width : i32, height : i32) -> Status);
+    unsafe { GdipFillEllipseI(graphics as _, brush as _, x, y, width, height) }
 }
 #[inline]
 pub unsafe fn GdipFillPath(graphics: *mut GpGraphics, brush: *mut GpBrush, path: *mut GpPath) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipFillPath(graphics : *mut GpGraphics, brush : *mut GpBrush, path : *mut GpPath) -> Status);
-    GdipFillPath(graphics, brush, path)
+    windows_link::link!("gdiplus.dll" "system" fn GdipFillPath(graphics : *mut GpGraphics, brush : *mut GpBrush, path : *mut GpPath) -> Status);
+    unsafe { GdipFillPath(graphics as _, brush as _, path as _) }
 }
 #[inline]
 pub unsafe fn GdipFillPie(graphics: *mut GpGraphics, brush: *mut GpBrush, x: f32, y: f32, width: f32, height: f32, startangle: f32, sweepangle: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipFillPie(graphics : *mut GpGraphics, brush : *mut GpBrush, x : f32, y : f32, width : f32, height : f32, startangle : f32, sweepangle : f32) -> Status);
-    GdipFillPie(graphics, brush, x, y, width, height, startangle, sweepangle)
+    windows_link::link!("gdiplus.dll" "system" fn GdipFillPie(graphics : *mut GpGraphics, brush : *mut GpBrush, x : f32, y : f32, width : f32, height : f32, startangle : f32, sweepangle : f32) -> Status);
+    unsafe { GdipFillPie(graphics as _, brush as _, x, y, width, height, startangle, sweepangle) }
 }
 #[inline]
 pub unsafe fn GdipFillPieI(graphics: *mut GpGraphics, brush: *mut GpBrush, x: i32, y: i32, width: i32, height: i32, startangle: f32, sweepangle: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipFillPieI(graphics : *mut GpGraphics, brush : *mut GpBrush, x : i32, y : i32, width : i32, height : i32, startangle : f32, sweepangle : f32) -> Status);
-    GdipFillPieI(graphics, brush, x, y, width, height, startangle, sweepangle)
+    windows_link::link!("gdiplus.dll" "system" fn GdipFillPieI(graphics : *mut GpGraphics, brush : *mut GpBrush, x : i32, y : i32, width : i32, height : i32, startangle : f32, sweepangle : f32) -> Status);
+    unsafe { GdipFillPieI(graphics as _, brush as _, x, y, width, height, startangle, sweepangle) }
 }
 #[inline]
 pub unsafe fn GdipFillPolygon(graphics: *mut GpGraphics, brush: *mut GpBrush, points: *const PointF, count: i32, fillmode: FillMode) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipFillPolygon(graphics : *mut GpGraphics, brush : *mut GpBrush, points : *const PointF, count : i32, fillmode : FillMode) -> Status);
-    GdipFillPolygon(graphics, brush, points, count, fillmode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipFillPolygon(graphics : *mut GpGraphics, brush : *mut GpBrush, points : *const PointF, count : i32, fillmode : FillMode) -> Status);
+    unsafe { GdipFillPolygon(graphics as _, brush as _, points, count, fillmode) }
 }
 #[inline]
 pub unsafe fn GdipFillPolygon2(graphics: *mut GpGraphics, brush: *mut GpBrush, points: *const PointF, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipFillPolygon2(graphics : *mut GpGraphics, brush : *mut GpBrush, points : *const PointF, count : i32) -> Status);
-    GdipFillPolygon2(graphics, brush, points, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipFillPolygon2(graphics : *mut GpGraphics, brush : *mut GpBrush, points : *const PointF, count : i32) -> Status);
+    unsafe { GdipFillPolygon2(graphics as _, brush as _, points, count) }
 }
 #[inline]
 pub unsafe fn GdipFillPolygon2I(graphics: *mut GpGraphics, brush: *mut GpBrush, points: *const Point, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipFillPolygon2I(graphics : *mut GpGraphics, brush : *mut GpBrush, points : *const Point, count : i32) -> Status);
-    GdipFillPolygon2I(graphics, brush, points, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipFillPolygon2I(graphics : *mut GpGraphics, brush : *mut GpBrush, points : *const Point, count : i32) -> Status);
+    unsafe { GdipFillPolygon2I(graphics as _, brush as _, points, count) }
 }
 #[inline]
 pub unsafe fn GdipFillPolygonI(graphics: *mut GpGraphics, brush: *mut GpBrush, points: *const Point, count: i32, fillmode: FillMode) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipFillPolygonI(graphics : *mut GpGraphics, brush : *mut GpBrush, points : *const Point, count : i32, fillmode : FillMode) -> Status);
-    GdipFillPolygonI(graphics, brush, points, count, fillmode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipFillPolygonI(graphics : *mut GpGraphics, brush : *mut GpBrush, points : *const Point, count : i32, fillmode : FillMode) -> Status);
+    unsafe { GdipFillPolygonI(graphics as _, brush as _, points, count, fillmode) }
 }
 #[inline]
 pub unsafe fn GdipFillRectangle(graphics: *mut GpGraphics, brush: *mut GpBrush, x: f32, y: f32, width: f32, height: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipFillRectangle(graphics : *mut GpGraphics, brush : *mut GpBrush, x : f32, y : f32, width : f32, height : f32) -> Status);
-    GdipFillRectangle(graphics, brush, x, y, width, height)
+    windows_link::link!("gdiplus.dll" "system" fn GdipFillRectangle(graphics : *mut GpGraphics, brush : *mut GpBrush, x : f32, y : f32, width : f32, height : f32) -> Status);
+    unsafe { GdipFillRectangle(graphics as _, brush as _, x, y, width, height) }
 }
 #[inline]
 pub unsafe fn GdipFillRectangleI(graphics: *mut GpGraphics, brush: *mut GpBrush, x: i32, y: i32, width: i32, height: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipFillRectangleI(graphics : *mut GpGraphics, brush : *mut GpBrush, x : i32, y : i32, width : i32, height : i32) -> Status);
-    GdipFillRectangleI(graphics, brush, x, y, width, height)
+    windows_link::link!("gdiplus.dll" "system" fn GdipFillRectangleI(graphics : *mut GpGraphics, brush : *mut GpBrush, x : i32, y : i32, width : i32, height : i32) -> Status);
+    unsafe { GdipFillRectangleI(graphics as _, brush as _, x, y, width, height) }
 }
 #[inline]
 pub unsafe fn GdipFillRectangles(graphics: *mut GpGraphics, brush: *mut GpBrush, rects: *const RectF, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipFillRectangles(graphics : *mut GpGraphics, brush : *mut GpBrush, rects : *const RectF, count : i32) -> Status);
-    GdipFillRectangles(graphics, brush, rects, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipFillRectangles(graphics : *mut GpGraphics, brush : *mut GpBrush, rects : *const RectF, count : i32) -> Status);
+    unsafe { GdipFillRectangles(graphics as _, brush as _, rects, count) }
 }
 #[inline]
 pub unsafe fn GdipFillRectanglesI(graphics: *mut GpGraphics, brush: *mut GpBrush, rects: *const Rect, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipFillRectanglesI(graphics : *mut GpGraphics, brush : *mut GpBrush, rects : *const Rect, count : i32) -> Status);
-    GdipFillRectanglesI(graphics, brush, rects, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipFillRectanglesI(graphics : *mut GpGraphics, brush : *mut GpBrush, rects : *const Rect, count : i32) -> Status);
+    unsafe { GdipFillRectanglesI(graphics as _, brush as _, rects, count) }
 }
 #[inline]
 pub unsafe fn GdipFillRegion(graphics: *mut GpGraphics, brush: *mut GpBrush, region: *mut GpRegion) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipFillRegion(graphics : *mut GpGraphics, brush : *mut GpBrush, region : *mut GpRegion) -> Status);
-    GdipFillRegion(graphics, brush, region)
+    windows_link::link!("gdiplus.dll" "system" fn GdipFillRegion(graphics : *mut GpGraphics, brush : *mut GpBrush, region : *mut GpRegion) -> Status);
+    unsafe { GdipFillRegion(graphics as _, brush as _, region as _) }
 }
 #[inline]
 pub unsafe fn GdipFindFirstImageItem(image: *mut GpImage, item: *mut ImageItemData) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipFindFirstImageItem(image : *mut GpImage, item : *mut ImageItemData) -> Status);
-    GdipFindFirstImageItem(image, item)
+    windows_link::link!("gdiplus.dll" "system" fn GdipFindFirstImageItem(image : *mut GpImage, item : *mut ImageItemData) -> Status);
+    unsafe { GdipFindFirstImageItem(image as _, item as _) }
 }
 #[inline]
 pub unsafe fn GdipFindNextImageItem(image: *mut GpImage, item: *mut ImageItemData) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipFindNextImageItem(image : *mut GpImage, item : *mut ImageItemData) -> Status);
-    GdipFindNextImageItem(image, item)
+    windows_link::link!("gdiplus.dll" "system" fn GdipFindNextImageItem(image : *mut GpImage, item : *mut ImageItemData) -> Status);
+    unsafe { GdipFindNextImageItem(image as _, item as _) }
 }
 #[inline]
 pub unsafe fn GdipFlattenPath(path: *mut GpPath, matrix: *mut Matrix, flatness: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipFlattenPath(path : *mut GpPath, matrix : *mut Matrix, flatness : f32) -> Status);
-    GdipFlattenPath(path, matrix, flatness)
+    windows_link::link!("gdiplus.dll" "system" fn GdipFlattenPath(path : *mut GpPath, matrix : *mut Matrix, flatness : f32) -> Status);
+    unsafe { GdipFlattenPath(path as _, matrix as _, flatness) }
 }
 #[inline]
 pub unsafe fn GdipFlush(graphics: *mut GpGraphics, intention: FlushIntention) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipFlush(graphics : *mut GpGraphics, intention : FlushIntention) -> Status);
-    GdipFlush(graphics, intention)
+    windows_link::link!("gdiplus.dll" "system" fn GdipFlush(graphics : *mut GpGraphics, intention : FlushIntention) -> Status);
+    unsafe { GdipFlush(graphics as _, intention) }
 }
 #[inline]
-pub unsafe fn GdipFree(ptr: *mut ::core::ffi::c_void) {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipFree(ptr : *mut ::core::ffi::c_void) -> ());
-    GdipFree(ptr)
+pub unsafe fn GdipFree(ptr: *mut core::ffi::c_void) {
+    windows_link::link!("gdiplus.dll" "system" fn GdipFree(ptr : *mut core::ffi::c_void));
+    unsafe { GdipFree(ptr as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipGetAdjustableArrowCapFillState(cap: *mut GpAdjustableArrowCap, fillstate: *mut super::super::Foundation::BOOL) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetAdjustableArrowCapFillState(cap : *mut GpAdjustableArrowCap, fillstate : *mut super::super::Foundation:: BOOL) -> Status);
-    GdipGetAdjustableArrowCapFillState(cap, fillstate)
+pub unsafe fn GdipGetAdjustableArrowCapFillState(cap: *mut GpAdjustableArrowCap, fillstate: *mut windows_core::BOOL) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetAdjustableArrowCapFillState(cap : *mut GpAdjustableArrowCap, fillstate : *mut windows_core::BOOL) -> Status);
+    unsafe { GdipGetAdjustableArrowCapFillState(cap as _, fillstate as _) }
 }
 #[inline]
 pub unsafe fn GdipGetAdjustableArrowCapHeight(cap: *mut GpAdjustableArrowCap, height: *mut f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetAdjustableArrowCapHeight(cap : *mut GpAdjustableArrowCap, height : *mut f32) -> Status);
-    GdipGetAdjustableArrowCapHeight(cap, height)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetAdjustableArrowCapHeight(cap : *mut GpAdjustableArrowCap, height : *mut f32) -> Status);
+    unsafe { GdipGetAdjustableArrowCapHeight(cap as _, height as _) }
 }
 #[inline]
 pub unsafe fn GdipGetAdjustableArrowCapMiddleInset(cap: *mut GpAdjustableArrowCap, middleinset: *mut f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetAdjustableArrowCapMiddleInset(cap : *mut GpAdjustableArrowCap, middleinset : *mut f32) -> Status);
-    GdipGetAdjustableArrowCapMiddleInset(cap, middleinset)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetAdjustableArrowCapMiddleInset(cap : *mut GpAdjustableArrowCap, middleinset : *mut f32) -> Status);
+    unsafe { GdipGetAdjustableArrowCapMiddleInset(cap as _, middleinset as _) }
 }
 #[inline]
 pub unsafe fn GdipGetAdjustableArrowCapWidth(cap: *mut GpAdjustableArrowCap, width: *mut f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetAdjustableArrowCapWidth(cap : *mut GpAdjustableArrowCap, width : *mut f32) -> Status);
-    GdipGetAdjustableArrowCapWidth(cap, width)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetAdjustableArrowCapWidth(cap : *mut GpAdjustableArrowCap, width : *mut f32) -> Status);
+    unsafe { GdipGetAdjustableArrowCapWidth(cap as _, width as _) }
 }
 #[inline]
 pub unsafe fn GdipGetAllPropertyItems(image: *mut GpImage, totalbuffersize: u32, numproperties: u32, allitems: *mut PropertyItem) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetAllPropertyItems(image : *mut GpImage, totalbuffersize : u32, numproperties : u32, allitems : *mut PropertyItem) -> Status);
-    GdipGetAllPropertyItems(image, totalbuffersize, numproperties, allitems)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetAllPropertyItems(image : *mut GpImage, totalbuffersize : u32, numproperties : u32, allitems : *mut PropertyItem) -> Status);
+    unsafe { GdipGetAllPropertyItems(image as _, totalbuffersize, numproperties, allitems as _) }
 }
 #[inline]
 pub unsafe fn GdipGetBrushType(brush: *mut GpBrush, r#type: *mut BrushType) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetBrushType(brush : *mut GpBrush, r#type : *mut BrushType) -> Status);
-    GdipGetBrushType(brush, r#type)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetBrushType(brush : *mut GpBrush, r#type : *mut BrushType) -> Status);
+    unsafe { GdipGetBrushType(brush as _, r#type as _) }
 }
 #[inline]
 pub unsafe fn GdipGetCellAscent(family: *const GpFontFamily, style: i32, cellascent: *mut u16) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetCellAscent(family : *const GpFontFamily, style : i32, cellascent : *mut u16) -> Status);
-    GdipGetCellAscent(family, style, cellascent)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetCellAscent(family : *const GpFontFamily, style : i32, cellascent : *mut u16) -> Status);
+    unsafe { GdipGetCellAscent(family, style, cellascent as _) }
 }
 #[inline]
 pub unsafe fn GdipGetCellDescent(family: *const GpFontFamily, style: i32, celldescent: *mut u16) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetCellDescent(family : *const GpFontFamily, style : i32, celldescent : *mut u16) -> Status);
-    GdipGetCellDescent(family, style, celldescent)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetCellDescent(family : *const GpFontFamily, style : i32, celldescent : *mut u16) -> Status);
+    unsafe { GdipGetCellDescent(family, style, celldescent as _) }
 }
 #[inline]
 pub unsafe fn GdipGetClip(graphics: *mut GpGraphics, region: *mut GpRegion) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetClip(graphics : *mut GpGraphics, region : *mut GpRegion) -> Status);
-    GdipGetClip(graphics, region)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetClip(graphics : *mut GpGraphics, region : *mut GpRegion) -> Status);
+    unsafe { GdipGetClip(graphics as _, region as _) }
 }
 #[inline]
 pub unsafe fn GdipGetClipBounds(graphics: *mut GpGraphics, rect: *mut RectF) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetClipBounds(graphics : *mut GpGraphics, rect : *mut RectF) -> Status);
-    GdipGetClipBounds(graphics, rect)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetClipBounds(graphics : *mut GpGraphics, rect : *mut RectF) -> Status);
+    unsafe { GdipGetClipBounds(graphics as _, rect as _) }
 }
 #[inline]
 pub unsafe fn GdipGetClipBoundsI(graphics: *mut GpGraphics, rect: *mut Rect) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetClipBoundsI(graphics : *mut GpGraphics, rect : *mut Rect) -> Status);
-    GdipGetClipBoundsI(graphics, rect)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetClipBoundsI(graphics : *mut GpGraphics, rect : *mut Rect) -> Status);
+    unsafe { GdipGetClipBoundsI(graphics as _, rect as _) }
 }
 #[inline]
 pub unsafe fn GdipGetCompositingMode(graphics: *mut GpGraphics, compositingmode: *mut CompositingMode) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetCompositingMode(graphics : *mut GpGraphics, compositingmode : *mut CompositingMode) -> Status);
-    GdipGetCompositingMode(graphics, compositingmode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetCompositingMode(graphics : *mut GpGraphics, compositingmode : *mut CompositingMode) -> Status);
+    unsafe { GdipGetCompositingMode(graphics as _, compositingmode as _) }
 }
 #[inline]
 pub unsafe fn GdipGetCompositingQuality(graphics: *mut GpGraphics, compositingquality: *mut CompositingQuality) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetCompositingQuality(graphics : *mut GpGraphics, compositingquality : *mut CompositingQuality) -> Status);
-    GdipGetCompositingQuality(graphics, compositingquality)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetCompositingQuality(graphics : *mut GpGraphics, compositingquality : *mut CompositingQuality) -> Status);
+    unsafe { GdipGetCompositingQuality(graphics as _, compositingquality as _) }
 }
 #[inline]
 pub unsafe fn GdipGetCustomLineCapBaseCap(customcap: *mut GpCustomLineCap, basecap: *mut LineCap) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetCustomLineCapBaseCap(customcap : *mut GpCustomLineCap, basecap : *mut LineCap) -> Status);
-    GdipGetCustomLineCapBaseCap(customcap, basecap)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetCustomLineCapBaseCap(customcap : *mut GpCustomLineCap, basecap : *mut LineCap) -> Status);
+    unsafe { GdipGetCustomLineCapBaseCap(customcap as _, basecap as _) }
 }
 #[inline]
 pub unsafe fn GdipGetCustomLineCapBaseInset(customcap: *mut GpCustomLineCap, inset: *mut f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetCustomLineCapBaseInset(customcap : *mut GpCustomLineCap, inset : *mut f32) -> Status);
-    GdipGetCustomLineCapBaseInset(customcap, inset)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetCustomLineCapBaseInset(customcap : *mut GpCustomLineCap, inset : *mut f32) -> Status);
+    unsafe { GdipGetCustomLineCapBaseInset(customcap as _, inset as _) }
 }
 #[inline]
 pub unsafe fn GdipGetCustomLineCapStrokeCaps(customcap: *mut GpCustomLineCap, startcap: *mut LineCap, endcap: *mut LineCap) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetCustomLineCapStrokeCaps(customcap : *mut GpCustomLineCap, startcap : *mut LineCap, endcap : *mut LineCap) -> Status);
-    GdipGetCustomLineCapStrokeCaps(customcap, startcap, endcap)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetCustomLineCapStrokeCaps(customcap : *mut GpCustomLineCap, startcap : *mut LineCap, endcap : *mut LineCap) -> Status);
+    unsafe { GdipGetCustomLineCapStrokeCaps(customcap as _, startcap as _, endcap as _) }
 }
 #[inline]
 pub unsafe fn GdipGetCustomLineCapStrokeJoin(customcap: *mut GpCustomLineCap, linejoin: *mut LineJoin) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetCustomLineCapStrokeJoin(customcap : *mut GpCustomLineCap, linejoin : *mut LineJoin) -> Status);
-    GdipGetCustomLineCapStrokeJoin(customcap, linejoin)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetCustomLineCapStrokeJoin(customcap : *mut GpCustomLineCap, linejoin : *mut LineJoin) -> Status);
+    unsafe { GdipGetCustomLineCapStrokeJoin(customcap as _, linejoin as _) }
 }
 #[inline]
 pub unsafe fn GdipGetCustomLineCapType(customcap: *mut GpCustomLineCap, captype: *mut CustomLineCapType) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetCustomLineCapType(customcap : *mut GpCustomLineCap, captype : *mut CustomLineCapType) -> Status);
-    GdipGetCustomLineCapType(customcap, captype)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetCustomLineCapType(customcap : *mut GpCustomLineCap, captype : *mut CustomLineCapType) -> Status);
+    unsafe { GdipGetCustomLineCapType(customcap as _, captype as _) }
 }
 #[inline]
 pub unsafe fn GdipGetCustomLineCapWidthScale(customcap: *mut GpCustomLineCap, widthscale: *mut f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetCustomLineCapWidthScale(customcap : *mut GpCustomLineCap, widthscale : *mut f32) -> Status);
-    GdipGetCustomLineCapWidthScale(customcap, widthscale)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetCustomLineCapWidthScale(customcap : *mut GpCustomLineCap, widthscale : *mut f32) -> Status);
+    unsafe { GdipGetCustomLineCapWidthScale(customcap as _, widthscale as _) }
 }
-#[doc = "Required features: `\"Win32_Graphics_Gdi\"`"]
 #[cfg(feature = "Win32_Graphics_Gdi")]
 #[inline]
 pub unsafe fn GdipGetDC(graphics: *mut GpGraphics, hdc: *mut super::Gdi::HDC) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetDC(graphics : *mut GpGraphics, hdc : *mut super::Gdi:: HDC) -> Status);
-    GdipGetDC(graphics, hdc)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetDC(graphics : *mut GpGraphics, hdc : *mut super::Gdi:: HDC) -> Status);
+    unsafe { GdipGetDC(graphics as _, hdc as _) }
 }
 #[inline]
 pub unsafe fn GdipGetDpiX(graphics: *mut GpGraphics, dpi: *mut f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetDpiX(graphics : *mut GpGraphics, dpi : *mut f32) -> Status);
-    GdipGetDpiX(graphics, dpi)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetDpiX(graphics : *mut GpGraphics, dpi : *mut f32) -> Status);
+    unsafe { GdipGetDpiX(graphics as _, dpi as _) }
 }
 #[inline]
 pub unsafe fn GdipGetDpiY(graphics: *mut GpGraphics, dpi: *mut f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetDpiY(graphics : *mut GpGraphics, dpi : *mut f32) -> Status);
-    GdipGetDpiY(graphics, dpi)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetDpiY(graphics : *mut GpGraphics, dpi : *mut f32) -> Status);
+    unsafe { GdipGetDpiY(graphics as _, dpi as _) }
 }
 #[inline]
 pub unsafe fn GdipGetEffectParameterSize(effect: *mut CGpEffect, size: *mut u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetEffectParameterSize(effect : *mut CGpEffect, size : *mut u32) -> Status);
-    GdipGetEffectParameterSize(effect, size)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetEffectParameterSize(effect : *mut CGpEffect, size : *mut u32) -> Status);
+    unsafe { GdipGetEffectParameterSize(effect as _, size as _) }
 }
 #[inline]
-pub unsafe fn GdipGetEffectParameters(effect: *mut CGpEffect, size: *mut u32, params: *mut ::core::ffi::c_void) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetEffectParameters(effect : *mut CGpEffect, size : *mut u32, params : *mut ::core::ffi::c_void) -> Status);
-    GdipGetEffectParameters(effect, size, params)
+pub unsafe fn GdipGetEffectParameters(effect: *mut CGpEffect, size: *mut u32, params: *mut core::ffi::c_void) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetEffectParameters(effect : *mut CGpEffect, size : *mut u32, params : *mut core::ffi::c_void) -> Status);
+    unsafe { GdipGetEffectParameters(effect as _, size as _, params as _) }
 }
 #[inline]
 pub unsafe fn GdipGetEmHeight(family: *const GpFontFamily, style: i32, emheight: *mut u16) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetEmHeight(family : *const GpFontFamily, style : i32, emheight : *mut u16) -> Status);
-    GdipGetEmHeight(family, style, emheight)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetEmHeight(family : *const GpFontFamily, style : i32, emheight : *mut u16) -> Status);
+    unsafe { GdipGetEmHeight(family, style, emheight as _) }
 }
 #[inline]
-pub unsafe fn GdipGetEncoderParameterList(image: *mut GpImage, clsidencoder: *const ::windows_core::GUID, size: u32, buffer: *mut EncoderParameters) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetEncoderParameterList(image : *mut GpImage, clsidencoder : *const ::windows_core::GUID, size : u32, buffer : *mut EncoderParameters) -> Status);
-    GdipGetEncoderParameterList(image, clsidencoder, size, buffer)
+pub unsafe fn GdipGetEncoderParameterList(image: *mut GpImage, clsidencoder: *const windows_core::GUID, size: u32, buffer: *mut EncoderParameters) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetEncoderParameterList(image : *mut GpImage, clsidencoder : *const windows_core::GUID, size : u32, buffer : *mut EncoderParameters) -> Status);
+    unsafe { GdipGetEncoderParameterList(image as _, clsidencoder, size, buffer as _) }
 }
 #[inline]
-pub unsafe fn GdipGetEncoderParameterListSize(image: *mut GpImage, clsidencoder: *const ::windows_core::GUID, size: *mut u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetEncoderParameterListSize(image : *mut GpImage, clsidencoder : *const ::windows_core::GUID, size : *mut u32) -> Status);
-    GdipGetEncoderParameterListSize(image, clsidencoder, size)
+pub unsafe fn GdipGetEncoderParameterListSize(image: *mut GpImage, clsidencoder: *const windows_core::GUID, size: *mut u32) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetEncoderParameterListSize(image : *mut GpImage, clsidencoder : *const windows_core::GUID, size : *mut u32) -> Status);
+    unsafe { GdipGetEncoderParameterListSize(image as _, clsidencoder, size as _) }
 }
 #[inline]
 pub unsafe fn GdipGetFamily(font: *mut GpFont, family: *mut *mut GpFontFamily) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetFamily(font : *mut GpFont, family : *mut *mut GpFontFamily) -> Status);
-    GdipGetFamily(font, family)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetFamily(font : *mut GpFont, family : *mut *mut GpFontFamily) -> Status);
+    unsafe { GdipGetFamily(font as _, family as _) }
 }
 #[inline]
 pub unsafe fn GdipGetFamilyName(family: *const GpFontFamily, name: &mut [u16; 32], language: u16) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetFamilyName(family : *const GpFontFamily, name : ::windows_core::PWSTR, language : u16) -> Status);
-    GdipGetFamilyName(family, ::core::mem::transmute(name.as_ptr()), language)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetFamilyName(family : *const GpFontFamily, name : windows_core::PWSTR, language : u16) -> Status);
+    unsafe { GdipGetFamilyName(family, core::mem::transmute(name.as_ptr()), language) }
 }
 #[inline]
 pub unsafe fn GdipGetFontCollectionFamilyCount(fontcollection: *mut GpFontCollection, numfound: *mut i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetFontCollectionFamilyCount(fontcollection : *mut GpFontCollection, numfound : *mut i32) -> Status);
-    GdipGetFontCollectionFamilyCount(fontcollection, numfound)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetFontCollectionFamilyCount(fontcollection : *mut GpFontCollection, numfound : *mut i32) -> Status);
+    unsafe { GdipGetFontCollectionFamilyCount(fontcollection as _, numfound as _) }
 }
 #[inline]
 pub unsafe fn GdipGetFontCollectionFamilyList(fontcollection: *const GpFontCollection, gpfamilies: &mut [*mut GpFontFamily], numfound: *mut i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetFontCollectionFamilyList(fontcollection : *const GpFontCollection, numsought : i32, gpfamilies : *mut *mut GpFontFamily, numfound : *mut i32) -> Status);
-    GdipGetFontCollectionFamilyList(fontcollection, gpfamilies.len().try_into().unwrap(), ::core::mem::transmute(gpfamilies.as_ptr()), numfound)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetFontCollectionFamilyList(fontcollection : *const GpFontCollection, numsought : i32, gpfamilies : *mut *mut GpFontFamily, numfound : *mut i32) -> Status);
+    unsafe { GdipGetFontCollectionFamilyList(fontcollection, gpfamilies.len().try_into().unwrap(), core::mem::transmute(gpfamilies.as_ptr()), numfound as _) }
 }
 #[inline]
 pub unsafe fn GdipGetFontHeight(font: *const GpFont, graphics: *const GpGraphics, height: *mut f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetFontHeight(font : *const GpFont, graphics : *const GpGraphics, height : *mut f32) -> Status);
-    GdipGetFontHeight(font, graphics, height)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetFontHeight(font : *const GpFont, graphics : *const GpGraphics, height : *mut f32) -> Status);
+    unsafe { GdipGetFontHeight(font, graphics, height as _) }
 }
 #[inline]
 pub unsafe fn GdipGetFontHeightGivenDPI(font: *const GpFont, dpi: f32, height: *mut f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetFontHeightGivenDPI(font : *const GpFont, dpi : f32, height : *mut f32) -> Status);
-    GdipGetFontHeightGivenDPI(font, dpi, height)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetFontHeightGivenDPI(font : *const GpFont, dpi : f32, height : *mut f32) -> Status);
+    unsafe { GdipGetFontHeightGivenDPI(font, dpi, height as _) }
 }
 #[inline]
 pub unsafe fn GdipGetFontSize(font: *mut GpFont, size: *mut f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetFontSize(font : *mut GpFont, size : *mut f32) -> Status);
-    GdipGetFontSize(font, size)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetFontSize(font : *mut GpFont, size : *mut f32) -> Status);
+    unsafe { GdipGetFontSize(font as _, size as _) }
 }
 #[inline]
 pub unsafe fn GdipGetFontStyle(font: *mut GpFont, style: *mut i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetFontStyle(font : *mut GpFont, style : *mut i32) -> Status);
-    GdipGetFontStyle(font, style)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetFontStyle(font : *mut GpFont, style : *mut i32) -> Status);
+    unsafe { GdipGetFontStyle(font as _, style as _) }
 }
 #[inline]
 pub unsafe fn GdipGetFontUnit(font: *mut GpFont, unit: *mut Unit) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetFontUnit(font : *mut GpFont, unit : *mut Unit) -> Status);
-    GdipGetFontUnit(font, unit)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetFontUnit(font : *mut GpFont, unit : *mut Unit) -> Status);
+    unsafe { GdipGetFontUnit(font as _, unit as _) }
 }
 #[inline]
 pub unsafe fn GdipGetGenericFontFamilyMonospace(nativefamily: *mut *mut GpFontFamily) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetGenericFontFamilyMonospace(nativefamily : *mut *mut GpFontFamily) -> Status);
-    GdipGetGenericFontFamilyMonospace(nativefamily)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetGenericFontFamilyMonospace(nativefamily : *mut *mut GpFontFamily) -> Status);
+    unsafe { GdipGetGenericFontFamilyMonospace(nativefamily as _) }
 }
 #[inline]
 pub unsafe fn GdipGetGenericFontFamilySansSerif(nativefamily: *mut *mut GpFontFamily) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetGenericFontFamilySansSerif(nativefamily : *mut *mut GpFontFamily) -> Status);
-    GdipGetGenericFontFamilySansSerif(nativefamily)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetGenericFontFamilySansSerif(nativefamily : *mut *mut GpFontFamily) -> Status);
+    unsafe { GdipGetGenericFontFamilySansSerif(nativefamily as _) }
 }
 #[inline]
 pub unsafe fn GdipGetGenericFontFamilySerif(nativefamily: *mut *mut GpFontFamily) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetGenericFontFamilySerif(nativefamily : *mut *mut GpFontFamily) -> Status);
-    GdipGetGenericFontFamilySerif(nativefamily)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetGenericFontFamilySerif(nativefamily : *mut *mut GpFontFamily) -> Status);
+    unsafe { GdipGetGenericFontFamilySerif(nativefamily as _) }
 }
 #[inline]
 pub unsafe fn GdipGetHatchBackgroundColor(brush: *mut GpHatch, backcol: *mut u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetHatchBackgroundColor(brush : *mut GpHatch, backcol : *mut u32) -> Status);
-    GdipGetHatchBackgroundColor(brush, backcol)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetHatchBackgroundColor(brush : *mut GpHatch, backcol : *mut u32) -> Status);
+    unsafe { GdipGetHatchBackgroundColor(brush as _, backcol as _) }
 }
 #[inline]
 pub unsafe fn GdipGetHatchForegroundColor(brush: *mut GpHatch, forecol: *mut u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetHatchForegroundColor(brush : *mut GpHatch, forecol : *mut u32) -> Status);
-    GdipGetHatchForegroundColor(brush, forecol)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetHatchForegroundColor(brush : *mut GpHatch, forecol : *mut u32) -> Status);
+    unsafe { GdipGetHatchForegroundColor(brush as _, forecol as _) }
 }
 #[inline]
 pub unsafe fn GdipGetHatchStyle(brush: *mut GpHatch, hatchstyle: *mut HatchStyle) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetHatchStyle(brush : *mut GpHatch, hatchstyle : *mut HatchStyle) -> Status);
-    GdipGetHatchStyle(brush, hatchstyle)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetHatchStyle(brush : *mut GpHatch, hatchstyle : *mut HatchStyle) -> Status);
+    unsafe { GdipGetHatchStyle(brush as _, hatchstyle as _) }
 }
-#[doc = "Required features: `\"Win32_Graphics_Gdi\"`"]
 #[cfg(feature = "Win32_Graphics_Gdi")]
 #[inline]
 pub unsafe fn GdipGetHemfFromMetafile(metafile: *mut GpMetafile, hemf: *mut super::Gdi::HENHMETAFILE) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetHemfFromMetafile(metafile : *mut GpMetafile, hemf : *mut super::Gdi:: HENHMETAFILE) -> Status);
-    GdipGetHemfFromMetafile(metafile, hemf)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetHemfFromMetafile(metafile : *mut GpMetafile, hemf : *mut super::Gdi:: HENHMETAFILE) -> Status);
+    unsafe { GdipGetHemfFromMetafile(metafile as _, hemf as _) }
 }
 #[inline]
 pub unsafe fn GdipGetImageAttributesAdjustedPalette(imageattr: *mut GpImageAttributes, colorpalette: *mut ColorPalette, coloradjusttype: ColorAdjustType) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetImageAttributesAdjustedPalette(imageattr : *mut GpImageAttributes, colorpalette : *mut ColorPalette, coloradjusttype : ColorAdjustType) -> Status);
-    GdipGetImageAttributesAdjustedPalette(imageattr, colorpalette, coloradjusttype)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetImageAttributesAdjustedPalette(imageattr : *mut GpImageAttributes, colorpalette : *mut ColorPalette, coloradjusttype : ColorAdjustType) -> Status);
+    unsafe { GdipGetImageAttributesAdjustedPalette(imageattr as _, colorpalette as _, coloradjusttype) }
 }
 #[inline]
 pub unsafe fn GdipGetImageBounds(image: *mut GpImage, srcrect: *mut RectF, srcunit: *mut Unit) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetImageBounds(image : *mut GpImage, srcrect : *mut RectF, srcunit : *mut Unit) -> Status);
-    GdipGetImageBounds(image, srcrect, srcunit)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetImageBounds(image : *mut GpImage, srcrect : *mut RectF, srcunit : *mut Unit) -> Status);
+    unsafe { GdipGetImageBounds(image as _, srcrect as _, srcunit as _) }
 }
 #[inline]
 pub unsafe fn GdipGetImageDecoders(numdecoders: u32, size: u32, decoders: *mut ImageCodecInfo) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetImageDecoders(numdecoders : u32, size : u32, decoders : *mut ImageCodecInfo) -> Status);
-    GdipGetImageDecoders(numdecoders, size, decoders)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetImageDecoders(numdecoders : u32, size : u32, decoders : *mut ImageCodecInfo) -> Status);
+    unsafe { GdipGetImageDecoders(numdecoders, size, decoders as _) }
 }
 #[inline]
 pub unsafe fn GdipGetImageDecodersSize(numdecoders: *mut u32, size: *mut u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetImageDecodersSize(numdecoders : *mut u32, size : *mut u32) -> Status);
-    GdipGetImageDecodersSize(numdecoders, size)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetImageDecodersSize(numdecoders : *mut u32, size : *mut u32) -> Status);
+    unsafe { GdipGetImageDecodersSize(numdecoders as _, size as _) }
 }
 #[inline]
 pub unsafe fn GdipGetImageDimension(image: *mut GpImage, width: *mut f32, height: *mut f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetImageDimension(image : *mut GpImage, width : *mut f32, height : *mut f32) -> Status);
-    GdipGetImageDimension(image, width, height)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetImageDimension(image : *mut GpImage, width : *mut f32, height : *mut f32) -> Status);
+    unsafe { GdipGetImageDimension(image as _, width as _, height as _) }
 }
 #[inline]
 pub unsafe fn GdipGetImageEncoders(numencoders: u32, size: u32, encoders: *mut ImageCodecInfo) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetImageEncoders(numencoders : u32, size : u32, encoders : *mut ImageCodecInfo) -> Status);
-    GdipGetImageEncoders(numencoders, size, encoders)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetImageEncoders(numencoders : u32, size : u32, encoders : *mut ImageCodecInfo) -> Status);
+    unsafe { GdipGetImageEncoders(numencoders, size, encoders as _) }
 }
 #[inline]
 pub unsafe fn GdipGetImageEncodersSize(numencoders: *mut u32, size: *mut u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetImageEncodersSize(numencoders : *mut u32, size : *mut u32) -> Status);
-    GdipGetImageEncodersSize(numencoders, size)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetImageEncodersSize(numencoders : *mut u32, size : *mut u32) -> Status);
+    unsafe { GdipGetImageEncodersSize(numencoders as _, size as _) }
 }
 #[inline]
 pub unsafe fn GdipGetImageFlags(image: *mut GpImage, flags: *mut u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetImageFlags(image : *mut GpImage, flags : *mut u32) -> Status);
-    GdipGetImageFlags(image, flags)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetImageFlags(image : *mut GpImage, flags : *mut u32) -> Status);
+    unsafe { GdipGetImageFlags(image as _, flags as _) }
 }
 #[inline]
 pub unsafe fn GdipGetImageGraphicsContext(image: *mut GpImage, graphics: *mut *mut GpGraphics) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetImageGraphicsContext(image : *mut GpImage, graphics : *mut *mut GpGraphics) -> Status);
-    GdipGetImageGraphicsContext(image, graphics)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetImageGraphicsContext(image : *mut GpImage, graphics : *mut *mut GpGraphics) -> Status);
+    unsafe { GdipGetImageGraphicsContext(image as _, graphics as _) }
 }
 #[inline]
 pub unsafe fn GdipGetImageHeight(image: *mut GpImage, height: *mut u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetImageHeight(image : *mut GpImage, height : *mut u32) -> Status);
-    GdipGetImageHeight(image, height)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetImageHeight(image : *mut GpImage, height : *mut u32) -> Status);
+    unsafe { GdipGetImageHeight(image as _, height as _) }
 }
 #[inline]
 pub unsafe fn GdipGetImageHorizontalResolution(image: *mut GpImage, resolution: *mut f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetImageHorizontalResolution(image : *mut GpImage, resolution : *mut f32) -> Status);
-    GdipGetImageHorizontalResolution(image, resolution)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetImageHorizontalResolution(image : *mut GpImage, resolution : *mut f32) -> Status);
+    unsafe { GdipGetImageHorizontalResolution(image as _, resolution as _) }
 }
 #[inline]
 pub unsafe fn GdipGetImageItemData(image: *mut GpImage, item: *mut ImageItemData) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetImageItemData(image : *mut GpImage, item : *mut ImageItemData) -> Status);
-    GdipGetImageItemData(image, item)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetImageItemData(image : *mut GpImage, item : *mut ImageItemData) -> Status);
+    unsafe { GdipGetImageItemData(image as _, item as _) }
 }
 #[inline]
 pub unsafe fn GdipGetImagePalette(image: *mut GpImage, palette: *mut ColorPalette, size: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetImagePalette(image : *mut GpImage, palette : *mut ColorPalette, size : i32) -> Status);
-    GdipGetImagePalette(image, palette, size)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetImagePalette(image : *mut GpImage, palette : *mut ColorPalette, size : i32) -> Status);
+    unsafe { GdipGetImagePalette(image as _, palette as _, size) }
 }
 #[inline]
 pub unsafe fn GdipGetImagePaletteSize(image: *mut GpImage, size: *mut i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetImagePaletteSize(image : *mut GpImage, size : *mut i32) -> Status);
-    GdipGetImagePaletteSize(image, size)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetImagePaletteSize(image : *mut GpImage, size : *mut i32) -> Status);
+    unsafe { GdipGetImagePaletteSize(image as _, size as _) }
 }
 #[inline]
 pub unsafe fn GdipGetImagePixelFormat(image: *mut GpImage, format: *mut i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetImagePixelFormat(image : *mut GpImage, format : *mut i32) -> Status);
-    GdipGetImagePixelFormat(image, format)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetImagePixelFormat(image : *mut GpImage, format : *mut i32) -> Status);
+    unsafe { GdipGetImagePixelFormat(image as _, format as _) }
 }
 #[inline]
-pub unsafe fn GdipGetImageRawFormat(image: *mut GpImage, format: *mut ::windows_core::GUID) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetImageRawFormat(image : *mut GpImage, format : *mut ::windows_core::GUID) -> Status);
-    GdipGetImageRawFormat(image, format)
+pub unsafe fn GdipGetImageRawFormat(image: *mut GpImage, format: *mut windows_core::GUID) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetImageRawFormat(image : *mut GpImage, format : *mut windows_core::GUID) -> Status);
+    unsafe { GdipGetImageRawFormat(image as _, format as _) }
 }
 #[inline]
-pub unsafe fn GdipGetImageThumbnail(image: *mut GpImage, thumbwidth: u32, thumbheight: u32, thumbimage: *mut *mut GpImage, callback: isize, callbackdata: *mut ::core::ffi::c_void) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetImageThumbnail(image : *mut GpImage, thumbwidth : u32, thumbheight : u32, thumbimage : *mut *mut GpImage, callback : isize, callbackdata : *mut ::core::ffi::c_void) -> Status);
-    GdipGetImageThumbnail(image, thumbwidth, thumbheight, thumbimage, callback, callbackdata)
+pub unsafe fn GdipGetImageThumbnail(image: *mut GpImage, thumbwidth: u32, thumbheight: u32, thumbimage: *mut *mut GpImage, callback: isize, callbackdata: *mut core::ffi::c_void) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetImageThumbnail(image : *mut GpImage, thumbwidth : u32, thumbheight : u32, thumbimage : *mut *mut GpImage, callback : isize, callbackdata : *mut core::ffi::c_void) -> Status);
+    unsafe { GdipGetImageThumbnail(image as _, thumbwidth, thumbheight, thumbimage as _, callback, callbackdata as _) }
 }
 #[inline]
 pub unsafe fn GdipGetImageType(image: *mut GpImage, r#type: *mut ImageType) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetImageType(image : *mut GpImage, r#type : *mut ImageType) -> Status);
-    GdipGetImageType(image, r#type)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetImageType(image : *mut GpImage, r#type : *mut ImageType) -> Status);
+    unsafe { GdipGetImageType(image as _, r#type as _) }
 }
 #[inline]
 pub unsafe fn GdipGetImageVerticalResolution(image: *mut GpImage, resolution: *mut f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetImageVerticalResolution(image : *mut GpImage, resolution : *mut f32) -> Status);
-    GdipGetImageVerticalResolution(image, resolution)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetImageVerticalResolution(image : *mut GpImage, resolution : *mut f32) -> Status);
+    unsafe { GdipGetImageVerticalResolution(image as _, resolution as _) }
 }
 #[inline]
 pub unsafe fn GdipGetImageWidth(image: *mut GpImage, width: *mut u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetImageWidth(image : *mut GpImage, width : *mut u32) -> Status);
-    GdipGetImageWidth(image, width)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetImageWidth(image : *mut GpImage, width : *mut u32) -> Status);
+    unsafe { GdipGetImageWidth(image as _, width as _) }
 }
 #[inline]
 pub unsafe fn GdipGetInterpolationMode(graphics: *mut GpGraphics, interpolationmode: *mut InterpolationMode) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetInterpolationMode(graphics : *mut GpGraphics, interpolationmode : *mut InterpolationMode) -> Status);
-    GdipGetInterpolationMode(graphics, interpolationmode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetInterpolationMode(graphics : *mut GpGraphics, interpolationmode : *mut InterpolationMode) -> Status);
+    unsafe { GdipGetInterpolationMode(graphics as _, interpolationmode as _) }
 }
 #[inline]
 pub unsafe fn GdipGetLineBlend(brush: *mut GpLineGradient, blend: *mut f32, positions: *mut f32, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetLineBlend(brush : *mut GpLineGradient, blend : *mut f32, positions : *mut f32, count : i32) -> Status);
-    GdipGetLineBlend(brush, blend, positions, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetLineBlend(brush : *mut GpLineGradient, blend : *mut f32, positions : *mut f32, count : i32) -> Status);
+    unsafe { GdipGetLineBlend(brush as _, blend as _, positions as _, count) }
 }
 #[inline]
 pub unsafe fn GdipGetLineBlendCount(brush: *mut GpLineGradient, count: *mut i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetLineBlendCount(brush : *mut GpLineGradient, count : *mut i32) -> Status);
-    GdipGetLineBlendCount(brush, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetLineBlendCount(brush : *mut GpLineGradient, count : *mut i32) -> Status);
+    unsafe { GdipGetLineBlendCount(brush as _, count as _) }
 }
 #[inline]
 pub unsafe fn GdipGetLineColors(brush: *mut GpLineGradient, colors: *mut u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetLineColors(brush : *mut GpLineGradient, colors : *mut u32) -> Status);
-    GdipGetLineColors(brush, colors)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetLineColors(brush : *mut GpLineGradient, colors : *mut u32) -> Status);
+    unsafe { GdipGetLineColors(brush as _, colors as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipGetLineGammaCorrection(brush: *mut GpLineGradient, usegammacorrection: *mut super::super::Foundation::BOOL) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetLineGammaCorrection(brush : *mut GpLineGradient, usegammacorrection : *mut super::super::Foundation:: BOOL) -> Status);
-    GdipGetLineGammaCorrection(brush, usegammacorrection)
+pub unsafe fn GdipGetLineGammaCorrection(brush: *mut GpLineGradient, usegammacorrection: *mut windows_core::BOOL) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetLineGammaCorrection(brush : *mut GpLineGradient, usegammacorrection : *mut windows_core::BOOL) -> Status);
+    unsafe { GdipGetLineGammaCorrection(brush as _, usegammacorrection as _) }
 }
 #[inline]
 pub unsafe fn GdipGetLinePresetBlend(brush: *mut GpLineGradient, blend: *mut u32, positions: *mut f32, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetLinePresetBlend(brush : *mut GpLineGradient, blend : *mut u32, positions : *mut f32, count : i32) -> Status);
-    GdipGetLinePresetBlend(brush, blend, positions, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetLinePresetBlend(brush : *mut GpLineGradient, blend : *mut u32, positions : *mut f32, count : i32) -> Status);
+    unsafe { GdipGetLinePresetBlend(brush as _, blend as _, positions as _, count) }
 }
 #[inline]
 pub unsafe fn GdipGetLinePresetBlendCount(brush: *mut GpLineGradient, count: *mut i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetLinePresetBlendCount(brush : *mut GpLineGradient, count : *mut i32) -> Status);
-    GdipGetLinePresetBlendCount(brush, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetLinePresetBlendCount(brush : *mut GpLineGradient, count : *mut i32) -> Status);
+    unsafe { GdipGetLinePresetBlendCount(brush as _, count as _) }
 }
 #[inline]
 pub unsafe fn GdipGetLineRect(brush: *mut GpLineGradient, rect: *mut RectF) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetLineRect(brush : *mut GpLineGradient, rect : *mut RectF) -> Status);
-    GdipGetLineRect(brush, rect)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetLineRect(brush : *mut GpLineGradient, rect : *mut RectF) -> Status);
+    unsafe { GdipGetLineRect(brush as _, rect as _) }
 }
 #[inline]
 pub unsafe fn GdipGetLineRectI(brush: *mut GpLineGradient, rect: *mut Rect) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetLineRectI(brush : *mut GpLineGradient, rect : *mut Rect) -> Status);
-    GdipGetLineRectI(brush, rect)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetLineRectI(brush : *mut GpLineGradient, rect : *mut Rect) -> Status);
+    unsafe { GdipGetLineRectI(brush as _, rect as _) }
 }
 #[inline]
 pub unsafe fn GdipGetLineSpacing(family: *const GpFontFamily, style: i32, linespacing: *mut u16) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetLineSpacing(family : *const GpFontFamily, style : i32, linespacing : *mut u16) -> Status);
-    GdipGetLineSpacing(family, style, linespacing)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetLineSpacing(family : *const GpFontFamily, style : i32, linespacing : *mut u16) -> Status);
+    unsafe { GdipGetLineSpacing(family, style, linespacing as _) }
 }
 #[inline]
 pub unsafe fn GdipGetLineTransform(brush: *mut GpLineGradient, matrix: *mut Matrix) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetLineTransform(brush : *mut GpLineGradient, matrix : *mut Matrix) -> Status);
-    GdipGetLineTransform(brush, matrix)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetLineTransform(brush : *mut GpLineGradient, matrix : *mut Matrix) -> Status);
+    unsafe { GdipGetLineTransform(brush as _, matrix as _) }
 }
 #[inline]
 pub unsafe fn GdipGetLineWrapMode(brush: *mut GpLineGradient, wrapmode: *mut WrapMode) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetLineWrapMode(brush : *mut GpLineGradient, wrapmode : *mut WrapMode) -> Status);
-    GdipGetLineWrapMode(brush, wrapmode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetLineWrapMode(brush : *mut GpLineGradient, wrapmode : *mut WrapMode) -> Status);
+    unsafe { GdipGetLineWrapMode(brush as _, wrapmode as _) }
 }
-#[doc = "Required features: `\"Win32_Graphics_Gdi\"`"]
 #[cfg(feature = "Win32_Graphics_Gdi")]
 #[inline]
 pub unsafe fn GdipGetLogFontA(font: *mut GpFont, graphics: *mut GpGraphics, logfonta: *mut super::Gdi::LOGFONTA) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetLogFontA(font : *mut GpFont, graphics : *mut GpGraphics, logfonta : *mut super::Gdi:: LOGFONTA) -> Status);
-    GdipGetLogFontA(font, graphics, logfonta)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetLogFontA(font : *mut GpFont, graphics : *mut GpGraphics, logfonta : *mut super::Gdi:: LOGFONTA) -> Status);
+    unsafe { GdipGetLogFontA(font as _, graphics as _, logfonta as _) }
 }
-#[doc = "Required features: `\"Win32_Graphics_Gdi\"`"]
 #[cfg(feature = "Win32_Graphics_Gdi")]
 #[inline]
 pub unsafe fn GdipGetLogFontW(font: *mut GpFont, graphics: *mut GpGraphics, logfontw: *mut super::Gdi::LOGFONTW) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetLogFontW(font : *mut GpFont, graphics : *mut GpGraphics, logfontw : *mut super::Gdi:: LOGFONTW) -> Status);
-    GdipGetLogFontW(font, graphics, logfontw)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetLogFontW(font : *mut GpFont, graphics : *mut GpGraphics, logfontw : *mut super::Gdi:: LOGFONTW) -> Status);
+    unsafe { GdipGetLogFontW(font as _, graphics as _, logfontw as _) }
 }
 #[inline]
 pub unsafe fn GdipGetMatrixElements(matrix: *const Matrix, matrixout: *mut f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetMatrixElements(matrix : *const Matrix, matrixout : *mut f32) -> Status);
-    GdipGetMatrixElements(matrix, matrixout)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetMatrixElements(matrix : *const Matrix, matrixout : *mut f32) -> Status);
+    unsafe { GdipGetMatrixElements(matrix, matrixout as _) }
 }
 #[inline]
 pub unsafe fn GdipGetMetafileDownLevelRasterizationLimit(metafile: *const GpMetafile, metafilerasterizationlimitdpi: *mut u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetMetafileDownLevelRasterizationLimit(metafile : *const GpMetafile, metafilerasterizationlimitdpi : *mut u32) -> Status);
-    GdipGetMetafileDownLevelRasterizationLimit(metafile, metafilerasterizationlimitdpi)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetMetafileDownLevelRasterizationLimit(metafile : *const GpMetafile, metafilerasterizationlimitdpi : *mut u32) -> Status);
+    unsafe { GdipGetMetafileDownLevelRasterizationLimit(metafile, metafilerasterizationlimitdpi as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`, `\"Win32_Graphics_Gdi\"`"]
-#[cfg(all(feature = "Win32_Foundation", feature = "Win32_Graphics_Gdi"))]
+#[cfg(feature = "Win32_Graphics_Gdi")]
 #[inline]
-pub unsafe fn GdipGetMetafileHeaderFromEmf<P0>(hemf: P0, header: *mut MetafileHeader) -> Status
-where
-    P0: ::windows_core::IntoParam<super::Gdi::HENHMETAFILE>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetMetafileHeaderFromEmf(hemf : super::Gdi:: HENHMETAFILE, header : *mut MetafileHeader) -> Status);
-    GdipGetMetafileHeaderFromEmf(hemf.into_param().abi(), header)
+pub unsafe fn GdipGetMetafileHeaderFromEmf(hemf: super::Gdi::HENHMETAFILE, header: *mut MetafileHeader) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetMetafileHeaderFromEmf(hemf : super::Gdi:: HENHMETAFILE, header : *mut MetafileHeader) -> Status);
+    unsafe { GdipGetMetafileHeaderFromEmf(hemf, header as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`, `\"Win32_Graphics_Gdi\"`"]
-#[cfg(all(feature = "Win32_Foundation", feature = "Win32_Graphics_Gdi"))]
+#[cfg(feature = "Win32_Graphics_Gdi")]
 #[inline]
 pub unsafe fn GdipGetMetafileHeaderFromFile<P0>(filename: P0, header: *mut MetafileHeader) -> Status
 where
-    P0: ::windows_core::IntoParam<::windows_core::PCWSTR>,
+    P0: windows_core::Param<windows_core::PCWSTR>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetMetafileHeaderFromFile(filename : ::windows_core::PCWSTR, header : *mut MetafileHeader) -> Status);
-    GdipGetMetafileHeaderFromFile(filename.into_param().abi(), header)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetMetafileHeaderFromFile(filename : windows_core::PCWSTR, header : *mut MetafileHeader) -> Status);
+    unsafe { GdipGetMetafileHeaderFromFile(filename.param().abi(), header as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`, `\"Win32_Graphics_Gdi\"`"]
-#[cfg(all(feature = "Win32_Foundation", feature = "Win32_Graphics_Gdi"))]
+#[cfg(feature = "Win32_Graphics_Gdi")]
 #[inline]
 pub unsafe fn GdipGetMetafileHeaderFromMetafile(metafile: *mut GpMetafile, header: *mut MetafileHeader) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetMetafileHeaderFromMetafile(metafile : *mut GpMetafile, header : *mut MetafileHeader) -> Status);
-    GdipGetMetafileHeaderFromMetafile(metafile, header)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetMetafileHeaderFromMetafile(metafile : *mut GpMetafile, header : *mut MetafileHeader) -> Status);
+    unsafe { GdipGetMetafileHeaderFromMetafile(metafile as _, header as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`, `\"Win32_Graphics_Gdi\"`, `\"Win32_System_Com\"`"]
-#[cfg(all(feature = "Win32_Foundation", feature = "Win32_Graphics_Gdi", feature = "Win32_System_Com"))]
+#[cfg(all(feature = "Win32_Graphics_Gdi", feature = "Win32_System_Com"))]
 #[inline]
 pub unsafe fn GdipGetMetafileHeaderFromStream<P0>(stream: P0, header: *mut MetafileHeader) -> Status
 where
-    P0: ::windows_core::IntoParam<super::super::System::Com::IStream>,
+    P0: windows_core::Param<super::super::System::Com::IStream>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetMetafileHeaderFromStream(stream : * mut::core::ffi::c_void, header : *mut MetafileHeader) -> Status);
-    GdipGetMetafileHeaderFromStream(stream.into_param().abi(), header)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetMetafileHeaderFromStream(stream : * mut core::ffi::c_void, header : *mut MetafileHeader) -> Status);
+    unsafe { GdipGetMetafileHeaderFromStream(stream.param().abi(), header as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`, `\"Win32_Graphics_Gdi\"`"]
-#[cfg(all(feature = "Win32_Foundation", feature = "Win32_Graphics_Gdi"))]
+#[cfg(feature = "Win32_Graphics_Gdi")]
 #[inline]
-pub unsafe fn GdipGetMetafileHeaderFromWmf<P0>(hwmf: P0, wmfplaceablefileheader: *const WmfPlaceableFileHeader, header: *mut MetafileHeader) -> Status
-where
-    P0: ::windows_core::IntoParam<super::Gdi::HMETAFILE>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetMetafileHeaderFromWmf(hwmf : super::Gdi:: HMETAFILE, wmfplaceablefileheader : *const WmfPlaceableFileHeader, header : *mut MetafileHeader) -> Status);
-    GdipGetMetafileHeaderFromWmf(hwmf.into_param().abi(), wmfplaceablefileheader, header)
+pub unsafe fn GdipGetMetafileHeaderFromWmf(hwmf: super::Gdi::HMETAFILE, wmfplaceablefileheader: *const WmfPlaceableFileHeader, header: *mut MetafileHeader) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetMetafileHeaderFromWmf(hwmf : super::Gdi:: HMETAFILE, wmfplaceablefileheader : *const WmfPlaceableFileHeader, header : *mut MetafileHeader) -> Status);
+    unsafe { GdipGetMetafileHeaderFromWmf(hwmf, wmfplaceablefileheader, header as _) }
 }
 #[inline]
 pub unsafe fn GdipGetNearestColor(graphics: *mut GpGraphics, argb: *mut u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetNearestColor(graphics : *mut GpGraphics, argb : *mut u32) -> Status);
-    GdipGetNearestColor(graphics, argb)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetNearestColor(graphics : *mut GpGraphics, argb : *mut u32) -> Status);
+    unsafe { GdipGetNearestColor(graphics as _, argb as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPageScale(graphics: *mut GpGraphics, scale: *mut f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPageScale(graphics : *mut GpGraphics, scale : *mut f32) -> Status);
-    GdipGetPageScale(graphics, scale)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPageScale(graphics : *mut GpGraphics, scale : *mut f32) -> Status);
+    unsafe { GdipGetPageScale(graphics as _, scale as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPageUnit(graphics: *mut GpGraphics, unit: *mut Unit) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPageUnit(graphics : *mut GpGraphics, unit : *mut Unit) -> Status);
-    GdipGetPageUnit(graphics, unit)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPageUnit(graphics : *mut GpGraphics, unit : *mut Unit) -> Status);
+    unsafe { GdipGetPageUnit(graphics as _, unit as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPathData(path: *mut GpPath, pathdata: *mut PathData) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPathData(path : *mut GpPath, pathdata : *mut PathData) -> Status);
-    GdipGetPathData(path, pathdata)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPathData(path : *mut GpPath, pathdata : *mut PathData) -> Status);
+    unsafe { GdipGetPathData(path as _, pathdata as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPathFillMode(path: *mut GpPath, fillmode: *mut FillMode) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPathFillMode(path : *mut GpPath, fillmode : *mut FillMode) -> Status);
-    GdipGetPathFillMode(path, fillmode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPathFillMode(path : *mut GpPath, fillmode : *mut FillMode) -> Status);
+    unsafe { GdipGetPathFillMode(path as _, fillmode as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPathGradientBlend(brush: *mut GpPathGradient, blend: *mut f32, positions: *mut f32, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPathGradientBlend(brush : *mut GpPathGradient, blend : *mut f32, positions : *mut f32, count : i32) -> Status);
-    GdipGetPathGradientBlend(brush, blend, positions, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPathGradientBlend(brush : *mut GpPathGradient, blend : *mut f32, positions : *mut f32, count : i32) -> Status);
+    unsafe { GdipGetPathGradientBlend(brush as _, blend as _, positions as _, count) }
 }
 #[inline]
 pub unsafe fn GdipGetPathGradientBlendCount(brush: *mut GpPathGradient, count: *mut i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPathGradientBlendCount(brush : *mut GpPathGradient, count : *mut i32) -> Status);
-    GdipGetPathGradientBlendCount(brush, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPathGradientBlendCount(brush : *mut GpPathGradient, count : *mut i32) -> Status);
+    unsafe { GdipGetPathGradientBlendCount(brush as _, count as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPathGradientCenterColor(brush: *mut GpPathGradient, colors: *mut u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPathGradientCenterColor(brush : *mut GpPathGradient, colors : *mut u32) -> Status);
-    GdipGetPathGradientCenterColor(brush, colors)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPathGradientCenterColor(brush : *mut GpPathGradient, colors : *mut u32) -> Status);
+    unsafe { GdipGetPathGradientCenterColor(brush as _, colors as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPathGradientCenterPoint(brush: *mut GpPathGradient, points: *mut PointF) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPathGradientCenterPoint(brush : *mut GpPathGradient, points : *mut PointF) -> Status);
-    GdipGetPathGradientCenterPoint(brush, points)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPathGradientCenterPoint(brush : *mut GpPathGradient, points : *mut PointF) -> Status);
+    unsafe { GdipGetPathGradientCenterPoint(brush as _, points as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPathGradientCenterPointI(brush: *mut GpPathGradient, points: *mut Point) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPathGradientCenterPointI(brush : *mut GpPathGradient, points : *mut Point) -> Status);
-    GdipGetPathGradientCenterPointI(brush, points)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPathGradientCenterPointI(brush : *mut GpPathGradient, points : *mut Point) -> Status);
+    unsafe { GdipGetPathGradientCenterPointI(brush as _, points as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPathGradientFocusScales(brush: *mut GpPathGradient, xscale: *mut f32, yscale: *mut f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPathGradientFocusScales(brush : *mut GpPathGradient, xscale : *mut f32, yscale : *mut f32) -> Status);
-    GdipGetPathGradientFocusScales(brush, xscale, yscale)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPathGradientFocusScales(brush : *mut GpPathGradient, xscale : *mut f32, yscale : *mut f32) -> Status);
+    unsafe { GdipGetPathGradientFocusScales(brush as _, xscale as _, yscale as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipGetPathGradientGammaCorrection(brush: *mut GpPathGradient, usegammacorrection: *mut super::super::Foundation::BOOL) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPathGradientGammaCorrection(brush : *mut GpPathGradient, usegammacorrection : *mut super::super::Foundation:: BOOL) -> Status);
-    GdipGetPathGradientGammaCorrection(brush, usegammacorrection)
+pub unsafe fn GdipGetPathGradientGammaCorrection(brush: *mut GpPathGradient, usegammacorrection: *mut windows_core::BOOL) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPathGradientGammaCorrection(brush : *mut GpPathGradient, usegammacorrection : *mut windows_core::BOOL) -> Status);
+    unsafe { GdipGetPathGradientGammaCorrection(brush as _, usegammacorrection as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPathGradientPath(brush: *mut GpPathGradient, path: *mut GpPath) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPathGradientPath(brush : *mut GpPathGradient, path : *mut GpPath) -> Status);
-    GdipGetPathGradientPath(brush, path)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPathGradientPath(brush : *mut GpPathGradient, path : *mut GpPath) -> Status);
+    unsafe { GdipGetPathGradientPath(brush as _, path as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPathGradientPointCount(brush: *mut GpPathGradient, count: *mut i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPathGradientPointCount(brush : *mut GpPathGradient, count : *mut i32) -> Status);
-    GdipGetPathGradientPointCount(brush, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPathGradientPointCount(brush : *mut GpPathGradient, count : *mut i32) -> Status);
+    unsafe { GdipGetPathGradientPointCount(brush as _, count as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPathGradientPresetBlend(brush: *mut GpPathGradient, blend: *mut u32, positions: *mut f32, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPathGradientPresetBlend(brush : *mut GpPathGradient, blend : *mut u32, positions : *mut f32, count : i32) -> Status);
-    GdipGetPathGradientPresetBlend(brush, blend, positions, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPathGradientPresetBlend(brush : *mut GpPathGradient, blend : *mut u32, positions : *mut f32, count : i32) -> Status);
+    unsafe { GdipGetPathGradientPresetBlend(brush as _, blend as _, positions as _, count) }
 }
 #[inline]
 pub unsafe fn GdipGetPathGradientPresetBlendCount(brush: *mut GpPathGradient, count: *mut i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPathGradientPresetBlendCount(brush : *mut GpPathGradient, count : *mut i32) -> Status);
-    GdipGetPathGradientPresetBlendCount(brush, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPathGradientPresetBlendCount(brush : *mut GpPathGradient, count : *mut i32) -> Status);
+    unsafe { GdipGetPathGradientPresetBlendCount(brush as _, count as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPathGradientRect(brush: *mut GpPathGradient, rect: *mut RectF) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPathGradientRect(brush : *mut GpPathGradient, rect : *mut RectF) -> Status);
-    GdipGetPathGradientRect(brush, rect)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPathGradientRect(brush : *mut GpPathGradient, rect : *mut RectF) -> Status);
+    unsafe { GdipGetPathGradientRect(brush as _, rect as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPathGradientRectI(brush: *mut GpPathGradient, rect: *mut Rect) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPathGradientRectI(brush : *mut GpPathGradient, rect : *mut Rect) -> Status);
-    GdipGetPathGradientRectI(brush, rect)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPathGradientRectI(brush : *mut GpPathGradient, rect : *mut Rect) -> Status);
+    unsafe { GdipGetPathGradientRectI(brush as _, rect as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPathGradientSurroundColorCount(brush: *mut GpPathGradient, count: *mut i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPathGradientSurroundColorCount(brush : *mut GpPathGradient, count : *mut i32) -> Status);
-    GdipGetPathGradientSurroundColorCount(brush, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPathGradientSurroundColorCount(brush : *mut GpPathGradient, count : *mut i32) -> Status);
+    unsafe { GdipGetPathGradientSurroundColorCount(brush as _, count as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPathGradientSurroundColorsWithCount(brush: *const GpPathGradient, color: *mut u32, count: *mut i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPathGradientSurroundColorsWithCount(brush : *const GpPathGradient, color : *mut u32, count : *mut i32) -> Status);
-    GdipGetPathGradientSurroundColorsWithCount(brush, color, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPathGradientSurroundColorsWithCount(brush : *const GpPathGradient, color : *mut u32, count : *mut i32) -> Status);
+    unsafe { GdipGetPathGradientSurroundColorsWithCount(brush, color as _, count as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPathGradientTransform(brush: *mut GpPathGradient, matrix: *mut Matrix) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPathGradientTransform(brush : *mut GpPathGradient, matrix : *mut Matrix) -> Status);
-    GdipGetPathGradientTransform(brush, matrix)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPathGradientTransform(brush : *mut GpPathGradient, matrix : *mut Matrix) -> Status);
+    unsafe { GdipGetPathGradientTransform(brush as _, matrix as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPathGradientWrapMode(brush: *mut GpPathGradient, wrapmode: *mut WrapMode) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPathGradientWrapMode(brush : *mut GpPathGradient, wrapmode : *mut WrapMode) -> Status);
-    GdipGetPathGradientWrapMode(brush, wrapmode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPathGradientWrapMode(brush : *mut GpPathGradient, wrapmode : *mut WrapMode) -> Status);
+    unsafe { GdipGetPathGradientWrapMode(brush as _, wrapmode as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPathLastPoint(path: *mut GpPath, lastpoint: *mut PointF) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPathLastPoint(path : *mut GpPath, lastpoint : *mut PointF) -> Status);
-    GdipGetPathLastPoint(path, lastpoint)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPathLastPoint(path : *mut GpPath, lastpoint : *mut PointF) -> Status);
+    unsafe { GdipGetPathLastPoint(path as _, lastpoint as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPathPoints(param0: *mut GpPath, points: *mut PointF, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPathPoints(param0 : *mut GpPath, points : *mut PointF, count : i32) -> Status);
-    GdipGetPathPoints(param0, points, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPathPoints(param0 : *mut GpPath, points : *mut PointF, count : i32) -> Status);
+    unsafe { GdipGetPathPoints(param0 as _, points as _, count) }
 }
 #[inline]
 pub unsafe fn GdipGetPathPointsI(param0: *mut GpPath, points: *mut Point, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPathPointsI(param0 : *mut GpPath, points : *mut Point, count : i32) -> Status);
-    GdipGetPathPointsI(param0, points, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPathPointsI(param0 : *mut GpPath, points : *mut Point, count : i32) -> Status);
+    unsafe { GdipGetPathPointsI(param0 as _, points as _, count) }
 }
 #[inline]
 pub unsafe fn GdipGetPathTypes(path: *const GpPath, types: &mut [u8]) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPathTypes(path : *const GpPath, types : *mut u8, count : i32) -> Status);
-    GdipGetPathTypes(path, ::core::mem::transmute(types.as_ptr()), types.len().try_into().unwrap())
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPathTypes(path : *const GpPath, types : *mut u8, count : i32) -> Status);
+    unsafe { GdipGetPathTypes(path, core::mem::transmute(types.as_ptr()), types.len().try_into().unwrap()) }
 }
 #[inline]
 pub unsafe fn GdipGetPathWorldBounds(path: *mut GpPath, bounds: *mut RectF, matrix: *const Matrix, pen: *const GpPen) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPathWorldBounds(path : *mut GpPath, bounds : *mut RectF, matrix : *const Matrix, pen : *const GpPen) -> Status);
-    GdipGetPathWorldBounds(path, bounds, matrix, pen)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPathWorldBounds(path : *mut GpPath, bounds : *mut RectF, matrix : *const Matrix, pen : *const GpPen) -> Status);
+    unsafe { GdipGetPathWorldBounds(path as _, bounds as _, matrix, pen) }
 }
 #[inline]
 pub unsafe fn GdipGetPathWorldBoundsI(path: *mut GpPath, bounds: *mut Rect, matrix: *const Matrix, pen: *const GpPen) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPathWorldBoundsI(path : *mut GpPath, bounds : *mut Rect, matrix : *const Matrix, pen : *const GpPen) -> Status);
-    GdipGetPathWorldBoundsI(path, bounds, matrix, pen)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPathWorldBoundsI(path : *mut GpPath, bounds : *mut Rect, matrix : *const Matrix, pen : *const GpPen) -> Status);
+    unsafe { GdipGetPathWorldBoundsI(path as _, bounds as _, matrix, pen) }
 }
 #[inline]
 pub unsafe fn GdipGetPenBrushFill(pen: *mut GpPen, brush: *mut *mut GpBrush) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPenBrushFill(pen : *mut GpPen, brush : *mut *mut GpBrush) -> Status);
-    GdipGetPenBrushFill(pen, brush)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPenBrushFill(pen : *mut GpPen, brush : *mut *mut GpBrush) -> Status);
+    unsafe { GdipGetPenBrushFill(pen as _, brush as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPenColor(pen: *mut GpPen, argb: *mut u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPenColor(pen : *mut GpPen, argb : *mut u32) -> Status);
-    GdipGetPenColor(pen, argb)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPenColor(pen : *mut GpPen, argb : *mut u32) -> Status);
+    unsafe { GdipGetPenColor(pen as _, argb as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPenCompoundArray(pen: *mut GpPen, dash: *mut f32, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPenCompoundArray(pen : *mut GpPen, dash : *mut f32, count : i32) -> Status);
-    GdipGetPenCompoundArray(pen, dash, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPenCompoundArray(pen : *mut GpPen, dash : *mut f32, count : i32) -> Status);
+    unsafe { GdipGetPenCompoundArray(pen as _, dash as _, count) }
 }
 #[inline]
 pub unsafe fn GdipGetPenCompoundCount(pen: *mut GpPen, count: *mut i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPenCompoundCount(pen : *mut GpPen, count : *mut i32) -> Status);
-    GdipGetPenCompoundCount(pen, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPenCompoundCount(pen : *mut GpPen, count : *mut i32) -> Status);
+    unsafe { GdipGetPenCompoundCount(pen as _, count as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPenCustomEndCap(pen: *mut GpPen, customcap: *mut *mut GpCustomLineCap) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPenCustomEndCap(pen : *mut GpPen, customcap : *mut *mut GpCustomLineCap) -> Status);
-    GdipGetPenCustomEndCap(pen, customcap)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPenCustomEndCap(pen : *mut GpPen, customcap : *mut *mut GpCustomLineCap) -> Status);
+    unsafe { GdipGetPenCustomEndCap(pen as _, customcap as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPenCustomStartCap(pen: *mut GpPen, customcap: *mut *mut GpCustomLineCap) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPenCustomStartCap(pen : *mut GpPen, customcap : *mut *mut GpCustomLineCap) -> Status);
-    GdipGetPenCustomStartCap(pen, customcap)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPenCustomStartCap(pen : *mut GpPen, customcap : *mut *mut GpCustomLineCap) -> Status);
+    unsafe { GdipGetPenCustomStartCap(pen as _, customcap as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPenDashArray(pen: *mut GpPen, dash: *mut f32, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPenDashArray(pen : *mut GpPen, dash : *mut f32, count : i32) -> Status);
-    GdipGetPenDashArray(pen, dash, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPenDashArray(pen : *mut GpPen, dash : *mut f32, count : i32) -> Status);
+    unsafe { GdipGetPenDashArray(pen as _, dash as _, count) }
 }
 #[inline]
 pub unsafe fn GdipGetPenDashCap197819(pen: *mut GpPen, dashcap: *mut DashCap) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPenDashCap197819(pen : *mut GpPen, dashcap : *mut DashCap) -> Status);
-    GdipGetPenDashCap197819(pen, dashcap)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPenDashCap197819(pen : *mut GpPen, dashcap : *mut DashCap) -> Status);
+    unsafe { GdipGetPenDashCap197819(pen as _, dashcap as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPenDashCount(pen: *mut GpPen, count: *mut i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPenDashCount(pen : *mut GpPen, count : *mut i32) -> Status);
-    GdipGetPenDashCount(pen, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPenDashCount(pen : *mut GpPen, count : *mut i32) -> Status);
+    unsafe { GdipGetPenDashCount(pen as _, count as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPenDashOffset(pen: *mut GpPen, offset: *mut f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPenDashOffset(pen : *mut GpPen, offset : *mut f32) -> Status);
-    GdipGetPenDashOffset(pen, offset)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPenDashOffset(pen : *mut GpPen, offset : *mut f32) -> Status);
+    unsafe { GdipGetPenDashOffset(pen as _, offset as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPenDashStyle(pen: *mut GpPen, dashstyle: *mut DashStyle) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPenDashStyle(pen : *mut GpPen, dashstyle : *mut DashStyle) -> Status);
-    GdipGetPenDashStyle(pen, dashstyle)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPenDashStyle(pen : *mut GpPen, dashstyle : *mut DashStyle) -> Status);
+    unsafe { GdipGetPenDashStyle(pen as _, dashstyle as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPenEndCap(pen: *mut GpPen, endcap: *mut LineCap) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPenEndCap(pen : *mut GpPen, endcap : *mut LineCap) -> Status);
-    GdipGetPenEndCap(pen, endcap)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPenEndCap(pen : *mut GpPen, endcap : *mut LineCap) -> Status);
+    unsafe { GdipGetPenEndCap(pen as _, endcap as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPenFillType(pen: *mut GpPen, r#type: *mut PenType) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPenFillType(pen : *mut GpPen, r#type : *mut PenType) -> Status);
-    GdipGetPenFillType(pen, r#type)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPenFillType(pen : *mut GpPen, r#type : *mut PenType) -> Status);
+    unsafe { GdipGetPenFillType(pen as _, r#type as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPenLineJoin(pen: *mut GpPen, linejoin: *mut LineJoin) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPenLineJoin(pen : *mut GpPen, linejoin : *mut LineJoin) -> Status);
-    GdipGetPenLineJoin(pen, linejoin)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPenLineJoin(pen : *mut GpPen, linejoin : *mut LineJoin) -> Status);
+    unsafe { GdipGetPenLineJoin(pen as _, linejoin as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPenMiterLimit(pen: *mut GpPen, miterlimit: *mut f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPenMiterLimit(pen : *mut GpPen, miterlimit : *mut f32) -> Status);
-    GdipGetPenMiterLimit(pen, miterlimit)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPenMiterLimit(pen : *mut GpPen, miterlimit : *mut f32) -> Status);
+    unsafe { GdipGetPenMiterLimit(pen as _, miterlimit as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPenMode(pen: *mut GpPen, penmode: *mut PenAlignment) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPenMode(pen : *mut GpPen, penmode : *mut PenAlignment) -> Status);
-    GdipGetPenMode(pen, penmode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPenMode(pen : *mut GpPen, penmode : *mut PenAlignment) -> Status);
+    unsafe { GdipGetPenMode(pen as _, penmode as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPenStartCap(pen: *mut GpPen, startcap: *mut LineCap) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPenStartCap(pen : *mut GpPen, startcap : *mut LineCap) -> Status);
-    GdipGetPenStartCap(pen, startcap)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPenStartCap(pen : *mut GpPen, startcap : *mut LineCap) -> Status);
+    unsafe { GdipGetPenStartCap(pen as _, startcap as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPenTransform(pen: *mut GpPen, matrix: *mut Matrix) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPenTransform(pen : *mut GpPen, matrix : *mut Matrix) -> Status);
-    GdipGetPenTransform(pen, matrix)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPenTransform(pen : *mut GpPen, matrix : *mut Matrix) -> Status);
+    unsafe { GdipGetPenTransform(pen as _, matrix as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPenUnit(pen: *mut GpPen, unit: *mut Unit) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPenUnit(pen : *mut GpPen, unit : *mut Unit) -> Status);
-    GdipGetPenUnit(pen, unit)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPenUnit(pen : *mut GpPen, unit : *mut Unit) -> Status);
+    unsafe { GdipGetPenUnit(pen as _, unit as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPenWidth(pen: *mut GpPen, width: *mut f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPenWidth(pen : *mut GpPen, width : *mut f32) -> Status);
-    GdipGetPenWidth(pen, width)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPenWidth(pen : *mut GpPen, width : *mut f32) -> Status);
+    unsafe { GdipGetPenWidth(pen as _, width as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPixelOffsetMode(graphics: *mut GpGraphics, pixeloffsetmode: *mut PixelOffsetMode) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPixelOffsetMode(graphics : *mut GpGraphics, pixeloffsetmode : *mut PixelOffsetMode) -> Status);
-    GdipGetPixelOffsetMode(graphics, pixeloffsetmode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPixelOffsetMode(graphics : *mut GpGraphics, pixeloffsetmode : *mut PixelOffsetMode) -> Status);
+    unsafe { GdipGetPixelOffsetMode(graphics as _, pixeloffsetmode as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPointCount(path: *mut GpPath, count: *mut i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPointCount(path : *mut GpPath, count : *mut i32) -> Status);
-    GdipGetPointCount(path, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPointCount(path : *mut GpPath, count : *mut i32) -> Status);
+    unsafe { GdipGetPointCount(path as _, count as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPropertyCount(image: *mut GpImage, numofproperty: *mut u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPropertyCount(image : *mut GpImage, numofproperty : *mut u32) -> Status);
-    GdipGetPropertyCount(image, numofproperty)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPropertyCount(image : *mut GpImage, numofproperty : *mut u32) -> Status);
+    unsafe { GdipGetPropertyCount(image as _, numofproperty as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPropertyIdList(image: *mut GpImage, numofproperty: u32, list: *mut u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPropertyIdList(image : *mut GpImage, numofproperty : u32, list : *mut u32) -> Status);
-    GdipGetPropertyIdList(image, numofproperty, list)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPropertyIdList(image : *mut GpImage, numofproperty : u32, list : *mut u32) -> Status);
+    unsafe { GdipGetPropertyIdList(image as _, numofproperty, list as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPropertyItem(image: *mut GpImage, propid: u32, propsize: u32, buffer: *mut PropertyItem) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPropertyItem(image : *mut GpImage, propid : u32, propsize : u32, buffer : *mut PropertyItem) -> Status);
-    GdipGetPropertyItem(image, propid, propsize, buffer)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPropertyItem(image : *mut GpImage, propid : u32, propsize : u32, buffer : *mut PropertyItem) -> Status);
+    unsafe { GdipGetPropertyItem(image as _, propid, propsize, buffer as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPropertyItemSize(image: *mut GpImage, propid: u32, size: *mut u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPropertyItemSize(image : *mut GpImage, propid : u32, size : *mut u32) -> Status);
-    GdipGetPropertyItemSize(image, propid, size)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPropertyItemSize(image : *mut GpImage, propid : u32, size : *mut u32) -> Status);
+    unsafe { GdipGetPropertyItemSize(image as _, propid, size as _) }
 }
 #[inline]
 pub unsafe fn GdipGetPropertySize(image: *mut GpImage, totalbuffersize: *mut u32, numproperties: *mut u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetPropertySize(image : *mut GpImage, totalbuffersize : *mut u32, numproperties : *mut u32) -> Status);
-    GdipGetPropertySize(image, totalbuffersize, numproperties)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetPropertySize(image : *mut GpImage, totalbuffersize : *mut u32, numproperties : *mut u32) -> Status);
+    unsafe { GdipGetPropertySize(image as _, totalbuffersize as _, numproperties as _) }
 }
 #[inline]
 pub unsafe fn GdipGetRegionBounds(region: *mut GpRegion, graphics: *mut GpGraphics, rect: *mut RectF) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetRegionBounds(region : *mut GpRegion, graphics : *mut GpGraphics, rect : *mut RectF) -> Status);
-    GdipGetRegionBounds(region, graphics, rect)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetRegionBounds(region : *mut GpRegion, graphics : *mut GpGraphics, rect : *mut RectF) -> Status);
+    unsafe { GdipGetRegionBounds(region as _, graphics as _, rect as _) }
 }
 #[inline]
 pub unsafe fn GdipGetRegionBoundsI(region: *mut GpRegion, graphics: *mut GpGraphics, rect: *mut Rect) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetRegionBoundsI(region : *mut GpRegion, graphics : *mut GpGraphics, rect : *mut Rect) -> Status);
-    GdipGetRegionBoundsI(region, graphics, rect)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetRegionBoundsI(region : *mut GpRegion, graphics : *mut GpGraphics, rect : *mut Rect) -> Status);
+    unsafe { GdipGetRegionBoundsI(region as _, graphics as _, rect as _) }
 }
 #[inline]
-pub unsafe fn GdipGetRegionData(region: *mut GpRegion, buffer: &mut [u8], sizefilled: ::core::option::Option<*mut u32>) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetRegionData(region : *mut GpRegion, buffer : *mut u8, buffersize : u32, sizefilled : *mut u32) -> Status);
-    GdipGetRegionData(region, ::core::mem::transmute(buffer.as_ptr()), buffer.len().try_into().unwrap(), ::core::mem::transmute(sizefilled.unwrap_or(::std::ptr::null_mut())))
+pub unsafe fn GdipGetRegionData(region: *mut GpRegion, buffer: &mut [u8], sizefilled: Option<*mut u32>) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetRegionData(region : *mut GpRegion, buffer : *mut u8, buffersize : u32, sizefilled : *mut u32) -> Status);
+    unsafe { GdipGetRegionData(region as _, core::mem::transmute(buffer.as_ptr()), buffer.len().try_into().unwrap(), sizefilled.unwrap_or(core::mem::zeroed()) as _) }
 }
 #[inline]
 pub unsafe fn GdipGetRegionDataSize(region: *mut GpRegion, buffersize: *mut u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetRegionDataSize(region : *mut GpRegion, buffersize : *mut u32) -> Status);
-    GdipGetRegionDataSize(region, buffersize)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetRegionDataSize(region : *mut GpRegion, buffersize : *mut u32) -> Status);
+    unsafe { GdipGetRegionDataSize(region as _, buffersize as _) }
 }
-#[doc = "Required features: `\"Win32_Graphics_Gdi\"`"]
 #[cfg(feature = "Win32_Graphics_Gdi")]
 #[inline]
 pub unsafe fn GdipGetRegionHRgn(region: *mut GpRegion, graphics: *mut GpGraphics, hrgn: *mut super::Gdi::HRGN) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetRegionHRgn(region : *mut GpRegion, graphics : *mut GpGraphics, hrgn : *mut super::Gdi:: HRGN) -> Status);
-    GdipGetRegionHRgn(region, graphics, hrgn)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetRegionHRgn(region : *mut GpRegion, graphics : *mut GpGraphics, hrgn : *mut super::Gdi:: HRGN) -> Status);
+    unsafe { GdipGetRegionHRgn(region as _, graphics as _, hrgn as _) }
 }
 #[inline]
 pub unsafe fn GdipGetRegionScans(region: *mut GpRegion, rects: *mut RectF, count: *mut i32, matrix: *mut Matrix) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetRegionScans(region : *mut GpRegion, rects : *mut RectF, count : *mut i32, matrix : *mut Matrix) -> Status);
-    GdipGetRegionScans(region, rects, count, matrix)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetRegionScans(region : *mut GpRegion, rects : *mut RectF, count : *mut i32, matrix : *mut Matrix) -> Status);
+    unsafe { GdipGetRegionScans(region as _, rects as _, count as _, matrix as _) }
 }
 #[inline]
 pub unsafe fn GdipGetRegionScansCount(region: *mut GpRegion, count: *mut u32, matrix: *mut Matrix) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetRegionScansCount(region : *mut GpRegion, count : *mut u32, matrix : *mut Matrix) -> Status);
-    GdipGetRegionScansCount(region, count, matrix)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetRegionScansCount(region : *mut GpRegion, count : *mut u32, matrix : *mut Matrix) -> Status);
+    unsafe { GdipGetRegionScansCount(region as _, count as _, matrix as _) }
 }
 #[inline]
 pub unsafe fn GdipGetRegionScansI(region: *mut GpRegion, rects: *mut Rect, count: *mut i32, matrix: *mut Matrix) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetRegionScansI(region : *mut GpRegion, rects : *mut Rect, count : *mut i32, matrix : *mut Matrix) -> Status);
-    GdipGetRegionScansI(region, rects, count, matrix)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetRegionScansI(region : *mut GpRegion, rects : *mut Rect, count : *mut i32, matrix : *mut Matrix) -> Status);
+    unsafe { GdipGetRegionScansI(region as _, rects as _, count as _, matrix as _) }
 }
 #[inline]
 pub unsafe fn GdipGetRenderingOrigin(graphics: *mut GpGraphics, x: *mut i32, y: *mut i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetRenderingOrigin(graphics : *mut GpGraphics, x : *mut i32, y : *mut i32) -> Status);
-    GdipGetRenderingOrigin(graphics, x, y)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetRenderingOrigin(graphics : *mut GpGraphics, x : *mut i32, y : *mut i32) -> Status);
+    unsafe { GdipGetRenderingOrigin(graphics as _, x as _, y as _) }
 }
 #[inline]
 pub unsafe fn GdipGetSmoothingMode(graphics: *mut GpGraphics, smoothingmode: *mut SmoothingMode) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetSmoothingMode(graphics : *mut GpGraphics, smoothingmode : *mut SmoothingMode) -> Status);
-    GdipGetSmoothingMode(graphics, smoothingmode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetSmoothingMode(graphics : *mut GpGraphics, smoothingmode : *mut SmoothingMode) -> Status);
+    unsafe { GdipGetSmoothingMode(graphics as _, smoothingmode as _) }
 }
 #[inline]
 pub unsafe fn GdipGetSolidFillColor(brush: *mut GpSolidFill, color: *mut u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetSolidFillColor(brush : *mut GpSolidFill, color : *mut u32) -> Status);
-    GdipGetSolidFillColor(brush, color)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetSolidFillColor(brush : *mut GpSolidFill, color : *mut u32) -> Status);
+    unsafe { GdipGetSolidFillColor(brush as _, color as _) }
 }
 #[inline]
 pub unsafe fn GdipGetStringFormatAlign(format: *const GpStringFormat, align: *mut StringAlignment) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetStringFormatAlign(format : *const GpStringFormat, align : *mut StringAlignment) -> Status);
-    GdipGetStringFormatAlign(format, align)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetStringFormatAlign(format : *const GpStringFormat, align : *mut StringAlignment) -> Status);
+    unsafe { GdipGetStringFormatAlign(format, align as _) }
 }
 #[inline]
 pub unsafe fn GdipGetStringFormatDigitSubstitution(format: *const GpStringFormat, language: *mut u16, substitute: *mut StringDigitSubstitute) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetStringFormatDigitSubstitution(format : *const GpStringFormat, language : *mut u16, substitute : *mut StringDigitSubstitute) -> Status);
-    GdipGetStringFormatDigitSubstitution(format, language, substitute)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetStringFormatDigitSubstitution(format : *const GpStringFormat, language : *mut u16, substitute : *mut StringDigitSubstitute) -> Status);
+    unsafe { GdipGetStringFormatDigitSubstitution(format, language as _, substitute as _) }
 }
 #[inline]
 pub unsafe fn GdipGetStringFormatFlags(format: *const GpStringFormat, flags: *mut i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetStringFormatFlags(format : *const GpStringFormat, flags : *mut i32) -> Status);
-    GdipGetStringFormatFlags(format, flags)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetStringFormatFlags(format : *const GpStringFormat, flags : *mut i32) -> Status);
+    unsafe { GdipGetStringFormatFlags(format, flags as _) }
 }
 #[inline]
 pub unsafe fn GdipGetStringFormatHotkeyPrefix(format: *const GpStringFormat, hotkeyprefix: *mut i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetStringFormatHotkeyPrefix(format : *const GpStringFormat, hotkeyprefix : *mut i32) -> Status);
-    GdipGetStringFormatHotkeyPrefix(format, hotkeyprefix)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetStringFormatHotkeyPrefix(format : *const GpStringFormat, hotkeyprefix : *mut i32) -> Status);
+    unsafe { GdipGetStringFormatHotkeyPrefix(format, hotkeyprefix as _) }
 }
 #[inline]
 pub unsafe fn GdipGetStringFormatLineAlign(format: *const GpStringFormat, align: *mut StringAlignment) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetStringFormatLineAlign(format : *const GpStringFormat, align : *mut StringAlignment) -> Status);
-    GdipGetStringFormatLineAlign(format, align)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetStringFormatLineAlign(format : *const GpStringFormat, align : *mut StringAlignment) -> Status);
+    unsafe { GdipGetStringFormatLineAlign(format, align as _) }
 }
 #[inline]
 pub unsafe fn GdipGetStringFormatMeasurableCharacterRangeCount(format: *const GpStringFormat, count: *mut i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetStringFormatMeasurableCharacterRangeCount(format : *const GpStringFormat, count : *mut i32) -> Status);
-    GdipGetStringFormatMeasurableCharacterRangeCount(format, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetStringFormatMeasurableCharacterRangeCount(format : *const GpStringFormat, count : *mut i32) -> Status);
+    unsafe { GdipGetStringFormatMeasurableCharacterRangeCount(format, count as _) }
 }
 #[inline]
 pub unsafe fn GdipGetStringFormatTabStopCount(format: *const GpStringFormat, count: *mut i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetStringFormatTabStopCount(format : *const GpStringFormat, count : *mut i32) -> Status);
-    GdipGetStringFormatTabStopCount(format, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetStringFormatTabStopCount(format : *const GpStringFormat, count : *mut i32) -> Status);
+    unsafe { GdipGetStringFormatTabStopCount(format, count as _) }
 }
 #[inline]
 pub unsafe fn GdipGetStringFormatTabStops(format: *const GpStringFormat, count: i32, firsttaboffset: *mut f32, tabstops: *mut f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetStringFormatTabStops(format : *const GpStringFormat, count : i32, firsttaboffset : *mut f32, tabstops : *mut f32) -> Status);
-    GdipGetStringFormatTabStops(format, count, firsttaboffset, tabstops)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetStringFormatTabStops(format : *const GpStringFormat, count : i32, firsttaboffset : *mut f32, tabstops : *mut f32) -> Status);
+    unsafe { GdipGetStringFormatTabStops(format, count, firsttaboffset as _, tabstops as _) }
 }
 #[inline]
 pub unsafe fn GdipGetStringFormatTrimming(format: *const GpStringFormat, trimming: *mut StringTrimming) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetStringFormatTrimming(format : *const GpStringFormat, trimming : *mut StringTrimming) -> Status);
-    GdipGetStringFormatTrimming(format, trimming)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetStringFormatTrimming(format : *const GpStringFormat, trimming : *mut StringTrimming) -> Status);
+    unsafe { GdipGetStringFormatTrimming(format, trimming as _) }
 }
 #[inline]
 pub unsafe fn GdipGetTextContrast(graphics: *mut GpGraphics, contrast: *mut u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetTextContrast(graphics : *mut GpGraphics, contrast : *mut u32) -> Status);
-    GdipGetTextContrast(graphics, contrast)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetTextContrast(graphics : *mut GpGraphics, contrast : *mut u32) -> Status);
+    unsafe { GdipGetTextContrast(graphics as _, contrast as _) }
 }
 #[inline]
 pub unsafe fn GdipGetTextRenderingHint(graphics: *mut GpGraphics, mode: *mut TextRenderingHint) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetTextRenderingHint(graphics : *mut GpGraphics, mode : *mut TextRenderingHint) -> Status);
-    GdipGetTextRenderingHint(graphics, mode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetTextRenderingHint(graphics : *mut GpGraphics, mode : *mut TextRenderingHint) -> Status);
+    unsafe { GdipGetTextRenderingHint(graphics as _, mode as _) }
 }
 #[inline]
 pub unsafe fn GdipGetTextureImage(brush: *mut GpTexture, image: *mut *mut GpImage) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetTextureImage(brush : *mut GpTexture, image : *mut *mut GpImage) -> Status);
-    GdipGetTextureImage(brush, image)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetTextureImage(brush : *mut GpTexture, image : *mut *mut GpImage) -> Status);
+    unsafe { GdipGetTextureImage(brush as _, image as _) }
 }
 #[inline]
 pub unsafe fn GdipGetTextureTransform(brush: *mut GpTexture, matrix: *mut Matrix) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetTextureTransform(brush : *mut GpTexture, matrix : *mut Matrix) -> Status);
-    GdipGetTextureTransform(brush, matrix)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetTextureTransform(brush : *mut GpTexture, matrix : *mut Matrix) -> Status);
+    unsafe { GdipGetTextureTransform(brush as _, matrix as _) }
 }
 #[inline]
 pub unsafe fn GdipGetTextureWrapMode(brush: *mut GpTexture, wrapmode: *mut WrapMode) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetTextureWrapMode(brush : *mut GpTexture, wrapmode : *mut WrapMode) -> Status);
-    GdipGetTextureWrapMode(brush, wrapmode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetTextureWrapMode(brush : *mut GpTexture, wrapmode : *mut WrapMode) -> Status);
+    unsafe { GdipGetTextureWrapMode(brush as _, wrapmode as _) }
 }
 #[inline]
 pub unsafe fn GdipGetVisibleClipBounds(graphics: *mut GpGraphics, rect: *mut RectF) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetVisibleClipBounds(graphics : *mut GpGraphics, rect : *mut RectF) -> Status);
-    GdipGetVisibleClipBounds(graphics, rect)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetVisibleClipBounds(graphics : *mut GpGraphics, rect : *mut RectF) -> Status);
+    unsafe { GdipGetVisibleClipBounds(graphics as _, rect as _) }
 }
 #[inline]
 pub unsafe fn GdipGetVisibleClipBoundsI(graphics: *mut GpGraphics, rect: *mut Rect) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetVisibleClipBoundsI(graphics : *mut GpGraphics, rect : *mut Rect) -> Status);
-    GdipGetVisibleClipBoundsI(graphics, rect)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetVisibleClipBoundsI(graphics : *mut GpGraphics, rect : *mut Rect) -> Status);
+    unsafe { GdipGetVisibleClipBoundsI(graphics as _, rect as _) }
 }
 #[inline]
 pub unsafe fn GdipGetWorldTransform(graphics: *mut GpGraphics, matrix: *mut Matrix) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGetWorldTransform(graphics : *mut GpGraphics, matrix : *mut Matrix) -> Status);
-    GdipGetWorldTransform(graphics, matrix)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGetWorldTransform(graphics : *mut GpGraphics, matrix : *mut Matrix) -> Status);
+    unsafe { GdipGetWorldTransform(graphics as _, matrix as _) }
 }
 #[inline]
 pub unsafe fn GdipGraphicsClear(graphics: *mut GpGraphics, color: u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGraphicsClear(graphics : *mut GpGraphics, color : u32) -> Status);
-    GdipGraphicsClear(graphics, color)
+    windows_link::link!("gdiplus.dll" "system" fn GdipGraphicsClear(graphics : *mut GpGraphics, color : u32) -> Status);
+    unsafe { GdipGraphicsClear(graphics as _, color) }
 }
 #[inline]
-pub unsafe fn GdipGraphicsSetAbort<P0>(pgraphics: *mut GpGraphics, piabort: P0) -> Status
+pub unsafe fn GdipGraphicsSetAbort<P1>(pgraphics: *mut GpGraphics, piabort: P1) -> Status
 where
-    P0: ::windows_core::IntoParam<GdiplusAbort>,
+    P1: windows_core::Param<GdiplusAbort>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipGraphicsSetAbort(pgraphics : *mut GpGraphics, piabort : * mut::core::ffi::c_void) -> Status);
-    GdipGraphicsSetAbort(pgraphics, piabort.into_param().abi())
+    windows_link::link!("gdiplus.dll" "system" fn GdipGraphicsSetAbort(pgraphics : *mut GpGraphics, piabort : * mut core::ffi::c_void) -> Status);
+    unsafe { GdipGraphicsSetAbort(pgraphics as _, piabort.param().abi()) }
 }
 #[inline]
 pub unsafe fn GdipImageForceValidation(image: *mut GpImage) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipImageForceValidation(image : *mut GpImage) -> Status);
-    GdipImageForceValidation(image)
+    windows_link::link!("gdiplus.dll" "system" fn GdipImageForceValidation(image : *mut GpImage) -> Status);
+    unsafe { GdipImageForceValidation(image as _) }
 }
 #[inline]
-pub unsafe fn GdipImageGetFrameCount(image: *mut GpImage, dimensionid: *const ::windows_core::GUID, count: *mut u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipImageGetFrameCount(image : *mut GpImage, dimensionid : *const ::windows_core::GUID, count : *mut u32) -> Status);
-    GdipImageGetFrameCount(image, dimensionid, count)
+pub unsafe fn GdipImageGetFrameCount(image: *mut GpImage, dimensionid: *const windows_core::GUID, count: *mut u32) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipImageGetFrameCount(image : *mut GpImage, dimensionid : *const windows_core::GUID, count : *mut u32) -> Status);
+    unsafe { GdipImageGetFrameCount(image as _, dimensionid, count as _) }
 }
 #[inline]
 pub unsafe fn GdipImageGetFrameDimensionsCount(image: *mut GpImage, count: *mut u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipImageGetFrameDimensionsCount(image : *mut GpImage, count : *mut u32) -> Status);
-    GdipImageGetFrameDimensionsCount(image, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipImageGetFrameDimensionsCount(image : *mut GpImage, count : *mut u32) -> Status);
+    unsafe { GdipImageGetFrameDimensionsCount(image as _, count as _) }
 }
 #[inline]
-pub unsafe fn GdipImageGetFrameDimensionsList(image: *mut GpImage, dimensionids: *mut ::windows_core::GUID, count: u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipImageGetFrameDimensionsList(image : *mut GpImage, dimensionids : *mut ::windows_core::GUID, count : u32) -> Status);
-    GdipImageGetFrameDimensionsList(image, dimensionids, count)
+pub unsafe fn GdipImageGetFrameDimensionsList(image: *mut GpImage, dimensionids: *mut windows_core::GUID, count: u32) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipImageGetFrameDimensionsList(image : *mut GpImage, dimensionids : *mut windows_core::GUID, count : u32) -> Status);
+    unsafe { GdipImageGetFrameDimensionsList(image as _, dimensionids as _, count) }
 }
 #[inline]
 pub unsafe fn GdipImageRotateFlip(image: *mut GpImage, rftype: RotateFlipType) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipImageRotateFlip(image : *mut GpImage, rftype : RotateFlipType) -> Status);
-    GdipImageRotateFlip(image, rftype)
+    windows_link::link!("gdiplus.dll" "system" fn GdipImageRotateFlip(image : *mut GpImage, rftype : RotateFlipType) -> Status);
+    unsafe { GdipImageRotateFlip(image as _, rftype) }
 }
 #[inline]
-pub unsafe fn GdipImageSelectActiveFrame(image: *mut GpImage, dimensionid: *const ::windows_core::GUID, frameindex: u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipImageSelectActiveFrame(image : *mut GpImage, dimensionid : *const ::windows_core::GUID, frameindex : u32) -> Status);
-    GdipImageSelectActiveFrame(image, dimensionid, frameindex)
+pub unsafe fn GdipImageSelectActiveFrame(image: *mut GpImage, dimensionid: *const windows_core::GUID, frameindex: u32) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipImageSelectActiveFrame(image : *mut GpImage, dimensionid : *const windows_core::GUID, frameindex : u32) -> Status);
+    unsafe { GdipImageSelectActiveFrame(image as _, dimensionid, frameindex) }
 }
 #[inline]
-pub unsafe fn GdipImageSetAbort<P0>(pimage: *mut GpImage, piabort: P0) -> Status
+pub unsafe fn GdipImageSetAbort<P1>(pimage: *mut GpImage, piabort: P1) -> Status
 where
-    P0: ::windows_core::IntoParam<GdiplusAbort>,
+    P1: windows_core::Param<GdiplusAbort>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipImageSetAbort(pimage : *mut GpImage, piabort : * mut::core::ffi::c_void) -> Status);
-    GdipImageSetAbort(pimage, piabort.into_param().abi())
+    windows_link::link!("gdiplus.dll" "system" fn GdipImageSetAbort(pimage : *mut GpImage, piabort : * mut core::ffi::c_void) -> Status);
+    unsafe { GdipImageSetAbort(pimage as _, piabort.param().abi()) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipInitializePalette<P0>(palette: *mut ColorPalette, palettetype: PaletteType, optimalcolors: i32, usetransparentcolor: P0, bitmap: *mut GpBitmap) -> Status
-where
-    P0: ::windows_core::IntoParam<super::super::Foundation::BOOL>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipInitializePalette(palette : *mut ColorPalette, palettetype : PaletteType, optimalcolors : i32, usetransparentcolor : super::super::Foundation:: BOOL, bitmap : *mut GpBitmap) -> Status);
-    GdipInitializePalette(palette, palettetype, optimalcolors, usetransparentcolor.into_param().abi(), bitmap)
+pub unsafe fn GdipInitializePalette(palette: *mut ColorPalette, palettetype: PaletteType, optimalcolors: i32, usetransparentcolor: bool, bitmap: *mut GpBitmap) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipInitializePalette(palette : *mut ColorPalette, palettetype : PaletteType, optimalcolors : i32, usetransparentcolor : windows_core::BOOL, bitmap : *mut GpBitmap) -> Status);
+    unsafe { GdipInitializePalette(palette as _, palettetype, optimalcolors, usetransparentcolor.into(), bitmap as _) }
 }
 #[inline]
 pub unsafe fn GdipInvertMatrix(matrix: *mut Matrix) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipInvertMatrix(matrix : *mut Matrix) -> Status);
-    GdipInvertMatrix(matrix)
+    windows_link::link!("gdiplus.dll" "system" fn GdipInvertMatrix(matrix : *mut Matrix) -> Status);
+    unsafe { GdipInvertMatrix(matrix as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipIsClipEmpty(graphics: *mut GpGraphics, result: *mut super::super::Foundation::BOOL) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipIsClipEmpty(graphics : *mut GpGraphics, result : *mut super::super::Foundation:: BOOL) -> Status);
-    GdipIsClipEmpty(graphics, result)
+pub unsafe fn GdipIsClipEmpty(graphics: *mut GpGraphics, result: *mut windows_core::BOOL) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipIsClipEmpty(graphics : *mut GpGraphics, result : *mut windows_core::BOOL) -> Status);
+    unsafe { GdipIsClipEmpty(graphics as _, result as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipIsEmptyRegion(region: *mut GpRegion, graphics: *mut GpGraphics, result: *mut super::super::Foundation::BOOL) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipIsEmptyRegion(region : *mut GpRegion, graphics : *mut GpGraphics, result : *mut super::super::Foundation:: BOOL) -> Status);
-    GdipIsEmptyRegion(region, graphics, result)
+pub unsafe fn GdipIsEmptyRegion(region: *mut GpRegion, graphics: *mut GpGraphics, result: *mut windows_core::BOOL) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipIsEmptyRegion(region : *mut GpRegion, graphics : *mut GpGraphics, result : *mut windows_core::BOOL) -> Status);
+    unsafe { GdipIsEmptyRegion(region as _, graphics as _, result as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipIsEqualRegion(region: *mut GpRegion, region2: *mut GpRegion, graphics: *mut GpGraphics, result: *mut super::super::Foundation::BOOL) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipIsEqualRegion(region : *mut GpRegion, region2 : *mut GpRegion, graphics : *mut GpGraphics, result : *mut super::super::Foundation:: BOOL) -> Status);
-    GdipIsEqualRegion(region, region2, graphics, result)
+pub unsafe fn GdipIsEqualRegion(region: *mut GpRegion, region2: *mut GpRegion, graphics: *mut GpGraphics, result: *mut windows_core::BOOL) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipIsEqualRegion(region : *mut GpRegion, region2 : *mut GpRegion, graphics : *mut GpGraphics, result : *mut windows_core::BOOL) -> Status);
+    unsafe { GdipIsEqualRegion(region as _, region2 as _, graphics as _, result as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipIsInfiniteRegion(region: *mut GpRegion, graphics: *mut GpGraphics, result: *mut super::super::Foundation::BOOL) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipIsInfiniteRegion(region : *mut GpRegion, graphics : *mut GpGraphics, result : *mut super::super::Foundation:: BOOL) -> Status);
-    GdipIsInfiniteRegion(region, graphics, result)
+pub unsafe fn GdipIsInfiniteRegion(region: *mut GpRegion, graphics: *mut GpGraphics, result: *mut windows_core::BOOL) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipIsInfiniteRegion(region : *mut GpRegion, graphics : *mut GpGraphics, result : *mut windows_core::BOOL) -> Status);
+    unsafe { GdipIsInfiniteRegion(region as _, graphics as _, result as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipIsMatrixEqual(matrix: *const Matrix, matrix2: *const Matrix, result: *mut super::super::Foundation::BOOL) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipIsMatrixEqual(matrix : *const Matrix, matrix2 : *const Matrix, result : *mut super::super::Foundation:: BOOL) -> Status);
-    GdipIsMatrixEqual(matrix, matrix2, result)
+pub unsafe fn GdipIsMatrixEqual(matrix: *const Matrix, matrix2: *const Matrix, result: *mut windows_core::BOOL) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipIsMatrixEqual(matrix : *const Matrix, matrix2 : *const Matrix, result : *mut windows_core::BOOL) -> Status);
+    unsafe { GdipIsMatrixEqual(matrix, matrix2, result as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipIsMatrixIdentity(matrix: *const Matrix, result: *mut super::super::Foundation::BOOL) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipIsMatrixIdentity(matrix : *const Matrix, result : *mut super::super::Foundation:: BOOL) -> Status);
-    GdipIsMatrixIdentity(matrix, result)
+pub unsafe fn GdipIsMatrixIdentity(matrix: *const Matrix, result: *mut windows_core::BOOL) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipIsMatrixIdentity(matrix : *const Matrix, result : *mut windows_core::BOOL) -> Status);
+    unsafe { GdipIsMatrixIdentity(matrix, result as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipIsMatrixInvertible(matrix: *const Matrix, result: *mut super::super::Foundation::BOOL) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipIsMatrixInvertible(matrix : *const Matrix, result : *mut super::super::Foundation:: BOOL) -> Status);
-    GdipIsMatrixInvertible(matrix, result)
+pub unsafe fn GdipIsMatrixInvertible(matrix: *const Matrix, result: *mut windows_core::BOOL) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipIsMatrixInvertible(matrix : *const Matrix, result : *mut windows_core::BOOL) -> Status);
+    unsafe { GdipIsMatrixInvertible(matrix, result as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipIsOutlineVisiblePathPoint(path: *mut GpPath, x: f32, y: f32, pen: *mut GpPen, graphics: *mut GpGraphics, result: *mut super::super::Foundation::BOOL) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipIsOutlineVisiblePathPoint(path : *mut GpPath, x : f32, y : f32, pen : *mut GpPen, graphics : *mut GpGraphics, result : *mut super::super::Foundation:: BOOL) -> Status);
-    GdipIsOutlineVisiblePathPoint(path, x, y, pen, graphics, result)
+pub unsafe fn GdipIsOutlineVisiblePathPoint(path: *mut GpPath, x: f32, y: f32, pen: *mut GpPen, graphics: *mut GpGraphics, result: *mut windows_core::BOOL) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipIsOutlineVisiblePathPoint(path : *mut GpPath, x : f32, y : f32, pen : *mut GpPen, graphics : *mut GpGraphics, result : *mut windows_core::BOOL) -> Status);
+    unsafe { GdipIsOutlineVisiblePathPoint(path as _, x, y, pen as _, graphics as _, result as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipIsOutlineVisiblePathPointI(path: *mut GpPath, x: i32, y: i32, pen: *mut GpPen, graphics: *mut GpGraphics, result: *mut super::super::Foundation::BOOL) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipIsOutlineVisiblePathPointI(path : *mut GpPath, x : i32, y : i32, pen : *mut GpPen, graphics : *mut GpGraphics, result : *mut super::super::Foundation:: BOOL) -> Status);
-    GdipIsOutlineVisiblePathPointI(path, x, y, pen, graphics, result)
+pub unsafe fn GdipIsOutlineVisiblePathPointI(path: *mut GpPath, x: i32, y: i32, pen: *mut GpPen, graphics: *mut GpGraphics, result: *mut windows_core::BOOL) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipIsOutlineVisiblePathPointI(path : *mut GpPath, x : i32, y : i32, pen : *mut GpPen, graphics : *mut GpGraphics, result : *mut windows_core::BOOL) -> Status);
+    unsafe { GdipIsOutlineVisiblePathPointI(path as _, x, y, pen as _, graphics as _, result as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipIsStyleAvailable(family: *const GpFontFamily, style: i32, isstyleavailable: *mut super::super::Foundation::BOOL) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipIsStyleAvailable(family : *const GpFontFamily, style : i32, isstyleavailable : *mut super::super::Foundation:: BOOL) -> Status);
-    GdipIsStyleAvailable(family, style, isstyleavailable)
+pub unsafe fn GdipIsStyleAvailable(family: *const GpFontFamily, style: i32, isstyleavailable: *mut windows_core::BOOL) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipIsStyleAvailable(family : *const GpFontFamily, style : i32, isstyleavailable : *mut windows_core::BOOL) -> Status);
+    unsafe { GdipIsStyleAvailable(family, style, isstyleavailable as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipIsVisibleClipEmpty(graphics: *mut GpGraphics, result: *mut super::super::Foundation::BOOL) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipIsVisibleClipEmpty(graphics : *mut GpGraphics, result : *mut super::super::Foundation:: BOOL) -> Status);
-    GdipIsVisibleClipEmpty(graphics, result)
+pub unsafe fn GdipIsVisibleClipEmpty(graphics: *mut GpGraphics, result: *mut windows_core::BOOL) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipIsVisibleClipEmpty(graphics : *mut GpGraphics, result : *mut windows_core::BOOL) -> Status);
+    unsafe { GdipIsVisibleClipEmpty(graphics as _, result as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipIsVisiblePathPoint(path: *mut GpPath, x: f32, y: f32, graphics: *mut GpGraphics, result: *mut super::super::Foundation::BOOL) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipIsVisiblePathPoint(path : *mut GpPath, x : f32, y : f32, graphics : *mut GpGraphics, result : *mut super::super::Foundation:: BOOL) -> Status);
-    GdipIsVisiblePathPoint(path, x, y, graphics, result)
+pub unsafe fn GdipIsVisiblePathPoint(path: *mut GpPath, x: f32, y: f32, graphics: *mut GpGraphics, result: *mut windows_core::BOOL) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipIsVisiblePathPoint(path : *mut GpPath, x : f32, y : f32, graphics : *mut GpGraphics, result : *mut windows_core::BOOL) -> Status);
+    unsafe { GdipIsVisiblePathPoint(path as _, x, y, graphics as _, result as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipIsVisiblePathPointI(path: *mut GpPath, x: i32, y: i32, graphics: *mut GpGraphics, result: *mut super::super::Foundation::BOOL) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipIsVisiblePathPointI(path : *mut GpPath, x : i32, y : i32, graphics : *mut GpGraphics, result : *mut super::super::Foundation:: BOOL) -> Status);
-    GdipIsVisiblePathPointI(path, x, y, graphics, result)
+pub unsafe fn GdipIsVisiblePathPointI(path: *mut GpPath, x: i32, y: i32, graphics: *mut GpGraphics, result: *mut windows_core::BOOL) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipIsVisiblePathPointI(path : *mut GpPath, x : i32, y : i32, graphics : *mut GpGraphics, result : *mut windows_core::BOOL) -> Status);
+    unsafe { GdipIsVisiblePathPointI(path as _, x, y, graphics as _, result as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipIsVisiblePoint(graphics: *mut GpGraphics, x: f32, y: f32, result: *mut super::super::Foundation::BOOL) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipIsVisiblePoint(graphics : *mut GpGraphics, x : f32, y : f32, result : *mut super::super::Foundation:: BOOL) -> Status);
-    GdipIsVisiblePoint(graphics, x, y, result)
+pub unsafe fn GdipIsVisiblePoint(graphics: *mut GpGraphics, x: f32, y: f32, result: *mut windows_core::BOOL) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipIsVisiblePoint(graphics : *mut GpGraphics, x : f32, y : f32, result : *mut windows_core::BOOL) -> Status);
+    unsafe { GdipIsVisiblePoint(graphics as _, x, y, result as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipIsVisiblePointI(graphics: *mut GpGraphics, x: i32, y: i32, result: *mut super::super::Foundation::BOOL) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipIsVisiblePointI(graphics : *mut GpGraphics, x : i32, y : i32, result : *mut super::super::Foundation:: BOOL) -> Status);
-    GdipIsVisiblePointI(graphics, x, y, result)
+pub unsafe fn GdipIsVisiblePointI(graphics: *mut GpGraphics, x: i32, y: i32, result: *mut windows_core::BOOL) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipIsVisiblePointI(graphics : *mut GpGraphics, x : i32, y : i32, result : *mut windows_core::BOOL) -> Status);
+    unsafe { GdipIsVisiblePointI(graphics as _, x, y, result as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipIsVisibleRect(graphics: *mut GpGraphics, x: f32, y: f32, width: f32, height: f32, result: *mut super::super::Foundation::BOOL) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipIsVisibleRect(graphics : *mut GpGraphics, x : f32, y : f32, width : f32, height : f32, result : *mut super::super::Foundation:: BOOL) -> Status);
-    GdipIsVisibleRect(graphics, x, y, width, height, result)
+pub unsafe fn GdipIsVisibleRect(graphics: *mut GpGraphics, x: f32, y: f32, width: f32, height: f32, result: *mut windows_core::BOOL) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipIsVisibleRect(graphics : *mut GpGraphics, x : f32, y : f32, width : f32, height : f32, result : *mut windows_core::BOOL) -> Status);
+    unsafe { GdipIsVisibleRect(graphics as _, x, y, width, height, result as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipIsVisibleRectI(graphics: *mut GpGraphics, x: i32, y: i32, width: i32, height: i32, result: *mut super::super::Foundation::BOOL) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipIsVisibleRectI(graphics : *mut GpGraphics, x : i32, y : i32, width : i32, height : i32, result : *mut super::super::Foundation:: BOOL) -> Status);
-    GdipIsVisibleRectI(graphics, x, y, width, height, result)
+pub unsafe fn GdipIsVisibleRectI(graphics: *mut GpGraphics, x: i32, y: i32, width: i32, height: i32, result: *mut windows_core::BOOL) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipIsVisibleRectI(graphics : *mut GpGraphics, x : i32, y : i32, width : i32, height : i32, result : *mut windows_core::BOOL) -> Status);
+    unsafe { GdipIsVisibleRectI(graphics as _, x, y, width, height, result as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipIsVisibleRegionPoint(region: *mut GpRegion, x: f32, y: f32, graphics: *mut GpGraphics, result: *mut super::super::Foundation::BOOL) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipIsVisibleRegionPoint(region : *mut GpRegion, x : f32, y : f32, graphics : *mut GpGraphics, result : *mut super::super::Foundation:: BOOL) -> Status);
-    GdipIsVisibleRegionPoint(region, x, y, graphics, result)
+pub unsafe fn GdipIsVisibleRegionPoint(region: *mut GpRegion, x: f32, y: f32, graphics: *mut GpGraphics, result: *mut windows_core::BOOL) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipIsVisibleRegionPoint(region : *mut GpRegion, x : f32, y : f32, graphics : *mut GpGraphics, result : *mut windows_core::BOOL) -> Status);
+    unsafe { GdipIsVisibleRegionPoint(region as _, x, y, graphics as _, result as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipIsVisibleRegionPointI(region: *mut GpRegion, x: i32, y: i32, graphics: *mut GpGraphics, result: *mut super::super::Foundation::BOOL) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipIsVisibleRegionPointI(region : *mut GpRegion, x : i32, y : i32, graphics : *mut GpGraphics, result : *mut super::super::Foundation:: BOOL) -> Status);
-    GdipIsVisibleRegionPointI(region, x, y, graphics, result)
+pub unsafe fn GdipIsVisibleRegionPointI(region: *mut GpRegion, x: i32, y: i32, graphics: *mut GpGraphics, result: *mut windows_core::BOOL) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipIsVisibleRegionPointI(region : *mut GpRegion, x : i32, y : i32, graphics : *mut GpGraphics, result : *mut windows_core::BOOL) -> Status);
+    unsafe { GdipIsVisibleRegionPointI(region as _, x, y, graphics as _, result as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipIsVisibleRegionRect(region: *mut GpRegion, x: f32, y: f32, width: f32, height: f32, graphics: *mut GpGraphics, result: *mut super::super::Foundation::BOOL) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipIsVisibleRegionRect(region : *mut GpRegion, x : f32, y : f32, width : f32, height : f32, graphics : *mut GpGraphics, result : *mut super::super::Foundation:: BOOL) -> Status);
-    GdipIsVisibleRegionRect(region, x, y, width, height, graphics, result)
+pub unsafe fn GdipIsVisibleRegionRect(region: *mut GpRegion, x: f32, y: f32, width: f32, height: f32, graphics: *mut GpGraphics, result: *mut windows_core::BOOL) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipIsVisibleRegionRect(region : *mut GpRegion, x : f32, y : f32, width : f32, height : f32, graphics : *mut GpGraphics, result : *mut windows_core::BOOL) -> Status);
+    unsafe { GdipIsVisibleRegionRect(region as _, x, y, width, height, graphics as _, result as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipIsVisibleRegionRectI(region: *mut GpRegion, x: i32, y: i32, width: i32, height: i32, graphics: *mut GpGraphics, result: *mut super::super::Foundation::BOOL) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipIsVisibleRegionRectI(region : *mut GpRegion, x : i32, y : i32, width : i32, height : i32, graphics : *mut GpGraphics, result : *mut super::super::Foundation:: BOOL) -> Status);
-    GdipIsVisibleRegionRectI(region, x, y, width, height, graphics, result)
+pub unsafe fn GdipIsVisibleRegionRectI(region: *mut GpRegion, x: i32, y: i32, width: i32, height: i32, graphics: *mut GpGraphics, result: *mut windows_core::BOOL) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipIsVisibleRegionRectI(region : *mut GpRegion, x : i32, y : i32, width : i32, height : i32, graphics : *mut GpGraphics, result : *mut windows_core::BOOL) -> Status);
+    unsafe { GdipIsVisibleRegionRectI(region as _, x, y, width, height, graphics as _, result as _) }
 }
 #[inline]
 pub unsafe fn GdipLoadImageFromFile<P0>(filename: P0, image: *mut *mut GpImage) -> Status
 where
-    P0: ::windows_core::IntoParam<::windows_core::PCWSTR>,
+    P0: windows_core::Param<windows_core::PCWSTR>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipLoadImageFromFile(filename : ::windows_core::PCWSTR, image : *mut *mut GpImage) -> Status);
-    GdipLoadImageFromFile(filename.into_param().abi(), image)
+    windows_link::link!("gdiplus.dll" "system" fn GdipLoadImageFromFile(filename : windows_core::PCWSTR, image : *mut *mut GpImage) -> Status);
+    unsafe { GdipLoadImageFromFile(filename.param().abi(), image as _) }
 }
 #[inline]
 pub unsafe fn GdipLoadImageFromFileICM<P0>(filename: P0, image: *mut *mut GpImage) -> Status
 where
-    P0: ::windows_core::IntoParam<::windows_core::PCWSTR>,
+    P0: windows_core::Param<windows_core::PCWSTR>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipLoadImageFromFileICM(filename : ::windows_core::PCWSTR, image : *mut *mut GpImage) -> Status);
-    GdipLoadImageFromFileICM(filename.into_param().abi(), image)
+    windows_link::link!("gdiplus.dll" "system" fn GdipLoadImageFromFileICM(filename : windows_core::PCWSTR, image : *mut *mut GpImage) -> Status);
+    unsafe { GdipLoadImageFromFileICM(filename.param().abi(), image as _) }
 }
-#[doc = "Required features: `\"Win32_System_Com\"`"]
 #[cfg(feature = "Win32_System_Com")]
 #[inline]
 pub unsafe fn GdipLoadImageFromStream<P0>(stream: P0, image: *mut *mut GpImage) -> Status
 where
-    P0: ::windows_core::IntoParam<super::super::System::Com::IStream>,
+    P0: windows_core::Param<super::super::System::Com::IStream>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipLoadImageFromStream(stream : * mut::core::ffi::c_void, image : *mut *mut GpImage) -> Status);
-    GdipLoadImageFromStream(stream.into_param().abi(), image)
+    windows_link::link!("gdiplus.dll" "system" fn GdipLoadImageFromStream(stream : * mut core::ffi::c_void, image : *mut *mut GpImage) -> Status);
+    unsafe { GdipLoadImageFromStream(stream.param().abi(), image as _) }
 }
-#[doc = "Required features: `\"Win32_System_Com\"`"]
 #[cfg(feature = "Win32_System_Com")]
 #[inline]
 pub unsafe fn GdipLoadImageFromStreamICM<P0>(stream: P0, image: *mut *mut GpImage) -> Status
 where
-    P0: ::windows_core::IntoParam<super::super::System::Com::IStream>,
+    P0: windows_core::Param<super::super::System::Com::IStream>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipLoadImageFromStreamICM(stream : * mut::core::ffi::c_void, image : *mut *mut GpImage) -> Status);
-    GdipLoadImageFromStreamICM(stream.into_param().abi(), image)
+    windows_link::link!("gdiplus.dll" "system" fn GdipLoadImageFromStreamICM(stream : * mut core::ffi::c_void, image : *mut *mut GpImage) -> Status);
+    unsafe { GdipLoadImageFromStreamICM(stream.param().abi(), image as _) }
 }
 #[inline]
-pub unsafe fn GdipMeasureCharacterRanges<P0>(graphics: *mut GpGraphics, string: P0, length: i32, font: *const GpFont, layoutrect: *const RectF, stringformat: *const GpStringFormat, regioncount: i32, regions: *mut *mut GpRegion) -> Status
+pub unsafe fn GdipMeasureCharacterRanges<P1>(graphics: *mut GpGraphics, string: P1, length: i32, font: *const GpFont, layoutrect: *const RectF, stringformat: *const GpStringFormat, regioncount: i32, regions: *mut *mut GpRegion) -> Status
 where
-    P0: ::windows_core::IntoParam<::windows_core::PCWSTR>,
+    P1: windows_core::Param<windows_core::PCWSTR>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipMeasureCharacterRanges(graphics : *mut GpGraphics, string : ::windows_core::PCWSTR, length : i32, font : *const GpFont, layoutrect : *const RectF, stringformat : *const GpStringFormat, regioncount : i32, regions : *mut *mut GpRegion) -> Status);
-    GdipMeasureCharacterRanges(graphics, string.into_param().abi(), length, font, layoutrect, stringformat, regioncount, regions)
+    windows_link::link!("gdiplus.dll" "system" fn GdipMeasureCharacterRanges(graphics : *mut GpGraphics, string : windows_core::PCWSTR, length : i32, font : *const GpFont, layoutrect : *const RectF, stringformat : *const GpStringFormat, regioncount : i32, regions : *mut *mut GpRegion) -> Status);
+    unsafe { GdipMeasureCharacterRanges(graphics as _, string.param().abi(), length, font, layoutrect, stringformat, regioncount, regions as _) }
 }
 #[inline]
 pub unsafe fn GdipMeasureDriverString(graphics: *mut GpGraphics, text: *const u16, length: i32, font: *const GpFont, positions: *const PointF, flags: i32, matrix: *const Matrix, boundingbox: *mut RectF) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipMeasureDriverString(graphics : *mut GpGraphics, text : *const u16, length : i32, font : *const GpFont, positions : *const PointF, flags : i32, matrix : *const Matrix, boundingbox : *mut RectF) -> Status);
-    GdipMeasureDriverString(graphics, text, length, font, positions, flags, matrix, boundingbox)
+    windows_link::link!("gdiplus.dll" "system" fn GdipMeasureDriverString(graphics : *mut GpGraphics, text : *const u16, length : i32, font : *const GpFont, positions : *const PointF, flags : i32, matrix : *const Matrix, boundingbox : *mut RectF) -> Status);
+    unsafe { GdipMeasureDriverString(graphics as _, text, length, font, positions, flags, matrix, boundingbox as _) }
 }
 #[inline]
-pub unsafe fn GdipMeasureString<P0>(graphics: *mut GpGraphics, string: P0, length: i32, font: *const GpFont, layoutrect: *const RectF, stringformat: *const GpStringFormat, boundingbox: *mut RectF, codepointsfitted: *mut i32, linesfilled: *mut i32) -> Status
+pub unsafe fn GdipMeasureString<P1>(graphics: *mut GpGraphics, string: P1, length: i32, font: *const GpFont, layoutrect: *const RectF, stringformat: *const GpStringFormat, boundingbox: *mut RectF, codepointsfitted: *mut i32, linesfilled: *mut i32) -> Status
 where
-    P0: ::windows_core::IntoParam<::windows_core::PCWSTR>,
+    P1: windows_core::Param<windows_core::PCWSTR>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipMeasureString(graphics : *mut GpGraphics, string : ::windows_core::PCWSTR, length : i32, font : *const GpFont, layoutrect : *const RectF, stringformat : *const GpStringFormat, boundingbox : *mut RectF, codepointsfitted : *mut i32, linesfilled : *mut i32) -> Status);
-    GdipMeasureString(graphics, string.into_param().abi(), length, font, layoutrect, stringformat, boundingbox, codepointsfitted, linesfilled)
+    windows_link::link!("gdiplus.dll" "system" fn GdipMeasureString(graphics : *mut GpGraphics, string : windows_core::PCWSTR, length : i32, font : *const GpFont, layoutrect : *const RectF, stringformat : *const GpStringFormat, boundingbox : *mut RectF, codepointsfitted : *mut i32, linesfilled : *mut i32) -> Status);
+    unsafe { GdipMeasureString(graphics as _, string.param().abi(), length, font, layoutrect, stringformat, boundingbox as _, codepointsfitted as _, linesfilled as _) }
 }
 #[inline]
 pub unsafe fn GdipMultiplyLineTransform(brush: *mut GpLineGradient, matrix: *const Matrix, order: MatrixOrder) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipMultiplyLineTransform(brush : *mut GpLineGradient, matrix : *const Matrix, order : MatrixOrder) -> Status);
-    GdipMultiplyLineTransform(brush, matrix, order)
+    windows_link::link!("gdiplus.dll" "system" fn GdipMultiplyLineTransform(brush : *mut GpLineGradient, matrix : *const Matrix, order : MatrixOrder) -> Status);
+    unsafe { GdipMultiplyLineTransform(brush as _, matrix, order) }
 }
 #[inline]
 pub unsafe fn GdipMultiplyMatrix(matrix: *mut Matrix, matrix2: *mut Matrix, order: MatrixOrder) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipMultiplyMatrix(matrix : *mut Matrix, matrix2 : *mut Matrix, order : MatrixOrder) -> Status);
-    GdipMultiplyMatrix(matrix, matrix2, order)
+    windows_link::link!("gdiplus.dll" "system" fn GdipMultiplyMatrix(matrix : *mut Matrix, matrix2 : *mut Matrix, order : MatrixOrder) -> Status);
+    unsafe { GdipMultiplyMatrix(matrix as _, matrix2 as _, order) }
 }
 #[inline]
 pub unsafe fn GdipMultiplyPathGradientTransform(brush: *mut GpPathGradient, matrix: *const Matrix, order: MatrixOrder) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipMultiplyPathGradientTransform(brush : *mut GpPathGradient, matrix : *const Matrix, order : MatrixOrder) -> Status);
-    GdipMultiplyPathGradientTransform(brush, matrix, order)
+    windows_link::link!("gdiplus.dll" "system" fn GdipMultiplyPathGradientTransform(brush : *mut GpPathGradient, matrix : *const Matrix, order : MatrixOrder) -> Status);
+    unsafe { GdipMultiplyPathGradientTransform(brush as _, matrix, order) }
 }
 #[inline]
 pub unsafe fn GdipMultiplyPenTransform(pen: *mut GpPen, matrix: *const Matrix, order: MatrixOrder) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipMultiplyPenTransform(pen : *mut GpPen, matrix : *const Matrix, order : MatrixOrder) -> Status);
-    GdipMultiplyPenTransform(pen, matrix, order)
+    windows_link::link!("gdiplus.dll" "system" fn GdipMultiplyPenTransform(pen : *mut GpPen, matrix : *const Matrix, order : MatrixOrder) -> Status);
+    unsafe { GdipMultiplyPenTransform(pen as _, matrix, order) }
 }
 #[inline]
 pub unsafe fn GdipMultiplyTextureTransform(brush: *mut GpTexture, matrix: *const Matrix, order: MatrixOrder) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipMultiplyTextureTransform(brush : *mut GpTexture, matrix : *const Matrix, order : MatrixOrder) -> Status);
-    GdipMultiplyTextureTransform(brush, matrix, order)
+    windows_link::link!("gdiplus.dll" "system" fn GdipMultiplyTextureTransform(brush : *mut GpTexture, matrix : *const Matrix, order : MatrixOrder) -> Status);
+    unsafe { GdipMultiplyTextureTransform(brush as _, matrix, order) }
 }
 #[inline]
 pub unsafe fn GdipMultiplyWorldTransform(graphics: *mut GpGraphics, matrix: *const Matrix, order: MatrixOrder) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipMultiplyWorldTransform(graphics : *mut GpGraphics, matrix : *const Matrix, order : MatrixOrder) -> Status);
-    GdipMultiplyWorldTransform(graphics, matrix, order)
+    windows_link::link!("gdiplus.dll" "system" fn GdipMultiplyWorldTransform(graphics : *mut GpGraphics, matrix : *const Matrix, order : MatrixOrder) -> Status);
+    unsafe { GdipMultiplyWorldTransform(graphics as _, matrix, order) }
 }
 #[inline]
 pub unsafe fn GdipNewInstalledFontCollection(fontcollection: *mut *mut GpFontCollection) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipNewInstalledFontCollection(fontcollection : *mut *mut GpFontCollection) -> Status);
-    GdipNewInstalledFontCollection(fontcollection)
+    windows_link::link!("gdiplus.dll" "system" fn GdipNewInstalledFontCollection(fontcollection : *mut *mut GpFontCollection) -> Status);
+    unsafe { GdipNewInstalledFontCollection(fontcollection as _) }
 }
 #[inline]
 pub unsafe fn GdipNewPrivateFontCollection(fontcollection: *mut *mut GpFontCollection) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipNewPrivateFontCollection(fontcollection : *mut *mut GpFontCollection) -> Status);
-    GdipNewPrivateFontCollection(fontcollection)
+    windows_link::link!("gdiplus.dll" "system" fn GdipNewPrivateFontCollection(fontcollection : *mut *mut GpFontCollection) -> Status);
+    unsafe { GdipNewPrivateFontCollection(fontcollection as _) }
 }
 #[inline]
 pub unsafe fn GdipPathIterCopyData(iterator: *mut GpPathIterator, resultcount: *mut i32, points: *mut PointF, types: *mut u8, startindex: i32, endindex: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipPathIterCopyData(iterator : *mut GpPathIterator, resultcount : *mut i32, points : *mut PointF, types : *mut u8, startindex : i32, endindex : i32) -> Status);
-    GdipPathIterCopyData(iterator, resultcount, points, types, startindex, endindex)
+    windows_link::link!("gdiplus.dll" "system" fn GdipPathIterCopyData(iterator : *mut GpPathIterator, resultcount : *mut i32, points : *mut PointF, types : *mut u8, startindex : i32, endindex : i32) -> Status);
+    unsafe { GdipPathIterCopyData(iterator as _, resultcount as _, points as _, types as _, startindex, endindex) }
 }
 #[inline]
 pub unsafe fn GdipPathIterEnumerate(iterator: *mut GpPathIterator, resultcount: *mut i32, points: *mut PointF, types: *mut u8, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipPathIterEnumerate(iterator : *mut GpPathIterator, resultcount : *mut i32, points : *mut PointF, types : *mut u8, count : i32) -> Status);
-    GdipPathIterEnumerate(iterator, resultcount, points, types, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipPathIterEnumerate(iterator : *mut GpPathIterator, resultcount : *mut i32, points : *mut PointF, types : *mut u8, count : i32) -> Status);
+    unsafe { GdipPathIterEnumerate(iterator as _, resultcount as _, points as _, types as _, count) }
 }
 #[inline]
 pub unsafe fn GdipPathIterGetCount(iterator: *mut GpPathIterator, count: *mut i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipPathIterGetCount(iterator : *mut GpPathIterator, count : *mut i32) -> Status);
-    GdipPathIterGetCount(iterator, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipPathIterGetCount(iterator : *mut GpPathIterator, count : *mut i32) -> Status);
+    unsafe { GdipPathIterGetCount(iterator as _, count as _) }
 }
 #[inline]
 pub unsafe fn GdipPathIterGetSubpathCount(iterator: *mut GpPathIterator, count: *mut i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipPathIterGetSubpathCount(iterator : *mut GpPathIterator, count : *mut i32) -> Status);
-    GdipPathIterGetSubpathCount(iterator, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipPathIterGetSubpathCount(iterator : *mut GpPathIterator, count : *mut i32) -> Status);
+    unsafe { GdipPathIterGetSubpathCount(iterator as _, count as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipPathIterHasCurve(iterator: *mut GpPathIterator, hascurve: *mut super::super::Foundation::BOOL) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipPathIterHasCurve(iterator : *mut GpPathIterator, hascurve : *mut super::super::Foundation:: BOOL) -> Status);
-    GdipPathIterHasCurve(iterator, hascurve)
+pub unsafe fn GdipPathIterHasCurve(iterator: *mut GpPathIterator, hascurve: *mut windows_core::BOOL) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipPathIterHasCurve(iterator : *mut GpPathIterator, hascurve : *mut windows_core::BOOL) -> Status);
+    unsafe { GdipPathIterHasCurve(iterator as _, hascurve as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipPathIterIsValid(iterator: *mut GpPathIterator, valid: *mut super::super::Foundation::BOOL) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipPathIterIsValid(iterator : *mut GpPathIterator, valid : *mut super::super::Foundation:: BOOL) -> Status);
-    GdipPathIterIsValid(iterator, valid)
+pub unsafe fn GdipPathIterIsValid(iterator: *mut GpPathIterator, valid: *mut windows_core::BOOL) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipPathIterIsValid(iterator : *mut GpPathIterator, valid : *mut windows_core::BOOL) -> Status);
+    unsafe { GdipPathIterIsValid(iterator as _, valid as _) }
 }
 #[inline]
 pub unsafe fn GdipPathIterNextMarker(iterator: *mut GpPathIterator, resultcount: *mut i32, startindex: *mut i32, endindex: *mut i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipPathIterNextMarker(iterator : *mut GpPathIterator, resultcount : *mut i32, startindex : *mut i32, endindex : *mut i32) -> Status);
-    GdipPathIterNextMarker(iterator, resultcount, startindex, endindex)
+    windows_link::link!("gdiplus.dll" "system" fn GdipPathIterNextMarker(iterator : *mut GpPathIterator, resultcount : *mut i32, startindex : *mut i32, endindex : *mut i32) -> Status);
+    unsafe { GdipPathIterNextMarker(iterator as _, resultcount as _, startindex as _, endindex as _) }
 }
 #[inline]
 pub unsafe fn GdipPathIterNextMarkerPath(iterator: *mut GpPathIterator, resultcount: *mut i32, path: *mut GpPath) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipPathIterNextMarkerPath(iterator : *mut GpPathIterator, resultcount : *mut i32, path : *mut GpPath) -> Status);
-    GdipPathIterNextMarkerPath(iterator, resultcount, path)
+    windows_link::link!("gdiplus.dll" "system" fn GdipPathIterNextMarkerPath(iterator : *mut GpPathIterator, resultcount : *mut i32, path : *mut GpPath) -> Status);
+    unsafe { GdipPathIterNextMarkerPath(iterator as _, resultcount as _, path as _) }
 }
 #[inline]
 pub unsafe fn GdipPathIterNextPathType(iterator: *mut GpPathIterator, resultcount: *mut i32, pathtype: *mut u8, startindex: *mut i32, endindex: *mut i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipPathIterNextPathType(iterator : *mut GpPathIterator, resultcount : *mut i32, pathtype : *mut u8, startindex : *mut i32, endindex : *mut i32) -> Status);
-    GdipPathIterNextPathType(iterator, resultcount, pathtype, startindex, endindex)
+    windows_link::link!("gdiplus.dll" "system" fn GdipPathIterNextPathType(iterator : *mut GpPathIterator, resultcount : *mut i32, pathtype : *mut u8, startindex : *mut i32, endindex : *mut i32) -> Status);
+    unsafe { GdipPathIterNextPathType(iterator as _, resultcount as _, pathtype as _, startindex as _, endindex as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipPathIterNextSubpath(iterator: *mut GpPathIterator, resultcount: *mut i32, startindex: *mut i32, endindex: *mut i32, isclosed: *mut super::super::Foundation::BOOL) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipPathIterNextSubpath(iterator : *mut GpPathIterator, resultcount : *mut i32, startindex : *mut i32, endindex : *mut i32, isclosed : *mut super::super::Foundation:: BOOL) -> Status);
-    GdipPathIterNextSubpath(iterator, resultcount, startindex, endindex, isclosed)
+pub unsafe fn GdipPathIterNextSubpath(iterator: *mut GpPathIterator, resultcount: *mut i32, startindex: *mut i32, endindex: *mut i32, isclosed: *mut windows_core::BOOL) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipPathIterNextSubpath(iterator : *mut GpPathIterator, resultcount : *mut i32, startindex : *mut i32, endindex : *mut i32, isclosed : *mut windows_core::BOOL) -> Status);
+    unsafe { GdipPathIterNextSubpath(iterator as _, resultcount as _, startindex as _, endindex as _, isclosed as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipPathIterNextSubpathPath(iterator: *mut GpPathIterator, resultcount: *mut i32, path: *mut GpPath, isclosed: *mut super::super::Foundation::BOOL) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipPathIterNextSubpathPath(iterator : *mut GpPathIterator, resultcount : *mut i32, path : *mut GpPath, isclosed : *mut super::super::Foundation:: BOOL) -> Status);
-    GdipPathIterNextSubpathPath(iterator, resultcount, path, isclosed)
+pub unsafe fn GdipPathIterNextSubpathPath(iterator: *mut GpPathIterator, resultcount: *mut i32, path: *mut GpPath, isclosed: *mut windows_core::BOOL) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipPathIterNextSubpathPath(iterator : *mut GpPathIterator, resultcount : *mut i32, path : *mut GpPath, isclosed : *mut windows_core::BOOL) -> Status);
+    unsafe { GdipPathIterNextSubpathPath(iterator as _, resultcount as _, path as _, isclosed as _) }
 }
 #[inline]
 pub unsafe fn GdipPathIterRewind(iterator: *mut GpPathIterator) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipPathIterRewind(iterator : *mut GpPathIterator) -> Status);
-    GdipPathIterRewind(iterator)
+    windows_link::link!("gdiplus.dll" "system" fn GdipPathIterRewind(iterator : *mut GpPathIterator) -> Status);
+    unsafe { GdipPathIterRewind(iterator as _) }
 }
 #[inline]
 pub unsafe fn GdipPlayMetafileRecord(metafile: *const GpMetafile, recordtype: EmfPlusRecordType, flags: u32, datasize: u32, data: *const u8) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipPlayMetafileRecord(metafile : *const GpMetafile, recordtype : EmfPlusRecordType, flags : u32, datasize : u32, data : *const u8) -> Status);
-    GdipPlayMetafileRecord(metafile, recordtype, flags, datasize, data)
+    windows_link::link!("gdiplus.dll" "system" fn GdipPlayMetafileRecord(metafile : *const GpMetafile, recordtype : EmfPlusRecordType, flags : u32, datasize : u32, data : *const u8) -> Status);
+    unsafe { GdipPlayMetafileRecord(metafile, recordtype, flags, datasize, data) }
 }
 #[inline]
-pub unsafe fn GdipPrivateAddFontFile<P0>(fontcollection: *mut GpFontCollection, filename: P0) -> Status
+pub unsafe fn GdipPrivateAddFontFile<P1>(fontcollection: *mut GpFontCollection, filename: P1) -> Status
 where
-    P0: ::windows_core::IntoParam<::windows_core::PCWSTR>,
+    P1: windows_core::Param<windows_core::PCWSTR>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipPrivateAddFontFile(fontcollection : *mut GpFontCollection, filename : ::windows_core::PCWSTR) -> Status);
-    GdipPrivateAddFontFile(fontcollection, filename.into_param().abi())
+    windows_link::link!("gdiplus.dll" "system" fn GdipPrivateAddFontFile(fontcollection : *mut GpFontCollection, filename : windows_core::PCWSTR) -> Status);
+    unsafe { GdipPrivateAddFontFile(fontcollection as _, filename.param().abi()) }
 }
 #[inline]
-pub unsafe fn GdipPrivateAddMemoryFont(fontcollection: *mut GpFontCollection, memory: *const ::core::ffi::c_void, length: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipPrivateAddMemoryFont(fontcollection : *mut GpFontCollection, memory : *const ::core::ffi::c_void, length : i32) -> Status);
-    GdipPrivateAddMemoryFont(fontcollection, memory, length)
+pub unsafe fn GdipPrivateAddMemoryFont(fontcollection: *mut GpFontCollection, memory: *const core::ffi::c_void, length: i32) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipPrivateAddMemoryFont(fontcollection : *mut GpFontCollection, memory : *const core::ffi::c_void, length : i32) -> Status);
+    unsafe { GdipPrivateAddMemoryFont(fontcollection as _, memory, length) }
 }
-#[doc = "Required features: `\"Win32_Graphics_Gdi\"`"]
 #[cfg(feature = "Win32_Graphics_Gdi")]
 #[inline]
-pub unsafe fn GdipRecordMetafile<P0, P1>(referencehdc: P0, r#type: EmfType, framerect: *const RectF, frameunit: MetafileFrameUnit, description: P1, metafile: *mut *mut GpMetafile) -> Status
+pub unsafe fn GdipRecordMetafile<P4>(referencehdc: super::Gdi::HDC, r#type: EmfType, framerect: *const RectF, frameunit: MetafileFrameUnit, description: P4, metafile: *mut *mut GpMetafile) -> Status
 where
-    P0: ::windows_core::IntoParam<super::Gdi::HDC>,
-    P1: ::windows_core::IntoParam<::windows_core::PCWSTR>,
+    P4: windows_core::Param<windows_core::PCWSTR>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipRecordMetafile(referencehdc : super::Gdi:: HDC, r#type : EmfType, framerect : *const RectF, frameunit : MetafileFrameUnit, description : ::windows_core::PCWSTR, metafile : *mut *mut GpMetafile) -> Status);
-    GdipRecordMetafile(referencehdc.into_param().abi(), r#type, framerect, frameunit, description.into_param().abi(), metafile)
+    windows_link::link!("gdiplus.dll" "system" fn GdipRecordMetafile(referencehdc : super::Gdi:: HDC, r#type : EmfType, framerect : *const RectF, frameunit : MetafileFrameUnit, description : windows_core::PCWSTR, metafile : *mut *mut GpMetafile) -> Status);
+    unsafe { GdipRecordMetafile(referencehdc, r#type, framerect, frameunit, description.param().abi(), metafile as _) }
 }
-#[doc = "Required features: `\"Win32_Graphics_Gdi\"`"]
 #[cfg(feature = "Win32_Graphics_Gdi")]
 #[inline]
-pub unsafe fn GdipRecordMetafileFileName<P0, P1, P2>(filename: P0, referencehdc: P1, r#type: EmfType, framerect: *const RectF, frameunit: MetafileFrameUnit, description: P2, metafile: *mut *mut GpMetafile) -> Status
+pub unsafe fn GdipRecordMetafileFileName<P0, P5>(filename: P0, referencehdc: super::Gdi::HDC, r#type: EmfType, framerect: *const RectF, frameunit: MetafileFrameUnit, description: P5, metafile: *mut *mut GpMetafile) -> Status
 where
-    P0: ::windows_core::IntoParam<::windows_core::PCWSTR>,
-    P1: ::windows_core::IntoParam<super::Gdi::HDC>,
-    P2: ::windows_core::IntoParam<::windows_core::PCWSTR>,
+    P0: windows_core::Param<windows_core::PCWSTR>,
+    P5: windows_core::Param<windows_core::PCWSTR>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipRecordMetafileFileName(filename : ::windows_core::PCWSTR, referencehdc : super::Gdi:: HDC, r#type : EmfType, framerect : *const RectF, frameunit : MetafileFrameUnit, description : ::windows_core::PCWSTR, metafile : *mut *mut GpMetafile) -> Status);
-    GdipRecordMetafileFileName(filename.into_param().abi(), referencehdc.into_param().abi(), r#type, framerect, frameunit, description.into_param().abi(), metafile)
+    windows_link::link!("gdiplus.dll" "system" fn GdipRecordMetafileFileName(filename : windows_core::PCWSTR, referencehdc : super::Gdi:: HDC, r#type : EmfType, framerect : *const RectF, frameunit : MetafileFrameUnit, description : windows_core::PCWSTR, metafile : *mut *mut GpMetafile) -> Status);
+    unsafe { GdipRecordMetafileFileName(filename.param().abi(), referencehdc, r#type, framerect, frameunit, description.param().abi(), metafile as _) }
 }
-#[doc = "Required features: `\"Win32_Graphics_Gdi\"`"]
 #[cfg(feature = "Win32_Graphics_Gdi")]
 #[inline]
-pub unsafe fn GdipRecordMetafileFileNameI<P0, P1, P2>(filename: P0, referencehdc: P1, r#type: EmfType, framerect: *const Rect, frameunit: MetafileFrameUnit, description: P2, metafile: *mut *mut GpMetafile) -> Status
+pub unsafe fn GdipRecordMetafileFileNameI<P0, P5>(filename: P0, referencehdc: super::Gdi::HDC, r#type: EmfType, framerect: *const Rect, frameunit: MetafileFrameUnit, description: P5, metafile: *mut *mut GpMetafile) -> Status
 where
-    P0: ::windows_core::IntoParam<::windows_core::PCWSTR>,
-    P1: ::windows_core::IntoParam<super::Gdi::HDC>,
-    P2: ::windows_core::IntoParam<::windows_core::PCWSTR>,
+    P0: windows_core::Param<windows_core::PCWSTR>,
+    P5: windows_core::Param<windows_core::PCWSTR>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipRecordMetafileFileNameI(filename : ::windows_core::PCWSTR, referencehdc : super::Gdi:: HDC, r#type : EmfType, framerect : *const Rect, frameunit : MetafileFrameUnit, description : ::windows_core::PCWSTR, metafile : *mut *mut GpMetafile) -> Status);
-    GdipRecordMetafileFileNameI(filename.into_param().abi(), referencehdc.into_param().abi(), r#type, framerect, frameunit, description.into_param().abi(), metafile)
+    windows_link::link!("gdiplus.dll" "system" fn GdipRecordMetafileFileNameI(filename : windows_core::PCWSTR, referencehdc : super::Gdi:: HDC, r#type : EmfType, framerect : *const Rect, frameunit : MetafileFrameUnit, description : windows_core::PCWSTR, metafile : *mut *mut GpMetafile) -> Status);
+    unsafe { GdipRecordMetafileFileNameI(filename.param().abi(), referencehdc, r#type, framerect, frameunit, description.param().abi(), metafile as _) }
 }
-#[doc = "Required features: `\"Win32_Graphics_Gdi\"`"]
 #[cfg(feature = "Win32_Graphics_Gdi")]
 #[inline]
-pub unsafe fn GdipRecordMetafileI<P0, P1>(referencehdc: P0, r#type: EmfType, framerect: *const Rect, frameunit: MetafileFrameUnit, description: P1, metafile: *mut *mut GpMetafile) -> Status
+pub unsafe fn GdipRecordMetafileI<P4>(referencehdc: super::Gdi::HDC, r#type: EmfType, framerect: *const Rect, frameunit: MetafileFrameUnit, description: P4, metafile: *mut *mut GpMetafile) -> Status
 where
-    P0: ::windows_core::IntoParam<super::Gdi::HDC>,
-    P1: ::windows_core::IntoParam<::windows_core::PCWSTR>,
+    P4: windows_core::Param<windows_core::PCWSTR>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipRecordMetafileI(referencehdc : super::Gdi:: HDC, r#type : EmfType, framerect : *const Rect, frameunit : MetafileFrameUnit, description : ::windows_core::PCWSTR, metafile : *mut *mut GpMetafile) -> Status);
-    GdipRecordMetafileI(referencehdc.into_param().abi(), r#type, framerect, frameunit, description.into_param().abi(), metafile)
+    windows_link::link!("gdiplus.dll" "system" fn GdipRecordMetafileI(referencehdc : super::Gdi:: HDC, r#type : EmfType, framerect : *const Rect, frameunit : MetafileFrameUnit, description : windows_core::PCWSTR, metafile : *mut *mut GpMetafile) -> Status);
+    unsafe { GdipRecordMetafileI(referencehdc, r#type, framerect, frameunit, description.param().abi(), metafile as _) }
 }
-#[doc = "Required features: `\"Win32_Graphics_Gdi\"`, `\"Win32_System_Com\"`"]
 #[cfg(all(feature = "Win32_Graphics_Gdi", feature = "Win32_System_Com"))]
 #[inline]
-pub unsafe fn GdipRecordMetafileStream<P0, P1, P2>(stream: P0, referencehdc: P1, r#type: EmfType, framerect: *const RectF, frameunit: MetafileFrameUnit, description: P2, metafile: *mut *mut GpMetafile) -> Status
+pub unsafe fn GdipRecordMetafileStream<P0, P5>(stream: P0, referencehdc: super::Gdi::HDC, r#type: EmfType, framerect: *const RectF, frameunit: MetafileFrameUnit, description: P5, metafile: *mut *mut GpMetafile) -> Status
 where
-    P0: ::windows_core::IntoParam<super::super::System::Com::IStream>,
-    P1: ::windows_core::IntoParam<super::Gdi::HDC>,
-    P2: ::windows_core::IntoParam<::windows_core::PCWSTR>,
+    P0: windows_core::Param<super::super::System::Com::IStream>,
+    P5: windows_core::Param<windows_core::PCWSTR>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipRecordMetafileStream(stream : * mut::core::ffi::c_void, referencehdc : super::Gdi:: HDC, r#type : EmfType, framerect : *const RectF, frameunit : MetafileFrameUnit, description : ::windows_core::PCWSTR, metafile : *mut *mut GpMetafile) -> Status);
-    GdipRecordMetafileStream(stream.into_param().abi(), referencehdc.into_param().abi(), r#type, framerect, frameunit, description.into_param().abi(), metafile)
+    windows_link::link!("gdiplus.dll" "system" fn GdipRecordMetafileStream(stream : * mut core::ffi::c_void, referencehdc : super::Gdi:: HDC, r#type : EmfType, framerect : *const RectF, frameunit : MetafileFrameUnit, description : windows_core::PCWSTR, metafile : *mut *mut GpMetafile) -> Status);
+    unsafe { GdipRecordMetafileStream(stream.param().abi(), referencehdc, r#type, framerect, frameunit, description.param().abi(), metafile as _) }
 }
-#[doc = "Required features: `\"Win32_Graphics_Gdi\"`, `\"Win32_System_Com\"`"]
 #[cfg(all(feature = "Win32_Graphics_Gdi", feature = "Win32_System_Com"))]
 #[inline]
-pub unsafe fn GdipRecordMetafileStreamI<P0, P1, P2>(stream: P0, referencehdc: P1, r#type: EmfType, framerect: *const Rect, frameunit: MetafileFrameUnit, description: P2, metafile: *mut *mut GpMetafile) -> Status
+pub unsafe fn GdipRecordMetafileStreamI<P0, P5>(stream: P0, referencehdc: super::Gdi::HDC, r#type: EmfType, framerect: *const Rect, frameunit: MetafileFrameUnit, description: P5, metafile: *mut *mut GpMetafile) -> Status
 where
-    P0: ::windows_core::IntoParam<super::super::System::Com::IStream>,
-    P1: ::windows_core::IntoParam<super::Gdi::HDC>,
-    P2: ::windows_core::IntoParam<::windows_core::PCWSTR>,
+    P0: windows_core::Param<super::super::System::Com::IStream>,
+    P5: windows_core::Param<windows_core::PCWSTR>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipRecordMetafileStreamI(stream : * mut::core::ffi::c_void, referencehdc : super::Gdi:: HDC, r#type : EmfType, framerect : *const Rect, frameunit : MetafileFrameUnit, description : ::windows_core::PCWSTR, metafile : *mut *mut GpMetafile) -> Status);
-    GdipRecordMetafileStreamI(stream.into_param().abi(), referencehdc.into_param().abi(), r#type, framerect, frameunit, description.into_param().abi(), metafile)
+    windows_link::link!("gdiplus.dll" "system" fn GdipRecordMetafileStreamI(stream : * mut core::ffi::c_void, referencehdc : super::Gdi:: HDC, r#type : EmfType, framerect : *const Rect, frameunit : MetafileFrameUnit, description : windows_core::PCWSTR, metafile : *mut *mut GpMetafile) -> Status);
+    unsafe { GdipRecordMetafileStreamI(stream.param().abi(), referencehdc, r#type, framerect, frameunit, description.param().abi(), metafile as _) }
 }
-#[doc = "Required features: `\"Win32_Graphics_Gdi\"`"]
 #[cfg(feature = "Win32_Graphics_Gdi")]
 #[inline]
-pub unsafe fn GdipReleaseDC<P0>(graphics: *mut GpGraphics, hdc: P0) -> Status
-where
-    P0: ::windows_core::IntoParam<super::Gdi::HDC>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipReleaseDC(graphics : *mut GpGraphics, hdc : super::Gdi:: HDC) -> Status);
-    GdipReleaseDC(graphics, hdc.into_param().abi())
+pub unsafe fn GdipReleaseDC(graphics: *mut GpGraphics, hdc: super::Gdi::HDC) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipReleaseDC(graphics : *mut GpGraphics, hdc : super::Gdi:: HDC) -> Status);
+    unsafe { GdipReleaseDC(graphics as _, hdc) }
 }
 #[inline]
 pub unsafe fn GdipRemovePropertyItem(image: *mut GpImage, propid: u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipRemovePropertyItem(image : *mut GpImage, propid : u32) -> Status);
-    GdipRemovePropertyItem(image, propid)
+    windows_link::link!("gdiplus.dll" "system" fn GdipRemovePropertyItem(image : *mut GpImage, propid : u32) -> Status);
+    unsafe { GdipRemovePropertyItem(image as _, propid) }
 }
 #[inline]
 pub unsafe fn GdipResetClip(graphics: *mut GpGraphics) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipResetClip(graphics : *mut GpGraphics) -> Status);
-    GdipResetClip(graphics)
+    windows_link::link!("gdiplus.dll" "system" fn GdipResetClip(graphics : *mut GpGraphics) -> Status);
+    unsafe { GdipResetClip(graphics as _) }
 }
 #[inline]
 pub unsafe fn GdipResetImageAttributes(imageattr: *mut GpImageAttributes, r#type: ColorAdjustType) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipResetImageAttributes(imageattr : *mut GpImageAttributes, r#type : ColorAdjustType) -> Status);
-    GdipResetImageAttributes(imageattr, r#type)
+    windows_link::link!("gdiplus.dll" "system" fn GdipResetImageAttributes(imageattr : *mut GpImageAttributes, r#type : ColorAdjustType) -> Status);
+    unsafe { GdipResetImageAttributes(imageattr as _, r#type) }
 }
 #[inline]
 pub unsafe fn GdipResetLineTransform(brush: *mut GpLineGradient) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipResetLineTransform(brush : *mut GpLineGradient) -> Status);
-    GdipResetLineTransform(brush)
+    windows_link::link!("gdiplus.dll" "system" fn GdipResetLineTransform(brush : *mut GpLineGradient) -> Status);
+    unsafe { GdipResetLineTransform(brush as _) }
 }
 #[inline]
 pub unsafe fn GdipResetPageTransform(graphics: *mut GpGraphics) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipResetPageTransform(graphics : *mut GpGraphics) -> Status);
-    GdipResetPageTransform(graphics)
+    windows_link::link!("gdiplus.dll" "system" fn GdipResetPageTransform(graphics : *mut GpGraphics) -> Status);
+    unsafe { GdipResetPageTransform(graphics as _) }
 }
 #[inline]
 pub unsafe fn GdipResetPath(path: *mut GpPath) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipResetPath(path : *mut GpPath) -> Status);
-    GdipResetPath(path)
+    windows_link::link!("gdiplus.dll" "system" fn GdipResetPath(path : *mut GpPath) -> Status);
+    unsafe { GdipResetPath(path as _) }
 }
 #[inline]
 pub unsafe fn GdipResetPathGradientTransform(brush: *mut GpPathGradient) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipResetPathGradientTransform(brush : *mut GpPathGradient) -> Status);
-    GdipResetPathGradientTransform(brush)
+    windows_link::link!("gdiplus.dll" "system" fn GdipResetPathGradientTransform(brush : *mut GpPathGradient) -> Status);
+    unsafe { GdipResetPathGradientTransform(brush as _) }
 }
 #[inline]
 pub unsafe fn GdipResetPenTransform(pen: *mut GpPen) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipResetPenTransform(pen : *mut GpPen) -> Status);
-    GdipResetPenTransform(pen)
+    windows_link::link!("gdiplus.dll" "system" fn GdipResetPenTransform(pen : *mut GpPen) -> Status);
+    unsafe { GdipResetPenTransform(pen as _) }
 }
 #[inline]
 pub unsafe fn GdipResetTextureTransform(brush: *mut GpTexture) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipResetTextureTransform(brush : *mut GpTexture) -> Status);
-    GdipResetTextureTransform(brush)
+    windows_link::link!("gdiplus.dll" "system" fn GdipResetTextureTransform(brush : *mut GpTexture) -> Status);
+    unsafe { GdipResetTextureTransform(brush as _) }
 }
 #[inline]
 pub unsafe fn GdipResetWorldTransform(graphics: *mut GpGraphics) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipResetWorldTransform(graphics : *mut GpGraphics) -> Status);
-    GdipResetWorldTransform(graphics)
+    windows_link::link!("gdiplus.dll" "system" fn GdipResetWorldTransform(graphics : *mut GpGraphics) -> Status);
+    unsafe { GdipResetWorldTransform(graphics as _) }
 }
 #[inline]
 pub unsafe fn GdipRestoreGraphics(graphics: *mut GpGraphics, state: u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipRestoreGraphics(graphics : *mut GpGraphics, state : u32) -> Status);
-    GdipRestoreGraphics(graphics, state)
+    windows_link::link!("gdiplus.dll" "system" fn GdipRestoreGraphics(graphics : *mut GpGraphics, state : u32) -> Status);
+    unsafe { GdipRestoreGraphics(graphics as _, state) }
 }
 #[inline]
 pub unsafe fn GdipReversePath(path: *mut GpPath) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipReversePath(path : *mut GpPath) -> Status);
-    GdipReversePath(path)
+    windows_link::link!("gdiplus.dll" "system" fn GdipReversePath(path : *mut GpPath) -> Status);
+    unsafe { GdipReversePath(path as _) }
 }
 #[inline]
 pub unsafe fn GdipRotateLineTransform(brush: *mut GpLineGradient, angle: f32, order: MatrixOrder) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipRotateLineTransform(brush : *mut GpLineGradient, angle : f32, order : MatrixOrder) -> Status);
-    GdipRotateLineTransform(brush, angle, order)
+    windows_link::link!("gdiplus.dll" "system" fn GdipRotateLineTransform(brush : *mut GpLineGradient, angle : f32, order : MatrixOrder) -> Status);
+    unsafe { GdipRotateLineTransform(brush as _, angle, order) }
 }
 #[inline]
 pub unsafe fn GdipRotateMatrix(matrix: *mut Matrix, angle: f32, order: MatrixOrder) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipRotateMatrix(matrix : *mut Matrix, angle : f32, order : MatrixOrder) -> Status);
-    GdipRotateMatrix(matrix, angle, order)
+    windows_link::link!("gdiplus.dll" "system" fn GdipRotateMatrix(matrix : *mut Matrix, angle : f32, order : MatrixOrder) -> Status);
+    unsafe { GdipRotateMatrix(matrix as _, angle, order) }
 }
 #[inline]
 pub unsafe fn GdipRotatePathGradientTransform(brush: *mut GpPathGradient, angle: f32, order: MatrixOrder) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipRotatePathGradientTransform(brush : *mut GpPathGradient, angle : f32, order : MatrixOrder) -> Status);
-    GdipRotatePathGradientTransform(brush, angle, order)
+    windows_link::link!("gdiplus.dll" "system" fn GdipRotatePathGradientTransform(brush : *mut GpPathGradient, angle : f32, order : MatrixOrder) -> Status);
+    unsafe { GdipRotatePathGradientTransform(brush as _, angle, order) }
 }
 #[inline]
 pub unsafe fn GdipRotatePenTransform(pen: *mut GpPen, angle: f32, order: MatrixOrder) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipRotatePenTransform(pen : *mut GpPen, angle : f32, order : MatrixOrder) -> Status);
-    GdipRotatePenTransform(pen, angle, order)
+    windows_link::link!("gdiplus.dll" "system" fn GdipRotatePenTransform(pen : *mut GpPen, angle : f32, order : MatrixOrder) -> Status);
+    unsafe { GdipRotatePenTransform(pen as _, angle, order) }
 }
 #[inline]
 pub unsafe fn GdipRotateTextureTransform(brush: *mut GpTexture, angle: f32, order: MatrixOrder) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipRotateTextureTransform(brush : *mut GpTexture, angle : f32, order : MatrixOrder) -> Status);
-    GdipRotateTextureTransform(brush, angle, order)
+    windows_link::link!("gdiplus.dll" "system" fn GdipRotateTextureTransform(brush : *mut GpTexture, angle : f32, order : MatrixOrder) -> Status);
+    unsafe { GdipRotateTextureTransform(brush as _, angle, order) }
 }
 #[inline]
 pub unsafe fn GdipRotateWorldTransform(graphics: *mut GpGraphics, angle: f32, order: MatrixOrder) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipRotateWorldTransform(graphics : *mut GpGraphics, angle : f32, order : MatrixOrder) -> Status);
-    GdipRotateWorldTransform(graphics, angle, order)
+    windows_link::link!("gdiplus.dll" "system" fn GdipRotateWorldTransform(graphics : *mut GpGraphics, angle : f32, order : MatrixOrder) -> Status);
+    unsafe { GdipRotateWorldTransform(graphics as _, angle, order) }
 }
 #[inline]
 pub unsafe fn GdipSaveAdd(image: *mut GpImage, encoderparams: *const EncoderParameters) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSaveAdd(image : *mut GpImage, encoderparams : *const EncoderParameters) -> Status);
-    GdipSaveAdd(image, encoderparams)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSaveAdd(image : *mut GpImage, encoderparams : *const EncoderParameters) -> Status);
+    unsafe { GdipSaveAdd(image as _, encoderparams) }
 }
 #[inline]
 pub unsafe fn GdipSaveAddImage(image: *mut GpImage, newimage: *mut GpImage, encoderparams: *const EncoderParameters) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSaveAddImage(image : *mut GpImage, newimage : *mut GpImage, encoderparams : *const EncoderParameters) -> Status);
-    GdipSaveAddImage(image, newimage, encoderparams)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSaveAddImage(image : *mut GpImage, newimage : *mut GpImage, encoderparams : *const EncoderParameters) -> Status);
+    unsafe { GdipSaveAddImage(image as _, newimage as _, encoderparams) }
 }
 #[inline]
 pub unsafe fn GdipSaveGraphics(graphics: *mut GpGraphics, state: *mut u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSaveGraphics(graphics : *mut GpGraphics, state : *mut u32) -> Status);
-    GdipSaveGraphics(graphics, state)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSaveGraphics(graphics : *mut GpGraphics, state : *mut u32) -> Status);
+    unsafe { GdipSaveGraphics(graphics as _, state as _) }
 }
 #[inline]
-pub unsafe fn GdipSaveImageToFile<P0>(image: *mut GpImage, filename: P0, clsidencoder: *const ::windows_core::GUID, encoderparams: *const EncoderParameters) -> Status
+pub unsafe fn GdipSaveImageToFile<P1>(image: *mut GpImage, filename: P1, clsidencoder: *const windows_core::GUID, encoderparams: *const EncoderParameters) -> Status
 where
-    P0: ::windows_core::IntoParam<::windows_core::PCWSTR>,
+    P1: windows_core::Param<windows_core::PCWSTR>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSaveImageToFile(image : *mut GpImage, filename : ::windows_core::PCWSTR, clsidencoder : *const ::windows_core::GUID, encoderparams : *const EncoderParameters) -> Status);
-    GdipSaveImageToFile(image, filename.into_param().abi(), clsidencoder, encoderparams)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSaveImageToFile(image : *mut GpImage, filename : windows_core::PCWSTR, clsidencoder : *const windows_core::GUID, encoderparams : *const EncoderParameters) -> Status);
+    unsafe { GdipSaveImageToFile(image as _, filename.param().abi(), clsidencoder, encoderparams) }
 }
-#[doc = "Required features: `\"Win32_System_Com\"`"]
 #[cfg(feature = "Win32_System_Com")]
 #[inline]
-pub unsafe fn GdipSaveImageToStream<P0>(image: *mut GpImage, stream: P0, clsidencoder: *const ::windows_core::GUID, encoderparams: *const EncoderParameters) -> Status
+pub unsafe fn GdipSaveImageToStream<P1>(image: *mut GpImage, stream: P1, clsidencoder: *const windows_core::GUID, encoderparams: *const EncoderParameters) -> Status
 where
-    P0: ::windows_core::IntoParam<super::super::System::Com::IStream>,
+    P1: windows_core::Param<super::super::System::Com::IStream>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSaveImageToStream(image : *mut GpImage, stream : * mut::core::ffi::c_void, clsidencoder : *const ::windows_core::GUID, encoderparams : *const EncoderParameters) -> Status);
-    GdipSaveImageToStream(image, stream.into_param().abi(), clsidencoder, encoderparams)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSaveImageToStream(image : *mut GpImage, stream : * mut core::ffi::c_void, clsidencoder : *const windows_core::GUID, encoderparams : *const EncoderParameters) -> Status);
+    unsafe { GdipSaveImageToStream(image as _, stream.param().abi(), clsidencoder, encoderparams) }
 }
 #[inline]
 pub unsafe fn GdipScaleLineTransform(brush: *mut GpLineGradient, sx: f32, sy: f32, order: MatrixOrder) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipScaleLineTransform(brush : *mut GpLineGradient, sx : f32, sy : f32, order : MatrixOrder) -> Status);
-    GdipScaleLineTransform(brush, sx, sy, order)
+    windows_link::link!("gdiplus.dll" "system" fn GdipScaleLineTransform(brush : *mut GpLineGradient, sx : f32, sy : f32, order : MatrixOrder) -> Status);
+    unsafe { GdipScaleLineTransform(brush as _, sx, sy, order) }
 }
 #[inline]
 pub unsafe fn GdipScaleMatrix(matrix: *mut Matrix, scalex: f32, scaley: f32, order: MatrixOrder) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipScaleMatrix(matrix : *mut Matrix, scalex : f32, scaley : f32, order : MatrixOrder) -> Status);
-    GdipScaleMatrix(matrix, scalex, scaley, order)
+    windows_link::link!("gdiplus.dll" "system" fn GdipScaleMatrix(matrix : *mut Matrix, scalex : f32, scaley : f32, order : MatrixOrder) -> Status);
+    unsafe { GdipScaleMatrix(matrix as _, scalex, scaley, order) }
 }
 #[inline]
 pub unsafe fn GdipScalePathGradientTransform(brush: *mut GpPathGradient, sx: f32, sy: f32, order: MatrixOrder) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipScalePathGradientTransform(brush : *mut GpPathGradient, sx : f32, sy : f32, order : MatrixOrder) -> Status);
-    GdipScalePathGradientTransform(brush, sx, sy, order)
+    windows_link::link!("gdiplus.dll" "system" fn GdipScalePathGradientTransform(brush : *mut GpPathGradient, sx : f32, sy : f32, order : MatrixOrder) -> Status);
+    unsafe { GdipScalePathGradientTransform(brush as _, sx, sy, order) }
 }
 #[inline]
 pub unsafe fn GdipScalePenTransform(pen: *mut GpPen, sx: f32, sy: f32, order: MatrixOrder) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipScalePenTransform(pen : *mut GpPen, sx : f32, sy : f32, order : MatrixOrder) -> Status);
-    GdipScalePenTransform(pen, sx, sy, order)
+    windows_link::link!("gdiplus.dll" "system" fn GdipScalePenTransform(pen : *mut GpPen, sx : f32, sy : f32, order : MatrixOrder) -> Status);
+    unsafe { GdipScalePenTransform(pen as _, sx, sy, order) }
 }
 #[inline]
 pub unsafe fn GdipScaleTextureTransform(brush: *mut GpTexture, sx: f32, sy: f32, order: MatrixOrder) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipScaleTextureTransform(brush : *mut GpTexture, sx : f32, sy : f32, order : MatrixOrder) -> Status);
-    GdipScaleTextureTransform(brush, sx, sy, order)
+    windows_link::link!("gdiplus.dll" "system" fn GdipScaleTextureTransform(brush : *mut GpTexture, sx : f32, sy : f32, order : MatrixOrder) -> Status);
+    unsafe { GdipScaleTextureTransform(brush as _, sx, sy, order) }
 }
 #[inline]
 pub unsafe fn GdipScaleWorldTransform(graphics: *mut GpGraphics, sx: f32, sy: f32, order: MatrixOrder) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipScaleWorldTransform(graphics : *mut GpGraphics, sx : f32, sy : f32, order : MatrixOrder) -> Status);
-    GdipScaleWorldTransform(graphics, sx, sy, order)
+    windows_link::link!("gdiplus.dll" "system" fn GdipScaleWorldTransform(graphics : *mut GpGraphics, sx : f32, sy : f32, order : MatrixOrder) -> Status);
+    unsafe { GdipScaleWorldTransform(graphics as _, sx, sy, order) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipSetAdjustableArrowCapFillState<P0>(cap: *mut GpAdjustableArrowCap, fillstate: P0) -> Status
-where
-    P0: ::windows_core::IntoParam<super::super::Foundation::BOOL>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetAdjustableArrowCapFillState(cap : *mut GpAdjustableArrowCap, fillstate : super::super::Foundation:: BOOL) -> Status);
-    GdipSetAdjustableArrowCapFillState(cap, fillstate.into_param().abi())
+pub unsafe fn GdipSetAdjustableArrowCapFillState(cap: *mut GpAdjustableArrowCap, fillstate: bool) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetAdjustableArrowCapFillState(cap : *mut GpAdjustableArrowCap, fillstate : windows_core::BOOL) -> Status);
+    unsafe { GdipSetAdjustableArrowCapFillState(cap as _, fillstate.into()) }
 }
 #[inline]
 pub unsafe fn GdipSetAdjustableArrowCapHeight(cap: *mut GpAdjustableArrowCap, height: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetAdjustableArrowCapHeight(cap : *mut GpAdjustableArrowCap, height : f32) -> Status);
-    GdipSetAdjustableArrowCapHeight(cap, height)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetAdjustableArrowCapHeight(cap : *mut GpAdjustableArrowCap, height : f32) -> Status);
+    unsafe { GdipSetAdjustableArrowCapHeight(cap as _, height) }
 }
 #[inline]
 pub unsafe fn GdipSetAdjustableArrowCapMiddleInset(cap: *mut GpAdjustableArrowCap, middleinset: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetAdjustableArrowCapMiddleInset(cap : *mut GpAdjustableArrowCap, middleinset : f32) -> Status);
-    GdipSetAdjustableArrowCapMiddleInset(cap, middleinset)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetAdjustableArrowCapMiddleInset(cap : *mut GpAdjustableArrowCap, middleinset : f32) -> Status);
+    unsafe { GdipSetAdjustableArrowCapMiddleInset(cap as _, middleinset) }
 }
 #[inline]
 pub unsafe fn GdipSetAdjustableArrowCapWidth(cap: *mut GpAdjustableArrowCap, width: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetAdjustableArrowCapWidth(cap : *mut GpAdjustableArrowCap, width : f32) -> Status);
-    GdipSetAdjustableArrowCapWidth(cap, width)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetAdjustableArrowCapWidth(cap : *mut GpAdjustableArrowCap, width : f32) -> Status);
+    unsafe { GdipSetAdjustableArrowCapWidth(cap as _, width) }
 }
 #[inline]
 pub unsafe fn GdipSetClipGraphics(graphics: *mut GpGraphics, srcgraphics: *mut GpGraphics, combinemode: CombineMode) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetClipGraphics(graphics : *mut GpGraphics, srcgraphics : *mut GpGraphics, combinemode : CombineMode) -> Status);
-    GdipSetClipGraphics(graphics, srcgraphics, combinemode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetClipGraphics(graphics : *mut GpGraphics, srcgraphics : *mut GpGraphics, combinemode : CombineMode) -> Status);
+    unsafe { GdipSetClipGraphics(graphics as _, srcgraphics as _, combinemode) }
 }
-#[doc = "Required features: `\"Win32_Graphics_Gdi\"`"]
 #[cfg(feature = "Win32_Graphics_Gdi")]
 #[inline]
-pub unsafe fn GdipSetClipHrgn<P0>(graphics: *mut GpGraphics, hrgn: P0, combinemode: CombineMode) -> Status
-where
-    P0: ::windows_core::IntoParam<super::Gdi::HRGN>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetClipHrgn(graphics : *mut GpGraphics, hrgn : super::Gdi:: HRGN, combinemode : CombineMode) -> Status);
-    GdipSetClipHrgn(graphics, hrgn.into_param().abi(), combinemode)
+pub unsafe fn GdipSetClipHrgn(graphics: *mut GpGraphics, hrgn: super::Gdi::HRGN, combinemode: CombineMode) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetClipHrgn(graphics : *mut GpGraphics, hrgn : super::Gdi:: HRGN, combinemode : CombineMode) -> Status);
+    unsafe { GdipSetClipHrgn(graphics as _, hrgn, combinemode) }
 }
 #[inline]
 pub unsafe fn GdipSetClipPath(graphics: *mut GpGraphics, path: *mut GpPath, combinemode: CombineMode) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetClipPath(graphics : *mut GpGraphics, path : *mut GpPath, combinemode : CombineMode) -> Status);
-    GdipSetClipPath(graphics, path, combinemode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetClipPath(graphics : *mut GpGraphics, path : *mut GpPath, combinemode : CombineMode) -> Status);
+    unsafe { GdipSetClipPath(graphics as _, path as _, combinemode) }
 }
 #[inline]
 pub unsafe fn GdipSetClipRect(graphics: *mut GpGraphics, x: f32, y: f32, width: f32, height: f32, combinemode: CombineMode) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetClipRect(graphics : *mut GpGraphics, x : f32, y : f32, width : f32, height : f32, combinemode : CombineMode) -> Status);
-    GdipSetClipRect(graphics, x, y, width, height, combinemode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetClipRect(graphics : *mut GpGraphics, x : f32, y : f32, width : f32, height : f32, combinemode : CombineMode) -> Status);
+    unsafe { GdipSetClipRect(graphics as _, x, y, width, height, combinemode) }
 }
 #[inline]
 pub unsafe fn GdipSetClipRectI(graphics: *mut GpGraphics, x: i32, y: i32, width: i32, height: i32, combinemode: CombineMode) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetClipRectI(graphics : *mut GpGraphics, x : i32, y : i32, width : i32, height : i32, combinemode : CombineMode) -> Status);
-    GdipSetClipRectI(graphics, x, y, width, height, combinemode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetClipRectI(graphics : *mut GpGraphics, x : i32, y : i32, width : i32, height : i32, combinemode : CombineMode) -> Status);
+    unsafe { GdipSetClipRectI(graphics as _, x, y, width, height, combinemode) }
 }
 #[inline]
 pub unsafe fn GdipSetClipRegion(graphics: *mut GpGraphics, region: *mut GpRegion, combinemode: CombineMode) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetClipRegion(graphics : *mut GpGraphics, region : *mut GpRegion, combinemode : CombineMode) -> Status);
-    GdipSetClipRegion(graphics, region, combinemode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetClipRegion(graphics : *mut GpGraphics, region : *mut GpRegion, combinemode : CombineMode) -> Status);
+    unsafe { GdipSetClipRegion(graphics as _, region as _, combinemode) }
 }
 #[inline]
 pub unsafe fn GdipSetCompositingMode(graphics: *mut GpGraphics, compositingmode: CompositingMode) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetCompositingMode(graphics : *mut GpGraphics, compositingmode : CompositingMode) -> Status);
-    GdipSetCompositingMode(graphics, compositingmode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetCompositingMode(graphics : *mut GpGraphics, compositingmode : CompositingMode) -> Status);
+    unsafe { GdipSetCompositingMode(graphics as _, compositingmode) }
 }
 #[inline]
 pub unsafe fn GdipSetCompositingQuality(graphics: *mut GpGraphics, compositingquality: CompositingQuality) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetCompositingQuality(graphics : *mut GpGraphics, compositingquality : CompositingQuality) -> Status);
-    GdipSetCompositingQuality(graphics, compositingquality)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetCompositingQuality(graphics : *mut GpGraphics, compositingquality : CompositingQuality) -> Status);
+    unsafe { GdipSetCompositingQuality(graphics as _, compositingquality) }
 }
 #[inline]
 pub unsafe fn GdipSetCustomLineCapBaseCap(customcap: *mut GpCustomLineCap, basecap: LineCap) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetCustomLineCapBaseCap(customcap : *mut GpCustomLineCap, basecap : LineCap) -> Status);
-    GdipSetCustomLineCapBaseCap(customcap, basecap)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetCustomLineCapBaseCap(customcap : *mut GpCustomLineCap, basecap : LineCap) -> Status);
+    unsafe { GdipSetCustomLineCapBaseCap(customcap as _, basecap) }
 }
 #[inline]
 pub unsafe fn GdipSetCustomLineCapBaseInset(customcap: *mut GpCustomLineCap, inset: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetCustomLineCapBaseInset(customcap : *mut GpCustomLineCap, inset : f32) -> Status);
-    GdipSetCustomLineCapBaseInset(customcap, inset)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetCustomLineCapBaseInset(customcap : *mut GpCustomLineCap, inset : f32) -> Status);
+    unsafe { GdipSetCustomLineCapBaseInset(customcap as _, inset) }
 }
 #[inline]
 pub unsafe fn GdipSetCustomLineCapStrokeCaps(customcap: *mut GpCustomLineCap, startcap: LineCap, endcap: LineCap) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetCustomLineCapStrokeCaps(customcap : *mut GpCustomLineCap, startcap : LineCap, endcap : LineCap) -> Status);
-    GdipSetCustomLineCapStrokeCaps(customcap, startcap, endcap)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetCustomLineCapStrokeCaps(customcap : *mut GpCustomLineCap, startcap : LineCap, endcap : LineCap) -> Status);
+    unsafe { GdipSetCustomLineCapStrokeCaps(customcap as _, startcap, endcap) }
 }
 #[inline]
 pub unsafe fn GdipSetCustomLineCapStrokeJoin(customcap: *mut GpCustomLineCap, linejoin: LineJoin) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetCustomLineCapStrokeJoin(customcap : *mut GpCustomLineCap, linejoin : LineJoin) -> Status);
-    GdipSetCustomLineCapStrokeJoin(customcap, linejoin)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetCustomLineCapStrokeJoin(customcap : *mut GpCustomLineCap, linejoin : LineJoin) -> Status);
+    unsafe { GdipSetCustomLineCapStrokeJoin(customcap as _, linejoin) }
 }
 #[inline]
 pub unsafe fn GdipSetCustomLineCapWidthScale(customcap: *mut GpCustomLineCap, widthscale: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetCustomLineCapWidthScale(customcap : *mut GpCustomLineCap, widthscale : f32) -> Status);
-    GdipSetCustomLineCapWidthScale(customcap, widthscale)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetCustomLineCapWidthScale(customcap : *mut GpCustomLineCap, widthscale : f32) -> Status);
+    unsafe { GdipSetCustomLineCapWidthScale(customcap as _, widthscale) }
 }
 #[inline]
-pub unsafe fn GdipSetEffectParameters(effect: *mut CGpEffect, params: *const ::core::ffi::c_void, size: u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetEffectParameters(effect : *mut CGpEffect, params : *const ::core::ffi::c_void, size : u32) -> Status);
-    GdipSetEffectParameters(effect, params, size)
+pub unsafe fn GdipSetEffectParameters(effect: *mut CGpEffect, params: *const core::ffi::c_void, size: u32) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetEffectParameters(effect : *mut CGpEffect, params : *const core::ffi::c_void, size : u32) -> Status);
+    unsafe { GdipSetEffectParameters(effect as _, params, size) }
 }
 #[inline]
 pub unsafe fn GdipSetEmpty(region: *mut GpRegion) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetEmpty(region : *mut GpRegion) -> Status);
-    GdipSetEmpty(region)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetEmpty(region : *mut GpRegion) -> Status);
+    unsafe { GdipSetEmpty(region as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipSetImageAttributesCachedBackground<P0>(imageattr: *mut GpImageAttributes, enableflag: P0) -> Status
-where
-    P0: ::windows_core::IntoParam<super::super::Foundation::BOOL>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetImageAttributesCachedBackground(imageattr : *mut GpImageAttributes, enableflag : super::super::Foundation:: BOOL) -> Status);
-    GdipSetImageAttributesCachedBackground(imageattr, enableflag.into_param().abi())
+pub unsafe fn GdipSetImageAttributesCachedBackground(imageattr: *mut GpImageAttributes, enableflag: bool) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetImageAttributesCachedBackground(imageattr : *mut GpImageAttributes, enableflag : windows_core::BOOL) -> Status);
+    unsafe { GdipSetImageAttributesCachedBackground(imageattr as _, enableflag.into()) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipSetImageAttributesColorKeys<P0>(imageattr: *mut GpImageAttributes, r#type: ColorAdjustType, enableflag: P0, colorlow: u32, colorhigh: u32) -> Status
-where
-    P0: ::windows_core::IntoParam<super::super::Foundation::BOOL>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetImageAttributesColorKeys(imageattr : *mut GpImageAttributes, r#type : ColorAdjustType, enableflag : super::super::Foundation:: BOOL, colorlow : u32, colorhigh : u32) -> Status);
-    GdipSetImageAttributesColorKeys(imageattr, r#type, enableflag.into_param().abi(), colorlow, colorhigh)
+pub unsafe fn GdipSetImageAttributesColorKeys(imageattr: *mut GpImageAttributes, r#type: ColorAdjustType, enableflag: bool, colorlow: u32, colorhigh: u32) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetImageAttributesColorKeys(imageattr : *mut GpImageAttributes, r#type : ColorAdjustType, enableflag : windows_core::BOOL, colorlow : u32, colorhigh : u32) -> Status);
+    unsafe { GdipSetImageAttributesColorKeys(imageattr as _, r#type, enableflag.into(), colorlow, colorhigh) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipSetImageAttributesColorMatrix<P0>(imageattr: *mut GpImageAttributes, r#type: ColorAdjustType, enableflag: P0, colormatrix: *const ColorMatrix, graymatrix: *const ColorMatrix, flags: ColorMatrixFlags) -> Status
-where
-    P0: ::windows_core::IntoParam<super::super::Foundation::BOOL>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetImageAttributesColorMatrix(imageattr : *mut GpImageAttributes, r#type : ColorAdjustType, enableflag : super::super::Foundation:: BOOL, colormatrix : *const ColorMatrix, graymatrix : *const ColorMatrix, flags : ColorMatrixFlags) -> Status);
-    GdipSetImageAttributesColorMatrix(imageattr, r#type, enableflag.into_param().abi(), colormatrix, graymatrix, flags)
+pub unsafe fn GdipSetImageAttributesColorMatrix(imageattr: *mut GpImageAttributes, r#type: ColorAdjustType, enableflag: bool, colormatrix: *const ColorMatrix, graymatrix: *const ColorMatrix, flags: ColorMatrixFlags) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetImageAttributesColorMatrix(imageattr : *mut GpImageAttributes, r#type : ColorAdjustType, enableflag : windows_core::BOOL, colormatrix : *const ColorMatrix, graymatrix : *const ColorMatrix, flags : ColorMatrixFlags) -> Status);
+    unsafe { GdipSetImageAttributesColorMatrix(imageattr as _, r#type, enableflag.into(), colormatrix, graymatrix, flags) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipSetImageAttributesGamma<P0>(imageattr: *mut GpImageAttributes, r#type: ColorAdjustType, enableflag: P0, gamma: f32) -> Status
-where
-    P0: ::windows_core::IntoParam<super::super::Foundation::BOOL>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetImageAttributesGamma(imageattr : *mut GpImageAttributes, r#type : ColorAdjustType, enableflag : super::super::Foundation:: BOOL, gamma : f32) -> Status);
-    GdipSetImageAttributesGamma(imageattr, r#type, enableflag.into_param().abi(), gamma)
+pub unsafe fn GdipSetImageAttributesGamma(imageattr: *mut GpImageAttributes, r#type: ColorAdjustType, enableflag: bool, gamma: f32) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetImageAttributesGamma(imageattr : *mut GpImageAttributes, r#type : ColorAdjustType, enableflag : windows_core::BOOL, gamma : f32) -> Status);
+    unsafe { GdipSetImageAttributesGamma(imageattr as _, r#type, enableflag.into(), gamma) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipSetImageAttributesNoOp<P0>(imageattr: *mut GpImageAttributes, r#type: ColorAdjustType, enableflag: P0) -> Status
-where
-    P0: ::windows_core::IntoParam<super::super::Foundation::BOOL>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetImageAttributesNoOp(imageattr : *mut GpImageAttributes, r#type : ColorAdjustType, enableflag : super::super::Foundation:: BOOL) -> Status);
-    GdipSetImageAttributesNoOp(imageattr, r#type, enableflag.into_param().abi())
+pub unsafe fn GdipSetImageAttributesNoOp(imageattr: *mut GpImageAttributes, r#type: ColorAdjustType, enableflag: bool) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetImageAttributesNoOp(imageattr : *mut GpImageAttributes, r#type : ColorAdjustType, enableflag : windows_core::BOOL) -> Status);
+    unsafe { GdipSetImageAttributesNoOp(imageattr as _, r#type, enableflag.into()) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipSetImageAttributesOutputChannel<P0>(imageattr: *mut GpImageAttributes, r#type: ColorAdjustType, enableflag: P0, channelflags: ColorChannelFlags) -> Status
-where
-    P0: ::windows_core::IntoParam<super::super::Foundation::BOOL>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetImageAttributesOutputChannel(imageattr : *mut GpImageAttributes, r#type : ColorAdjustType, enableflag : super::super::Foundation:: BOOL, channelflags : ColorChannelFlags) -> Status);
-    GdipSetImageAttributesOutputChannel(imageattr, r#type, enableflag.into_param().abi(), channelflags)
+pub unsafe fn GdipSetImageAttributesOutputChannel(imageattr: *mut GpImageAttributes, r#type: ColorAdjustType, enableflag: bool, channelflags: ColorChannelFlags) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetImageAttributesOutputChannel(imageattr : *mut GpImageAttributes, r#type : ColorAdjustType, enableflag : windows_core::BOOL, channelflags : ColorChannelFlags) -> Status);
+    unsafe { GdipSetImageAttributesOutputChannel(imageattr as _, r#type, enableflag.into(), channelflags) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipSetImageAttributesOutputChannelColorProfile<P0, P1>(imageattr: *mut GpImageAttributes, r#type: ColorAdjustType, enableflag: P0, colorprofilefilename: P1) -> Status
+pub unsafe fn GdipSetImageAttributesOutputChannelColorProfile<P3>(imageattr: *mut GpImageAttributes, r#type: ColorAdjustType, enableflag: bool, colorprofilefilename: P3) -> Status
 where
-    P0: ::windows_core::IntoParam<super::super::Foundation::BOOL>,
-    P1: ::windows_core::IntoParam<::windows_core::PCWSTR>,
+    P3: windows_core::Param<windows_core::PCWSTR>,
 {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetImageAttributesOutputChannelColorProfile(imageattr : *mut GpImageAttributes, r#type : ColorAdjustType, enableflag : super::super::Foundation:: BOOL, colorprofilefilename : ::windows_core::PCWSTR) -> Status);
-    GdipSetImageAttributesOutputChannelColorProfile(imageattr, r#type, enableflag.into_param().abi(), colorprofilefilename.into_param().abi())
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetImageAttributesOutputChannelColorProfile(imageattr : *mut GpImageAttributes, r#type : ColorAdjustType, enableflag : windows_core::BOOL, colorprofilefilename : windows_core::PCWSTR) -> Status);
+    unsafe { GdipSetImageAttributesOutputChannelColorProfile(imageattr as _, r#type, enableflag.into(), colorprofilefilename.param().abi()) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipSetImageAttributesRemapTable<P0>(imageattr: *mut GpImageAttributes, r#type: ColorAdjustType, enableflag: P0, mapsize: u32, map: *const ColorMap) -> Status
-where
-    P0: ::windows_core::IntoParam<super::super::Foundation::BOOL>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetImageAttributesRemapTable(imageattr : *mut GpImageAttributes, r#type : ColorAdjustType, enableflag : super::super::Foundation:: BOOL, mapsize : u32, map : *const ColorMap) -> Status);
-    GdipSetImageAttributesRemapTable(imageattr, r#type, enableflag.into_param().abi(), mapsize, map)
+pub unsafe fn GdipSetImageAttributesRemapTable(imageattr: *mut GpImageAttributes, r#type: ColorAdjustType, enableflag: bool, mapsize: u32, map: *const ColorMap) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetImageAttributesRemapTable(imageattr : *mut GpImageAttributes, r#type : ColorAdjustType, enableflag : windows_core::BOOL, mapsize : u32, map : *const ColorMap) -> Status);
+    unsafe { GdipSetImageAttributesRemapTable(imageattr as _, r#type, enableflag.into(), mapsize, map) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipSetImageAttributesThreshold<P0>(imageattr: *mut GpImageAttributes, r#type: ColorAdjustType, enableflag: P0, threshold: f32) -> Status
-where
-    P0: ::windows_core::IntoParam<super::super::Foundation::BOOL>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetImageAttributesThreshold(imageattr : *mut GpImageAttributes, r#type : ColorAdjustType, enableflag : super::super::Foundation:: BOOL, threshold : f32) -> Status);
-    GdipSetImageAttributesThreshold(imageattr, r#type, enableflag.into_param().abi(), threshold)
+pub unsafe fn GdipSetImageAttributesThreshold(imageattr: *mut GpImageAttributes, r#type: ColorAdjustType, enableflag: bool, threshold: f32) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetImageAttributesThreshold(imageattr : *mut GpImageAttributes, r#type : ColorAdjustType, enableflag : windows_core::BOOL, threshold : f32) -> Status);
+    unsafe { GdipSetImageAttributesThreshold(imageattr as _, r#type, enableflag.into(), threshold) }
 }
 #[inline]
 pub unsafe fn GdipSetImageAttributesToIdentity(imageattr: *mut GpImageAttributes, r#type: ColorAdjustType) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetImageAttributesToIdentity(imageattr : *mut GpImageAttributes, r#type : ColorAdjustType) -> Status);
-    GdipSetImageAttributesToIdentity(imageattr, r#type)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetImageAttributesToIdentity(imageattr : *mut GpImageAttributes, r#type : ColorAdjustType) -> Status);
+    unsafe { GdipSetImageAttributesToIdentity(imageattr as _, r#type) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipSetImageAttributesWrapMode<P0>(imageattr: *mut GpImageAttributes, wrap: WrapMode, argb: u32, clamp: P0) -> Status
-where
-    P0: ::windows_core::IntoParam<super::super::Foundation::BOOL>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetImageAttributesWrapMode(imageattr : *mut GpImageAttributes, wrap : WrapMode, argb : u32, clamp : super::super::Foundation:: BOOL) -> Status);
-    GdipSetImageAttributesWrapMode(imageattr, wrap, argb, clamp.into_param().abi())
+pub unsafe fn GdipSetImageAttributesWrapMode(imageattr: *mut GpImageAttributes, wrap: WrapMode, argb: u32, clamp: bool) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetImageAttributesWrapMode(imageattr : *mut GpImageAttributes, wrap : WrapMode, argb : u32, clamp : windows_core::BOOL) -> Status);
+    unsafe { GdipSetImageAttributesWrapMode(imageattr as _, wrap, argb, clamp.into()) }
 }
 #[inline]
 pub unsafe fn GdipSetImagePalette(image: *mut GpImage, palette: *const ColorPalette) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetImagePalette(image : *mut GpImage, palette : *const ColorPalette) -> Status);
-    GdipSetImagePalette(image, palette)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetImagePalette(image : *mut GpImage, palette : *const ColorPalette) -> Status);
+    unsafe { GdipSetImagePalette(image as _, palette) }
 }
 #[inline]
 pub unsafe fn GdipSetInfinite(region: *mut GpRegion) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetInfinite(region : *mut GpRegion) -> Status);
-    GdipSetInfinite(region)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetInfinite(region : *mut GpRegion) -> Status);
+    unsafe { GdipSetInfinite(region as _) }
 }
 #[inline]
 pub unsafe fn GdipSetInterpolationMode(graphics: *mut GpGraphics, interpolationmode: InterpolationMode) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetInterpolationMode(graphics : *mut GpGraphics, interpolationmode : InterpolationMode) -> Status);
-    GdipSetInterpolationMode(graphics, interpolationmode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetInterpolationMode(graphics : *mut GpGraphics, interpolationmode : InterpolationMode) -> Status);
+    unsafe { GdipSetInterpolationMode(graphics as _, interpolationmode) }
 }
 #[inline]
 pub unsafe fn GdipSetLineBlend(brush: *mut GpLineGradient, blend: *const f32, positions: *const f32, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetLineBlend(brush : *mut GpLineGradient, blend : *const f32, positions : *const f32, count : i32) -> Status);
-    GdipSetLineBlend(brush, blend, positions, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetLineBlend(brush : *mut GpLineGradient, blend : *const f32, positions : *const f32, count : i32) -> Status);
+    unsafe { GdipSetLineBlend(brush as _, blend, positions, count) }
 }
 #[inline]
 pub unsafe fn GdipSetLineColors(brush: *mut GpLineGradient, color1: u32, color2: u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetLineColors(brush : *mut GpLineGradient, color1 : u32, color2 : u32) -> Status);
-    GdipSetLineColors(brush, color1, color2)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetLineColors(brush : *mut GpLineGradient, color1 : u32, color2 : u32) -> Status);
+    unsafe { GdipSetLineColors(brush as _, color1, color2) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipSetLineGammaCorrection<P0>(brush: *mut GpLineGradient, usegammacorrection: P0) -> Status
-where
-    P0: ::windows_core::IntoParam<super::super::Foundation::BOOL>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetLineGammaCorrection(brush : *mut GpLineGradient, usegammacorrection : super::super::Foundation:: BOOL) -> Status);
-    GdipSetLineGammaCorrection(brush, usegammacorrection.into_param().abi())
+pub unsafe fn GdipSetLineGammaCorrection(brush: *mut GpLineGradient, usegammacorrection: bool) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetLineGammaCorrection(brush : *mut GpLineGradient, usegammacorrection : windows_core::BOOL) -> Status);
+    unsafe { GdipSetLineGammaCorrection(brush as _, usegammacorrection.into()) }
 }
 #[inline]
 pub unsafe fn GdipSetLineLinearBlend(brush: *mut GpLineGradient, focus: f32, scale: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetLineLinearBlend(brush : *mut GpLineGradient, focus : f32, scale : f32) -> Status);
-    GdipSetLineLinearBlend(brush, focus, scale)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetLineLinearBlend(brush : *mut GpLineGradient, focus : f32, scale : f32) -> Status);
+    unsafe { GdipSetLineLinearBlend(brush as _, focus, scale) }
 }
 #[inline]
 pub unsafe fn GdipSetLinePresetBlend(brush: *mut GpLineGradient, blend: *const u32, positions: *const f32, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetLinePresetBlend(brush : *mut GpLineGradient, blend : *const u32, positions : *const f32, count : i32) -> Status);
-    GdipSetLinePresetBlend(brush, blend, positions, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetLinePresetBlend(brush : *mut GpLineGradient, blend : *const u32, positions : *const f32, count : i32) -> Status);
+    unsafe { GdipSetLinePresetBlend(brush as _, blend, positions, count) }
 }
 #[inline]
 pub unsafe fn GdipSetLineSigmaBlend(brush: *mut GpLineGradient, focus: f32, scale: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetLineSigmaBlend(brush : *mut GpLineGradient, focus : f32, scale : f32) -> Status);
-    GdipSetLineSigmaBlend(brush, focus, scale)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetLineSigmaBlend(brush : *mut GpLineGradient, focus : f32, scale : f32) -> Status);
+    unsafe { GdipSetLineSigmaBlend(brush as _, focus, scale) }
 }
 #[inline]
 pub unsafe fn GdipSetLineTransform(brush: *mut GpLineGradient, matrix: *const Matrix) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetLineTransform(brush : *mut GpLineGradient, matrix : *const Matrix) -> Status);
-    GdipSetLineTransform(brush, matrix)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetLineTransform(brush : *mut GpLineGradient, matrix : *const Matrix) -> Status);
+    unsafe { GdipSetLineTransform(brush as _, matrix) }
 }
 #[inline]
 pub unsafe fn GdipSetLineWrapMode(brush: *mut GpLineGradient, wrapmode: WrapMode) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetLineWrapMode(brush : *mut GpLineGradient, wrapmode : WrapMode) -> Status);
-    GdipSetLineWrapMode(brush, wrapmode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetLineWrapMode(brush : *mut GpLineGradient, wrapmode : WrapMode) -> Status);
+    unsafe { GdipSetLineWrapMode(brush as _, wrapmode) }
 }
 #[inline]
 pub unsafe fn GdipSetMatrixElements(matrix: *mut Matrix, m11: f32, m12: f32, m21: f32, m22: f32, dx: f32, dy: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetMatrixElements(matrix : *mut Matrix, m11 : f32, m12 : f32, m21 : f32, m22 : f32, dx : f32, dy : f32) -> Status);
-    GdipSetMatrixElements(matrix, m11, m12, m21, m22, dx, dy)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetMatrixElements(matrix : *mut Matrix, m11 : f32, m12 : f32, m21 : f32, m22 : f32, dx : f32, dy : f32) -> Status);
+    unsafe { GdipSetMatrixElements(matrix as _, m11, m12, m21, m22, dx, dy) }
 }
 #[inline]
 pub unsafe fn GdipSetMetafileDownLevelRasterizationLimit(metafile: *mut GpMetafile, metafilerasterizationlimitdpi: u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetMetafileDownLevelRasterizationLimit(metafile : *mut GpMetafile, metafilerasterizationlimitdpi : u32) -> Status);
-    GdipSetMetafileDownLevelRasterizationLimit(metafile, metafilerasterizationlimitdpi)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetMetafileDownLevelRasterizationLimit(metafile : *mut GpMetafile, metafilerasterizationlimitdpi : u32) -> Status);
+    unsafe { GdipSetMetafileDownLevelRasterizationLimit(metafile as _, metafilerasterizationlimitdpi) }
 }
 #[inline]
 pub unsafe fn GdipSetPageScale(graphics: *mut GpGraphics, scale: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPageScale(graphics : *mut GpGraphics, scale : f32) -> Status);
-    GdipSetPageScale(graphics, scale)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPageScale(graphics : *mut GpGraphics, scale : f32) -> Status);
+    unsafe { GdipSetPageScale(graphics as _, scale) }
 }
 #[inline]
 pub unsafe fn GdipSetPageUnit(graphics: *mut GpGraphics, unit: Unit) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPageUnit(graphics : *mut GpGraphics, unit : Unit) -> Status);
-    GdipSetPageUnit(graphics, unit)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPageUnit(graphics : *mut GpGraphics, unit : Unit) -> Status);
+    unsafe { GdipSetPageUnit(graphics as _, unit) }
 }
 #[inline]
 pub unsafe fn GdipSetPathFillMode(path: *mut GpPath, fillmode: FillMode) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPathFillMode(path : *mut GpPath, fillmode : FillMode) -> Status);
-    GdipSetPathFillMode(path, fillmode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPathFillMode(path : *mut GpPath, fillmode : FillMode) -> Status);
+    unsafe { GdipSetPathFillMode(path as _, fillmode) }
 }
 #[inline]
 pub unsafe fn GdipSetPathGradientBlend(brush: *mut GpPathGradient, blend: *const f32, positions: *const f32, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPathGradientBlend(brush : *mut GpPathGradient, blend : *const f32, positions : *const f32, count : i32) -> Status);
-    GdipSetPathGradientBlend(brush, blend, positions, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPathGradientBlend(brush : *mut GpPathGradient, blend : *const f32, positions : *const f32, count : i32) -> Status);
+    unsafe { GdipSetPathGradientBlend(brush as _, blend, positions, count) }
 }
 #[inline]
 pub unsafe fn GdipSetPathGradientCenterColor(brush: *mut GpPathGradient, colors: u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPathGradientCenterColor(brush : *mut GpPathGradient, colors : u32) -> Status);
-    GdipSetPathGradientCenterColor(brush, colors)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPathGradientCenterColor(brush : *mut GpPathGradient, colors : u32) -> Status);
+    unsafe { GdipSetPathGradientCenterColor(brush as _, colors) }
 }
 #[inline]
 pub unsafe fn GdipSetPathGradientCenterPoint(brush: *mut GpPathGradient, points: *const PointF) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPathGradientCenterPoint(brush : *mut GpPathGradient, points : *const PointF) -> Status);
-    GdipSetPathGradientCenterPoint(brush, points)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPathGradientCenterPoint(brush : *mut GpPathGradient, points : *const PointF) -> Status);
+    unsafe { GdipSetPathGradientCenterPoint(brush as _, points) }
 }
 #[inline]
 pub unsafe fn GdipSetPathGradientCenterPointI(brush: *mut GpPathGradient, points: *const Point) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPathGradientCenterPointI(brush : *mut GpPathGradient, points : *const Point) -> Status);
-    GdipSetPathGradientCenterPointI(brush, points)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPathGradientCenterPointI(brush : *mut GpPathGradient, points : *const Point) -> Status);
+    unsafe { GdipSetPathGradientCenterPointI(brush as _, points) }
 }
 #[inline]
 pub unsafe fn GdipSetPathGradientFocusScales(brush: *mut GpPathGradient, xscale: f32, yscale: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPathGradientFocusScales(brush : *mut GpPathGradient, xscale : f32, yscale : f32) -> Status);
-    GdipSetPathGradientFocusScales(brush, xscale, yscale)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPathGradientFocusScales(brush : *mut GpPathGradient, xscale : f32, yscale : f32) -> Status);
+    unsafe { GdipSetPathGradientFocusScales(brush as _, xscale, yscale) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn GdipSetPathGradientGammaCorrection<P0>(brush: *mut GpPathGradient, usegammacorrection: P0) -> Status
-where
-    P0: ::windows_core::IntoParam<super::super::Foundation::BOOL>,
-{
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPathGradientGammaCorrection(brush : *mut GpPathGradient, usegammacorrection : super::super::Foundation:: BOOL) -> Status);
-    GdipSetPathGradientGammaCorrection(brush, usegammacorrection.into_param().abi())
+pub unsafe fn GdipSetPathGradientGammaCorrection(brush: *mut GpPathGradient, usegammacorrection: bool) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPathGradientGammaCorrection(brush : *mut GpPathGradient, usegammacorrection : windows_core::BOOL) -> Status);
+    unsafe { GdipSetPathGradientGammaCorrection(brush as _, usegammacorrection.into()) }
 }
 #[inline]
 pub unsafe fn GdipSetPathGradientLinearBlend(brush: *mut GpPathGradient, focus: f32, scale: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPathGradientLinearBlend(brush : *mut GpPathGradient, focus : f32, scale : f32) -> Status);
-    GdipSetPathGradientLinearBlend(brush, focus, scale)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPathGradientLinearBlend(brush : *mut GpPathGradient, focus : f32, scale : f32) -> Status);
+    unsafe { GdipSetPathGradientLinearBlend(brush as _, focus, scale) }
 }
 #[inline]
 pub unsafe fn GdipSetPathGradientPath(brush: *mut GpPathGradient, path: *const GpPath) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPathGradientPath(brush : *mut GpPathGradient, path : *const GpPath) -> Status);
-    GdipSetPathGradientPath(brush, path)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPathGradientPath(brush : *mut GpPathGradient, path : *const GpPath) -> Status);
+    unsafe { GdipSetPathGradientPath(brush as _, path) }
 }
 #[inline]
 pub unsafe fn GdipSetPathGradientPresetBlend(brush: *mut GpPathGradient, blend: *const u32, positions: *const f32, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPathGradientPresetBlend(brush : *mut GpPathGradient, blend : *const u32, positions : *const f32, count : i32) -> Status);
-    GdipSetPathGradientPresetBlend(brush, blend, positions, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPathGradientPresetBlend(brush : *mut GpPathGradient, blend : *const u32, positions : *const f32, count : i32) -> Status);
+    unsafe { GdipSetPathGradientPresetBlend(brush as _, blend, positions, count) }
 }
 #[inline]
 pub unsafe fn GdipSetPathGradientSigmaBlend(brush: *mut GpPathGradient, focus: f32, scale: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPathGradientSigmaBlend(brush : *mut GpPathGradient, focus : f32, scale : f32) -> Status);
-    GdipSetPathGradientSigmaBlend(brush, focus, scale)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPathGradientSigmaBlend(brush : *mut GpPathGradient, focus : f32, scale : f32) -> Status);
+    unsafe { GdipSetPathGradientSigmaBlend(brush as _, focus, scale) }
 }
 #[inline]
 pub unsafe fn GdipSetPathGradientSurroundColorsWithCount(brush: *mut GpPathGradient, color: *const u32, count: *mut i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPathGradientSurroundColorsWithCount(brush : *mut GpPathGradient, color : *const u32, count : *mut i32) -> Status);
-    GdipSetPathGradientSurroundColorsWithCount(brush, color, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPathGradientSurroundColorsWithCount(brush : *mut GpPathGradient, color : *const u32, count : *mut i32) -> Status);
+    unsafe { GdipSetPathGradientSurroundColorsWithCount(brush as _, color, count as _) }
 }
 #[inline]
 pub unsafe fn GdipSetPathGradientTransform(brush: *mut GpPathGradient, matrix: *mut Matrix) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPathGradientTransform(brush : *mut GpPathGradient, matrix : *mut Matrix) -> Status);
-    GdipSetPathGradientTransform(brush, matrix)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPathGradientTransform(brush : *mut GpPathGradient, matrix : *mut Matrix) -> Status);
+    unsafe { GdipSetPathGradientTransform(brush as _, matrix as _) }
 }
 #[inline]
 pub unsafe fn GdipSetPathGradientWrapMode(brush: *mut GpPathGradient, wrapmode: WrapMode) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPathGradientWrapMode(brush : *mut GpPathGradient, wrapmode : WrapMode) -> Status);
-    GdipSetPathGradientWrapMode(brush, wrapmode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPathGradientWrapMode(brush : *mut GpPathGradient, wrapmode : WrapMode) -> Status);
+    unsafe { GdipSetPathGradientWrapMode(brush as _, wrapmode) }
 }
 #[inline]
 pub unsafe fn GdipSetPathMarker(path: *mut GpPath) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPathMarker(path : *mut GpPath) -> Status);
-    GdipSetPathMarker(path)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPathMarker(path : *mut GpPath) -> Status);
+    unsafe { GdipSetPathMarker(path as _) }
 }
 #[inline]
 pub unsafe fn GdipSetPenBrushFill(pen: *mut GpPen, brush: *mut GpBrush) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPenBrushFill(pen : *mut GpPen, brush : *mut GpBrush) -> Status);
-    GdipSetPenBrushFill(pen, brush)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPenBrushFill(pen : *mut GpPen, brush : *mut GpBrush) -> Status);
+    unsafe { GdipSetPenBrushFill(pen as _, brush as _) }
 }
 #[inline]
 pub unsafe fn GdipSetPenColor(pen: *mut GpPen, argb: u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPenColor(pen : *mut GpPen, argb : u32) -> Status);
-    GdipSetPenColor(pen, argb)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPenColor(pen : *mut GpPen, argb : u32) -> Status);
+    unsafe { GdipSetPenColor(pen as _, argb) }
 }
 #[inline]
 pub unsafe fn GdipSetPenCompoundArray(pen: *mut GpPen, dash: *const f32, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPenCompoundArray(pen : *mut GpPen, dash : *const f32, count : i32) -> Status);
-    GdipSetPenCompoundArray(pen, dash, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPenCompoundArray(pen : *mut GpPen, dash : *const f32, count : i32) -> Status);
+    unsafe { GdipSetPenCompoundArray(pen as _, dash, count) }
 }
 #[inline]
 pub unsafe fn GdipSetPenCustomEndCap(pen: *mut GpPen, customcap: *mut GpCustomLineCap) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPenCustomEndCap(pen : *mut GpPen, customcap : *mut GpCustomLineCap) -> Status);
-    GdipSetPenCustomEndCap(pen, customcap)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPenCustomEndCap(pen : *mut GpPen, customcap : *mut GpCustomLineCap) -> Status);
+    unsafe { GdipSetPenCustomEndCap(pen as _, customcap as _) }
 }
 #[inline]
 pub unsafe fn GdipSetPenCustomStartCap(pen: *mut GpPen, customcap: *mut GpCustomLineCap) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPenCustomStartCap(pen : *mut GpPen, customcap : *mut GpCustomLineCap) -> Status);
-    GdipSetPenCustomStartCap(pen, customcap)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPenCustomStartCap(pen : *mut GpPen, customcap : *mut GpCustomLineCap) -> Status);
+    unsafe { GdipSetPenCustomStartCap(pen as _, customcap as _) }
 }
 #[inline]
 pub unsafe fn GdipSetPenDashArray(pen: *mut GpPen, dash: *const f32, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPenDashArray(pen : *mut GpPen, dash : *const f32, count : i32) -> Status);
-    GdipSetPenDashArray(pen, dash, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPenDashArray(pen : *mut GpPen, dash : *const f32, count : i32) -> Status);
+    unsafe { GdipSetPenDashArray(pen as _, dash, count) }
 }
 #[inline]
 pub unsafe fn GdipSetPenDashCap197819(pen: *mut GpPen, dashcap: DashCap) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPenDashCap197819(pen : *mut GpPen, dashcap : DashCap) -> Status);
-    GdipSetPenDashCap197819(pen, dashcap)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPenDashCap197819(pen : *mut GpPen, dashcap : DashCap) -> Status);
+    unsafe { GdipSetPenDashCap197819(pen as _, dashcap) }
 }
 #[inline]
 pub unsafe fn GdipSetPenDashOffset(pen: *mut GpPen, offset: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPenDashOffset(pen : *mut GpPen, offset : f32) -> Status);
-    GdipSetPenDashOffset(pen, offset)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPenDashOffset(pen : *mut GpPen, offset : f32) -> Status);
+    unsafe { GdipSetPenDashOffset(pen as _, offset) }
 }
 #[inline]
 pub unsafe fn GdipSetPenDashStyle(pen: *mut GpPen, dashstyle: DashStyle) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPenDashStyle(pen : *mut GpPen, dashstyle : DashStyle) -> Status);
-    GdipSetPenDashStyle(pen, dashstyle)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPenDashStyle(pen : *mut GpPen, dashstyle : DashStyle) -> Status);
+    unsafe { GdipSetPenDashStyle(pen as _, dashstyle) }
 }
 #[inline]
 pub unsafe fn GdipSetPenEndCap(pen: *mut GpPen, endcap: LineCap) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPenEndCap(pen : *mut GpPen, endcap : LineCap) -> Status);
-    GdipSetPenEndCap(pen, endcap)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPenEndCap(pen : *mut GpPen, endcap : LineCap) -> Status);
+    unsafe { GdipSetPenEndCap(pen as _, endcap) }
 }
 #[inline]
 pub unsafe fn GdipSetPenLineCap197819(pen: *mut GpPen, startcap: LineCap, endcap: LineCap, dashcap: DashCap) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPenLineCap197819(pen : *mut GpPen, startcap : LineCap, endcap : LineCap, dashcap : DashCap) -> Status);
-    GdipSetPenLineCap197819(pen, startcap, endcap, dashcap)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPenLineCap197819(pen : *mut GpPen, startcap : LineCap, endcap : LineCap, dashcap : DashCap) -> Status);
+    unsafe { GdipSetPenLineCap197819(pen as _, startcap, endcap, dashcap) }
 }
 #[inline]
 pub unsafe fn GdipSetPenLineJoin(pen: *mut GpPen, linejoin: LineJoin) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPenLineJoin(pen : *mut GpPen, linejoin : LineJoin) -> Status);
-    GdipSetPenLineJoin(pen, linejoin)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPenLineJoin(pen : *mut GpPen, linejoin : LineJoin) -> Status);
+    unsafe { GdipSetPenLineJoin(pen as _, linejoin) }
 }
 #[inline]
 pub unsafe fn GdipSetPenMiterLimit(pen: *mut GpPen, miterlimit: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPenMiterLimit(pen : *mut GpPen, miterlimit : f32) -> Status);
-    GdipSetPenMiterLimit(pen, miterlimit)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPenMiterLimit(pen : *mut GpPen, miterlimit : f32) -> Status);
+    unsafe { GdipSetPenMiterLimit(pen as _, miterlimit) }
 }
 #[inline]
 pub unsafe fn GdipSetPenMode(pen: *mut GpPen, penmode: PenAlignment) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPenMode(pen : *mut GpPen, penmode : PenAlignment) -> Status);
-    GdipSetPenMode(pen, penmode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPenMode(pen : *mut GpPen, penmode : PenAlignment) -> Status);
+    unsafe { GdipSetPenMode(pen as _, penmode) }
 }
 #[inline]
 pub unsafe fn GdipSetPenStartCap(pen: *mut GpPen, startcap: LineCap) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPenStartCap(pen : *mut GpPen, startcap : LineCap) -> Status);
-    GdipSetPenStartCap(pen, startcap)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPenStartCap(pen : *mut GpPen, startcap : LineCap) -> Status);
+    unsafe { GdipSetPenStartCap(pen as _, startcap) }
 }
 #[inline]
 pub unsafe fn GdipSetPenTransform(pen: *mut GpPen, matrix: *mut Matrix) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPenTransform(pen : *mut GpPen, matrix : *mut Matrix) -> Status);
-    GdipSetPenTransform(pen, matrix)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPenTransform(pen : *mut GpPen, matrix : *mut Matrix) -> Status);
+    unsafe { GdipSetPenTransform(pen as _, matrix as _) }
 }
 #[inline]
 pub unsafe fn GdipSetPenUnit(pen: *mut GpPen, unit: Unit) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPenUnit(pen : *mut GpPen, unit : Unit) -> Status);
-    GdipSetPenUnit(pen, unit)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPenUnit(pen : *mut GpPen, unit : Unit) -> Status);
+    unsafe { GdipSetPenUnit(pen as _, unit) }
 }
 #[inline]
 pub unsafe fn GdipSetPenWidth(pen: *mut GpPen, width: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPenWidth(pen : *mut GpPen, width : f32) -> Status);
-    GdipSetPenWidth(pen, width)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPenWidth(pen : *mut GpPen, width : f32) -> Status);
+    unsafe { GdipSetPenWidth(pen as _, width) }
 }
 #[inline]
 pub unsafe fn GdipSetPixelOffsetMode(graphics: *mut GpGraphics, pixeloffsetmode: PixelOffsetMode) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPixelOffsetMode(graphics : *mut GpGraphics, pixeloffsetmode : PixelOffsetMode) -> Status);
-    GdipSetPixelOffsetMode(graphics, pixeloffsetmode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPixelOffsetMode(graphics : *mut GpGraphics, pixeloffsetmode : PixelOffsetMode) -> Status);
+    unsafe { GdipSetPixelOffsetMode(graphics as _, pixeloffsetmode) }
 }
 #[inline]
 pub unsafe fn GdipSetPropertyItem(image: *mut GpImage, item: *const PropertyItem) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetPropertyItem(image : *mut GpImage, item : *const PropertyItem) -> Status);
-    GdipSetPropertyItem(image, item)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetPropertyItem(image : *mut GpImage, item : *const PropertyItem) -> Status);
+    unsafe { GdipSetPropertyItem(image as _, item) }
 }
 #[inline]
 pub unsafe fn GdipSetRenderingOrigin(graphics: *mut GpGraphics, x: i32, y: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetRenderingOrigin(graphics : *mut GpGraphics, x : i32, y : i32) -> Status);
-    GdipSetRenderingOrigin(graphics, x, y)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetRenderingOrigin(graphics : *mut GpGraphics, x : i32, y : i32) -> Status);
+    unsafe { GdipSetRenderingOrigin(graphics as _, x, y) }
 }
 #[inline]
 pub unsafe fn GdipSetSmoothingMode(graphics: *mut GpGraphics, smoothingmode: SmoothingMode) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetSmoothingMode(graphics : *mut GpGraphics, smoothingmode : SmoothingMode) -> Status);
-    GdipSetSmoothingMode(graphics, smoothingmode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetSmoothingMode(graphics : *mut GpGraphics, smoothingmode : SmoothingMode) -> Status);
+    unsafe { GdipSetSmoothingMode(graphics as _, smoothingmode) }
 }
 #[inline]
 pub unsafe fn GdipSetSolidFillColor(brush: *mut GpSolidFill, color: u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetSolidFillColor(brush : *mut GpSolidFill, color : u32) -> Status);
-    GdipSetSolidFillColor(brush, color)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetSolidFillColor(brush : *mut GpSolidFill, color : u32) -> Status);
+    unsafe { GdipSetSolidFillColor(brush as _, color) }
 }
 #[inline]
 pub unsafe fn GdipSetStringFormatAlign(format: *mut GpStringFormat, align: StringAlignment) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetStringFormatAlign(format : *mut GpStringFormat, align : StringAlignment) -> Status);
-    GdipSetStringFormatAlign(format, align)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetStringFormatAlign(format : *mut GpStringFormat, align : StringAlignment) -> Status);
+    unsafe { GdipSetStringFormatAlign(format as _, align) }
 }
 #[inline]
 pub unsafe fn GdipSetStringFormatDigitSubstitution(format: *mut GpStringFormat, language: u16, substitute: StringDigitSubstitute) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetStringFormatDigitSubstitution(format : *mut GpStringFormat, language : u16, substitute : StringDigitSubstitute) -> Status);
-    GdipSetStringFormatDigitSubstitution(format, language, substitute)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetStringFormatDigitSubstitution(format : *mut GpStringFormat, language : u16, substitute : StringDigitSubstitute) -> Status);
+    unsafe { GdipSetStringFormatDigitSubstitution(format as _, language, substitute) }
 }
 #[inline]
 pub unsafe fn GdipSetStringFormatFlags(format: *mut GpStringFormat, flags: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetStringFormatFlags(format : *mut GpStringFormat, flags : i32) -> Status);
-    GdipSetStringFormatFlags(format, flags)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetStringFormatFlags(format : *mut GpStringFormat, flags : i32) -> Status);
+    unsafe { GdipSetStringFormatFlags(format as _, flags) }
 }
 #[inline]
 pub unsafe fn GdipSetStringFormatHotkeyPrefix(format: *mut GpStringFormat, hotkeyprefix: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetStringFormatHotkeyPrefix(format : *mut GpStringFormat, hotkeyprefix : i32) -> Status);
-    GdipSetStringFormatHotkeyPrefix(format, hotkeyprefix)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetStringFormatHotkeyPrefix(format : *mut GpStringFormat, hotkeyprefix : i32) -> Status);
+    unsafe { GdipSetStringFormatHotkeyPrefix(format as _, hotkeyprefix) }
 }
 #[inline]
 pub unsafe fn GdipSetStringFormatLineAlign(format: *mut GpStringFormat, align: StringAlignment) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetStringFormatLineAlign(format : *mut GpStringFormat, align : StringAlignment) -> Status);
-    GdipSetStringFormatLineAlign(format, align)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetStringFormatLineAlign(format : *mut GpStringFormat, align : StringAlignment) -> Status);
+    unsafe { GdipSetStringFormatLineAlign(format as _, align) }
 }
 #[inline]
 pub unsafe fn GdipSetStringFormatMeasurableCharacterRanges(format: *mut GpStringFormat, rangecount: i32, ranges: *const CharacterRange) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetStringFormatMeasurableCharacterRanges(format : *mut GpStringFormat, rangecount : i32, ranges : *const CharacterRange) -> Status);
-    GdipSetStringFormatMeasurableCharacterRanges(format, rangecount, ranges)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetStringFormatMeasurableCharacterRanges(format : *mut GpStringFormat, rangecount : i32, ranges : *const CharacterRange) -> Status);
+    unsafe { GdipSetStringFormatMeasurableCharacterRanges(format as _, rangecount, ranges) }
 }
 #[inline]
 pub unsafe fn GdipSetStringFormatTabStops(format: *mut GpStringFormat, firsttaboffset: f32, count: i32, tabstops: *const f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetStringFormatTabStops(format : *mut GpStringFormat, firsttaboffset : f32, count : i32, tabstops : *const f32) -> Status);
-    GdipSetStringFormatTabStops(format, firsttaboffset, count, tabstops)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetStringFormatTabStops(format : *mut GpStringFormat, firsttaboffset : f32, count : i32, tabstops : *const f32) -> Status);
+    unsafe { GdipSetStringFormatTabStops(format as _, firsttaboffset, count, tabstops) }
 }
 #[inline]
 pub unsafe fn GdipSetStringFormatTrimming(format: *mut GpStringFormat, trimming: StringTrimming) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetStringFormatTrimming(format : *mut GpStringFormat, trimming : StringTrimming) -> Status);
-    GdipSetStringFormatTrimming(format, trimming)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetStringFormatTrimming(format : *mut GpStringFormat, trimming : StringTrimming) -> Status);
+    unsafe { GdipSetStringFormatTrimming(format as _, trimming) }
 }
 #[inline]
 pub unsafe fn GdipSetTextContrast(graphics: *mut GpGraphics, contrast: u32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetTextContrast(graphics : *mut GpGraphics, contrast : u32) -> Status);
-    GdipSetTextContrast(graphics, contrast)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetTextContrast(graphics : *mut GpGraphics, contrast : u32) -> Status);
+    unsafe { GdipSetTextContrast(graphics as _, contrast) }
 }
 #[inline]
 pub unsafe fn GdipSetTextRenderingHint(graphics: *mut GpGraphics, mode: TextRenderingHint) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetTextRenderingHint(graphics : *mut GpGraphics, mode : TextRenderingHint) -> Status);
-    GdipSetTextRenderingHint(graphics, mode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetTextRenderingHint(graphics : *mut GpGraphics, mode : TextRenderingHint) -> Status);
+    unsafe { GdipSetTextRenderingHint(graphics as _, mode) }
 }
 #[inline]
 pub unsafe fn GdipSetTextureTransform(brush: *mut GpTexture, matrix: *const Matrix) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetTextureTransform(brush : *mut GpTexture, matrix : *const Matrix) -> Status);
-    GdipSetTextureTransform(brush, matrix)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetTextureTransform(brush : *mut GpTexture, matrix : *const Matrix) -> Status);
+    unsafe { GdipSetTextureTransform(brush as _, matrix) }
 }
 #[inline]
 pub unsafe fn GdipSetTextureWrapMode(brush: *mut GpTexture, wrapmode: WrapMode) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetTextureWrapMode(brush : *mut GpTexture, wrapmode : WrapMode) -> Status);
-    GdipSetTextureWrapMode(brush, wrapmode)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetTextureWrapMode(brush : *mut GpTexture, wrapmode : WrapMode) -> Status);
+    unsafe { GdipSetTextureWrapMode(brush as _, wrapmode) }
 }
 #[inline]
 pub unsafe fn GdipSetWorldTransform(graphics: *mut GpGraphics, matrix: *mut Matrix) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipSetWorldTransform(graphics : *mut GpGraphics, matrix : *mut Matrix) -> Status);
-    GdipSetWorldTransform(graphics, matrix)
+    windows_link::link!("gdiplus.dll" "system" fn GdipSetWorldTransform(graphics : *mut GpGraphics, matrix : *mut Matrix) -> Status);
+    unsafe { GdipSetWorldTransform(graphics as _, matrix as _) }
 }
 #[inline]
 pub unsafe fn GdipShearMatrix(matrix: *mut Matrix, shearx: f32, sheary: f32, order: MatrixOrder) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipShearMatrix(matrix : *mut Matrix, shearx : f32, sheary : f32, order : MatrixOrder) -> Status);
-    GdipShearMatrix(matrix, shearx, sheary, order)
+    windows_link::link!("gdiplus.dll" "system" fn GdipShearMatrix(matrix : *mut Matrix, shearx : f32, sheary : f32, order : MatrixOrder) -> Status);
+    unsafe { GdipShearMatrix(matrix as _, shearx, sheary, order) }
 }
 #[inline]
 pub unsafe fn GdipStartPathFigure(path: *mut GpPath) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipStartPathFigure(path : *mut GpPath) -> Status);
-    GdipStartPathFigure(path)
+    windows_link::link!("gdiplus.dll" "system" fn GdipStartPathFigure(path : *mut GpPath) -> Status);
+    unsafe { GdipStartPathFigure(path as _) }
 }
 #[inline]
 pub unsafe fn GdipStringFormatGetGenericDefault(format: *mut *mut GpStringFormat) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipStringFormatGetGenericDefault(format : *mut *mut GpStringFormat) -> Status);
-    GdipStringFormatGetGenericDefault(format)
+    windows_link::link!("gdiplus.dll" "system" fn GdipStringFormatGetGenericDefault(format : *mut *mut GpStringFormat) -> Status);
+    unsafe { GdipStringFormatGetGenericDefault(format as _) }
 }
 #[inline]
 pub unsafe fn GdipStringFormatGetGenericTypographic(format: *mut *mut GpStringFormat) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipStringFormatGetGenericTypographic(format : *mut *mut GpStringFormat) -> Status);
-    GdipStringFormatGetGenericTypographic(format)
+    windows_link::link!("gdiplus.dll" "system" fn GdipStringFormatGetGenericTypographic(format : *mut *mut GpStringFormat) -> Status);
+    unsafe { GdipStringFormatGetGenericTypographic(format as _) }
 }
 #[inline]
-pub unsafe fn GdipTestControl(control: GpTestControlEnum, param1: *mut ::core::ffi::c_void) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipTestControl(control : GpTestControlEnum, param1 : *mut ::core::ffi::c_void) -> Status);
-    GdipTestControl(control, param1)
+pub unsafe fn GdipTestControl(control: GpTestControlEnum, param1: *mut core::ffi::c_void) -> Status {
+    windows_link::link!("gdiplus.dll" "system" fn GdipTestControl(control : GpTestControlEnum, param1 : *mut core::ffi::c_void) -> Status);
+    unsafe { GdipTestControl(control, param1 as _) }
 }
 #[inline]
 pub unsafe fn GdipTransformMatrixPoints(matrix: *mut Matrix, pts: *mut PointF, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipTransformMatrixPoints(matrix : *mut Matrix, pts : *mut PointF, count : i32) -> Status);
-    GdipTransformMatrixPoints(matrix, pts, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipTransformMatrixPoints(matrix : *mut Matrix, pts : *mut PointF, count : i32) -> Status);
+    unsafe { GdipTransformMatrixPoints(matrix as _, pts as _, count) }
 }
 #[inline]
 pub unsafe fn GdipTransformMatrixPointsI(matrix: *mut Matrix, pts: *mut Point, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipTransformMatrixPointsI(matrix : *mut Matrix, pts : *mut Point, count : i32) -> Status);
-    GdipTransformMatrixPointsI(matrix, pts, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipTransformMatrixPointsI(matrix : *mut Matrix, pts : *mut Point, count : i32) -> Status);
+    unsafe { GdipTransformMatrixPointsI(matrix as _, pts as _, count) }
 }
 #[inline]
 pub unsafe fn GdipTransformPath(path: *mut GpPath, matrix: *mut Matrix) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipTransformPath(path : *mut GpPath, matrix : *mut Matrix) -> Status);
-    GdipTransformPath(path, matrix)
+    windows_link::link!("gdiplus.dll" "system" fn GdipTransformPath(path : *mut GpPath, matrix : *mut Matrix) -> Status);
+    unsafe { GdipTransformPath(path as _, matrix as _) }
 }
 #[inline]
 pub unsafe fn GdipTransformPoints(graphics: *mut GpGraphics, destspace: CoordinateSpace, srcspace: CoordinateSpace, points: *mut PointF, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipTransformPoints(graphics : *mut GpGraphics, destspace : CoordinateSpace, srcspace : CoordinateSpace, points : *mut PointF, count : i32) -> Status);
-    GdipTransformPoints(graphics, destspace, srcspace, points, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipTransformPoints(graphics : *mut GpGraphics, destspace : CoordinateSpace, srcspace : CoordinateSpace, points : *mut PointF, count : i32) -> Status);
+    unsafe { GdipTransformPoints(graphics as _, destspace, srcspace, points as _, count) }
 }
 #[inline]
 pub unsafe fn GdipTransformPointsI(graphics: *mut GpGraphics, destspace: CoordinateSpace, srcspace: CoordinateSpace, points: *mut Point, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipTransformPointsI(graphics : *mut GpGraphics, destspace : CoordinateSpace, srcspace : CoordinateSpace, points : *mut Point, count : i32) -> Status);
-    GdipTransformPointsI(graphics, destspace, srcspace, points, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipTransformPointsI(graphics : *mut GpGraphics, destspace : CoordinateSpace, srcspace : CoordinateSpace, points : *mut Point, count : i32) -> Status);
+    unsafe { GdipTransformPointsI(graphics as _, destspace, srcspace, points as _, count) }
 }
 #[inline]
 pub unsafe fn GdipTransformRegion(region: *mut GpRegion, matrix: *mut Matrix) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipTransformRegion(region : *mut GpRegion, matrix : *mut Matrix) -> Status);
-    GdipTransformRegion(region, matrix)
+    windows_link::link!("gdiplus.dll" "system" fn GdipTransformRegion(region : *mut GpRegion, matrix : *mut Matrix) -> Status);
+    unsafe { GdipTransformRegion(region as _, matrix as _) }
 }
 #[inline]
 pub unsafe fn GdipTranslateClip(graphics: *mut GpGraphics, dx: f32, dy: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipTranslateClip(graphics : *mut GpGraphics, dx : f32, dy : f32) -> Status);
-    GdipTranslateClip(graphics, dx, dy)
+    windows_link::link!("gdiplus.dll" "system" fn GdipTranslateClip(graphics : *mut GpGraphics, dx : f32, dy : f32) -> Status);
+    unsafe { GdipTranslateClip(graphics as _, dx, dy) }
 }
 #[inline]
 pub unsafe fn GdipTranslateClipI(graphics: *mut GpGraphics, dx: i32, dy: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipTranslateClipI(graphics : *mut GpGraphics, dx : i32, dy : i32) -> Status);
-    GdipTranslateClipI(graphics, dx, dy)
+    windows_link::link!("gdiplus.dll" "system" fn GdipTranslateClipI(graphics : *mut GpGraphics, dx : i32, dy : i32) -> Status);
+    unsafe { GdipTranslateClipI(graphics as _, dx, dy) }
 }
 #[inline]
 pub unsafe fn GdipTranslateLineTransform(brush: *mut GpLineGradient, dx: f32, dy: f32, order: MatrixOrder) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipTranslateLineTransform(brush : *mut GpLineGradient, dx : f32, dy : f32, order : MatrixOrder) -> Status);
-    GdipTranslateLineTransform(brush, dx, dy, order)
+    windows_link::link!("gdiplus.dll" "system" fn GdipTranslateLineTransform(brush : *mut GpLineGradient, dx : f32, dy : f32, order : MatrixOrder) -> Status);
+    unsafe { GdipTranslateLineTransform(brush as _, dx, dy, order) }
 }
 #[inline]
 pub unsafe fn GdipTranslateMatrix(matrix: *mut Matrix, offsetx: f32, offsety: f32, order: MatrixOrder) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipTranslateMatrix(matrix : *mut Matrix, offsetx : f32, offsety : f32, order : MatrixOrder) -> Status);
-    GdipTranslateMatrix(matrix, offsetx, offsety, order)
+    windows_link::link!("gdiplus.dll" "system" fn GdipTranslateMatrix(matrix : *mut Matrix, offsetx : f32, offsety : f32, order : MatrixOrder) -> Status);
+    unsafe { GdipTranslateMatrix(matrix as _, offsetx, offsety, order) }
 }
 #[inline]
 pub unsafe fn GdipTranslatePathGradientTransform(brush: *mut GpPathGradient, dx: f32, dy: f32, order: MatrixOrder) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipTranslatePathGradientTransform(brush : *mut GpPathGradient, dx : f32, dy : f32, order : MatrixOrder) -> Status);
-    GdipTranslatePathGradientTransform(brush, dx, dy, order)
+    windows_link::link!("gdiplus.dll" "system" fn GdipTranslatePathGradientTransform(brush : *mut GpPathGradient, dx : f32, dy : f32, order : MatrixOrder) -> Status);
+    unsafe { GdipTranslatePathGradientTransform(brush as _, dx, dy, order) }
 }
 #[inline]
 pub unsafe fn GdipTranslatePenTransform(pen: *mut GpPen, dx: f32, dy: f32, order: MatrixOrder) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipTranslatePenTransform(pen : *mut GpPen, dx : f32, dy : f32, order : MatrixOrder) -> Status);
-    GdipTranslatePenTransform(pen, dx, dy, order)
+    windows_link::link!("gdiplus.dll" "system" fn GdipTranslatePenTransform(pen : *mut GpPen, dx : f32, dy : f32, order : MatrixOrder) -> Status);
+    unsafe { GdipTranslatePenTransform(pen as _, dx, dy, order) }
 }
 #[inline]
 pub unsafe fn GdipTranslateRegion(region: *mut GpRegion, dx: f32, dy: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipTranslateRegion(region : *mut GpRegion, dx : f32, dy : f32) -> Status);
-    GdipTranslateRegion(region, dx, dy)
+    windows_link::link!("gdiplus.dll" "system" fn GdipTranslateRegion(region : *mut GpRegion, dx : f32, dy : f32) -> Status);
+    unsafe { GdipTranslateRegion(region as _, dx, dy) }
 }
 #[inline]
 pub unsafe fn GdipTranslateRegionI(region: *mut GpRegion, dx: i32, dy: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipTranslateRegionI(region : *mut GpRegion, dx : i32, dy : i32) -> Status);
-    GdipTranslateRegionI(region, dx, dy)
+    windows_link::link!("gdiplus.dll" "system" fn GdipTranslateRegionI(region : *mut GpRegion, dx : i32, dy : i32) -> Status);
+    unsafe { GdipTranslateRegionI(region as _, dx, dy) }
 }
 #[inline]
 pub unsafe fn GdipTranslateTextureTransform(brush: *mut GpTexture, dx: f32, dy: f32, order: MatrixOrder) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipTranslateTextureTransform(brush : *mut GpTexture, dx : f32, dy : f32, order : MatrixOrder) -> Status);
-    GdipTranslateTextureTransform(brush, dx, dy, order)
+    windows_link::link!("gdiplus.dll" "system" fn GdipTranslateTextureTransform(brush : *mut GpTexture, dx : f32, dy : f32, order : MatrixOrder) -> Status);
+    unsafe { GdipTranslateTextureTransform(brush as _, dx, dy, order) }
 }
 #[inline]
 pub unsafe fn GdipTranslateWorldTransform(graphics: *mut GpGraphics, dx: f32, dy: f32, order: MatrixOrder) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipTranslateWorldTransform(graphics : *mut GpGraphics, dx : f32, dy : f32, order : MatrixOrder) -> Status);
-    GdipTranslateWorldTransform(graphics, dx, dy, order)
+    windows_link::link!("gdiplus.dll" "system" fn GdipTranslateWorldTransform(graphics : *mut GpGraphics, dx : f32, dy : f32, order : MatrixOrder) -> Status);
+    unsafe { GdipTranslateWorldTransform(graphics as _, dx, dy, order) }
 }
 #[inline]
 pub unsafe fn GdipVectorTransformMatrixPoints(matrix: *mut Matrix, pts: *mut PointF, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipVectorTransformMatrixPoints(matrix : *mut Matrix, pts : *mut PointF, count : i32) -> Status);
-    GdipVectorTransformMatrixPoints(matrix, pts, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipVectorTransformMatrixPoints(matrix : *mut Matrix, pts : *mut PointF, count : i32) -> Status);
+    unsafe { GdipVectorTransformMatrixPoints(matrix as _, pts as _, count) }
 }
 #[inline]
 pub unsafe fn GdipVectorTransformMatrixPointsI(matrix: *mut Matrix, pts: *mut Point, count: i32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipVectorTransformMatrixPointsI(matrix : *mut Matrix, pts : *mut Point, count : i32) -> Status);
-    GdipVectorTransformMatrixPointsI(matrix, pts, count)
+    windows_link::link!("gdiplus.dll" "system" fn GdipVectorTransformMatrixPointsI(matrix : *mut Matrix, pts : *mut Point, count : i32) -> Status);
+    unsafe { GdipVectorTransformMatrixPointsI(matrix as _, pts as _, count) }
 }
 #[inline]
 pub unsafe fn GdipWarpPath(path: *mut GpPath, matrix: *mut Matrix, points: *const PointF, count: i32, srcx: f32, srcy: f32, srcwidth: f32, srcheight: f32, warpmode: WarpMode, flatness: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipWarpPath(path : *mut GpPath, matrix : *mut Matrix, points : *const PointF, count : i32, srcx : f32, srcy : f32, srcwidth : f32, srcheight : f32, warpmode : WarpMode, flatness : f32) -> Status);
-    GdipWarpPath(path, matrix, points, count, srcx, srcy, srcwidth, srcheight, warpmode, flatness)
+    windows_link::link!("gdiplus.dll" "system" fn GdipWarpPath(path : *mut GpPath, matrix : *mut Matrix, points : *const PointF, count : i32, srcx : f32, srcy : f32, srcwidth : f32, srcheight : f32, warpmode : WarpMode, flatness : f32) -> Status);
+    unsafe { GdipWarpPath(path as _, matrix as _, points, count, srcx, srcy, srcwidth, srcheight, warpmode, flatness) }
 }
 #[inline]
 pub unsafe fn GdipWidenPath(nativepath: *mut GpPath, pen: *mut GpPen, matrix: *mut Matrix, flatness: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipWidenPath(nativepath : *mut GpPath, pen : *mut GpPen, matrix : *mut Matrix, flatness : f32) -> Status);
-    GdipWidenPath(nativepath, pen, matrix, flatness)
+    windows_link::link!("gdiplus.dll" "system" fn GdipWidenPath(nativepath : *mut GpPath, pen : *mut GpPen, matrix : *mut Matrix, flatness : f32) -> Status);
+    unsafe { GdipWidenPath(nativepath as _, pen as _, matrix as _, flatness) }
 }
 #[inline]
 pub unsafe fn GdipWindingModeOutline(path: *mut GpPath, matrix: *mut Matrix, flatness: f32) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdipWindingModeOutline(path : *mut GpPath, matrix : *mut Matrix, flatness : f32) -> Status);
-    GdipWindingModeOutline(path, matrix, flatness)
+    windows_link::link!("gdiplus.dll" "system" fn GdipWindingModeOutline(path : *mut GpPath, matrix : *mut Matrix, flatness : f32) -> Status);
+    unsafe { GdipWindingModeOutline(path as _, matrix as _, flatness) }
 }
 #[inline]
 pub unsafe fn GdiplusNotificationHook(token: *mut usize) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdiplusNotificationHook(token : *mut usize) -> Status);
-    GdiplusNotificationHook(token)
+    windows_link::link!("gdiplus.dll" "system" fn GdiplusNotificationHook(token : *mut usize) -> Status);
+    unsafe { GdiplusNotificationHook(token as _) }
 }
 #[inline]
 pub unsafe fn GdiplusNotificationUnhook(token: usize) {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdiplusNotificationUnhook(token : usize) -> ());
-    GdiplusNotificationUnhook(token)
+    windows_link::link!("gdiplus.dll" "system" fn GdiplusNotificationUnhook(token : usize));
+    unsafe { GdiplusNotificationUnhook(token) }
 }
 #[inline]
 pub unsafe fn GdiplusShutdown(token: usize) {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdiplusShutdown(token : usize) -> ());
-    GdiplusShutdown(token)
+    windows_link::link!("gdiplus.dll" "system" fn GdiplusShutdown(token : usize));
+    unsafe { GdiplusShutdown(token) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
 pub unsafe fn GdiplusStartup(token: *mut usize, input: *const GdiplusStartupInput, output: *mut GdiplusStartupOutput) -> Status {
-    ::windows_targets::link!("gdiplus.dll" "system" fn GdiplusStartup(token : *mut usize, input : *const GdiplusStartupInput, output : *mut GdiplusStartupOutput) -> Status);
-    GdiplusStartup(token, input, output)
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq, ::core::fmt::Debug, ::core::clone::Clone)]
-pub struct GdiplusAbort(::std::ptr::NonNull<::std::ffi::c_void>);
-impl GdiplusAbort {
-    pub unsafe fn Abort(&self) -> ::windows_core::Result<()> {
-        (::windows_core::Interface::vtable(self).Abort)(::windows_core::Interface::as_raw(self)).ok()
-    }
-}
-unsafe impl ::windows_core::Interface for GdiplusAbort {
-    type Vtable = GdiplusAbort_Vtbl;
-}
-#[repr(C)]
-#[doc(hidden)]
-pub struct GdiplusAbort_Vtbl {
-    pub Abort: unsafe extern "system" fn(this: *mut ::core::ffi::c_void) -> ::windows_core::HRESULT,
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq, ::core::fmt::Debug, ::core::clone::Clone)]
-pub struct IImageBytes(::windows_core::IUnknown);
-impl IImageBytes {
-    pub unsafe fn CountBytes(&self, pcb: *mut u32) -> ::windows_core::Result<()> {
-        (::windows_core::Interface::vtable(self).CountBytes)(::windows_core::Interface::as_raw(self), pcb).ok()
-    }
-    pub unsafe fn LockBytes(&self, cb: u32, uloffset: u32, ppvbytes: *const *const ::core::ffi::c_void) -> ::windows_core::Result<()> {
-        (::windows_core::Interface::vtable(self).LockBytes)(::windows_core::Interface::as_raw(self), cb, uloffset, ppvbytes).ok()
-    }
-    pub unsafe fn UnlockBytes(&self, pvbytes: *const ::core::ffi::c_void, cb: u32, uloffset: u32) -> ::windows_core::Result<()> {
-        (::windows_core::Interface::vtable(self).UnlockBytes)(::windows_core::Interface::as_raw(self), pvbytes, cb, uloffset).ok()
-    }
-}
-::windows_core::imp::interface_hierarchy!(IImageBytes, ::windows_core::IUnknown);
-unsafe impl ::windows_core::Interface for IImageBytes {
-    type Vtable = IImageBytes_Vtbl;
-}
-unsafe impl ::windows_core::ComInterface for IImageBytes {
-    const IID: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x025d1823_6c7d_447b_bbdb_a3cbc3dfa2fc);
-}
-#[repr(C)]
-#[doc(hidden)]
-pub struct IImageBytes_Vtbl {
-    pub base__: ::windows_core::IUnknown_Vtbl,
-    pub CountBytes: unsafe extern "system" fn(this: *mut ::core::ffi::c_void, pcb: *mut u32) -> ::windows_core::HRESULT,
-    pub LockBytes: unsafe extern "system" fn(this: *mut ::core::ffi::c_void, cb: u32, uloffset: u32, ppvbytes: *const *const ::core::ffi::c_void) -> ::windows_core::HRESULT,
-    pub UnlockBytes: unsafe extern "system" fn(this: *mut ::core::ffi::c_void, pvbytes: *const ::core::ffi::c_void, cb: u32, uloffset: u32) -> ::windows_core::HRESULT,
+    windows_link::link!("gdiplus.dll" "system" fn GdiplusStartup(token : *mut usize, input : *const GdiplusStartupInput, output : *mut GdiplusStartupOutput) -> Status);
+    unsafe { GdiplusStartup(token as _, input, output as _) }
 }
 pub const ALPHA_SHIFT: u32 = 24u32;
 pub const Aborted: Status = Status(9i32);
@@ -3625,14 +3314,228 @@ pub const AdjustMidtone: CurveAdjustments = CurveAdjustments(5i32);
 pub const AdjustShadow: CurveAdjustments = CurveAdjustments(4i32);
 pub const AdjustWhiteSaturation: CurveAdjustments = CurveAdjustments(6i32);
 pub const BLUE_SHIFT: u32 = 0u32;
-pub const BlurEffectGuid: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x633c80a4_1843_482b_9ef2_be2834c5fdd4);
-pub const BrightnessContrastEffectGuid: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xd3a1dbe1_8ec4_4c17_9f4c_ea97ad1c343d);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
+pub struct Bitmap(pub isize);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct BitmapData {
+    pub Width: u32,
+    pub Height: u32,
+    pub Stride: i32,
+    pub PixelFormat: i32,
+    pub Scan0: *mut core::ffi::c_void,
+    pub Reserved: usize,
+}
+impl Default for BitmapData {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct Blur {
+    pub Base: Effect,
+}
+pub const BlurEffectGuid: windows_core::GUID = windows_core::GUID::from_u128(0x633c80a4_1843_482b_9ef2_be2834c5fdd4);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct BlurParams {
+    pub radius: f32,
+    pub expandEdge: windows_core::BOOL,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct BrightnessContrast {
+    pub Base: Effect,
+}
+pub const BrightnessContrastEffectGuid: windows_core::GUID = windows_core::GUID::from_u128(0xd3a1dbe1_8ec4_4c17_9f4c_ea97ad1c343d);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct BrightnessContrastParams {
+    pub brightnessLevel: i32,
+    pub contrastLevel: i32,
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct BrushType(pub i32);
 pub const BrushTypeHatchFill: BrushType = BrushType(1i32);
 pub const BrushTypeLinearGradient: BrushType = BrushType(4i32);
 pub const BrushTypePathGradient: BrushType = BrushType(3i32);
 pub const BrushTypeSolidColor: BrushType = BrushType(0i32);
 pub const BrushTypeTextureFill: BrushType = BrushType(2i32);
-pub const CodecIImageBytes: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x025d1823_6c7d_447b_bbdb_a3cbc3dfa2fc);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
+pub struct CGpEffect(pub isize);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
+pub struct CachedBitmap(pub isize);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct CharacterRange {
+    pub First: i32,
+    pub Length: i32,
+}
+pub const CodecIImageBytes: windows_core::GUID = windows_core::GUID::from_u128(0x025d1823_6c7d_447b_bbdb_a3cbc3dfa2fc);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct Color {
+    pub Argb: u32,
+}
+impl Color {
+    pub const AliceBlue: i32 = -984833i32;
+    pub const AntiqueWhite: i32 = -332841i32;
+    pub const Aqua: i32 = -16711681i32;
+    pub const Aquamarine: i32 = -8388652i32;
+    pub const Azure: i32 = -983041i32;
+    pub const Beige: i32 = -657956i32;
+    pub const Bisque: i32 = -6972i32;
+    pub const Black: i32 = -16777216i32;
+    pub const BlanchedAlmond: i32 = -5171i32;
+    pub const Blue: i32 = -16776961i32;
+    pub const BlueViolet: i32 = -7722014i32;
+    pub const Brown: i32 = -5952982i32;
+    pub const BurlyWood: i32 = -2180985i32;
+    pub const CadetBlue: i32 = -10510688i32;
+    pub const Chartreuse: i32 = -8388864i32;
+    pub const Chocolate: i32 = -2987746i32;
+    pub const Coral: i32 = -32944i32;
+    pub const CornflowerBlue: i32 = -10185235i32;
+    pub const Cornsilk: i32 = -1828i32;
+    pub const Crimson: i32 = -2354116i32;
+    pub const Cyan: i32 = -16711681i32;
+    pub const DarkBlue: i32 = -16777077i32;
+    pub const DarkCyan: i32 = -16741493i32;
+    pub const DarkGoldenrod: i32 = -4684277i32;
+    pub const DarkGray: i32 = -5658199i32;
+    pub const DarkGreen: i32 = -16751616i32;
+    pub const DarkKhaki: i32 = -4343957i32;
+    pub const DarkMagenta: i32 = -7667573i32;
+    pub const DarkOliveGreen: i32 = -11179217i32;
+    pub const DarkOrange: i32 = -29696i32;
+    pub const DarkOrchid: i32 = -6737204i32;
+    pub const DarkRed: i32 = -7667712i32;
+    pub const DarkSalmon: i32 = -1468806i32;
+    pub const DarkSeaGreen: i32 = -7357301i32;
+    pub const DarkSlateBlue: i32 = -12042869i32;
+    pub const DarkSlateGray: i32 = -13676721i32;
+    pub const DarkTurquoise: i32 = -16724271i32;
+    pub const DarkViolet: i32 = -7077677i32;
+    pub const DeepPink: i32 = -60269i32;
+    pub const DeepSkyBlue: i32 = -16728065i32;
+    pub const DimGray: i32 = -9868951i32;
+    pub const DodgerBlue: i32 = -14774017i32;
+    pub const Firebrick: i32 = -5103070i32;
+    pub const FloralWhite: i32 = -1296i32;
+    pub const ForestGreen: i32 = -14513374i32;
+    pub const Fuchsia: i32 = -65281i32;
+    pub const Gainsboro: i32 = -2302756i32;
+    pub const GhostWhite: i32 = -460545i32;
+    pub const Gold: i32 = -10496i32;
+    pub const Goldenrod: i32 = -2448096i32;
+    pub const Gray: i32 = -8355712i32;
+    pub const Green: i32 = -16744448i32;
+    pub const GreenYellow: i32 = -5374161i32;
+    pub const Honeydew: i32 = -983056i32;
+    pub const HotPink: i32 = -38476i32;
+    pub const IndianRed: i32 = -3318692i32;
+    pub const Indigo: i32 = -11861886i32;
+    pub const Ivory: i32 = -16i32;
+    pub const Khaki: i32 = -989556i32;
+    pub const Lavender: i32 = -1644806i32;
+    pub const LavenderBlush: i32 = -3851i32;
+    pub const LawnGreen: i32 = -8586240i32;
+    pub const LemonChiffon: i32 = -1331i32;
+    pub const LightBlue: i32 = -5383962i32;
+    pub const LightCoral: i32 = -1015680i32;
+    pub const LightCyan: i32 = -2031617i32;
+    pub const LightGoldenrodYellow: i32 = -329006i32;
+    pub const LightGray: i32 = -2894893i32;
+    pub const LightGreen: i32 = -7278960i32;
+    pub const LightPink: i32 = -18751i32;
+    pub const LightSalmon: i32 = -24454i32;
+    pub const LightSeaGreen: i32 = -14634326i32;
+    pub const LightSkyBlue: i32 = -7876870i32;
+    pub const LightSlateGray: i32 = -8943463i32;
+    pub const LightSteelBlue: i32 = -5192482i32;
+    pub const LightYellow: i32 = -32i32;
+    pub const Lime: i32 = -16711936i32;
+    pub const LimeGreen: i32 = -13447886i32;
+    pub const Linen: i32 = -331546i32;
+    pub const Magenta: i32 = -65281i32;
+    pub const Maroon: i32 = -8388608i32;
+    pub const MediumAquamarine: i32 = -10039894i32;
+    pub const MediumBlue: i32 = -16777011i32;
+    pub const MediumOrchid: i32 = -4565549i32;
+    pub const MediumPurple: i32 = -7114533i32;
+    pub const MediumSeaGreen: i32 = -12799119i32;
+    pub const MediumSlateBlue: i32 = -8689426i32;
+    pub const MediumSpringGreen: i32 = -16713062i32;
+    pub const MediumTurquoise: i32 = -12004916i32;
+    pub const MediumVioletRed: i32 = -3730043i32;
+    pub const MidnightBlue: i32 = -15132304i32;
+    pub const MintCream: i32 = -655366i32;
+    pub const MistyRose: i32 = -6943i32;
+    pub const Moccasin: i32 = -6987i32;
+    pub const NavajoWhite: i32 = -8531i32;
+    pub const Navy: i32 = -16777088i32;
+    pub const OldLace: i32 = -133658i32;
+    pub const Olive: i32 = -8355840i32;
+    pub const OliveDrab: i32 = -9728477i32;
+    pub const Orange: i32 = -23296i32;
+    pub const OrangeRed: i32 = -47872i32;
+    pub const Orchid: i32 = -2461482i32;
+    pub const PaleGoldenrod: i32 = -1120086i32;
+    pub const PaleGreen: i32 = -6751336i32;
+    pub const PaleTurquoise: i32 = -5247250i32;
+    pub const PaleVioletRed: i32 = -2396013i32;
+    pub const PapayaWhip: i32 = -4139i32;
+    pub const PeachPuff: i32 = -9543i32;
+    pub const Peru: i32 = -3308225i32;
+    pub const Pink: i32 = -16181i32;
+    pub const Plum: i32 = -2252579i32;
+    pub const PowderBlue: i32 = -5185306i32;
+    pub const Purple: i32 = -8388480i32;
+    pub const Red: i32 = -65536i32;
+    pub const RosyBrown: i32 = -4419697i32;
+    pub const RoyalBlue: i32 = -12490271i32;
+    pub const SaddleBrown: i32 = -7650029i32;
+    pub const Salmon: i32 = -360334i32;
+    pub const SandyBrown: i32 = -744352i32;
+    pub const SeaGreen: i32 = -13726889i32;
+    pub const SeaShell: i32 = -2578i32;
+    pub const Sienna: i32 = -6270419i32;
+    pub const Silver: i32 = -4144960i32;
+    pub const SkyBlue: i32 = -7876885i32;
+    pub const SlateBlue: i32 = -9807155i32;
+    pub const SlateGray: i32 = -9404272i32;
+    pub const Snow: i32 = -1286i32;
+    pub const SpringGreen: i32 = -16711809i32;
+    pub const SteelBlue: i32 = -12156236i32;
+    pub const Tan: i32 = -2968436i32;
+    pub const Teal: i32 = -16744320i32;
+    pub const Thistle: i32 = -2572328i32;
+    pub const Tomato: i32 = -40121i32;
+    pub const Transparent: i32 = 16777215i32;
+    pub const Turquoise: i32 = -12525360i32;
+    pub const Violet: i32 = -1146130i32;
+    pub const Wheat: i32 = -663885i32;
+    pub const White: i32 = -1i32;
+    pub const WhiteSmoke: i32 = -657931i32;
+    pub const Yellow: i32 = -256i32;
+    pub const YellowGreen: i32 = -6632142i32;
+    pub const AlphaShift: i32 = 24i32;
+    pub const RedShift: i32 = 16i32;
+    pub const GreenShift: i32 = 8i32;
+    pub const BlueShift: i32 = 0i32;
+    pub const AlphaMask: i32 = -16777216i32;
+    pub const RedMask: i32 = 16711680i32;
+    pub const GreenMask: i32 = 65280i32;
+    pub const BlueMask: i32 = 255i32;
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct ColorAdjustType(pub i32);
 pub const ColorAdjustTypeAny: ColorAdjustType = ColorAdjustType(6i32);
 pub const ColorAdjustTypeBitmap: ColorAdjustType = ColorAdjustType(1i32);
 pub const ColorAdjustTypeBrush: ColorAdjustType = ColorAdjustType(2i32);
@@ -3640,58 +3543,182 @@ pub const ColorAdjustTypeCount: ColorAdjustType = ColorAdjustType(5i32);
 pub const ColorAdjustTypeDefault: ColorAdjustType = ColorAdjustType(0i32);
 pub const ColorAdjustTypePen: ColorAdjustType = ColorAdjustType(3i32);
 pub const ColorAdjustTypeText: ColorAdjustType = ColorAdjustType(4i32);
-pub const ColorBalanceEffectGuid: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x537e597d_251e_48da_9664_29ca496b70f8);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct ColorBalance {
+    pub Base: Effect,
+}
+pub const ColorBalanceEffectGuid: windows_core::GUID = windows_core::GUID::from_u128(0x537e597d_251e_48da_9664_29ca496b70f8);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct ColorBalanceParams {
+    pub cyanRed: i32,
+    pub magentaGreen: i32,
+    pub yellowBlue: i32,
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct ColorChannelFlags(pub i32);
 pub const ColorChannelFlagsC: ColorChannelFlags = ColorChannelFlags(0i32);
 pub const ColorChannelFlagsK: ColorChannelFlags = ColorChannelFlags(3i32);
 pub const ColorChannelFlagsLast: ColorChannelFlags = ColorChannelFlags(4i32);
 pub const ColorChannelFlagsM: ColorChannelFlags = ColorChannelFlags(1i32);
 pub const ColorChannelFlagsY: ColorChannelFlags = ColorChannelFlags(2i32);
-pub const ColorCurveEffectGuid: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xdd6a0022_58e4_4a67_9d9b_d48eb881a53d);
-pub const ColorLUTEffectGuid: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xa7ce72a9_0f7f_40d7_b3cc_d0c02d5c3212);
-pub const ColorMatrixEffectGuid: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x718f2615_7933_40e3_a511_5f68fe14dd74);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct ColorCurve {
+    pub Base: Effect,
+}
+pub const ColorCurveEffectGuid: windows_core::GUID = windows_core::GUID::from_u128(0xdd6a0022_58e4_4a67_9d9b_d48eb881a53d);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct ColorCurveParams {
+    pub adjustment: CurveAdjustments,
+    pub channel: CurveChannel,
+    pub adjustValue: i32,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct ColorLUT {
+    pub Base: Effect,
+}
+pub const ColorLUTEffectGuid: windows_core::GUID = windows_core::GUID::from_u128(0xa7ce72a9_0f7f_40d7_b3cc_d0c02d5c3212);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct ColorLUTParams {
+    pub lutB: [u8; 256],
+    pub lutG: [u8; 256],
+    pub lutR: [u8; 256],
+    pub lutA: [u8; 256],
+}
+impl Default for ColorLUTParams {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct ColorMap {
+    pub oldColor: Color,
+    pub newColor: Color,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct ColorMatrix {
+    pub m: [f32; 25],
+}
+impl Default for ColorMatrix {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct ColorMatrixEffect {
+    pub Base: Effect,
+}
+pub const ColorMatrixEffectGuid: windows_core::GUID = windows_core::GUID::from_u128(0x718f2615_7933_40e3_a511_5f68fe14dd74);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct ColorMatrixFlags(pub i32);
 pub const ColorMatrixFlagsAltGray: ColorMatrixFlags = ColorMatrixFlags(2i32);
 pub const ColorMatrixFlagsDefault: ColorMatrixFlags = ColorMatrixFlags(0i32);
 pub const ColorMatrixFlagsSkipGrays: ColorMatrixFlags = ColorMatrixFlags(1i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct ColorMode(pub i32);
 pub const ColorModeARGB32: ColorMode = ColorMode(0i32);
 pub const ColorModeARGB64: ColorMode = ColorMode(1i32);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct ColorPalette {
+    pub Flags: u32,
+    pub Count: u32,
+    pub Entries: [u32; 1],
+}
+impl Default for ColorPalette {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct CombineMode(pub i32);
 pub const CombineModeComplement: CombineMode = CombineMode(5i32);
 pub const CombineModeExclude: CombineMode = CombineMode(4i32);
 pub const CombineModeIntersect: CombineMode = CombineMode(1i32);
 pub const CombineModeReplace: CombineMode = CombineMode(0i32);
 pub const CombineModeUnion: CombineMode = CombineMode(2i32);
 pub const CombineModeXor: CombineMode = CombineMode(3i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct CompositingMode(pub i32);
 pub const CompositingModeSourceCopy: CompositingMode = CompositingMode(1i32);
 pub const CompositingModeSourceOver: CompositingMode = CompositingMode(0i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct CompositingQuality(pub i32);
 pub const CompositingQualityAssumeLinear: CompositingQuality = CompositingQuality(4i32);
 pub const CompositingQualityDefault: CompositingQuality = CompositingQuality(0i32);
 pub const CompositingQualityGammaCorrected: CompositingQuality = CompositingQuality(3i32);
 pub const CompositingQualityHighQuality: CompositingQuality = CompositingQuality(2i32);
 pub const CompositingQualityHighSpeed: CompositingQuality = CompositingQuality(1i32);
 pub const CompositingQualityInvalid: CompositingQuality = CompositingQuality(-1i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct ConvertToEmfPlusFlags(pub i32);
 pub const ConvertToEmfPlusFlagsDefault: ConvertToEmfPlusFlags = ConvertToEmfPlusFlags(0i32);
 pub const ConvertToEmfPlusFlagsInvalidRecord: ConvertToEmfPlusFlags = ConvertToEmfPlusFlags(4i32);
 pub const ConvertToEmfPlusFlagsRopUsed: ConvertToEmfPlusFlags = ConvertToEmfPlusFlags(1i32);
 pub const ConvertToEmfPlusFlagsText: ConvertToEmfPlusFlags = ConvertToEmfPlusFlags(2i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct CoordinateSpace(pub i32);
 pub const CoordinateSpaceDevice: CoordinateSpace = CoordinateSpace(2i32);
 pub const CoordinateSpacePage: CoordinateSpace = CoordinateSpace(1i32);
 pub const CoordinateSpaceWorld: CoordinateSpace = CoordinateSpace(0i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct CurveAdjustments(pub i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct CurveChannel(pub i32);
 pub const CurveChannelAll: CurveChannel = CurveChannel(0i32);
 pub const CurveChannelBlue: CurveChannel = CurveChannel(3i32);
 pub const CurveChannelGreen: CurveChannel = CurveChannel(2i32);
 pub const CurveChannelRed: CurveChannel = CurveChannel(1i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
+pub struct CustomLineCap(pub isize);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct CustomLineCapType(pub i32);
 pub const CustomLineCapTypeAdjustableArrow: CustomLineCapType = CustomLineCapType(1i32);
 pub const CustomLineCapTypeDefault: CustomLineCapType = CustomLineCapType(0i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct DashCap(pub i32);
 pub const DashCapFlat: DashCap = DashCap(0i32);
 pub const DashCapRound: DashCap = DashCap(2i32);
 pub const DashCapTriangle: DashCap = DashCap(3i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct DashStyle(pub i32);
 pub const DashStyleCustom: DashStyle = DashStyle(5i32);
 pub const DashStyleDash: DashStyle = DashStyle(1i32);
 pub const DashStyleDashDot: DashStyle = DashStyle(3i32);
 pub const DashStyleDashDotDot: DashStyle = DashStyle(4i32);
 pub const DashStyleDot: DashStyle = DashStyle(2i32);
 pub const DashStyleSolid: DashStyle = DashStyle(0i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct DebugEventLevel(pub i32);
 pub const DebugEventLevelFatal: DebugEventLevel = DebugEventLevel(0i32);
 pub const DebugEventLevelWarning: DebugEventLevel = DebugEventLevel(1i32);
+pub type DebugEventProc = Option<unsafe extern "system" fn(level: DebugEventLevel, message: windows_core::PCSTR)>;
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct DitherType(pub i32);
 pub const DitherTypeDualSpiral4x4: DitherType = DitherType(7i32);
 pub const DitherTypeDualSpiral8x8: DitherType = DitherType(8i32);
 pub const DitherTypeErrorDiffusion: DitherType = DitherType(9i32);
@@ -3703,11 +3730,51 @@ pub const DitherTypeOrdered8x8: DitherType = DitherType(3i32);
 pub const DitherTypeSolid: DitherType = DitherType(1i32);
 pub const DitherTypeSpiral4x4: DitherType = DitherType(5i32);
 pub const DitherTypeSpiral8x8: DitherType = DitherType(6i32);
+pub type DrawImageAbort = Option<unsafe extern "system" fn() -> windows_core::BOOL>;
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct DriverStringOptions(pub i32);
 pub const DriverStringOptionsCmapLookup: DriverStringOptions = DriverStringOptions(1i32);
 pub const DriverStringOptionsLimitSubpixel: DriverStringOptions = DriverStringOptions(8i32);
 pub const DriverStringOptionsRealizedAdvance: DriverStringOptions = DriverStringOptions(4i32);
 pub const DriverStringOptionsVertical: DriverStringOptions = DriverStringOptions(2i32);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct ENHMETAHEADER3 {
+    pub iType: u32,
+    pub nSize: u32,
+    pub rclBounds: super::super::Foundation::RECTL,
+    pub rclFrame: super::super::Foundation::RECTL,
+    pub dSignature: u32,
+    pub nVersion: u32,
+    pub nBytes: u32,
+    pub nRecords: u32,
+    pub nHandles: u16,
+    pub sReserved: u16,
+    pub nDescription: u32,
+    pub offDescription: u32,
+    pub nPalEntries: u32,
+    pub szlDevice: super::super::Foundation::SIZE,
+    pub szlMillimeters: super::super::Foundation::SIZE,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct Effect {
+    pub lpVtbl: *mut *mut core::ffi::c_void,
+    pub nativeEffect: *mut CGpEffect,
+    pub auxDataSize: i32,
+    pub auxData: *mut core::ffi::c_void,
+    pub useAuxData: windows_core::BOOL,
+}
+impl Default for Effect {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
 pub const EmfPlusRecordTotal: EmfPlusRecordType = EmfPlusRecordType(16443i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct EmfPlusRecordType(pub i32);
 pub const EmfPlusRecordTypeBeginContainer: EmfPlusRecordType = EmfPlusRecordType(16423i32);
 pub const EmfPlusRecordTypeBeginContainerNoParams: EmfPlusRecordType = EmfPlusRecordType(16424i32);
 pub const EmfPlusRecordTypeClear: EmfPlusRecordType = EmfPlusRecordType(16393i32);
@@ -3893,19 +3960,41 @@ pub const EmfRecordTypeStrokeAndFillPath: EmfPlusRecordType = EmfPlusRecordType(
 pub const EmfRecordTypeStrokePath: EmfPlusRecordType = EmfPlusRecordType(64i32);
 pub const EmfRecordTypeTransparentBlt: EmfPlusRecordType = EmfPlusRecordType(116i32);
 pub const EmfRecordTypeWidenPath: EmfPlusRecordType = EmfPlusRecordType(66i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct EmfToWmfBitsFlags(pub i32);
 pub const EmfToWmfBitsFlagsDefault: EmfToWmfBitsFlags = EmfToWmfBitsFlags(0i32);
 pub const EmfToWmfBitsFlagsEmbedEmf: EmfToWmfBitsFlags = EmfToWmfBitsFlags(1i32);
 pub const EmfToWmfBitsFlagsIncludePlaceable: EmfToWmfBitsFlags = EmfToWmfBitsFlags(2i32);
 pub const EmfToWmfBitsFlagsNoXORClip: EmfToWmfBitsFlags = EmfToWmfBitsFlags(4i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct EmfType(pub i32);
 pub const EmfTypeEmfOnly: EmfType = EmfType(3i32);
 pub const EmfTypeEmfPlusDual: EmfType = EmfType(5i32);
 pub const EmfTypeEmfPlusOnly: EmfType = EmfType(4i32);
-pub const EncoderChrominanceTable: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xf2e455dc_09b3_4316_8260_676ada32481c);
-pub const EncoderColorDepth: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x66087055_ad66_4c7c_9a18_38a2310b8337);
-pub const EncoderColorSpace: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xae7a62a0_ee2c_49d8_9d07_1ba8a927596e);
-pub const EncoderCompression: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xe09d739d_ccd4_44ee_8eba_3fbf8be4fc58);
-pub const EncoderImageItems: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x63875e13_1f1d_45ab_9195_a29b6066a650);
-pub const EncoderLuminanceTable: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xedb33bce_0266_4a77_b904_27216099e717);
+pub const EncoderChrominanceTable: windows_core::GUID = windows_core::GUID::from_u128(0xf2e455dc_09b3_4316_8260_676ada32481c);
+pub const EncoderColorDepth: windows_core::GUID = windows_core::GUID::from_u128(0x66087055_ad66_4c7c_9a18_38a2310b8337);
+pub const EncoderColorSpace: windows_core::GUID = windows_core::GUID::from_u128(0xae7a62a0_ee2c_49d8_9d07_1ba8a927596e);
+pub const EncoderCompression: windows_core::GUID = windows_core::GUID::from_u128(0xe09d739d_ccd4_44ee_8eba_3fbf8be4fc58);
+pub const EncoderImageItems: windows_core::GUID = windows_core::GUID::from_u128(0x63875e13_1f1d_45ab_9195_a29b6066a650);
+pub const EncoderLuminanceTable: windows_core::GUID = windows_core::GUID::from_u128(0xedb33bce_0266_4a77_b904_27216099e717);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct EncoderParameter {
+    pub Guid: windows_core::GUID,
+    pub NumberOfValues: u32,
+    pub Type: u32,
+    pub Value: *mut core::ffi::c_void,
+}
+impl Default for EncoderParameter {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct EncoderParameterValueType(pub i32);
 pub const EncoderParameterValueTypeASCII: EncoderParameterValueType = EncoderParameterValueType(2i32);
 pub const EncoderParameterValueTypeByte: EncoderParameterValueType = EncoderParameterValueType(1i32);
 pub const EncoderParameterValueTypeLong: EncoderParameterValueType = EncoderParameterValueType(4i32);
@@ -3915,12 +4004,26 @@ pub const EncoderParameterValueTypeRational: EncoderParameterValueType = Encoder
 pub const EncoderParameterValueTypeRationalRange: EncoderParameterValueType = EncoderParameterValueType(8i32);
 pub const EncoderParameterValueTypeShort: EncoderParameterValueType = EncoderParameterValueType(3i32);
 pub const EncoderParameterValueTypeUndefined: EncoderParameterValueType = EncoderParameterValueType(7i32);
-pub const EncoderQuality: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x1d5be4b5_fa4a_452d_9cdd_5db35105e7eb);
-pub const EncoderRenderMethod: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x6d42c53a_229a_4825_8bb7_5c99e2b9a8b8);
-pub const EncoderSaveAsCMYK: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xa219bbc9_0a9d_4005_a3ee_3a421b8bb06c);
-pub const EncoderSaveFlag: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x292266fc_ac40_47bf_8cfc_a85b89a655de);
-pub const EncoderScanMethod: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x3a4e2661_3109_4e56_8536_42c156e7dcfa);
-pub const EncoderTransformation: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x8d0eb2d1_a58e_4ea8_aa14_108074b7b6f9);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct EncoderParameters {
+    pub Count: u32,
+    pub Parameter: [EncoderParameter; 1],
+}
+impl Default for EncoderParameters {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+pub const EncoderQuality: windows_core::GUID = windows_core::GUID::from_u128(0x1d5be4b5_fa4a_452d_9cdd_5db35105e7eb);
+pub const EncoderRenderMethod: windows_core::GUID = windows_core::GUID::from_u128(0x6d42c53a_229a_4825_8bb7_5c99e2b9a8b8);
+pub const EncoderSaveAsCMYK: windows_core::GUID = windows_core::GUID::from_u128(0xa219bbc9_0a9d_4005_a3ee_3a421b8bb06c);
+pub const EncoderSaveFlag: windows_core::GUID = windows_core::GUID::from_u128(0x292266fc_ac40_47bf_8cfc_a85b89a655de);
+pub const EncoderScanMethod: windows_core::GUID = windows_core::GUID::from_u128(0x3a4e2661_3109_4e56_8536_42c156e7dcfa);
+pub const EncoderTransformation: windows_core::GUID = windows_core::GUID::from_u128(0x8d0eb2d1_a58e_4ea8_aa14_108074b7b6f9);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct EncoderValue(pub i32);
 pub const EncoderValueColorTypeCMYK: EncoderValue = EncoderValue(0i32);
 pub const EncoderValueColorTypeGray: EncoderValue = EncoderValue(24i32);
 pub const EncoderValueColorTypeRGB: EncoderValue = EncoderValue(25i32);
@@ -3947,14 +4050,33 @@ pub const EncoderValueTransformRotate270: EncoderValue = EncoderValue(15i32);
 pub const EncoderValueTransformRotate90: EncoderValue = EncoderValue(13i32);
 pub const EncoderValueVersionGif87: EncoderValue = EncoderValue(9i32);
 pub const EncoderValueVersionGif89: EncoderValue = EncoderValue(10i32);
-pub const EncoderVersion: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x24d18c76_814a_41a4_bf53_1c219cccf797);
+pub const EncoderVersion: windows_core::GUID = windows_core::GUID::from_u128(0x24d18c76_814a_41a4_bf53_1c219cccf797);
+pub type EnumerateMetafileProc = Option<unsafe extern "system" fn(param0: EmfPlusRecordType, param1: u32, param2: u32, param3: *const u8, param4: *mut core::ffi::c_void) -> windows_core::BOOL>;
 pub const FileNotFound: Status = Status(10i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct FillMode(pub i32);
 pub const FillModeAlternate: FillMode = FillMode(0i32);
 pub const FillModeWinding: FillMode = FillMode(1i32);
 pub const FlatnessDefault: f32 = 0.25f32;
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct FlushIntention(pub i32);
 pub const FlushIntentionFlush: FlushIntention = FlushIntention(0i32);
 pub const FlushIntentionSync: FlushIntention = FlushIntention(1i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
+pub struct Font(pub isize);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
+pub struct FontCollection(pub isize);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
+pub struct FontFamily(pub isize);
 pub const FontFamilyNotFound: Status = Status(14i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct FontStyle(pub i32);
 pub const FontStyleBold: FontStyle = FontStyle(1i32);
 pub const FontStyleBoldItalic: FontStyle = FontStyle(3i32);
 pub const FontStyleItalic: FontStyle = FontStyle(2i32);
@@ -3962,24 +4084,166 @@ pub const FontStyleNotFound: Status = Status(15i32);
 pub const FontStyleRegular: FontStyle = FontStyle(0i32);
 pub const FontStyleStrikeout: FontStyle = FontStyle(8i32);
 pub const FontStyleUnderline: FontStyle = FontStyle(4i32);
-pub const FormatIDImageInformation: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xe5836cbe_5eef_4f1d_acde_ae4c43b608ce);
-pub const FormatIDJpegAppHeaders: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x1c4afdcd_6177_43cf_abc7_5f51af39ee85);
-pub const FrameDimensionPage: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x7462dc86_6180_4c7e_8e3f_ee7333a7a483);
-pub const FrameDimensionResolution: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x84236f7b_3bd3_428f_8dab_4ea1439ca315);
-pub const FrameDimensionTime: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x6aedbd6d_3fb5_418a_83a6_7f45229dc872);
+pub const FormatIDImageInformation: windows_core::GUID = windows_core::GUID::from_u128(0xe5836cbe_5eef_4f1d_acde_ae4c43b608ce);
+pub const FormatIDJpegAppHeaders: windows_core::GUID = windows_core::GUID::from_u128(0x1c4afdcd_6177_43cf_abc7_5f51af39ee85);
+pub const FrameDimensionPage: windows_core::GUID = windows_core::GUID::from_u128(0x7462dc86_6180_4c7e_8e3f_ee7333a7a483);
+pub const FrameDimensionResolution: windows_core::GUID = windows_core::GUID::from_u128(0x84236f7b_3bd3_428f_8dab_4ea1439ca315);
+pub const FrameDimensionTime: windows_core::GUID = windows_core::GUID::from_u128(0x6aedbd6d_3fb5_418a_83a6_7f45229dc872);
 pub const GDIP_EMFPLUSFLAGS_DISPLAY: u32 = 1u32;
 pub const GDIP_EMFPLUS_RECORD_BASE: u32 = 16384u32;
 pub const GDIP_WMF_RECORD_BASE: u32 = 65536u32;
 pub const GREEN_SHIFT: u32 = 8u32;
+windows_core::imp::define_interface!(GdiplusAbort, GdiplusAbort_Vtbl);
+impl GdiplusAbort {
+    pub unsafe fn Abort(&self) -> windows_core::Result<()> {
+        unsafe { (windows_core::Interface::vtable(self).Abort)(windows_core::Interface::as_raw(self)).ok() }
+    }
+}
+#[repr(C)]
+#[doc(hidden)]
+pub struct GdiplusAbort_Vtbl {
+    pub Abort: unsafe extern "system" fn(*mut core::ffi::c_void) -> windows_core::HRESULT,
+}
+pub trait GdiplusAbort_Impl {
+    fn Abort(&self) -> windows_core::Result<()>;
+}
+impl GdiplusAbort_Vtbl {
+    pub const fn new<Identity: GdiplusAbort_Impl>() -> Self {
+        unsafe extern "system" fn Abort<Identity: GdiplusAbort_Impl>(this: *mut core::ffi::c_void) -> windows_core::HRESULT {
+            unsafe {
+                let this = (this as *mut *mut core::ffi::c_void) as *const windows_core::ScopedHeap;
+                let this = &*((*this).this as *const Identity);
+                GdiplusAbort_Impl::Abort(this).into()
+            }
+        }
+        Self { Abort: Abort::<Identity> }
+    }
+}
+struct GdiplusAbort_ImplVtbl<T: GdiplusAbort_Impl>(core::marker::PhantomData<T>);
+impl<T: GdiplusAbort_Impl> GdiplusAbort_ImplVtbl<T> {
+    const VTABLE: GdiplusAbort_Vtbl = GdiplusAbort_Vtbl::new::<T>();
+}
+impl GdiplusAbort {
+    pub fn new<'a, T: GdiplusAbort_Impl>(this: &'a T) -> windows_core::ScopedInterface<'a, Self> {
+        let this = windows_core::ScopedHeap { vtable: &GdiplusAbort_ImplVtbl::<T>::VTABLE as *const _ as *const _, this: this as *const _ as *const _ };
+        let this = core::mem::ManuallyDrop::new(windows_core::imp::Box::new(this));
+        unsafe { windows_core::ScopedInterface::new(core::mem::transmute(&this.vtable)) }
+    }
+}
 pub const GdiplusNotInitialized: Status = Status(18i32);
 pub const GdiplusStartupDefault: GdiplusStartupParams = GdiplusStartupParams(0i32);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct GdiplusStartupInput {
+    pub GdiplusVersion: u32,
+    pub DebugEventCallback: isize,
+    pub SuppressBackgroundThread: windows_core::BOOL,
+    pub SuppressExternalCodecs: windows_core::BOOL,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct GdiplusStartupInputEx {
+    pub Base: GdiplusStartupInput,
+    pub StartupParameters: i32,
+}
 pub const GdiplusStartupNoSetRound: GdiplusStartupParams = GdiplusStartupParams(1i32);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct GdiplusStartupOutput {
+    pub NotificationHook: isize,
+    pub NotificationUnhook: isize,
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct GdiplusStartupParams(pub i32);
 pub const GdiplusStartupSetPSValue: GdiplusStartupParams = GdiplusStartupParams(2i32);
 pub const GdiplusStartupTransparencyMask: GdiplusStartupParams = GdiplusStartupParams(-16777216i32);
 pub const GenericError: Status = Status(1i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct GenericFontFamily(pub i32);
 pub const GenericFontFamilyMonospace: GenericFontFamily = GenericFontFamily(2i32);
 pub const GenericFontFamilySansSerif: GenericFontFamily = GenericFontFamily(1i32);
 pub const GenericFontFamilySerif: GenericFontFamily = GenericFontFamily(0i32);
+pub type GetThumbnailImageAbort = Option<unsafe extern "system" fn() -> windows_core::BOOL>;
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct GpAdjustableArrowCap(pub u8);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct GpBitmap(pub u8);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct GpBrush(pub u8);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct GpCachedBitmap(pub u8);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct GpCustomLineCap(pub u8);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct GpFont(pub u8);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct GpFontCollection(pub u8);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct GpFontFamily(pub u8);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct GpGraphics(pub u8);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct GpHatch(pub u8);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct GpImage(pub u8);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct GpImageAttributes(pub u8);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct GpInstalledFontCollection(pub u8);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct GpLineGradient(pub u8);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct GpMetafile(pub u8);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct GpPath(pub u8);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct GpPathGradient(pub u8);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct GpPathIterator(pub u8);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct GpPen(pub u8);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct GpPrivateFontCollection(pub u8);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct GpRegion(pub u8);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct GpSolidFill(pub u8);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct GpStringFormat(pub u8);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct GpTestControlEnum(pub i32);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct GpTexture(pub u8);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct HatchStyle(pub i32);
 pub const HatchStyle05Percent: HatchStyle = HatchStyle(6i32);
 pub const HatchStyle10Percent: HatchStyle = HatchStyle(7i32);
 pub const HatchStyle20Percent: HatchStyle = HatchStyle(8i32);
@@ -4037,6 +4301,9 @@ pub const HatchStyleWeave: HatchStyle = HatchStyle(40i32);
 pub const HatchStyleWideDownwardDiagonal: HatchStyle = HatchStyle(22i32);
 pub const HatchStyleWideUpwardDiagonal: HatchStyle = HatchStyle(23i32);
 pub const HatchStyleZigZag: HatchStyle = HatchStyle(36i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct HistogramFormat(pub i32);
 pub const HistogramFormatA: HistogramFormat = HistogramFormat(7i32);
 pub const HistogramFormatARGB: HistogramFormat = HistogramFormat(0i32);
 pub const HistogramFormatB: HistogramFormat = HistogramFormat(4i32);
@@ -4045,10 +4312,90 @@ pub const HistogramFormatGray: HistogramFormat = HistogramFormat(3i32);
 pub const HistogramFormatPARGB: HistogramFormat = HistogramFormat(1i32);
 pub const HistogramFormatR: HistogramFormat = HistogramFormat(6i32);
 pub const HistogramFormatRGB: HistogramFormat = HistogramFormat(2i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct HotkeyPrefix(pub i32);
 pub const HotkeyPrefixHide: HotkeyPrefix = HotkeyPrefix(2i32);
 pub const HotkeyPrefixNone: HotkeyPrefix = HotkeyPrefix(0i32);
 pub const HotkeyPrefixShow: HotkeyPrefix = HotkeyPrefix(1i32);
-pub const HueSaturationLightnessEffectGuid: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x8b2dd6c3_eb07_4d87_a5f0_7108e26a9c5f);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct HueSaturationLightness {
+    pub Base: Effect,
+}
+pub const HueSaturationLightnessEffectGuid: windows_core::GUID = windows_core::GUID::from_u128(0x8b2dd6c3_eb07_4d87_a5f0_7108e26a9c5f);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct HueSaturationLightnessParams {
+    pub hueLevel: i32,
+    pub saturationLevel: i32,
+    pub lightnessLevel: i32,
+}
+windows_core::imp::define_interface!(IImageBytes, IImageBytes_Vtbl, 0x025d1823_6c7d_447b_bbdb_a3cbc3dfa2fc);
+windows_core::imp::interface_hierarchy!(IImageBytes, windows_core::IUnknown);
+impl IImageBytes {
+    pub unsafe fn CountBytes(&self, pcb: *mut u32) -> windows_core::Result<()> {
+        unsafe { (windows_core::Interface::vtable(self).CountBytes)(windows_core::Interface::as_raw(self), pcb as _).ok() }
+    }
+    pub unsafe fn LockBytes(&self, cb: u32, uloffset: u32, ppvbytes: *const *const core::ffi::c_void) -> windows_core::Result<()> {
+        unsafe { (windows_core::Interface::vtable(self).LockBytes)(windows_core::Interface::as_raw(self), cb, uloffset, ppvbytes).ok() }
+    }
+    pub unsafe fn UnlockBytes(&self, pvbytes: *const core::ffi::c_void, cb: u32, uloffset: u32) -> windows_core::Result<()> {
+        unsafe { (windows_core::Interface::vtable(self).UnlockBytes)(windows_core::Interface::as_raw(self), pvbytes, cb, uloffset).ok() }
+    }
+}
+#[repr(C)]
+#[doc(hidden)]
+pub struct IImageBytes_Vtbl {
+    pub base__: windows_core::IUnknown_Vtbl,
+    pub CountBytes: unsafe extern "system" fn(*mut core::ffi::c_void, *mut u32) -> windows_core::HRESULT,
+    pub LockBytes: unsafe extern "system" fn(*mut core::ffi::c_void, u32, u32, *const *const core::ffi::c_void) -> windows_core::HRESULT,
+    pub UnlockBytes: unsafe extern "system" fn(*mut core::ffi::c_void, *const core::ffi::c_void, u32, u32) -> windows_core::HRESULT,
+}
+pub trait IImageBytes_Impl: windows_core::IUnknownImpl {
+    fn CountBytes(&self, pcb: *mut u32) -> windows_core::Result<()>;
+    fn LockBytes(&self, cb: u32, uloffset: u32, ppvbytes: *const *const core::ffi::c_void) -> windows_core::Result<()>;
+    fn UnlockBytes(&self, pvbytes: *const core::ffi::c_void, cb: u32, uloffset: u32) -> windows_core::Result<()>;
+}
+impl IImageBytes_Vtbl {
+    pub const fn new<Identity: IImageBytes_Impl, const OFFSET: isize>() -> Self {
+        unsafe extern "system" fn CountBytes<Identity: IImageBytes_Impl, const OFFSET: isize>(this: *mut core::ffi::c_void, pcb: *mut u32) -> windows_core::HRESULT {
+            unsafe {
+                let this: &Identity = &*((this as *const *const ()).offset(OFFSET) as *const Identity);
+                IImageBytes_Impl::CountBytes(this, core::mem::transmute_copy(&pcb)).into()
+            }
+        }
+        unsafe extern "system" fn LockBytes<Identity: IImageBytes_Impl, const OFFSET: isize>(this: *mut core::ffi::c_void, cb: u32, uloffset: u32, ppvbytes: *const *const core::ffi::c_void) -> windows_core::HRESULT {
+            unsafe {
+                let this: &Identity = &*((this as *const *const ()).offset(OFFSET) as *const Identity);
+                IImageBytes_Impl::LockBytes(this, core::mem::transmute_copy(&cb), core::mem::transmute_copy(&uloffset), core::mem::transmute_copy(&ppvbytes)).into()
+            }
+        }
+        unsafe extern "system" fn UnlockBytes<Identity: IImageBytes_Impl, const OFFSET: isize>(this: *mut core::ffi::c_void, pvbytes: *const core::ffi::c_void, cb: u32, uloffset: u32) -> windows_core::HRESULT {
+            unsafe {
+                let this: &Identity = &*((this as *const *const ()).offset(OFFSET) as *const Identity);
+                IImageBytes_Impl::UnlockBytes(this, core::mem::transmute_copy(&pvbytes), core::mem::transmute_copy(&cb), core::mem::transmute_copy(&uloffset)).into()
+            }
+        }
+        Self {
+            base__: windows_core::IUnknown_Vtbl::new::<Identity, OFFSET>(),
+            CountBytes: CountBytes::<Identity, OFFSET>,
+            LockBytes: LockBytes::<Identity, OFFSET>,
+            UnlockBytes: UnlockBytes::<Identity, OFFSET>,
+        }
+    }
+    pub fn matches(iid: &windows_core::GUID) -> bool {
+        iid == &<IImageBytes as windows_core::Interface>::IID
+    }
+}
+impl windows_core::RuntimeName for IImageBytes {}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
+pub struct Image(pub isize);
+pub type ImageAbort = Option<unsafe extern "system" fn(param0: *mut core::ffi::c_void) -> windows_core::BOOL>;
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct ImageCodecFlags(pub i32);
 pub const ImageCodecFlagsBlockingDecode: ImageCodecFlags = ImageCodecFlags(32i32);
 pub const ImageCodecFlagsBuiltin: ImageCodecFlags = ImageCodecFlags(65536i32);
 pub const ImageCodecFlagsDecoder: ImageCodecFlags = ImageCodecFlags(2i32);
@@ -4058,6 +4405,31 @@ pub const ImageCodecFlagsSupportBitmap: ImageCodecFlags = ImageCodecFlags(4i32);
 pub const ImageCodecFlagsSupportVector: ImageCodecFlags = ImageCodecFlags(8i32);
 pub const ImageCodecFlagsSystem: ImageCodecFlags = ImageCodecFlags(131072i32);
 pub const ImageCodecFlagsUser: ImageCodecFlags = ImageCodecFlags(262144i32);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct ImageCodecInfo {
+    pub Clsid: windows_core::GUID,
+    pub FormatID: windows_core::GUID,
+    pub CodecName: windows_core::PCWSTR,
+    pub DllName: windows_core::PCWSTR,
+    pub FormatDescription: windows_core::PCWSTR,
+    pub FilenameExtension: windows_core::PCWSTR,
+    pub MimeType: windows_core::PCWSTR,
+    pub Flags: u32,
+    pub Version: u32,
+    pub SigCount: u32,
+    pub SigSize: u32,
+    pub SigPattern: *const u8,
+    pub SigMask: *const u8,
+}
+impl Default for ImageCodecInfo {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct ImageFlags(pub i32);
 pub const ImageFlagsCaching: ImageFlags = ImageFlags(131072i32);
 pub const ImageFlagsColorSpaceCMYK: ImageFlags = ImageFlags(32i32);
 pub const ImageFlagsColorSpaceGRAY: ImageFlags = ImageFlags(64i32);
@@ -4072,26 +4444,54 @@ pub const ImageFlagsNone: ImageFlags = ImageFlags(0i32);
 pub const ImageFlagsPartiallyScalable: ImageFlags = ImageFlags(8i32);
 pub const ImageFlagsReadOnly: ImageFlags = ImageFlags(65536i32);
 pub const ImageFlagsScalable: ImageFlags = ImageFlags(1i32);
-pub const ImageFormatBMP: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xb96b3cab_0728_11d3_9d7b_0000f81ef32e);
-pub const ImageFormatEMF: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xb96b3cac_0728_11d3_9d7b_0000f81ef32e);
-pub const ImageFormatEXIF: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xb96b3cb2_0728_11d3_9d7b_0000f81ef32e);
-pub const ImageFormatGIF: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xb96b3cb0_0728_11d3_9d7b_0000f81ef32e);
-pub const ImageFormatHEIF: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xb96b3cb6_0728_11d3_9d7b_0000f81ef32e);
-pub const ImageFormatIcon: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xb96b3cb5_0728_11d3_9d7b_0000f81ef32e);
-pub const ImageFormatJPEG: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xb96b3cae_0728_11d3_9d7b_0000f81ef32e);
-pub const ImageFormatMemoryBMP: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xb96b3caa_0728_11d3_9d7b_0000f81ef32e);
-pub const ImageFormatPNG: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xb96b3caf_0728_11d3_9d7b_0000f81ef32e);
-pub const ImageFormatTIFF: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xb96b3cb1_0728_11d3_9d7b_0000f81ef32e);
-pub const ImageFormatUndefined: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xb96b3ca9_0728_11d3_9d7b_0000f81ef32e);
-pub const ImageFormatWEBP: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xb96b3cb7_0728_11d3_9d7b_0000f81ef32e);
-pub const ImageFormatWMF: ::windows_core::GUID = ::windows_core::GUID::from_u128(0xb96b3cad_0728_11d3_9d7b_0000f81ef32e);
+pub const ImageFormatBMP: windows_core::GUID = windows_core::GUID::from_u128(0xb96b3cab_0728_11d3_9d7b_0000f81ef32e);
+pub const ImageFormatEMF: windows_core::GUID = windows_core::GUID::from_u128(0xb96b3cac_0728_11d3_9d7b_0000f81ef32e);
+pub const ImageFormatEXIF: windows_core::GUID = windows_core::GUID::from_u128(0xb96b3cb2_0728_11d3_9d7b_0000f81ef32e);
+pub const ImageFormatGIF: windows_core::GUID = windows_core::GUID::from_u128(0xb96b3cb0_0728_11d3_9d7b_0000f81ef32e);
+pub const ImageFormatHEIF: windows_core::GUID = windows_core::GUID::from_u128(0xb96b3cb6_0728_11d3_9d7b_0000f81ef32e);
+pub const ImageFormatIcon: windows_core::GUID = windows_core::GUID::from_u128(0xb96b3cb5_0728_11d3_9d7b_0000f81ef32e);
+pub const ImageFormatJPEG: windows_core::GUID = windows_core::GUID::from_u128(0xb96b3cae_0728_11d3_9d7b_0000f81ef32e);
+pub const ImageFormatMemoryBMP: windows_core::GUID = windows_core::GUID::from_u128(0xb96b3caa_0728_11d3_9d7b_0000f81ef32e);
+pub const ImageFormatPNG: windows_core::GUID = windows_core::GUID::from_u128(0xb96b3caf_0728_11d3_9d7b_0000f81ef32e);
+pub const ImageFormatTIFF: windows_core::GUID = windows_core::GUID::from_u128(0xb96b3cb1_0728_11d3_9d7b_0000f81ef32e);
+pub const ImageFormatUndefined: windows_core::GUID = windows_core::GUID::from_u128(0xb96b3ca9_0728_11d3_9d7b_0000f81ef32e);
+pub const ImageFormatWEBP: windows_core::GUID = windows_core::GUID::from_u128(0xb96b3cb7_0728_11d3_9d7b_0000f81ef32e);
+pub const ImageFormatWMF: windows_core::GUID = windows_core::GUID::from_u128(0xb96b3cad_0728_11d3_9d7b_0000f81ef32e);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct ImageItemData {
+    pub Size: u32,
+    pub Position: u32,
+    pub Desc: *mut core::ffi::c_void,
+    pub DescSize: u32,
+    pub Data: *mut core::ffi::c_void,
+    pub DataSize: u32,
+    pub Cookie: u32,
+}
+impl Default for ImageItemData {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct ImageLockMode(pub i32);
 pub const ImageLockModeRead: ImageLockMode = ImageLockMode(1i32);
 pub const ImageLockModeUserInputBuf: ImageLockMode = ImageLockMode(4i32);
 pub const ImageLockModeWrite: ImageLockMode = ImageLockMode(2i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct ImageType(pub i32);
 pub const ImageTypeBitmap: ImageType = ImageType(1i32);
 pub const ImageTypeMetafile: ImageType = ImageType(2i32);
 pub const ImageTypeUnknown: ImageType = ImageType(0i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
+pub struct InstalledFontCollection(pub isize);
 pub const InsufficientBuffer: Status = Status(5i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct InterpolationMode(pub i32);
 pub const InterpolationModeBicubic: InterpolationMode = InterpolationMode(4i32);
 pub const InterpolationModeBilinear: InterpolationMode = InterpolationMode(3i32);
 pub const InterpolationModeDefault: InterpolationMode = InterpolationMode(0i32);
@@ -4102,10 +4502,28 @@ pub const InterpolationModeInvalid: InterpolationMode = InterpolationMode(-1i32)
 pub const InterpolationModeLowQuality: InterpolationMode = InterpolationMode(1i32);
 pub const InterpolationModeNearestNeighbor: InterpolationMode = InterpolationMode(5i32);
 pub const InvalidParameter: Status = Status(2i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct ItemDataPosition(pub i32);
 pub const ItemDataPositionAfterBits: ItemDataPosition = ItemDataPosition(2i32);
 pub const ItemDataPositionAfterHeader: ItemDataPosition = ItemDataPosition(0i32);
 pub const ItemDataPositionAfterPalette: ItemDataPosition = ItemDataPosition(1i32);
-pub const LevelsEffectGuid: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x99c354ec_2a31_4f3a_8c34_17a803b33a25);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct Levels {
+    pub Base: Effect,
+}
+pub const LevelsEffectGuid: windows_core::GUID = windows_core::GUID::from_u128(0x99c354ec_2a31_4f3a_8c34_17a803b33a25);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct LevelsParams {
+    pub highlight: i32,
+    pub midtone: i32,
+    pub shadow: i32,
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct LineCap(pub i32);
 pub const LineCapAnchorMask: LineCap = LineCap(240i32);
 pub const LineCapArrowAnchor: LineCap = LineCap(20i32);
 pub const LineCapCustom: LineCap = LineCap(255i32);
@@ -4117,22 +4535,81 @@ pub const LineCapRoundAnchor: LineCap = LineCap(18i32);
 pub const LineCapSquare: LineCap = LineCap(1i32);
 pub const LineCapSquareAnchor: LineCap = LineCap(17i32);
 pub const LineCapTriangle: LineCap = LineCap(3i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct LineJoin(pub i32);
 pub const LineJoinBevel: LineJoin = LineJoin(1i32);
 pub const LineJoinMiter: LineJoin = LineJoin(0i32);
 pub const LineJoinMiterClipped: LineJoin = LineJoin(3i32);
 pub const LineJoinRound: LineJoin = LineJoin(2i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct LinearGradientMode(pub i32);
 pub const LinearGradientModeBackwardDiagonal: LinearGradientMode = LinearGradientMode(3i32);
 pub const LinearGradientModeForwardDiagonal: LinearGradientMode = LinearGradientMode(2i32);
 pub const LinearGradientModeHorizontal: LinearGradientMode = LinearGradientMode(0i32);
 pub const LinearGradientModeVertical: LinearGradientMode = LinearGradientMode(1i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
+pub struct Matrix(pub isize);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct MatrixOrder(pub i32);
 pub const MatrixOrderAppend: MatrixOrder = MatrixOrder(1i32);
 pub const MatrixOrderPrepend: MatrixOrder = MatrixOrder(0i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
+pub struct Metafile(pub isize);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct MetafileFrameUnit(pub i32);
 pub const MetafileFrameUnitDocument: MetafileFrameUnit = MetafileFrameUnit(5i32);
 pub const MetafileFrameUnitGdi: MetafileFrameUnit = MetafileFrameUnit(7i32);
 pub const MetafileFrameUnitInch: MetafileFrameUnit = MetafileFrameUnit(4i32);
 pub const MetafileFrameUnitMillimeter: MetafileFrameUnit = MetafileFrameUnit(6i32);
 pub const MetafileFrameUnitPixel: MetafileFrameUnit = MetafileFrameUnit(2i32);
 pub const MetafileFrameUnitPoint: MetafileFrameUnit = MetafileFrameUnit(3i32);
+#[repr(C)]
+#[cfg(feature = "Win32_Graphics_Gdi")]
+#[derive(Clone, Copy)]
+pub struct MetafileHeader {
+    pub Type: MetafileType,
+    pub Size: u32,
+    pub Version: u32,
+    pub EmfPlusFlags: u32,
+    pub DpiX: f32,
+    pub DpiY: f32,
+    pub X: i32,
+    pub Y: i32,
+    pub Width: i32,
+    pub Height: i32,
+    pub Anonymous: MetafileHeader_0,
+    pub EmfPlusHeaderSize: i32,
+    pub LogicalDpiX: i32,
+    pub LogicalDpiY: i32,
+}
+#[cfg(feature = "Win32_Graphics_Gdi")]
+impl Default for MetafileHeader {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(C)]
+#[cfg(feature = "Win32_Graphics_Gdi")]
+#[derive(Clone, Copy)]
+pub union MetafileHeader_0 {
+    pub WmfHeader: super::Gdi::METAHEADER,
+    pub EmfHeader: ENHMETAHEADER3,
+}
+#[cfg(feature = "Win32_Graphics_Gdi")]
+impl Default for MetafileHeader_0 {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct MetafileType(pub i32);
 pub const MetafileTypeEmf: MetafileType = MetafileType(3i32);
 pub const MetafileTypeEmfPlusDual: MetafileType = MetafileType(5i32);
 pub const MetafileTypeEmfPlusOnly: MetafileType = MetafileType(4i32);
@@ -4141,7 +4618,12 @@ pub const MetafileTypeWmf: MetafileType = MetafileType(1i32);
 pub const MetafileTypeWmfPlaceable: MetafileType = MetafileType(2i32);
 pub const NotImplemented: Status = Status(6i32);
 pub const NotTrueTypeFont: Status = Status(16i32);
+pub type NotificationHookProc = Option<unsafe extern "system" fn(token: *mut usize) -> Status>;
+pub type NotificationUnhookProc = Option<unsafe extern "system" fn(token: usize)>;
 pub const ObjectBusy: Status = Status(4i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct ObjectType(pub i32);
 pub const ObjectTypeBrush: ObjectType = ObjectType(1i32);
 pub const ObjectTypeCustomLineCap: ObjectType = ObjectType(9i32);
 pub const ObjectTypeFont: ObjectType = ObjectType(6i32);
@@ -4157,9 +4639,23 @@ pub const ObjectTypeRegion: ObjectType = ObjectType(4i32);
 pub const ObjectTypeStringFormat: ObjectType = ObjectType(7i32);
 pub const Ok: Status = Status(0i32);
 pub const OutOfMemory: Status = Status(3i32);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct PWMFRect16 {
+    pub Left: i16,
+    pub Top: i16,
+    pub Right: i16,
+    pub Bottom: i16,
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct PaletteFlags(pub i32);
 pub const PaletteFlagsGrayScale: PaletteFlags = PaletteFlags(2i32);
 pub const PaletteFlagsHalftone: PaletteFlags = PaletteFlags(4i32);
 pub const PaletteFlagsHasAlpha: PaletteFlags = PaletteFlags(1i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct PaletteType(pub i32);
 pub const PaletteTypeCustom: PaletteType = PaletteType(0i32);
 pub const PaletteTypeFixedBW: PaletteType = PaletteType(2i32);
 pub const PaletteTypeFixedHalftone125: PaletteType = PaletteType(6i32);
@@ -4170,6 +4666,12 @@ pub const PaletteTypeFixedHalftone27: PaletteType = PaletteType(4i32);
 pub const PaletteTypeFixedHalftone64: PaletteType = PaletteType(5i32);
 pub const PaletteTypeFixedHalftone8: PaletteType = PaletteType(3i32);
 pub const PaletteTypeOptimal: PaletteType = PaletteType(1i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
+pub struct PathData(pub isize);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct PathPointType(pub i32);
 pub const PathPointTypeBezier: PathPointType = PathPointType(3i32);
 pub const PathPointTypeBezier3: PathPointType = PathPointType(3i32);
 pub const PathPointTypeCloseSubpath: PathPointType = PathPointType(128i32);
@@ -4178,8 +4680,14 @@ pub const PathPointTypeLine: PathPointType = PathPointType(1i32);
 pub const PathPointTypePathMarker: PathPointType = PathPointType(32i32);
 pub const PathPointTypePathTypeMask: PathPointType = PathPointType(7i32);
 pub const PathPointTypeStart: PathPointType = PathPointType(0i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct PenAlignment(pub i32);
 pub const PenAlignmentCenter: PenAlignment = PenAlignment(0i32);
 pub const PenAlignmentInset: PenAlignment = PenAlignment(1i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct PenType(pub i32);
 pub const PenTypeHatchFill: PenType = PenType(1i32);
 pub const PenTypeLinearGradient: PenType = PenType(4i32);
 pub const PenTypePathGradient: PenType = PenType(3i32);
@@ -4195,13 +4703,44 @@ pub const PixelFormatIndexed: u32 = 65536u32;
 pub const PixelFormatMax: u32 = 16u32;
 pub const PixelFormatPAlpha: u32 = 524288u32;
 pub const PixelFormatUndefined: u32 = 0u32;
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct PixelOffsetMode(pub i32);
 pub const PixelOffsetModeDefault: PixelOffsetMode = PixelOffsetMode(0i32);
 pub const PixelOffsetModeHalf: PixelOffsetMode = PixelOffsetMode(4i32);
 pub const PixelOffsetModeHighQuality: PixelOffsetMode = PixelOffsetMode(2i32);
 pub const PixelOffsetModeHighSpeed: PixelOffsetMode = PixelOffsetMode(1i32);
 pub const PixelOffsetModeInvalid: PixelOffsetMode = PixelOffsetMode(-1i32);
 pub const PixelOffsetModeNone: PixelOffsetMode = PixelOffsetMode(3i32);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct Point {
+    pub X: i32,
+    pub Y: i32,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct PointF {
+    pub X: f32,
+    pub Y: f32,
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
+pub struct PrivateFontCollection(pub isize);
 pub const ProfileNotFound: Status = Status(21i32);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct PropertyItem {
+    pub id: u32,
+    pub length: u32,
+    pub r#type: u16,
+    pub value: *mut core::ffi::c_void,
+}
+impl Default for PropertyItem {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
 pub const PropertyNotFound: Status = Status(19i32);
 pub const PropertyNotSupported: Status = Status(20i32);
 pub const PropertyTagArtist: u32 = 315u32;
@@ -4447,12 +4986,50 @@ pub const PropertyTagYCbCrPositioning: u32 = 531u32;
 pub const PropertyTagYCbCrSubsampling: u32 = 530u32;
 pub const PropertyTagYPosition: u32 = 287u32;
 pub const PropertyTagYResolution: u32 = 283u32;
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct QualityMode(pub i32);
 pub const QualityModeDefault: QualityMode = QualityMode(0i32);
 pub const QualityModeHigh: QualityMode = QualityMode(2i32);
 pub const QualityModeInvalid: QualityMode = QualityMode(-1i32);
 pub const QualityModeLow: QualityMode = QualityMode(1i32);
 pub const RED_SHIFT: u32 = 16u32;
-pub const RedEyeCorrectionEffectGuid: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x74d29d05_69a4_4266_9549_3cc52836b632);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct Rect {
+    pub X: i32,
+    pub Y: i32,
+    pub Width: i32,
+    pub Height: i32,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct RectF {
+    pub X: f32,
+    pub Y: f32,
+    pub Width: f32,
+    pub Height: f32,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct RedEyeCorrection {
+    pub Base: Effect,
+}
+pub const RedEyeCorrectionEffectGuid: windows_core::GUID = windows_core::GUID::from_u128(0x74d29d05_69a4_4266_9549_3cc52836b632);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct RedEyeCorrectionParams {
+    pub numberOfAreas: u32,
+    pub areas: *mut super::super::Foundation::RECT,
+}
+impl Default for RedEyeCorrectionParams {
+    fn default() -> Self {
+        unsafe { core::mem::zeroed() }
+    }
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Default)]
+pub struct Region(pub isize);
 pub const Rotate180FlipNone: RotateFlipType = RotateFlipType(2i32);
 pub const Rotate180FlipX: RotateFlipType = RotateFlipType(6i32);
 pub const Rotate180FlipXY: RotateFlipType = RotateFlipType(0i32);
@@ -4465,11 +5042,40 @@ pub const Rotate90FlipNone: RotateFlipType = RotateFlipType(1i32);
 pub const Rotate90FlipX: RotateFlipType = RotateFlipType(5i32);
 pub const Rotate90FlipXY: RotateFlipType = RotateFlipType(3i32);
 pub const Rotate90FlipY: RotateFlipType = RotateFlipType(7i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct RotateFlipType(pub i32);
 pub const RotateNoneFlipNone: RotateFlipType = RotateFlipType(0i32);
 pub const RotateNoneFlipX: RotateFlipType = RotateFlipType(4i32);
 pub const RotateNoneFlipXY: RotateFlipType = RotateFlipType(2i32);
 pub const RotateNoneFlipY: RotateFlipType = RotateFlipType(6i32);
-pub const SharpenEffectGuid: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x63cbf3ee_c526_402c_8f71_62c540bf5142);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct Sharpen {
+    pub Base: Effect,
+}
+pub const SharpenEffectGuid: windows_core::GUID = windows_core::GUID::from_u128(0x63cbf3ee_c526_402c_8f71_62c540bf5142);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct SharpenParams {
+    pub radius: f32,
+    pub amount: f32,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct Size {
+    pub Width: i32,
+    pub Height: i32,
+}
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct SizeF {
+    pub Width: f32,
+    pub Height: f32,
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct SmoothingMode(pub i32);
 pub const SmoothingModeAntiAlias: SmoothingMode = SmoothingMode(4i32);
 pub const SmoothingModeAntiAlias8x4: SmoothingMode = SmoothingMode(4i32);
 pub const SmoothingModeAntiAlias8x8: SmoothingMode = SmoothingMode(5i32);
@@ -4478,13 +5084,25 @@ pub const SmoothingModeHighQuality: SmoothingMode = SmoothingMode(2i32);
 pub const SmoothingModeHighSpeed: SmoothingMode = SmoothingMode(1i32);
 pub const SmoothingModeInvalid: SmoothingMode = SmoothingMode(-1i32);
 pub const SmoothingModeNone: SmoothingMode = SmoothingMode(3i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct Status(pub i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct StringAlignment(pub i32);
 pub const StringAlignmentCenter: StringAlignment = StringAlignment(1i32);
 pub const StringAlignmentFar: StringAlignment = StringAlignment(2i32);
 pub const StringAlignmentNear: StringAlignment = StringAlignment(0i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct StringDigitSubstitute(pub i32);
 pub const StringDigitSubstituteNational: StringDigitSubstitute = StringDigitSubstitute(2i32);
 pub const StringDigitSubstituteNone: StringDigitSubstitute = StringDigitSubstitute(1i32);
 pub const StringDigitSubstituteTraditional: StringDigitSubstitute = StringDigitSubstitute(3i32);
 pub const StringDigitSubstituteUser: StringDigitSubstitute = StringDigitSubstitute(0i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct StringFormatFlags(pub i32);
 pub const StringFormatFlagsBypassGDI: StringFormatFlags = StringFormatFlags(-2147483648i32);
 pub const StringFormatFlagsDirectionRightToLeft: StringFormatFlags = StringFormatFlags(1i32);
 pub const StringFormatFlagsDirectionVertical: StringFormatFlags = StringFormatFlags(2i32);
@@ -4495,6 +5113,9 @@ pub const StringFormatFlagsNoClip: StringFormatFlags = StringFormatFlags(16384i3
 pub const StringFormatFlagsNoFitBlackBox: StringFormatFlags = StringFormatFlags(4i32);
 pub const StringFormatFlagsNoFontFallback: StringFormatFlags = StringFormatFlags(1024i32);
 pub const StringFormatFlagsNoWrap: StringFormatFlags = StringFormatFlags(4096i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct StringTrimming(pub i32);
 pub const StringTrimmingCharacter: StringTrimming = StringTrimming(1i32);
 pub const StringTrimmingEllipsisCharacter: StringTrimming = StringTrimming(3i32);
 pub const StringTrimmingEllipsisPath: StringTrimming = StringTrimming(5i32);
@@ -4504,13 +5125,30 @@ pub const StringTrimmingWord: StringTrimming = StringTrimming(2i32);
 pub const TestControlForceBilinear: GpTestControlEnum = GpTestControlEnum(0i32);
 pub const TestControlGetBuildNumber: GpTestControlEnum = GpTestControlEnum(2i32);
 pub const TestControlNoICM: GpTestControlEnum = GpTestControlEnum(1i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct TextRenderingHint(pub i32);
 pub const TextRenderingHintAntiAlias: TextRenderingHint = TextRenderingHint(4i32);
 pub const TextRenderingHintAntiAliasGridFit: TextRenderingHint = TextRenderingHint(3i32);
 pub const TextRenderingHintClearTypeGridFit: TextRenderingHint = TextRenderingHint(5i32);
 pub const TextRenderingHintSingleBitPerPixel: TextRenderingHint = TextRenderingHint(2i32);
 pub const TextRenderingHintSingleBitPerPixelGridFit: TextRenderingHint = TextRenderingHint(1i32);
 pub const TextRenderingHintSystemDefault: TextRenderingHint = TextRenderingHint(0i32);
-pub const TintEffectGuid: ::windows_core::GUID = ::windows_core::GUID::from_u128(0x1077af00_2848_4441_9489_44ad4c2d7a2c);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct Tint {
+    pub Base: Effect,
+}
+pub const TintEffectGuid: windows_core::GUID = windows_core::GUID::from_u128(0x1077af00_2848_4441_9489_44ad4c2d7a2c);
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
+pub struct TintParams {
+    pub hue: i32,
+    pub amount: i32,
+}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct Unit(pub i32);
 pub const UnitDisplay: Unit = Unit(1i32);
 pub const UnitDocument: Unit = Unit(5i32);
 pub const UnitInch: Unit = Unit(4i32);
@@ -4521,9 +5159,22 @@ pub const UnitWorld: Unit = Unit(0i32);
 pub const UnknownImageFormat: Status = Status(13i32);
 pub const UnsupportedGdiplusVersion: Status = Status(17i32);
 pub const ValueOverflow: Status = Status(11i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct WarpMode(pub i32);
 pub const WarpModeBilinear: WarpMode = WarpMode(1i32);
 pub const WarpModePerspective: WarpMode = WarpMode(0i32);
 pub const Win32Error: Status = Status(7i32);
+#[repr(C, packed(2))]
+#[derive(Clone, Copy, Default)]
+pub struct WmfPlaceableFileHeader {
+    pub Key: u32,
+    pub Hmf: i16,
+    pub BoundingBox: PWMFRect16,
+    pub Inch: i16,
+    pub Reserved: u32,
+    pub Checksum: i16,
+}
 pub const WmfRecordTypeAbortDoc: EmfPlusRecordType = EmfPlusRecordType(65618i32);
 pub const WmfRecordTypeAnimatePalette: EmfPlusRecordType = EmfPlusRecordType(66614i32);
 pub const WmfRecordTypeArc: EmfPlusRecordType = EmfPlusRecordType(67607i32);
@@ -4603,4029 +5254,12 @@ pub const WmfRecordTypeStartPage: EmfPlusRecordType = EmfPlusRecordType(65615i32
 pub const WmfRecordTypeStretchBlt: EmfPlusRecordType = EmfPlusRecordType(68387i32);
 pub const WmfRecordTypeStretchDIB: EmfPlusRecordType = EmfPlusRecordType(69443i32);
 pub const WmfRecordTypeTextOut: EmfPlusRecordType = EmfPlusRecordType(66849i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct WrapMode(pub i32);
 pub const WrapModeClamp: WrapMode = WrapMode(4i32);
 pub const WrapModeTile: WrapMode = WrapMode(0i32);
 pub const WrapModeTileFlipX: WrapMode = WrapMode(1i32);
 pub const WrapModeTileFlipXY: WrapMode = WrapMode(3i32);
 pub const WrapModeTileFlipY: WrapMode = WrapMode(2i32);
 pub const WrongState: Status = Status(8i32);
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct BrushType(pub i32);
-impl ::core::marker::Copy for BrushType {}
-impl ::core::clone::Clone for BrushType {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for BrushType {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for BrushType {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for BrushType {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("BrushType").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct ColorAdjustType(pub i32);
-impl ::core::marker::Copy for ColorAdjustType {}
-impl ::core::clone::Clone for ColorAdjustType {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for ColorAdjustType {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for ColorAdjustType {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for ColorAdjustType {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("ColorAdjustType").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct ColorChannelFlags(pub i32);
-impl ::core::marker::Copy for ColorChannelFlags {}
-impl ::core::clone::Clone for ColorChannelFlags {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for ColorChannelFlags {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for ColorChannelFlags {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for ColorChannelFlags {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("ColorChannelFlags").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct ColorMatrixFlags(pub i32);
-impl ::core::marker::Copy for ColorMatrixFlags {}
-impl ::core::clone::Clone for ColorMatrixFlags {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for ColorMatrixFlags {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for ColorMatrixFlags {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for ColorMatrixFlags {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("ColorMatrixFlags").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct ColorMode(pub i32);
-impl ::core::marker::Copy for ColorMode {}
-impl ::core::clone::Clone for ColorMode {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for ColorMode {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for ColorMode {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for ColorMode {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("ColorMode").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct CombineMode(pub i32);
-impl ::core::marker::Copy for CombineMode {}
-impl ::core::clone::Clone for CombineMode {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for CombineMode {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for CombineMode {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for CombineMode {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("CombineMode").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct CompositingMode(pub i32);
-impl ::core::marker::Copy for CompositingMode {}
-impl ::core::clone::Clone for CompositingMode {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for CompositingMode {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for CompositingMode {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for CompositingMode {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("CompositingMode").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct CompositingQuality(pub i32);
-impl ::core::marker::Copy for CompositingQuality {}
-impl ::core::clone::Clone for CompositingQuality {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for CompositingQuality {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for CompositingQuality {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for CompositingQuality {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("CompositingQuality").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct ConvertToEmfPlusFlags(pub i32);
-impl ::core::marker::Copy for ConvertToEmfPlusFlags {}
-impl ::core::clone::Clone for ConvertToEmfPlusFlags {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for ConvertToEmfPlusFlags {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for ConvertToEmfPlusFlags {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for ConvertToEmfPlusFlags {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("ConvertToEmfPlusFlags").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct CoordinateSpace(pub i32);
-impl ::core::marker::Copy for CoordinateSpace {}
-impl ::core::clone::Clone for CoordinateSpace {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for CoordinateSpace {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for CoordinateSpace {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for CoordinateSpace {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("CoordinateSpace").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct CurveAdjustments(pub i32);
-impl ::core::marker::Copy for CurveAdjustments {}
-impl ::core::clone::Clone for CurveAdjustments {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for CurveAdjustments {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for CurveAdjustments {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for CurveAdjustments {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("CurveAdjustments").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct CurveChannel(pub i32);
-impl ::core::marker::Copy for CurveChannel {}
-impl ::core::clone::Clone for CurveChannel {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for CurveChannel {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for CurveChannel {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for CurveChannel {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("CurveChannel").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct CustomLineCapType(pub i32);
-impl ::core::marker::Copy for CustomLineCapType {}
-impl ::core::clone::Clone for CustomLineCapType {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for CustomLineCapType {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for CustomLineCapType {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for CustomLineCapType {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("CustomLineCapType").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct DashCap(pub i32);
-impl ::core::marker::Copy for DashCap {}
-impl ::core::clone::Clone for DashCap {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for DashCap {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for DashCap {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for DashCap {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("DashCap").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct DashStyle(pub i32);
-impl ::core::marker::Copy for DashStyle {}
-impl ::core::clone::Clone for DashStyle {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for DashStyle {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for DashStyle {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for DashStyle {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("DashStyle").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct DebugEventLevel(pub i32);
-impl ::core::marker::Copy for DebugEventLevel {}
-impl ::core::clone::Clone for DebugEventLevel {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for DebugEventLevel {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for DebugEventLevel {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for DebugEventLevel {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("DebugEventLevel").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct DitherType(pub i32);
-impl ::core::marker::Copy for DitherType {}
-impl ::core::clone::Clone for DitherType {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for DitherType {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for DitherType {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for DitherType {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("DitherType").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct DriverStringOptions(pub i32);
-impl ::core::marker::Copy for DriverStringOptions {}
-impl ::core::clone::Clone for DriverStringOptions {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for DriverStringOptions {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for DriverStringOptions {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for DriverStringOptions {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("DriverStringOptions").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct EmfPlusRecordType(pub i32);
-impl ::core::marker::Copy for EmfPlusRecordType {}
-impl ::core::clone::Clone for EmfPlusRecordType {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for EmfPlusRecordType {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for EmfPlusRecordType {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for EmfPlusRecordType {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("EmfPlusRecordType").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct EmfToWmfBitsFlags(pub i32);
-impl ::core::marker::Copy for EmfToWmfBitsFlags {}
-impl ::core::clone::Clone for EmfToWmfBitsFlags {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for EmfToWmfBitsFlags {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for EmfToWmfBitsFlags {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for EmfToWmfBitsFlags {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("EmfToWmfBitsFlags").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct EmfType(pub i32);
-impl ::core::marker::Copy for EmfType {}
-impl ::core::clone::Clone for EmfType {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for EmfType {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for EmfType {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for EmfType {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("EmfType").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct EncoderParameterValueType(pub i32);
-impl ::core::marker::Copy for EncoderParameterValueType {}
-impl ::core::clone::Clone for EncoderParameterValueType {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for EncoderParameterValueType {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for EncoderParameterValueType {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for EncoderParameterValueType {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("EncoderParameterValueType").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct EncoderValue(pub i32);
-impl ::core::marker::Copy for EncoderValue {}
-impl ::core::clone::Clone for EncoderValue {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for EncoderValue {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for EncoderValue {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for EncoderValue {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("EncoderValue").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct FillMode(pub i32);
-impl ::core::marker::Copy for FillMode {}
-impl ::core::clone::Clone for FillMode {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for FillMode {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for FillMode {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for FillMode {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("FillMode").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct FlushIntention(pub i32);
-impl ::core::marker::Copy for FlushIntention {}
-impl ::core::clone::Clone for FlushIntention {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for FlushIntention {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for FlushIntention {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for FlushIntention {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("FlushIntention").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct FontStyle(pub i32);
-impl ::core::marker::Copy for FontStyle {}
-impl ::core::clone::Clone for FontStyle {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for FontStyle {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for FontStyle {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for FontStyle {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("FontStyle").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct GdiplusStartupParams(pub i32);
-impl ::core::marker::Copy for GdiplusStartupParams {}
-impl ::core::clone::Clone for GdiplusStartupParams {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for GdiplusStartupParams {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for GdiplusStartupParams {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for GdiplusStartupParams {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("GdiplusStartupParams").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct GenericFontFamily(pub i32);
-impl ::core::marker::Copy for GenericFontFamily {}
-impl ::core::clone::Clone for GenericFontFamily {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for GenericFontFamily {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for GenericFontFamily {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for GenericFontFamily {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("GenericFontFamily").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct GpTestControlEnum(pub i32);
-impl ::core::marker::Copy for GpTestControlEnum {}
-impl ::core::clone::Clone for GpTestControlEnum {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for GpTestControlEnum {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for GpTestControlEnum {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for GpTestControlEnum {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("GpTestControlEnum").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct HatchStyle(pub i32);
-impl ::core::marker::Copy for HatchStyle {}
-impl ::core::clone::Clone for HatchStyle {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for HatchStyle {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for HatchStyle {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for HatchStyle {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("HatchStyle").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct HistogramFormat(pub i32);
-impl ::core::marker::Copy for HistogramFormat {}
-impl ::core::clone::Clone for HistogramFormat {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for HistogramFormat {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for HistogramFormat {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for HistogramFormat {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("HistogramFormat").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct HotkeyPrefix(pub i32);
-impl ::core::marker::Copy for HotkeyPrefix {}
-impl ::core::clone::Clone for HotkeyPrefix {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for HotkeyPrefix {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for HotkeyPrefix {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for HotkeyPrefix {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("HotkeyPrefix").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct ImageCodecFlags(pub i32);
-impl ::core::marker::Copy for ImageCodecFlags {}
-impl ::core::clone::Clone for ImageCodecFlags {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for ImageCodecFlags {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for ImageCodecFlags {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for ImageCodecFlags {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("ImageCodecFlags").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct ImageFlags(pub i32);
-impl ::core::marker::Copy for ImageFlags {}
-impl ::core::clone::Clone for ImageFlags {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for ImageFlags {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for ImageFlags {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for ImageFlags {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("ImageFlags").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct ImageLockMode(pub i32);
-impl ::core::marker::Copy for ImageLockMode {}
-impl ::core::clone::Clone for ImageLockMode {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for ImageLockMode {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for ImageLockMode {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for ImageLockMode {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("ImageLockMode").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct ImageType(pub i32);
-impl ::core::marker::Copy for ImageType {}
-impl ::core::clone::Clone for ImageType {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for ImageType {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for ImageType {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for ImageType {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("ImageType").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct InterpolationMode(pub i32);
-impl ::core::marker::Copy for InterpolationMode {}
-impl ::core::clone::Clone for InterpolationMode {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for InterpolationMode {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for InterpolationMode {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for InterpolationMode {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("InterpolationMode").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct ItemDataPosition(pub i32);
-impl ::core::marker::Copy for ItemDataPosition {}
-impl ::core::clone::Clone for ItemDataPosition {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for ItemDataPosition {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for ItemDataPosition {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for ItemDataPosition {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("ItemDataPosition").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct LineCap(pub i32);
-impl ::core::marker::Copy for LineCap {}
-impl ::core::clone::Clone for LineCap {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for LineCap {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for LineCap {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for LineCap {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("LineCap").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct LineJoin(pub i32);
-impl ::core::marker::Copy for LineJoin {}
-impl ::core::clone::Clone for LineJoin {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for LineJoin {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for LineJoin {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for LineJoin {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("LineJoin").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct LinearGradientMode(pub i32);
-impl ::core::marker::Copy for LinearGradientMode {}
-impl ::core::clone::Clone for LinearGradientMode {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for LinearGradientMode {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for LinearGradientMode {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for LinearGradientMode {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("LinearGradientMode").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct MatrixOrder(pub i32);
-impl ::core::marker::Copy for MatrixOrder {}
-impl ::core::clone::Clone for MatrixOrder {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for MatrixOrder {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for MatrixOrder {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for MatrixOrder {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("MatrixOrder").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct MetafileFrameUnit(pub i32);
-impl ::core::marker::Copy for MetafileFrameUnit {}
-impl ::core::clone::Clone for MetafileFrameUnit {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for MetafileFrameUnit {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for MetafileFrameUnit {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for MetafileFrameUnit {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("MetafileFrameUnit").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct MetafileType(pub i32);
-impl ::core::marker::Copy for MetafileType {}
-impl ::core::clone::Clone for MetafileType {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for MetafileType {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for MetafileType {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for MetafileType {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("MetafileType").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct ObjectType(pub i32);
-impl ::core::marker::Copy for ObjectType {}
-impl ::core::clone::Clone for ObjectType {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for ObjectType {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for ObjectType {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for ObjectType {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("ObjectType").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct PaletteFlags(pub i32);
-impl ::core::marker::Copy for PaletteFlags {}
-impl ::core::clone::Clone for PaletteFlags {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for PaletteFlags {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for PaletteFlags {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for PaletteFlags {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("PaletteFlags").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct PaletteType(pub i32);
-impl ::core::marker::Copy for PaletteType {}
-impl ::core::clone::Clone for PaletteType {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for PaletteType {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for PaletteType {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for PaletteType {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("PaletteType").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct PathPointType(pub i32);
-impl ::core::marker::Copy for PathPointType {}
-impl ::core::clone::Clone for PathPointType {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for PathPointType {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for PathPointType {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for PathPointType {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("PathPointType").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct PenAlignment(pub i32);
-impl ::core::marker::Copy for PenAlignment {}
-impl ::core::clone::Clone for PenAlignment {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for PenAlignment {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for PenAlignment {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for PenAlignment {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("PenAlignment").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct PenType(pub i32);
-impl ::core::marker::Copy for PenType {}
-impl ::core::clone::Clone for PenType {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for PenType {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for PenType {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for PenType {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("PenType").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct PixelOffsetMode(pub i32);
-impl ::core::marker::Copy for PixelOffsetMode {}
-impl ::core::clone::Clone for PixelOffsetMode {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for PixelOffsetMode {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for PixelOffsetMode {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for PixelOffsetMode {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("PixelOffsetMode").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct QualityMode(pub i32);
-impl ::core::marker::Copy for QualityMode {}
-impl ::core::clone::Clone for QualityMode {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for QualityMode {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for QualityMode {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for QualityMode {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("QualityMode").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct RotateFlipType(pub i32);
-impl ::core::marker::Copy for RotateFlipType {}
-impl ::core::clone::Clone for RotateFlipType {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for RotateFlipType {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for RotateFlipType {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for RotateFlipType {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("RotateFlipType").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct SmoothingMode(pub i32);
-impl ::core::marker::Copy for SmoothingMode {}
-impl ::core::clone::Clone for SmoothingMode {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for SmoothingMode {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for SmoothingMode {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for SmoothingMode {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("SmoothingMode").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct Status(pub i32);
-impl ::core::marker::Copy for Status {}
-impl ::core::clone::Clone for Status {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for Status {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for Status {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for Status {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("Status").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct StringAlignment(pub i32);
-impl ::core::marker::Copy for StringAlignment {}
-impl ::core::clone::Clone for StringAlignment {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for StringAlignment {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for StringAlignment {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for StringAlignment {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("StringAlignment").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct StringDigitSubstitute(pub i32);
-impl ::core::marker::Copy for StringDigitSubstitute {}
-impl ::core::clone::Clone for StringDigitSubstitute {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for StringDigitSubstitute {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for StringDigitSubstitute {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for StringDigitSubstitute {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("StringDigitSubstitute").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct StringFormatFlags(pub i32);
-impl ::core::marker::Copy for StringFormatFlags {}
-impl ::core::clone::Clone for StringFormatFlags {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for StringFormatFlags {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for StringFormatFlags {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for StringFormatFlags {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("StringFormatFlags").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct StringTrimming(pub i32);
-impl ::core::marker::Copy for StringTrimming {}
-impl ::core::clone::Clone for StringTrimming {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for StringTrimming {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for StringTrimming {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for StringTrimming {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("StringTrimming").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct TextRenderingHint(pub i32);
-impl ::core::marker::Copy for TextRenderingHint {}
-impl ::core::clone::Clone for TextRenderingHint {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for TextRenderingHint {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for TextRenderingHint {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for TextRenderingHint {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("TextRenderingHint").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct Unit(pub i32);
-impl ::core::marker::Copy for Unit {}
-impl ::core::clone::Clone for Unit {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for Unit {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for Unit {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for Unit {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("Unit").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct WarpMode(pub i32);
-impl ::core::marker::Copy for WarpMode {}
-impl ::core::clone::Clone for WarpMode {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for WarpMode {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for WarpMode {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for WarpMode {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("WarpMode").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct WrapMode(pub i32);
-impl ::core::marker::Copy for WrapMode {}
-impl ::core::clone::Clone for WrapMode {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for WrapMode {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for WrapMode {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for WrapMode {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("WrapMode").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct Bitmap(pub isize);
-impl ::core::default::Default for Bitmap {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for Bitmap {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for Bitmap {}
-impl ::core::fmt::Debug for Bitmap {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("Bitmap").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for Bitmap {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(C)]
-pub struct BitmapData {
-    pub Width: u32,
-    pub Height: u32,
-    pub Stride: i32,
-    pub PixelFormat: i32,
-    pub Scan0: *mut ::core::ffi::c_void,
-    pub Reserved: usize,
-}
-impl ::core::marker::Copy for BitmapData {}
-impl ::core::clone::Clone for BitmapData {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for BitmapData {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("BitmapData").field("Width", &self.Width).field("Height", &self.Height).field("Stride", &self.Stride).field("PixelFormat", &self.PixelFormat).field("Scan0", &self.Scan0).field("Reserved", &self.Reserved).finish()
-    }
-}
-impl ::windows_core::TypeKind for BitmapData {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for BitmapData {
-    fn eq(&self, other: &Self) -> bool {
-        self.Width == other.Width && self.Height == other.Height && self.Stride == other.Stride && self.PixelFormat == other.PixelFormat && self.Scan0 == other.Scan0 && self.Reserved == other.Reserved
-    }
-}
-impl ::core::cmp::Eq for BitmapData {}
-impl ::core::default::Default for BitmapData {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
-pub struct Blur {
-    pub Base: Effect,
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::marker::Copy for Blur {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::clone::Clone for Blur {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::fmt::Debug for Blur {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("Blur").field("Base", &self.Base).finish()
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::windows_core::TypeKind for Blur {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::PartialEq for Blur {
-    fn eq(&self, other: &Self) -> bool {
-        self.Base == other.Base
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::Eq for Blur {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::default::Default for Blur {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
-pub struct BlurParams {
-    pub radius: f32,
-    pub expandEdge: super::super::Foundation::BOOL,
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::marker::Copy for BlurParams {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::clone::Clone for BlurParams {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::fmt::Debug for BlurParams {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("BlurParams").field("radius", &self.radius).field("expandEdge", &self.expandEdge).finish()
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::windows_core::TypeKind for BlurParams {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::PartialEq for BlurParams {
-    fn eq(&self, other: &Self) -> bool {
-        self.radius == other.radius && self.expandEdge == other.expandEdge
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::Eq for BlurParams {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::default::Default for BlurParams {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
-pub struct BrightnessContrast {
-    pub Base: Effect,
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::marker::Copy for BrightnessContrast {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::clone::Clone for BrightnessContrast {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::fmt::Debug for BrightnessContrast {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("BrightnessContrast").field("Base", &self.Base).finish()
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::windows_core::TypeKind for BrightnessContrast {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::PartialEq for BrightnessContrast {
-    fn eq(&self, other: &Self) -> bool {
-        self.Base == other.Base
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::Eq for BrightnessContrast {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::default::Default for BrightnessContrast {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct BrightnessContrastParams {
-    pub brightnessLevel: i32,
-    pub contrastLevel: i32,
-}
-impl ::core::marker::Copy for BrightnessContrastParams {}
-impl ::core::clone::Clone for BrightnessContrastParams {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for BrightnessContrastParams {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("BrightnessContrastParams").field("brightnessLevel", &self.brightnessLevel).field("contrastLevel", &self.contrastLevel).finish()
-    }
-}
-impl ::windows_core::TypeKind for BrightnessContrastParams {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for BrightnessContrastParams {
-    fn eq(&self, other: &Self) -> bool {
-        self.brightnessLevel == other.brightnessLevel && self.contrastLevel == other.contrastLevel
-    }
-}
-impl ::core::cmp::Eq for BrightnessContrastParams {}
-impl ::core::default::Default for BrightnessContrastParams {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct CGpEffect(pub isize);
-impl ::core::default::Default for CGpEffect {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for CGpEffect {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for CGpEffect {}
-impl ::core::fmt::Debug for CGpEffect {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("CGpEffect").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for CGpEffect {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct CachedBitmap(pub isize);
-impl ::core::default::Default for CachedBitmap {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for CachedBitmap {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for CachedBitmap {}
-impl ::core::fmt::Debug for CachedBitmap {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("CachedBitmap").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for CachedBitmap {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(C)]
-pub struct CharacterRange {
-    pub First: i32,
-    pub Length: i32,
-}
-impl ::core::marker::Copy for CharacterRange {}
-impl ::core::clone::Clone for CharacterRange {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for CharacterRange {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("CharacterRange").field("First", &self.First).field("Length", &self.Length).finish()
-    }
-}
-impl ::windows_core::TypeKind for CharacterRange {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for CharacterRange {
-    fn eq(&self, other: &Self) -> bool {
-        self.First == other.First && self.Length == other.Length
-    }
-}
-impl ::core::cmp::Eq for CharacterRange {}
-impl ::core::default::Default for CharacterRange {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct Color {
-    pub Argb: u32,
-}
-impl Color {
-    pub const AliceBlue: i32 = -984833i32;
-    pub const AntiqueWhite: i32 = -332841i32;
-    pub const Aqua: i32 = -16711681i32;
-    pub const Aquamarine: i32 = -8388652i32;
-    pub const Azure: i32 = -983041i32;
-    pub const Beige: i32 = -657956i32;
-    pub const Bisque: i32 = -6972i32;
-    pub const Black: i32 = -16777216i32;
-    pub const BlanchedAlmond: i32 = -5171i32;
-    pub const Blue: i32 = -16776961i32;
-    pub const BlueViolet: i32 = -7722014i32;
-    pub const Brown: i32 = -5952982i32;
-    pub const BurlyWood: i32 = -2180985i32;
-    pub const CadetBlue: i32 = -10510688i32;
-    pub const Chartreuse: i32 = -8388864i32;
-    pub const Chocolate: i32 = -2987746i32;
-    pub const Coral: i32 = -32944i32;
-    pub const CornflowerBlue: i32 = -10185235i32;
-    pub const Cornsilk: i32 = -1828i32;
-    pub const Crimson: i32 = -2354116i32;
-    pub const Cyan: i32 = -16711681i32;
-    pub const DarkBlue: i32 = -16777077i32;
-    pub const DarkCyan: i32 = -16741493i32;
-    pub const DarkGoldenrod: i32 = -4684277i32;
-    pub const DarkGray: i32 = -5658199i32;
-    pub const DarkGreen: i32 = -16751616i32;
-    pub const DarkKhaki: i32 = -4343957i32;
-    pub const DarkMagenta: i32 = -7667573i32;
-    pub const DarkOliveGreen: i32 = -11179217i32;
-    pub const DarkOrange: i32 = -29696i32;
-    pub const DarkOrchid: i32 = -6737204i32;
-    pub const DarkRed: i32 = -7667712i32;
-    pub const DarkSalmon: i32 = -1468806i32;
-    pub const DarkSeaGreen: i32 = -7357301i32;
-    pub const DarkSlateBlue: i32 = -12042869i32;
-    pub const DarkSlateGray: i32 = -13676721i32;
-    pub const DarkTurquoise: i32 = -16724271i32;
-    pub const DarkViolet: i32 = -7077677i32;
-    pub const DeepPink: i32 = -60269i32;
-    pub const DeepSkyBlue: i32 = -16728065i32;
-    pub const DimGray: i32 = -9868951i32;
-    pub const DodgerBlue: i32 = -14774017i32;
-    pub const Firebrick: i32 = -5103070i32;
-    pub const FloralWhite: i32 = -1296i32;
-    pub const ForestGreen: i32 = -14513374i32;
-    pub const Fuchsia: i32 = -65281i32;
-    pub const Gainsboro: i32 = -2302756i32;
-    pub const GhostWhite: i32 = -460545i32;
-    pub const Gold: i32 = -10496i32;
-    pub const Goldenrod: i32 = -2448096i32;
-    pub const Gray: i32 = -8355712i32;
-    pub const Green: i32 = -16744448i32;
-    pub const GreenYellow: i32 = -5374161i32;
-    pub const Honeydew: i32 = -983056i32;
-    pub const HotPink: i32 = -38476i32;
-    pub const IndianRed: i32 = -3318692i32;
-    pub const Indigo: i32 = -11861886i32;
-    pub const Ivory: i32 = -16i32;
-    pub const Khaki: i32 = -989556i32;
-    pub const Lavender: i32 = -1644806i32;
-    pub const LavenderBlush: i32 = -3851i32;
-    pub const LawnGreen: i32 = -8586240i32;
-    pub const LemonChiffon: i32 = -1331i32;
-    pub const LightBlue: i32 = -5383962i32;
-    pub const LightCoral: i32 = -1015680i32;
-    pub const LightCyan: i32 = -2031617i32;
-    pub const LightGoldenrodYellow: i32 = -329006i32;
-    pub const LightGray: i32 = -2894893i32;
-    pub const LightGreen: i32 = -7278960i32;
-    pub const LightPink: i32 = -18751i32;
-    pub const LightSalmon: i32 = -24454i32;
-    pub const LightSeaGreen: i32 = -14634326i32;
-    pub const LightSkyBlue: i32 = -7876870i32;
-    pub const LightSlateGray: i32 = -8943463i32;
-    pub const LightSteelBlue: i32 = -5192482i32;
-    pub const LightYellow: i32 = -32i32;
-    pub const Lime: i32 = -16711936i32;
-    pub const LimeGreen: i32 = -13447886i32;
-    pub const Linen: i32 = -331546i32;
-    pub const Magenta: i32 = -65281i32;
-    pub const Maroon: i32 = -8388608i32;
-    pub const MediumAquamarine: i32 = -10039894i32;
-    pub const MediumBlue: i32 = -16777011i32;
-    pub const MediumOrchid: i32 = -4565549i32;
-    pub const MediumPurple: i32 = -7114533i32;
-    pub const MediumSeaGreen: i32 = -12799119i32;
-    pub const MediumSlateBlue: i32 = -8689426i32;
-    pub const MediumSpringGreen: i32 = -16713062i32;
-    pub const MediumTurquoise: i32 = -12004916i32;
-    pub const MediumVioletRed: i32 = -3730043i32;
-    pub const MidnightBlue: i32 = -15132304i32;
-    pub const MintCream: i32 = -655366i32;
-    pub const MistyRose: i32 = -6943i32;
-    pub const Moccasin: i32 = -6987i32;
-    pub const NavajoWhite: i32 = -8531i32;
-    pub const Navy: i32 = -16777088i32;
-    pub const OldLace: i32 = -133658i32;
-    pub const Olive: i32 = -8355840i32;
-    pub const OliveDrab: i32 = -9728477i32;
-    pub const Orange: i32 = -23296i32;
-    pub const OrangeRed: i32 = -47872i32;
-    pub const Orchid: i32 = -2461482i32;
-    pub const PaleGoldenrod: i32 = -1120086i32;
-    pub const PaleGreen: i32 = -6751336i32;
-    pub const PaleTurquoise: i32 = -5247250i32;
-    pub const PaleVioletRed: i32 = -2396013i32;
-    pub const PapayaWhip: i32 = -4139i32;
-    pub const PeachPuff: i32 = -9543i32;
-    pub const Peru: i32 = -3308225i32;
-    pub const Pink: i32 = -16181i32;
-    pub const Plum: i32 = -2252579i32;
-    pub const PowderBlue: i32 = -5185306i32;
-    pub const Purple: i32 = -8388480i32;
-    pub const Red: i32 = -65536i32;
-    pub const RosyBrown: i32 = -4419697i32;
-    pub const RoyalBlue: i32 = -12490271i32;
-    pub const SaddleBrown: i32 = -7650029i32;
-    pub const Salmon: i32 = -360334i32;
-    pub const SandyBrown: i32 = -744352i32;
-    pub const SeaGreen: i32 = -13726889i32;
-    pub const SeaShell: i32 = -2578i32;
-    pub const Sienna: i32 = -6270419i32;
-    pub const Silver: i32 = -4144960i32;
-    pub const SkyBlue: i32 = -7876885i32;
-    pub const SlateBlue: i32 = -9807155i32;
-    pub const SlateGray: i32 = -9404272i32;
-    pub const Snow: i32 = -1286i32;
-    pub const SpringGreen: i32 = -16711809i32;
-    pub const SteelBlue: i32 = -12156236i32;
-    pub const Tan: i32 = -2968436i32;
-    pub const Teal: i32 = -16744320i32;
-    pub const Thistle: i32 = -2572328i32;
-    pub const Tomato: i32 = -40121i32;
-    pub const Transparent: i32 = 16777215i32;
-    pub const Turquoise: i32 = -12525360i32;
-    pub const Violet: i32 = -1146130i32;
-    pub const Wheat: i32 = -663885i32;
-    pub const White: i32 = -1i32;
-    pub const WhiteSmoke: i32 = -657931i32;
-    pub const Yellow: i32 = -256i32;
-    pub const YellowGreen: i32 = -6632142i32;
-    pub const AlphaShift: i32 = 24i32;
-    pub const RedShift: i32 = 16i32;
-    pub const GreenShift: i32 = 8i32;
-    pub const BlueShift: i32 = 0i32;
-    pub const AlphaMask: i32 = -16777216i32;
-    pub const RedMask: i32 = 16711680i32;
-    pub const GreenMask: i32 = 65280i32;
-    pub const BlueMask: i32 = 255i32;
-}
-impl ::core::marker::Copy for Color {}
-impl ::core::clone::Clone for Color {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for Color {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("Color").field("Argb", &self.Argb).finish()
-    }
-}
-impl ::windows_core::TypeKind for Color {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for Color {
-    fn eq(&self, other: &Self) -> bool {
-        self.Argb == other.Argb
-    }
-}
-impl ::core::cmp::Eq for Color {}
-impl ::core::default::Default for Color {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
-pub struct ColorBalance {
-    pub Base: Effect,
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::marker::Copy for ColorBalance {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::clone::Clone for ColorBalance {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::fmt::Debug for ColorBalance {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("ColorBalance").field("Base", &self.Base).finish()
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::windows_core::TypeKind for ColorBalance {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::PartialEq for ColorBalance {
-    fn eq(&self, other: &Self) -> bool {
-        self.Base == other.Base
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::Eq for ColorBalance {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::default::Default for ColorBalance {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct ColorBalanceParams {
-    pub cyanRed: i32,
-    pub magentaGreen: i32,
-    pub yellowBlue: i32,
-}
-impl ::core::marker::Copy for ColorBalanceParams {}
-impl ::core::clone::Clone for ColorBalanceParams {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for ColorBalanceParams {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("ColorBalanceParams").field("cyanRed", &self.cyanRed).field("magentaGreen", &self.magentaGreen).field("yellowBlue", &self.yellowBlue).finish()
-    }
-}
-impl ::windows_core::TypeKind for ColorBalanceParams {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for ColorBalanceParams {
-    fn eq(&self, other: &Self) -> bool {
-        self.cyanRed == other.cyanRed && self.magentaGreen == other.magentaGreen && self.yellowBlue == other.yellowBlue
-    }
-}
-impl ::core::cmp::Eq for ColorBalanceParams {}
-impl ::core::default::Default for ColorBalanceParams {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
-pub struct ColorCurve {
-    pub Base: Effect,
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::marker::Copy for ColorCurve {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::clone::Clone for ColorCurve {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::fmt::Debug for ColorCurve {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("ColorCurve").field("Base", &self.Base).finish()
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::windows_core::TypeKind for ColorCurve {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::PartialEq for ColorCurve {
-    fn eq(&self, other: &Self) -> bool {
-        self.Base == other.Base
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::Eq for ColorCurve {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::default::Default for ColorCurve {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct ColorCurveParams {
-    pub adjustment: CurveAdjustments,
-    pub channel: CurveChannel,
-    pub adjustValue: i32,
-}
-impl ::core::marker::Copy for ColorCurveParams {}
-impl ::core::clone::Clone for ColorCurveParams {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for ColorCurveParams {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("ColorCurveParams").field("adjustment", &self.adjustment).field("channel", &self.channel).field("adjustValue", &self.adjustValue).finish()
-    }
-}
-impl ::windows_core::TypeKind for ColorCurveParams {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for ColorCurveParams {
-    fn eq(&self, other: &Self) -> bool {
-        self.adjustment == other.adjustment && self.channel == other.channel && self.adjustValue == other.adjustValue
-    }
-}
-impl ::core::cmp::Eq for ColorCurveParams {}
-impl ::core::default::Default for ColorCurveParams {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
-pub struct ColorLUT {
-    pub Base: Effect,
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::marker::Copy for ColorLUT {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::clone::Clone for ColorLUT {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::fmt::Debug for ColorLUT {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("ColorLUT").field("Base", &self.Base).finish()
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::windows_core::TypeKind for ColorLUT {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::PartialEq for ColorLUT {
-    fn eq(&self, other: &Self) -> bool {
-        self.Base == other.Base
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::Eq for ColorLUT {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::default::Default for ColorLUT {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct ColorLUTParams {
-    pub lutB: [u8; 256],
-    pub lutG: [u8; 256],
-    pub lutR: [u8; 256],
-    pub lutA: [u8; 256],
-}
-impl ::core::marker::Copy for ColorLUTParams {}
-impl ::core::clone::Clone for ColorLUTParams {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for ColorLUTParams {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("ColorLUTParams").field("lutB", &self.lutB).field("lutG", &self.lutG).field("lutR", &self.lutR).field("lutA", &self.lutA).finish()
-    }
-}
-impl ::windows_core::TypeKind for ColorLUTParams {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for ColorLUTParams {
-    fn eq(&self, other: &Self) -> bool {
-        self.lutB == other.lutB && self.lutG == other.lutG && self.lutR == other.lutR && self.lutA == other.lutA
-    }
-}
-impl ::core::cmp::Eq for ColorLUTParams {}
-impl ::core::default::Default for ColorLUTParams {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct ColorMap {
-    pub oldColor: Color,
-    pub newColor: Color,
-}
-impl ::core::marker::Copy for ColorMap {}
-impl ::core::clone::Clone for ColorMap {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for ColorMap {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("ColorMap").field("oldColor", &self.oldColor).field("newColor", &self.newColor).finish()
-    }
-}
-impl ::windows_core::TypeKind for ColorMap {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for ColorMap {
-    fn eq(&self, other: &Self) -> bool {
-        self.oldColor == other.oldColor && self.newColor == other.newColor
-    }
-}
-impl ::core::cmp::Eq for ColorMap {}
-impl ::core::default::Default for ColorMap {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct ColorMatrix {
-    pub m: [f32; 25],
-}
-impl ::core::marker::Copy for ColorMatrix {}
-impl ::core::clone::Clone for ColorMatrix {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for ColorMatrix {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("ColorMatrix").field("m", &self.m).finish()
-    }
-}
-impl ::windows_core::TypeKind for ColorMatrix {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for ColorMatrix {
-    fn eq(&self, other: &Self) -> bool {
-        self.m == other.m
-    }
-}
-impl ::core::cmp::Eq for ColorMatrix {}
-impl ::core::default::Default for ColorMatrix {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
-pub struct ColorMatrixEffect {
-    pub Base: Effect,
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::marker::Copy for ColorMatrixEffect {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::clone::Clone for ColorMatrixEffect {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::fmt::Debug for ColorMatrixEffect {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("ColorMatrixEffect").field("Base", &self.Base).finish()
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::windows_core::TypeKind for ColorMatrixEffect {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::PartialEq for ColorMatrixEffect {
-    fn eq(&self, other: &Self) -> bool {
-        self.Base == other.Base
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::Eq for ColorMatrixEffect {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::default::Default for ColorMatrixEffect {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct ColorPalette {
-    pub Flags: u32,
-    pub Count: u32,
-    pub Entries: [u32; 1],
-}
-impl ::core::marker::Copy for ColorPalette {}
-impl ::core::clone::Clone for ColorPalette {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for ColorPalette {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("ColorPalette").field("Flags", &self.Flags).field("Count", &self.Count).field("Entries", &self.Entries).finish()
-    }
-}
-impl ::windows_core::TypeKind for ColorPalette {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for ColorPalette {
-    fn eq(&self, other: &Self) -> bool {
-        self.Flags == other.Flags && self.Count == other.Count && self.Entries == other.Entries
-    }
-}
-impl ::core::cmp::Eq for ColorPalette {}
-impl ::core::default::Default for ColorPalette {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct CustomLineCap(pub isize);
-impl ::core::default::Default for CustomLineCap {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for CustomLineCap {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for CustomLineCap {}
-impl ::core::fmt::Debug for CustomLineCap {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("CustomLineCap").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for CustomLineCap {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(C)]
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
-pub struct ENHMETAHEADER3 {
-    pub iType: u32,
-    pub nSize: u32,
-    pub rclBounds: super::super::Foundation::RECTL,
-    pub rclFrame: super::super::Foundation::RECTL,
-    pub dSignature: u32,
-    pub nVersion: u32,
-    pub nBytes: u32,
-    pub nRecords: u32,
-    pub nHandles: u16,
-    pub sReserved: u16,
-    pub nDescription: u32,
-    pub offDescription: u32,
-    pub nPalEntries: u32,
-    pub szlDevice: super::super::Foundation::SIZE,
-    pub szlMillimeters: super::super::Foundation::SIZE,
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::marker::Copy for ENHMETAHEADER3 {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::clone::Clone for ENHMETAHEADER3 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::fmt::Debug for ENHMETAHEADER3 {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("ENHMETAHEADER3")
-            .field("iType", &self.iType)
-            .field("nSize", &self.nSize)
-            .field("rclBounds", &self.rclBounds)
-            .field("rclFrame", &self.rclFrame)
-            .field("dSignature", &self.dSignature)
-            .field("nVersion", &self.nVersion)
-            .field("nBytes", &self.nBytes)
-            .field("nRecords", &self.nRecords)
-            .field("nHandles", &self.nHandles)
-            .field("sReserved", &self.sReserved)
-            .field("nDescription", &self.nDescription)
-            .field("offDescription", &self.offDescription)
-            .field("nPalEntries", &self.nPalEntries)
-            .field("szlDevice", &self.szlDevice)
-            .field("szlMillimeters", &self.szlMillimeters)
-            .finish()
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::windows_core::TypeKind for ENHMETAHEADER3 {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::PartialEq for ENHMETAHEADER3 {
-    fn eq(&self, other: &Self) -> bool {
-        self.iType == other.iType && self.nSize == other.nSize && self.rclBounds == other.rclBounds && self.rclFrame == other.rclFrame && self.dSignature == other.dSignature && self.nVersion == other.nVersion && self.nBytes == other.nBytes && self.nRecords == other.nRecords && self.nHandles == other.nHandles && self.sReserved == other.sReserved && self.nDescription == other.nDescription && self.offDescription == other.offDescription && self.nPalEntries == other.nPalEntries && self.szlDevice == other.szlDevice && self.szlMillimeters == other.szlMillimeters
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::Eq for ENHMETAHEADER3 {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::default::Default for ENHMETAHEADER3 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
-pub struct Effect {
-    pub lpVtbl: *mut *mut ::core::ffi::c_void,
-    pub nativeEffect: *mut CGpEffect,
-    pub auxDataSize: i32,
-    pub auxData: *mut ::core::ffi::c_void,
-    pub useAuxData: super::super::Foundation::BOOL,
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::marker::Copy for Effect {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::clone::Clone for Effect {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::fmt::Debug for Effect {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("Effect").field("lpVtbl", &self.lpVtbl).field("nativeEffect", &self.nativeEffect).field("auxDataSize", &self.auxDataSize).field("auxData", &self.auxData).field("useAuxData", &self.useAuxData).finish()
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::windows_core::TypeKind for Effect {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::PartialEq for Effect {
-    fn eq(&self, other: &Self) -> bool {
-        self.lpVtbl == other.lpVtbl && self.nativeEffect == other.nativeEffect && self.auxDataSize == other.auxDataSize && self.auxData == other.auxData && self.useAuxData == other.useAuxData
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::Eq for Effect {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::default::Default for Effect {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct EncoderParameter {
-    pub Guid: ::windows_core::GUID,
-    pub NumberOfValues: u32,
-    pub Type: u32,
-    pub Value: *mut ::core::ffi::c_void,
-}
-impl ::core::marker::Copy for EncoderParameter {}
-impl ::core::clone::Clone for EncoderParameter {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for EncoderParameter {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("EncoderParameter").field("Guid", &self.Guid).field("NumberOfValues", &self.NumberOfValues).field("Type", &self.Type).field("Value", &self.Value).finish()
-    }
-}
-impl ::windows_core::TypeKind for EncoderParameter {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for EncoderParameter {
-    fn eq(&self, other: &Self) -> bool {
-        self.Guid == other.Guid && self.NumberOfValues == other.NumberOfValues && self.Type == other.Type && self.Value == other.Value
-    }
-}
-impl ::core::cmp::Eq for EncoderParameter {}
-impl ::core::default::Default for EncoderParameter {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct EncoderParameters {
-    pub Count: u32,
-    pub Parameter: [EncoderParameter; 1],
-}
-impl ::core::marker::Copy for EncoderParameters {}
-impl ::core::clone::Clone for EncoderParameters {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for EncoderParameters {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("EncoderParameters").field("Count", &self.Count).field("Parameter", &self.Parameter).finish()
-    }
-}
-impl ::windows_core::TypeKind for EncoderParameters {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for EncoderParameters {
-    fn eq(&self, other: &Self) -> bool {
-        self.Count == other.Count && self.Parameter == other.Parameter
-    }
-}
-impl ::core::cmp::Eq for EncoderParameters {}
-impl ::core::default::Default for EncoderParameters {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct Font(pub isize);
-impl ::core::default::Default for Font {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for Font {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for Font {}
-impl ::core::fmt::Debug for Font {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("Font").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for Font {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct FontCollection(pub isize);
-impl ::core::default::Default for FontCollection {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for FontCollection {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for FontCollection {}
-impl ::core::fmt::Debug for FontCollection {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("FontCollection").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for FontCollection {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct FontFamily(pub isize);
-impl ::core::default::Default for FontFamily {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for FontFamily {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for FontFamily {}
-impl ::core::fmt::Debug for FontFamily {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("FontFamily").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for FontFamily {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(C)]
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
-pub struct GdiplusStartupInput {
-    pub GdiplusVersion: u32,
-    pub DebugEventCallback: isize,
-    pub SuppressBackgroundThread: super::super::Foundation::BOOL,
-    pub SuppressExternalCodecs: super::super::Foundation::BOOL,
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::marker::Copy for GdiplusStartupInput {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::clone::Clone for GdiplusStartupInput {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::fmt::Debug for GdiplusStartupInput {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("GdiplusStartupInput").field("GdiplusVersion", &self.GdiplusVersion).field("DebugEventCallback", &self.DebugEventCallback).field("SuppressBackgroundThread", &self.SuppressBackgroundThread).field("SuppressExternalCodecs", &self.SuppressExternalCodecs).finish()
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::windows_core::TypeKind for GdiplusStartupInput {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::PartialEq for GdiplusStartupInput {
-    fn eq(&self, other: &Self) -> bool {
-        self.GdiplusVersion == other.GdiplusVersion && self.DebugEventCallback == other.DebugEventCallback && self.SuppressBackgroundThread == other.SuppressBackgroundThread && self.SuppressExternalCodecs == other.SuppressExternalCodecs
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::Eq for GdiplusStartupInput {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::default::Default for GdiplusStartupInput {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
-pub struct GdiplusStartupInputEx {
-    pub Base: GdiplusStartupInput,
-    pub StartupParameters: i32,
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::marker::Copy for GdiplusStartupInputEx {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::clone::Clone for GdiplusStartupInputEx {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::fmt::Debug for GdiplusStartupInputEx {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("GdiplusStartupInputEx").field("Base", &self.Base).field("StartupParameters", &self.StartupParameters).finish()
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::windows_core::TypeKind for GdiplusStartupInputEx {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::PartialEq for GdiplusStartupInputEx {
-    fn eq(&self, other: &Self) -> bool {
-        self.Base == other.Base && self.StartupParameters == other.StartupParameters
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::Eq for GdiplusStartupInputEx {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::default::Default for GdiplusStartupInputEx {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct GdiplusStartupOutput {
-    pub NotificationHook: isize,
-    pub NotificationUnhook: isize,
-}
-impl ::core::marker::Copy for GdiplusStartupOutput {}
-impl ::core::clone::Clone for GdiplusStartupOutput {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for GdiplusStartupOutput {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("GdiplusStartupOutput").field("NotificationHook", &self.NotificationHook).field("NotificationUnhook", &self.NotificationUnhook).finish()
-    }
-}
-impl ::windows_core::TypeKind for GdiplusStartupOutput {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for GdiplusStartupOutput {
-    fn eq(&self, other: &Self) -> bool {
-        self.NotificationHook == other.NotificationHook && self.NotificationUnhook == other.NotificationUnhook
-    }
-}
-impl ::core::cmp::Eq for GdiplusStartupOutput {}
-impl ::core::default::Default for GdiplusStartupOutput {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct GpAdjustableArrowCap(pub isize);
-impl ::core::default::Default for GpAdjustableArrowCap {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for GpAdjustableArrowCap {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for GpAdjustableArrowCap {}
-impl ::core::fmt::Debug for GpAdjustableArrowCap {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("GpAdjustableArrowCap").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for GpAdjustableArrowCap {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct GpBitmap(pub isize);
-impl ::core::default::Default for GpBitmap {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for GpBitmap {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for GpBitmap {}
-impl ::core::fmt::Debug for GpBitmap {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("GpBitmap").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for GpBitmap {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct GpBrush(pub isize);
-impl ::core::default::Default for GpBrush {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for GpBrush {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for GpBrush {}
-impl ::core::fmt::Debug for GpBrush {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("GpBrush").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for GpBrush {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct GpCachedBitmap(pub isize);
-impl ::core::default::Default for GpCachedBitmap {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for GpCachedBitmap {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for GpCachedBitmap {}
-impl ::core::fmt::Debug for GpCachedBitmap {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("GpCachedBitmap").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for GpCachedBitmap {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct GpCustomLineCap(pub isize);
-impl ::core::default::Default for GpCustomLineCap {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for GpCustomLineCap {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for GpCustomLineCap {}
-impl ::core::fmt::Debug for GpCustomLineCap {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("GpCustomLineCap").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for GpCustomLineCap {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct GpFont(pub isize);
-impl ::core::default::Default for GpFont {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for GpFont {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for GpFont {}
-impl ::core::fmt::Debug for GpFont {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("GpFont").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for GpFont {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct GpFontCollection(pub isize);
-impl ::core::default::Default for GpFontCollection {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for GpFontCollection {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for GpFontCollection {}
-impl ::core::fmt::Debug for GpFontCollection {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("GpFontCollection").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for GpFontCollection {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct GpFontFamily(pub isize);
-impl ::core::default::Default for GpFontFamily {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for GpFontFamily {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for GpFontFamily {}
-impl ::core::fmt::Debug for GpFontFamily {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("GpFontFamily").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for GpFontFamily {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct GpGraphics(pub isize);
-impl ::core::default::Default for GpGraphics {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for GpGraphics {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for GpGraphics {}
-impl ::core::fmt::Debug for GpGraphics {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("GpGraphics").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for GpGraphics {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct GpHatch(pub isize);
-impl ::core::default::Default for GpHatch {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for GpHatch {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for GpHatch {}
-impl ::core::fmt::Debug for GpHatch {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("GpHatch").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for GpHatch {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct GpImage(pub isize);
-impl ::core::default::Default for GpImage {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for GpImage {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for GpImage {}
-impl ::core::fmt::Debug for GpImage {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("GpImage").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for GpImage {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct GpImageAttributes(pub isize);
-impl ::core::default::Default for GpImageAttributes {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for GpImageAttributes {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for GpImageAttributes {}
-impl ::core::fmt::Debug for GpImageAttributes {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("GpImageAttributes").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for GpImageAttributes {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct GpInstalledFontCollection(pub isize);
-impl ::core::default::Default for GpInstalledFontCollection {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for GpInstalledFontCollection {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for GpInstalledFontCollection {}
-impl ::core::fmt::Debug for GpInstalledFontCollection {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("GpInstalledFontCollection").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for GpInstalledFontCollection {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct GpLineGradient(pub isize);
-impl ::core::default::Default for GpLineGradient {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for GpLineGradient {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for GpLineGradient {}
-impl ::core::fmt::Debug for GpLineGradient {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("GpLineGradient").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for GpLineGradient {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct GpMetafile(pub isize);
-impl ::core::default::Default for GpMetafile {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for GpMetafile {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for GpMetafile {}
-impl ::core::fmt::Debug for GpMetafile {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("GpMetafile").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for GpMetafile {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct GpPath(pub isize);
-impl ::core::default::Default for GpPath {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for GpPath {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for GpPath {}
-impl ::core::fmt::Debug for GpPath {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("GpPath").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for GpPath {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct GpPathGradient(pub isize);
-impl ::core::default::Default for GpPathGradient {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for GpPathGradient {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for GpPathGradient {}
-impl ::core::fmt::Debug for GpPathGradient {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("GpPathGradient").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for GpPathGradient {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct GpPathIterator(pub isize);
-impl ::core::default::Default for GpPathIterator {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for GpPathIterator {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for GpPathIterator {}
-impl ::core::fmt::Debug for GpPathIterator {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("GpPathIterator").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for GpPathIterator {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct GpPen(pub isize);
-impl ::core::default::Default for GpPen {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for GpPen {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for GpPen {}
-impl ::core::fmt::Debug for GpPen {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("GpPen").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for GpPen {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct GpPrivateFontCollection(pub isize);
-impl ::core::default::Default for GpPrivateFontCollection {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for GpPrivateFontCollection {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for GpPrivateFontCollection {}
-impl ::core::fmt::Debug for GpPrivateFontCollection {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("GpPrivateFontCollection").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for GpPrivateFontCollection {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct GpRegion(pub isize);
-impl ::core::default::Default for GpRegion {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for GpRegion {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for GpRegion {}
-impl ::core::fmt::Debug for GpRegion {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("GpRegion").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for GpRegion {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct GpSolidFill(pub isize);
-impl ::core::default::Default for GpSolidFill {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for GpSolidFill {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for GpSolidFill {}
-impl ::core::fmt::Debug for GpSolidFill {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("GpSolidFill").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for GpSolidFill {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct GpStringFormat(pub isize);
-impl ::core::default::Default for GpStringFormat {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for GpStringFormat {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for GpStringFormat {}
-impl ::core::fmt::Debug for GpStringFormat {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("GpStringFormat").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for GpStringFormat {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct GpTexture(pub isize);
-impl ::core::default::Default for GpTexture {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for GpTexture {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for GpTexture {}
-impl ::core::fmt::Debug for GpTexture {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("GpTexture").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for GpTexture {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(C)]
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
-pub struct HueSaturationLightness {
-    pub Base: Effect,
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::marker::Copy for HueSaturationLightness {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::clone::Clone for HueSaturationLightness {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::fmt::Debug for HueSaturationLightness {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("HueSaturationLightness").field("Base", &self.Base).finish()
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::windows_core::TypeKind for HueSaturationLightness {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::PartialEq for HueSaturationLightness {
-    fn eq(&self, other: &Self) -> bool {
-        self.Base == other.Base
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::Eq for HueSaturationLightness {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::default::Default for HueSaturationLightness {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct HueSaturationLightnessParams {
-    pub hueLevel: i32,
-    pub saturationLevel: i32,
-    pub lightnessLevel: i32,
-}
-impl ::core::marker::Copy for HueSaturationLightnessParams {}
-impl ::core::clone::Clone for HueSaturationLightnessParams {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for HueSaturationLightnessParams {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("HueSaturationLightnessParams").field("hueLevel", &self.hueLevel).field("saturationLevel", &self.saturationLevel).field("lightnessLevel", &self.lightnessLevel).finish()
-    }
-}
-impl ::windows_core::TypeKind for HueSaturationLightnessParams {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for HueSaturationLightnessParams {
-    fn eq(&self, other: &Self) -> bool {
-        self.hueLevel == other.hueLevel && self.saturationLevel == other.saturationLevel && self.lightnessLevel == other.lightnessLevel
-    }
-}
-impl ::core::cmp::Eq for HueSaturationLightnessParams {}
-impl ::core::default::Default for HueSaturationLightnessParams {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct Image(pub isize);
-impl ::core::default::Default for Image {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for Image {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for Image {}
-impl ::core::fmt::Debug for Image {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("Image").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for Image {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(C)]
-pub struct ImageCodecInfo {
-    pub Clsid: ::windows_core::GUID,
-    pub FormatID: ::windows_core::GUID,
-    pub CodecName: ::windows_core::PCWSTR,
-    pub DllName: ::windows_core::PCWSTR,
-    pub FormatDescription: ::windows_core::PCWSTR,
-    pub FilenameExtension: ::windows_core::PCWSTR,
-    pub MimeType: ::windows_core::PCWSTR,
-    pub Flags: u32,
-    pub Version: u32,
-    pub SigCount: u32,
-    pub SigSize: u32,
-    pub SigPattern: *const u8,
-    pub SigMask: *const u8,
-}
-impl ::core::marker::Copy for ImageCodecInfo {}
-impl ::core::clone::Clone for ImageCodecInfo {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for ImageCodecInfo {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("ImageCodecInfo")
-            .field("Clsid", &self.Clsid)
-            .field("FormatID", &self.FormatID)
-            .field("CodecName", &self.CodecName)
-            .field("DllName", &self.DllName)
-            .field("FormatDescription", &self.FormatDescription)
-            .field("FilenameExtension", &self.FilenameExtension)
-            .field("MimeType", &self.MimeType)
-            .field("Flags", &self.Flags)
-            .field("Version", &self.Version)
-            .field("SigCount", &self.SigCount)
-            .field("SigSize", &self.SigSize)
-            .field("SigPattern", &self.SigPattern)
-            .field("SigMask", &self.SigMask)
-            .finish()
-    }
-}
-impl ::windows_core::TypeKind for ImageCodecInfo {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for ImageCodecInfo {
-    fn eq(&self, other: &Self) -> bool {
-        self.Clsid == other.Clsid && self.FormatID == other.FormatID && self.CodecName == other.CodecName && self.DllName == other.DllName && self.FormatDescription == other.FormatDescription && self.FilenameExtension == other.FilenameExtension && self.MimeType == other.MimeType && self.Flags == other.Flags && self.Version == other.Version && self.SigCount == other.SigCount && self.SigSize == other.SigSize && self.SigPattern == other.SigPattern && self.SigMask == other.SigMask
-    }
-}
-impl ::core::cmp::Eq for ImageCodecInfo {}
-impl ::core::default::Default for ImageCodecInfo {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct ImageItemData {
-    pub Size: u32,
-    pub Position: u32,
-    pub Desc: *mut ::core::ffi::c_void,
-    pub DescSize: u32,
-    pub Data: *mut ::core::ffi::c_void,
-    pub DataSize: u32,
-    pub Cookie: u32,
-}
-impl ::core::marker::Copy for ImageItemData {}
-impl ::core::clone::Clone for ImageItemData {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for ImageItemData {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("ImageItemData").field("Size", &self.Size).field("Position", &self.Position).field("Desc", &self.Desc).field("DescSize", &self.DescSize).field("Data", &self.Data).field("DataSize", &self.DataSize).field("Cookie", &self.Cookie).finish()
-    }
-}
-impl ::windows_core::TypeKind for ImageItemData {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for ImageItemData {
-    fn eq(&self, other: &Self) -> bool {
-        self.Size == other.Size && self.Position == other.Position && self.Desc == other.Desc && self.DescSize == other.DescSize && self.Data == other.Data && self.DataSize == other.DataSize && self.Cookie == other.Cookie
-    }
-}
-impl ::core::cmp::Eq for ImageItemData {}
-impl ::core::default::Default for ImageItemData {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct InstalledFontCollection(pub isize);
-impl ::core::default::Default for InstalledFontCollection {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for InstalledFontCollection {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for InstalledFontCollection {}
-impl ::core::fmt::Debug for InstalledFontCollection {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("InstalledFontCollection").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for InstalledFontCollection {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(C)]
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
-pub struct Levels {
-    pub Base: Effect,
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::marker::Copy for Levels {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::clone::Clone for Levels {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::fmt::Debug for Levels {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("Levels").field("Base", &self.Base).finish()
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::windows_core::TypeKind for Levels {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::PartialEq for Levels {
-    fn eq(&self, other: &Self) -> bool {
-        self.Base == other.Base
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::Eq for Levels {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::default::Default for Levels {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct LevelsParams {
-    pub highlight: i32,
-    pub midtone: i32,
-    pub shadow: i32,
-}
-impl ::core::marker::Copy for LevelsParams {}
-impl ::core::clone::Clone for LevelsParams {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for LevelsParams {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("LevelsParams").field("highlight", &self.highlight).field("midtone", &self.midtone).field("shadow", &self.shadow).finish()
-    }
-}
-impl ::windows_core::TypeKind for LevelsParams {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for LevelsParams {
-    fn eq(&self, other: &Self) -> bool {
-        self.highlight == other.highlight && self.midtone == other.midtone && self.shadow == other.shadow
-    }
-}
-impl ::core::cmp::Eq for LevelsParams {}
-impl ::core::default::Default for LevelsParams {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct Matrix(pub isize);
-impl ::core::default::Default for Matrix {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for Matrix {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for Matrix {}
-impl ::core::fmt::Debug for Matrix {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("Matrix").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for Matrix {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct Metafile(pub isize);
-impl ::core::default::Default for Metafile {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for Metafile {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for Metafile {}
-impl ::core::fmt::Debug for Metafile {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("Metafile").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for Metafile {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(C)]
-#[doc = "Required features: `\"Win32_Foundation\"`, `\"Win32_Graphics_Gdi\"`"]
-#[cfg(all(feature = "Win32_Foundation", feature = "Win32_Graphics_Gdi"))]
-pub struct MetafileHeader {
-    pub Type: MetafileType,
-    pub Size: u32,
-    pub Version: u32,
-    pub EmfPlusFlags: u32,
-    pub DpiX: f32,
-    pub DpiY: f32,
-    pub X: i32,
-    pub Y: i32,
-    pub Width: i32,
-    pub Height: i32,
-    pub Anonymous: MetafileHeader_0,
-    pub EmfPlusHeaderSize: i32,
-    pub LogicalDpiX: i32,
-    pub LogicalDpiY: i32,
-}
-#[cfg(all(feature = "Win32_Foundation", feature = "Win32_Graphics_Gdi"))]
-impl ::core::marker::Copy for MetafileHeader {}
-#[cfg(all(feature = "Win32_Foundation", feature = "Win32_Graphics_Gdi"))]
-impl ::core::clone::Clone for MetafileHeader {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-#[cfg(all(feature = "Win32_Foundation", feature = "Win32_Graphics_Gdi"))]
-impl ::windows_core::TypeKind for MetafileHeader {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[cfg(all(feature = "Win32_Foundation", feature = "Win32_Graphics_Gdi"))]
-impl ::core::default::Default for MetafileHeader {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-#[doc = "Required features: `\"Win32_Foundation\"`, `\"Win32_Graphics_Gdi\"`"]
-#[cfg(all(feature = "Win32_Foundation", feature = "Win32_Graphics_Gdi"))]
-pub union MetafileHeader_0 {
-    pub WmfHeader: super::Gdi::METAHEADER,
-    pub EmfHeader: ENHMETAHEADER3,
-}
-#[cfg(all(feature = "Win32_Foundation", feature = "Win32_Graphics_Gdi"))]
-impl ::core::marker::Copy for MetafileHeader_0 {}
-#[cfg(all(feature = "Win32_Foundation", feature = "Win32_Graphics_Gdi"))]
-impl ::core::clone::Clone for MetafileHeader_0 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-#[cfg(all(feature = "Win32_Foundation", feature = "Win32_Graphics_Gdi"))]
-impl ::windows_core::TypeKind for MetafileHeader_0 {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[cfg(all(feature = "Win32_Foundation", feature = "Win32_Graphics_Gdi"))]
-impl ::core::default::Default for MetafileHeader_0 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct PWMFRect16 {
-    pub Left: i16,
-    pub Top: i16,
-    pub Right: i16,
-    pub Bottom: i16,
-}
-impl ::core::marker::Copy for PWMFRect16 {}
-impl ::core::clone::Clone for PWMFRect16 {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for PWMFRect16 {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("PWMFRect16").field("Left", &self.Left).field("Top", &self.Top).field("Right", &self.Right).field("Bottom", &self.Bottom).finish()
-    }
-}
-impl ::windows_core::TypeKind for PWMFRect16 {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for PWMFRect16 {
-    fn eq(&self, other: &Self) -> bool {
-        self.Left == other.Left && self.Top == other.Top && self.Right == other.Right && self.Bottom == other.Bottom
-    }
-}
-impl ::core::cmp::Eq for PWMFRect16 {}
-impl ::core::default::Default for PWMFRect16 {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct PathData(pub isize);
-impl ::core::default::Default for PathData {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for PathData {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for PathData {}
-impl ::core::fmt::Debug for PathData {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("PathData").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for PathData {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(C)]
-pub struct Point {
-    pub X: i32,
-    pub Y: i32,
-}
-impl ::core::marker::Copy for Point {}
-impl ::core::clone::Clone for Point {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for Point {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("Point").field("X", &self.X).field("Y", &self.Y).finish()
-    }
-}
-impl ::windows_core::TypeKind for Point {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for Point {
-    fn eq(&self, other: &Self) -> bool {
-        self.X == other.X && self.Y == other.Y
-    }
-}
-impl ::core::cmp::Eq for Point {}
-impl ::core::default::Default for Point {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct PointF {
-    pub X: f32,
-    pub Y: f32,
-}
-impl ::core::marker::Copy for PointF {}
-impl ::core::clone::Clone for PointF {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for PointF {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("PointF").field("X", &self.X).field("Y", &self.Y).finish()
-    }
-}
-impl ::windows_core::TypeKind for PointF {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for PointF {
-    fn eq(&self, other: &Self) -> bool {
-        self.X == other.X && self.Y == other.Y
-    }
-}
-impl ::core::cmp::Eq for PointF {}
-impl ::core::default::Default for PointF {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct PrivateFontCollection(pub isize);
-impl ::core::default::Default for PrivateFontCollection {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for PrivateFontCollection {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for PrivateFontCollection {}
-impl ::core::fmt::Debug for PrivateFontCollection {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("PrivateFontCollection").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for PrivateFontCollection {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(C)]
-pub struct PropertyItem {
-    pub id: u32,
-    pub length: u32,
-    pub r#type: u16,
-    pub value: *mut ::core::ffi::c_void,
-}
-impl ::core::marker::Copy for PropertyItem {}
-impl ::core::clone::Clone for PropertyItem {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for PropertyItem {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("PropertyItem").field("id", &self.id).field("length", &self.length).field("type", &self.r#type).field("value", &self.value).finish()
-    }
-}
-impl ::windows_core::TypeKind for PropertyItem {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for PropertyItem {
-    fn eq(&self, other: &Self) -> bool {
-        self.id == other.id && self.length == other.length && self.r#type == other.r#type && self.value == other.value
-    }
-}
-impl ::core::cmp::Eq for PropertyItem {}
-impl ::core::default::Default for PropertyItem {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct Rect {
-    pub X: i32,
-    pub Y: i32,
-    pub Width: i32,
-    pub Height: i32,
-}
-impl ::core::marker::Copy for Rect {}
-impl ::core::clone::Clone for Rect {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for Rect {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("Rect").field("X", &self.X).field("Y", &self.Y).field("Width", &self.Width).field("Height", &self.Height).finish()
-    }
-}
-impl ::windows_core::TypeKind for Rect {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for Rect {
-    fn eq(&self, other: &Self) -> bool {
-        self.X == other.X && self.Y == other.Y && self.Width == other.Width && self.Height == other.Height
-    }
-}
-impl ::core::cmp::Eq for Rect {}
-impl ::core::default::Default for Rect {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct RectF {
-    pub X: f32,
-    pub Y: f32,
-    pub Width: f32,
-    pub Height: f32,
-}
-impl ::core::marker::Copy for RectF {}
-impl ::core::clone::Clone for RectF {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for RectF {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("RectF").field("X", &self.X).field("Y", &self.Y).field("Width", &self.Width).field("Height", &self.Height).finish()
-    }
-}
-impl ::windows_core::TypeKind for RectF {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for RectF {
-    fn eq(&self, other: &Self) -> bool {
-        self.X == other.X && self.Y == other.Y && self.Width == other.Width && self.Height == other.Height
-    }
-}
-impl ::core::cmp::Eq for RectF {}
-impl ::core::default::Default for RectF {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
-pub struct RedEyeCorrection {
-    pub Base: Effect,
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::marker::Copy for RedEyeCorrection {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::clone::Clone for RedEyeCorrection {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::fmt::Debug for RedEyeCorrection {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("RedEyeCorrection").field("Base", &self.Base).finish()
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::windows_core::TypeKind for RedEyeCorrection {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::PartialEq for RedEyeCorrection {
-    fn eq(&self, other: &Self) -> bool {
-        self.Base == other.Base
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::Eq for RedEyeCorrection {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::default::Default for RedEyeCorrection {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
-pub struct RedEyeCorrectionParams {
-    pub numberOfAreas: u32,
-    pub areas: *mut super::super::Foundation::RECT,
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::marker::Copy for RedEyeCorrectionParams {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::clone::Clone for RedEyeCorrectionParams {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::fmt::Debug for RedEyeCorrectionParams {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("RedEyeCorrectionParams").field("numberOfAreas", &self.numberOfAreas).field("areas", &self.areas).finish()
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::windows_core::TypeKind for RedEyeCorrectionParams {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::PartialEq for RedEyeCorrectionParams {
-    fn eq(&self, other: &Self) -> bool {
-        self.numberOfAreas == other.numberOfAreas && self.areas == other.areas
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::Eq for RedEyeCorrectionParams {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::default::Default for RedEyeCorrectionParams {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct Region(pub isize);
-impl ::core::default::Default for Region {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-impl ::core::clone::Clone for Region {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::marker::Copy for Region {}
-impl ::core::fmt::Debug for Region {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("Region").field(&self.0).finish()
-    }
-}
-impl ::windows_core::TypeKind for Region {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[repr(C)]
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
-pub struct Sharpen {
-    pub Base: Effect,
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::marker::Copy for Sharpen {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::clone::Clone for Sharpen {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::fmt::Debug for Sharpen {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("Sharpen").field("Base", &self.Base).finish()
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::windows_core::TypeKind for Sharpen {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::PartialEq for Sharpen {
-    fn eq(&self, other: &Self) -> bool {
-        self.Base == other.Base
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::Eq for Sharpen {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::default::Default for Sharpen {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct SharpenParams {
-    pub radius: f32,
-    pub amount: f32,
-}
-impl ::core::marker::Copy for SharpenParams {}
-impl ::core::clone::Clone for SharpenParams {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for SharpenParams {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("SharpenParams").field("radius", &self.radius).field("amount", &self.amount).finish()
-    }
-}
-impl ::windows_core::TypeKind for SharpenParams {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for SharpenParams {
-    fn eq(&self, other: &Self) -> bool {
-        self.radius == other.radius && self.amount == other.amount
-    }
-}
-impl ::core::cmp::Eq for SharpenParams {}
-impl ::core::default::Default for SharpenParams {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct Size {
-    pub Width: i32,
-    pub Height: i32,
-}
-impl ::core::marker::Copy for Size {}
-impl ::core::clone::Clone for Size {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for Size {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("Size").field("Width", &self.Width).field("Height", &self.Height).finish()
-    }
-}
-impl ::windows_core::TypeKind for Size {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for Size {
-    fn eq(&self, other: &Self) -> bool {
-        self.Width == other.Width && self.Height == other.Height
-    }
-}
-impl ::core::cmp::Eq for Size {}
-impl ::core::default::Default for Size {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct SizeF {
-    pub Width: f32,
-    pub Height: f32,
-}
-impl ::core::marker::Copy for SizeF {}
-impl ::core::clone::Clone for SizeF {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for SizeF {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("SizeF").field("Width", &self.Width).field("Height", &self.Height).finish()
-    }
-}
-impl ::windows_core::TypeKind for SizeF {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for SizeF {
-    fn eq(&self, other: &Self) -> bool {
-        self.Width == other.Width && self.Height == other.Height
-    }
-}
-impl ::core::cmp::Eq for SizeF {}
-impl ::core::default::Default for SizeF {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
-pub struct Tint {
-    pub Base: Effect,
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::marker::Copy for Tint {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::clone::Clone for Tint {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::fmt::Debug for Tint {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("Tint").field("Base", &self.Base).finish()
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::windows_core::TypeKind for Tint {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::PartialEq for Tint {
-    fn eq(&self, other: &Self) -> bool {
-        self.Base == other.Base
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::Eq for Tint {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::default::Default for Tint {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C)]
-pub struct TintParams {
-    pub hue: i32,
-    pub amount: i32,
-}
-impl ::core::marker::Copy for TintParams {}
-impl ::core::clone::Clone for TintParams {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for TintParams {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("TintParams").field("hue", &self.hue).field("amount", &self.amount).finish()
-    }
-}
-impl ::windows_core::TypeKind for TintParams {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for TintParams {
-    fn eq(&self, other: &Self) -> bool {
-        self.hue == other.hue && self.amount == other.amount
-    }
-}
-impl ::core::cmp::Eq for TintParams {}
-impl ::core::default::Default for TintParams {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-#[repr(C, packed(2))]
-pub struct WmfPlaceableFileHeader {
-    pub Key: u32,
-    pub Hmf: i16,
-    pub BoundingBox: PWMFRect16,
-    pub Inch: i16,
-    pub Reserved: u32,
-    pub Checksum: i16,
-}
-impl ::core::marker::Copy for WmfPlaceableFileHeader {}
-impl ::core::clone::Clone for WmfPlaceableFileHeader {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::windows_core::TypeKind for WmfPlaceableFileHeader {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::default::Default for WmfPlaceableFileHeader {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
-pub type DebugEventProc = ::core::option::Option<unsafe extern "system" fn(level: DebugEventLevel, message: ::windows_core::PCSTR) -> ()>;
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
-pub type DrawImageAbort = ::core::option::Option<unsafe extern "system" fn() -> super::super::Foundation::BOOL>;
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
-pub type EnumerateMetafileProc = ::core::option::Option<unsafe extern "system" fn(param0: EmfPlusRecordType, param1: u32, param2: u32, param3: *const u8, param4: *mut ::core::ffi::c_void) -> super::super::Foundation::BOOL>;
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
-pub type GetThumbnailImageAbort = ::core::option::Option<unsafe extern "system" fn() -> super::super::Foundation::BOOL>;
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
-pub type ImageAbort = ::core::option::Option<unsafe extern "system" fn(param0: *mut ::core::ffi::c_void) -> super::super::Foundation::BOOL>;
-pub type NotificationHookProc = ::core::option::Option<unsafe extern "system" fn(token: *mut usize) -> Status>;
-pub type NotificationUnhookProc = ::core::option::Option<unsafe extern "system" fn(token: usize) -> ()>;
-#[cfg(feature = "implement")]
-::core::include!("impl.rs");

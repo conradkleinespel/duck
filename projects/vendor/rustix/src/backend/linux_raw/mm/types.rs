@@ -1,4 +1,4 @@
-use crate::backend::c;
+use crate::ffi;
 use bitflags::bitflags;
 
 bitflags! {
@@ -6,7 +6,7 @@ bitflags! {
     ///
     /// For `PROT_NONE`, use `ProtFlags::empty()`.
     ///
-    /// [`mmap`]: crate::io::mmap
+    /// [`mmap`]: crate::mm::mmap
     #[repr(transparent)]
     #[derive(Copy, Clone, Eq, PartialEq, Hash, Debug)]
     pub struct ProtFlags: u32 {
@@ -27,7 +27,7 @@ bitflags! {
     ///
     /// For `PROT_NONE`, use `MprotectFlags::empty()`.
     ///
-    /// [`mprotect`]: crate::io::mprotect
+    /// [`mprotect`]: crate::mm::mprotect
     #[repr(transparent)]
     #[derive(Copy, Clone, Eq, PartialEq, Hash, Debug)]
     pub struct MprotectFlags: u32 {
@@ -66,8 +66,8 @@ bitflags! {
     ///
     /// For `MAP_ANONYMOUS` (aka `MAP_ANON`), see [`mmap_anonymous`].
     ///
-    /// [`mmap`]: crate::io::mmap
-    /// [`mmap_anonymous`]: crates::io::mmap_anonymous
+    /// [`mmap`]: crate::mm::mmap
+    /// [`mmap_anonymous`]: crates::mm::mmap_anonymous
     #[repr(transparent)]
     #[derive(Copy, Clone, Eq, PartialEq, Hash, Debug)]
     pub struct MapFlags: u32 {
@@ -105,6 +105,8 @@ bitflags! {
         /// `MAP_UNINITIALIZED`
         #[cfg(not(any(target_arch = "mips", target_arch = "mips32r6", target_arch = "mips64", target_arch = "mips64r6")))]
         const UNINITIALIZED = linux_raw_sys::general::MAP_UNINITIALIZED;
+        /// `MAP_DROPPABLE`
+        const DROPPABLE = linux_raw_sys::general::MAP_DROPPABLE;
 
         /// <https://docs.rs/bitflags/*/bitflags/#externally-defined-flags>
         const _ = !0;
@@ -116,8 +118,8 @@ bitflags! {
     ///
     /// For `MREMAP_FIXED`, see [`mremap_fixed`].
     ///
-    /// [`mremap`]: crate::io::mremap
-    /// [`mremap_fixed`]: crate::io::mremap_fixed
+    /// [`mremap`]: crate::mm::mremap
+    /// [`mremap_fixed`]: crate::mm::mremap_fixed
     #[repr(transparent)]
     #[derive(Copy, Clone, Eq, PartialEq, Hash, Debug)]
     pub struct MremapFlags: u32 {
@@ -134,7 +136,7 @@ bitflags! {
 bitflags! {
     /// `MS_*` flags for use with [`msync`].
     ///
-    /// [`msync`]: crate::io::msync
+    /// [`msync`]: crate::mm::msync
     #[repr(transparent)]
     #[derive(Copy, Clone, Eq, PartialEq, Hash, Debug)]
     pub struct MsyncFlags: u32 {
@@ -156,7 +158,7 @@ bitflags! {
 bitflags! {
     /// `MLOCK_*` flags for use with [`mlock_with`].
     ///
-    /// [`mlock_with`]: crate::io::mlock_with
+    /// [`mlock_with`]: crate::mm::mlock_with
     #[repr(transparent)]
     #[derive(Copy, Clone, Eq, PartialEq, Hash, Debug)]
     pub struct MlockFlags: u32 {
@@ -249,10 +251,10 @@ impl Advice {
 bitflags! {
     /// `O_*` flags for use with [`userfaultfd`].
     ///
-    /// [`userfaultfd`]: crate::io::userfaultfd
+    /// [`userfaultfd`]: crate::mm::userfaultfd
     #[repr(transparent)]
     #[derive(Copy, Clone, Eq, PartialEq, Hash, Debug)]
-    pub struct UserfaultfdFlags: c::c_uint {
+    pub struct UserfaultfdFlags: ffi::c_uint {
         /// `O_CLOEXEC`
         const CLOEXEC = linux_raw_sys::general::O_CLOEXEC;
         /// `O_NONBLOCK`

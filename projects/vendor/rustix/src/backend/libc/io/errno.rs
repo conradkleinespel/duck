@@ -14,7 +14,7 @@ use libc_errno::errno;
 /// # References
 ///  - [POSIX]
 ///  - [Linux]
-///  - [Winsock2]
+///  - [Winsock]
 ///  - [FreeBSD]
 ///  - [NetBSD]
 ///  - [OpenBSD]
@@ -22,16 +22,15 @@ use libc_errno::errno;
 ///  - [illumos]
 ///  - [glibc]
 ///
-/// [POSIX]: https://pubs.opengroup.org/onlinepubs/9699919799/functions/errno.html
+/// [POSIX]: https://pubs.opengroup.org/onlinepubs/9799919799/functions/errno.html
 /// [Linux]: https://man7.org/linux/man-pages/man3/errno.3.html
-/// [Winsock2]: https://learn.microsoft.com/en-us/windows/win32/winsock/windows-sockets-error-codes-2
+/// [Winsock]: https://learn.microsoft.com/en-us/windows/win32/winsock/windows-sockets-error-codes-2
 /// [FreeBSD]: https://man.freebsd.org/cgi/man.cgi?errno
 /// [NetBSD]: https://man.netbsd.org/errno.2
 /// [OpenBSD]: https://man.openbsd.org/errno.2
 /// [DragonFly BSD]: https://man.dragonflybsd.org/?command=errno&section=2
 /// [illumos]: https://illumos.org/man/3C/errno
-/// [glibc]: https://www.gnu.org/software/libc/manual/html_node/Error-Codes.html
-/// [`std::io::Error`]: Result
+/// [glibc]: https://sourceware.org/glibc/manual/latest/html_node/Error-Codes.html
 #[repr(transparent)]
 #[doc(alias = "errno")]
 #[derive(Eq, PartialEq, Hash, Copy, Clone)]
@@ -52,6 +51,7 @@ impl Errno {
         target_os = "aix",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "vita",
@@ -76,6 +76,7 @@ impl Errno {
         target_os = "aix",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "vita",
@@ -91,6 +92,7 @@ impl Errno {
         target_os = "aix",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "vita",
@@ -107,6 +109,7 @@ impl Errno {
         target_os = "aix",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "vita",
@@ -123,6 +126,7 @@ impl Errno {
         target_os = "aix",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "vita",
@@ -136,6 +140,7 @@ impl Errno {
         target_os = "aix",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "vita",
@@ -149,6 +154,7 @@ impl Errno {
         target_os = "aix",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "vita",
@@ -173,6 +179,7 @@ impl Errno {
         windows,
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "vita",
@@ -186,6 +193,7 @@ impl Errno {
         target_os = "aix",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "vita",
@@ -209,6 +217,7 @@ impl Errno {
         target_os = "android",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "vita",
         target_os = "wasi",
@@ -234,6 +243,7 @@ impl Errno {
         target_os = "aix",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "nto",
@@ -266,8 +276,10 @@ impl Errno {
         windows,
         target_os = "aix",
         target_os = "android",
+        target_os = "cygwin",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "nto",
@@ -315,8 +327,10 @@ impl Errno {
         solarish,
         windows,
         target_os = "aix",
+        target_os = "cygwin",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "nto",
@@ -330,8 +344,10 @@ impl Errno {
         solarish,
         windows,
         target_os = "aix",
+        target_os = "cygwin",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "nto",
@@ -345,8 +361,10 @@ impl Errno {
         solarish,
         windows,
         target_os = "aix",
+        target_os = "cygwin",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "nto",
@@ -360,8 +378,10 @@ impl Errno {
         solarish,
         windows,
         target_os = "aix",
+        target_os = "cygwin",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "nto",
@@ -375,6 +395,7 @@ impl Errno {
         windows,
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "vita",
@@ -387,6 +408,7 @@ impl Errno {
         windows,
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "vita",
@@ -399,6 +421,7 @@ impl Errno {
         windows,
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "vita",
@@ -411,6 +434,7 @@ impl Errno {
         windows,
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "vita",
@@ -424,6 +448,7 @@ impl Errno {
         target_os = "aix",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "vita",
@@ -437,6 +462,7 @@ impl Errno {
         target_os = "aix",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "vita",
@@ -450,6 +476,7 @@ impl Errno {
         target_os = "aix",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "l4re",
         target_os = "vita",
         target_os = "wasi",
@@ -462,6 +489,7 @@ impl Errno {
         target_os = "aix",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "vita",
@@ -475,6 +503,7 @@ impl Errno {
         target_os = "aix",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "vita",
@@ -487,6 +516,7 @@ impl Errno {
         windows,
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "vita",
@@ -501,8 +531,10 @@ impl Errno {
         solarish,
         windows,
         target_os = "aix",
+        target_os = "cygwin",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "nto",
@@ -529,8 +561,10 @@ impl Errno {
         solarish,
         windows,
         target_os = "aix",
+        target_os = "cygwin",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "nto",
@@ -558,6 +592,7 @@ impl Errno {
         target_os = "aix",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "vita",
@@ -576,6 +611,7 @@ impl Errno {
         windows,
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "vita",
@@ -606,8 +642,10 @@ impl Errno {
         bsd,
         windows,
         target_os = "aix",
+        target_os = "cygwin",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "nto",
@@ -629,6 +667,7 @@ impl Errno {
         target_os = "aix",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "nto",
@@ -652,6 +691,7 @@ impl Errno {
         target_os = "aix",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "vita",
@@ -665,6 +705,7 @@ impl Errno {
         target_os = "aix",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "vita",
@@ -705,6 +746,7 @@ impl Errno {
         windows,
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "vita",
         target_os = "wasi"
     )))]
@@ -725,8 +767,10 @@ impl Errno {
         solarish,
         windows,
         target_os = "aix",
+        target_os = "cygwin",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "nto",
@@ -747,7 +791,7 @@ impl Errno {
     #[cfg(not(target_os = "l4re"))]
     pub const NOTSOCK: Self = Self(c::ENOTSOCK);
     /// `ENOTSUP`
-    #[cfg(not(any(windows, target_os = "haiku", target_os = "redox")))]
+    #[cfg(not(any(windows, target_os = "redox")))]
     pub const NOTSUP: Self = Self(c::ENOTSUP);
     /// `ENOTTY`
     #[cfg(not(windows))]
@@ -759,6 +803,7 @@ impl Errno {
         target_os = "aix",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "vita",
@@ -828,6 +873,7 @@ impl Errno {
         target_os = "aix",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "vita",
@@ -838,6 +884,7 @@ impl Errno {
     #[cfg(not(any(
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "l4re",
         target_os = "vita",
         target_os = "wasi"
@@ -849,8 +896,10 @@ impl Errno {
         solarish,
         windows,
         target_os = "aix",
+        target_os = "cygwin",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "nto",
@@ -862,12 +911,14 @@ impl Errno {
     #[cfg(not(any(
         bsd,
         windows,
+        target_os = "cygwin",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "vita",
-        target_os = "wasi"
+        target_os = "wasi",
     )))]
     pub const RESTART: Self = Self(c::ERESTART);
     /// `ERFKILL`
@@ -877,8 +928,10 @@ impl Errno {
         windows,
         target_os = "aix",
         target_os = "android",
+        target_os = "cygwin",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "nto",
@@ -896,6 +949,7 @@ impl Errno {
     /// `ESHUTDOWN`
     #[cfg(not(any(
         target_os = "espidf",
+        target_os = "horizon",
         target_os = "l4re",
         target_os = "vita",
         target_os = "wasi"
@@ -905,6 +959,7 @@ impl Errno {
     #[cfg(not(any(
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "l4re",
         target_os = "vita",
         target_os = "wasi"
@@ -923,6 +978,7 @@ impl Errno {
         target_os = "aix",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "vita",
@@ -938,6 +994,7 @@ impl Errno {
         target_os = "aix",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "vita",
@@ -971,8 +1028,10 @@ impl Errno {
         solarish,
         windows,
         target_os = "aix",
+        target_os = "cygwin",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "nto",
@@ -986,6 +1045,7 @@ impl Errno {
         windows,
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "vita",
@@ -996,6 +1056,7 @@ impl Errno {
     #[cfg(not(any(
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "l4re",
         target_os = "vita",
         target_os = "wasi"
@@ -1013,6 +1074,7 @@ impl Errno {
         target_os = "aix",
         target_os = "espidf",
         target_os = "haiku",
+        target_os = "horizon",
         target_os = "hurd",
         target_os = "l4re",
         target_os = "vita",

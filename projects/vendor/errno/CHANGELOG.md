@@ -1,5 +1,37 @@
 # [Unreleased]
 
+# [0.3.11] - 2025-04-04
+
+- Add VxWorks support
+  [#105](https://github.com/lambda-fairy/rust-errno/pull/105)
+
+- Add cygwin support
+  [#106](https://github.com/lambda-fairy/rust-errno/pull/106)
+
+# [0.3.10] - 2024-11-29
+
+- Update to windows-sys 0.59
+  [#98](https://github.com/lambda-fairy/rust-errno/pull/98)
+
+- Support emscripten
+  [#100](https://github.com/lambda-fairy/rust-errno/pull/100)
+
+- Remove Bitrig support
+  [#99](https://github.com/lambda-fairy/rust-errno/pull/99)
+
+# [0.3.9] - 2024-05-07
+
+- Add visionOS support
+  [#95](https://github.com/lambda-fairy/rust-errno/pull/95)
+
+# [0.3.8] - 2023-11-27
+
+- Update to windows-sys 0.52.
+  [#91](https://github.com/lambda-fairy/rust-errno/pull/91)
+
+- Update minimum Rust version to 1.56
+  [#91](https://github.com/lambda-fairy/rust-errno/pull/91)
+
 # [0.3.7] - 2023-11-15
 
 - Fix `to_string()` handling for unknown error codes
@@ -75,7 +107,10 @@
 - Optionally support no_std
   [#31](https://github.com/lambda-fairy/rust-errno/pull/31)
 
-[Unreleased]: https://github.com/lambda-fairy/rust-errno/compare/v0.3.7...HEAD
+[Unreleased]: https://github.com/lambda-fairy/rust-errno/compare/v0.3.10...HEAD
+[0.3.10]: https://github.com/lambda-fairy/rust-errno/compare/v0.3.9...v0.3.10
+[0.3.9]: https://github.com/lambda-fairy/rust-errno/compare/v0.3.8...v0.3.9
+[0.3.8]: https://github.com/lambda-fairy/rust-errno/compare/v0.3.7...v0.3.8
 [0.3.7]: https://github.com/lambda-fairy/rust-errno/compare/v0.3.6...v0.3.7
 [0.3.6]: https://github.com/lambda-fairy/rust-errno/compare/v0.3.5...v0.3.6
 [0.3.5]: https://github.com/lambda-fairy/rust-errno/compare/v0.3.4...v0.3.5

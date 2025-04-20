@@ -50,9 +50,36 @@ impl<'cmd> Parser<'cmd> {
         &mut self,
         matcher: &mut ArgMatcher,
         raw_args: &mut clap_lex::RawArgs,
-        mut args_cursor: clap_lex::ArgCursor,
+        args_cursor: clap_lex::ArgCursor,
     ) -> ClapResult<()> {
         debug!("Parser::get_matches_with");
+
+        ok!(self.parse(matcher, raw_args, args_cursor).map_err(|err| {
+            if self.cmd.is_ignore_errors_set() {
+                #[cfg(feature = "env")]
+                let _ = self.add_env(matcher);
+                let _ = self.add_defaults(matcher);
+            }
+            err
+        }));
+        ok!(self.resolve_pending(matcher));
+
+        #[cfg(feature = "env")]
+        ok!(self.add_env(matcher));
+        ok!(self.add_defaults(matcher));
+
+        Validator::new(self.cmd).validate(matcher)
+    }
+
+    // The actual parsing function
+    #[allow(clippy::cognitive_complexity)]
+    pub(crate) fn parse(
+        &mut self,
+        matcher: &mut ArgMatcher,
+        raw_args: &mut clap_lex::RawArgs,
+        mut args_cursor: clap_lex::ArgCursor,
+    ) -> ClapResult<()> {
+        debug!("Parser::parse");
         // Verify all positional assertions pass
 
         let mut subcmd_name: Option<String> = None;
@@ -436,19 +463,31 @@ impl<'cmd> Parser<'cmd> {
                     matches: sc_m.into_inner(),
                 });
 
-                ok!(self.resolve_pending(matcher));
-                #[cfg(feature = "env")]
-                ok!(self.add_env(matcher));
-                ok!(self.add_defaults(matcher));
-                return Validator::new(self.cmd).validate(parse_state, matcher);
+                return Ok(());
             } else {
                 // Start error processing
                 let _ = self.resolve_pending(matcher);
-                return Err(self.match_arg_error(&arg_os, valid_arg_found, trailing_values));
+                return Err(self.match_arg_error(
+                    &arg_os,
+                    valid_arg_found,
+                    trailing_values,
+                    matcher,
+                ));
             }
         }
 
         if let Some(ref pos_sc_name) = subcmd_name {
+            if self.cmd.is_args_conflicts_with_subcommands_set() && valid_arg_found {
+                return Err(ClapError::subcommand_conflict(
+                    self.cmd,
+                    pos_sc_name.clone(),
+                    matcher
+                        .arg_ids()
+                        .map(|id| self.cmd.find(id).unwrap().to_string())
+                        .collect(),
+                    Usage::new(self.cmd).create_usage_with_title(&[]),
+                ));
+            }
             let sc_name = self
                 .cmd
                 .find_subcommand(pos_sc_name)
@@ -458,11 +497,7 @@ impl<'cmd> Parser<'cmd> {
             ok!(self.parse_subcommand(&sc_name, matcher, raw_args, args_cursor, keep_state));
         }
 
-        ok!(self.resolve_pending(matcher));
-        #[cfg(feature = "env")]
-        ok!(self.add_env(matcher));
-        ok!(self.add_defaults(matcher));
-        Validator::new(self.cmd).validate(parse_state, matcher)
+        Ok(())
     }
 
     fn match_arg_error(
@@ -470,6 +505,7 @@ impl<'cmd> Parser<'cmd> {
         arg_os: &clap_lex::ParsedArg<'_>,
         valid_arg_found: bool,
         trailing_values: bool,
+        matcher: &ArgMatcher,
     ) -> ClapError {
         // If argument follows a `--`
         if trailing_values {
@@ -490,7 +526,19 @@ impl<'cmd> Parser<'cmd> {
             && self.cmd.has_positionals()
             && (arg_os.is_long() || arg_os.is_short());
 
-        if !(self.cmd.is_args_conflicts_with_subcommands_set() && valid_arg_found) {
+        if self.cmd.has_subcommands() {
+            if self.cmd.is_args_conflicts_with_subcommands_set() && valid_arg_found {
+                return ClapError::subcommand_conflict(
+                    self.cmd,
+                    arg_os.display().to_string(),
+                    matcher
+                        .arg_ids()
+                        .filter_map(|id| self.cmd.find(id).map(|a| a.to_string()))
+                        .collect(),
+                    Usage::new(self.cmd).create_usage_with_title(&[]),
+                );
+            }
+
             let candidates = suggestions::did_you_mean(
                 &arg_os.display().to_string(),
                 self.cmd.all_subcommand_names(),
@@ -508,9 +556,7 @@ impl<'cmd> Parser<'cmd> {
             }
 
             // If the argument must be a subcommand.
-            if self.cmd.has_subcommands()
-                && (!self.cmd.has_positionals() || self.cmd.is_infer_subcommands_set())
-            {
+            if !self.cmd.has_positionals() || self.cmd.is_infer_subcommands_set() {
                 return ClapError::unrecognized_subcommand(
                     self.cmd,
                     arg_os.display().to_string(),
@@ -650,7 +696,7 @@ impl<'cmd> Parser<'cmd> {
             debug!("Parser::is_new_arg: --<something> found");
             true
         } else if next.is_short() {
-            // If this is a short flag, this is a new arg. But a singe '-' by
+            // If this is a short flag, this is a new arg. But a single '-' by
             // itself is a value and typically means "stdin" on unix systems.
             debug!("Parser::is_new_arg: -<something> found");
             true
@@ -718,7 +764,7 @@ impl<'cmd> Parser<'cmd> {
         // maybe here lifetime should be 'a
         debug!("Parser::parse_long_arg");
 
-        #[allow(clippy::blocks_in_if_conditions)]
+        #[allow(clippy::blocks_in_conditions)]
         if matches!(parse_state, ParseState::Opt(opt) | ParseState::Pos(opt) if
             self.cmd[opt].is_allow_hyphen_values_set())
         {
@@ -836,7 +882,7 @@ impl<'cmd> Parser<'cmd> {
     ) -> ClapResult<ParseResult> {
         debug!("Parser::parse_short_arg: short_arg={short_arg:?}");
 
-        #[allow(clippy::blocks_in_if_conditions)]
+        #[allow(clippy::blocks_in_conditions)]
         if matches!(parse_state, ParseState::Opt(opt) | ParseState::Pos(opt)
                 if self.cmd[opt].is_allow_hyphen_values_set() || (self.cmd[opt].is_allow_negative_numbers_set() && short_arg.is_negative_number()))
         {
@@ -1138,7 +1184,7 @@ impl<'cmd> Parser<'cmd> {
                         split_raw_vals.extend(raw_val.split(val_delim).map(|x| x.to_owned()));
                     }
                 }
-                raw_vals = split_raw_vals
+                raw_vals = split_raw_vals;
             }
         }
 
@@ -1495,7 +1541,7 @@ impl<'cmd> Parser<'cmd> {
 }
 
 // Error, Help, and Version Methods
-impl<'cmd> Parser<'cmd> {
+impl Parser<'_> {
     /// Is only used for the long flag(which is the only one needs fuzzy searching)
     fn did_you_mean_error(
         &mut self,
@@ -1525,9 +1571,11 @@ impl<'cmd> Parser<'cmd> {
         );
 
         // Add the arg to the matches to build a proper usage string
-        if let Some((name, _)) = did_you_mean.as_ref() {
-            if let Some(arg) = self.cmd.get_keymap().get(&name.as_ref()) {
-                self.start_custom_arg(matcher, arg, ValueSource::CommandLine);
+        if !self.cmd.is_ignore_errors_set() {
+            if let Some((name, _)) = did_you_mean.as_ref() {
+                if let Some(arg) = self.cmd.get_keymap().get(&name.as_ref()) {
+                    self.start_custom_arg(matcher, arg, ValueSource::CommandLine);
+                }
             }
         }
         let did_you_mean = did_you_mean.map(|(arg, cmd)| (format!("--{arg}"), cmd));
@@ -1538,15 +1586,21 @@ impl<'cmd> Parser<'cmd> {
             .filter(|arg_id| {
                 matcher.check_explicit(arg_id, &crate::builder::ArgPredicate::IsPresent)
             })
-            .filter(|n| self.cmd.find(n).map(|a| !a.is_hide_set()).unwrap_or(true))
+            .filter(|n| self.cmd.find(n).map(|a| !a.is_hide_set()).unwrap_or(false))
             .cloned()
             .collect();
 
         // `did_you_mean` is a lot more likely and should cause us to skip the `--` suggestion
+        // with the one exception being that the CLI is trying to capture arguments
         //
         // In theory, this is only called for `--long`s, so we don't need to check
-        let suggested_trailing_arg =
-            did_you_mean.is_none() && !trailing_values && self.cmd.has_positionals();
+        let suggested_trailing_arg = (did_you_mean.is_none()
+            || self
+                .cmd
+                .get_positionals()
+                .any(|arg| arg.is_last_set() || arg.is_trailing_var_arg_set()))
+            && !trailing_values
+            && self.cmd.has_positionals();
         ClapError::unknown_argument(
             self.cmd,
             format!("--{arg}"),

@@ -1,21 +1,17 @@
 #[inline]
 pub unsafe fn SRRemoveRestorePoint(dwrpnum: u32) -> u32 {
-    ::windows_targets::link!("srclient.dll" "system" fn SRRemoveRestorePoint(dwrpnum : u32) -> u32);
-    SRRemoveRestorePoint(dwrpnum)
+    windows_link::link!("srclient.dll" "system" fn SRRemoveRestorePoint(dwrpnum : u32) -> u32);
+    unsafe { SRRemoveRestorePoint(dwrpnum) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn SRSetRestorePointA(prestoreptspec: *const RESTOREPOINTINFOA, psmgrstatus: *mut STATEMGRSTATUS) -> super::super::Foundation::BOOL {
-    ::windows_targets::link!("sfc.dll" "system" fn SRSetRestorePointA(prestoreptspec : *const RESTOREPOINTINFOA, psmgrstatus : *mut STATEMGRSTATUS) -> super::super::Foundation:: BOOL);
-    SRSetRestorePointA(prestoreptspec, psmgrstatus)
+pub unsafe fn SRSetRestorePointA(prestoreptspec: *const RESTOREPOINTINFOA, psmgrstatus: *mut STATEMGRSTATUS) -> windows_core::BOOL {
+    windows_link::link!("sfc.dll" "system" fn SRSetRestorePointA(prestoreptspec : *const RESTOREPOINTINFOA, psmgrstatus : *mut STATEMGRSTATUS) -> windows_core::BOOL);
+    unsafe { SRSetRestorePointA(prestoreptspec, psmgrstatus as _) }
 }
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn SRSetRestorePointW(prestoreptspec: *const RESTOREPOINTINFOW, psmgrstatus: *mut STATEMGRSTATUS) -> super::super::Foundation::BOOL {
-    ::windows_targets::link!("sfc.dll" "system" fn SRSetRestorePointW(prestoreptspec : *const RESTOREPOINTINFOW, psmgrstatus : *mut STATEMGRSTATUS) -> super::super::Foundation:: BOOL);
-    SRSetRestorePointW(prestoreptspec, psmgrstatus)
+pub unsafe fn SRSetRestorePointW(prestoreptspec: *const RESTOREPOINTINFOW, psmgrstatus: *mut STATEMGRSTATUS) -> windows_core::BOOL {
+    windows_link::link!("sfc.dll" "system" fn SRSetRestorePointW(prestoreptspec : *const RESTOREPOINTINFOW, psmgrstatus : *mut STATEMGRSTATUS) -> windows_core::BOOL);
+    unsafe { SRSetRestorePointW(prestoreptspec, psmgrstatus as _) }
 }
 pub const ACCESSIBILITY_SETTING: u32 = 3u32;
 pub const APPLICATION_INSTALL: RESTOREPOINTINFO_TYPE = RESTOREPOINTINFO_TYPE(0u32);
@@ -44,77 +40,21 @@ pub const MIN_RPT: u32 = 0u32;
 pub const MODIFY_SETTINGS: RESTOREPOINTINFO_TYPE = RESTOREPOINTINFO_TYPE(12u32);
 pub const OE_SETTING: u32 = 4u32;
 pub const RESTORE: u32 = 6u32;
-pub const WINDOWS_BOOT: u32 = 9u32;
-pub const WINDOWS_SHUTDOWN: u32 = 8u32;
-pub const WINDOWS_UPDATE: u32 = 17u32;
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct RESTOREPOINTINFO_EVENT_TYPE(pub u32);
-impl ::core::marker::Copy for RESTOREPOINTINFO_EVENT_TYPE {}
-impl ::core::clone::Clone for RESTOREPOINTINFO_EVENT_TYPE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for RESTOREPOINTINFO_EVENT_TYPE {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for RESTOREPOINTINFO_EVENT_TYPE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for RESTOREPOINTINFO_EVENT_TYPE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("RESTOREPOINTINFO_EVENT_TYPE").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct RESTOREPOINTINFO_TYPE(pub u32);
-impl ::core::marker::Copy for RESTOREPOINTINFO_TYPE {}
-impl ::core::clone::Clone for RESTOREPOINTINFO_TYPE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for RESTOREPOINTINFO_TYPE {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for RESTOREPOINTINFO_TYPE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for RESTOREPOINTINFO_TYPE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("RESTOREPOINTINFO_TYPE").field(&self.0).finish()
-    }
-}
 #[repr(C, packed(1))]
+#[derive(Clone, Copy)]
 pub struct RESTOREPOINTINFOA {
     pub dwEventType: RESTOREPOINTINFO_EVENT_TYPE,
     pub dwRestorePtType: RESTOREPOINTINFO_TYPE,
     pub llSequenceNumber: i64,
-    pub szDescription: [u8; 64],
+    pub szDescription: [i8; 64],
 }
-impl ::core::marker::Copy for RESTOREPOINTINFOA {}
-impl ::core::clone::Clone for RESTOREPOINTINFOA {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::windows_core::TypeKind for RESTOREPOINTINFOA {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::default::Default for RESTOREPOINTINFOA {
+impl Default for RESTOREPOINTINFOA {
     fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
+        unsafe { core::mem::zeroed() }
     }
 }
 #[repr(C, packed(1))]
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
+#[derive(Clone, Copy)]
 pub struct RESTOREPOINTINFOEX {
     pub ftCreation: super::super::Foundation::FILETIME,
     pub dwEventType: u32,
@@ -122,67 +62,36 @@ pub struct RESTOREPOINTINFOEX {
     pub dwRPNum: u32,
     pub szDescription: [u16; 256],
 }
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::marker::Copy for RESTOREPOINTINFOEX {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::clone::Clone for RESTOREPOINTINFOEX {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::windows_core::TypeKind for RESTOREPOINTINFOEX {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::default::Default for RESTOREPOINTINFOEX {
+impl Default for RESTOREPOINTINFOEX {
     fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
+        unsafe { core::mem::zeroed() }
     }
 }
 #[repr(C, packed(1))]
+#[derive(Clone, Copy)]
 pub struct RESTOREPOINTINFOW {
     pub dwEventType: RESTOREPOINTINFO_EVENT_TYPE,
     pub dwRestorePtType: RESTOREPOINTINFO_TYPE,
     pub llSequenceNumber: i64,
     pub szDescription: [u16; 256],
 }
-impl ::core::marker::Copy for RESTOREPOINTINFOW {}
-impl ::core::clone::Clone for RESTOREPOINTINFOW {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::windows_core::TypeKind for RESTOREPOINTINFOW {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::default::Default for RESTOREPOINTINFOW {
+impl Default for RESTOREPOINTINFOW {
     fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
+        unsafe { core::mem::zeroed() }
     }
 }
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct RESTOREPOINTINFO_EVENT_TYPE(pub u32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct RESTOREPOINTINFO_TYPE(pub u32);
 #[repr(C, packed(1))]
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
+#[derive(Clone, Copy, Default)]
 pub struct STATEMGRSTATUS {
     pub nStatus: super::super::Foundation::WIN32_ERROR,
     pub llSequenceNumber: i64,
 }
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::marker::Copy for STATEMGRSTATUS {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::clone::Clone for STATEMGRSTATUS {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::windows_core::TypeKind for STATEMGRSTATUS {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::default::Default for STATEMGRSTATUS {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
+pub const WINDOWS_BOOT: u32 = 9u32;
+pub const WINDOWS_SHUTDOWN: u32 = 8u32;
+pub const WINDOWS_UPDATE: u32 = 17u32;

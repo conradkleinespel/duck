@@ -6,14 +6,21 @@ use git2::Error;
 #[test]
 fn test_remove_extensions() -> Result<(), Error> {
     unsafe {
-        set_extensions(&["custom", "!ignore", "!noop", "!objectformat", "other"])?;
+        set_extensions(&[
+            "custom",
+            "!ignore",
+            "!noop",
+            "!objectformat",
+            "!preciousobjects",
+            "!worktreeconfig",
+            "other",
+        ])?;
     }
 
     let extensions = unsafe { get_extensions() }?;
+    let extensions: Vec<_> = extensions.iter().collect();
 
-    assert_eq!(extensions.len(), 2);
-    assert_eq!(extensions.get(0), Some("custom"));
-    assert_eq!(extensions.get(1), Some("other"));
+    assert_eq!(extensions, [Some("custom"), Some("other")]);
 
     Ok(())
 }

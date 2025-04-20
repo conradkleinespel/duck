@@ -1,5 +1,4 @@
-extern crate env_logger;
-extern crate log;
+#![allow(clippy::unwrap_used)]
 
 use std::env;
 use std::process;
@@ -28,7 +27,7 @@ fn main() {
         .env("YOU_ARE_TESTING_NOW", "1")
         .env("RUST_LOG", "debug")
         .output()
-        .unwrap_or_else(|e| panic!("Unable to start child process: {}", e));
+        .unwrap_or_else(|e| panic!("Unable to start child process: {e}"));
     if out.status.success() {
         return;
     }

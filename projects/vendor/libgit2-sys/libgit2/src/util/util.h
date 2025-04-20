@@ -7,14 +7,14 @@
 #ifndef INCLUDE_util_h__
 #define INCLUDE_util_h__
 
-#ifndef GIT_WIN32
-# include <ctype.h>
-#endif
-
 #include "str.h"
 #include "git2_util.h"
 #include "strnlen.h"
 #include "thread.h"
+
+#ifndef GIT_WIN32
+# include <ctype.h>
+#endif
 
 #define ARRAY_SIZE(x) (sizeof(x)/sizeof(x[0]))
 #define bitsizeof(x) (CHAR_BIT * sizeof(x))
@@ -82,15 +82,6 @@ extern char *git__strsep(char **end, const char *sep);
 
 extern void git__strntolower(char *str, size_t len);
 extern void git__strtolower(char *str);
-
-#ifdef GIT_WIN32
-GIT_INLINE(int) git__tolower(int c)
-{
-	return (c >= 'A' && c <= 'Z') ? (c + 32) : c;
-}
-#else
-# define git__tolower(a) tolower(a)
-#endif
 
 extern size_t git__linenlen(const char *buffer, size_t buffer_len);
 
@@ -249,26 +240,6 @@ GIT_INLINE(size_t) git__size_t_powerof2(size_t v)
 	return git__size_t_bitmask(v) + 1;
 }
 
-GIT_INLINE(bool) git__isupper(int c)
-{
-	return (c >= 'A' && c <= 'Z');
-}
-
-GIT_INLINE(bool) git__isalpha(int c)
-{
-	return ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'));
-}
-
-GIT_INLINE(bool) git__isdigit(int c)
-{
-	return (c >= '0' && c <= '9');
-}
-
-GIT_INLINE(bool) git__isspace(int c)
-{
-	return (c == ' ' || c == '\t' || c == '\n' || c == '\f' || c == '\r' || c == '\v');
-}
-
 GIT_INLINE(bool) git__isspace_nonlf(int c)
 {
 	return (c == ' ' || c == '\t' || c == '\f' || c == '\r' || c == '\v');
@@ -277,11 +248,6 @@ GIT_INLINE(bool) git__isspace_nonlf(int c)
 GIT_INLINE(bool) git__iswildcard(int c)
 {
 	return (c == '*' || c == '?' || c == '[');
-}
-
-GIT_INLINE(bool) git__isxdigit(int c)
-{
-	return ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f') || (c >= 'A' && c <= 'F'));
 }
 
 /*
