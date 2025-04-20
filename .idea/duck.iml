@@ -2,7 +2,23 @@
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$" />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/projects/dt/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/projects/ram/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/projects/ram/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/projects/ram/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/projects/rclio/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/projects/rooster/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/projects/rooster/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/projects/rpassword/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/projects/rpassword/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/projects/rprompt/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/projects/rsmtp/examples" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/projects/rsmtp/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/projects/rsmtp/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/projects/rtoolbox/src" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/projects/target" />
+    </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
