@@ -1,7 +1,5 @@
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
 #[inline]
-pub unsafe fn CeipIsOptedIn() -> super::super::super::Foundation::BOOL {
-    ::windows_targets::link!("kernel32.dll" "system" fn CeipIsOptedIn() -> super::super::super::Foundation:: BOOL);
-    CeipIsOptedIn()
+pub unsafe fn CeipIsOptedIn() -> windows_core::BOOL {
+    windows_link::link!("kernel32.dll" "system" fn CeipIsOptedIn() -> windows_core::BOOL);
+    unsafe { CeipIsOptedIn() }
 }

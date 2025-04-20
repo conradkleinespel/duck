@@ -1,3 +1,6 @@
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct DXGI_ALPHA_MODE(pub i32);
 pub const DXGI_ALPHA_MODE_IGNORE: DXGI_ALPHA_MODE = DXGI_ALPHA_MODE(3i32);
 pub const DXGI_ALPHA_MODE_PREMULTIPLIED: DXGI_ALPHA_MODE = DXGI_ALPHA_MODE(1i32);
 pub const DXGI_ALPHA_MODE_STRAIGHT: DXGI_ALPHA_MODE = DXGI_ALPHA_MODE(2i32);
@@ -14,6 +17,9 @@ pub const DXGI_COLOR_SPACE_RGB_STUDIO_G22_NONE_P2020: DXGI_COLOR_SPACE_TYPE = DX
 pub const DXGI_COLOR_SPACE_RGB_STUDIO_G22_NONE_P709: DXGI_COLOR_SPACE_TYPE = DXGI_COLOR_SPACE_TYPE(2i32);
 pub const DXGI_COLOR_SPACE_RGB_STUDIO_G24_NONE_P2020: DXGI_COLOR_SPACE_TYPE = DXGI_COLOR_SPACE_TYPE(21i32);
 pub const DXGI_COLOR_SPACE_RGB_STUDIO_G24_NONE_P709: DXGI_COLOR_SPACE_TYPE = DXGI_COLOR_SPACE_TYPE(20i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct DXGI_COLOR_SPACE_TYPE(pub i32);
 pub const DXGI_COLOR_SPACE_YCBCR_FULL_G22_LEFT_P2020: DXGI_COLOR_SPACE_TYPE = DXGI_COLOR_SPACE_TYPE(11i32);
 pub const DXGI_COLOR_SPACE_YCBCR_FULL_G22_LEFT_P601: DXGI_COLOR_SPACE_TYPE = DXGI_COLOR_SPACE_TYPE(7i32);
 pub const DXGI_COLOR_SPACE_YCBCR_FULL_G22_LEFT_P709: DXGI_COLOR_SPACE_TYPE = DXGI_COLOR_SPACE_TYPE(9i32);
@@ -34,6 +40,9 @@ pub const DXGI_CPU_ACCESS_FIELD: u32 = 15u32;
 pub const DXGI_CPU_ACCESS_NONE: u32 = 0u32;
 pub const DXGI_CPU_ACCESS_READ_WRITE: u32 = 2u32;
 pub const DXGI_CPU_ACCESS_SCRATCH: u32 = 3u32;
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct DXGI_FORMAT(pub i32);
 pub const DXGI_FORMAT_420_OPAQUE: DXGI_FORMAT = DXGI_FORMAT(106i32);
 pub const DXGI_FORMAT_A4B4G4R4_UNORM: DXGI_FORMAT = DXGI_FORMAT(191i32);
 pub const DXGI_FORMAT_A8P8: DXGI_FORMAT = DXGI_FORMAT(114i32);
@@ -157,315 +166,66 @@ pub const DXGI_FORMAT_Y216: DXGI_FORMAT = DXGI_FORMAT(109i32);
 pub const DXGI_FORMAT_Y410: DXGI_FORMAT = DXGI_FORMAT(101i32);
 pub const DXGI_FORMAT_Y416: DXGI_FORMAT = DXGI_FORMAT(102i32);
 pub const DXGI_FORMAT_YUY2: DXGI_FORMAT = DXGI_FORMAT(107i32);
-pub const DXGI_MODE_ROTATION_IDENTITY: DXGI_MODE_ROTATION = DXGI_MODE_ROTATION(1i32);
-pub const DXGI_MODE_ROTATION_ROTATE180: DXGI_MODE_ROTATION = DXGI_MODE_ROTATION(3i32);
-pub const DXGI_MODE_ROTATION_ROTATE270: DXGI_MODE_ROTATION = DXGI_MODE_ROTATION(4i32);
-pub const DXGI_MODE_ROTATION_ROTATE90: DXGI_MODE_ROTATION = DXGI_MODE_ROTATION(2i32);
-pub const DXGI_MODE_ROTATION_UNSPECIFIED: DXGI_MODE_ROTATION = DXGI_MODE_ROTATION(0i32);
-pub const DXGI_MODE_SCALING_CENTERED: DXGI_MODE_SCALING = DXGI_MODE_SCALING(1i32);
-pub const DXGI_MODE_SCALING_STRETCHED: DXGI_MODE_SCALING = DXGI_MODE_SCALING(2i32);
-pub const DXGI_MODE_SCALING_UNSPECIFIED: DXGI_MODE_SCALING = DXGI_MODE_SCALING(0i32);
-pub const DXGI_MODE_SCANLINE_ORDER_LOWER_FIELD_FIRST: DXGI_MODE_SCANLINE_ORDER = DXGI_MODE_SCANLINE_ORDER(3i32);
-pub const DXGI_MODE_SCANLINE_ORDER_PROGRESSIVE: DXGI_MODE_SCANLINE_ORDER = DXGI_MODE_SCANLINE_ORDER(1i32);
-pub const DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED: DXGI_MODE_SCANLINE_ORDER = DXGI_MODE_SCANLINE_ORDER(0i32);
-pub const DXGI_MODE_SCANLINE_ORDER_UPPER_FIELD_FIRST: DXGI_MODE_SCANLINE_ORDER = DXGI_MODE_SCANLINE_ORDER(2i32);
-pub const DXGI_STANDARD_MULTISAMPLE_QUALITY_PATTERN: u32 = 4294967295u32;
-pub const _FACDXGI: u32 = 2170u32;
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct DXGI_ALPHA_MODE(pub i32);
-impl ::core::marker::Copy for DXGI_ALPHA_MODE {}
-impl ::core::clone::Clone for DXGI_ALPHA_MODE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for DXGI_ALPHA_MODE {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for DXGI_ALPHA_MODE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for DXGI_ALPHA_MODE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("DXGI_ALPHA_MODE").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct DXGI_COLOR_SPACE_TYPE(pub i32);
-impl ::core::marker::Copy for DXGI_COLOR_SPACE_TYPE {}
-impl ::core::clone::Clone for DXGI_COLOR_SPACE_TYPE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for DXGI_COLOR_SPACE_TYPE {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for DXGI_COLOR_SPACE_TYPE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for DXGI_COLOR_SPACE_TYPE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("DXGI_COLOR_SPACE_TYPE").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct DXGI_FORMAT(pub i32);
-impl ::core::marker::Copy for DXGI_FORMAT {}
-impl ::core::clone::Clone for DXGI_FORMAT {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for DXGI_FORMAT {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for DXGI_FORMAT {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for DXGI_FORMAT {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("DXGI_FORMAT").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct DXGI_MODE_ROTATION(pub i32);
-impl ::core::marker::Copy for DXGI_MODE_ROTATION {}
-impl ::core::clone::Clone for DXGI_MODE_ROTATION {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for DXGI_MODE_ROTATION {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for DXGI_MODE_ROTATION {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for DXGI_MODE_ROTATION {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("DXGI_MODE_ROTATION").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct DXGI_MODE_SCALING(pub i32);
-impl ::core::marker::Copy for DXGI_MODE_SCALING {}
-impl ::core::clone::Clone for DXGI_MODE_SCALING {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for DXGI_MODE_SCALING {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for DXGI_MODE_SCALING {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for DXGI_MODE_SCALING {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("DXGI_MODE_SCALING").field(&self.0).finish()
-    }
-}
-#[repr(transparent)]
-#[derive(::core::cmp::PartialEq, ::core::cmp::Eq)]
-pub struct DXGI_MODE_SCANLINE_ORDER(pub i32);
-impl ::core::marker::Copy for DXGI_MODE_SCANLINE_ORDER {}
-impl ::core::clone::Clone for DXGI_MODE_SCANLINE_ORDER {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::default::Default for DXGI_MODE_SCANLINE_ORDER {
-    fn default() -> Self {
-        Self(0)
-    }
-}
-impl ::windows_core::TypeKind for DXGI_MODE_SCANLINE_ORDER {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::fmt::Debug for DXGI_MODE_SCANLINE_ORDER {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_tuple("DXGI_MODE_SCANLINE_ORDER").field(&self.0).finish()
-    }
-}
 #[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
 pub struct DXGI_GAMMA_CONTROL {
     pub Scale: DXGI_RGB,
     pub Offset: DXGI_RGB,
     pub GammaCurve: [DXGI_RGB; 1025],
 }
-impl ::core::marker::Copy for DXGI_GAMMA_CONTROL {}
-impl ::core::clone::Clone for DXGI_GAMMA_CONTROL {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for DXGI_GAMMA_CONTROL {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("DXGI_GAMMA_CONTROL").field("Scale", &self.Scale).field("Offset", &self.Offset).field("GammaCurve", &self.GammaCurve).finish()
-    }
-}
-impl ::windows_core::TypeKind for DXGI_GAMMA_CONTROL {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for DXGI_GAMMA_CONTROL {
-    fn eq(&self, other: &Self) -> bool {
-        self.Scale == other.Scale && self.Offset == other.Offset && self.GammaCurve == other.GammaCurve
-    }
-}
-impl ::core::cmp::Eq for DXGI_GAMMA_CONTROL {}
-impl ::core::default::Default for DXGI_GAMMA_CONTROL {
+impl Default for DXGI_GAMMA_CONTROL {
     fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
+        unsafe { core::mem::zeroed() }
     }
 }
 #[repr(C)]
-#[doc = "Required features: `\"Win32_Foundation\"`"]
-#[cfg(feature = "Win32_Foundation")]
+#[derive(Clone, Copy, Debug, PartialEq)]
 pub struct DXGI_GAMMA_CONTROL_CAPABILITIES {
-    pub ScaleAndOffsetSupported: super::super::super::Foundation::BOOL,
+    pub ScaleAndOffsetSupported: windows_core::BOOL,
     pub MaxConvertedValue: f32,
     pub MinConvertedValue: f32,
     pub NumGammaControlPoints: u32,
     pub ControlPointPositions: [f32; 1025],
 }
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::marker::Copy for DXGI_GAMMA_CONTROL_CAPABILITIES {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::clone::Clone for DXGI_GAMMA_CONTROL_CAPABILITIES {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::fmt::Debug for DXGI_GAMMA_CONTROL_CAPABILITIES {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("DXGI_GAMMA_CONTROL_CAPABILITIES").field("ScaleAndOffsetSupported", &self.ScaleAndOffsetSupported).field("MaxConvertedValue", &self.MaxConvertedValue).field("MinConvertedValue", &self.MinConvertedValue).field("NumGammaControlPoints", &self.NumGammaControlPoints).field("ControlPointPositions", &self.ControlPointPositions).finish()
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::windows_core::TypeKind for DXGI_GAMMA_CONTROL_CAPABILITIES {
-    type TypeKind = ::windows_core::CopyType;
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::PartialEq for DXGI_GAMMA_CONTROL_CAPABILITIES {
-    fn eq(&self, other: &Self) -> bool {
-        self.ScaleAndOffsetSupported == other.ScaleAndOffsetSupported && self.MaxConvertedValue == other.MaxConvertedValue && self.MinConvertedValue == other.MinConvertedValue && self.NumGammaControlPoints == other.NumGammaControlPoints && self.ControlPointPositions == other.ControlPointPositions
-    }
-}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::cmp::Eq for DXGI_GAMMA_CONTROL_CAPABILITIES {}
-#[cfg(feature = "Win32_Foundation")]
-impl ::core::default::Default for DXGI_GAMMA_CONTROL_CAPABILITIES {
+impl Default for DXGI_GAMMA_CONTROL_CAPABILITIES {
     fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
+        unsafe { core::mem::zeroed() }
     }
 }
 #[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
 pub struct DXGI_JPEG_AC_HUFFMAN_TABLE {
     pub CodeCounts: [u8; 16],
     pub CodeValues: [u8; 162],
 }
-impl ::core::marker::Copy for DXGI_JPEG_AC_HUFFMAN_TABLE {}
-impl ::core::clone::Clone for DXGI_JPEG_AC_HUFFMAN_TABLE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for DXGI_JPEG_AC_HUFFMAN_TABLE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("DXGI_JPEG_AC_HUFFMAN_TABLE").field("CodeCounts", &self.CodeCounts).field("CodeValues", &self.CodeValues).finish()
-    }
-}
-impl ::windows_core::TypeKind for DXGI_JPEG_AC_HUFFMAN_TABLE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for DXGI_JPEG_AC_HUFFMAN_TABLE {
-    fn eq(&self, other: &Self) -> bool {
-        self.CodeCounts == other.CodeCounts && self.CodeValues == other.CodeValues
-    }
-}
-impl ::core::cmp::Eq for DXGI_JPEG_AC_HUFFMAN_TABLE {}
-impl ::core::default::Default for DXGI_JPEG_AC_HUFFMAN_TABLE {
+impl Default for DXGI_JPEG_AC_HUFFMAN_TABLE {
     fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
+        unsafe { core::mem::zeroed() }
     }
 }
 #[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
 pub struct DXGI_JPEG_DC_HUFFMAN_TABLE {
     pub CodeCounts: [u8; 12],
     pub CodeValues: [u8; 12],
 }
-impl ::core::marker::Copy for DXGI_JPEG_DC_HUFFMAN_TABLE {}
-impl ::core::clone::Clone for DXGI_JPEG_DC_HUFFMAN_TABLE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for DXGI_JPEG_DC_HUFFMAN_TABLE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("DXGI_JPEG_DC_HUFFMAN_TABLE").field("CodeCounts", &self.CodeCounts).field("CodeValues", &self.CodeValues).finish()
-    }
-}
-impl ::windows_core::TypeKind for DXGI_JPEG_DC_HUFFMAN_TABLE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for DXGI_JPEG_DC_HUFFMAN_TABLE {
-    fn eq(&self, other: &Self) -> bool {
-        self.CodeCounts == other.CodeCounts && self.CodeValues == other.CodeValues
-    }
-}
-impl ::core::cmp::Eq for DXGI_JPEG_DC_HUFFMAN_TABLE {}
-impl ::core::default::Default for DXGI_JPEG_DC_HUFFMAN_TABLE {
+impl Default for DXGI_JPEG_DC_HUFFMAN_TABLE {
     fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
+        unsafe { core::mem::zeroed() }
     }
 }
 #[repr(C)]
+#[derive(Clone, Copy, Debug, PartialEq)]
 pub struct DXGI_JPEG_QUANTIZATION_TABLE {
     pub Elements: [u8; 64],
 }
-impl ::core::marker::Copy for DXGI_JPEG_QUANTIZATION_TABLE {}
-impl ::core::clone::Clone for DXGI_JPEG_QUANTIZATION_TABLE {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for DXGI_JPEG_QUANTIZATION_TABLE {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("DXGI_JPEG_QUANTIZATION_TABLE").field("Elements", &self.Elements).finish()
-    }
-}
-impl ::windows_core::TypeKind for DXGI_JPEG_QUANTIZATION_TABLE {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for DXGI_JPEG_QUANTIZATION_TABLE {
-    fn eq(&self, other: &Self) -> bool {
-        self.Elements == other.Elements
-    }
-}
-impl ::core::cmp::Eq for DXGI_JPEG_QUANTIZATION_TABLE {}
-impl ::core::default::Default for DXGI_JPEG_QUANTIZATION_TABLE {
+impl Default for DXGI_JPEG_QUANTIZATION_TABLE {
     fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
+        unsafe { core::mem::zeroed() }
     }
 }
 #[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
 pub struct DXGI_MODE_DESC {
     pub Width: u32,
     pub Height: u32,
@@ -474,119 +234,45 @@ pub struct DXGI_MODE_DESC {
     pub ScanlineOrdering: DXGI_MODE_SCANLINE_ORDER,
     pub Scaling: DXGI_MODE_SCALING,
 }
-impl ::core::marker::Copy for DXGI_MODE_DESC {}
-impl ::core::clone::Clone for DXGI_MODE_DESC {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for DXGI_MODE_DESC {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("DXGI_MODE_DESC").field("Width", &self.Width).field("Height", &self.Height).field("RefreshRate", &self.RefreshRate).field("Format", &self.Format).field("ScanlineOrdering", &self.ScanlineOrdering).field("Scaling", &self.Scaling).finish()
-    }
-}
-impl ::windows_core::TypeKind for DXGI_MODE_DESC {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for DXGI_MODE_DESC {
-    fn eq(&self, other: &Self) -> bool {
-        self.Width == other.Width && self.Height == other.Height && self.RefreshRate == other.RefreshRate && self.Format == other.Format && self.ScanlineOrdering == other.ScanlineOrdering && self.Scaling == other.Scaling
-    }
-}
-impl ::core::cmp::Eq for DXGI_MODE_DESC {}
-impl ::core::default::Default for DXGI_MODE_DESC {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct DXGI_MODE_ROTATION(pub i32);
+pub const DXGI_MODE_ROTATION_IDENTITY: DXGI_MODE_ROTATION = DXGI_MODE_ROTATION(1i32);
+pub const DXGI_MODE_ROTATION_ROTATE180: DXGI_MODE_ROTATION = DXGI_MODE_ROTATION(3i32);
+pub const DXGI_MODE_ROTATION_ROTATE270: DXGI_MODE_ROTATION = DXGI_MODE_ROTATION(4i32);
+pub const DXGI_MODE_ROTATION_ROTATE90: DXGI_MODE_ROTATION = DXGI_MODE_ROTATION(2i32);
+pub const DXGI_MODE_ROTATION_UNSPECIFIED: DXGI_MODE_ROTATION = DXGI_MODE_ROTATION(0i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct DXGI_MODE_SCALING(pub i32);
+pub const DXGI_MODE_SCALING_CENTERED: DXGI_MODE_SCALING = DXGI_MODE_SCALING(1i32);
+pub const DXGI_MODE_SCALING_STRETCHED: DXGI_MODE_SCALING = DXGI_MODE_SCALING(2i32);
+pub const DXGI_MODE_SCALING_UNSPECIFIED: DXGI_MODE_SCALING = DXGI_MODE_SCALING(0i32);
+#[repr(transparent)]
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub struct DXGI_MODE_SCANLINE_ORDER(pub i32);
+pub const DXGI_MODE_SCANLINE_ORDER_LOWER_FIELD_FIRST: DXGI_MODE_SCANLINE_ORDER = DXGI_MODE_SCANLINE_ORDER(3i32);
+pub const DXGI_MODE_SCANLINE_ORDER_PROGRESSIVE: DXGI_MODE_SCANLINE_ORDER = DXGI_MODE_SCANLINE_ORDER(1i32);
+pub const DXGI_MODE_SCANLINE_ORDER_UNSPECIFIED: DXGI_MODE_SCANLINE_ORDER = DXGI_MODE_SCANLINE_ORDER(0i32);
+pub const DXGI_MODE_SCANLINE_ORDER_UPPER_FIELD_FIRST: DXGI_MODE_SCANLINE_ORDER = DXGI_MODE_SCANLINE_ORDER(2i32);
 #[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
 pub struct DXGI_RATIONAL {
     pub Numerator: u32,
     pub Denominator: u32,
 }
-impl ::core::marker::Copy for DXGI_RATIONAL {}
-impl ::core::clone::Clone for DXGI_RATIONAL {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for DXGI_RATIONAL {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("DXGI_RATIONAL").field("Numerator", &self.Numerator).field("Denominator", &self.Denominator).finish()
-    }
-}
-impl ::windows_core::TypeKind for DXGI_RATIONAL {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for DXGI_RATIONAL {
-    fn eq(&self, other: &Self) -> bool {
-        self.Numerator == other.Numerator && self.Denominator == other.Denominator
-    }
-}
-impl ::core::cmp::Eq for DXGI_RATIONAL {}
-impl ::core::default::Default for DXGI_RATIONAL {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
 #[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
 pub struct DXGI_RGB {
     pub Red: f32,
     pub Green: f32,
     pub Blue: f32,
 }
-impl ::core::marker::Copy for DXGI_RGB {}
-impl ::core::clone::Clone for DXGI_RGB {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for DXGI_RGB {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("DXGI_RGB").field("Red", &self.Red).field("Green", &self.Green).field("Blue", &self.Blue).finish()
-    }
-}
-impl ::windows_core::TypeKind for DXGI_RGB {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for DXGI_RGB {
-    fn eq(&self, other: &Self) -> bool {
-        self.Red == other.Red && self.Green == other.Green && self.Blue == other.Blue
-    }
-}
-impl ::core::cmp::Eq for DXGI_RGB {}
-impl ::core::default::Default for DXGI_RGB {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
 #[repr(C)]
+#[derive(Clone, Copy, Debug, Default, PartialEq)]
 pub struct DXGI_SAMPLE_DESC {
     pub Count: u32,
     pub Quality: u32,
 }
-impl ::core::marker::Copy for DXGI_SAMPLE_DESC {}
-impl ::core::clone::Clone for DXGI_SAMPLE_DESC {
-    fn clone(&self) -> Self {
-        *self
-    }
-}
-impl ::core::fmt::Debug for DXGI_SAMPLE_DESC {
-    fn fmt(&self, f: &mut ::core::fmt::Formatter<'_>) -> ::core::fmt::Result {
-        f.debug_struct("DXGI_SAMPLE_DESC").field("Count", &self.Count).field("Quality", &self.Quality).finish()
-    }
-}
-impl ::windows_core::TypeKind for DXGI_SAMPLE_DESC {
-    type TypeKind = ::windows_core::CopyType;
-}
-impl ::core::cmp::PartialEq for DXGI_SAMPLE_DESC {
-    fn eq(&self, other: &Self) -> bool {
-        self.Count == other.Count && self.Quality == other.Quality
-    }
-}
-impl ::core::cmp::Eq for DXGI_SAMPLE_DESC {}
-impl ::core::default::Default for DXGI_SAMPLE_DESC {
-    fn default() -> Self {
-        unsafe { ::core::mem::zeroed() }
-    }
-}
+pub const DXGI_STANDARD_MULTISAMPLE_QUALITY_PATTERN: u32 = 4294967295u32;
+pub const _FACDXGI: u32 = 2170u32;

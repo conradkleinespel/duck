@@ -1,10 +1,10 @@
-#![doc(html_root_url = "https://docs.rs/libgit2-sys/0.16")]
+#![doc(html_root_url = "https://docs.rs/libgit2-sys/0.18")]
 #![allow(non_camel_case_types, unused_extern_crates)]
 
 // This is required to link libz when libssh2-sys is not included.
 extern crate libz_sys as libz;
 
-use libc::{c_char, c_int, c_uchar, c_uint, c_void, size_t};
+use libc::{c_char, c_int, c_uchar, c_uint, c_ushort, c_void, size_t};
 #[cfg(feature = "ssh")]
 use libssh2_sys as libssh2;
 use std::ffi::CStr;
@@ -198,6 +198,10 @@ git_enum! {
         GIT_EINDEXDIRTY = -34,
         GIT_EAPPLYFAIL = -35,
         GIT_EOWNER = -36,
+        GIT_TIMEOUT = -37,
+        GIT_EUNCHANGED = -38,
+        GIT_ENOTSUPPORTED = -39,
+        GIT_EREADONLY = -40,
     }
 }
 
@@ -366,6 +370,13 @@ pub struct git_indexer_options {
 
 pub type git_remote_ready_cb = Option<extern "C" fn(*mut git_remote, c_int, *mut c_void) -> c_int>;
 
+git_enum! {
+    pub enum git_remote_update_flags {
+        GIT_REMOTE_UPDATE_FETCHHEAD = 1 << 0,
+        GIT_REMOTE_UPDATE_REPORT_UNCHANGED = 1 << 1,
+    }
+}
+
 #[repr(C)]
 pub struct git_remote_callbacks {
     pub version: c_uint,
@@ -384,6 +395,15 @@ pub struct git_remote_callbacks {
     pub remote_ready: git_remote_ready_cb,
     pub payload: *mut c_void,
     pub resolve_url: git_url_resolve_cb,
+    pub update_refs: Option<
+        extern "C" fn(
+            *const c_char,
+            *const git_oid,
+            *const git_oid,
+            *mut git_refspec,
+            *mut c_void,
+        ) -> c_int,
+    >,
 }
 
 #[repr(C)]
@@ -391,7 +411,7 @@ pub struct git_fetch_options {
     pub version: c_int,
     pub callbacks: git_remote_callbacks,
     pub prune: git_fetch_prune_t,
-    pub update_fetchhead: c_int,
+    pub update_fetchhead: c_uint,
     pub download_tags: git_remote_autotag_option_t,
     pub proxy_opts: git_proxy_options,
     pub depth: c_int,
@@ -657,8 +677,7 @@ pub struct git_status_entry {
 
 git_enum! {
     pub enum git_checkout_strategy_t {
-        GIT_CHECKOUT_NONE = 0,
-        GIT_CHECKOUT_SAFE = 1 << 0,
+        GIT_CHECKOUT_SAFE = 0,
         GIT_CHECKOUT_FORCE = 1 << 1,
         GIT_CHECKOUT_RECREATE_MISSING = 1 << 2,
         GIT_CHECKOUT_ALLOW_CONFLICTS = 1 << 4,
@@ -675,6 +694,7 @@ git_enum! {
         GIT_CHECKOUT_DONT_OVERWRITE_IGNORED = 1 << 19,
         GIT_CHECKOUT_CONFLICT_STYLE_MERGE = 1 << 20,
         GIT_CHECKOUT_CONFLICT_STYLE_DIFF3 = 1 << 21,
+        GIT_CHECKOUT_NONE = 1 << 30,
 
         GIT_CHECKOUT_UPDATE_SUBMODULES = 1 << 16,
         GIT_CHECKOUT_UPDATE_SUBMODULES_IF_CHANGED = 1 << 17,
@@ -731,7 +751,7 @@ git_enum! {
 }
 
 pub type git_treewalk_cb =
-    Option<extern "C" fn(*const c_char, *const git_tree_entry, *mut c_void) -> c_int>;
+    extern "C" fn(*const c_char, *const git_tree_entry, *mut c_void) -> c_int;
 pub type git_treebuilder_filter_cb =
     Option<extern "C" fn(*const git_tree_entry, *mut c_void) -> c_int>;
 
@@ -797,10 +817,13 @@ pub struct git_blame_hunk {
     pub final_commit_id: git_oid,
     pub final_start_line_number: usize,
     pub final_signature: *mut git_signature,
+    pub final_committer: *mut git_signature,
     pub orig_commit_id: git_oid,
     pub orig_path: *const c_char,
     pub orig_start_line_number: usize,
     pub orig_signature: *mut git_signature,
+    pub orig_committer: *mut git_signature,
+    pub summary: *const c_char,
     pub boundary: c_char,
 }
 
@@ -855,10 +878,10 @@ pub struct git_index_time {
 pub struct git_config_entry {
     pub name: *const c_char,
     pub value: *const c_char,
+    pub backend_type: *const c_char,
+    pub origin_path: *const c_char,
     pub include_depth: c_uint,
     pub level: git_config_level_t,
-    pub free: Option<extern "C" fn(*mut git_config_entry)>,
-    pub payload: *mut c_void,
 }
 
 git_enum! {
@@ -868,7 +891,8 @@ git_enum! {
         GIT_CONFIG_LEVEL_XDG = 3,
         GIT_CONFIG_LEVEL_GLOBAL = 4,
         GIT_CONFIG_LEVEL_LOCAL = 5,
-        GIT_CONFIG_LEVEL_APP = 6,
+        GIT_CONFIG_LEVEL_WORKTREE = 6,
+        GIT_CONFIG_LEVEL_APP = 7,
         GIT_CONFIG_HIGHEST_LEVEL = -1,
     }
 }
@@ -981,6 +1005,7 @@ pub struct git_push_options {
     pub proxy_opts: git_proxy_options,
     pub follow_redirects: git_remote_redirect_t,
     pub custom_headers: git_strarray,
+    pub remote_push_options: git_strarray,
 }
 
 pub type git_tag_foreach_cb =
@@ -1336,6 +1361,26 @@ pub struct git_merge_options {
     pub file_flags: u32,
 }
 
+#[repr(C)]
+pub struct git_merge_file_options {
+    pub version: c_uint,
+    pub ancestor_label: *const c_char,
+    pub our_label: *const c_char,
+    pub their_label: *const c_char,
+    pub favor: git_merge_file_favor_t,
+    pub flags: u32,
+    pub marker_size: c_ushort,
+}
+
+#[repr(C)]
+pub struct git_merge_file_result {
+    pub automergeable: c_uint,
+    pub path: *const c_char,
+    pub mode: c_uint,
+    pub ptr: *const c_char,
+    pub len: size_t,
+}
+
 git_enum! {
     pub enum git_merge_flag_t {
         GIT_MERGE_FIND_RENAMES = 1 << 0,
@@ -1365,6 +1410,8 @@ git_enum! {
         GIT_MERGE_FILE_IGNORE_WHITESPACE_EOL = 1 << 5,
         GIT_MERGE_FILE_DIFF_PATIENCE = 1 << 6,
         GIT_MERGE_FILE_DIFF_MINIMAL = 1 << 7,
+        GIT_MERGE_FILE_STYLE_ZDIFF3 = 1 << 8,
+        GIT_MERGE_FILE_ACCEPT_CONFLICTS = 1 << 9,
     }
 }
 
@@ -1947,6 +1994,14 @@ git_enum! {
         GIT_OPT_SET_EXTENSIONS,
         GIT_OPT_GET_OWNER_VALIDATION,
         GIT_OPT_SET_OWNER_VALIDATION,
+        GIT_OPT_GET_HOMEDIR,
+        GIT_OPT_SET_HOMEDIR,
+        GIT_OPT_SET_SERVER_CONNECT_TIMEOUT,
+        GIT_OPT_GET_SERVER_CONNECT_TIMEOUT,
+        GIT_OPT_SET_SERVER_TIMEOUT,
+        GIT_OPT_GET_SERVER_TIMEOUT,
+        GIT_OPT_SET_USER_AGENT_PRODUCT,
+        GIT_OPT_GET_USER_AGENT_PRODUCT,
     }
 }
 
@@ -1963,6 +2018,7 @@ git_enum! {
 pub struct git_worktree_add_options {
     pub version: c_uint,
     pub lock: c_int,
+    pub checkout_existing: c_int,
     pub reference: *mut git_reference,
     pub checkout_options: git_checkout_options,
 }
@@ -2125,6 +2181,7 @@ extern "C" {
     pub fn git_repository_is_empty(repo: *mut git_repository) -> c_int;
     pub fn git_repository_is_shallow(repo: *mut git_repository) -> c_int;
     pub fn git_repository_path(repo: *const git_repository) -> *const c_char;
+    pub fn git_repository_commondir(repo: *const git_repository) -> *const c_char;
     pub fn git_repository_state(repo: *mut git_repository) -> c_int;
     pub fn git_repository_workdir(repo: *const git_repository) -> *const c_char;
     pub fn git_repository_set_workdir(
@@ -2203,6 +2260,13 @@ extern "C" {
         dest: *mut *mut git_object,
         repo: *mut git_repository,
         id: *const git_oid,
+        kind: git_object_t,
+    ) -> c_int;
+    pub fn git_object_lookup_prefix(
+        dest: *mut *mut git_object,
+        repo: *mut git_repository,
+        id: *const git_oid,
+        len: size_t,
         kind: git_object_t,
     ) -> c_int;
     pub fn git_object_type(obj: *const git_object) -> git_object_t;
@@ -2319,7 +2383,7 @@ extern "C" {
     pub fn git_remote_update_tips(
         remote: *mut git_remote,
         callbacks: *const git_remote_callbacks,
-        update_fetchead: c_int,
+        update_flags: c_uint,
         download_tags: git_remote_autotag_option_t,
         reflog_message: *const c_char,
     ) -> c_int;
@@ -2827,6 +2891,12 @@ extern "C" {
         repo: *mut git_repository,
         id: *const git_oid,
     ) -> c_int;
+    pub fn git_commit_lookup_prefix(
+        commit: *mut *mut git_commit,
+        repo: *mut git_repository,
+        id: *const git_oid,
+        len: size_t,
+    ) -> c_int;
     pub fn git_commit_message(commit: *const git_commit) -> *const c_char;
     pub fn git_commit_message_encoding(commit: *const git_commit) -> *const c_char;
     pub fn git_commit_message_raw(commit: *const git_commit) -> *const c_char;
@@ -2966,6 +3036,11 @@ extern "C" {
         refname: *const c_char,
     ) -> c_int;
     pub fn git_branch_upstream_remote(
+        out: *mut git_buf,
+        repo: *mut git_repository,
+        refname: *const c_char,
+    ) -> c_int;
+    pub fn git_branch_upstream_merge(
         out: *mut git_buf,
         repo: *mut git_repository,
         refname: *const c_char,
@@ -3342,6 +3417,8 @@ extern "C" {
         their_tree: *const git_tree,
         opts: *const git_merge_options,
     ) -> c_int;
+    pub fn git_merge_file_options_init(opts: *mut git_merge_file_options, version: c_uint)
+        -> c_int;
     pub fn git_repository_state_cleanup(repo: *mut git_repository) -> c_int;
 
     // merge analysis
@@ -3469,6 +3546,13 @@ extern "C" {
         input_array: *const git_oid,
     ) -> c_int;
 
+    pub fn git_merge_base_octopus(
+        out: *mut git_oid,
+        repo: *mut git_repository,
+        length: size_t,
+        input_array: *const git_oid,
+    ) -> c_int;
+
     pub fn git_merge_bases(
         out: *mut git_oidarray,
         repo: *mut git_repository,
@@ -3482,6 +3566,17 @@ extern "C" {
         length: size_t,
         input_array: *const git_oid,
     ) -> c_int;
+
+    pub fn git_merge_file_from_index(
+        out: *mut git_merge_file_result,
+        repo: *mut git_repository,
+        ancestor: *const git_index_entry,
+        ours: *const git_index_entry,
+        theirs: *const git_index_entry,
+        opts: *const git_merge_file_options,
+    ) -> c_int;
+
+    pub fn git_merge_file_result_free(file_result: *mut git_merge_file_result);
 
     // pathspec
     pub fn git_pathspec_free(ps: *mut git_pathspec);

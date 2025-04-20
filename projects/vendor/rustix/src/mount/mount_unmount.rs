@@ -3,7 +3,9 @@
 use crate::backend::mount::types::{
     InternalMountFlags, MountFlags, MountFlagsArg, MountPropagationFlags, UnmountFlags,
 };
-use crate::{backend, io, path};
+use crate::ffi::CStr;
+use crate::path::{self, option_into_with_c_str};
+use crate::{backend, io};
 
 /// `mount(source, target, filesystemtype, mountflags, data)`
 ///
@@ -12,7 +14,13 @@ use crate::{backend, io, path};
 ///
 /// [Linux]: https://man7.org/linux/man-pages/man2/mount.2.html
 #[inline]
-pub fn mount<Source: path::Arg, Target: path::Arg, Fs: path::Arg, Data: path::Arg>(
+pub fn mount<
+    'a,
+    Source: path::Arg,
+    Target: path::Arg,
+    Fs: path::Arg,
+    Data: Into<Option<&'a CStr>>,
+>(
     source: Source,
     target: Target,
     file_system_type: Fs,
@@ -22,13 +30,13 @@ pub fn mount<Source: path::Arg, Target: path::Arg, Fs: path::Arg, Data: path::Ar
     source.into_with_c_str(|source| {
         target.into_with_c_str(|target| {
             file_system_type.into_with_c_str(|file_system_type| {
-                data.into_with_c_str(|data| {
+                option_into_with_c_str(data.into(), |data| {
                     backend::mount::syscalls::mount(
                         Some(source),
                         target,
                         Some(file_system_type),
                         MountFlagsArg(flags.bits()),
-                        Some(data),
+                        data,
                     )
                 })
             })
@@ -98,7 +106,7 @@ pub fn mount_bind<Source: path::Arg, Target: path::Arg>(
 #[inline]
 #[doc(alias = "mount")]
 #[doc(alias = "MS_REC")]
-pub fn mount_recursive_bind<Source: path::Arg, Target: path::Arg>(
+pub fn mount_bind_recursive<Source: path::Arg, Target: path::Arg>(
     source: Source,
     target: Target,
 ) -> io::Result<()> {

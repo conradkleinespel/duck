@@ -770,6 +770,7 @@ int p_rmdir(const char *path)
 			 * handle to the directory."  This sounds like what everybody else calls
 			 * EBUSY.  Let's convert appropriate error codes.
 			 */
+			case ERROR_ACCESS_DENIED:
 			case ERROR_SHARING_VIOLATION:
 				errno = EBUSY;
 				break;
@@ -787,13 +788,19 @@ int p_rmdir(const char *path)
 char *p_realpath(const char *orig_path, char *buffer)
 {
 	git_win32_path orig_path_w, buffer_w;
+	DWORD long_len;
 
 	if (git_win32_path_from_utf8(orig_path_w, orig_path) < 0)
 		return NULL;
 
-	/* Note that if the path provided is a relative path, then the current directory
+	/*
+	 * POSIX realpath performs two functions: first, it turns relative
+	 * paths into absolute paths. For this, we need GetFullPathName.
+	 *
+	 * Note that if the path provided is a relative path, then the current directory
 	 * is used to resolve the path -- which is a concurrency issue because the current
-	 * directory is a process-wide variable. */
+	 * directory is a process-wide variable.
+	 */
 	if (!GetFullPathNameW(orig_path_w, GIT_WIN_PATH_UTF16, buffer_w, NULL)) {
 		if (GetLastError() == ERROR_INSUFFICIENT_BUFFER)
 			errno = ENAMETOOLONG;
@@ -803,9 +810,26 @@ char *p_realpath(const char *orig_path, char *buffer)
 		return NULL;
 	}
 
-	/* The path must exist. */
-	if (GetFileAttributesW(buffer_w) == INVALID_FILE_ATTRIBUTES) {
-		errno = ENOENT;
+	/*
+	 * Then, the path is canonicalized. eg, on macOS,
+	 * "/TMP" -> "/private/tmp". For this, we need GetLongPathName.
+	 */
+	if ((long_len = GetLongPathNameW(buffer_w, buffer_w, GIT_WIN_PATH_UTF16)) == 0) {
+		DWORD error = GetLastError();
+
+		if (error == ERROR_FILE_NOT_FOUND ||
+		    error == ERROR_PATH_NOT_FOUND)
+			errno = ENOENT;
+		else if (error == ERROR_ACCESS_DENIED)
+			errno = EPERM;
+		else
+			errno = EINVAL;
+
+		return NULL;
+	}
+
+	if (long_len > GIT_WIN_PATH_UTF16) {
+		errno = ENAMETOOLONG;
 		return NULL;
 	}
 
@@ -821,7 +845,6 @@ char *p_realpath(const char *orig_path, char *buffer)
 		return NULL;
 
 	git_fs_path_mkposix(buffer);
-
 	return buffer;
 }
 

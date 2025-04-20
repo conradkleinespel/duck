@@ -19,7 +19,18 @@ fn to_utf16(s: &Path) -> Vec<u16> {
     s.as_os_str().encode_wide().chain(iter::once(0)).collect()
 }
 
-pub fn create_named(path: &Path, open_options: &mut OpenOptions) -> io::Result<File> {
+fn not_supported<T>(msg: &str) -> io::Result<T> {
+    Err(io::Error::new(io::ErrorKind::Other, msg))
+}
+
+pub fn create_named(
+    path: &Path,
+    open_options: &mut OpenOptions,
+    permissions: Option<&std::fs::Permissions>,
+) -> io::Result<File> {
+    if permissions.map_or(false, |p| p.readonly()) {
+        return not_supported("changing permissions is not supported on this platform");
+    }
     open_options
         .create_new(true)
         .read(true)
@@ -35,13 +46,17 @@ pub fn create(dir: &Path) -> io::Result<File> {
         OsStr::new(""),
         crate::NUM_RAND_CHARS,
         |path| {
-            OpenOptions::new()
+            let f = OpenOptions::new()
                 .create_new(true)
                 .read(true)
                 .write(true)
                 .share_mode(0)
                 .custom_flags(FILE_ATTRIBUTE_TEMPORARY | FILE_FLAG_DELETE_ON_CLOSE)
-                .open(path)
+                .open(path)?;
+            // NOTE: in theory, we could delete the file immediately (we open the file in "unix
+            // semantics" mode) but this seemed to corrupt something in Windows at scale (see #339).
+            // So we just rely on `FILE_FLAG_DELETE_ON_CLOSE`.
+            Ok(f)
         },
     )
 }

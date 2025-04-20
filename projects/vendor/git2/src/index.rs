@@ -412,6 +412,39 @@ impl Index {
         unsafe { raw::git_index_has_conflicts(self.raw) == 1 }
     }
 
+    /// Get the index entries that represent a conflict of a single file.
+    pub fn conflict_get(&self, path: &Path) -> Result<IndexConflict, Error> {
+        let path = path_to_repo_path(path)?;
+        let mut ancestor = ptr::null();
+        let mut our = ptr::null();
+        let mut their = ptr::null();
+
+        unsafe {
+            try_call!(raw::git_index_conflict_get(
+                &mut ancestor,
+                &mut our,
+                &mut their,
+                self.raw,
+                path
+            ));
+
+            Ok(IndexConflict {
+                ancestor: match ancestor.is_null() {
+                    false => Some(IndexEntry::from_raw(*ancestor)),
+                    true => None,
+                },
+                our: match our.is_null() {
+                    false => Some(IndexEntry::from_raw(*our)),
+                    true => None,
+                },
+                their: match their.is_null() {
+                    false => Some(IndexEntry::from_raw(*their)),
+                    true => None,
+                },
+            })
+        }
+    }
+
     /// Get the full path to the index file on disk.
     ///
     /// Returns `None` if this is an in-memory index.
@@ -481,6 +514,15 @@ impl Index {
                 path,
                 stage as c_int
             ));
+        }
+        Ok(())
+    }
+
+    /// Removes the index entries that represent a conflict of a single file.
+    pub fn conflict_remove(&mut self, path: &Path) -> Result<(), Error> {
+        let path = path_to_repo_path(path)?;
+        unsafe {
+            try_call!(raw::git_index_conflict_remove(self.raw, path));
         }
         Ok(())
     }
@@ -610,6 +652,52 @@ impl Index {
                 entry_path
             ));
             Ok(at_pos)
+        }
+    }
+}
+
+impl IndexEntry {
+    /// Create a raw index entry.
+    ///
+    /// The returned `raw::git_index_entry` contains a pointer to a `CString` path, which is also
+    /// returned because it's lifetime must exceed the lifetime of the `raw::git_index_entry`.
+    pub(crate) unsafe fn to_raw(&self) -> Result<(raw::git_index_entry, CString), Error> {
+        let path = CString::new(&self.path[..])?;
+
+        // libgit2 encodes the length of the path in the lower bits of the
+        // `flags` entry, so mask those out and recalculate here to ensure we
+        // don't corrupt anything.
+        let mut flags = self.flags & !raw::GIT_INDEX_ENTRY_NAMEMASK;
+
+        if self.path.len() < raw::GIT_INDEX_ENTRY_NAMEMASK as usize {
+            flags |= self.path.len() as u16;
+        } else {
+            flags |= raw::GIT_INDEX_ENTRY_NAMEMASK;
+        }
+
+        unsafe {
+            let raw = raw::git_index_entry {
+                dev: self.dev,
+                ino: self.ino,
+                mode: self.mode,
+                uid: self.uid,
+                gid: self.gid,
+                file_size: self.file_size,
+                id: *self.id.raw(),
+                flags,
+                flags_extended: self.flags_extended,
+                path: path.as_ptr(),
+                mtime: raw::git_index_time {
+                    seconds: self.mtime.seconds(),
+                    nanoseconds: self.mtime.nanoseconds(),
+                },
+                ctime: raw::git_index_time {
+                    seconds: self.ctime.seconds(),
+                    nanoseconds: self.ctime.nanoseconds(),
+                },
+            };
+
+            Ok((raw, path))
         }
     }
 }

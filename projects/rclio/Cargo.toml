@@ -8,6 +8,6 @@ edition = "2018"
 
 [dependencies]
 ansi_term = "0.12"
-rpassword = { path = "../rpassword", version = "7.2" }
-rprompt = { path = "../rprompt", version = "2.0" }
+rpassword = { path = "../rpassword", version = "7.3" }
+rprompt = { path = "../rprompt", version = "2.1" }
 rtoolbox = { path = "../rtoolbox", version = "0.0" }

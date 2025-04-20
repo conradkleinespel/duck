@@ -4,15 +4,14 @@
 use crate::fs::Mode;
 #[cfg(not(target_os = "wasi"))]
 use crate::fs::{Gid, Uid};
-use crate::fs::{OFlags, SeekFrom, Timespec};
+use crate::fs::{SeekFrom, Timespec};
 use crate::{backend, io};
-use backend::fd::{AsFd, BorrowedFd};
+use backend::fd::AsFd;
 #[cfg(not(any(
     netbsdlike,
-    solarish,
-    target_os = "aix",
     target_os = "dragonfly",
     target_os = "espidf",
+    target_os = "horizon",
     target_os = "nto",
     target_os = "redox",
     target_os = "vita",
@@ -20,6 +19,7 @@ use backend::fd::{AsFd, BorrowedFd};
 use backend::fs::types::FallocateFlags;
 #[cfg(not(any(
     target_os = "espidf",
+    target_os = "horizon",
     target_os = "solaris",
     target_os = "vita",
     target_os = "wasi"
@@ -32,6 +32,7 @@ use backend::fs::types::Stat;
     solarish,
     target_os = "espidf",
     target_os = "haiku",
+    target_os = "horizon",
     target_os = "netbsd",
     target_os = "nto",
     target_os = "redox",
@@ -49,7 +50,7 @@ use backend::fs::types::StatVfs;
 // This is `repr(C)` and specifically laid out to match the representation used
 // by `utimensat` and `futimens`, which expect 2-element arrays of timestamps.
 #[repr(C)]
-#[derive(Clone, Debug)]
+#[derive(Debug, Clone)]
 pub struct Timestamps {
     /// The timestamp of the last access to a filesystem object.
     pub last_access: Timespec,
@@ -80,7 +81,7 @@ pub const NFS_SUPER_MAGIC: FsWord = backend::c::NFS_SUPER_MAGIC as FsWord;
 ///  - [POSIX]
 ///  - [Linux]
 ///
-/// [POSIX]: https://pubs.opengroup.org/onlinepubs/9699919799/functions/lseek.html
+/// [POSIX]: https://pubs.opengroup.org/onlinepubs/9799919799/functions/lseek.html
 /// [Linux]: https://man7.org/linux/man-pages/man2/lseek.2.html
 #[inline]
 #[doc(alias = "lseek")]
@@ -98,7 +99,7 @@ pub fn seek<Fd: AsFd>(fd: Fd, pos: SeekFrom) -> io::Result<u64> {
 ///  - [POSIX]
 ///  - [Linux]
 ///
-/// [POSIX]: https://pubs.opengroup.org/onlinepubs/9699919799/functions/lseek.html
+/// [POSIX]: https://pubs.opengroup.org/onlinepubs/9799919799/functions/lseek.html
 /// [Linux]: https://man7.org/linux/man-pages/man2/lseek.2.html
 #[inline]
 #[doc(alias = "lseek")]
@@ -115,8 +116,9 @@ pub fn tell<Fd: AsFd>(fd: Fd) -> io::Result<u64> {
 ///  - [POSIX]
 ///  - [Linux]
 ///
-/// [POSIX]: https://pubs.opengroup.org/onlinepubs/9699919799/functions/fchmod.html
+/// [POSIX]: https://pubs.opengroup.org/onlinepubs/9799919799/functions/fchmod.html
 /// [Linux]: https://man7.org/linux/man-pages/man2/fchmod.2.html
+/// [`OFlags::PATH`]: crate::fs::OFlags::PATH
 #[cfg(not(target_os = "wasi"))]
 #[inline]
 pub fn fchmod<Fd: AsFd>(fd: Fd, mode: Mode) -> io::Result<()> {
@@ -129,7 +131,7 @@ pub fn fchmod<Fd: AsFd>(fd: Fd, mode: Mode) -> io::Result<()> {
 ///  - [POSIX]
 ///  - [Linux]
 ///
-/// [POSIX]: https://pubs.opengroup.org/onlinepubs/9699919799/functions/fchown.html
+/// [POSIX]: https://pubs.opengroup.org/onlinepubs/9799919799/functions/fchown.html
 /// [Linux]: https://man7.org/linux/man-pages/man2/fchown.2.html
 #[cfg(not(target_os = "wasi"))]
 #[inline]
@@ -146,7 +148,7 @@ pub fn fchown<Fd: AsFd>(fd: Fd, owner: Option<Uid>, group: Option<Gid>) -> io::R
 ///  - [POSIX]
 ///  - [Linux]
 ///
-/// [POSIX]: https://pubs.opengroup.org/onlinepubs/9699919799/functions/fstat.html
+/// [POSIX]: https://pubs.opengroup.org/onlinepubs/9799919799/functions/fstat.html
 /// [Linux]: https://man7.org/linux/man-pages/man2/fstat.2.html
 /// [`Mode::from_raw_mode`]: Mode::from_raw_mode
 /// [`FileType::from_raw_mode`]: crate::fs::FileType::from_raw_mode
@@ -168,6 +170,7 @@ pub fn fstat<Fd: AsFd>(fd: Fd) -> io::Result<Stat> {
     solarish,
     target_os = "espidf",
     target_os = "haiku",
+    target_os = "horizon",
     target_os = "netbsd",
     target_os = "nto",
     target_os = "redox",
@@ -191,7 +194,7 @@ pub fn fstatfs<Fd: AsFd>(fd: Fd) -> io::Result<StatFs> {
 ///  - [POSIX]
 ///  - [Linux]
 ///
-/// [POSIX]: https://pubs.opengroup.org/onlinepubs/9699919799/functions/fstatvfs.html
+/// [POSIX]: https://pubs.opengroup.org/onlinepubs/9799919799/functions/fstatvfs.html
 /// [Linux]: https://man7.org/linux/man-pages/man2/fstatvfs.2.html
 #[cfg(not(any(target_os = "haiku", target_os = "redox", target_os = "wasi")))]
 #[inline]
@@ -205,9 +208,9 @@ pub fn fstatvfs<Fd: AsFd>(fd: Fd) -> io::Result<StatVfs> {
 ///  - [POSIX]
 ///  - [Linux]
 ///
-/// [POSIX]: https://pubs.opengroup.org/onlinepubs/9699919799/functions/futimens.html
+/// [POSIX]: https://pubs.opengroup.org/onlinepubs/9799919799/functions/futimens.html
 /// [Linux]: https://man7.org/linux/man-pages/man2/utimensat.2.html
-#[cfg(not(any(target_os = "espidf", target_os = "vita")))]
+#[cfg(not(any(target_os = "espidf", target_os = "horizon", target_os = "vita")))]
 #[inline]
 pub fn futimens<Fd: AsFd>(fd: Fd, times: &Timestamps) -> io::Result<()> {
     backend::fs::syscalls::futimens(fd.as_fd(), times)
@@ -225,53 +228,22 @@ pub fn futimens<Fd: AsFd>(fd: Fd, times: &Timestamps) -> io::Result<()> {
 ///  - [Linux `fallocate`]
 ///  - [Linux `posix_fallocate`]
 ///
-/// [POSIX]: https://pubs.opengroup.org/onlinepubs/9699919799/functions/posix_fallocate.html
+/// [POSIX]: https://pubs.opengroup.org/onlinepubs/9799919799/functions/posix_fallocate.html
 /// [Linux `fallocate`]: https://man7.org/linux/man-pages/man2/fallocate.2.html
 /// [Linux `posix_fallocate`]: https://man7.org/linux/man-pages/man3/posix_fallocate.3.html
 #[cfg(not(any(
     netbsdlike,
-    solarish,
-    target_os = "aix",
     target_os = "dragonfly",
     target_os = "espidf",
+    target_os = "horizon",
     target_os = "nto",
     target_os = "redox",
     target_os = "vita",
-)))] // not implemented in libc for netbsd yet
+)))] // not implemented in libc for NetBSD yet
 #[inline]
 #[doc(alias = "posix_fallocate")]
 pub fn fallocate<Fd: AsFd>(fd: Fd, mode: FallocateFlags, offset: u64, len: u64) -> io::Result<()> {
     backend::fs::syscalls::fallocate(fd.as_fd(), mode, offset, len)
-}
-
-/// `fcntl(fd, F_GETFL) & O_ACCMODE`
-///
-/// Returns a pair of booleans indicating whether the file descriptor is
-/// readable and/or writable, respectively. This is only reliable on files; for
-/// example, it doesn't reflect whether sockets have been shut down; for
-/// general I/O handle support, use [`io::is_read_write`].
-#[inline]
-pub fn is_file_read_write<Fd: AsFd>(fd: Fd) -> io::Result<(bool, bool)> {
-    _is_file_read_write(fd.as_fd())
-}
-
-pub(crate) fn _is_file_read_write(fd: BorrowedFd<'_>) -> io::Result<(bool, bool)> {
-    let mode = backend::fs::syscalls::fcntl_getfl(fd)?;
-
-    // Check for `O_PATH`.
-    #[cfg(any(linux_kernel, target_os = "emscripten", target_os = "fuchsia"))]
-    if mode.contains(OFlags::PATH) {
-        return Ok((false, false));
-    }
-
-    // Use `RWMODE` rather than `ACCMODE` as `ACCMODE` may include `O_PATH`.
-    // We handled `O_PATH` above.
-    match mode & OFlags::RWMODE {
-        OFlags::RDONLY => Ok((true, false)),
-        OFlags::RDWR => Ok((true, true)),
-        OFlags::WRONLY => Ok((false, true)),
-        _ => unreachable!(),
-    }
 }
 
 /// `fsync(fd)`—Ensures that file data and metadata is written to the
@@ -284,7 +256,7 @@ pub(crate) fn _is_file_read_write(fd: BorrowedFd<'_>) -> io::Result<(bool, bool)
 ///  - [POSIX]
 ///  - [Linux]
 ///
-/// [POSIX]: https://pubs.opengroup.org/onlinepubs/9699919799/functions/fsync.html
+/// [POSIX]: https://pubs.opengroup.org/onlinepubs/9799919799/functions/fsync.html
 /// [Linux]: https://man7.org/linux/man-pages/man2/fsync.2.html
 /// [`fcntl_fullfsync`]: https://docs.rs/rustix/*/x86_64-apple-darwin/rustix/fs/fn.fcntl_fullfsync.html
 #[inline]
@@ -299,13 +271,14 @@ pub fn fsync<Fd: AsFd>(fd: Fd) -> io::Result<()> {
 ///  - [POSIX]
 ///  - [Linux]
 ///
-/// [POSIX]: https://pubs.opengroup.org/onlinepubs/9699919799/functions/fdatasync.html
+/// [POSIX]: https://pubs.opengroup.org/onlinepubs/9799919799/functions/fdatasync.html
 /// [Linux]: https://man7.org/linux/man-pages/man2/fdatasync.2.html
 #[cfg(not(any(
     apple,
     target_os = "dragonfly",
     target_os = "espidf",
     target_os = "haiku",
+    target_os = "horizon",
     target_os = "redox",
     target_os = "vita",
 )))]
@@ -320,7 +293,7 @@ pub fn fdatasync<Fd: AsFd>(fd: Fd) -> io::Result<()> {
 ///  - [POSIX]
 ///  - [Linux]
 ///
-/// [POSIX]: https://pubs.opengroup.org/onlinepubs/9699919799/functions/ftruncate.html
+/// [POSIX]: https://pubs.opengroup.org/onlinepubs/9799919799/functions/ftruncate.html
 /// [Linux]: https://man7.org/linux/man-pages/man2/ftruncate.2.html
 #[inline]
 pub fn ftruncate<Fd: AsFd>(fd: Fd, length: u64) -> io::Result<()> {
@@ -335,6 +308,7 @@ pub fn ftruncate<Fd: AsFd>(fd: Fd, length: u64) -> io::Result<()> {
 /// [Linux]: https://man7.org/linux/man-pages/man2/flock.2.html
 #[cfg(not(any(
     target_os = "espidf",
+    target_os = "horizon",
     target_os = "solaris",
     target_os = "vita",
     target_os = "wasi"

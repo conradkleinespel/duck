@@ -1,6 +1,6 @@
 # fastrand
 
-[![Build](https://github.com/smol-rs/fastrand/workflows/Build%20and%20test/badge.svg)](
+[![Build](https://github.com/smol-rs/fastrand/workflows/CI/badge.svg)](
 https://github.com/smol-rs/fastrand/actions)
 [![License](https://img.shields.io/badge/license-Apache--2.0_OR_MIT-blue.svg)](
 https://github.com/smol-rs/fastrand)
@@ -43,7 +43,7 @@ let elem = v[i];
 Sample values from an array with `O(n)` complexity (`n` is the length of array):
 
 ```rust
-fastrand::choose_multiple(vec![1, 4, 5].iter(), 2);
+fastrand::choose_multiple([1, 4, 5], 2);
 fastrand::choose_multiple(0..20, 12);
 ```
 

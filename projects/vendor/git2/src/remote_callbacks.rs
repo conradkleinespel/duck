@@ -1,5 +1,5 @@
 use libc::{c_char, c_int, c_uint, c_void, size_t};
-use std::ffi::{CStr, CString};
+use std::ffi::CStr;
 use std::mem;
 use std::ptr;
 use std::slice;
@@ -76,20 +76,23 @@ pub type PushUpdateReference<'a> = dyn FnMut(&str, Option<&str>) -> Result<(), E
 /// Callback for push transfer progress
 ///
 /// Parameters:
-///     * current
-///     * total
-///     * bytes
+/// * current
+/// * total
+/// * bytes
 pub type PushTransferProgress<'a> = dyn FnMut(usize, usize, usize) + 'a;
 
 /// Callback for pack progress
 ///
+/// Be aware that this is called inline with pack building operations,
+/// so performance may be affected.
+///
 /// Parameters:
-///     * stage
-///     * current
-///     * total
+/// * stage
+/// * current
+/// * total
 pub type PackProgress<'a> = dyn FnMut(PackBuilderStage, usize, usize) + 'a;
 
-/// Callback used to inform of upcoming updates.
+/// The callback is called once between the negotiation step and the upload.
 ///
 /// The argument is a slice containing the updates which will be sent as
 /// commands to the destination.
@@ -204,6 +207,11 @@ impl<'a> RemoteCallbacks<'a> {
     }
 
     /// The callback through which progress of push transfer is monitored
+    ///
+    /// Parameters:
+    /// * current
+    /// * total
+    /// * bytes
     pub fn push_transfer_progress<F>(&mut self, cb: F) -> &mut RemoteCallbacks<'a>
     where
         F: FnMut(usize, usize, usize) + 'a,
@@ -213,8 +221,14 @@ impl<'a> RemoteCallbacks<'a> {
     }
 
     /// Function to call with progress information during pack building.
+    ///
     /// Be aware that this is called inline with pack building operations,
     /// so performance may be affected.
+    ///
+    /// Parameters:
+    /// * stage
+    /// * current
+    /// * total
     pub fn pack_progress<F>(&mut self, cb: F) -> &mut RemoteCallbacks<'a>
     where
         F: FnMut(PackBuilderStage, usize, usize) + 'a,
@@ -224,7 +238,11 @@ impl<'a> RemoteCallbacks<'a> {
     }
 
     /// The callback is called once between the negotiation step and the upload.
-    /// It provides information about what updates will be performed.
+    ///
+    /// The argument to the callback is a slice containing the updates which
+    /// will be sent as commands to the destination.
+    ///
+    /// The push is cancelled if the callback returns an error.
     pub fn push_negotiation<F>(&mut self, cb: F) -> &mut RemoteCallbacks<'a>
     where
         F: FnMut(&[PushUpdate<'_>]) -> Result<(), Error> + 'a,
@@ -312,11 +330,7 @@ extern "C" fn credentials_cb(
 
             let cred_type = CredentialType::from_bits_truncate(allowed_types as u32);
 
-            callback(url, username_from_url, cred_type).map_err(|e| {
-                let s = CString::new(e.to_string()).unwrap();
-                raw::git_error_set_str(e.class() as c_int, s.as_ptr());
-                e.raw_code() as c_int
-            })
+            callback(url, username_from_url, cred_type).map_err(|e| e.raw_set_git_error())
         });
         match ok {
             Some(Ok(cred)) => {
@@ -415,13 +429,7 @@ extern "C" fn certificate_check_cb(
     match ok {
         Some(Ok(CertificateCheckStatus::CertificateOk)) => 0,
         Some(Ok(CertificateCheckStatus::CertificatePassthrough)) => raw::GIT_PASSTHROUGH as c_int,
-        Some(Err(e)) => {
-            let s = CString::new(e.message()).unwrap();
-            unsafe {
-                raw::git_error_set_str(e.class() as c_int, s.as_ptr());
-            }
-            e.raw_code() as c_int
-        }
+        Some(Err(e)) => unsafe { e.raw_set_git_error() },
         None => {
             // Panic. The *should* get resumed by some future call to check().
             -1
@@ -448,7 +456,7 @@ extern "C" fn push_update_reference_cb(
         };
         match callback(refname, status) {
             Ok(()) => 0,
-            Err(e) => e.raw_code(),
+            Err(e) => e.raw_set_git_error(),
         }
     })
     .unwrap_or(-1)
@@ -511,7 +519,7 @@ extern "C" fn push_negotiation_cb(
         let updates = slice::from_raw_parts(updates as *mut PushUpdate<'_>, len);
         match callback(updates) {
             Ok(()) => 0,
-            Err(e) => e.raw_code(),
+            Err(e) => e.raw_set_git_error(),
         }
     })
     .unwrap_or(-1)

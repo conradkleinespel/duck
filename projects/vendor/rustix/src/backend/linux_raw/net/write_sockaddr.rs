@@ -1,21 +1,9 @@
-//! The BSD sockets API requires us to read the `ss_family` field before we can
+//! The BSD sockets API requires us to read the `sa_family` field before we can
 //! interpret the rest of a `sockaddr` produced by the kernel.
 #![allow(unsafe_code)]
 
 use crate::backend::c;
-use crate::net::{SocketAddrAny, SocketAddrStorage, SocketAddrUnix, SocketAddrV4, SocketAddrV6};
-use core::mem::size_of;
-
-pub(crate) unsafe fn write_sockaddr(
-    addr: &SocketAddrAny,
-    storage: *mut SocketAddrStorage,
-) -> usize {
-    match addr {
-        SocketAddrAny::V4(v4) => write_sockaddr_v4(v4, storage),
-        SocketAddrAny::V6(v6) => write_sockaddr_v6(v6, storage),
-        SocketAddrAny::Unix(unix) => write_sockaddr_unix(unix, storage),
-    }
-}
+use crate::net::{SocketAddrV4, SocketAddrV6};
 
 pub(crate) fn encode_sockaddr_v4(v4: &SocketAddrV4) -> c::sockaddr_in {
     c::sockaddr_in {
@@ -26,12 +14,6 @@ pub(crate) fn encode_sockaddr_v4(v4: &SocketAddrV4) -> c::sockaddr_in {
         },
         __pad: [0_u8; 8],
     }
-}
-
-unsafe fn write_sockaddr_v4(v4: &SocketAddrV4, storage: *mut SocketAddrStorage) -> usize {
-    let encoded = encode_sockaddr_v4(v4);
-    core::ptr::write(storage.cast(), encoded);
-    size_of::<c::sockaddr_in>()
 }
 
 pub(crate) fn encode_sockaddr_v6(v6: &SocketAddrV6) -> c::sockaddr_in6 {
@@ -46,15 +28,4 @@ pub(crate) fn encode_sockaddr_v6(v6: &SocketAddrV6) -> c::sockaddr_in6 {
         },
         sin6_scope_id: v6.scope_id(),
     }
-}
-
-unsafe fn write_sockaddr_v6(v6: &SocketAddrV6, storage: *mut SocketAddrStorage) -> usize {
-    let encoded = encode_sockaddr_v6(v6);
-    core::ptr::write(storage.cast(), encoded);
-    size_of::<c::sockaddr_in6>()
-}
-
-unsafe fn write_sockaddr_unix(unix: &SocketAddrUnix, storage: *mut SocketAddrStorage) -> usize {
-    core::ptr::write(storage.cast(), unix.unix);
-    unix.len()
 }

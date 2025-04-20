@@ -1,6 +1,7 @@
+#![allow(clippy::unwrap_used)]
+
 #[macro_use]
 extern crate log;
-extern crate env_logger;
 
 use std::env;
 use std::fmt;
@@ -10,7 +11,7 @@ use std::str;
 struct Foo;
 
 impl fmt::Display for Foo {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         info!("test");
         f.write_str("bar")
     }
@@ -27,7 +28,7 @@ fn main() {
         .env("YOU_ARE_TESTING_NOW", "1")
         .env("RUST_LOG", "debug")
         .output()
-        .unwrap_or_else(|e| panic!("Unable to start child process: {}", e));
+        .unwrap_or_else(|e| panic!("Unable to start child process: {e}"));
     if out.status.success() {
         return;
     }

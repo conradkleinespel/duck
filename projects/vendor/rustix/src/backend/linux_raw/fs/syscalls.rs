@@ -8,7 +8,13 @@
 
 use crate::backend::c;
 use crate::backend::conv::fs::oflags_for_open_how;
-#[cfg(not(feature = "linux_4_11"))]
+#[cfg(any(
+    not(feature = "linux_4_11"),
+    target_arch = "aarch64",
+    target_arch = "riscv64",
+    target_arch = "mips",
+    target_arch = "mips32r6",
+))]
 use crate::backend::conv::zero;
 use crate::backend::conv::{
     by_ref, c_int, c_uint, dev_t, opt_mut, pass_usize, raw_fd, ret, ret_c_int, ret_c_uint,
@@ -16,31 +22,23 @@ use crate::backend::conv::{
 };
 #[cfg(target_pointer_width = "64")]
 use crate::backend::conv::{loff_t, loff_t_from_u64, ret_u64};
-#[cfg(any(
-    target_arch = "aarch64",
-    target_arch = "riscv64",
-    target_arch = "mips64",
-    target_arch = "mips64r6",
-    target_pointer_width = "32",
-))]
-use crate::fd::AsFd;
 use crate::fd::{BorrowedFd, OwnedFd};
 use crate::ffi::CStr;
 #[cfg(any(target_arch = "aarch64", target_arch = "riscv64"))]
 use crate::fs::CWD;
 use crate::fs::{
-    inotify, Access, Advice, AtFlags, FallocateFlags, FileType, FlockOperation, Gid, MemfdFlags,
-    Mode, OFlags, RenameFlags, ResolveFlags, SealFlags, SeekFrom, Stat, StatFs, StatVfs,
-    StatVfsMountFlags, StatxFlags, Timestamps, Uid, XattrFlags,
+    inotify, Access, Advice, AtFlags, FallocateFlags, FileType, FlockOperation, Fsid, Gid,
+    MemfdFlags, Mode, OFlags, RenameFlags, ResolveFlags, SealFlags, SeekFrom, Stat, StatFs,
+    StatVfs, StatVfsMountFlags, Statx, StatxFlags, Timestamps, Uid, XattrFlags,
 };
 use crate::io;
 use core::mem::MaybeUninit;
+use core::num::NonZeroU64;
 #[cfg(any(target_arch = "mips64", target_arch = "mips64r6"))]
 use linux_raw_sys::general::stat as linux_stat64;
 use linux_raw_sys::general::{
-    __kernel_fsid_t, open_how, statx, AT_EACCESS, AT_FDCWD, AT_REMOVEDIR, AT_SYMLINK_NOFOLLOW,
-    F_ADD_SEALS, F_GETFL, F_GET_SEALS, F_SETFL, SEEK_CUR, SEEK_DATA, SEEK_END, SEEK_HOLE, SEEK_SET,
-    STATX__RESERVED,
+    open_how, AT_EACCESS, AT_FDCWD, AT_REMOVEDIR, AT_SYMLINK_NOFOLLOW, F_ADD_SEALS, F_GETFL,
+    F_GET_SEALS, F_SETFL, SEEK_CUR, SEEK_DATA, SEEK_END, SEEK_HOLE, SEEK_SET, STATX__RESERVED,
 };
 #[cfg(target_pointer_width = "32")]
 use {
@@ -52,11 +50,11 @@ use {
 #[inline]
 pub(crate) fn open(path: &CStr, flags: OFlags, mode: Mode) -> io::Result<OwnedFd> {
     // Always enable support for large files.
-    let flags = flags | OFlags::from_bits_retain(c::O_LARGEFILE);
+    let flags = flags | OFlags::LARGEFILE;
 
     #[cfg(any(target_arch = "aarch64", target_arch = "riscv64"))]
     {
-        openat(CWD.as_fd(), path, flags, mode)
+        openat(CWD, path, flags, mode)
     }
     #[cfg(not(any(target_arch = "aarch64", target_arch = "riscv64")))]
     unsafe {
@@ -72,7 +70,7 @@ pub(crate) fn openat(
     mode: Mode,
 ) -> io::Result<OwnedFd> {
     // Always enable support for large files.
-    let flags = flags | OFlags::from_bits_retain(c::O_LARGEFILE);
+    let flags = flags | OFlags::LARGEFILE;
 
     unsafe { ret_owned_fd(syscall_readonly!(__NR_openat, dirfd, path, flags, mode)) }
 }
@@ -232,8 +230,16 @@ pub(crate) fn seek(fd: BorrowedFd<'_>, pos: SeekFrom) -> io::Result<u64> {
         }
         SeekFrom::End(offset) => (SEEK_END, offset),
         SeekFrom::Current(offset) => (SEEK_CUR, offset),
-        SeekFrom::Data(offset) => (SEEK_DATA, offset),
-        SeekFrom::Hole(offset) => (SEEK_HOLE, offset),
+        SeekFrom::Data(pos) => {
+            let pos: u64 = pos;
+            // Silently cast; we'll get `EINVAL` if the value is negative.
+            (SEEK_DATA, pos as i64)
+        }
+        SeekFrom::Hole(pos) => {
+            let pos: u64 = pos;
+            // Silently cast; we'll get `EINVAL` if the value is negative.
+            (SEEK_HOLE, pos as i64)
+        }
     };
     _seek(fd, offset, whence)
 }
@@ -273,7 +279,7 @@ pub(crate) fn tell(fd: BorrowedFd<'_>) -> io::Result<u64> {
 
 #[inline]
 pub(crate) fn ftruncate(fd: BorrowedFd<'_>, length: u64) -> io::Result<()> {
-    // <https://github.com/torvalds/linux/blob/fcadab740480e0e0e9fa9bd272acd409884d431a/arch/arm64/kernel/sys32.c#L81-L83>
+    // <https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/tree/arch/arm64/kernel/sys32.c?h=v6.13#n89>
     #[cfg(all(
         target_pointer_width = "32",
         any(
@@ -351,8 +357,18 @@ pub(crate) fn fallocate(
 }
 
 #[inline]
-pub(crate) fn fadvise(fd: BorrowedFd<'_>, pos: u64, len: u64, advice: Advice) -> io::Result<()> {
-    // On ARM, the arguments are reordered so that the len and pos argument
+pub(crate) fn fadvise(
+    fd: BorrowedFd<'_>,
+    pos: u64,
+    len: Option<NonZeroU64>,
+    advice: Advice,
+) -> io::Result<()> {
+    let len = match len {
+        None => 0,
+        Some(len) => len.get(),
+    };
+
+    // On ARM, the arguments are reordered so that the `len` and `pos` argument
     // pairs are aligned. And ARM has a custom syscall code for this.
     #[cfg(target_arch = "arm")]
     unsafe {
@@ -528,7 +544,7 @@ pub(crate) fn stat(path: &CStr) -> io::Result<Stat> {
     ))]
     {
         match crate::fs::statx(
-            crate::fs::CWD.as_fd(),
+            crate::fs::CWD,
             path,
             AtFlags::empty(),
             StatxFlags::BASIC_STATS,
@@ -645,7 +661,7 @@ pub(crate) fn lstat(path: &CStr) -> io::Result<Stat> {
     #[cfg(any(target_pointer_width = "32", target_arch = "mips64"))]
     {
         match crate::fs::statx(
-            crate::fs::CWD.as_fd(),
+            crate::fs::CWD,
             path,
             AtFlags::SYMLINK_NOFOLLOW,
             StatxFlags::BASIC_STATS,
@@ -716,23 +732,11 @@ fn statx_to_stat(x: crate::fs::Statx) -> io::Result<Stat> {
         st_size: x.stx_size.try_into().map_err(|_| io::Errno::OVERFLOW)?,
         st_blksize: x.stx_blksize.into(),
         st_blocks: x.stx_blocks.into(),
-        st_atime: x
-            .stx_atime
-            .tv_sec
-            .try_into()
-            .map_err(|_| io::Errno::OVERFLOW)?,
+        st_atime: i64::from(x.stx_atime.tv_sec),
         st_atime_nsec: x.stx_atime.tv_nsec.into(),
-        st_mtime: x
-            .stx_mtime
-            .tv_sec
-            .try_into()
-            .map_err(|_| io::Errno::OVERFLOW)?,
+        st_mtime: i64::from(x.stx_mtime.tv_sec),
         st_mtime_nsec: x.stx_mtime.tv_nsec.into(),
-        st_ctime: x
-            .stx_ctime
-            .tv_sec
-            .try_into()
-            .map_err(|_| io::Errno::OVERFLOW)?,
+        st_ctime: i64::from(x.stx_ctime.tv_sec),
         st_ctime_nsec: x.stx_ctime.tv_nsec.into(),
         st_ino: x.stx_ino.into(),
     })
@@ -751,17 +755,17 @@ fn stat_to_stat(s64: linux_raw_sys::general::stat64) -> io::Result<Stat> {
         st_size: s64.st_size.try_into().map_err(|_| io::Errno::OVERFLOW)?,
         st_blksize: s64.st_blksize.try_into().map_err(|_| io::Errno::OVERFLOW)?,
         st_blocks: s64.st_blocks.try_into().map_err(|_| io::Errno::OVERFLOW)?,
-        st_atime: s64.st_atime.try_into().map_err(|_| io::Errno::OVERFLOW)?,
+        st_atime: i64::from(s64.st_atime.to_signed()),
         st_atime_nsec: s64
             .st_atime_nsec
             .try_into()
             .map_err(|_| io::Errno::OVERFLOW)?,
-        st_mtime: s64.st_mtime.try_into().map_err(|_| io::Errno::OVERFLOW)?,
+        st_mtime: i64::from(s64.st_mtime.to_signed()),
         st_mtime_nsec: s64
             .st_mtime_nsec
             .try_into()
             .map_err(|_| io::Errno::OVERFLOW)?,
-        st_ctime: s64.st_ctime.try_into().map_err(|_| io::Errno::OVERFLOW)?,
+        st_ctime: i64::from(s64.st_ctime.to_signed()),
         st_ctime_nsec: s64
             .st_ctime_nsec
             .try_into()
@@ -783,17 +787,17 @@ fn stat_to_stat(s: linux_raw_sys::general::stat) -> io::Result<Stat> {
         st_size: s.st_size.try_into().map_err(|_| io::Errno::OVERFLOW)?,
         st_blksize: s.st_blksize.try_into().map_err(|_| io::Errno::OVERFLOW)?,
         st_blocks: s.st_blocks.try_into().map_err(|_| io::Errno::OVERFLOW)?,
-        st_atime: s.st_atime.try_into().map_err(|_| io::Errno::OVERFLOW)?,
+        st_atime: i64::from(s.st_atime.to_signed()),
         st_atime_nsec: s
             .st_atime_nsec
             .try_into()
             .map_err(|_| io::Errno::OVERFLOW)?,
-        st_mtime: s.st_mtime.try_into().map_err(|_| io::Errno::OVERFLOW)?,
+        st_mtime: i64::from(s.st_mtime.to_signed()),
         st_mtime_nsec: s
             .st_mtime_nsec
             .try_into()
             .map_err(|_| io::Errno::OVERFLOW)?,
-        st_ctime: s.st_ctime.try_into().map_err(|_| io::Errno::OVERFLOW)?,
+        st_ctime: i64::from(s.st_ctime.to_signed()),
         st_ctime_nsec: s
             .st_ctime_nsec
             .try_into()
@@ -808,7 +812,7 @@ pub(crate) fn statx(
     path: &CStr,
     flags: AtFlags,
     mask: StatxFlags,
-) -> io::Result<statx> {
+) -> io::Result<Statx> {
     // If a future Linux kernel adds more fields to `struct statx` and users
     // passing flags unknown to rustix in `StatxFlags`, we could end up
     // writing outside of the buffer. To prevent this possibility, we mask off
@@ -828,7 +832,7 @@ pub(crate) fn statx(
     let mask = mask & StatxFlags::all();
 
     unsafe {
-        let mut statx_buf = MaybeUninit::<statx>::uninit();
+        let mut statx_buf = MaybeUninit::<Statx>::uninit();
         ret(syscall!(
             __NR_statx,
             dirfd,
@@ -924,7 +928,9 @@ pub(crate) fn statvfs(path: &CStr) -> io::Result<StatVfs> {
 }
 
 fn statfs_to_statvfs(statfs: StatFs) -> StatVfs {
-    let __kernel_fsid_t { val } = statfs.f_fsid;
+    let Fsid { val } = Fsid {
+        val: statfs.f_fsid.val,
+    };
     let [f_fsid_val0, f_fsid_val1]: [i32; 2] = val;
 
     StatVfs {
@@ -940,7 +946,7 @@ fn statfs_to_statvfs(statfs: StatFs) -> StatVfs {
         f_files: statfs.f_files as u64,
         f_ffree: statfs.f_ffree as u64,
         f_favail: statfs.f_ffree as u64,
-        f_fsid: u64::from(f_fsid_val0 as u32) | u64::from(f_fsid_val1 as u32) << 32,
+        f_fsid: u64::from(f_fsid_val0 as u32) | (u64::from(f_fsid_val1 as u32) << 32),
         f_flag: StatVfsMountFlags::from_bits_retain(statfs.f_flags as u64),
         f_namemax: statfs.f_namelen as u64,
     }
@@ -962,21 +968,18 @@ pub(crate) fn readlink(path: &CStr, buf: &mut [u8]) -> io::Result<usize> {
 }
 
 #[inline]
-pub(crate) fn readlinkat(
+pub(crate) unsafe fn readlinkat(
     dirfd: BorrowedFd<'_>,
     path: &CStr,
-    buf: &mut [MaybeUninit<u8>],
+    buf: (*mut u8, usize),
 ) -> io::Result<usize> {
-    let (buf_addr_mut, buf_len) = slice_mut(buf);
-    unsafe {
-        ret_usize(syscall!(
-            __NR_readlinkat,
-            dirfd,
-            path,
-            buf_addr_mut,
-            buf_len
-        ))
-    }
+    ret_usize(syscall!(
+        __NR_readlinkat,
+        dirfd,
+        path,
+        buf.0,
+        pass_usize(buf.1)
+    ))
 }
 
 #[inline]
@@ -1335,8 +1338,7 @@ unsafe fn _utimensat_old(
     times: &Timestamps,
     flags: AtFlags,
 ) -> io::Result<()> {
-    // See the comments in `rustix_clock_gettime_via_syscall` about
-    // emulation.
+    // See the comments in `clock_gettime_via_syscall` about emulation.
     let old_times = [
         __kernel_old_timespec {
             tv_sec: times
@@ -1383,7 +1385,7 @@ pub(crate) fn futimens(fd: BorrowedFd<'_>, times: &Timestamps) -> io::Result<()>
 pub(crate) fn access(path: &CStr, access: Access) -> io::Result<()> {
     #[cfg(any(target_arch = "aarch64", target_arch = "riscv64"))]
     {
-        accessat_noflags(CWD.as_fd(), path, access)
+        accessat_noflags(CWD, path, access)
     }
 
     #[cfg(not(any(target_arch = "aarch64", target_arch = "riscv64")))]
@@ -1521,45 +1523,48 @@ pub(crate) fn inotify_rm_watch(infd: BorrowedFd<'_>, wfd: i32) -> io::Result<()>
 }
 
 #[inline]
-pub(crate) fn getxattr(path: &CStr, name: &CStr, value: &mut [u8]) -> io::Result<usize> {
-    let (value_addr_mut, value_len) = slice_mut(value);
-    unsafe {
-        ret_usize(syscall!(
-            __NR_getxattr,
-            path,
-            name,
-            value_addr_mut,
-            value_len
-        ))
-    }
+pub(crate) unsafe fn getxattr(
+    path: &CStr,
+    name: &CStr,
+    value: (*mut u8, usize),
+) -> io::Result<usize> {
+    ret_usize(syscall!(
+        __NR_getxattr,
+        path,
+        name,
+        value.0,
+        pass_usize(value.1)
+    ))
 }
 
 #[inline]
-pub(crate) fn lgetxattr(path: &CStr, name: &CStr, value: &mut [u8]) -> io::Result<usize> {
-    let (value_addr_mut, value_len) = slice_mut(value);
-    unsafe {
-        ret_usize(syscall!(
-            __NR_lgetxattr,
-            path,
-            name,
-            value_addr_mut,
-            value_len
-        ))
-    }
+pub(crate) unsafe fn lgetxattr(
+    path: &CStr,
+    name: &CStr,
+    value: (*mut u8, usize),
+) -> io::Result<usize> {
+    ret_usize(syscall!(
+        __NR_lgetxattr,
+        path,
+        name,
+        value.0,
+        pass_usize(value.1)
+    ))
 }
 
 #[inline]
-pub(crate) fn fgetxattr(fd: BorrowedFd<'_>, name: &CStr, value: &mut [u8]) -> io::Result<usize> {
-    let (value_addr_mut, value_len) = slice_mut(value);
-    unsafe {
-        ret_usize(syscall!(
-            __NR_fgetxattr,
-            fd,
-            name,
-            value_addr_mut,
-            value_len
-        ))
-    }
+pub(crate) unsafe fn fgetxattr(
+    fd: BorrowedFd<'_>,
+    name: &CStr,
+    value: (*mut u8, usize),
+) -> io::Result<usize> {
+    ret_usize(syscall!(
+        __NR_fgetxattr,
+        fd,
+        name,
+        value.0,
+        pass_usize(value.1)
+    ))
 }
 
 #[inline]
@@ -1623,21 +1628,18 @@ pub(crate) fn fsetxattr(
 }
 
 #[inline]
-pub(crate) fn listxattr(path: &CStr, list: &mut [c::c_char]) -> io::Result<usize> {
-    let (list_addr_mut, list_len) = slice_mut(list);
-    unsafe { ret_usize(syscall!(__NR_listxattr, path, list_addr_mut, list_len)) }
+pub(crate) unsafe fn listxattr(path: &CStr, list: (*mut u8, usize)) -> io::Result<usize> {
+    ret_usize(syscall!(__NR_listxattr, path, list.0, pass_usize(list.1)))
 }
 
 #[inline]
-pub(crate) fn llistxattr(path: &CStr, list: &mut [c::c_char]) -> io::Result<usize> {
-    let (list_addr_mut, list_len) = slice_mut(list);
-    unsafe { ret_usize(syscall!(__NR_llistxattr, path, list_addr_mut, list_len)) }
+pub(crate) unsafe fn llistxattr(path: &CStr, list: (*mut u8, usize)) -> io::Result<usize> {
+    ret_usize(syscall!(__NR_llistxattr, path, list.0, pass_usize(list.1)))
 }
 
 #[inline]
-pub(crate) fn flistxattr(fd: BorrowedFd<'_>, list: &mut [c::c_char]) -> io::Result<usize> {
-    let (list_addr_mut, list_len) = slice_mut(list);
-    unsafe { ret_usize(syscall!(__NR_flistxattr, fd, list_addr_mut, list_len)) }
+pub(crate) unsafe fn flistxattr(fd: BorrowedFd<'_>, list: (*mut u8, usize)) -> io::Result<usize> {
+    ret_usize(syscall!(__NR_flistxattr, fd, list.0, pass_usize(list.1)))
 }
 
 #[inline]
@@ -1655,10 +1657,66 @@ pub(crate) fn fremovexattr(fd: BorrowedFd<'_>, name: &CStr) -> io::Result<()> {
     unsafe { ret(syscall_readonly!(__NR_fremovexattr, fd, name)) }
 }
 
-#[test]
-fn test_sizes() {
-    assert_eq_size!(linux_raw_sys::general::__kernel_loff_t, u64);
+// Some linux_raw_sys structs have unsigned types for values which are
+// interpreted as signed. This defines a utility or casting to the
+// same-sized signed type.
+#[cfg(any(
+    target_pointer_width = "32",
+    target_arch = "mips64",
+    target_arch = "mips64r6"
+))]
+mod to_signed {
+    pub(super) trait ToSigned {
+        type Signed;
+        fn to_signed(self) -> Self::Signed;
+    }
+    impl ToSigned for u32 {
+        type Signed = i32;
 
-    // Assert that `Timestamps` has the expected layout.
-    assert_eq_size!([linux_raw_sys::general::__kernel_timespec; 2], Timestamps);
+        fn to_signed(self) -> Self::Signed {
+            self as _
+        }
+    }
+    impl ToSigned for i32 {
+        type Signed = i32;
+
+        fn to_signed(self) -> Self::Signed {
+            self
+        }
+    }
+    impl ToSigned for u64 {
+        type Signed = i64;
+
+        fn to_signed(self) -> Self::Signed {
+            self as _
+        }
+    }
+    impl ToSigned for i64 {
+        type Signed = i64;
+
+        fn to_signed(self) -> Self::Signed {
+            self
+        }
+    }
+}
+#[cfg(any(
+    target_pointer_width = "32",
+    target_arch = "mips64",
+    target_arch = "mips64r6"
+))]
+use to_signed::*;
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_sizes() {
+        assert_eq_size!(linux_raw_sys::general::__kernel_loff_t, u64);
+        assert_eq_align!(linux_raw_sys::general::__kernel_loff_t, u64);
+
+        // Assert that `Timestamps` has the expected layout.
+        assert_eq_size!([linux_raw_sys::general::__kernel_timespec; 2], Timestamps);
+        assert_eq_align!([linux_raw_sys::general::__kernel_timespec; 2], Timestamps);
+    }
 }

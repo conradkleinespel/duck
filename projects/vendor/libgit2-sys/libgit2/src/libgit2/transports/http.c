@@ -9,7 +9,6 @@
 
 #ifndef GIT_WINHTTP
 
-#include "http_parser.h"
 #include "net.h"
 #include "remote.h"
 #include "smart.h"
@@ -334,7 +333,7 @@ static int lookup_proxy(
 		return 0;
 	}
 
-	if (!proxy ||
+	if (!proxy || !*proxy ||
 	    (error = git_net_url_parse_http(&transport->proxy.url, proxy)) < 0)
 		goto done;
 

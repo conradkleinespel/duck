@@ -17,10 +17,12 @@ use crate::ffi::CStr;
 ///  - [Linux `sysconf`]
 ///  - [Linux `getpagesize`]
 ///
-/// [POSIX]: https://pubs.opengroup.org/onlinepubs/9699919799/functions/sysconf.html
+/// [POSIX]: https://pubs.opengroup.org/onlinepubs/9799919799/functions/sysconf.html
 /// [Linux `sysconf`]: https://man7.org/linux/man-pages/man3/sysconf.3.html
 /// [Linux `getpagesize`]: https://man7.org/linux/man-pages/man2/getpagesize.2.html
 #[inline]
+#[doc(alias = "PAGESIZE")]
+#[doc(alias = "PAGE_SIZE")]
 #[doc(alias = "_SC_PAGESIZE")]
 #[doc(alias = "_SC_PAGE_SIZE")]
 #[doc(alias = "getpagesize")]
@@ -34,9 +36,9 @@ pub fn page_size() -> usize {
 ///  - [POSIX]
 ///  - [Linux]
 ///
-/// [POSIX]: https://pubs.opengroup.org/onlinepubs/9699919799/functions/sysconf.html
+/// [POSIX]: https://pubs.opengroup.org/onlinepubs/9799919799/functions/sysconf.html
 /// [Linux]: https://man7.org/linux/man-pages/man3/sysconf.3.html
-#[cfg(not(any(target_os = "vita", target_os = "wasi")))]
+#[cfg(not(any(target_os = "horizon", target_os = "vita", target_os = "wasi")))]
 #[inline]
 #[doc(alias = "_SC_CLK_TCK")]
 pub fn clock_ticks_per_second() -> u64 {
@@ -63,6 +65,27 @@ pub fn clock_ticks_per_second() -> u64 {
 #[inline]
 pub fn linux_hwcap() -> (usize, usize) {
     backend::param::auxv::linux_hwcap()
+}
+
+/// `getauxval(AT_MINSIGSTKSZ)`—Returns the Linux "minsigstksz" data.
+///
+/// Return the Linux `AT_MINSIGSTKSZ` value passed to the current process.
+/// Returns 0 if it is not available.
+///
+/// # References
+///  - [Linux]
+///
+/// [Linux]: https://man7.org/linux/man-pages/man3/getauxval.3.html
+#[cfg(any(
+    linux_raw,
+    any(
+        all(target_os = "android", target_pointer_width = "64"),
+        target_os = "linux",
+    )
+))]
+#[inline]
+pub fn linux_minsigstksz() -> usize {
+    backend::param::auxv::linux_minsigstksz()
 }
 
 /// `getauxval(AT_EXECFN)`—Returns the Linux "execfn" string.
