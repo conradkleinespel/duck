@@ -1,0 +1,22 @@
+services:
+  rust:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      network: host
+    volumes:
+      - ./:/app
+      - home_rust_cargo:/home/rust/cargo/
+    tmpfs:
+      - /tmp:exec
+    working_dir: /app
+    user: rust
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges
+    read_only: true
+    command: tail -f /dev/null  # Keeps the container alive by tailing /dev/null
+
+volumes:
+  home_rust_cargo:
